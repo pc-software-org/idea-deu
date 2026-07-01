@@ -61,3 +61,45 @@ def mark_product_info_encrypted(archive: Path) -> str:
         )
     archive.write_bytes(content)
     return hashlib.sha256(content).hexdigest()
+
+
+def mark_product_info_compression_unsupported(archive: Path) -> str:
+    """Set an unsupported compression method in both member headers."""
+    content = bytearray(archive.read_bytes())
+    filename = b"product-info.json"
+    header_layouts = ((30, b"PK\x03\x04", 8), (46, b"PK\x01\x02", 10))
+    changed_headers = 0
+    position = 0
+    while (position := content.find(filename, position)) >= 0:
+        for filename_offset, signature, method_offset in header_layouts:
+            header = position - filename_offset
+            if content[header : header + 4] != signature:
+                continue
+            content[header + method_offset : header + method_offset + 2] = (99).to_bytes(
+                2, "little"
+            )
+            changed_headers += 1
+            break
+        position += len(filename)
+
+    if changed_headers != 2:
+        raise AssertionError(
+            "could not update both product-info.json compression fields"
+        )
+    archive.write_bytes(content)
+    return hashlib.sha256(content).hexdigest()
+
+
+def corrupt_product_info_data(archive: Path) -> str:
+    """Flip compressed member data while leaving the ZIP directory intact."""
+    with ZipFile(archive) as source_zip:
+        info = source_zip.getinfo("product-info.json")
+
+    content = bytearray(archive.read_bytes())
+    header = info.header_offset
+    filename_length = int.from_bytes(content[header + 26 : header + 28], "little")
+    extra_length = int.from_bytes(content[header + 28 : header + 30], "little")
+    data_offset = header + 30 + filename_length + extra_length
+    content[data_offset] ^= 0xFF
+    archive.write_bytes(content)
+    return hashlib.sha256(content).hexdigest()

@@ -1,12 +1,43 @@
 import hashlib
+import os
 import tempfile
 import unittest
 from dataclasses import FrozenInstanceError
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.idea_deu.config import ProductConfig
 from scripts.idea_deu.source import SourceValidationError, validate_source
-from tests.fixtures.source_factory import make_source_archive, mark_product_info_encrypted
+from tests.fixtures.source_factory import (
+    corrupt_product_info_data,
+    make_source_archive,
+    mark_product_info_compression_unsupported,
+    mark_product_info_encrypted,
+)
+
+
+class _SwapPathAtHashEnd:
+    def __init__(self, source_file: object, replacement: Path, target: Path) -> None:
+        self._source_file = source_file
+        self._replacement = replacement
+        self._target = target
+        self._swapped = False
+
+    def read(self, size: int = -1) -> bytes:
+        data = self._source_file.read(size)  # type: ignore[attr-defined]
+        if not data and not self._swapped:
+            os.replace(self._replacement, self._target)
+            self._swapped = True
+        return data
+
+    def __enter__(self) -> "_SwapPathAtHashEnd":
+        return self
+
+    def __exit__(self, *args: object) -> None:
+        self._source_file.close()  # type: ignore[attr-defined]
+
+    def __getattr__(self, name: str) -> object:
+        return getattr(self._source_file, name)
 
 
 class SourceValidationTest(unittest.TestCase):
@@ -23,6 +54,25 @@ class SourceValidationTest(unittest.TestCase):
             self.assertEqual(source.product_code, "IU")
             with self.assertRaises(FrozenInstanceError):
                 source.version = "changed"  # type: ignore[misc]
+
+    def test_hash_and_metadata_use_same_open_archive(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive, sha256 = make_source_archive(root)
+            replacement_root = root / "replacement"
+            replacement_root.mkdir()
+            replacement, _ = make_source_archive(
+                replacement_root, product_code="IC"
+            )
+            original_open = Path.open
+            source_file = original_open(archive, "rb")
+            swapping_file = _SwapPathAtHashEnd(source_file, replacement, archive)
+
+            with patch.object(Path, "open", return_value=swapping_file):
+                source = validate_source(self._config(archive, sha256))
+
+            self.assertEqual(source.sha256, sha256)
+            self.assertEqual(source.product_code, "IU")
 
     def test_rejects_wrong_hash_with_expected_and_actual_values(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -74,6 +124,37 @@ class SourceValidationTest(unittest.TestCase):
 
             with self.assertRaisesRegex(
                 SourceValidationError, r"product-info\.json.*password-protected"
+            ):
+                validate_source(self._config(archive, sha256))
+
+    def test_rejects_oversized_product_info_before_reading_it(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            archive, sha256 = make_source_archive(
+                Path(directory), product_info=" " * (1024 * 1024 + 1)
+            )
+
+            with self.assertRaisesRegex(
+                SourceValidationError, r"product-info\.json.*exceeds.*1048576"
+            ):
+                validate_source(self._config(archive, sha256))
+
+    def test_rejects_unsupported_product_info_compression(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            archive, _ = make_source_archive(Path(directory))
+            sha256 = mark_product_info_compression_unsupported(archive)
+
+            with self.assertRaisesRegex(
+                SourceValidationError, r"product-info\.json.*unsupported compression"
+            ):
+                validate_source(self._config(archive, sha256))
+
+    def test_rejects_damaged_product_info_entry(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            archive, _ = make_source_archive(Path(directory))
+            sha256 = corrupt_product_info_data(archive)
+
+            with self.assertRaisesRegex(
+                SourceValidationError, r"product-info\.json.*damaged"
             ):
                 validate_source(self._config(archive, sha256))
 
