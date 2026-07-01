@@ -62,6 +62,85 @@ class DirFdStateTest(unittest.TestCase):
             finally:
                 os.close(descriptor)
 
+    def test_directory_fsync_failure_restores_existing_fd_state(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            path = directory / "state.jsonl"
+            path.write_bytes(b'{"id":"old"}\n')
+            path.chmod(0o640)
+            descriptor = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+            directory_calls = 0
+            real_fsync = os.fsync
+
+            def fail_directory(fd: int) -> None:
+                nonlocal directory_calls
+                if stat.S_ISDIR(os.fstat(fd).st_mode):
+                    directory_calls += 1
+                if directory_calls == 2:
+                    raise OSError("directory fsync failed")
+                real_fsync(fd)
+
+            try:
+                with patch("scripts.idea_deu.state.os.fsync", side_effect=fail_directory):
+                    with self.assertRaisesRegex(StateError, "directory fsync failed"):
+                        write_jsonl_atomic_at(descriptor, "state.jsonl", [{"id": "new"}])
+                self.assertEqual(b'{"id":"old"}\n', path.read_bytes())
+                self.assertEqual(0o640, stat.S_IMODE(path.stat().st_mode))
+                self.assertEqual([], list(directory.glob(".state.jsonl.*")))
+            finally:
+                os.close(descriptor)
+
+    def test_directory_fsync_failure_removes_new_fd_state(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            descriptor = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+            directory_calls = 0
+            real_fsync = os.fsync
+
+            def fail_directory(fd: int) -> None:
+                nonlocal directory_calls
+                if stat.S_ISDIR(os.fstat(fd).st_mode):
+                    directory_calls += 1
+                if directory_calls == 2:
+                    raise OSError("directory fsync failed")
+                real_fsync(fd)
+
+            try:
+                with patch("scripts.idea_deu.state.os.fsync", side_effect=fail_directory):
+                    with self.assertRaisesRegex(StateError, "directory fsync failed"):
+                        write_jsonl_atomic_at(descriptor, "state.jsonl", [{"id": "new"}])
+                self.assertFalse((directory / "state.jsonl").exists())
+                self.assertEqual([], list(directory.iterdir()))
+            finally:
+                os.close(descriptor)
+
+    def test_failed_fd_rollback_retains_recovery_backup(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            path = directory / "state.jsonl"
+            path.write_bytes(b'{"id":"old"}\n')
+            descriptor = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+            directory_calls = 0
+            real_fsync = os.fsync
+
+            def fail_after_prepare(fd: int) -> None:
+                nonlocal directory_calls
+                if stat.S_ISDIR(os.fstat(fd).st_mode):
+                    directory_calls += 1
+                    if directory_calls >= 2:
+                        raise OSError("directory fsync failed")
+                real_fsync(fd)
+
+            try:
+                with patch("scripts.idea_deu.state.os.fsync", side_effect=fail_after_prepare):
+                    with self.assertRaisesRegex(StateError, "rollback failed.*backup retained"):
+                        write_jsonl_atomic_at(descriptor, "state.jsonl", [{"id": "new"}])
+                backups = list(directory.glob(".state.jsonl.*.bak"))
+                self.assertEqual(1, len(backups))
+                self.assertEqual(b'{"id":"old"}\n', backups[0].read_bytes())
+            finally:
+                os.close(descriptor)
+
 
 class StateTest(unittest.TestCase):
     def setUp(self) -> None:

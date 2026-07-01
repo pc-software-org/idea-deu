@@ -2,6 +2,7 @@ import json
 import multiprocessing
 import os
 import queue
+import stat
 import tempfile
 import unittest
 from dataclasses import replace
@@ -72,6 +73,50 @@ class BatchTests(unittest.TestCase):
         checkpoint = json.loads((self.root / "translations/checkpoint.json").read_text())
         self.assertEqual(1, checkpoint["current_sequence"])
         self.assertEqual("translations/batches/1-aaaaaaaaaaaa.jsonl", checkpoint["current_batch"])
+
+    def test_checkpoint_directory_fsync_failure_keeps_export_coherent(self) -> None:
+        import scripts.idea_deu.batches as batches
+        import scripts.idea_deu.state as state
+        real_write = batches._write_jsonl_at
+
+        def fail_checkpoint(directory_fd: int, name: str, values: object) -> None:
+            if name != "checkpoint.json":
+                real_write(directory_fd, name, values)
+                return
+            directory_calls = 0
+            real_fsync = state.os.fsync
+
+            def fail_second(fd: int) -> None:
+                nonlocal directory_calls
+                if stat.S_ISDIR(os.fstat(fd).st_mode):
+                    directory_calls += 1
+                if directory_calls == 2:
+                    raise OSError("checkpoint fsync failed")
+                real_fsync(fd)
+
+            with patch("scripts.idea_deu.state.os.fsync", side_effect=fail_second):
+                real_write(directory_fd, name, values)
+
+        with patch("scripts.idea_deu.batches._write_jsonl_at", side_effect=fail_checkpoint):
+            with self.assertRaisesRegex(BatchError, "checkpoint fsync failed"):
+                export_next_batch(self.root, self.units_path)
+        self.assertFalse((self.root / "translations/checkpoint.json").exists())
+        self.assertEqual([], list((self.root / "translations/batches").glob("*.jsonl")))
+
+    def test_descriptor_detach_before_binding_aborts_without_old_write(self) -> None:
+        old_state = self.root / "translations-old"
+        original = self.root / "translations"
+
+        def detach() -> None:
+            original.rename(old_state)
+            original.mkdir()
+            write_jsonl_atomic(original / "units.jsonl", self.units)
+            (original / "batches").mkdir()
+
+        with patch("scripts.idea_deu.batches._descriptor_hook", side_effect=detach):
+            with self.assertRaisesRegex(BatchError, "descriptor identity"):
+                export_next_batch(self.root, self.units_path)
+        self.assertEqual([], list((old_state / "batches").glob("*.jsonl")))
 
     def test_export_validates_limit_and_empty_open_set(self) -> None:
         for limit in (True, 0, -1, 1001):

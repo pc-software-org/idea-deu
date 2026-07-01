@@ -101,7 +101,7 @@ def _nonempty_unique_strings(value: Any, name: str) -> tuple[str, ...]:
 def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path | None:
     root = _safe_root(root)
     with _exclusive_lock(root) as root_fd:
-        with _state_descriptors(root_fd) as (state_fd, batches_fd):
+        with _state_descriptors(root_fd, root) as (state_fd, batches_fd):
             return _export_next_batch_locked(root, units_path, limit, state_fd, batches_fd)
 
 
@@ -147,7 +147,7 @@ def _export_next_batch_locked(root: Path, units_path: Path, limit: int, state_fd
 def import_batch(root: Path, units_path: Path, batch_path: Path, glossary_path: Path) -> ImportResult:
     root = _safe_root(root)
     with _exclusive_lock(root) as root_fd:
-        with _state_descriptors(root_fd) as (state_fd, batches_fd):
+        with _state_descriptors(root_fd, root) as (state_fd, batches_fd):
             return _import_batch_locked(root, units_path, batch_path, glossary_path, state_fd, batches_fd)
 
 
@@ -707,6 +707,7 @@ def _exclusive_lock(root: Path):
         raise BatchError("batch mutation requires POSIX dir_fd support")
     directory_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
     root_fd = os.open(root, directory_flags)
+    _bind_descriptor_identity(root_fd, root, "root")
     flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0)
     descriptor = -1
     try:
@@ -730,7 +731,7 @@ def _exclusive_lock(root: Path):
 
 
 @contextmanager
-def _state_descriptors(root_fd: int):
+def _state_descriptors(root_fd: int, root: Path):
     if os.name == "nt" or os.open not in os.supports_dir_fd:
         raise BatchError("batch mutation requires POSIX dir_fd support")
     flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
@@ -740,6 +741,8 @@ def _state_descriptors(root_fd: int):
         raise BatchError(f"translations may be symbolic or unsafe: {exc}") from exc
     batches_fd = -1
     try:
+        _bind_descriptor_identity(root_fd, root, "root")
+        _bind_descriptor_identity(state_fd, root / "translations", "translations")
         try:
             batches_fd = os.open("batches", flags, dir_fd=state_fd)
         except FileNotFoundError:
@@ -748,11 +751,31 @@ def _state_descriptors(root_fd: int):
             batches_fd = os.open("batches", flags, dir_fd=state_fd)
         except OSError as exc:
             raise BatchError(f"batches may be a symbolic link or unsafe: {exc}") from exc
+        _descriptor_hook()
+        _bind_descriptor_identity(root_fd, root, "root")
+        _bind_descriptor_identity(state_fd, root / "translations", "translations")
+        _bind_descriptor_identity(
+            batches_fd, root / "translations/batches", "batches"
+        )
         yield state_fd, batches_fd
     finally:
         if batches_fd >= 0:
             os.close(batches_fd)
         os.close(state_fd)
+
+
+def _descriptor_hook() -> None:
+    """Test seam after descriptor open and before path-identity binding."""
+
+
+def _bind_descriptor_identity(descriptor: int, path: Path, label: str) -> None:
+    try:
+        path_info = path.stat(follow_symlinks=False)
+    except OSError as exc:
+        raise BatchError(f"{label} descriptor identity cannot be validated: {exc}") from exc
+    fd_info = os.fstat(descriptor)
+    if (fd_info.st_dev, fd_info.st_ino) != (path_info.st_dev, path_info.st_ino):
+        raise BatchError(f"{label} descriptor identity changed")
 
 
 def _lock_descriptor(descriptor: int) -> None:

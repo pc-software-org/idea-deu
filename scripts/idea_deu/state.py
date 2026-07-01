@@ -57,8 +57,31 @@ def write_jsonl_atomic_at(directory_fd: int, name: str, records: Iterable[T]) ->
     except FileNotFoundError:
         pass
     temp_name = f".{name}.{secrets.token_hex(8)}.tmp"
+    backup_name = f".{name}.{secrets.token_hex(8)}.bak"
+    had_existing = False
     descriptor = -1
+    preserve_backup = False
     try:
+        try:
+            os.link(
+                name,
+                backup_name,
+                src_dir_fd=directory_fd,
+                dst_dir_fd=directory_fd,
+                follow_symlinks=False,
+            )
+            had_existing = True
+        except FileNotFoundError:
+            marker = os.open(
+                backup_name,
+                os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0),
+                0o600,
+                dir_fd=directory_fd,
+            )
+            try:
+                os.fsync(marker)
+            finally:
+                os.close(marker)
         descriptor = os.open(
             temp_name,
             os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0),
@@ -68,13 +91,34 @@ def write_jsonl_atomic_at(directory_fd: int, name: str, records: Iterable[T]) ->
         with os.fdopen(descriptor, "wb") as stream:
             descriptor = -1
             _write_payload(stream, payload)
+        os.fsync(directory_fd)
         os.replace(
             temp_name,
             name,
             src_dir_fd=directory_fd,
             dst_dir_fd=directory_fd,
         )
-        os.fsync(directory_fd)
+        try:
+            os.fsync(directory_fd)
+        except OSError as exc:
+            try:
+                os.unlink(name, dir_fd=directory_fd)
+                if had_existing:
+                    os.link(
+                        backup_name,
+                        name,
+                        src_dir_fd=directory_fd,
+                        dst_dir_fd=directory_fd,
+                        follow_symlinks=False,
+                    )
+                os.fsync(directory_fd)
+            except OSError as rollback_exc:
+                preserve_backup = True
+                raise StateError(
+                    f"{exc}; rollback failed: {rollback_exc}; "
+                    f"backup retained as {backup_name}"
+                ) from exc
+            raise
     except StateError:
         raise
     except OSError as exc:
@@ -86,6 +130,11 @@ def write_jsonl_atomic_at(directory_fd: int, name: str, records: Iterable[T]) ->
             os.unlink(temp_name, dir_fd=directory_fd)
         except FileNotFoundError:
             pass
+        if not preserve_backup:
+            try:
+                os.unlink(backup_name, dir_fd=directory_fd)
+            except FileNotFoundError:
+                pass
 
 
 def _validate_relative_name(name: str) -> None:
