@@ -1,0 +1,137 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import tempfile
+import unittest
+from dataclasses import replace
+from pathlib import Path
+
+from scripts.idea_deu.models import ExclusionReason
+from scripts.idea_deu.scanner import load_scanner_config, scan_archive
+from tests.fixtures.scanner_factory import (
+    jar_bytes,
+    with_unsupported_compression,
+    write_outer_archive,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class ScannerTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temporary_directory = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary_directory.cleanup)
+        self.directory = Path(self.temporary_directory.name)
+        self.config = load_scanner_config(ROOT / "config" / "scanner.json")
+
+    def test_inventory_classifies_resources_and_records_every_exclusion(self) -> None:
+        core = jar_bytes(
+            [
+                ("messages/App.properties", b"hello=Hello"),
+                ("inspectionDescriptions/Unused.html", b"<html>Unused</html>"),
+                ("intentionDescriptions/Flip/description.html", b"<html>Flip</html>"),
+                ("fileTemplates/internal/Class.html", b"class ${NAME}"),
+                ("postfixTemplates/if.xml", b"<template />"),
+                ("tips/Welcome.html", b"<html>Welcome</html>"),
+                ("messages/App_ja.properties", b"hello=\xe3\x81\x93\xe3\x82\x93\xe3\x81\xab\xe3\x81\xa1\xe3\x81\xaf"),
+                ("messages/App_en_US.properties", b"hello=Hello"),
+                ("localization/fr/messages/App.properties", b"hello=Bonjour"),
+                ("classes/App.class", b"\xca\xfe\xba\xbe"),
+                ("docs/readme.html", b"not supported"),
+                ("lib/vendor.jar", b"not recursively scanned"),
+            ]
+        )
+        plugin = jar_bytes(
+            [
+                ("messages/PluginBundle.properties", b"name=Plugin"),
+                ("tips/PluginTip.html", b"<html>Plugin</html>"),
+            ]
+        )
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("IDE/lib/app.jar", core), ("IDE/plugins/demo/lib/demo.jar", plugin), ("IDE/bin/idea.sh", b"#!/bin/sh")],
+        )
+
+        inventory = scan_archive(source, self.config)
+
+        actual = [(item.container, item.resource_path) for item in inventory.resources]
+        self.assertEqual(
+            actual,
+            [
+                ("IDE/lib/app.jar", "fileTemplates/internal/Class.html"),
+                ("IDE/lib/app.jar", "inspectionDescriptions/Unused.html"),
+                ("IDE/lib/app.jar", "intentionDescriptions/Flip/description.html"),
+                ("IDE/lib/app.jar", "messages/App.properties"),
+                ("IDE/lib/app.jar", "postfixTemplates/if.xml"),
+                ("IDE/lib/app.jar", "tips/Welcome.html"),
+                ("IDE/plugins/demo/lib/demo.jar", "messages/PluginBundle.properties"),
+                ("IDE/plugins/demo/lib/demo.jar", "tips/PluginTip.html"),
+            ],
+        )
+        expected_id = hashlib.sha256(b"IDE/lib/app.jar\0messages/App.properties").hexdigest()
+        self.assertEqual(inventory.resources[3].resource_id, expected_id)
+        exclusions = {(item.container, item.resource_path): item.reason for item in inventory.exclusions}
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "messages/App_ja.properties")], ExclusionReason.LOCALIZED)
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "messages/App_en_US.properties")], ExclusionReason.LOCALIZED)
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "localization/fr/messages/App.properties")], ExclusionReason.LOCALIZED)
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "classes/App.class")], ExclusionReason.UNSUPPORTED_RESOURCE)
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "docs/readme.html")], ExclusionReason.UNSUPPORTED_RESOURCE)
+        self.assertEqual(exclusions[("IDE/lib/app.jar", "lib/vendor.jar")], ExclusionReason.NESTED_ARCHIVE)
+        self.assertEqual(exclusions[("<outer>", "IDE/bin/idea.sh")], ExclusionReason.NOT_JAR)
+
+    def test_reports_collisions_and_duplicate_members_deterministically(self) -> None:
+        first = jar_bytes([("messages/Same.properties", b"a=1"), ("messages/Dup.properties", b"a=1"), ("messages/Dup.properties", b"a=2")])
+        second = jar_bytes([("messages/Same.properties", b"a=2")])
+        source = write_outer_archive(self.directory / "idea.zip", [("z.jar", second), ("a.jar", first)])
+
+        inventory = scan_archive(source, self.config)
+
+        self.assertEqual([item.container for item in inventory.collisions[0].resources], ["a.jar", "z.jar"])
+        self.assertEqual(inventory.collisions[0].resource_path, "messages/Same.properties")
+        self.assertTrue(inventory.collisions[0].unresolved)
+        self.assertIn(ExclusionReason.DUPLICATE_MEMBER, [item.reason for item in inventory.exclusions])
+
+    def test_corrupt_oversized_and_unsupported_nested_jars_become_exclusions(self) -> None:
+        small_limits = self.config.with_limits(max_nested_jar_bytes=200, max_resource_bytes=10)
+        incompressible = b"".join(hashlib.sha256(str(index).encode()).digest() for index in range(20))
+        oversized = jar_bytes([("messages/Big.properties", incompressible)])
+        unsupported = with_unsupported_compression(jar_bytes([("messages/X.properties", b"x=1")]))
+        resource_too_large = jar_bytes([("messages/Large.properties", b"01234567890")])
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("bad.jar", b"not a zip"), ("huge.jar", oversized), ("unsupported.jar", unsupported), ("resource.jar", resource_too_large)],
+        )
+
+        inventory = scan_archive(source, small_limits)
+
+        reasons = {item.container: item.reason for item in inventory.exclusions}
+        self.assertEqual(reasons["bad.jar"], ExclusionReason.CORRUPT_ARCHIVE)
+        self.assertEqual(reasons["huge.jar"], ExclusionReason.NESTED_JAR_TOO_LARGE)
+        self.assertEqual(reasons["unsupported.jar"], ExclusionReason.UNSUPPORTED_COMPRESSION)
+        self.assertEqual(reasons["resource.jar"], ExclusionReason.RESOURCE_TOO_LARGE)
+
+    def test_traversal_names_are_excluded_and_config_is_explicit(self) -> None:
+        source = write_outer_archive(self.directory / "idea.zip", [("../evil.jar", jar_bytes([("../messages/Evil.properties", b"x=y")]))])
+        inventory = scan_archive(source, self.config)
+        self.assertEqual([item.reason for item in inventory.exclusions], [ExclusionReason.UNSAFE_PATH])
+
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(raw["limits"]["max_nested_jar_bytes"], 300_000_000)
+        self.assertEqual(raw["resource_patterns"], list(self.config.resource_patterns))
+
+    def test_resource_patterns_control_classification(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("app.jar", jar_bytes([("messages/App.properties", b"x=y"), ("tips/Welcome.html", b"tip")]))],
+        )
+        tips_only = replace(self.config, resource_patterns=("tips/**/*.html",))
+
+        inventory = scan_archive(source, tips_only)
+
+        self.assertEqual([item.resource_path for item in inventory.resources], ["tips/Welcome.html"])
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,21 @@
+{
+  "resource_patterns": [
+    "*.properties",
+    "inspectionDescriptions/**/*.html",
+    "intentionDescriptions/**/*.html",
+    "fileTemplates/**/*.html",
+    "postfixTemplates/**/*.xml",
+    "tips/**/*.html"
+  ],
+  "localization_directories": [
+    "i18n",
+    "l10n",
+    "localization",
+    "localized"
+  ],
+  "limits": {
+    "max_nested_jar_bytes": 536870912,
+    "max_resource_bytes": 16777216,
+    "spool_memory_bytes": 67108864
+  }
+}
