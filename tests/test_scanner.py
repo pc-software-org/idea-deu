@@ -150,6 +150,25 @@ class ScannerTests(unittest.TestCase):
 
         self.assertEqual([item.resource_path for item in inventory.resources], ["tips/Welcome.html"])
 
+    def test_config_rejects_resource_pattern_without_resource_type(self) -> None:
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["resource_patterns"] = ["docs/**/*.html"]
+        path = self.directory / "unknown-pattern.json"
+        path.write_text(json.dumps(raw), encoding="utf-8")
+
+        with self.assertRaisesRegex(ScannerError, r"unsupported resource pattern: docs/\*\*/\*\.html"):
+            load_scanner_config(path)
+
+    def test_direct_config_replacement_cannot_leak_resource_type_key_error(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("app.jar", jar_bytes([("docs/Readme.html", b"<html>Read me</html>")]))],
+        )
+        invalid = replace(self.config, resource_patterns=("docs/**/*.html",))
+
+        with self.assertRaisesRegex(ScannerError, r"unsupported resource pattern: docs/\*\*/\*\.html"):
+            scan_archive(source, invalid)
+
     def test_explicit_third_party_container_rule_excludes_before_nested_scan(self) -> None:
         source = write_outer_archive(
             self.directory / "idea.zip",

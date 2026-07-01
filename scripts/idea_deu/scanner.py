@@ -23,6 +23,14 @@ from .models import (
 
 
 _LOCALIZED_PROPERTIES = re.compile(r"(?:^|/)[^/]+_(?:[a-z]{2,3})(?:_(?:[A-Z]{2}|[A-Za-z]{4})(?:_[A-Z]{2})?)?\.properties$")
+_RESOURCE_PATTERN_TYPES = {
+    "*.properties": ResourceType.PROPERTIES,
+    "inspectionDescriptions/**/*.html": ResourceType.INSPECTION_DESCRIPTION,
+    "intentionDescriptions/**/*.html": ResourceType.INTENTION_DESCRIPTION,
+    "fileTemplates/**/*.html": ResourceType.FILE_TEMPLATE,
+    "postfixTemplates/**/*.xml": ResourceType.POSTFIX_TEMPLATE,
+    "tips/**/*.html": ResourceType.TIP,
+}
 
 
 class ScannerError(ValueError):
@@ -120,6 +128,7 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         isinstance(value, str) and value.strip() for value in patterns
     ):
         raise ScannerError("resource_patterns must be a non-empty string list")
+    _validate_resource_patterns(patterns)
     if not isinstance(directories, list) or not directories or not all(
         isinstance(value, str) and value.strip() for value in directories
     ):
@@ -167,6 +176,7 @@ def load_scanner_config(path: Path) -> ScannerConfig:
 
 
 def scan_archive(path: Path, config: ScannerConfig) -> Inventory:
+    _validate_resource_patterns(config.resource_patterns)
     resources: list[ResourceRecord] = []
     exclusions: list[ExclusionRecord] = []
     budget = _ScanBudget()
@@ -302,7 +312,7 @@ def _classify_member(
                 resource_id,
                 container,
                 path,
-                _resource_type(path),
+                _resource_type(path, config.resource_patterns),
                 member.file_size,
                 source_sha256,
             )
@@ -310,14 +320,21 @@ def _classify_member(
 
 
 def _matches_resource(path: str, patterns: tuple[str, ...]) -> bool:
+    return any(_pattern_matches(path, pattern) for pattern in patterns)
+
+
+def _pattern_matches(path: str, pattern: str) -> bool:
+    if fnmatchcase(path, pattern):
+        return True
+    # Treat ``**/`` as zero-or-more directories, unlike fnmatch's purely
+    # textual wildcard handling.
+    return "/**/" in pattern and fnmatchcase(path, pattern.replace("/**/", "/"))
+
+
+def _validate_resource_patterns(patterns: Any) -> None:
     for pattern in patterns:
-        if fnmatchcase(path, pattern):
-            return True
-        # Treat ``**/`` as zero-or-more directories, unlike fnmatch's purely
-        # textual wildcard handling.
-        if "/**/" in pattern and fnmatchcase(path, pattern.replace("/**/", "/")):
-            return True
-    return False
+        if pattern not in _RESOURCE_PATTERN_TYPES:
+            raise ScannerError(f"unsupported resource pattern: {pattern}")
 
 
 def _container_exclusion_reason(
@@ -330,17 +347,11 @@ def _container_exclusion_reason(
     return None
 
 
-def _resource_type(path: str) -> ResourceType:
-    if path.lower().endswith(".properties"):
-        return ResourceType.PROPERTIES
-    top_level = path.split("/", 1)[0].lower()
-    return {
-        "filetemplates": ResourceType.FILE_TEMPLATE,
-        "inspectiondescriptions": ResourceType.INSPECTION_DESCRIPTION,
-        "intentiondescriptions": ResourceType.INTENTION_DESCRIPTION,
-        "postfixtemplates": ResourceType.POSTFIX_TEMPLATE,
-        "tips": ResourceType.TIP,
-    }[top_level]
+def _resource_type(path: str, patterns: tuple[str, ...]) -> ResourceType:
+    for pattern in patterns:
+        if _pattern_matches(path, pattern):
+            return _RESOURCE_PATTERN_TYPES[pattern]
+    raise ScannerError(f"matched resource has no type: {path}")
 
 
 def _is_localized(path: str, directory_names: tuple[str, ...]) -> bool:
