@@ -225,20 +225,24 @@ def _valid_choice_style(content: str) -> bool:
 
 
 def _choice_limit(value: str) -> float:
-    aliases = {
-        "Infinity": float("inf"),
-        "∞": float("inf"),
-        "-Infinity": float("-inf"),
-        "-∞": float("-inf"),
-        "NaN": float("nan"),
-    }
-    if value in aliases:
-        return aliases[value]
-    if re.fullmatch(
-        r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?", value
-    ) is None:
-        raise ValueError(value)
-    return float(value)
+    if value == "∞":
+        return float("inf")
+    if value == "-∞":
+        return float("-inf")
+    if re.fullmatch(r"[-+]?(?:NaN|Infinity)", value):
+        return float(value)
+
+    suffixless = value[:-1] if value[-1:] in "fFdD" else value
+    decimal = r"[-+]?(?:(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)"
+    hexadecimal = (
+        r"[-+]?0[xX](?:[0-9a-fA-F]+(?:\.[0-9a-fA-F]*)?"
+        r"|\.[0-9a-fA-F]+)[pP][-+]?\d+"
+    )
+    if re.fullmatch(decimal, suffixless):
+        return float(suffixless)
+    if re.fullmatch(hexadecimal, suffixless):
+        return float.fromhex(suffixless)
+    raise ValueError(value)
 
 
 def _split_choice(style: str) -> list[str]:

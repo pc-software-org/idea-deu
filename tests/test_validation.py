@@ -67,6 +67,7 @@ class TranslationValidationTests(unittest.TestCase):
             "{0,choice,1#a|0#b}",
             "{0,choice,0#a|0#b}",
             "{0,choice,0<a|x#b}",
+            "{0,choice,+∞#a}",
         ):
             with self.subTest(target=target):
                 self.assert_code(
@@ -86,6 +87,11 @@ class TranslationValidationTests(unittest.TestCase):
             "{0,choice,NaN#a}",
             "{0,choice,NaN#a|0#b|1#c}",
             "{0,choice,0#a|NaN#b|-1#c}",
+            "{0,choice,+Infinity#a}",
+            "{0,choice,+NaN#a|-NaN#b}",
+            "{0,choice,0x1.0p0#a|0x1.8P1D#b}",
+            "{0,choice,1f#a|2D#b}",
+            "{0,choice,+.5e1F#a|1.e1d#b}",
         ):
             with self.subTest(text=text):
                 self.assert_clean(text)
