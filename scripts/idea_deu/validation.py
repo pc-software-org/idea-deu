@@ -212,9 +212,6 @@ def _valid_choice_style(content: str) -> bool:
             return False
         index, marker = separator
         limit_text = alternative[:index].strip()
-        subformat = alternative[index + 1 :]
-        if not subformat:
-            return False
         try:
             limit = _choice_limit(limit_text)
         except ValueError:
@@ -233,6 +230,7 @@ def _choice_limit(value: str) -> float:
         "∞": float("inf"),
         "-Infinity": float("-inf"),
         "-∞": float("-inf"),
+        "NaN": float("nan"),
     }
     if value in aliases:
         return aliases[value]
