@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import errno
 import json
 import os
 import stat
 import tempfile
+from collections.abc import Mapping as MappingABC
 from dataclasses import fields, is_dataclass
 from enum import Enum
 from pathlib import Path
@@ -52,7 +54,13 @@ def write_jsonl_atomic(path: Path, records: Iterable[T]) -> None:
         for value in objects:
             _check_duplicate_id(value, seen_ids)
         serialized = [
-            json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            json.dumps(
+                value,
+                allow_nan=False,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
             for value in objects
         ]
         serialized.sort(key=lambda line: (_record_id(json.loads(line)) or "", line))
@@ -63,7 +71,7 @@ def write_jsonl_atomic(path: Path, records: Iterable[T]) -> None:
         raise StateError(str(exc)) from exc
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    existing_mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
+    existing_mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o600
     descriptor = -1
     temp_path: Path | None = None
     backup_path: Path | None = None
@@ -193,8 +201,15 @@ def _json_value(value: Any) -> Any:
 
 
 def _record_id(value: dict[str, Any]) -> str | None:
-    identifier = value.get("resource_id", value.get("id"))
-    return identifier if isinstance(identifier, str) else None
+    if "resource_id" in value:
+        identifier = value["resource_id"]
+    elif "id" in value:
+        identifier = value["id"]
+    else:
+        return None
+    if not isinstance(identifier, str) or not identifier:
+        raise StateError("record ID must be a non-empty string")
+    return identifier
 
 
 def _check_duplicate_id(value: dict[str, Any], seen: set[str]) -> None:
@@ -214,49 +229,106 @@ def _construct(record_type: type[T], value: dict[str, Any]) -> T:
             return record_type.from_dict(value)  # type: ignore[attr-defined,no-any-return]
         return record_type(**value)
     hints = get_type_hints(record_type)
-    converted = {
-        key: _convert_type(item, hints.get(key, Any)) for key, item in value.items()
-    }
+    field_names = {field.name for field in fields(record_type)}
+    missing = sorted(field_names - value.keys())
+    extra = sorted(value.keys() - field_names)
+    if missing or extra:
+        raise ValueError(f"record fields mismatch: missing={missing}, extra={extra}")
+    converted: dict[str, Any] = {}
+    for key, item in value.items():
+        try:
+            converted[key] = _convert_type(item, hints.get(key, Any))
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"{key}: {exc}") from exc
     return record_type(**converted)
 
 
 def _convert_type(value: Any, annotation: Any) -> Any:
     origin = get_origin(annotation)
+    if annotation is Any:
+        return value
+    if annotation in (str, int, bool, float):
+        if type(value) is not annotation:
+            raise TypeError(
+                f"expected {annotation.__name__}, got {type(value).__name__}"
+            )
+        return value
+    if annotation in (None, type(None)):
+        if value is not None:
+            raise TypeError(f"expected null, got {type(value).__name__}")
+        return None
     if isinstance(annotation, type) and issubclass(annotation, Enum):
+        member_types = {type(member.value) for member in annotation}
+        if type(value) not in member_types:
+            raise TypeError(f"invalid {annotation.__name__} input type")
         return annotation(value)
     if annotation is Path:
+        if not isinstance(value, str):
+            raise TypeError(f"expected path string, got {type(value).__name__}")
         return Path(value)
-    if origin in (tuple, list):
+    if origin is list:
+        if not isinstance(value, list):
+            raise TypeError(f"expected list, got {type(value).__name__}")
         item_type = get_args(annotation)[0] if get_args(annotation) else Any
-        converted = [_convert_type(item, item_type) for item in value]
-        return tuple(converted) if origin is tuple else converted
+        return [_convert_type(item, item_type) for item in value]
+    if origin is tuple:
+        if not isinstance(value, list):
+            raise TypeError(f"expected JSON array, got {type(value).__name__}")
+        item_types = get_args(annotation)
+        if len(item_types) == 2 and item_types[1] is Ellipsis:
+            return tuple(_convert_type(item, item_types[0]) for item in value)
+        if item_types and len(item_types) != len(value):
+            raise ValueError(f"expected tuple of length {len(item_types)}")
+        return tuple(
+            _convert_type(item, item_types[index] if item_types else Any)
+            for index, item in enumerate(value)
+        )
+    if origin in (dict, MappingABC):
+        if not isinstance(value, dict):
+            raise TypeError(f"expected object, got {type(value).__name__}")
+        arguments = get_args(annotation)
+        key_type, item_type = arguments if len(arguments) == 2 else (Any, Any)
+        return {
+            _convert_type(key, key_type): _convert_type(item, item_type)
+            for key, item in value.items()
+        }
     if origin in (Union, UnionType):
+        errors: list[str] = []
         for candidate in get_args(annotation):
-            if candidate is type(None) and value is None:
-                return None
             try:
                 return _convert_type(value, candidate)
-            except (TypeError, ValueError):
-                continue
-    if (
-        isinstance(annotation, type)
-        and is_dataclass(annotation)
-        and isinstance(value, dict)
-    ):
+            except (TypeError, ValueError) as exc:
+                errors.append(str(exc))
+        raise TypeError("does not match union: " + "; ".join(errors))
+    if isinstance(annotation, type) and is_dataclass(annotation):
+        if not isinstance(value, dict):
+            raise TypeError(f"expected object, got {type(value).__name__}")
         return _construct(annotation, value)
-    return value
+    if isinstance(annotation, type) and type(value) is annotation:
+        return value
+    raise TypeError(f"unsupported or mismatched annotation {annotation!r}")
 
 
 def _fsync_directory(directory: Path) -> None:
     flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
     try:
         descriptor = os.open(directory, flags)
-    except OSError:
-        return
+    except OSError as exc:
+        if exc.errno in _UNSUPPORTED_DIRECTORY_SYNC_ERRNOS:
+            return
+        raise
     try:
         os.fsync(descriptor)
     except OSError as exc:
-        if exc.errno not in {getattr(os, "EINVAL", 22), getattr(os, "ENOTSUP", 45)}:
+        if exc.errno not in _UNSUPPORTED_DIRECTORY_SYNC_ERRNOS:
             raise
     finally:
         os.close(descriptor)
+
+
+_UNSUPPORTED_DIRECTORY_SYNC_ERRNOS = {
+    errno.EINVAL,
+    getattr(errno, "ENOSYS", errno.EINVAL),
+    getattr(errno, "ENOTSUP", errno.EINVAL),
+    getattr(errno, "EOPNOTSUPP", errno.EINVAL),
+}
