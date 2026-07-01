@@ -67,6 +67,20 @@ class TranslationValidationTests(unittest.TestCase):
             with self.subTest(target=target):
                 self.assert_code("Hello {0}", target, FindingCode.MESSAGE_FORMAT_INVALID)
 
+    def test_unknown_target_message_format_type_is_invalid(self) -> None:
+        self.assert_code(
+            "Hello {0}",
+            "Hallo {0,foo}",
+            FindingCode.MESSAGE_FORMAT_INVALID,
+        )
+
+    def test_malformed_source_does_not_make_plain_target_invalid(self) -> None:
+        result = validate_translation("Source {0,foo}", "Einfacher Text")
+        self.assertNotIn(
+            FindingCode.MESSAGE_FORMAT_INVALID,
+            {finding.code for finding in result.findings},
+        )
+
     def test_printf_placeholders_are_preserved(self) -> None:
         cases = (
             ("Use %s", "Nutze %d"),
@@ -77,6 +91,14 @@ class TranslationValidationTests(unittest.TestCase):
             with self.subTest(source=source, target=target):
                 self.assert_code(source, target, FindingCode.PLACEHOLDER_MISMATCH)
         self.assert_clean("Value %1$-+#08.2f and %%")
+        self.assert_clean("Character: % c")
+
+    def test_percent_followed_by_plain_word_is_not_printf(self) -> None:
+        result = validate_translation("100% complete", "100 % abgeschlossen")
+        self.assertNotIn(
+            FindingCode.PLACEHOLDER_MISMATCH,
+            {finding.code for finding in result.findings},
+        )
 
     def test_template_placeholders_and_mnemonics_are_preserved(self) -> None:
         cases = (
@@ -90,6 +112,16 @@ class TranslationValidationTests(unittest.TestCase):
         for source, target in cases:
             with self.subTest(source=source, target=target):
                 self.assert_code(source, target, FindingCode.PLACEHOLDER_MISMATCH)
+
+    def test_ampersand_inside_alphanumeric_token_is_not_mnemonic(self) -> None:
+        result = validate_translation(
+            "R&D settings", "Einstellungen für Forschung und Entwicklung"
+        )
+        self.assertNotIn(
+            FindingCode.PLACEHOLDER_MISMATCH,
+            {finding.code for finding in result.findings},
+        )
+        self.assert_code("Save &As", "Speichern unter", FindingCode.PLACEHOLDER_MISMATCH)
 
     def test_markup_structure_links_and_attribute_placeholders_are_preserved(self) -> None:
         cases = (

@@ -48,7 +48,8 @@ class ValidationResult:
 
 
 _PRINTF = re.compile(
-    r"%(?:%|(?:\d+\$)?[-#+ 0,(<]*\d*(?:\.\d+)?(?:[tT][a-zA-Z]|[a-zA-Z]))"
+    r"%(?:%|(?:\d+\$)?[-#+ 0,(<]*\d*(?:\.\d+)?"
+    r"(?:[tT][a-zA-Z]|[a-zA-Z])(?![A-Za-z]))"
 )
 _TEMPLATE = re.compile(r"\$\{[A-Za-z_][A-Za-z0-9_.-]*\}|\$[A-Za-z_][A-Za-z0-9_]*\$")
 _TAG_LIKE = re.compile(r"</?[A-Za-z][^<>]*>")
@@ -77,7 +78,7 @@ def validate_translation(
     target_markup = _markup(target)
     source_message = _messages_in_content(source, source_markup)
     target_message = _messages_in_content(target, target_markup)
-    message_relevant = bool(source_message.tokens or target_message.tokens)
+    message_relevant = source_message.recognized or target_message.recognized
     if message_relevant and not target_message.valid:
         findings.append(Finding(FindingCode.MESSAGE_FORMAT_INVALID, Severity.BLOCKING))
 
@@ -104,6 +105,7 @@ def validate_translation(
 class _MessageParse:
     tokens: tuple[str, ...]
     valid: bool
+    recognized: bool
 
 
 def _messages_in_content(text: str, markup: _Markup) -> _MessageParse:
@@ -113,6 +115,7 @@ def _messages_in_content(text: str, markup: _Markup) -> _MessageParse:
     return _MessageParse(
         tuple(token for parsed in parses for token in parsed.tokens),
         all(parsed.valid for parsed in parses),
+        any(parsed.recognized for parsed in parses),
     )
 
 
@@ -121,6 +124,7 @@ def _message_tokens(text: str) -> _MessageParse:
     index = 0
     quoted = False
     valid = True
+    recognized = False
     while index < len(text):
         character = text[index]
         if character == "'":
@@ -138,10 +142,15 @@ def _message_tokens(text: str) -> _MessageParse:
             content = text[index + 1 : end]
             signature = _message_signature(content)
             if signature is not None:
+                recognized = True
                 tokens.append(signature)
                 nested = _message_tokens(content)
                 tokens.extend(nested.tokens)
                 valid = valid and nested.valid
+                recognized = recognized or nested.recognized
+            elif re.match(r"\s*\d+\s*(?:,|$)", content):
+                recognized = True
+                valid = False
             index = end + 1
             continue
         if not quoted and character == "}":
@@ -149,7 +158,7 @@ def _message_tokens(text: str) -> _MessageParse:
         index += 1
     if quoted:
         valid = False
-    return _MessageParse(tuple(tokens), valid)
+    return _MessageParse(tuple(tokens), valid, recognized)
 
 
 def _matching_brace(text: str, start: int) -> int | None:
@@ -200,7 +209,12 @@ def _mnemonics(text: str) -> list[str]:
         if text.startswith("&&", index):
             result.append("escaped:&")
             index += 2
-        elif text[index] == "&" and index + 1 < len(text) and text[index + 1].isalnum():
+        elif (
+            text[index] == "&"
+            and index + 1 < len(text)
+            and text[index + 1].isalnum()
+            and (index == 0 or not text[index - 1].isalnum())
+        ):
             result.append("mnemonic:&")
             index += 1
         elif text.startswith("__", index):
