@@ -49,7 +49,7 @@ class ValidationResult:
 
 _PRINTF = re.compile(
     r"%(?:%|(?:\d+\$)?[-#+ 0,(<]*\d*(?:\.\d+)?"
-    r"(?:[tT][a-zA-Z]|[a-zA-Z])(?![A-Za-z]))"
+    r"(?:[tT][a-zA-Z]|[a-zA-Z]))"
 )
 _TEMPLATE = re.compile(r"\$\{[A-Za-z_][A-Za-z0-9_.-]*\}|\$[A-Za-z_][A-Za-z0-9_]*\$")
 _TAG_LIKE = re.compile(r"</?[A-Za-z][^<>]*>")
@@ -196,10 +196,25 @@ def _message_signature(content: str) -> str | None:
 
 def _placeholder_multiset(text: str, message: _MessageParse) -> Counter[str]:
     tokens = list(message.tokens)
-    tokens.extend(f"printf:{match.group()}" for match in _PRINTF.finditer(text))
+    tokens.extend(_printf_tokens(text))
     tokens.extend(f"template:{match.group()}" for match in _TEMPLATE.finditer(text))
     tokens.extend(_mnemonics(text))
     return Counter(tokens)
+
+
+def _printf_tokens(text: str) -> list[str]:
+    tokens: list[str] = []
+    for match in _PRINTF.finditer(text):
+        token = match.group()
+        prose_percent = (
+            token.startswith("% ")
+            and match.end() < len(text)
+            and text[match.end()].isascii()
+            and text[match.end()].isalpha()
+        )
+        if not prose_percent:
+            tokens.append(f"printf:{token}")
+    return tokens
 
 
 def _mnemonics(text: str) -> list[str]:

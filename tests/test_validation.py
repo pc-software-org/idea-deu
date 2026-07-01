@@ -92,13 +92,29 @@ class TranslationValidationTests(unittest.TestCase):
                 self.assert_code(source, target, FindingCode.PLACEHOLDER_MISMATCH)
         self.assert_clean("Value %1$-+#08.2f and %%")
         self.assert_clean("Character: % c")
+        self.assert_clean("Character: % c.")
+
+    def test_printf_may_be_followed_immediately_by_literal_text(self) -> None:
+        for source in ("Wait %dms", "Open %sfile", "Value %1$08.2fms"):
+            with self.subTest(source=source):
+                self.assert_code(
+                    source,
+                    "Platzhalter entfernt",
+                    FindingCode.PLACEHOLDER_MISMATCH,
+                )
 
     def test_percent_followed_by_plain_word_is_not_printf(self) -> None:
-        result = validate_translation("100% complete", "100 % abgeschlossen")
-        self.assertNotIn(
-            FindingCode.PLACEHOLDER_MISMATCH,
-            {finding.code for finding in result.findings},
-        )
+        for source, target in (
+            ("100% complete", "100 % abgeschlossen"),
+            ("50% discount", "50 % Rabatt"),
+            ("Length: % cm", "Länge in Prozentzentimetern"),
+        ):
+            with self.subTest(source=source):
+                result = validate_translation(source, target)
+                self.assertNotIn(
+                    FindingCode.PLACEHOLDER_MISMATCH,
+                    {finding.code for finding in result.findings},
+                )
 
     def test_template_placeholders_and_mnemonics_are_preserved(self) -> None:
         cases = (
