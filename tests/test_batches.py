@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.idea_deu.batches import (
     BatchError,
@@ -91,6 +92,101 @@ class BatchTests(unittest.TestCase):
             import_batch(self.root, self.units_path, batch, self.glossary_path)
         self.assertEqual(old_units, self.units_path.read_bytes())
         self.assertEqual(old_checkpoint, (self.root / "translations/checkpoint.json").read_bytes())
+
+    def test_import_is_bound_to_exact_ordered_exported_ids(self) -> None:
+        third = self.unit("c" * 64, "Close {0}")
+        write_jsonl_atomic(self.units_path, [*self.units, third])
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        substitute = third.to_dict()
+        substitute["target"] = "Schließen {0}"
+        substitute["batch"] = records[1]["batch"]
+        records[1] = substitute
+        write_jsonl_atomic(batch, records)
+        with self.assertRaisesRegex(BatchError, "unit IDs"):
+            import_batch(self.root, self.units_path, batch, self.glossary_path)
+
+    def test_checkpoint_manifest_has_ids_and_immutable_digest(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        checkpoint = json.loads((self.root / "translations/checkpoint.json").read_text())
+        self.assertEqual(["a" * 64, "b" * 64], checkpoint["unit_ids"])
+        self.assertRegex(checkpoint["batch_digest"], r"^[0-9a-f]{64}$")
+        records = read_jsonl(batch, dict)
+        self.assertEqual(checkpoint["batch_digest"], records[0]["batch"]["digest"])
+
+    def test_rejects_incoherent_active_checkpoint(self) -> None:
+        export_next_batch(self.root, self.units_path, limit=2)
+        checkpoint_path = self.root / "translations/checkpoint.json"
+        checkpoint = json.loads(checkpoint_path.read_text())
+        checkpoint["current_sequence"] = 3
+        write_jsonl_atomic(checkpoint_path, [checkpoint])
+        with self.assertRaisesRegex(BatchError, "checkpoint"):
+            export_next_batch(self.root, self.units_path)
+
+    def test_recovers_after_base_exception_between_transaction_writes(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        for record in records:
+            record["target"] = record["source"]
+        write_jsonl_atomic(batch, records)
+        old_units = self.units_path.read_bytes()
+        checkpoint_path = self.root / "translations/checkpoint.json"
+        old_checkpoint = checkpoint_path.read_bytes()
+        import scripts.idea_deu.batches as batches
+        real_write = batches.write_jsonl_atomic
+        state_writes = 0
+
+        def interrupt(path: Path, values: object) -> None:
+            nonlocal state_writes
+            real_write(path, values)
+            if path == self.units_path.resolve():
+                state_writes += 1
+                if state_writes == 1:
+                    raise SystemExit("crash")
+
+        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=interrupt):
+            with self.assertRaises(SystemExit):
+                import_batch(self.root, self.units_path, batch, self.glossary_path)
+        self.assertNotEqual(old_units, self.units_path.read_bytes())
+        self.assertEqual(batch, export_next_batch(self.root, self.units_path))
+        self.assertEqual(old_units, self.units_path.read_bytes())
+        self.assertEqual(old_checkpoint, checkpoint_path.read_bytes())
+        self.assertEqual([], list((self.root / "translations").glob(".batch-transaction*")))
+
+    def test_failed_recovery_retains_evidence_for_later_retry(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        for record in records:
+            record["target"] = record["source"]
+        write_jsonl_atomic(batch, records)
+        import scripts.idea_deu.batches as batches
+        real_write = batches.write_jsonl_atomic
+
+        def crash_after_units(path: Path, values: object) -> None:
+            real_write(path, values)
+            if path == self.units_path.resolve():
+                raise SystemExit("crash")
+
+        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=crash_after_units):
+            with self.assertRaises(SystemExit):
+                import_batch(self.root, self.units_path, batch, self.glossary_path)
+
+        def fail_restore(path: Path, values: object) -> None:
+            if path.resolve() == self.units_path.resolve():
+                raise OSError("restore failed")
+            real_write(path, values)
+
+        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=fail_restore):
+            with self.assertRaisesRegex(OSError, "restore failed"):
+                export_next_batch(self.root, self.units_path)
+        evidence = list((self.root / "translations").glob(".batch-transaction*"))
+        self.assertEqual(3, len(evidence))
+        self.assertEqual(batch, export_next_batch(self.root, self.units_path))
+        self.assertEqual([], list((self.root / "translations").glob(".batch-transaction*")))
 
     def test_paths_are_confined_to_root(self) -> None:
         outside = self.root.parent / "outside.jsonl"
