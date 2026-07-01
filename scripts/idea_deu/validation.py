@@ -208,6 +208,8 @@ def _printf_tokens(text: str) -> list[str]:
         token = match.group()
         prose_percent = (
             token.startswith("% ")
+            and match.start() > 0
+            and text[match.start() - 1].isdigit()
             and match.end() < len(text)
             and text[match.end()].isascii()
             and text[match.end()].isalpha()

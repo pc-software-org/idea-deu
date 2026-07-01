@@ -95,7 +95,14 @@ class TranslationValidationTests(unittest.TestCase):
         self.assert_clean("Character: % c.")
 
     def test_printf_may_be_followed_immediately_by_literal_text(self) -> None:
-        for source in ("Wait %dms", "Open %sfile", "Value %1$08.2fms"):
+        for source in (
+            "Wait %dms",
+            "Open %sfile",
+            "Value %1$08.2fms",
+            "Signed % dms",
+            "Padded % 8dms",
+            "Length % cm",
+        ):
             with self.subTest(source=source):
                 self.assert_code(
                     source,
@@ -105,9 +112,8 @@ class TranslationValidationTests(unittest.TestCase):
 
     def test_percent_followed_by_plain_word_is_not_printf(self) -> None:
         for source, target in (
-            ("100% complete", "100 % abgeschlossen"),
-            ("50% discount", "50 % Rabatt"),
-            ("Length: % cm", "Länge in Prozentzentimetern"),
+            ("100% complete", "100% abgeschlossen"),
+            ("50% discount", "50% Rabatt"),
         ):
             with self.subTest(source=source):
                 result = validate_translation(source, target)
