@@ -91,3 +91,10 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(PackageError,"symbolic|unsafe"):
             build_plugin_package(self.result,self.descriptor,linked/"dist"/"idea-deu.zip")
         self.assertEqual([],list(outside.iterdir()))
+
+    def test_rejects_symlink_above_existing_dist_parent_without_outside_write(self):
+        outside=self.root/"outside"; existing=outside/"existing"; existing.mkdir(parents=True)
+        linked=self.root/"linked"; linked.symlink_to(outside,target_is_directory=True)
+        with self.assertRaisesRegex(PackageError,"symbolic|unsafe"):
+            build_plugin_package(self.result,self.descriptor,linked/"existing"/"dist"/"idea-deu.zip")
+        self.assertEqual([],list(existing.iterdir()))

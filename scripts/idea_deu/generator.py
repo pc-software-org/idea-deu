@@ -16,6 +16,7 @@ from pathlib import Path, PurePosixPath
 from xml.etree import ElementTree
 
 from .models import Inventory, ProcessingStatus, ResourceRecord, ResourceType, TranslationUnit
+from .path_safety import unsafe_output_parent
 from .properties import PropertiesError, parse_properties, render_properties
 from .validation import Severity
 
@@ -228,16 +229,10 @@ def _write_tree(root: Path, resources: Mapping[str,bytes]) -> None:
 
 
 def _assert_no_symlink_ancestors(path: Path) -> None:
-    current = path.absolute().parent
-    while True:
-        try: mode = current.lstat().st_mode
-        except FileNotFoundError:
-            if current == current.parent: return
-            current = current.parent
-            continue
-        if stat.S_ISLNK(mode): raise GenerationError(f"symbolic-link parent: {current}")
-        if not stat.S_ISDIR(mode): raise GenerationError(f"unsafe non-directory parent: {current}")
-        return
+    unsafe = unsafe_output_parent(path)
+    if unsafe is not None:
+        reason, component = unsafe
+        raise GenerationError(f"{reason}: {component}")
 
 
 def _unique_zip_member(archive: zipfile.ZipFile, name: str) -> zipfile.ZipInfo:

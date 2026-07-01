@@ -7,6 +7,7 @@ from pathlib import Path, PurePosixPath
 from xml.etree import ElementTree
 from .generator import GenerationResult
 from .models import ProcessingStatus
+from .path_safety import unsafe_output_parent
 from .validation import Severity
 
 class PackageError(ValueError): pass
@@ -81,16 +82,10 @@ def _regular_tree(root: Path) -> dict[str,bytes]:
     return result
 
 def _assert_safe_destination_parent(destination: Path) -> None:
-    current=destination.absolute().parent
-    while True:
-        try: mode=current.lstat().st_mode
-        except FileNotFoundError:
-            if current==current.parent: return
-            current=current.parent
-            continue
-        if stat.S_ISLNK(mode): raise PackageError(f"symbolic-link destination parent: {current}")
-        if not stat.S_ISDIR(mode): raise PackageError(f"unsafe destination parent: {current}")
-        return
+    unsafe=unsafe_output_parent(destination)
+    if unsafe is not None:
+        reason,component=unsafe
+        raise PackageError(f"{reason}: {component}")
 
 def _zip_bytes(entries: dict[str,bytes]) -> bytes:
     stream=io.BytesIO()

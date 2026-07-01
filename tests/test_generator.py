@@ -87,6 +87,16 @@ class GeneratorTests(unittest.TestCase):
                 MappingResourceProvider({(self.record.container,self.record.resource_path):self.data}),parent/"generated")
         self.assertEqual([],list(outside.iterdir()))
 
+    def test_rejects_symlink_above_existing_generated_parent_without_outside_write(self):
+        outside=Path(self.tmp.name)/"outside"; existing=outside/"existing"; existing.mkdir(parents=True)
+        linked=Path(self.tmp.name)/"linked"; linked.symlink_to(outside,target_is_directory=True)
+        with self.assertRaisesRegex(GenerationError,"symbolic|unsafe"):
+            generate_resources(Inventory((self.record,),(),()),(
+                self.unit(self.record,"hello","Hello","Hallo"), self.unit(self.record,"other","untouched","x")),
+                MappingResourceProvider({(self.record.container,self.record.resource_path):self.data}),
+                linked/"existing"/"generated")
+        self.assertEqual([],list(existing.iterdir()))
+
     def test_rejects_incomplete_statuses_and_blockers_with_all_ids(self):
         units = [self.unit(self.record, str(i), "Hello", "Hallo", status) for i, status in enumerate(
             (ProcessingStatus.OPEN, ProcessingStatus.TRANSLATED))]
