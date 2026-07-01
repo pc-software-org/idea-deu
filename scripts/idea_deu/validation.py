@@ -206,10 +206,11 @@ def _printf_tokens(text: str) -> list[str]:
     tokens: list[str] = []
     for match in _PRINTF.finditer(text):
         token = match.group()
+        prefix = text[:match.start()].rstrip()
         prose_percent = (
             token.startswith("% ")
-            and match.start() > 0
-            and text[match.start() - 1].isdigit()
+            and bool(prefix)
+            and prefix[-1].isdigit()
             and match.end() < len(text)
             and text[match.end()].isascii()
             and text[match.end()].isalpha()

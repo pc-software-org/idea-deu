@@ -113,9 +113,11 @@ class TranslationValidationTests(unittest.TestCase):
     def test_percent_followed_by_plain_word_is_not_printf(self) -> None:
         for source, target in (
             ("100% complete", "100% abgeschlossen"),
+            ("100% complete", "100 % abgeschlossen"),
             ("50% discount", "50% Rabatt"),
+            ("50% discount", "50 % Rabatt"),
         ):
-            with self.subTest(source=source):
+            with self.subTest(source=source, target=target):
                 result = validate_translation(source, target)
                 self.assertNotIn(
                     FindingCode.PLACEHOLDER_MISMATCH,
