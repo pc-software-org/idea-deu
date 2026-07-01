@@ -1,4 +1,6 @@
 import json
+import multiprocessing
+import queue
 import tempfile
 import unittest
 from dataclasses import replace
@@ -13,6 +15,20 @@ from scripts.idea_deu.batches import (
 )
 from scripts.idea_deu.models import ProcessingStatus, TranslationContext, TranslationUnit
 from scripts.idea_deu.state import read_jsonl, write_jsonl_atomic
+
+
+def _hold_batch_lock(root: str, ready: object, release: object) -> None:
+    from pathlib import Path
+    from scripts.idea_deu.batches import _exclusive_lock
+    with _exclusive_lock(Path(root)):
+        ready.set()
+        release.wait(5)
+
+
+def _export_in_process(root: str, result: object) -> None:
+    from pathlib import Path
+    from scripts.idea_deu.batches import export_next_batch
+    result.put(str(export_next_batch(Path(root), Path(root) / "translations/units.jsonl")))
 
 
 class BatchTests(unittest.TestCase):
@@ -115,6 +131,73 @@ class BatchTests(unittest.TestCase):
         self.assertRegex(checkpoint["batch_digest"], r"^[0-9a-f]{64}$")
         records = read_jsonl(batch, dict)
         self.assertEqual(checkpoint["batch_digest"], records[0]["batch"]["digest"])
+
+    def test_idempotent_export_rejects_tampered_immutable_record(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        records[0]["source"] = "tampered"
+        write_jsonl_atomic(batch, records)
+        with self.assertRaisesRegex(BatchError, "immutable"):
+            export_next_batch(self.root, self.units_path)
+
+    def test_cross_process_lock_serializes_operations(self) -> None:
+        context = multiprocessing.get_context("spawn")
+        ready = context.Event()
+        release = context.Event()
+        result = context.Queue()
+        holder = context.Process(target=_hold_batch_lock, args=(str(self.root), ready, release))
+        contender = context.Process(target=_export_in_process, args=(str(self.root), result))
+        holder.start()
+        self.assertTrue(ready.wait(5))
+        contender.start()
+        with self.assertRaises(queue.Empty):
+            result.get(timeout=0.2)
+        release.set()
+        holder.join(5)
+        contender.join(5)
+        self.assertEqual(0, holder.exitcode)
+        self.assertEqual(0, contender.exitcode)
+        self.assertIn("translations/batches", result.get(timeout=2))
+
+    def test_parent_swap_after_validation_aborts_without_outside_write(self) -> None:
+        outside = self.root / "outside-state"
+        outside.mkdir()
+        sentinel = outside / "sentinel"
+        sentinel.write_text("untouched", encoding="utf-8")
+        original = self.root / "translations"
+        moved = self.root / "translations-moved"
+
+        def swap() -> None:
+            original.rename(moved)
+            original.symlink_to(outside, target_is_directory=True)
+
+        with patch("scripts.idea_deu.batches._layout_hook", side_effect=swap):
+            with self.assertRaisesRegex(BatchError, "identity"):
+                export_next_batch(self.root, self.units_path)
+        self.assertEqual("untouched", sentinel.read_text(encoding="utf-8"))
+
+    def test_post_commit_cleanup_failure_still_returns_success(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        for record in records:
+            record["target"] = record["source"]
+        write_jsonl_atomic(batch, records)
+        import scripts.idea_deu.batches as batches
+        real_remove = batches._remove_transaction_directory
+
+        def fail_committed(path: Path, **kwargs: object) -> None:
+            if path.name == ".batch-txn.committed":
+                raise OSError("cleanup failed")
+            real_remove(path, **kwargs)
+
+        with patch("scripts.idea_deu.batches._remove_transaction_directory", side_effect=fail_committed):
+            result = import_batch(self.root, self.units_path, batch, self.glossary_path)
+        self.assertEqual(2, result.imported)
+        self.assertTrue((self.root / "translations/.batch-txn.committed").exists())
+        self.assertIsNone(export_next_batch(self.root, self.units_path))
+        self.assertFalse((self.root / "translations/.batch-txn.committed").exists())
 
     def test_rejects_incoherent_active_checkpoint(self) -> None:
         export_next_batch(self.root, self.units_path, limit=2)

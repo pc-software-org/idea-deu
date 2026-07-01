@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import stat
+from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
@@ -93,16 +94,23 @@ def _nonempty_unique_strings(value: Any, name: str) -> tuple[str, ...]:
 
 def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path | None:
     root = _safe_root(root)
-    units_path, checkpoint_path = _validate_state_layout(root, units_path)
-    _recover_transaction(root)
+    with _exclusive_lock(root):
+        return _export_next_batch_locked(root, units_path, limit)
+
+
+def _export_next_batch_locked(root: Path, units_path: Path, limit: int) -> Path | None:
+    units_path, checkpoint_path, identity = _validate_state_layout(root, units_path)
+    _layout_hook()
+    _assert_state_identity(root, identity)
+    _recover_transaction(root, identity)
     if type(limit) is not int or not 1 <= limit <= MAX_BATCH_SIZE:
         raise BatchError(f"limit must be an integer from 1 to {MAX_BATCH_SIZE}")
     checkpoint = _read_checkpoint(checkpoint_path)
+    units = _read_jsonl(units_path, TranslationUnit)
     if checkpoint["current_batch"] is not None:
         current = _safe_path(root, root / checkpoint["current_batch"], must_exist=True)
-        _validate_batch_manifest(current, checkpoint)
+        _validate_batch_manifest(current, checkpoint, units)
         return current
-    units = _read_jsonl(units_path, TranslationUnit)
     selected = sorted((unit for unit in units if unit.status is ProcessingStatus.OPEN), key=lambda unit: unit.id)[:limit]
     if not selected:
         return None
@@ -112,9 +120,11 @@ def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path
     unit_ids = [unit.id for unit in selected]
     digest = _batch_digest(selected, sequence, relative.as_posix(), unit_ids)
     records = [_batch_record(unit, sequence, relative.as_posix(), unit_ids, digest) for unit in selected]
+    _assert_state_identity(root, identity)
     write_jsonl_atomic(batch_path, records)
     next_checkpoint = _checkpoint(checkpoint["completed_sequence"], sequence, relative.as_posix(), unit_ids, digest, "translate-current-batch")
     try:
+        _assert_state_identity(root, identity)
         write_jsonl_atomic(checkpoint_path, [next_checkpoint])
     except Exception:
         batch_path.unlink(missing_ok=True)
@@ -124,8 +134,15 @@ def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path
 
 def import_batch(root: Path, units_path: Path, batch_path: Path, glossary_path: Path) -> ImportResult:
     root = _safe_root(root)
-    units_path, checkpoint_path = _validate_state_layout(root, units_path)
-    _recover_transaction(root)
+    with _exclusive_lock(root):
+        return _import_batch_locked(root, units_path, batch_path, glossary_path)
+
+
+def _import_batch_locked(root: Path, units_path: Path, batch_path: Path, glossary_path: Path) -> ImportResult:
+    units_path, checkpoint_path, identity = _validate_state_layout(root, units_path)
+    _layout_hook()
+    _assert_state_identity(root, identity)
+    _recover_transaction(root, identity)
     batch_path = _safe_path(root, batch_path, must_exist=True)
     glossary_path = _safe_path(root, glossary_path, must_exist=True)
     checkpoint = _read_checkpoint(checkpoint_path)
@@ -173,7 +190,7 @@ def import_batch(root: Path, units_path: Path, batch_path: Path, glossary_path: 
     updated = [replacements.get(unit.id, unit) for unit in units]
     blocking = sum(unit.status is ProcessingStatus.TRANSLATED for unit in replacements.values())
     next_checkpoint = _checkpoint(sequence, None, None, [], None, "export-next-batch")
-    _commit_transaction(root, units_path, updated, checkpoint_path, next_checkpoint)
+    _commit_transaction(root, units_path, updated, checkpoint_path, next_checkpoint, identity)
     return ImportResult(len(records), len(records) - blocking, blocking)
 
 
@@ -261,13 +278,16 @@ def _commit_transaction(
     units: list[TranslationUnit],
     checkpoint_path: Path,
     checkpoint: dict[str, Any],
+    identity: tuple[int, int],
 ) -> None:
     """Commit through staging -> active -> committed directory states."""
     staging, active, committed = _transaction_paths(root)
-    _recover_transaction(root)
+    _recover_transaction(root, identity)
+    _assert_state_identity(root, identity)
     old_units = _read_jsonl(units_path, TranslationUnit)
     old_checkpoint = _read_jsonl(checkpoint_path, dict)
     staging.mkdir(mode=0o700)
+    committed_durable = False
     try:
         units_backup = staging / "units.jsonl"
         checkpoint_backup = staging / "checkpoint.json"
@@ -287,23 +307,30 @@ def _commit_transaction(
         os.rename(staging, active)
         _fsync_directory(active.parent)
         _transaction_hook("after_active_rename")
+        _assert_state_identity(root, identity)
         write_jsonl_atomic(units_path, units)
         _transaction_hook("between_state_writes")
+        _assert_state_identity(root, identity)
         write_jsonl_atomic(checkpoint_path, [checkpoint])
         os.rename(active, committed)
         _fsync_directory(committed.parent)
+        committed_durable = True
         _transaction_hook("after_committed_rename")
         _remove_transaction_directory(committed, validate=False, hook_cleanup=True)
     except Exception:
-        _recover_transaction(root)
+        if committed_durable:
+            return
+        _recover_transaction(root, identity)
         raise
     except BaseException:
         raise
 
 
-def _recover_transaction(root: Path) -> None:
+def _recover_transaction(root: Path, identity: tuple[int, int] | None = None) -> None:
     """Rollback an interrupted two-file commit before any public operation."""
     staging, active, committed = _transaction_paths(root)
+    if identity is not None:
+        _assert_state_identity(root, identity)
     for path in (staging, active, committed):
         if path.is_symlink():
             raise BatchError(f"symbolic transaction path: {path}")
@@ -312,8 +339,12 @@ def _recover_transaction(root: Path) -> None:
     if active.exists() and committed.exists():
         raise BatchError("conflicting transaction states")
     if committed.exists():
+        if identity is not None:
+            _assert_state_identity(root, identity)
         _remove_transaction_directory(committed, validate=False)
     if active.exists():
+        if identity is not None:
+            _assert_state_identity(root, identity)
         manifest = _validate_transaction_directory(active)
         units_path = root / "translations/units.jsonl"
         checkpoint_path = root / "translations/checkpoint.json"
@@ -410,7 +441,7 @@ def _transaction_hook(label: str) -> None:
     del label
 
 
-def _validate_batch_manifest(path: Path, checkpoint: dict[str, Any]) -> None:
+def _validate_batch_manifest(path: Path, checkpoint: dict[str, Any], units: list[TranslationUnit]) -> None:
     records = _read_jsonl(path, dict)
     if [record.get("id") for record in records] != checkpoint["unit_ids"]:
         raise BatchError("batch unit IDs do not match exported manifest")
@@ -424,6 +455,20 @@ def _validate_batch_manifest(path: Path, checkpoint: dict[str, Any]) -> None:
     }
     if any(record.get("batch") != expected for record in records):
         raise BatchError("changed batch metadata")
+    unit_by_id = {unit.id: unit for unit in units}
+    exported = [unit_by_id.get(identifier) for identifier in checkpoint["unit_ids"]]
+    if any(unit is None for unit in exported):
+        raise BatchError("batch immutable units are unavailable")
+    digest = _batch_digest(exported, checkpoint["current_sequence"], checkpoint["current_batch"], checkpoint["unit_ids"])  # type: ignore[arg-type]
+    if digest != checkpoint["batch_digest"]:
+        raise BatchError("batch digest does not match immutable units")
+    for record, unit in zip(records, exported, strict=True):
+        canonical = _batch_record(unit, checkpoint["current_sequence"], checkpoint["current_batch"], checkpoint["unit_ids"], checkpoint["batch_digest"])  # type: ignore[arg-type]
+        if not isinstance(record.get("target"), str) or any(
+            record.get(key) != canonical[key]
+            for key in ("id", "source", "source_sha256", "context", "status", "findings")
+        ):
+            raise BatchError("changed immutable batch record")
 
 
 def _safe_root(root: Path) -> Path:
@@ -436,7 +481,7 @@ def _safe_root(root: Path) -> Path:
         raise BatchError(f"invalid root: {exc}") from exc
 
 
-def _validate_state_layout(root: Path, units_path: Path) -> tuple[Path, Path]:
+def _validate_state_layout(root: Path, units_path: Path) -> tuple[Path, Path, tuple[int, int]]:
     """Bind state and recovery to the one canonical, non-symlinked layout."""
     state = root / "translations"
     if state.is_symlink():
@@ -457,7 +502,63 @@ def _validate_state_layout(root: Path, units_path: Path) -> tuple[Path, Path]:
     checkpoint = state / "checkpoint.json"
     if checkpoint.is_symlink() or (checkpoint.exists() and not checkpoint.is_file()):
         raise BatchError("canonical checkpoint must be a regular file")
-    return expected_units.resolve(strict=True), checkpoint
+    info = state.stat(follow_symlinks=False)
+    return expected_units.resolve(strict=True), checkpoint, (info.st_dev, info.st_ino)
+
+
+def _assert_state_identity(root: Path, expected: tuple[int, int]) -> None:
+    state = root / "translations"
+    if state.is_symlink():
+        raise BatchError("translations directory identity changed")
+    info = state.stat(follow_symlinks=False)
+    if (info.st_dev, info.st_ino) != expected:
+        raise BatchError("translations directory identity changed")
+
+
+def _layout_hook() -> None:
+    """Test seam for adversarial parent replacement after validation."""
+
+
+@contextmanager
+def _exclusive_lock(root: Path):
+    lock_path = root / ".batch.lock"
+    flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(lock_path, flags, 0o600)
+    except OSError as exc:
+        raise BatchError(f"cannot open batch lock safely: {exc}") from exc
+    try:
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise BatchError("batch lock is not a regular file")
+        _lock_descriptor(descriptor)
+        try:
+            yield
+        finally:
+            _unlock_descriptor(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _lock_descriptor(descriptor: int) -> None:
+    if os.name == "nt":
+        import msvcrt
+        if os.fstat(descriptor).st_size == 0:
+            os.write(descriptor, b"0")
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        msvcrt.locking(descriptor, msvcrt.LK_LOCK, 1)
+    else:
+        import fcntl
+        fcntl.flock(descriptor, fcntl.LOCK_EX)
+
+
+def _unlock_descriptor(descriptor: int) -> None:
+    if os.name == "nt":
+        import msvcrt
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
+    else:
+        import fcntl
+        fcntl.flock(descriptor, fcntl.LOCK_UN)
 
 
 def _safe_path(root: Path, path: Path, *, must_exist: bool = False) -> Path:
