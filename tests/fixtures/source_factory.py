@@ -31,3 +31,33 @@ def make_source_archive(
             source_zip.writestr("product-info.json", document)
 
     return archive, hashlib.sha256(archive.read_bytes()).hexdigest()
+
+
+def mark_product_info_encrypted(archive: Path) -> str:
+    """Set the encryption flag in both ZIP headers for product-info.json."""
+    content = bytearray(archive.read_bytes())
+    filename = b"product-info.json"
+    header_layouts = ((30, b"PK\x03\x04", 6), (46, b"PK\x01\x02", 8))
+    changed_headers = 0
+    position = 0
+    while (position := content.find(filename, position)) >= 0:
+        for filename_offset, signature, flag_offset in header_layouts:
+            header = position - filename_offset
+            if content[header : header + 4] != signature:
+                continue
+            flags = int.from_bytes(
+                content[header + flag_offset : header + flag_offset + 2], "little"
+            )
+            content[header + flag_offset : header + flag_offset + 2] = (
+                flags | 1
+            ).to_bytes(2, "little")
+            changed_headers += 1
+            break
+        position += len(filename)
+
+    if changed_headers != 2:
+        raise AssertionError(
+            "could not mark both product-info.json ZIP headers encrypted"
+        )
+    archive.write_bytes(content)
+    return hashlib.sha256(content).hexdigest()

@@ -6,7 +6,7 @@ from pathlib import Path
 
 from scripts.idea_deu.config import ProductConfig
 from scripts.idea_deu.source import SourceValidationError, validate_source
-from tests.fixtures.source_factory import make_source_archive
+from tests.fixtures.source_factory import make_source_archive, mark_product_info_encrypted
 
 
 class SourceValidationTest(unittest.TestCase):
@@ -65,6 +65,16 @@ class SourceValidationTest(unittest.TestCase):
             sha256 = hashlib.sha256(archive.read_bytes()).hexdigest()
 
             with self.assertRaisesRegex(SourceValidationError, "valid ZIP archive"):
+                validate_source(self._config(archive, sha256))
+
+    def test_rejects_password_protected_product_info_with_domain_error(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            archive, _ = make_source_archive(Path(directory))
+            sha256 = mark_product_info_encrypted(archive)
+
+            with self.assertRaisesRegex(
+                SourceValidationError, r"product-info\.json.*password-protected"
+            ):
                 validate_source(self._config(archive, sha256))
 
     def test_rejects_malformed_product_info_json(self) -> None:

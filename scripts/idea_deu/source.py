@@ -96,6 +96,10 @@ def _read_product_info(archive: Path) -> dict[str, Any]:
                 raise SourceValidationError(
                     f"source archive is missing root {_PRODUCT_INFO_PATH}"
                 ) from None
+            except RuntimeError:
+                raise SourceValidationError(
+                    f"{_PRODUCT_INFO_PATH} is password-protected and cannot be read"
+                ) from None
     except BadZipFile:
         raise SourceValidationError(
             f"source archive {archive} is not a valid ZIP archive"
