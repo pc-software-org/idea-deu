@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "locale": "de",
+  "style": {"primary": "neutral", "fallback": "Sie"},
+  "retained_terms": ["Git", "Commit", "Branch", "Debugger", "Breakpoint", "API", "URL", "IntelliJ IDEA"],
+  "preferred_terms": {},
+  "forbidden_blanket_replacements": ["run"]
+}

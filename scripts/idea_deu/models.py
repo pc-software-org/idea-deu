@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import Any
 
+from .validation import Finding
+
 
 class ExclusionReason(StrEnum):
     CONTAINER_BUDGET_EXCEEDED = "container_budget_exceeded"
@@ -28,6 +30,8 @@ class ExclusionReason(StrEnum):
 
 class ProcessingStatus(StrEnum):
     OPEN = "open"
+    TRANSLATED = "translated"
+    TECHNICALLY_REVIEWED = "technically_reviewed"
 
 
 class ResourceType(StrEnum):
@@ -37,6 +41,44 @@ class ResourceType(StrEnum):
     POSTFIX_TEMPLATE = "postfix_template"
     PROPERTIES = "properties"
     TIP = "tip"
+
+
+@dataclass(frozen=True, slots=True)
+class TranslationContext:
+    bundle: str
+    key: str
+    container: str
+    path: str
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "bundle": self.bundle,
+            "key": self.key,
+            "container": self.container,
+            "path": self.path,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class TranslationUnit:
+    id: str
+    source: str
+    source_sha256: str
+    target: str
+    context: TranslationContext
+    status: ProcessingStatus
+    findings: tuple[Finding, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "source": self.source,
+            "source_sha256": self.source_sha256,
+            "target": self.target,
+            "context": self.context.to_dict(),
+            "status": self.status.value,
+            "findings": [finding.to_dict() for finding in self.findings],
+        }
 
 
 @dataclass(frozen=True, slots=True)
