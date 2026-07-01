@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-import json
 import hashlib
+import json
+import os
+import stat
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
@@ -249,9 +251,9 @@ def _batch_digest(units: list[TranslationUnit], sequence: int, relative: str, un
 def _transaction_paths(root: Path) -> tuple[Path, Path, Path]:
     directory = root / "translations"
     return (
-        directory / ".batch-transaction.jsonl",
-        directory / ".batch-transaction.units.backup.jsonl",
-        directory / ".batch-transaction.checkpoint.backup.jsonl",
+        directory / ".batch-txn.staging",
+        directory / ".batch-txn.active",
+        directory / ".batch-txn.committed",
     )
 
 
@@ -262,73 +264,152 @@ def _commit_transaction(
     checkpoint_path: Path,
     checkpoint: dict[str, Any],
 ) -> None:
-    """Replace both state files, leaving durable recovery evidence until complete."""
-    marker, units_backup, checkpoint_backup = _transaction_paths(root)
-    if marker.exists() or units_backup.exists() or checkpoint_backup.exists():
-        _recover_transaction(root)
+    """Commit through staging -> active -> committed directory states."""
+    staging, active, committed = _transaction_paths(root)
+    _recover_transaction(root)
     old_units = _read_jsonl(units_path, TranslationUnit)
     old_checkpoint = _read_jsonl(checkpoint_path, dict)
+    staging.mkdir(mode=0o700)
     try:
+        units_backup = staging / "units.jsonl"
+        checkpoint_backup = staging / "checkpoint.json"
         write_jsonl_atomic(units_backup, old_units)
+        _transaction_hook("after_one_backup")
         write_jsonl_atomic(checkpoint_backup, old_checkpoint)
-    except BaseException:
-        units_backup.unlink(missing_ok=True)
-        checkpoint_backup.unlink(missing_ok=True)
-        raise
-    resolved_root = root.resolve(strict=True)
-    units_relative = units_path.resolve(strict=True).relative_to(resolved_root).as_posix()
-    checkpoint_relative = checkpoint_path.resolve(strict=True).relative_to(resolved_root).as_posix()
-    try:
-        write_jsonl_atomic(marker, [{
+        manifest = {
             "schema_version": SCHEMA_VERSION,
-            "units": units_relative,
-            "checkpoint": checkpoint_relative,
-        }])
-    except BaseException:
-        units_backup.unlink(missing_ok=True)
-        checkpoint_backup.unlink(missing_ok=True)
-        raise
-    try:
+            "units_present": units_path.exists(),
+            "checkpoint_present": checkpoint_path.exists(),
+            "units_sha256": _file_sha256(units_backup),
+            "checkpoint_sha256": _file_sha256(checkpoint_backup),
+        }
+        write_jsonl_atomic(staging / "manifest.json", [manifest])
+        _fsync_directory(staging)
+        _transaction_hook("before_active_rename")
+        os.rename(staging, active)
+        _fsync_directory(active.parent)
+        _transaction_hook("after_active_rename")
         write_jsonl_atomic(units_path, units)
+        _transaction_hook("between_state_writes")
         write_jsonl_atomic(checkpoint_path, [checkpoint])
+        os.rename(active, committed)
+        _fsync_directory(committed.parent)
+        _transaction_hook("after_committed_rename")
+        _remove_transaction_directory(committed, validate=False, hook_cleanup=True)
     except Exception:
         _recover_transaction(root)
         raise
-    _remove_transaction_files(marker, units_backup, checkpoint_backup)
+    except BaseException:
+        raise
 
 
 def _recover_transaction(root: Path) -> None:
     """Rollback an interrupted two-file commit before any public operation."""
-    marker, units_backup, checkpoint_backup = _transaction_paths(root)
-    if not marker.exists():
-        if units_backup.exists() or checkpoint_backup.exists():
-            raise BatchError("incomplete transaction preparation requires inspection")
-        return
-    marker_records = _read_jsonl(marker, dict)
+    staging, active, committed = _transaction_paths(root)
+    for path in (staging, active, committed):
+        if path.is_symlink():
+            raise BatchError(f"symbolic transaction path: {path}")
+        if path.exists() and not path.is_dir():
+            raise BatchError(f"transaction path is not a directory: {path}")
+    if active.exists() and committed.exists():
+        raise BatchError("conflicting transaction states")
+    if committed.exists():
+        _remove_transaction_directory(committed, validate=False)
+    if active.exists():
+        manifest = _validate_transaction_directory(active)
+        units_path = root / "translations/units.jsonl"
+        checkpoint_path = root / "translations/checkpoint.json"
+        _restore_backup(active / "units.jsonl", units_path, manifest["units_present"], TranslationUnit)
+        _restore_backup(active / "checkpoint.json", checkpoint_path, manifest["checkpoint_present"], dict)
+        _fsync_directory(active.parent)
+        os.rename(active, committed)
+        _fsync_directory(committed.parent)
+        _remove_transaction_directory(committed, validate=False)
+    if staging.exists():
+        _remove_transaction_directory(staging, validate=False)
+
+
+def _validate_transaction_directory(directory: Path) -> dict[str, Any]:
+    expected_names = {"units.jsonl", "checkpoint.json", "manifest.json"}
+    if {item.name for item in directory.iterdir()} != expected_names:
+        raise BatchError("invalid transaction directory contents")
+    for name in expected_names:
+        _require_regular(directory / name)
+    records = _read_jsonl(directory / "manifest.json", dict)
+    expected_fields = {"schema_version", "units_present", "checkpoint_present", "units_sha256", "checkpoint_sha256"}
+    if len(records) != 1 or set(records[0]) != expected_fields:
+        raise BatchError("invalid transaction manifest")
+    manifest = records[0]
     if (
-        len(marker_records) != 1
-        or set(marker_records[0]) != {"schema_version", "units", "checkpoint"}
-        or marker_records[0]["schema_version"] != SCHEMA_VERSION
-        or not isinstance(marker_records[0]["units"], str)
-        or not isinstance(marker_records[0]["checkpoint"], str)
-        or not units_backup.exists()
-        or not checkpoint_backup.exists()
+        manifest["schema_version"] != SCHEMA_VERSION
+        or type(manifest["units_present"]) is not bool
+        or type(manifest["checkpoint_present"]) is not bool
+        or manifest["units_sha256"] != _file_sha256(directory / "units.jsonl")
+        or manifest["checkpoint_sha256"] != _file_sha256(directory / "checkpoint.json")
     ):
-        raise BatchError("invalid transaction recovery evidence")
-    units_path = _safe_path(root, root / marker_records[0]["units"], must_exist=True)
-    checkpoint_path = _safe_path(root, root / marker_records[0]["checkpoint"], must_exist=True)
-    old_units = _read_jsonl(units_backup, TranslationUnit)
-    old_checkpoint = _read_jsonl(checkpoint_backup, dict)
-    # Cleanup happens only after both restores succeed. A failed rollback therefore
-    # retains the marker and both known-good backups for the next recovery attempt.
-    write_jsonl_atomic(units_path, old_units)
-    write_jsonl_atomic(checkpoint_path, old_checkpoint)
-    _remove_transaction_files(marker, units_backup, checkpoint_backup)
+        raise BatchError("invalid transaction manifest")
+    return manifest
 
 
-def _remove_transaction_files(*paths: Path) -> None:
-    for path in paths:
-        path.unlink(missing_ok=True)
+def _restore_backup(backup: Path, destination: Path, present: bool, record_type: type[Any]) -> None:
+    if present:
+        write_jsonl_atomic(destination, _read_jsonl(backup, record_type))
+    else:
+        destination.unlink(missing_ok=True)
+
+
+def _remove_transaction_directory(
+    directory: Path, *, validate: bool = True, hook_cleanup: bool = False
+) -> None:
+    if validate:
+        _validate_transaction_directory(directory)
+    for index, item in enumerate(directory.iterdir()):
+        if item.is_symlink() or not item.is_file():
+            raise BatchError(f"unsafe transaction artifact: {item}")
+        item.unlink()
+        if hook_cleanup and index == 0:
+            _transaction_hook("during_cleanup")
+    directory.rmdir()
+    _fsync_directory(directory.parent)
+
+
+def _require_regular(path: Path) -> None:
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as exc:
+        raise BatchError(f"unsafe transaction file: {path}: {exc}") from exc
+    try:
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise BatchError(f"transaction artifact is not regular: {path}")
+    finally:
+        os.close(descriptor)
+
+
+def _file_sha256(path: Path) -> str:
+    _require_regular(path)
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    digest = hashlib.sha256()
+    try:
+        while chunk := os.read(descriptor, 65536):
+            digest.update(chunk)
+    finally:
+        os.close(descriptor)
+    return digest.hexdigest()
+
+
+def _fsync_directory(directory: Path) -> None:
+    descriptor = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _transaction_hook(label: str) -> None:
+    """Test seam for simulating process death at durable state boundaries."""
+    del label
 
 
 def _validate_batch_manifest(path: Path, checkpoint: dict[str, Any]) -> None:

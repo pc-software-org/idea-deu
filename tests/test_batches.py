@@ -183,10 +183,101 @@ class BatchTests(unittest.TestCase):
         with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=fail_restore):
             with self.assertRaisesRegex(OSError, "restore failed"):
                 export_next_batch(self.root, self.units_path)
-        evidence = list((self.root / "translations").glob(".batch-transaction*"))
-        self.assertEqual(3, len(evidence))
+        evidence = list((self.root / "translations").glob(".batch-txn.*"))
+        self.assertEqual(1, len(evidence))
         self.assertEqual(batch, export_next_batch(self.root, self.units_path))
         self.assertEqual([], list((self.root / "translations").glob(".batch-transaction*")))
+
+    def test_transaction_directory_recovers_every_commit_boundary(self) -> None:
+        import scripts.idea_deu.batches as batches
+        for boundary, committed in (
+            ("after_one_backup", False),
+            ("before_active_rename", False),
+            ("after_active_rename", False),
+            ("between_state_writes", False),
+            ("after_committed_rename", True),
+            ("during_cleanup", True),
+        ):
+            with self.subTest(boundary=boundary):
+                with tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    units_path = root / "translations/units.jsonl"
+                    glossary_path = root / "glossary.json"
+                    glossary_path.write_bytes(self.glossary_path.read_bytes())
+                    write_jsonl_atomic(units_path, self.units)
+                    batch = export_next_batch(root, units_path, limit=2)
+                    assert batch
+                    records = read_jsonl(batch, dict)
+                    for record in records:
+                        record["target"] = record["source"]
+                    write_jsonl_atomic(batch, records)
+                    old = units_path.read_bytes()
+
+                    def stop(label: str) -> None:
+                        if label == boundary:
+                            raise SystemExit(boundary)
+
+                    with patch("scripts.idea_deu.batches._transaction_hook", side_effect=stop):
+                        with self.assertRaises(SystemExit):
+                            import_batch(root, units_path, batch, glossary_path)
+                    export_next_batch(root, units_path)
+                    changed = units_path.read_bytes() != old
+                    self.assertEqual(committed, changed)
+                    self.assertEqual([], list((root / "translations").glob(".batch-txn.*")))
+
+    def test_recovery_rejects_symlink_transaction_directory(self) -> None:
+        state = self.root / "translations"
+        target = self.root / "elsewhere"
+        target.mkdir()
+        (state / ".batch-txn.active").symlink_to(target, target_is_directory=True)
+        with self.assertRaisesRegex(BatchError, "symbolic"):
+            export_next_batch(self.root, self.units_path)
+
+    def test_recovery_rejects_symlink_backup_and_manifest_destination(self) -> None:
+        import hashlib
+        state = self.root / "translations"
+        active = state / ".batch-txn.active"
+        active.mkdir()
+        outside = self.root / "outside.jsonl"
+        outside.write_text("untouched", encoding="utf-8")
+        (active / "units.jsonl").symlink_to(outside)
+        checkpoint = active / "checkpoint.json"
+        checkpoint.write_text("{}\n", encoding="utf-8")
+        manifest = {
+            "schema_version": 1,
+            "units_present": True,
+            "checkpoint_present": True,
+            "units_sha256": hashlib.sha256(outside.read_bytes()).hexdigest(),
+            "checkpoint_sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+            "destination": str(outside),
+        }
+        (active / "manifest.json").write_text(json.dumps(manifest) + "\n", encoding="utf-8")
+        with self.assertRaises(BatchError):
+            export_next_batch(self.root, self.units_path)
+        self.assertEqual("untouched", outside.read_text(encoding="utf-8"))
+
+    def test_recovery_ignores_no_destination_from_crafted_manifest(self) -> None:
+        import hashlib
+        active = self.root / "translations/.batch-txn.active"
+        active.mkdir()
+        outside = self.root / "outside.jsonl"
+        outside.write_text("untouched", encoding="utf-8")
+        units = active / "units.jsonl"
+        checkpoint = active / "checkpoint.json"
+        units.write_bytes(self.units_path.read_bytes())
+        checkpoint.write_text("{}\n", encoding="utf-8")
+        manifest = {
+            "schema_version": 1,
+            "units_present": True,
+            "checkpoint_present": True,
+            "units_sha256": hashlib.sha256(units.read_bytes()).hexdigest(),
+            "checkpoint_sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+            "destination": str(outside),
+        }
+        (active / "manifest.json").write_text(json.dumps(manifest) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(BatchError, "manifest"):
+            export_next_batch(self.root, self.units_path)
+        self.assertEqual("untouched", outside.read_text(encoding="utf-8"))
 
     def test_paths_are_confined_to_root(self) -> None:
         outside = self.root.parent / "outside.jsonl"
