@@ -2,8 +2,10 @@
 from __future__ import annotations
 import io
 import stat
+import struct
 import tempfile
 import zipfile
+import zlib
 from collections.abc import Sequence
 from pathlib import Path
 from xml.etree import ElementTree
@@ -73,7 +75,8 @@ def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path
     try:
         descriptor_bytes = Path(descriptor).read_bytes(); _validate_descriptor(descriptor_bytes)
         expected = dict(result.files); expected["META-INF/plugin.xml"] = descriptor_bytes
-        with zipfile.ZipFile(path) as outer:
+        with Path(path).open("rb") as outer_file, zipfile.ZipFile(outer_file) as outer:
+            if not _canonical_archive(outer_file, outer): return False
             if outer.namelist() != ["idea-deu/lib/idea-deu.jar"]: return False
             outer_info = outer.infolist()[0]
             if not _canonical_info(outer_info): return False
@@ -86,6 +89,7 @@ def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path
                 if jar_stream.read(1): return False
                 spool.seek(0)
                 with zipfile.ZipFile(spool) as inner:
+                    if not _canonical_archive(spool, inner): return False
                     if inner.namelist() != sorted(expected): return False
                     if len(inner.infolist()) != len(expected): return False
                     for info in inner.infolist():
@@ -94,14 +98,48 @@ def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path
                         with inner.open(info) as stream:
                             if stream.read(len(data) + 1) != data: return False
         return True
-    except (OSError, ValueError, zipfile.BadZipFile, PackageError):
+    except (OSError, ValueError, RuntimeError, NotImplementedError, EOFError,
+            zlib.error, zipfile.BadZipFile, PackageError):
         return False
 
 
 def _canonical_info(info: zipfile.ZipInfo) -> bool:
     return (info.date_time == _TIME and info.compress_type == zipfile.ZIP_DEFLATED and
-            info.create_system == 3 and (info.external_attr >> 16) == (stat.S_IFREG | 0o644) and
+            info.flag_bits == 0 and info.extra == b"" and info.comment == b"" and
+            info.internal_attr == 0 and info.create_system == 3 and
+            info.create_version == 20 and info.extract_version == 20 and info.volume == 0 and
+            info.external_attr == (stat.S_IFREG | 0o644) << 16 and
             not stat.S_ISLNK((info.external_attr >> 16) & 0xffff))
+
+
+def _canonical_archive(stream: object, archive: zipfile.ZipFile) -> bool:
+    stream.seek(0, 2)  # type: ignore[attr-defined]
+    size = stream.tell()  # type: ignore[attr-defined]
+    if size < 22: return False
+    stream.seek(0)  # type: ignore[attr-defined]
+    if stream.read(4) != b"PK\x03\x04": return False  # type: ignore[attr-defined]
+    stream.seek(size - 22)  # type: ignore[attr-defined]
+    eocd = stream.read(22)  # type: ignore[attr-defined]
+    signature, disk, cd_disk, disk_entries, entries, cd_size, cd_offset, comment_size = struct.unpack(
+        "<4s4H2LH", eocd)
+    infos = archive.infolist()
+    if (signature != b"PK\x05\x06" or disk or cd_disk or comment_size or
+        disk_entries != entries or entries != len(infos) or
+        cd_offset + cd_size != size - 22 or archive.start_dir != cd_offset or archive.comment):
+        return False
+    previous_end = 0
+    for info in infos:
+        if info.header_offset != previous_end or info.header_offset >= cd_offset: return False
+        stream.seek(info.header_offset)  # type: ignore[attr-defined]
+        header = stream.read(30)  # type: ignore[attr-defined]
+        if len(header) != 30 or header[:4] != b"PK\x03\x04": return False
+        fields = struct.unpack("<4s5H3L2H", header)
+        flags, compression, filename_size, extra_size = fields[2], fields[3], fields[-2], fields[-1]
+        if flags != 0 or compression != zipfile.ZIP_DEFLATED or extra_size != 0: return False
+        data_end = info.header_offset + 30 + filename_size + extra_size + info.compress_size
+        if data_end > cd_offset: return False
+        previous_end = data_end
+    return bool(infos) and infos[0].header_offset == 0 and previous_end == cd_offset
 
 def _validate_descriptor(data: bytes) -> None:
     try: root=ElementTree.fromstring(data)

@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 from scripts.idea_deu.generator import GenerationResult, MappingResourceProvider, generate_resources
 from scripts.idea_deu.models import Inventory, ProcessingStatus, ResourceRecord, ResourceType, TranslationContext, TranslationUnit
-from scripts.idea_deu.package import PackageError, build_plugin_package
+from scripts.idea_deu.package import PackageError, build_plugin_package, verify_plugin_package
 
 
 class PackageTests(unittest.TestCase):
@@ -63,6 +63,26 @@ class PackageTests(unittest.TestCase):
                 self.assertTrue(all((info.external_attr >> 16) == 0o100644 for info in jar.infolist()))
                 root=ElementTree.fromstring(jar.read("META-INF/plugin.xml"))
                 self.assertEqual("org.pc-software.idea-deu",root.findtext("id"))
+
+    def test_strict_verifier_rejects_noncanonical_boundaries_comments_flags_and_compression(self):
+        canonical = self.root / "canonical.zip"; self.build(self.result, self.descriptor, canonical)
+        self.assertTrue(verify_plugin_package(canonical, self.result, self.descriptor))
+        for label, payload in (("prepended", b"JUNK" + canonical.read_bytes()),
+                               ("appended", canonical.read_bytes() + b"JUNK")):
+            path = self.root / f"{label}.zip"; path.write_bytes(payload)
+            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor))
+        commented = self.root / "commented.zip"; commented.write_bytes(canonical.read_bytes())
+        with zipfile.ZipFile(commented, "a") as archive: archive.comment = b"comment"
+        self.assertFalse(verify_plugin_package(commented, self.result, self.descriptor))
+        for label, local_offset, central_offset, value in (
+            ("encrypted", 6, 8, 1), ("unsupported", 8, 10, 99)):
+            content = bytearray(canonical.read_bytes())
+            local = content.find(b"PK\x03\x04"); central = content.find(b"PK\x01\x02")
+            offset = local_offset if label == "encrypted" else local_offset
+            content[local + offset:local + offset + 2] = value.to_bytes(2,"little")
+            content[central + central_offset:central + central_offset + 2] = value.to_bytes(2,"little")
+            path = self.root / f"{label}.zip"; path.write_bytes(content)
+            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor))
 
     def test_ignores_symlink_in_materialized_resource_tree(self):
         (self.resources / "link").symlink_to(self.descriptor.resolve())
