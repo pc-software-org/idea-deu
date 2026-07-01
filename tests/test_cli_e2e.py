@@ -61,6 +61,23 @@ class CliEndToEndTests(unittest.TestCase):
         self.assertTrue((self.root / "reports/status.md").is_file())
         return report.stat().st_mtime_ns, stdout
 
+    def _run_process(self, *args):
+        repo = Path(__file__).resolve().parents[1]
+        env = dict(os.environ, PYTHONPATH=str(repo))
+        return subprocess.run([sys.executable, "-m", "scripts.idea_deu", "--root", str(self.root), *args],
+                              cwd=repo, env=env, text=True, capture_output=True,
+                              timeout=10, check=False)
+
+    def _successful_process_mutation(self, previous_mtime, *args):
+        time.sleep(.002)
+        process = self._run_process(*args)
+        self.assertEqual(0, process.returncode, (args, process.stderr))
+        self.assertEqual("", process.stderr); self.assertNotIn("Traceback", process.stdout)
+        report = self.root / "reports/status.json"
+        self.assertTrue(report.is_file()); self.assertGreater(report.stat().st_mtime_ns, previous_mtime)
+        self.assertTrue((self.root / "reports/status.md").is_file())
+        return report.stat().st_mtime_ns
+
     def test_real_cli_command_sequence_reaches_complete_package(self):
         code, _stdout, stderr = self._run("validate-source")
         self.assertEqual((0, ""), (code, stderr))
@@ -90,6 +107,35 @@ class CliEndToEndTests(unittest.TestCase):
                                  text=True, capture_output=True, env=env, check=False)
         self.assertEqual(0, process.returncode); self.assertNotIn("Traceback", process.stderr)
         self.assertIn("complete", json.loads((self.root / "reports/status.json").read_text())["workflow_state"])
+
+    def test_every_cli_command_runs_across_real_process_boundaries(self):
+        process = self._run_process("validate-source")
+        self.assertEqual(0, process.returncode); self.assertEqual("", process.stderr)
+        self.assertNotIn("Traceback", process.stdout)
+        mtime = self._successful_process_mutation(-1, "scan")
+        units = read_jsonl(self.root / "translations/units.jsonl", TranslationUnit)
+        self.assertEqual({"hello", "other", ""}, {unit.context.key for unit in units})
+        mtime = self._successful_process_mutation(mtime, "next-batch")
+        batch = next((self.root / "translations/batches").glob("*.jsonl"))
+        records = [json.loads(line) for line in batch.read_text().splitlines()]
+        targets = {"hello":"Hallo", "other":"Andere", "":"<html>Tipp</html>\n"}
+        for record in records: record["target"] = targets[record["context"]["key"]]
+        batch.write_text("".join(json.dumps(record, ensure_ascii=False, sort_keys=True,
+                                             separators=(",", ":"))+"\n" for record in records))
+        mtime = self._successful_process_mutation(mtime, "import-batch", str(batch.relative_to(self.root)))
+        mtime = self._successful_process_mutation(mtime, "validate")
+        mtime = self._successful_process_mutation(mtime, "generate")
+        mtime = self._successful_process_mutation(mtime, "package")
+        self.assertTrue((self.root / "dist/idea-deu.zip").is_file())
+        mtime = self._successful_process_mutation(mtime, "report")
+        process = self._run_process("status")
+        self.assertEqual(0, process.returncode); self.assertEqual("", process.stderr)
+        self.assertNotIn("Traceback", process.stdout); self.assertIn("python -m scripts.idea_deu status", process.stdout)
+        report = json.loads((self.root / "reports/status.json").read_text())
+        self.assertEqual("complete", report["workflow_state"])
+        self.assertTrue(report["generation"]["valid"]); self.assertTrue(report["package"]["valid"])
+        with zipfile.ZipFile(self.root / "dist/idea-deu.zip") as archive:
+            self.assertEqual(["idea-deu/lib/idea-deu.jar"], archive.namelist())
 
     def test_cli_rescan_preserves_unchanged_and_records_changed_and_removed_revisions(self):
         self.assertEqual(0, self._run("scan")[0])
