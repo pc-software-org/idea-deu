@@ -3,41 +3,40 @@ from __future__ import annotations
 import io
 import stat
 import zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from xml.etree import ElementTree
-from .generator import GenerationResult
-from .models import ProcessingStatus
-from .path_safety import unsafe_output_parent
-from .validation import Severity
+from .generator import GenerationError, GenerationResult, recompute_result
+from .path_safety import OutputPathError, atomic_write_bytes
 
 class PackageError(ValueError): pass
 
 _TIME=(1980,1,1,0,0,0)
 
 def build_plugin_package(result: GenerationResult, descriptor: Path, destination: Path) -> Path:
-    if not isinstance(result, GenerationResult) or not result.is_verified():
-        raise PackageError("verified GenerationResult required")
-    if not result.complete or result.unresolved_collisions:
-        raise PackageError("GenerationResult is incomplete or has unresolved collisions")
-    bad = [unit.id for unit in result.units if unit.status not in {
-        ProcessingStatus.TECHNICALLY_REVIEWED, ProcessingStatus.LINGUISTICALLY_REVIEWED
-    } or any(finding.severity is Severity.BLOCKING for finding in unit.findings)]
-    if bad: raise PackageError("GenerationResult contains blocked units: " + ", ".join(bad))
+    if not isinstance(result, GenerationResult):
+        raise PackageError("GenerationResult required")
+    try:
+        entries = recompute_result(result)
+    except GenerationError as exc:
+        raise PackageError(f"invalid generation evidence: {exc}") from exc
+    supplied: dict[str, bytes] = {}
+    for name, data in result.files:
+        if name in supplied:
+            raise PackageError(f"duplicate generated evidence: {name}")
+        supplied[name] = data
+    if supplied != entries:
+        raise PackageError("generated evidence does not match canonical recomputation")
     try: descriptor_bytes = Path(descriptor).read_bytes()
     except OSError as exc: raise PackageError(f"cannot read plugin descriptor: {exc}") from exc
     _validate_descriptor(descriptor_bytes)
-    entries = _regular_tree(result.root)
-    expected = dict(result.files)
-    if set(entries) != set(expected): raise PackageError("generated resource set changed or contains unsupported content")
-    for name, data in entries.items():
-        if __import__("hashlib").sha256(data).hexdigest() != expected[name]:
-            raise PackageError(f"generated resource changed: {name}")
     entries["META-INF/plugin.xml"] = descriptor_bytes
     jar = _zip_bytes(entries)
     payload = {"idea-deu/lib/idea-deu.jar": jar}
-    destination = Path(destination); _assert_safe_destination_parent(destination); destination.parent.mkdir(parents=True,exist_ok=True)
-    if destination.is_symlink(): raise PackageError("refusing symbolic-link destination")
-    destination.write_bytes(_zip_bytes(payload))
+    destination = Path(destination)
+    try:
+        atomic_write_bytes(destination, _zip_bytes(payload))
+    except (OSError, OutputPathError) as exc:
+        raise PackageError(str(exc)) from exc
     return destination
 
 def _validate_descriptor(data: bytes) -> None:
@@ -63,29 +62,6 @@ def _descriptor_children(element: ElementTree.Element) -> tuple[tuple[object, ..
         (child.tag, dict(child.attrib), (child.text or "").strip(), _descriptor_children(child))
         for child in element
     )
-
-def _regular_tree(root: Path) -> dict[str,bytes]:
-    if root.is_symlink() or not root.is_dir(): raise PackageError("resource root is not a regular directory")
-    result={}; folded={}
-    for path in root.rglob("*"):
-        if path.is_symlink(): raise PackageError(f"symbolic link in resources: {path}")
-        if path.is_dir(): continue
-        if not path.is_file(): raise PackageError(f"non-regular resource: {path}")
-        relative=path.relative_to(root).as_posix(); pure=PurePosixPath(relative)
-        if pure.is_absolute() or ".." in pure.parts or "\\" in relative: raise PackageError(f"unsafe resource path: {relative}")
-        if relative in result: raise PackageError(f"duplicate resource: {relative}")
-        if relative.casefold() in folded: raise PackageError(f"case-fold resource collision: {folded[relative.casefold()]}, {relative}")
-        if pure.suffix.lower() not in {".properties", ".html", ".xml"}:
-            raise PackageError(f"unsupported generated content: {relative}")
-        folded[relative.casefold()]=relative
-        result[relative]=path.read_bytes()
-    return result
-
-def _assert_safe_destination_parent(destination: Path) -> None:
-    unsafe=unsafe_output_parent(destination)
-    if unsafe is not None:
-        reason,component=unsafe
-        raise PackageError(f"{reason}: {component}")
 
 def _zip_bytes(entries: dict[str,bytes]) -> bytes:
     stream=io.BytesIO()

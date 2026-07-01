@@ -4,9 +4,10 @@ import unittest
 import zipfile
 from dataclasses import replace
 from pathlib import Path
+from unittest import mock
 from xml.etree import ElementTree
 
-from scripts.idea_deu.generator import MappingResourceProvider, generate_resources
+from scripts.idea_deu.generator import GenerationResult, MappingResourceProvider, generate_resources
 from scripts.idea_deu.models import Inventory, ProcessingStatus, ResourceRecord, ResourceType, TranslationContext, TranslationUnit
 from scripts.idea_deu.package import PackageError, build_plugin_package
 
@@ -50,10 +51,9 @@ class PackageTests(unittest.TestCase):
                 root=ElementTree.fromstring(jar.read("META-INF/plugin.xml"))
                 self.assertEqual("org.pc-software.idea-deu",root.findtext("id"))
 
-    def test_rejects_symlink_and_unsafe_resource_tree(self):
+    def test_ignores_symlink_in_materialized_resource_tree(self):
         (self.resources / "link").symlink_to(self.descriptor.resolve())
-        with self.assertRaisesRegex(PackageError, "symbolic"):
-            build_plugin_package(self.result, self.descriptor, self.root/"bad.zip")
+        build_plugin_package(self.result, self.descriptor, self.root/"from-evidence.zip")
 
     def test_rejects_invalid_or_wrong_descriptor(self):
         bad = self.root / "plugin.xml"; bad.write_text("<idea-plugin><id>x&amp;y</id></idea-plugin>")
@@ -74,17 +74,33 @@ class PackageTests(unittest.TestCase):
 
     def test_rejects_modified_copy_of_generation_result(self):
         forged=replace(self.result,root=self.root,files=())
-        with self.assertRaisesRegex(PackageError,"verified GenerationResult"):
+        with self.assertRaisesRegex(PackageError,"generation evidence"):
             build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
 
-    def test_revalidates_generated_files_and_rejects_executable_content(self):
+    def test_rejects_arbitrary_directly_constructed_result(self):
+        arbitrary=self.root/"arbitrary"; arbitrary.mkdir(); (arbitrary/"evil.xml").write_bytes(b"<evil/>")
+        forged=GenerationResult(arbitrary,Inventory((),(),()),(),(),(("evil.xml",b"<evil/>"),),False)
+        with self.assertRaises(PackageError):
+            build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
+
+    def test_rejects_forged_empty_generation_result(self):
+        forged=GenerationResult(self.root,Inventory((),(),()),(),(),(),False)
+        with self.assertRaises(PackageError):
+            build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
+
+    def test_packaging_uses_evidence_not_mutable_generated_tree(self):
         (self.resources/"Bundle_de.properties").write_text("tampered")
-        with self.assertRaisesRegex(PackageError,"changed"):
-            build_plugin_package(self.result,self.descriptor,self.root/"bad.zip")
-        (self.resources/"Bundle_de.properties").write_text("hello=Grüße\n")
         (self.resources/"X.class").write_bytes(b"x")
-        with self.assertRaisesRegex(PackageError,"unsupported"):
-            build_plugin_package(self.result,self.descriptor,self.root/"bad.zip")
+        built=self.root/"evidence.zip"
+        build_plugin_package(self.result,self.descriptor,built)
+        with zipfile.ZipFile(built) as archive, zipfile.ZipFile(archive.open("idea-deu/lib/idea-deu.jar")) as jar:
+            self.assertEqual(b"hello=Gr\xc3\xbc\xc3\x9fe\n",jar.read("Bundle_de.properties"))
+            self.assertNotIn("X.class",jar.namelist())
+
+    def test_ignores_changed_and_executable_materialized_content(self):
+        (self.resources/"Bundle_de.properties").write_text("tampered")
+        (self.resources/"X.class").write_bytes(b"x")
+        build_plugin_package(self.result,self.descriptor,self.root/"from-evidence.zip")
 
     def test_rejects_symlinked_dist_parent_without_outside_write(self):
         outside=self.root/"outside"; outside.mkdir(); linked=self.root/"linked"; linked.symlink_to(outside,target_is_directory=True)
@@ -98,3 +114,14 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(PackageError,"symbolic|unsafe"):
             build_plugin_package(self.result,self.descriptor,linked/"existing"/"dist"/"idea-deu.zip")
         self.assertEqual([],list(existing.iterdir()))
+
+    def test_parent_swap_after_fd_open_cannot_redirect_package(self):
+        control=self.root/"control"; control.mkdir(); detached=self.root/"detached"
+        outside=self.root/"outside"; outside.mkdir()
+        def swap(_path, _fd):
+            control.rename(detached)
+            control.symlink_to(outside,target_is_directory=True)
+        with mock.patch("scripts.idea_deu.path_safety._after_parent_open",side_effect=swap,create=True):
+            with self.assertRaises(PackageError):
+                build_plugin_package(self.result,self.descriptor,control/"idea-deu.zip")
+        self.assertEqual([],list(outside.iterdir()))

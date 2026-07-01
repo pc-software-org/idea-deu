@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest import mock
 
 from scripts.idea_deu.generator import GenerationError, GenerationResult, MappingResourceProvider, generate_resources
 from scripts.idea_deu.models import (CollisionRecord, Inventory, ProcessingStatus,
@@ -97,6 +98,20 @@ class GeneratorTests(unittest.TestCase):
                 linked/"existing"/"generated")
         self.assertEqual([],list(existing.iterdir()))
 
+    def test_parent_swap_after_fd_open_cannot_redirect_generation(self):
+        control=Path(self.tmp.name)/"control"; control.mkdir()
+        detached=Path(self.tmp.name)/"detached"; outside=Path(self.tmp.name)/"outside"; outside.mkdir()
+        def swap(_path, _fd):
+            control.rename(detached)
+            control.symlink_to(outside,target_is_directory=True)
+        with mock.patch("scripts.idea_deu.path_safety._after_parent_open",side_effect=swap,create=True):
+            with self.assertRaises(GenerationError):
+                generate_resources(Inventory((self.record,),(),()),(
+                    self.unit(self.record,"hello","Hello","Hallo"),self.unit(self.record,"other","untouched","x")),
+                    MappingResourceProvider({(self.record.container,self.record.resource_path):self.data}),
+                    control/"generated")
+        self.assertEqual([],list(outside.iterdir()))
+
     def test_rejects_incomplete_statuses_and_blockers_with_all_ids(self):
         units = [self.unit(self.record, str(i), "Hello", "Hallo", status) for i, status in enumerate(
             (ProcessingStatus.OPEN, ProcessingStatus.TRANSLATED))]
@@ -114,8 +129,17 @@ class GeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(GenerationError, "SHA-256"):
             generate_resources(Inventory((self.record,), (), ()), (self.unit(self.record,"hello","Hello","Hallo"),), provider, self.out)
 
+    def test_rejects_resource_size_and_translation_source_hash_mismatches(self):
+        units=(self.unit(self.record,"hello","Hello","Hallo"),self.unit(self.record,"other","untouched","x"))
+        provider=MappingResourceProvider({(self.record.container,self.record.resource_path):self.data})
+        with self.assertRaisesRegex(GenerationError,"size"):
+            generate_resources(Inventory((replace(self.record,size=len(self.data)+1),),(),()),units,provider,self.out)
+        bad_unit=replace(units[0],source_sha256="0"*64)
+        with self.assertRaisesRegex(GenerationError,"source SHA-256"):
+            generate_resources(Inventory((self.record,),(),()),(bad_unit,units[1]),provider,self.out)
+
     def test_unresolved_collision_lists_every_container(self):
-        other = replace(self.record, resource_id="f"*64, container="plugins/x.jar")
+        other = replace(self.record, resource_id="f"*64, container="plugins/x.jar", source_sha256="0"*64)
         collision = CollisionRecord(self.record.resource_path, (self.record, other), False)
         with self.assertRaises(GenerationError) as caught:
             generate_resources(Inventory((self.record, other), (), (collision,)), (), MappingResourceProvider({}), self.out)
@@ -143,3 +167,15 @@ class GeneratorTests(unittest.TestCase):
         other = replace(self.record, resource_id="d"*64, container="plugins/x.jar")
         with self.assertRaisesRegex(GenerationError, "missing collision classification"):
             generate_resources(Inventory((self.record, other), (), ()), (), MappingResourceProvider({}), self.out)
+
+    def test_collision_claim_must_exactly_match_derived_group_and_hash_identity(self):
+        other=replace(self.record,resource_id="f"*64,container="plugins/x.jar")
+        forged_member=replace(other,source_sha256="0"*64)
+        forged=CollisionRecord(self.record.resource_path,(self.record,forged_member),True,False)
+        with self.assertRaisesRegex(GenerationError,"collision classification"):
+            generate_resources(Inventory((self.record,other),(),(forged,)),(),MappingResourceProvider({}),self.out)
+
+    def test_rejects_extra_collision_claim_for_unique_resource(self):
+        forged=CollisionRecord(self.record.resource_path,(self.record,),True,False)
+        with self.assertRaisesRegex(GenerationError,"collision classification"):
+            generate_resources(Inventory((self.record,),(),(forged,)),(),MappingResourceProvider({}),self.out)

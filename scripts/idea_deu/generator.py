@@ -2,10 +2,7 @@
 from __future__ import annotations
 
 import hashlib
-import hmac
 import io
-import json
-import os
 import re
 import stat
 import zipfile
@@ -15,8 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from xml.etree import ElementTree
 
-from .models import Inventory, ProcessingStatus, ResourceRecord, ResourceType, TranslationUnit
-from .path_safety import unsafe_output_parent
+from .models import CollisionRecord, Inventory, ProcessingStatus, ResourceRecord, ResourceType, TranslationUnit
+from .path_safety import OutputPathError, atomic_materialize_tree
 from .properties import PropertiesError, parse_properties, render_properties
 from .validation import Severity
 
@@ -24,36 +21,14 @@ from .validation import Severity
 class GenerationError(ValueError): pass
 
 
-_GENERATION_KEY = os.urandom(32)
-
-
 @dataclass(frozen=True, slots=True)
 class GenerationResult:
     root: Path
-    files: tuple[tuple[str, str], ...]
+    inventory: Inventory
     units: tuple[TranslationUnit, ...]
-    unresolved_collisions: tuple[str, ...]
-    complete: bool
-    _seal: str
-
-    @classmethod
-    def _verified(cls, root: Path, files: Mapping[str, bytes], units: Sequence[TranslationUnit]) -> "GenerationResult":
-        normalized_files = tuple((path, hashlib.sha256(data).hexdigest()) for path, data in sorted(files.items()))
-        normalized_units = tuple(units)
-        seal = _result_seal(root.resolve(), normalized_files, normalized_units, (), True)
-        return cls(root.resolve(), normalized_files, normalized_units, (), True, seal)
-
-    def is_verified(self) -> bool:
-        expected = _result_seal(self.root, self.files, self.units, self.unresolved_collisions, self.complete)
-        return hmac.compare_digest(self._seal, expected)
-
-
-def _result_seal(root: Path, files: tuple[tuple[str, str], ...], units: tuple[TranslationUnit, ...],
-                 collisions: tuple[str, ...], complete: bool) -> str:
-    value = {"root": str(root), "files": files, "units": [unit.to_dict() for unit in units],
-             "collisions": collisions, "complete": complete}
-    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
-    return hashlib.blake2b(payload, key=_GENERATION_KEY, digest_size=32).hexdigest()
+    sources: tuple[tuple[str, str, bytes], ...]
+    files: tuple[tuple[str, bytes], ...]
+    dedupe_identical: bool
 
 
 class MappingResourceProvider:
@@ -81,37 +56,52 @@ class DistributionResourceProvider:
 
 def generate_resources(inventory: Inventory, units: Sequence[TranslationUnit], provider: object,
                        output: Path, *, dedupe_identical: bool = False) -> GenerationResult:
-    _validate_inventory_paths(inventory.resources)
-    collision_paths = {collision.resource_path for collision in inventory.collisions}
-    grouped_paths: dict[str, list[ResourceRecord]] = defaultdict(list)
+    _validate_generation_structure(inventory, units, dedupe_identical)
+    sources: dict[tuple[str, str], bytes] = {}
     for record in inventory.resources:
-        grouped_paths[record.resource_path].append(record)
-    unclassified = sorted(path for path, records in grouped_paths.items()
-                          if len(records) > 1 and path not in collision_paths)
-    if unclassified:
-        raise GenerationError("missing collision classification: " + ", ".join(unclassified))
-    unresolved = [c for c in inventory.collisions if c.unresolved and not (dedupe_identical and c.content_identical)]
-    if unresolved:
-        details = "; ".join(f"{c.resource_path}: " + ", ".join(r.container for r in c.resources) for c in unresolved)
-        raise GenerationError(f"unresolved collision: {details}")
-    bad = [u.id for u in units if u.status not in {ProcessingStatus.TECHNICALLY_REVIEWED,
-        ProcessingStatus.LINGUISTICALLY_REVIEWED} or any(f.severity is Severity.BLOCKING for f in u.findings)]
-    if bad: raise GenerationError("units not review-complete or blocking: " + ", ".join(sorted(bad)))
+        key = (record.container, record.resource_path)
+        if key not in sources:
+            sources[key] = provider.read(record)  # type: ignore[attr-defined]
+    rendered = recompute_generation(inventory, units, sources, dedupe_identical=dedupe_identical)
+    _write_tree(output, rendered)
+    source_evidence = tuple((container, path, data) for (container, path), data in sorted(sources.items()))
+    return GenerationResult(Path(output).absolute(), inventory, tuple(units), source_evidence,
+                            tuple(sorted(rendered.items())), dedupe_identical)
+
+
+def recompute_result(result: GenerationResult) -> dict[str, bytes]:
+    if not isinstance(result, GenerationResult):
+        raise GenerationError("GenerationResult required")
+    if not result.inventory.resources or not result.units or not result.sources or not result.files:
+        raise GenerationError("generation evidence must not be empty")
+    sources: dict[tuple[str, str], bytes] = {}
+    for container, path, data in result.sources:
+        key = (container, path)
+        if key in sources:
+            raise GenerationError(f"duplicate source evidence: {container}!/{path}")
+        sources[key] = data
+    return recompute_generation(result.inventory, result.units, sources,
+                                dedupe_identical=result.dedupe_identical)
+
+
+def recompute_generation(inventory: Inventory, units: Sequence[TranslationUnit],
+                         sources: Mapping[tuple[str, str], bytes], *,
+                         dedupe_identical: bool = False) -> dict[str, bytes]:
+    _validate_generation_structure(inventory, units, dedupe_identical)
     by_resource: dict[tuple[str,str], list[TranslationUnit]] = defaultdict(list)
     for unit in units: by_resource[(unit.context.container, unit.context.path)].append(unit)
     inventory_keys = {(record.container, record.resource_path) for record in inventory.resources}
-    unknown_resources = sorted(set(by_resource) - inventory_keys)
-    if unknown_resources:
-        raise GenerationError("translation units without inventory resource: " + ", ".join(
-            f"{container}!/{path}" for container, path in unknown_resources))
-    missing = [r.resource_id for r in inventory.resources if (r.container,r.resource_path) not in by_resource]
-    if missing: raise GenerationError("missing translation units: " + ", ".join(missing))
+    expected_source_keys = inventory_keys
+    if set(sources) != expected_source_keys:
+        raise GenerationError("source evidence does not exactly match inventory")
 
     rendered: dict[str, bytes] = {}
     for record in inventory.resources:
-        source = provider.read(record)  # type: ignore[attr-defined]
+        source = sources[(record.container, record.resource_path)]
         if hashlib.sha256(source).hexdigest() != record.source_sha256:
             raise GenerationError(f"source SHA-256 mismatch: {record.resource_id}")
+        if len(source) != record.size:
+            raise GenerationError(f"source size mismatch: {record.resource_id}")
         selected = by_resource[(record.container,record.resource_path)]
         if record.resource_type is ResourceType.PROPERTIES:
             try:
@@ -153,8 +143,59 @@ def generate_resources(inventory: Inventory, units: Sequence[TranslationUnit], p
             if not allowed_dedupe or previous != data:
                 raise GenerationError(f"duplicate output collision: {target}")
         rendered[target] = data
-    _write_tree(output, rendered)
-    return GenerationResult._verified(output, rendered, units)
+    return rendered
+
+
+def _validate_generation_structure(inventory: Inventory, units: Sequence[TranslationUnit],
+                                   dedupe_identical: bool) -> None:
+    _validate_inventory_paths(inventory.resources)
+    _validate_collision_evidence(inventory)
+    unresolved = [c for c in inventory.collisions if c.unresolved and not (dedupe_identical and c.content_identical)]
+    if unresolved:
+        details = "; ".join(f"{c.resource_path}: " + ", ".join(r.container for r in c.resources) for c in unresolved)
+        raise GenerationError(f"unresolved collision: {details}")
+    bad = [u.id for u in units if u.status not in {ProcessingStatus.TECHNICALLY_REVIEWED,
+        ProcessingStatus.LINGUISTICALLY_REVIEWED} or any(f.severity is Severity.BLOCKING for f in u.findings)]
+    if bad: raise GenerationError("units not review-complete or blocking: " + ", ".join(sorted(bad)))
+    bad_hashes = [u.id for u in units if hashlib.sha256(u.source.encode("utf-8")).hexdigest() != u.source_sha256]
+    if bad_hashes: raise GenerationError("translation source SHA-256 mismatch: " + ", ".join(sorted(bad_hashes)))
+    by_resource: dict[tuple[str,str], list[TranslationUnit]] = defaultdict(list)
+    for unit in units: by_resource[(unit.context.container, unit.context.path)].append(unit)
+    inventory_keys = {(record.container, record.resource_path) for record in inventory.resources}
+    unknown_resources = sorted(set(by_resource) - inventory_keys)
+    if unknown_resources:
+        raise GenerationError("translation units without inventory resource: " + ", ".join(
+            f"{container}!/{path}" for container, path in unknown_resources))
+    missing = [r.resource_id for r in inventory.resources if (r.container,r.resource_path) not in by_resource]
+    if missing: raise GenerationError("missing translation units: " + ", ".join(missing))
+
+
+def _validate_collision_evidence(inventory: Inventory) -> None:
+    groups: dict[str, list[ResourceRecord]] = defaultdict(list)
+    for record in inventory.resources:
+        groups[record.resource_path].append(record)
+    derived = {path: records for path, records in groups.items() if len(records) > 1}
+    claimed: dict[str, CollisionRecord] = {}
+    for collision in inventory.collisions:
+        if collision.resource_path in claimed:
+            raise GenerationError(f"duplicate collision classification: {collision.resource_path}")
+        claimed[collision.resource_path] = collision
+    missing = set(derived) - set(claimed)
+    extra = set(claimed) - set(derived)
+    if missing:
+        raise GenerationError("missing collision classification: " + ", ".join(sorted(missing)))
+    if extra:
+        raise GenerationError("extra collision classification: " + ", ".join(sorted(extra)))
+    key = lambda record: (record.resource_id, record.container, record.resource_path,
+                          record.resource_type.value, record.size, record.source_sha256,
+                          record.processing_status.value)
+    for path, records in derived.items():
+        collision = claimed[path]
+        if tuple(sorted(collision.resources, key=key)) != tuple(sorted(records, key=key)):
+            raise GenerationError(f"collision classification members mismatch: {path}")
+        identical = len({record.source_sha256 for record in records}) == 1
+        if collision.content_identical is not identical:
+            raise GenerationError(f"collision classification content mismatch: {path}")
 
 
 def _localized_properties(path: str) -> str:
@@ -217,22 +258,10 @@ def _supported_record(record: ResourceRecord) -> bool:
 
 
 def _write_tree(root: Path, resources: Mapping[str,bytes]) -> None:
-    root = Path(root)
-    _assert_no_symlink_ancestors(root)
-    if root.exists() and (root.is_symlink() or not root.is_dir()): raise GenerationError(f"unsafe output root: {root}")
-    if root.exists() and any(root.iterdir()): raise GenerationError(f"output root is not empty: {root}")
-    root.mkdir(parents=True, exist_ok=True)
-    for relative,data in sorted(resources.items()):
-        target = root.joinpath(*PurePosixPath(relative).parts); target.parent.mkdir(parents=True,exist_ok=True)
-        if target.is_symlink(): raise GenerationError(f"symbolic-link output: {relative}")
-        target.write_bytes(data)
-
-
-def _assert_no_symlink_ancestors(path: Path) -> None:
-    unsafe = unsafe_output_parent(path)
-    if unsafe is not None:
-        reason, component = unsafe
-        raise GenerationError(f"{reason}: {component}")
+    try:
+        atomic_materialize_tree(root, resources)
+    except (OSError, OutputPathError) as exc:
+        raise GenerationError(str(exc)) from exc
 
 
 def _unique_zip_member(archive: zipfile.ZipFile, name: str) -> zipfile.ZipInfo:
