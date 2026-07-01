@@ -284,6 +284,33 @@ class BatchTests(unittest.TestCase):
         with self.assertRaises(BatchError):
             import_batch(self.root, self.units_path, outside, self.glossary_path)
 
+    def test_rejects_custom_units_path_without_mutation(self) -> None:
+        custom = self.root / "custom/units.jsonl"
+        write_jsonl_atomic(custom, self.units)
+        before = custom.read_bytes()
+        with self.assertRaisesRegex(BatchError, "canonical units"):
+            export_next_batch(self.root, custom)
+        self.assertEqual(before, custom.read_bytes())
+        self.assertFalse((self.root / "translations/checkpoint.json").exists())
+
+    def test_does_not_recover_through_symlinked_translations(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            root = base / "root"
+            outside = base / "outside"
+            root.mkdir()
+            outside.mkdir()
+            units = outside / "units.jsonl"
+            write_jsonl_atomic(units, self.units)
+            committed = outside / ".batch-txn.committed"
+            committed.mkdir()
+            sentinel = committed / "sentinel"
+            sentinel.write_text("untouched", encoding="utf-8")
+            (root / "translations").symlink_to(outside, target_is_directory=True)
+            with self.assertRaisesRegex(BatchError, "translations.*symbolic"):
+                export_next_batch(root, root / "translations/units.jsonl")
+            self.assertEqual("untouched", sentinel.read_text(encoding="utf-8"))
+
     def test_rejects_symlinked_batch_directory(self) -> None:
         real = self.root / "real-batches"
         real.mkdir()

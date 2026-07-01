@@ -93,11 +93,10 @@ def _nonempty_unique_strings(value: Any, name: str) -> tuple[str, ...]:
 
 def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path | None:
     root = _safe_root(root)
+    units_path, checkpoint_path = _validate_state_layout(root, units_path)
     _recover_transaction(root)
-    units_path = _safe_path(root, units_path, must_exist=True)
     if type(limit) is not int or not 1 <= limit <= MAX_BATCH_SIZE:
         raise BatchError(f"limit must be an integer from 1 to {MAX_BATCH_SIZE}")
-    checkpoint_path = root / "translations/checkpoint.json"
     checkpoint = _read_checkpoint(checkpoint_path)
     if checkpoint["current_batch"] is not None:
         current = _safe_path(root, root / checkpoint["current_batch"], must_exist=True)
@@ -125,11 +124,10 @@ def export_next_batch(root: Path, units_path: Path, *, limit: int = 100) -> Path
 
 def import_batch(root: Path, units_path: Path, batch_path: Path, glossary_path: Path) -> ImportResult:
     root = _safe_root(root)
+    units_path, checkpoint_path = _validate_state_layout(root, units_path)
     _recover_transaction(root)
-    units_path = _safe_path(root, units_path, must_exist=True)
     batch_path = _safe_path(root, batch_path, must_exist=True)
     glossary_path = _safe_path(root, glossary_path, must_exist=True)
-    checkpoint_path = root / "translations/checkpoint.json"
     checkpoint = _read_checkpoint(checkpoint_path)
     expected_relative = batch_path.relative_to(root.resolve(strict=True)).as_posix()
     if checkpoint["current_batch"] != expected_relative:
@@ -431,11 +429,35 @@ def _validate_batch_manifest(path: Path, checkpoint: dict[str, Any]) -> None:
 def _safe_root(root: Path) -> Path:
     try:
         candidate = Path(root).absolute()
-        if not candidate.is_dir():
+        if candidate.is_symlink() or not candidate.is_dir():
             raise OSError("root is not a directory")
-        return candidate
+        return candidate.resolve(strict=True)
     except OSError as exc:
         raise BatchError(f"invalid root: {exc}") from exc
+
+
+def _validate_state_layout(root: Path, units_path: Path) -> tuple[Path, Path]:
+    """Bind state and recovery to the one canonical, non-symlinked layout."""
+    state = root / "translations"
+    if state.is_symlink():
+        raise BatchError("translations directory must not be symbolic")
+    if not state.is_dir():
+        raise BatchError("translations directory is missing")
+    expected_units = state / "units.jsonl"
+    candidate = Path(units_path)
+    if not candidate.is_absolute():
+        candidate = root / candidate
+    try:
+        if candidate.resolve(strict=True) != expected_units.resolve(strict=True):
+            raise BatchError("units_path must be canonical units state path")
+    except OSError as exc:
+        raise BatchError(f"invalid canonical units path: {exc}") from exc
+    if expected_units.is_symlink() or not expected_units.is_file():
+        raise BatchError("canonical units state must be a regular file")
+    checkpoint = state / "checkpoint.json"
+    if checkpoint.is_symlink() or (checkpoint.exists() and not checkpoint.is_file()):
+        raise BatchError("canonical checkpoint must be a regular file")
+    return expected_units.resolve(strict=True), checkpoint
 
 
 def _safe_path(root: Path, path: Path, *, must_exist: bool = False) -> Path:
