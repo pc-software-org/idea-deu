@@ -6,25 +6,27 @@ import argparse
 import hashlib
 import os
 import shutil
+import stat
 import sys
+from contextlib import contextmanager
 from dataclasses import replace
 from pathlib import Path
 from typing import Any, Sequence
 
 from .batches import BatchError, export_next_batch, import_batch, validate_all_units, workflow_lock
 from .config import ProductConfig, load_product_config
-from .generator import (DistributionResourceProvider, GenerationError, GenerationResult,
+from .generator import (BlobResourceProvider, DistributionResourceProvider, GenerationError, GenerationResult,
                         generate_resources, recompute_generation)
 from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStatus,
                      ResourceRecord, ResourceType, StaleTranslationUnit,
                      TranslationContext, TranslationUnit)
-from .package import PackageError, build_plugin_package
+from .package import PackageError, build_plugin_package, verify_plugin_package
 from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
 from .scanner import ScannerError, load_scanner_config, scan_archive
 from .source import SourceValidationError, validate_source
 from .state import StateError, read_jsonl, write_jsonl_atomic
-from .path_safety import recover_materialized_tree
+from .path_safety import atomic_materialize_tree, recover_materialized_tree
 
 DOMAIN_ERROR = 1
 
@@ -78,8 +80,8 @@ def _canonical_root(path: Path) -> Path:
 def _config(root: Path) -> ProductConfig:
     config = load_product_config(root / "config/product.json")
     archive = Path(config.archive)
-    if archive.is_absolute() or ".." in archive.parts:
-        raise ValueError("configured archive must be relative to workflow root")
+    if archive.is_absolute() or len(archive.parts) != 1 or archive.name in {".", ".."}:
+        raise ValueError("configured archive must be one relative filename under workflow root")
     current = root
     for component in archive.parts:
         current /= component
@@ -91,18 +93,24 @@ def _config(root: Path) -> ProductConfig:
 def _dispatch(root: Path, args: argparse.Namespace) -> int:
     command = args.command
     if command == "validate-source":
-        info = validate_source(_config(root)); print(f"validated {info.version} ({info.build_number}) {info.sha256}"); return 0
+        config = _config(root)
+        with _opened_source(root, config) as source:
+            info = validate_source(config, source)
+        print(f"validated {info.version} ({info.build_number}) {info.sha256}"); return 0
     if command == "scan":
         config = _config(root)
-        validate_source(config)
-        inventory = scan_archive(Path(config.archive), load_scanner_config(root / "config/scanner.json"))
-        old_units = _read_units(root)
-        units = _extract_units(inventory, DistributionResourceProvider(Path(config.archive)), old_units)
+        with _opened_source(root, config) as source:
+            validate_source(config, source)
+            inventory = scan_archive(source, load_scanner_config(root / "config/scanner.json"))
+            old_units = _read_units(root)
+            source_provider = DistributionResourceProvider(source)
+            units = _extract_units(inventory, source_provider, old_units)
+            blobs = {record.source_sha256: source_provider.read(record) for record in inventory.resources}
         stale = _stale_units(old_units, units, config.build_number)
         checkpoint = _checkpoint(root)
         if checkpoint.get("current_batch") and tuple(units) != tuple(old_units):
             raise BatchError("source inventory changed while a batch is active")
-        _persist_scan(root, inventory, units, stale, checkpoint=checkpoint)
+        _persist_scan(root, inventory, units, stale, blobs=blobs, checkpoint=checkpoint)
         print(f"scanned {len(inventory.resources)} resources, {len(units)} translation units"); return 0
     if command == "next-batch":
         path = export_next_batch(root, root / "translations/units.jsonl", limit=args.limit)
@@ -119,7 +127,7 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
     if command == "package":
         generated = _trusted_generation(root, materialize=False)
         inventory, units = _read_inventory(root), _read_units(root)
-        provider = DistributionResourceProvider(Path(_config(root).archive))
+        provider = BlobResourceProvider(root / "inventory/source-blobs")
         destination = root / "dist/idea-deu.zip"
         build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination,
                              trusted_root=root)
@@ -139,6 +147,20 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         if _recovery_markers(root): print("Recovery needed: unfinished transaction detected")
         return 0
     raise ValueError(f"unknown command: {command}")
+
+
+@contextmanager
+def _opened_source(root: Path, config: ProductConfig):
+    root_fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0))
+    descriptor = -1
+    try:
+        descriptor = os.open(Path(config.archive).name, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0), dir_fd=root_fd)
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode): raise ValueError("configured archive must be a regular file")
+        with os.fdopen(descriptor, "rb", closefd=True) as stream:
+            descriptor = -1; yield stream
+    finally:
+        if descriptor >= 0: os.close(descriptor)
+        os.close(root_fd)
 
 
 def _read_inventory(root: Path) -> Inventory:
@@ -209,7 +231,8 @@ def _stale_units(previous: Sequence[TranslationUnit], active: Sequence[Translati
 
 
 def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit],
-                  stale: Sequence[StaleTranslationUnit] = (), *, checkpoint: dict[str, Any] | None = None) -> None:
+                  stale: Sequence[StaleTranslationUnit] = (), *, blobs: dict[str, bytes] | None = None,
+                  checkpoint: dict[str, Any] | None = None) -> None:
     for directory in (root / "inventory", root / "translations", root / "translations/batches"):
         directory.mkdir(parents=True, exist_ok=True)
     checkpoint = checkpoint or {"schema_version": 1, "completed_sequence": 0,
@@ -224,6 +247,10 @@ def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationU
         write_jsonl_atomic(transaction / "collisions.jsonl", inventory.collisions)
         write_jsonl_atomic(transaction / "units.jsonl", units)
         write_jsonl_atomic(transaction / "stale-units.jsonl", stale)
+        atomic_materialize_tree(transaction / "source-blobs", blobs or {}, trusted_root=root)
+        write_jsonl_atomic(transaction / "source-manifest.jsonl", [
+            {"id": record.resource_id, "sha256": record.source_sha256, "size": record.size}
+            for record in inventory.resources])
         write_jsonl_atomic(transaction / "checkpoint.json", [checkpoint])
         write_jsonl_atomic(transaction / "manifest.jsonl", [{"schema_version": 1, "state": "prepared"}])
         _recover_scan(root)
@@ -246,6 +273,10 @@ def _recover_scan(root: Path) -> None:
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
     write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))
+    staged_blobs = transaction / "source-blobs"
+    blob_data = {path.name: path.read_bytes() for path in staged_blobs.iterdir() if path.is_file() and not path.is_symlink()}
+    atomic_materialize_tree(root / "inventory/source-blobs", blob_data, trusted_root=root)
+    write_jsonl_atomic(root / "inventory/source-manifest.jsonl", read_jsonl(transaction / "source-manifest.jsonl", dict))
     write_jsonl_atomic(root / "translations/checkpoint.json", read_jsonl(transaction / "checkpoint.json", dict))
     shutil.rmtree(transaction)
     descriptor = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
@@ -272,7 +303,7 @@ def _generate(root: Path):
 
 def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
     inventory, units = _read_inventory(root), _read_units(root)
-    provider = DistributionResourceProvider(Path(_config(root).archive))
+    provider = BlobResourceProvider(root / "inventory/source-blobs")
     if materialize:
         plugin = root / "generated/plugin"
         recover_materialized_tree(plugin, trusted_root=root)
@@ -375,16 +406,18 @@ def _snapshot(root: Path) -> ReportSnapshot:
     product = load_product_config(root / "config/product.json")
     stale_path = root / "inventory/stale-units.jsonl"
     stale = read_jsonl(stale_path, StaleTranslationUnit) if stale_path.exists() else []
-    generation_valid, _generation = _verify_generation_manifest(root, inventory, units)
+    generation_valid = False
+    trusted: GenerationResult | None = None
+    try:
+        trusted = _trusted_generation(root, materialize=False)
+        generation_valid = _tree_matches(root / "generated/plugin", dict(trusted.files))
+    except (OSError, ValueError):
+        generation_valid = False
     artifact = root / "dist/idea-deu.zip"
     package_valid = False
     try:
-        package_manifest = read_jsonl(root / "dist/manifest.json", dict)
-        if len(package_manifest) == 1 and artifact.is_file():
-            digest, size = _file_fingerprint(artifact); manifest = package_manifest[0]
-            package_valid = (generation_valid and manifest == {"schema_version": 1,
-                "input_sha256": _state_input_digest(inventory, units),
-                "artifact_sha256": digest, "artifact_size": size})
+        package_valid = bool(generation_valid and trusted is not None and artifact.is_file() and
+                             verify_plugin_package(artifact, trusted, root / "plugin/META-INF/plugin.xml"))
     except (OSError, ValueError):
         package_valid = False
     package: dict[str, bool | str] = {"present": artifact.is_file(), "valid": package_valid,

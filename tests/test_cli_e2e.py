@@ -110,6 +110,23 @@ class CliEndToEndTests(unittest.TestCase):
         self.assertEqual(0, process.returncode); self.assertNotIn("Traceback", process.stderr)
         self.assertIn("complete", json.loads((self.root / "reports/status.json").read_text())["workflow_state"])
 
+        blob = next((self.root / "inventory/source-blobs").iterdir()); blob_bytes = blob.read_bytes(); blob.unlink()
+        code, stdout, stderr = self._run("status")
+        self.assertEqual((0, ""), (code, stderr)); self.assertNotIn("Traceback", stdout)
+        self.assertIn("python -m scripts.idea_deu generate", stdout)
+        blob.write_bytes(blob_bytes)
+
+        generated_file = next(path for path in (self.root / "generated/plugin").rglob("*") if path.is_file())
+        generated_file.write_bytes(b"paired forged resource")
+        (self.root / "generated/manifest.json").write_text('{"schema_version":1,"forged":true}\n')
+        code, stdout, stderr = self._run("status")
+        self.assertEqual((0, ""), (code, stderr)); self.assertIn("python -m scripts.idea_deu generate", stdout)
+        self.assertEqual(0, self._run("generate")[0])
+        (self.root / "dist/idea-deu.zip").write_bytes(b"not a zip")
+        (self.root / "dist/manifest.json").write_text('{"schema_version":1,"forged":true}\n')
+        code, stdout, stderr = self._run("status")
+        self.assertEqual((0, ""), (code, stderr)); self.assertIn("python -m scripts.idea_deu package", stdout)
+
     def test_every_cli_command_runs_across_real_process_boundaries(self):
         process = self._run_process("validate-source")
         self.assertEqual(0, process.returncode); self.assertEqual("", process.stderr)

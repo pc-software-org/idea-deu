@@ -2,6 +2,7 @@
 from __future__ import annotations
 import io
 import stat
+import tempfile
 import zipfile
 from collections.abc import Sequence
 from pathlib import Path
@@ -65,6 +66,42 @@ def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
     jar = _zip_bytes(entries)
     payload = {"idea-deu/lib/idea-deu.jar": jar}
     return _zip_bytes(payload)
+
+
+def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path) -> bool:
+    """Strictly verify an existing deterministic outer and inner plugin ZIP."""
+    try:
+        descriptor_bytes = Path(descriptor).read_bytes(); _validate_descriptor(descriptor_bytes)
+        expected = dict(result.files); expected["META-INF/plugin.xml"] = descriptor_bytes
+        with zipfile.ZipFile(path) as outer:
+            if outer.namelist() != ["idea-deu/lib/idea-deu.jar"]: return False
+            outer_info = outer.infolist()[0]
+            if not _canonical_info(outer_info): return False
+            with outer.open(outer_info) as jar_stream, tempfile.SpooledTemporaryFile(max_size=8 * 1024 * 1024) as spool:
+                remaining = outer_info.file_size
+                while remaining:
+                    chunk = jar_stream.read(min(1024 * 1024, remaining))
+                    if not chunk: return False
+                    spool.write(chunk); remaining -= len(chunk)
+                if jar_stream.read(1): return False
+                spool.seek(0)
+                with zipfile.ZipFile(spool) as inner:
+                    if inner.namelist() != sorted(expected): return False
+                    if len(inner.infolist()) != len(expected): return False
+                    for info in inner.infolist():
+                        data = expected.get(info.filename)
+                        if data is None or not _canonical_info(info) or info.file_size != len(data): return False
+                        with inner.open(info) as stream:
+                            if stream.read(len(data) + 1) != data: return False
+        return True
+    except (OSError, ValueError, zipfile.BadZipFile, PackageError):
+        return False
+
+
+def _canonical_info(info: zipfile.ZipInfo) -> bool:
+    return (info.date_time == _TIME and info.compress_type == zipfile.ZIP_DEFLATED and
+            info.create_system == 3 and (info.external_attr >> 16) == (stat.S_IFREG | 0o644) and
+            not stat.S_ISLNK((info.external_attr >> 16) & 0xffff))
 
 def _validate_descriptor(data: bytes) -> None:
     try: root=ElementTree.fromstring(data)

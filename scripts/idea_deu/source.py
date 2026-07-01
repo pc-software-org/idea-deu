@@ -35,11 +35,12 @@ class SourceInfo:
     product_code: str
 
 
-def validate_source(config: ProductConfig) -> SourceInfo:
+def validate_source(config: ProductConfig, archive_file: BinaryIO | None = None) -> SourceInfo:
     """Validate the configured archive and return its bound product identity."""
     archive = Path(config.archive)
     try:
-        with archive.open("rb") as source_file:
+        if archive_file is not None:
+            source_file = archive_file; source_file.seek(0)
             actual_sha256 = _archive_sha256(source_file)
             if actual_sha256 != config.sha256:
                 raise SourceValidationError(
@@ -48,6 +49,13 @@ def validate_source(config: ProductConfig) -> SourceInfo:
                 )
             source_file.seek(0)
             product_info = _read_product_info(source_file)
+        else:
+            with archive.open("rb") as source_file:
+                actual_sha256 = _archive_sha256(source_file)
+                if actual_sha256 != config.sha256:
+                    raise SourceValidationError("source SHA-256 mismatch: "
+                        f"expected {config.sha256}, actual {actual_sha256}")
+                source_file.seek(0); product_info = _read_product_info(source_file)
     except OSError as error:
         raise SourceValidationError(
             f"cannot read source archive {archive}: {error.strerror or 'I/O error'}"

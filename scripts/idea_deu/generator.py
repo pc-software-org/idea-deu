@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import io
+import os
 import re
 import stat
 import zipfile
@@ -40,9 +41,10 @@ class MappingResourceProvider:
 
 class DistributionResourceProvider:
     """Read an inventoried member from its nested JAR without extraction."""
-    def __init__(self, archive: Path): self.archive = Path(archive)
+    def __init__(self, archive: object): self.archive = archive if hasattr(archive, "read") else Path(archive)  # type: ignore[arg-type]
     def read(self, record: ResourceRecord) -> bytes:
         try:
+            if hasattr(self.archive, "seek"): self.archive.seek(0)  # type: ignore[union-attr]
             with zipfile.ZipFile(self.archive) as outer:
                 info = _unique_zip_member(outer, record.container)
                 if _zip_symlink(info): raise GenerationError(f"symbolic-link container: {record.container}")
@@ -52,6 +54,21 @@ class DistributionResourceProvider:
                     return nested.read(resource)
         except GenerationError: raise
         except (OSError, zipfile.BadZipFile, KeyError) as exc: raise GenerationError(f"cannot read source resource: {exc}") from exc
+
+
+class BlobResourceProvider:
+    """Read immutable content-addressed scan blobs without following links."""
+    def __init__(self, root: Path): self.root = Path(root)
+    def read(self, record: ResourceRecord) -> bytes:
+        path = self.root / record.source_sha256
+        if path.is_symlink(): raise GenerationError(f"symbolic source blob: {record.source_sha256}")
+        try:
+            descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+            with os.fdopen(descriptor, "rb") as stream: data = stream.read(record.size + 1)
+        except OSError as exc: raise GenerationError(f"cannot read source blob: {record.source_sha256}: {exc}") from exc
+        if len(data) != record.size or hashlib.sha256(data).hexdigest() != record.source_sha256:
+            raise GenerationError(f"invalid source blob: {record.source_sha256}")
+        return data
 
 
 def generate_resources(inventory: Inventory, units: Sequence[TranslationUnit], provider: object,

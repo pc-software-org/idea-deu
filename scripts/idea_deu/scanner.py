@@ -172,12 +172,13 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     )
 
 
-def scan_archive(path: Path, config: ScannerConfig) -> Inventory:
+def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
     _validate_resource_patterns(config.resource_patterns)
     resources: list[ResourceRecord] = []
     exclusions: list[ExclusionRecord] = []
     budget = _ScanBudget()
     try:
+        if hasattr(path, "seek"): path.seek(0)
         with zipfile.ZipFile(path) as outer:
             outer_member_count = len(outer.filelist)
             if outer_member_count > config.max_outer_members:
