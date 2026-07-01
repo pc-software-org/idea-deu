@@ -6,4 +6,4 @@
 /dist/
 /.gradle/
 /build/
-
+/.worktrees/
