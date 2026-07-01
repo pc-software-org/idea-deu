@@ -241,7 +241,10 @@ def _choice_limit(value: str) -> float:
     if re.fullmatch(decimal, suffixless):
         return float(suffixless)
     if re.fullmatch(hexadecimal, suffixless):
-        return float.fromhex(suffixless)
+        try:
+            return float.fromhex(suffixless)
+        except OverflowError:
+            return -math.inf if suffixless.startswith("-") else math.inf
     raise ValueError(value)
 
 

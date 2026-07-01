@@ -92,6 +92,13 @@ class TranslationValidationTests(unittest.TestCase):
             "{0,choice,0x1.0p0#a|0x1.8P1D#b}",
             "{0,choice,1f#a|2D#b}",
             "{0,choice,+.5e1F#a|1.e1d#b}",
+            "{0,choice,0x1p999999999#a}",
+            "{0,choice,-0x1p999999999#a}",
+            "{0,choice,0x1p-999999999#a}",
+            (
+                "{0,choice,-0x1p999999999#a|"
+                "0x1p-999999999#b|0x1p999999999#c}"
+            ),
         ):
             with self.subTest(text=text):
                 self.assert_clean(text)
