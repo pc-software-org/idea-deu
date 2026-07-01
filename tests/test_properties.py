@@ -51,6 +51,22 @@ class PropertiesTest(unittest.TestCase):
         )
         self.assertEqual(parse_properties(rendered).values["first"], " leading:=\\\nnext")
 
+    def test_preserves_continued_key_and_separator_when_replacing_value(self) -> None:
+        data = b"ke\\\n  y = old\n"
+
+        rendered = render_properties(parse_properties(data), {"key": "new"})
+
+        self.assertEqual(rendered, b"ke\\\n  y = new\n")
+        self.assertEqual(parse_properties(rendered).values, {"key": "new"})
+
+    def test_preserves_leading_whitespace_and_continued_separator(self) -> None:
+        data = b"  key \\\n   = old\n"
+
+        rendered = render_properties(parse_properties(data), {"key": "new"})
+
+        self.assertEqual(rendered, b"  key \\\n   = new\n")
+        self.assertEqual(parse_properties(rendered).values, {"key": "new"})
+
     def test_rejects_unknown_translation_key(self) -> None:
         document = parse_properties(b"known=value\n")
         with self.assertRaisesRegex(PropertiesError, "unknown.*missing"):

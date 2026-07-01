@@ -74,6 +74,49 @@ class StateTest(unittest.TestCase):
         self.assertEqual(self.path.read_bytes(), b"old\n")
         self.assertEqual(list(self.path.parent.glob(f".{self.path.name}.*.tmp")), [])
 
+    def test_directory_fsync_failure_restores_existing_file(self) -> None:
+        self.path.write_bytes(b"old\n")
+
+        with patch("scripts.idea_deu.state.os.fsync", side_effect=self._fail_second_fsync):
+            with self.assertRaisesRegex(StateError, "directory fsync failed"):
+                write_jsonl_atomic(self.path, [self._record("new", "container")])
+
+        self.assertEqual(self.path.read_bytes(), b"old\n")
+        self.assertEqual(self._state_artifacts(), [])
+
+    def test_directory_fsync_failure_removes_new_file(self) -> None:
+        with patch("scripts.idea_deu.state.os.fsync", side_effect=self._fail_second_fsync):
+            with self.assertRaisesRegex(StateError, "directory fsync failed"):
+                write_jsonl_atomic(self.path, [self._record("new", "container")])
+
+        self.assertFalse(self.path.exists())
+        self.assertEqual(self._state_artifacts(), [])
+
+    def test_failed_rollback_retains_recovery_backup(self) -> None:
+        self.path.write_bytes(b"old\n")
+        real_replace = os.replace
+        replace_calls = 0
+
+        def fail_rollback(source: Path, destination: Path) -> None:
+            nonlocal replace_calls
+            replace_calls += 1
+            if replace_calls == 2:
+                raise OSError("rollback replace failed")
+            real_replace(source, destination)
+
+        with (
+            patch("scripts.idea_deu.state.os.fsync", side_effect=self._fail_second_fsync),
+            patch("scripts.idea_deu.state.os.replace", side_effect=fail_rollback),
+        ):
+            with self.assertRaisesRegex(
+                StateError, "rollback failed.*backup retained"
+            ):
+                write_jsonl_atomic(self.path, [self._record("new", "container")])
+
+        backups = list(self.path.parent.glob(f".{self.path.name}.*.bak"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), b"old\n")
+
     def test_rejects_duplicate_ids_for_write_and_read(self) -> None:
         records = [self._record("same", "one"), self._record("same", "two")]
         with self.assertRaisesRegex(StateError, "duplicate.*same"):
@@ -112,6 +155,15 @@ class StateTest(unittest.TestCase):
             source_sha256="a" * 64,
             processing_status=ProcessingStatus.OPEN,
         )
+
+    def _fail_second_fsync(self, _descriptor: int) -> None:
+        calls = getattr(self, "_fsync_calls", 0) + 1
+        self._fsync_calls = calls
+        if calls == 2:
+            raise OSError("directory fsync failed")
+
+    def _state_artifacts(self) -> list[Path]:
+        return sorted(self.path.parent.glob(f".{self.path.name}.*"))
 
 
 if __name__ == "__main__":

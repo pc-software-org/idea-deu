@@ -66,6 +66,9 @@ def write_jsonl_atomic(path: Path, records: Iterable[T]) -> None:
     existing_mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
     descriptor = -1
     temp_path: Path | None = None
+    backup_path: Path | None = None
+    preserve_backup = False
+    had_existing_file = path.exists()
     try:
         descriptor, temp_name = tempfile.mkstemp(
             prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
@@ -75,9 +78,26 @@ def write_jsonl_atomic(path: Path, records: Iterable[T]) -> None:
         with os.fdopen(descriptor, "wb") as stream:
             descriptor = -1
             _write_payload(stream, payload)
+        if had_existing_file:
+            backup_path = _backup_file(path)
         os.replace(temp_path, path)
         temp_path = None
-        _fsync_directory(path.parent)
+        try:
+            _fsync_directory(path.parent)
+        except OSError as exc:
+            try:
+                _rollback_replace(path, backup_path, had_existing_file)
+            except OSError as rollback_exc:
+                preserve_backup = backup_path is not None and backup_path.exists()
+                recovery = (
+                    f"; backup retained at {backup_path}"
+                    if preserve_backup
+                    else ""
+                )
+                raise StateError(
+                    f"{exc}; rollback failed: {rollback_exc}{recovery}"
+                ) from exc
+            raise
     except OSError as exc:
         raise StateError(str(exc)) from exc
     finally:
@@ -88,12 +108,47 @@ def write_jsonl_atomic(path: Path, records: Iterable[T]) -> None:
                 temp_path.unlink()
             except FileNotFoundError:
                 pass
+        if backup_path is not None and not preserve_backup:
+            try:
+                backup_path.unlink()
+            except FileNotFoundError:
+                pass
 
 
 def _write_payload(stream: Any, payload: bytes) -> None:
     stream.write(payload)
     stream.flush()
     os.fsync(stream.fileno())
+
+
+def _backup_file(path: Path) -> Path:
+    descriptor, name = tempfile.mkstemp(
+        prefix=f".{path.name}.", suffix=".bak", dir=path.parent
+    )
+    os.close(descriptor)
+    backup_path = Path(name)
+    backup_path.unlink()
+    try:
+        os.link(path, backup_path)
+    except OSError:
+        try:
+            backup_path.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+    return backup_path
+
+
+def _rollback_replace(
+    path: Path, backup_path: Path | None, had_existing_file: bool
+) -> None:
+    if had_existing_file:
+        if backup_path is None:
+            raise OSError("original-file backup is unavailable")
+        os.replace(backup_path, path)
+    else:
+        path.unlink()
+    _fsync_directory(path.parent)
 
 
 def _object_without_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

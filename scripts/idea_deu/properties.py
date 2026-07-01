@@ -52,15 +52,25 @@ def parse_properties(data: bytes) -> PropertiesDocument:
             continue
 
         logical = content
+        logical_offsets = [start_char + offset for offset in range(len(content) + 1)]
         final_ending = ending
         last_end_char = end_char
         while _is_continued(logical):
             if not final_ending or index + 1 >= len(lines):
                 raise PropertiesError("malformed continuation at end of input")
             logical = logical[:-1]
+            logical_offsets = logical_offsets[:-1]
             index += 1
-            _, next_content, final_ending, last_end_char = lines[index]
-            logical += next_content.lstrip(" \t\f")
+            next_start, next_content, final_ending, last_end_char = lines[index]
+            continued_content = next_content.lstrip(" \t\f")
+            leading_whitespace = len(next_content) - len(continued_content)
+            continued_start = next_start + leading_whitespace
+            logical_offsets[-1] = continued_start
+            logical += continued_content
+            logical_offsets.extend(
+                continued_start + offset
+                for offset in range(1, len(continued_content) + 1)
+            )
 
         key_raw, value_raw, value_start = _split_property(logical)
         key = _unescape(key_raw)
@@ -69,8 +79,7 @@ def parse_properties(data: bytes) -> PropertiesDocument:
             raise PropertiesError(f"duplicate logical key: {key}")
         values[key] = value
 
-        first_line_value_start = min(value_start, len(content))
-        prefix_end_char = start_char + first_line_value_start
+        prefix_end_char = logical_offsets[value_start]
         properties.append(
             _Property(
                 key=key,
