@@ -1,0 +1,249 @@
+"""Command-line workflow for the resumable language-pack pipeline."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import os
+import shutil
+import sys
+from dataclasses import replace
+from pathlib import Path
+from typing import Any, Sequence
+
+from .batches import BatchError, export_next_batch, import_batch, validate_all_units
+from .config import ProductConfig, load_product_config
+from .generator import DistributionResourceProvider, GenerationError, generate_resources
+from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStatus,
+                     ResourceRecord, ResourceType, TranslationContext, TranslationUnit)
+from .package import PackageError, build_plugin_package
+from .properties import PropertiesError, parse_properties
+from .report import ReportSnapshot, build_report, write_report
+from .scanner import ScannerError, load_scanner_config, scan_archive
+from .source import SourceValidationError, validate_source
+from .state import StateError, read_jsonl, write_jsonl_atomic
+
+DOMAIN_ERROR = 1
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="python -m scripts.idea_deu")
+    parser.add_argument("--root", type=Path, default=Path.cwd(), help=argparse.SUPPRESS)
+    commands = parser.add_subparsers(dest="command", required=True)
+    for name in ("validate-source", "scan", "validate", "generate", "package", "report", "status"):
+        commands.add_parser(name)
+    next_batch = commands.add_parser("next-batch")
+    next_batch.add_argument("--limit", type=int, default=100)
+    imported = commands.add_parser("import-batch")
+    imported.add_argument("path", type=Path)
+    return parser
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    try:
+        args = _parser().parse_args(argv)
+    except SystemExit as exc:
+        return int(exc.code)
+    try:
+        root = _canonical_root(args.root)
+        if args.command not in {"status", "validate-source"}:
+            _recover_scan(root)
+        result = _dispatch(root, args)
+        if args.command not in {"status", "validate-source"}:
+            try:
+                _refresh_report(root)
+            except Exception as exc:
+                print(f"report refresh failed: {exc}", file=sys.stderr)
+                return DOMAIN_ERROR
+        return result
+    except (BatchError, GenerationError, PackageError, PropertiesError, ScannerError,
+            SourceValidationError, StateError, OSError, ValueError) as exc:
+        print(str(exc), file=sys.stderr)
+        return DOMAIN_ERROR
+
+
+def _canonical_root(path: Path) -> Path:
+    path = Path(path).absolute()
+    if path.is_symlink() or not path.is_dir():
+        raise ValueError(f"unsafe workflow root: {path}")
+    return path.resolve(strict=True)
+
+
+def _config(root: Path) -> ProductConfig:
+    config = load_product_config(root / "config/product.json")
+    archive = Path(config.archive)
+    if archive.is_absolute() or ".." in archive.parts:
+        raise ValueError("configured archive must be relative to workflow root")
+    return replace(config, archive=str(root / archive))
+
+
+def _dispatch(root: Path, args: argparse.Namespace) -> int:
+    command = args.command
+    if command == "validate-source":
+        info = validate_source(_config(root)); print(f"validated {info.version} ({info.build_number}) {info.sha256}"); return 0
+    if command == "scan":
+        config = _config(root)
+        validate_source(config)
+        inventory = scan_archive(Path(config.archive), load_scanner_config(root / "config/scanner.json"))
+        old_units = _read_units(root)
+        units = _extract_units(inventory, DistributionResourceProvider(Path(config.archive)), old_units)
+        checkpoint = _checkpoint(root)
+        if checkpoint.get("current_batch") and tuple(units) != tuple(old_units):
+            raise BatchError("source inventory changed while a batch is active")
+        _persist_scan(root, inventory, units, checkpoint=checkpoint)
+        print(f"scanned {len(inventory.resources)} resources, {len(units)} translation units"); return 0
+    if command == "next-batch":
+        path = export_next_batch(root, root / "translations/units.jsonl", limit=args.limit)
+        print(path.relative_to(root) if path else "no open translation units"); return 0
+    if command == "import-batch":
+        batch = _confined_batch(root, args.path)
+        result = import_batch(root, root / "translations/units.jsonl", batch, root / "glossary/de.json")
+        print(f"imported {result.imported}: {result.reviewed} reviewed, {result.blocking} blocking"); return DOMAIN_ERROR if result.blocking else 0
+    if command == "validate":
+        units = _validate_all(root); print(f"validated {len(units)} translation units")
+        return DOMAIN_ERROR if any(any(f.severity.value == "blocking" for f in unit.findings) for unit in units) else 0
+    if command == "generate":
+        result = _generate(root); print(result.root); return 0
+    if command == "package":
+        generated = _generate(root)
+        inventory, units = _read_inventory(root), _read_units(root)
+        provider = DistributionResourceProvider(Path(_config(root).archive))
+        destination = root / "dist/idea-deu.zip"
+        build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination)
+        print(destination); return 0
+    if command == "report":
+        print(root / "reports/status.json"); return 0
+    if command == "status":
+        snapshot = _snapshot(root)
+        print(f"Resource files: {snapshot.counts['resource_files']}")
+        print(f"Translation units: {snapshot.counts['translation_units']}")
+        print(f"Blocking findings: {snapshot.findings['counts']['blocking']}")
+        print(f"Next: {snapshot.next_command}")
+        if (root / "translations/.transaction").exists() or (root / ".scan-transaction").exists(): print("Recovery needed: unfinished transaction detected")
+        return 0
+    raise ValueError(f"unknown command: {command}")
+
+
+def _read_inventory(root: Path) -> Inventory:
+    paths = tuple(root / f"inventory/{name}.jsonl" for name in ("resources", "exclusions", "collisions"))
+    if not any(path.exists() for path in paths): return Inventory((), (), ())
+    if not all(path.exists() for path in paths): raise StateError("incomplete inventory; recovery or scan required")
+    return Inventory(tuple(read_jsonl(paths[0], ResourceRecord)), tuple(read_jsonl(paths[1], ExclusionRecord)),
+                     tuple(read_jsonl(paths[2], CollisionRecord)))
+
+
+def _read_units(root: Path) -> tuple[TranslationUnit, ...]:
+    path = root / "translations/units.jsonl"
+    return tuple(read_jsonl(path, TranslationUnit)) if path.exists() else ()
+
+
+def _checkpoint(root: Path) -> dict[str, Any]:
+    path = root / "translations/checkpoint.json"
+    if not path.exists(): return {}
+    records = read_jsonl(path, dict)
+    if len(records) != 1: raise StateError("invalid checkpoint")
+    return records[0]
+
+
+def _extract_units(inventory: Inventory, provider: DistributionResourceProvider,
+                   previous: Sequence[TranslationUnit]) -> tuple[TranslationUnit, ...]:
+    old = {unit.id: unit for unit in previous}
+    units: list[TranslationUnit] = []
+    for record in inventory.resources:
+        data = provider.read(record)
+        if hashlib.sha256(data).hexdigest() != record.source_sha256 or len(data) != record.size:
+            raise ScannerError(f"source changed while extracting: {record.container}!/{record.resource_path}")
+        if record.resource_type is ResourceType.PROPERTIES:
+            values = parse_properties(data).values.items()
+        else:
+            try: values = (("", data.decode("utf-8-sig")),)
+            except UnicodeDecodeError as exc: raise ScannerError(f"invalid UTF-8 resource: {record.resource_path}") from exc
+        bundle = Path(record.resource_path).stem
+        for key, source in values:
+            context = TranslationContext(bundle, key, record.container, record.resource_path)
+            identifier = hashlib.sha256(f"{record.container}\0{record.resource_path}\0{key}".encode()).hexdigest()
+            source_hash = hashlib.sha256(source.encode("utf-8")).hexdigest()
+            prior = old.get(identifier)
+            preserve = prior is not None and prior.source == source and prior.source_sha256 == source_hash and prior.context == context
+            units.append(TranslationUnit(identifier, source, source_hash,
+                prior.target if preserve else "", context,
+                prior.status if preserve else ProcessingStatus.OPEN,
+                prior.findings if preserve else ()))
+    return tuple(sorted(units, key=lambda unit: unit.id))
+
+
+def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit], *, checkpoint: dict[str, Any] | None = None) -> None:
+    for directory in (root / "inventory", root / "translations", root / "translations/batches"):
+        directory.mkdir(parents=True, exist_ok=True)
+    checkpoint = checkpoint or {"schema_version": 1, "completed_sequence": 0,
+        "current_sequence": None, "current_batch": None, "counts": {"exported": 0}, "unit_ids": [],
+        "batch_digest": None, "next_command": "export-next-batch"}
+    transaction = root / ".scan-transaction"
+    if transaction.exists(): raise StateError("unfinished scan transaction requires recovery")
+    transaction.mkdir(mode=0o700)
+    try:
+        write_jsonl_atomic(transaction / "resources.jsonl", inventory.resources)
+        write_jsonl_atomic(transaction / "exclusions.jsonl", inventory.exclusions)
+        write_jsonl_atomic(transaction / "collisions.jsonl", inventory.collisions)
+        write_jsonl_atomic(transaction / "units.jsonl", units)
+        write_jsonl_atomic(transaction / "checkpoint.json", [checkpoint])
+        write_jsonl_atomic(transaction / "manifest.jsonl", [{"schema_version": 1, "state": "prepared"}])
+        _recover_scan(root)
+    except Exception:
+        if not (transaction / "manifest.jsonl").exists(): shutil.rmtree(transaction, ignore_errors=True)
+        raise
+
+
+def _recover_scan(root: Path) -> None:
+    transaction = root / ".scan-transaction"
+    if not transaction.exists(): return
+    if transaction.is_symlink() or not transaction.is_dir(): raise StateError("unsafe scan transaction")
+    if read_jsonl(transaction / "manifest.jsonl", dict) != [{"schema_version": 1, "state": "prepared"}]:
+        raise StateError("invalid scan transaction")
+    write_jsonl_atomic(root / "inventory/resources.jsonl", read_jsonl(transaction / "resources.jsonl", ResourceRecord))
+    write_jsonl_atomic(root / "inventory/exclusions.jsonl", read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord))
+    write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
+    write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
+    write_jsonl_atomic(root / "translations/checkpoint.json", read_jsonl(transaction / "checkpoint.json", dict))
+    shutil.rmtree(transaction)
+    descriptor = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+    try: os.fsync(descriptor)
+    finally: os.close(descriptor)
+
+
+def _confined_batch(root: Path, supplied: Path) -> Path:
+    batches = (root / "translations/batches").resolve(strict=True)
+    candidate = supplied if supplied.is_absolute() else root / supplied
+    if candidate.is_symlink(): raise BatchError("batch path must not be a symbolic link")
+    resolved = candidate.resolve(strict=True)
+    if resolved.parent != batches or not resolved.is_file(): raise BatchError("batch path is outside translations/batches")
+    return resolved
+
+
+def _validate_all(root: Path) -> tuple[TranslationUnit, ...]:
+    return validate_all_units(root, root / "translations/units.jsonl", root / "glossary/de.json")
+
+
+def _generate(root: Path):
+    inventory, units = _read_inventory(root), _read_units(root)
+    provider = DistributionResourceProvider(Path(_config(root).archive))
+    return generate_resources(inventory, units, provider, root / "generated/plugin")
+
+
+def _snapshot(root: Path) -> ReportSnapshot:
+    inventory, units = _read_inventory(root), _read_units(root)
+    product = load_product_config(root / "config/product.json")
+    artifact = root / "dist/idea-deu.zip"
+    package: dict[str, bool | str] = {"present": artifact.is_file(), "path": "dist/idea-deu.zip"}
+    if artifact.is_file(): package.update({"sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(), "size": str(artifact.stat().st_size)})
+    return build_report(inventory, units,
+        source={"version": product.version, "build": product.build_number, "hash": product.sha256},
+        checkpoint=_checkpoint(root),
+        generation={"present": (root / "generated/plugin").is_dir(), "path": "generated/plugin"}, package=package)
+
+
+def _refresh_report(root: Path) -> ReportSnapshot:
+    snapshot = _snapshot(root)
+    (root / "reports").mkdir(parents=True, exist_ok=True)
+    write_report(snapshot, root / "reports/status.json", root / "reports/status.md")
+    return snapshot

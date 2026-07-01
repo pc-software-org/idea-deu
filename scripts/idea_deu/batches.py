@@ -49,6 +49,33 @@ class ImportResult:
     blocking: int
 
 
+def validate_all_units(root: Path, units_path: Path, glossary_path: Path) -> tuple[TranslationUnit, ...]:
+    """Validate every unit and commit units/checkpoint through the batch transaction."""
+    root = _safe_root(root)
+    with _exclusive_lock(root) as root_fd:
+        with _state_descriptors(root_fd, root) as (state_fd, _batches_fd):
+            units_path, _checkpoint_path, identity = _validate_state_layout(root, units_path)
+            _recover_transaction(root, identity, state_fd)
+            glossary_path = _safe_path(root, glossary_path, must_exist=True)
+            glossary = load_glossary(glossary_path).validation_terms()
+            checkpoint = _read_checkpoint_at(state_fd)
+            if not _regular_exists_at(state_fd, "checkpoint.json"):
+                _write_jsonl_at(state_fd, "checkpoint.json", [checkpoint])
+            updated: list[TranslationUnit] = []
+            for unit in _read_jsonl_at(state_fd, "units.jsonl", TranslationUnit):
+                validation = validate_translation(unit.source, unit.target, glossary=glossary,
+                                                  context=unit.context.to_dict())
+                if not unit.target:
+                    status = ProcessingStatus.OPEN
+                elif validation.is_blocking:
+                    status = ProcessingStatus.TRANSLATED
+                else:
+                    status = ProcessingStatus.TECHNICALLY_REVIEWED
+                updated.append(replace(unit, status=status, findings=validation.findings))
+            _commit_transaction(root, updated, checkpoint, identity, state_fd)
+            return tuple(updated)
+
+
 def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
     for key, value in pairs:

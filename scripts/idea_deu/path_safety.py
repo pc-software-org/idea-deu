@@ -22,7 +22,8 @@ def _after_parent_open(_path: Path, _fd: int) -> None:
 def unsafe_output_parent(path: Path) -> tuple[str, Path] | None:
     """Return the first unsafe component below a trusted control root."""
     parent = Path(path).absolute().parent
-    roots = (Path.cwd().absolute(), Path(tempfile.gettempdir()).absolute())
+    cwd, temporary = Path.cwd(), Path(tempfile.gettempdir())
+    roots = (cwd.absolute(), cwd.resolve(), temporary.absolute(), temporary.resolve())
     candidates = [root for root in roots if parent == root or root in parent.parents]
     if not candidates:
         return "outside trusted control roots", parent
@@ -139,7 +140,8 @@ def _open_output_parent(path: Path) -> tuple[int, str]:
 
 
 def _trusted_root(parent: Path) -> Path:
-    roots = (Path.cwd().absolute(), Path(tempfile.gettempdir()).absolute())
+    cwd, temporary = Path.cwd(), Path(tempfile.gettempdir())
+    roots = (cwd.absolute(), cwd.resolve(), temporary.absolute(), temporary.resolve())
     candidates = [root for root in roots if parent == root or root in parent.parents]
     if not candidates:
         raise OutputPathError(f"outside trusted control roots: {parent}")
