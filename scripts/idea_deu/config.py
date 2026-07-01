@@ -13,6 +13,10 @@ _EXACT_BUILD = "253.29346.240"
 _SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 
 
+class ConfigError(ValueError):
+    """Raised when a product configuration is structurally invalid."""
+
+
 @dataclass(frozen=True, slots=True)
 class ProductConfig:
     archive: str
@@ -29,7 +33,7 @@ class ProductConfig:
 def load_product_config(path: Path) -> ProductConfig:
     """Load and validate the exact product configuration from *path*."""
     with path.open(encoding="utf-8") as config_file:
-        data: Any = json.load(config_file)
+        data: Any = json.load(config_file, object_pairs_hook=_unique_object)
 
     if not isinstance(data, dict):
         raise ValueError("product configuration must be a JSON object")
@@ -52,3 +56,12 @@ def load_product_config(path: Path) -> ProductConfig:
             raise ValueError(f"{key} must be exactly {_EXACT_BUILD}")
 
     return ProductConfig(**data)
+
+
+def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ConfigError(f"duplicate product configuration key: {key}")
+        result[key] = value
+    return result
