@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import re
 from collections import Counter
 from collections.abc import Mapping, Sequence
@@ -49,7 +50,7 @@ class ValidationResult:
 
 _PRINTF = re.compile(
     r"%(?:%|(?:\d+\$)?[-#+ 0,(<]*\d*(?:\.\d+)?"
-    r"(?:[tT][a-zA-Z]|[a-zA-Z]))"
+    r"(?:[tT][HIklMSLNpzZsQBbhAaCYyjmdeRTrDFc]|[bBhHsScCdoxXeEfgGaAn]))"
 )
 _TEMPLATE = re.compile(r"\$\{[A-Za-z_][A-Za-z0-9_.-]*\}|\$[A-Za-z_][A-Za-z0-9_]*\$")
 _TAG_LIKE = re.compile(r"</?[A-Za-z][^<>]*>")
@@ -147,6 +148,8 @@ def _message_tokens(text: str) -> _MessageParse:
                 nested = _message_tokens(content)
                 tokens.extend(nested.tokens)
                 valid = valid and nested.valid
+                if signature.endswith(":choice"):
+                    valid = valid and _valid_choice_style(content)
                 recognized = recognized or nested.recognized
             elif re.match(r"\s*\d+\s*(?:,|$)", content):
                 recognized = True
@@ -192,6 +195,92 @@ def _message_signature(content: str) -> str | None:
     argument, kind, style = match.groups()
     normalized_style = (style or "").strip()
     return f"mf:{argument}:{kind or ''}:{normalized_style if kind != 'choice' else 'choice'}"
+
+
+def _valid_choice_style(content: str) -> bool:
+    match = re.match(r"\s*\d+\s*,\s*choice\s*,\s*(.*)$", content, re.DOTALL)
+    if match is None:
+        return False
+    style = match.group(1)
+    alternatives = _split_choice(style)
+    if len(alternatives) == 1 and not any(marker in style for marker in "#<≤"):
+        return True  # ChoiceFormat tolerates a pattern without a limit separator.
+    previous: float | None = None
+    for alternative in alternatives:
+        separator = _choice_separator(alternative)
+        if separator is None:
+            return False
+        index, marker = separator
+        limit_text = alternative[:index].strip()
+        subformat = alternative[index + 1 :]
+        if not subformat:
+            return False
+        try:
+            limit = _choice_limit(limit_text)
+        except ValueError:
+            return False
+        if marker == "<" and math.isfinite(limit):
+            limit = math.nextafter(limit, math.inf)
+        if previous is not None and limit <= previous:
+            return False
+        previous = limit
+    return True
+
+
+def _choice_limit(value: str) -> float:
+    aliases = {
+        "Infinity": float("inf"),
+        "∞": float("inf"),
+        "-Infinity": float("-inf"),
+        "-∞": float("-inf"),
+    }
+    if value in aliases:
+        return aliases[value]
+    if re.fullmatch(
+        r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?", value
+    ) is None:
+        raise ValueError(value)
+    return float(value)
+
+
+def _split_choice(style: str) -> list[str]:
+    result: list[str] = []
+    start = 0
+    quoted = False
+    depth = 0
+    index = 0
+    while index < len(style):
+        if style[index] == "'":
+            if index + 1 < len(style) and style[index + 1] == "'":
+                index += 2
+                continue
+            quoted = not quoted
+        elif not quoted and style[index] == "{":
+            depth += 1
+        elif not quoted and style[index] == "}":
+            depth -= 1
+        elif not quoted and depth == 0 and style[index] == "|":
+            result.append(style[start:index])
+            start = index + 1
+        index += 1
+    result.append(style[start:])
+    return result
+
+
+def _choice_separator(alternative: str) -> tuple[int, str] | None:
+    quoted = False
+    index = 0
+    while index < len(alternative):
+        character = alternative[index]
+        if character == "'":
+            if index + 1 < len(alternative) and alternative[index + 1] == "'":
+                index += 2
+                continue
+            quoted = not quoted
+        elif not quoted and character in "#<≤":
+            return index, character
+        index += 1
+    return None
 
 
 def _placeholder_multiset(text: str, message: _MessageParse) -> Counter[str]:
@@ -263,6 +352,8 @@ class _FragmentParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.stack: list[str] = []
+        self.paths: list[str] = []
+        self.child_counts: list[int] = [0]
         self.structure: list[tuple[str, ...]] = []
         self.links: list[tuple[str, str, str]] = []
         self.attributes: list[str] = []
@@ -270,20 +361,28 @@ class _FragmentParser(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
+        child_index = self.child_counts[-1]
+        self.child_counts[-1] += 1
+        parent_path = self.paths[-1] if self.paths else ""
+        path = f"{parent_path}/{tag}[{child_index}]"
         event = "void" if tag in _VOID_TAGS else "start"
         attribute_names = tuple(sorted(name.lower() for name, _value in attrs))
         self.structure.append((event, tag, *attribute_names))
         if event == "start":
             self.stack.append(tag)
+            self.paths.append(path)
+            self.child_counts.append(0)
         for name, value in attrs:
             self.attributes.append(value or "")
             if name.lower() in {"href", "src"}:
-                self.links.append((tag, name.lower(), value or ""))
+                self.links.append((path, name.lower(), value or ""))
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self.handle_starttag(tag, attrs)
         if tag.lower() not in _VOID_TAGS:
             self.stack.pop()
+            self.paths.pop()
+            self.child_counts.pop()
             self.structure[-1] = (
                 "void", tag.lower(), *self.structure[-1][2:]
             )
@@ -294,7 +393,15 @@ class _FragmentParser(HTMLParser):
             self.valid = False
             return
         self.stack.pop()
+        self.paths.pop()
+        self.child_counts.pop()
         self.structure.append(("end", tag))
+
+    def handle_comment(self, data: str) -> None:
+        self.structure.append(("comment",))
+
+    def handle_pi(self, data: str) -> None:
+        self.structure.append(("pi",))
 
     def handle_decl(self, decl: str) -> None:
         self.valid = False
@@ -305,7 +412,12 @@ class _FragmentParser(HTMLParser):
 
 
 def _markup(text: str) -> _Markup:
-    relevant = bool(_TAG_LIKE.search(text) or "<!DOCTYPE" in text.upper())
+    relevant = bool(
+        _TAG_LIKE.search(text)
+        or "<!DOCTYPE" in text.upper()
+        or "<!--" in text
+        or "<?" in text
+    )
     if not relevant:
         return _Markup(False, True, (), (), ())
     parser = _FragmentParser()
@@ -318,7 +430,7 @@ def _markup(text: str) -> _Markup:
         True,
         parser.valid and not parser.stack,
         tuple(parser.structure),
-        tuple(parser.links),
+        tuple(sorted(parser.links)),
         tuple(parser.attributes),
     )
 

@@ -62,6 +62,31 @@ class TranslationValidationTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assert_clean(text)
 
+    def test_choice_format_validates_limits_order_and_syntax(self) -> None:
+        for target in (
+            "{0,choice,1#a|0#b}",
+            "{0,choice,0#a|0#b}",
+            "{0,choice,0<a|x#b}",
+            "{0,choice,NaN#a}",
+            "{0,choice,0#}",
+        ):
+            with self.subTest(target=target):
+                self.assert_code(
+                    "{0,choice,0#a|1#b}",
+                    target,
+                    FindingCode.MESSAGE_FORMAT_INVALID,
+                )
+
+    def test_choice_format_accepts_supported_limits_quotes_and_nesting(self) -> None:
+        for text in (
+            "{0,choice,-Infinity#none|1e3<many|Infinity#all}",
+            "{0,choice,0#'a|b'|1<'x#y'}",
+            "{0,choice,0#none|1#{1,number}}",
+            "{0,choice,nope}",
+        ):
+            with self.subTest(text=text):
+                self.assert_clean(text)
+
     def test_malformed_target_message_format_is_blocking(self) -> None:
         for target in ("Hallo {0", "Hallo }", "Hallo '{0}"):
             with self.subTest(target=target):
@@ -93,6 +118,14 @@ class TranslationValidationTests(unittest.TestCase):
         self.assert_clean("Value %1$-+#08.2f and %%")
         self.assert_clean("Character: % c")
         self.assert_clean("Character: % c.")
+        self.assert_clean("Date: %1$tY%n")
+
+    def test_unknown_printf_conversions_are_plain_text(self) -> None:
+        result = validate_translation("Options %m %q %P", "Optionen entfernt")
+        self.assertNotIn(
+            FindingCode.PLACEHOLDER_MISMATCH,
+            {finding.code for finding in result.findings},
+        )
 
     def test_printf_may_be_followed_immediately_by_literal_text(self) -> None:
         for source in (
@@ -180,6 +213,29 @@ class TranslationValidationTests(unittest.TestCase):
             "<td colspan='2'>Value</td>",
             "<td rowspan='2'>Wert</td>",
             FindingCode.MARKUP_STRUCTURE_CHANGED,
+        )
+
+    def test_markup_comments_and_processing_instructions_are_structural(self) -> None:
+        for source, target in (
+            ("<b>x</b>", "<!-- note --><b>x</b>"),
+            ("<!-- note --><b>x</b>", "<b>x</b>"),
+            ("<b>x</b>", "<?target data?><b>x</b>"),
+            ("text", "<!-- note -->text"),
+            ("text", "<?target data?>text"),
+        ):
+            with self.subTest(source=source, target=target):
+                self.assert_code(
+                    source, target, FindingCode.MARKUP_STRUCTURE_CHANGED
+                )
+
+    def test_link_comparison_ignores_attribute_order(self) -> None:
+        result = validate_translation(
+            "<img href='page.html' src='icon.png'/>",
+            "<img src='icon.png' href='page.html'/>",
+        )
+        self.assertNotIn(
+            FindingCode.LINK_CHANGED,
+            {finding.code for finding in result.findings},
         )
 
     def test_attribute_quote_style_does_not_change_placeholder_count(self) -> None:
