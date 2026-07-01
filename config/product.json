@@ -1,0 +1,11 @@
+{
+  "archive": "idea-2025.3.1.1.win.zip",
+  "version": "2025.3.1.1",
+  "build_number": "253.29346.240",
+  "product_code": "IU",
+  "sha256": "755b9549eb41ddec86ea111e4aba94b4fd6e39a60b1de7945c92652c70f80026",
+  "since_build": "253.29346.240",
+  "until_build": "253.29346.240",
+  "plugin_id": "org.pc-software.idea-deu",
+  "plugin_version": "2025.3.1.1"
+}

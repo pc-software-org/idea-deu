@@ -7,3 +7,8 @@
 /.gradle/
 /build/
 /.worktrees/
+
+# Local Python artifacts.
+__pycache__/
+*.py[cod]
+/.venv/

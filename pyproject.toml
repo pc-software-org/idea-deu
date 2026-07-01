@@ -1,0 +1,9 @@
+[project]
+name = "idea-deu"
+version = "2025.3.1.1"
+description = "Build pipeline for the German IntelliJ IDEA language pack"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["scripts*"]
