@@ -32,6 +32,7 @@ class ProcessingStatus(StrEnum):
     OPEN = "open"
     TRANSLATED = "translated"
     TECHNICALLY_REVIEWED = "technically_reviewed"
+    LINGUISTICALLY_REVIEWED = "linguistically_reviewed"
 
 
 class ResourceType(StrEnum):

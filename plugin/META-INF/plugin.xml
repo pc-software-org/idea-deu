@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+  <id>org.pc-software.idea-deu</id>
+  <name>German Language Pack</name>
+  <version>2025.3.1.1</version>
+  <vendor>PC-Software</vendor>
+  <idea-version since-build="253.29346.240" until-build="253.29346.240"/>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <languageBundle locale="de"/>
+  </extensions>
+</idea-plugin>
