@@ -30,9 +30,15 @@ def read_jsonl(path: Path, record_type: type[T]) -> list[T]:
                 if not line.strip():
                     raise StateError(f"line {line_number} is empty")
                 try:
-                    value = json.loads(line, object_pairs_hook=_object_without_duplicates)
+                    value = json.loads(
+                        line,
+                        object_pairs_hook=_object_without_duplicates,
+                        parse_constant=_reject_json_constant,
+                    )
                 except (json.JSONDecodeError, StateError) as exc:
-                    raise StateError(f"invalid JSON on line {line_number}: {exc}") from exc
+                    raise StateError(
+                        f"{path}: invalid JSON on line {line_number}: {exc}"
+                    ) from exc
                 if not isinstance(value, dict):
                     raise StateError(f"line {line_number} must be a JSON object")
                 _check_duplicate_id(value, seen_ids)
@@ -168,6 +174,10 @@ def _object_without_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _reject_json_constant(token: str) -> None:
+    raise StateError(f"non-finite JSON number is not allowed: {token}")
+
+
 def _as_json_object(record: Any) -> dict[str, Any]:
     if hasattr(record, "to_dict"):
         value = record.to_dict()
@@ -177,27 +187,46 @@ def _as_json_object(record: Any) -> dict[str, Any]:
         value = {field.name: getattr(record, field.name) for field in fields(record)}
     else:
         raise TypeError(f"record {record!r} is not serializable")
-    converted = _json_value(value)
+    converted = _json_value(value, "$")
     if not isinstance(converted, dict):
         raise TypeError("record must serialize to a JSON object")
     return converted
 
 
-def _json_value(value: Any) -> Any:
+def _json_value(value: Any, path: str) -> Any:
     if isinstance(value, Enum):
         return value.value
     if isinstance(value, Path):
         return str(value)
     if is_dataclass(value) and not isinstance(value, type):
         return {
-            field.name: _json_value(getattr(value, field.name))
+            field.name: _json_value(
+                getattr(value, field.name), _json_child_path(path, field.name)
+            )
             for field in fields(value)
         }
     if isinstance(value, dict):
-        return {str(key): _json_value(item) for key, item in value.items()}
+        result: dict[str, Any] = {}
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise StateError(
+                    f"{path}: JSON objects require string keys; "
+                    f"got {type(key).__name__} key {key!r}"
+                )
+            result[key] = _json_value(item, _json_child_path(path, key))
+        return result
     if isinstance(value, (list, tuple)):
-        return [_json_value(item) for item in value]
+        return [
+            _json_value(item, f"{path}[{index}]")
+            for index, item in enumerate(value)
+        ]
     return value
+
+
+def _json_child_path(path: str, key: str) -> str:
+    if key.isidentifier():
+        return f"{path}.{key}"
+    return f"{path}[{key!r}]"
 
 
 def _record_id(value: dict[str, Any]) -> str | None:

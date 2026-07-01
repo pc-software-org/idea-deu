@@ -34,6 +34,12 @@ class TypedState:
     nested: NestedState
 
 
+@dataclass(frozen=True)
+class FloatState:
+    resource_id: str
+    ratio: float
+
+
 class StateTest(unittest.TestCase):
     def setUp(self) -> None:
         self.directory = tempfile.TemporaryDirectory()
@@ -268,6 +274,29 @@ class StateTest(unittest.TestCase):
                 with self.assertRaises(StateError):
                     write_jsonl_atomic(self.path, [{"id": "number", "value": value}])
                 self.assertEqual(self.path.read_bytes(), b"old\n")
+
+    def test_rejects_non_string_mapping_keys_without_touching_old_file(self) -> None:
+        for payload in ({1: "numeric"}, {1: "numeric", "1": "string"}):
+            with self.subTest(payload=payload):
+                self.path.write_bytes(b"old\n")
+                with self.assertRaisesRegex(StateError, r"\$\.payload.*string keys"):
+                    write_jsonl_atomic(
+                        self.path, [{"id": "mapping", "payload": payload}]
+                    )
+                self.assertEqual(self.path.read_bytes(), b"old\n")
+
+    def test_reader_rejects_non_finite_json_constants_for_dict_and_typed(self) -> None:
+        for token in ("NaN", "Infinity", "-Infinity"):
+            for record_type in (dict, FloatState):
+                with self.subTest(token=token, record_type=record_type):
+                    self.path.write_text(
+                        f'{{"resource_id":"number","ratio":{token}}}\n',
+                        encoding="utf-8",
+                    )
+                    with self.assertRaisesRegex(
+                        StateError, rf"{self.path.name}.*line 1.*{token}"
+                    ):
+                        read_jsonl(self.path, record_type)
 
     @staticmethod
     def _record(resource_id: str, container: str) -> ResourceRecord:
