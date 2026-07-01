@@ -132,6 +132,122 @@ class ScannerTests(unittest.TestCase):
 
         self.assertEqual([item.resource_path for item in inventory.resources], ["tips/Welcome.html"])
 
+    def test_config_declares_cumulative_scan_budgets(self) -> None:
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            set(raw["limits"]),
+            {
+                "max_containers",
+                "max_members",
+                "max_nested_jar_bytes",
+                "max_resource_bytes",
+                "max_total_nested_jar_bytes",
+                "max_total_resource_bytes",
+                "spool_memory_bytes",
+            },
+        )
+
+    def test_container_and_total_nested_jar_budgets_skip_each_excess_container(self) -> None:
+        jars = {
+            name: jar_bytes([(f"messages/{name.upper()}.properties", b"x=y")])
+            for name in ("a", "b", "c", "d")
+        }
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [(f"{name}.jar", content) for name, content in reversed(jars.items())],
+        )
+        limits = replace(
+            self.config,
+            max_containers=3,
+            max_total_nested_jar_bytes=len(jars["a"]) + len(jars["b"]),
+        )
+
+        inventory = scan_archive(source, limits)
+
+        self.assertEqual([item.container for item in inventory.resources], ["a.jar", "b.jar"])
+        reasons = {(item.container, item.resource_path): item.reason.value for item in inventory.exclusions}
+        self.assertEqual(reasons[("c.jar", "")], "total_nested_jar_bytes_exceeded")
+        self.assertEqual(reasons[("d.jar", "")], "container_budget_exceeded")
+
+    def test_member_budget_skips_whole_container_and_can_continue(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [
+                ("b.jar", jar_bytes([("messages/B1.properties", b"x=1"), ("messages/B2.properties", b"x=2")])),
+                ("c.jar", jar_bytes([("messages/C.properties", b"x=3")])),
+                ("a.jar", jar_bytes([("messages/A1.properties", b"x=1"), ("messages/A2.properties", b"x=2")])),
+            ],
+        )
+        limits = replace(self.config, max_members=3)
+
+        inventory = scan_archive(source, limits)
+
+        self.assertEqual(
+            [(item.container, item.resource_path) for item in inventory.resources],
+            [
+                ("a.jar", "messages/A1.properties"),
+                ("a.jar", "messages/A2.properties"),
+                ("c.jar", "messages/C.properties"),
+            ],
+        )
+        self.assertEqual(
+            [(item.container, item.resource_path, item.reason.value) for item in inventory.exclusions],
+            [("b.jar", "", "member_budget_exceeded")],
+        )
+
+    def test_total_resource_budget_excludes_each_candidate_that_does_not_fit(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [
+                (
+                    "app.jar",
+                    jar_bytes(
+                        [
+                            ("messages/C.properties", b"cccc"),
+                            ("messages/A.properties", b"aaaa"),
+                            ("messages/B.properties", b"bbbb"),
+                        ]
+                    ),
+                )
+            ],
+        )
+        limits = replace(self.config, max_total_resource_bytes=8)
+
+        inventory = scan_archive(source, limits)
+
+        self.assertEqual(
+            [item.resource_path for item in inventory.resources],
+            ["messages/A.properties", "messages/B.properties"],
+        )
+        self.assertEqual(
+            [(item.resource_path, item.reason.value) for item in inventory.exclusions],
+            [("messages/C.properties", "total_resource_bytes_exceeded")],
+        )
+
+    def test_total_resource_budget_reserves_candidate_bytes_before_decompression(self) -> None:
+        nested = with_unsupported_compression(
+            jar_bytes(
+                [
+                    ("messages/A.properties", b"aaaa"),
+                    ("messages/B.properties", b"bbbb"),
+                ]
+            )
+        )
+        source = write_outer_archive(self.directory / "idea.zip", [("app.jar", nested)])
+        limits = replace(self.config, max_total_resource_bytes=4)
+
+        inventory = scan_archive(source, limits)
+
+        self.assertEqual(inventory.resources, ())
+        self.assertEqual(
+            [(item.resource_path, item.reason.value) for item in inventory.exclusions],
+            [
+                ("messages/A.properties", "unsupported_compression"),
+                ("messages/B.properties", "total_resource_bytes_exceeded"),
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

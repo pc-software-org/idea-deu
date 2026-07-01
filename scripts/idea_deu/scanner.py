@@ -22,20 +22,34 @@ class ScannerError(ValueError):
     """Raised when scanner configuration or the outer archive is invalid."""
 
 
+@dataclass(slots=True)
+class _ScanBudget:
+    containers: int = 0
+    members: int = 0
+    nested_jar_bytes: int = 0
+    resource_bytes: int = 0
+
+
 @dataclass(frozen=True, slots=True)
 class ScannerConfig:
     """Explicit rules and byte ceilings for bounded nested scanning.
 
     The shipped 512 MiB JAR ceiling leaves headroom for the roughly 240 MiB
-    ``app.jar``. Individual translation resources are capped at 16 MiB, while
-    only the first 64 MiB of a JAR is retained in memory before spooling to
-    disk. Metadata checks and bounded reads enforce both byte ceilings.
+    ``app.jar``. The 20,000-container, 2,000,000-member and 8 GiB cumulative
+    JAR budgets leave substantial headroom for a full IDEA installation while
+    bounding central-directory and decompression work. Individual translation
+    resources are capped at 16 MiB and 4 GiB cumulatively. Only the first
+    64 MiB of a JAR stays in memory before spooling to disk.
     """
 
     resource_patterns: tuple[str, ...]
     localization_directories: tuple[str, ...]
+    max_containers: int
+    max_members: int
     max_nested_jar_bytes: int
     max_resource_bytes: int
+    max_total_nested_jar_bytes: int
+    max_total_resource_bytes: int
     spool_memory_bytes: int
 
     def with_limits(
@@ -57,7 +71,16 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     if not isinstance(data, dict) or set(data) != {"resource_patterns", "localization_directories", "limits"}:
         raise ScannerError("scanner configuration has invalid top-level keys")
     limits = data["limits"]
-    if not isinstance(limits, dict) or set(limits) != {"max_nested_jar_bytes", "max_resource_bytes", "spool_memory_bytes"}:
+    expected_limits = {
+        "max_containers",
+        "max_members",
+        "max_nested_jar_bytes",
+        "max_resource_bytes",
+        "max_total_nested_jar_bytes",
+        "max_total_resource_bytes",
+        "spool_memory_bytes",
+    }
+    if not isinstance(limits, dict) or set(limits) != expected_limits:
         raise ScannerError("scanner configuration has invalid limit keys")
     patterns = data["resource_patterns"]
     directories = data["localization_directories"]
@@ -70,8 +93,12 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     return ScannerConfig(
         tuple(patterns),
         tuple(value.lower() for value in directories),
+        limits["max_containers"],
+        limits["max_members"],
         limits["max_nested_jar_bytes"],
         limits["max_resource_bytes"],
+        limits["max_total_nested_jar_bytes"],
+        limits["max_total_resource_bytes"],
         limits["spool_memory_bytes"],
     )
 
@@ -79,9 +106,10 @@ def load_scanner_config(path: Path) -> ScannerConfig:
 def scan_archive(path: Path, config: ScannerConfig) -> Inventory:
     resources: list[ResourceRecord] = []
     exclusions: list[ExclusionRecord] = []
+    budget = _ScanBudget()
     try:
         with zipfile.ZipFile(path) as outer:
-            for member in outer.infolist():
+            for member in sorted(outer.infolist(), key=lambda item: item.filename):
                 container = member.filename
                 if member.is_dir():
                     exclusions.append(ExclusionRecord("<outer>", container, ExclusionReason.DIRECTORY))
@@ -89,10 +117,19 @@ def scan_archive(path: Path, config: ScannerConfig) -> Inventory:
                     exclusions.append(ExclusionRecord("<outer>", container, ExclusionReason.UNSAFE_PATH))
                 elif not container.lower().endswith(".jar"):
                     exclusions.append(ExclusionRecord("<outer>", container, ExclusionReason.NOT_JAR))
+                elif budget.containers >= config.max_containers:
+                    exclusions.append(ExclusionRecord(container, "", ExclusionReason.CONTAINER_BUDGET_EXCEEDED))
                 elif member.file_size > config.max_nested_jar_bytes:
                     exclusions.append(ExclusionRecord(container, "", ExclusionReason.NESTED_JAR_TOO_LARGE, str(member.file_size)))
+                elif budget.nested_jar_bytes + member.file_size > config.max_total_nested_jar_bytes:
+                    exclusions.append(
+                        ExclusionRecord(container, "", ExclusionReason.TOTAL_NESTED_JAR_BYTES_EXCEEDED, str(member.file_size))
+                    )
                 else:
-                    _scan_nested(outer, member, config, resources, exclusions)
+                    budget.nested_jar_bytes += member.file_size
+                    _scan_nested(outer, member, config, budget, resources, exclusions)
+                if container.lower().endswith(".jar") and _safe_path(container) and not member.is_dir():
+                    budget.containers += 1
     except (OSError, zipfile.BadZipFile) as error:
         raise ScannerError(f"cannot read outer archive: {path}") from error
 
@@ -113,6 +150,7 @@ def _scan_nested(
     outer: zipfile.ZipFile,
     jar_info: zipfile.ZipInfo,
     config: ScannerConfig,
+    budget: _ScanBudget,
     resources: list[ResourceRecord],
     exclusions: list[ExclusionRecord],
 ) -> None:
@@ -123,14 +161,21 @@ def _scan_nested(
                 _copy_bounded(nested_stream, temporary, config.max_nested_jar_bytes)
             temporary.seek(0)
             with zipfile.ZipFile(temporary) as nested:
+                members = sorted(nested.infolist(), key=lambda item: item.filename)
+                if budget.members + len(members) > config.max_members:
+                    exclusions.append(
+                        ExclusionRecord(container, "", ExclusionReason.MEMBER_BUDGET_EXCEEDED, str(len(members)))
+                    )
+                    return
+                budget.members += len(members)
                 seen: set[str] = set()
-                for member in nested.infolist():
+                for member in members:
                     resource_path = member.filename
                     if resource_path in seen:
                         exclusions.append(ExclusionRecord(container, resource_path, ExclusionReason.DUPLICATE_MEMBER))
                         continue
                     seen.add(resource_path)
-                    _classify_member(nested, member, container, config, resources, exclusions)
+                    _classify_member(nested, member, container, config, budget, resources, exclusions)
     except (zipfile.BadZipFile, EOFError) as error:
         exclusions.append(ExclusionRecord(container, "", ExclusionReason.CORRUPT_ARCHIVE, str(error)))
     except (NotImplementedError, RuntimeError) as error:
@@ -142,6 +187,7 @@ def _classify_member(
     member: zipfile.ZipInfo,
     container: str,
     config: ScannerConfig,
+    budget: _ScanBudget,
     resources: list[ResourceRecord],
     exclusions: list[ExclusionRecord],
 ) -> None:
@@ -158,7 +204,14 @@ def _classify_member(
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.UNSUPPORTED_RESOURCE))
     elif member.file_size > config.max_resource_bytes:
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.RESOURCE_TOO_LARGE, str(member.file_size)))
+    elif budget.resource_bytes + member.file_size > config.max_total_resource_bytes:
+        exclusions.append(
+            ExclusionRecord(container, path, ExclusionReason.TOTAL_RESOURCE_BYTES_EXCEEDED, str(member.file_size))
+        )
     else:
+        # Reserve candidate bytes before opening the member. Failed or
+        # unsupported decompression must still consume the global work budget.
+        budget.resource_bytes += member.file_size
         try:
             with nested.open(member) as stream:
                 _read_bounded(stream, config.max_resource_bytes)

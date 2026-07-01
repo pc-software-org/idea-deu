@@ -8,14 +8,18 @@ from typing import Any
 
 
 class ExclusionReason(StrEnum):
+    CONTAINER_BUDGET_EXCEEDED = "container_budget_exceeded"
     CORRUPT_ARCHIVE = "corrupt_archive"
     DIRECTORY = "directory"
     DUPLICATE_MEMBER = "duplicate_member"
     LOCALIZED = "localized"
+    MEMBER_BUDGET_EXCEEDED = "member_budget_exceeded"
     NESTED_ARCHIVE = "nested_archive"
     NESTED_JAR_TOO_LARGE = "nested_jar_too_large"
     NOT_JAR = "not_jar"
     RESOURCE_TOO_LARGE = "resource_too_large"
+    TOTAL_NESTED_JAR_BYTES_EXCEEDED = "total_nested_jar_bytes_exceeded"
+    TOTAL_RESOURCE_BYTES_EXCEEDED = "total_resource_bytes_exceeded"
     UNSAFE_PATH = "unsafe_path"
     UNSUPPORTED_COMPRESSION = "unsupported_compression"
     UNSUPPORTED_RESOURCE = "unsupported_resource"

@@ -14,8 +14,12 @@
     "localized"
   ],
   "limits": {
+    "max_containers": 20000,
+    "max_members": 2000000,
     "max_nested_jar_bytes": 536870912,
     "max_resource_bytes": 16777216,
+    "max_total_nested_jar_bytes": 8589934592,
+    "max_total_resource_bytes": 4294967296,
     "spool_memory_bytes": 67108864
   }
 }
