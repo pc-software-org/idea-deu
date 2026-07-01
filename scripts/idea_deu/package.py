@@ -75,8 +75,9 @@ def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path
     try:
         descriptor_bytes = Path(descriptor).read_bytes(); _validate_descriptor(descriptor_bytes)
         expected = dict(result.files); expected["META-INF/plugin.xml"] = descriptor_bytes
+        canonical_inner = _zip_bytes(expected)
         with Path(path).open("rb") as outer_file, zipfile.ZipFile(outer_file) as outer:
-            if not _canonical_archive(outer_file, outer): return False
+            if not _canonical_archive(outer_file, outer, {"idea-deu/lib/idea-deu.jar": canonical_inner}): return False
             if outer.namelist() != ["idea-deu/lib/idea-deu.jar"]: return False
             outer_info = outer.infolist()[0]
             if not _canonical_info(outer_info): return False
@@ -89,7 +90,7 @@ def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path
                 if jar_stream.read(1): return False
                 spool.seek(0)
                 with zipfile.ZipFile(spool) as inner:
-                    if not _canonical_archive(spool, inner): return False
+                    if not _canonical_archive(spool, inner, expected): return False
                     if inner.namelist() != sorted(expected): return False
                     if len(inner.infolist()) != len(expected): return False
                     for info in inner.infolist():
@@ -112,7 +113,8 @@ def _canonical_info(info: zipfile.ZipInfo) -> bool:
             not stat.S_ISLNK((info.external_attr >> 16) & 0xffff))
 
 
-def _canonical_archive(stream: object, archive: zipfile.ZipFile) -> bool:
+def _canonical_archive(stream: object, archive: zipfile.ZipFile,
+                       expected: dict[str, bytes]) -> bool:
     stream.seek(0, 2)  # type: ignore[attr-defined]
     size = stream.tell()  # type: ignore[attr-defined]
     if size < 22: return False
@@ -133,13 +135,27 @@ def _canonical_archive(stream: object, archive: zipfile.ZipFile) -> bool:
         stream.seek(info.header_offset)  # type: ignore[attr-defined]
         header = stream.read(30)  # type: ignore[attr-defined]
         if len(header) != 30 or header[:4] != b"PK\x03\x04": return False
-        fields = struct.unpack("<4s5H3L2H", header)
-        flags, compression, filename_size, extra_size = fields[2], fields[3], fields[-2], fields[-1]
-        if flags != 0 or compression != zipfile.ZIP_DEFLATED or extra_size != 0: return False
-        data_end = info.header_offset + 30 + filename_size + extra_size + info.compress_size
+        (_signature, extract_version, flags, compression, dos_time, dos_date, crc,
+         compressed_size, uncompressed_size, filename_size, extra_size) = struct.unpack("<4s5H3L2H", header)
+        if (extract_version != 20 or flags != 0 or compression != zipfile.ZIP_DEFLATED or
+            dos_time != 0 or dos_date != 33 or extra_size != 0 or crc != info.CRC or
+            compressed_size != info.compress_size or uncompressed_size != info.file_size): return False
+        raw_name = stream.read(filename_size)  # type: ignore[attr-defined]
+        raw_extra = stream.read(extra_size)  # type: ignore[attr-defined]
+        expected_name = info.filename.encode("utf-8" if flags & 0x800 else "cp437")
+        if raw_name != expected_name or raw_extra or info.filename not in expected: return False
+        compressed = stream.read(compressed_size)  # type: ignore[attr-defined]
+        if compressed != _raw_deflate(expected[info.filename]): return False
+        if crc != zlib.crc32(expected[info.filename]) & 0xffffffff or uncompressed_size != len(expected[info.filename]): return False
+        data_end = info.header_offset + 30 + filename_size + extra_size + compressed_size
         if data_end > cd_offset: return False
         previous_end = data_end
     return bool(infos) and infos[0].header_offset == 0 and previous_end == cd_offset
+
+
+def _raw_deflate(data: bytes) -> bytes:
+    compressor = zlib.compressobj(9, zlib.DEFLATED, -15)
+    return compressor.compress(data) + compressor.flush()
 
 def _validate_descriptor(data: bytes) -> None:
     try: root=ElementTree.fromstring(data)

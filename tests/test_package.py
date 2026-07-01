@@ -84,6 +84,26 @@ class PackageTests(unittest.TestCase):
             path = self.root / f"{label}.zip"; path.write_bytes(content)
             self.assertFalse(verify_plugin_package(path, self.result, self.descriptor))
 
+    def test_strict_verifier_rejects_local_header_mutations_and_level_one_deflate(self):
+        canonical = self.root / "canonical.zip"; self.build(self.result, self.descriptor, canonical)
+        original = canonical.read_bytes(); local = original.find(b"PK\x03\x04")
+        mutations = {"version":(4,b"\x0a\x00"), "time":(10,b"\x01\x00"),
+            "date":(12,b"\x22\x00"), "crc":(14,b"\0\0\0\0"),
+            "compressed_size":(18,b"\0\0\0\0"), "size":(22,b"\0\0\0\0"),
+            "name":(30,b"X")}
+        for label, (offset, replacement) in mutations.items():
+            content = bytearray(original); content[local+offset:local+offset+len(replacement)] = replacement
+            path = self.root / f"local-{label}.zip"; path.write_bytes(content)
+            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor), label)
+        with zipfile.ZipFile(canonical) as archive:
+            inner = archive.read("idea-deu/lib/idea-deu.jar")
+        level_one = self.root / "level-one.zip"
+        info=zipfile.ZipInfo("idea-deu/lib/idea-deu.jar",(1980,1,1,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED
+        info.create_system=3; info.external_attr=(0o100644)<<16
+        with zipfile.ZipFile(level_one,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=1) as archive:
+            archive.writestr(info,inner,compress_type=zipfile.ZIP_DEFLATED,compresslevel=1)
+        self.assertFalse(verify_plugin_package(level_one, self.result, self.descriptor))
+
     def test_ignores_symlink_in_materialized_resource_tree(self):
         (self.resources / "link").symlink_to(self.descriptor.resolve())
         self.build(self.result, self.descriptor, self.root/"from-evidence.zip")
