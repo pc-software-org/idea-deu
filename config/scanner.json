@@ -1,4 +1,18 @@
 {
+  "container_exclusions": [
+    {
+      "glob": "**/lib/jna-platform.jar",
+      "reason": "third_party_container"
+    },
+    {
+      "glob": "**/lib/jna.jar",
+      "reason": "third_party_container"
+    },
+    {
+      "glob": "**/lib/jsr305.jar",
+      "reason": "third_party_container"
+    }
+  ],
   "resource_patterns": [
     "*.properties",
     "inspectionDescriptions/**/*.html",
@@ -17,6 +31,7 @@
     "max_containers": 20000,
     "max_members": 2000000,
     "max_nested_jar_bytes": 536870912,
+    "max_outer_members": 100000,
     "max_resource_bytes": 16777216,
     "max_total_nested_jar_bytes": 8589934592,
     "max_total_resource_bytes": 4294967296,

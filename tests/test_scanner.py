@@ -4,11 +4,12 @@ import hashlib
 import json
 import tempfile
 import unittest
+from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
 
 from scripts.idea_deu.models import ExclusionReason
-from scripts.idea_deu.scanner import load_scanner_config, scan_archive
+from scripts.idea_deu.scanner import ScannerError, load_scanner_config, scan_archive
 from tests.fixtures.scanner_factory import (
     jar_bytes,
     with_unsupported_compression,
@@ -72,6 +73,18 @@ class ScannerTests(unittest.TestCase):
         )
         expected_id = hashlib.sha256(b"IDE/lib/app.jar\0messages/App.properties").hexdigest()
         self.assertEqual(inventory.resources[3].resource_id, expected_id)
+        self.assertEqual(
+            inventory.resources[3].to_dict(),
+            {
+                "resource_id": expected_id,
+                "container": "IDE/lib/app.jar",
+                "resource_path": "messages/App.properties",
+                "resource_type": "properties",
+                "size": 11,
+                "source_sha256": hashlib.sha256(b"hello=Hello").hexdigest(),
+                "processing_status": "open",
+            },
+        )
         exclusions = {(item.container, item.resource_path): item.reason for item in inventory.exclusions}
         self.assertEqual(exclusions[("IDE/lib/app.jar", "messages/App_ja.properties")], ExclusionReason.LOCALIZED)
         self.assertEqual(exclusions[("IDE/lib/app.jar", "messages/App_en_US.properties")], ExclusionReason.LOCALIZED)
@@ -91,6 +104,11 @@ class ScannerTests(unittest.TestCase):
         self.assertEqual([item.container for item in inventory.collisions[0].resources], ["a.jar", "z.jar"])
         self.assertEqual(inventory.collisions[0].resource_path, "messages/Same.properties")
         self.assertTrue(inventory.collisions[0].unresolved)
+        self.assertFalse(inventory.collisions[0].content_identical)
+        self.assertEqual(
+            {item.source_sha256 for item in inventory.collisions[0].resources},
+            {hashlib.sha256(b"a=1").hexdigest(), hashlib.sha256(b"a=2").hexdigest()},
+        )
         self.assertIn(ExclusionReason.DUPLICATE_MEMBER, [item.reason for item in inventory.exclusions])
 
     def test_corrupt_oversized_and_unsupported_nested_jars_become_exclusions(self) -> None:
@@ -132,6 +150,34 @@ class ScannerTests(unittest.TestCase):
 
         self.assertEqual([item.resource_path for item in inventory.resources], ["tips/Welcome.html"])
 
+    def test_explicit_third_party_container_rule_excludes_before_nested_scan(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [
+                ("IDE/lib/jna.jar", jar_bytes([("messages/Native.properties", b"name=Native")])),
+                (
+                    "IDE/plugins/demo/lib/demo.jar",
+                    jar_bytes([("messages/Plugin.properties", b"name=Plugin")]),
+                ),
+            ],
+        )
+
+        inventory = scan_archive(source, self.config)
+
+        self.assertEqual(
+            [(item.container, item.resource_path) for item in inventory.resources],
+            [("IDE/plugins/demo/lib/demo.jar", "messages/Plugin.properties")],
+        )
+        self.assertEqual(
+            [(item.container, item.reason.value) for item in inventory.exclusions],
+            [("IDE/lib/jna.jar", "third_party_container")],
+        )
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        self.assertIn(
+            {"glob": "**/lib/jna.jar", "reason": "third_party_container"},
+            raw["container_exclusions"],
+        )
+
     def test_config_declares_cumulative_scan_budgets(self) -> None:
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
 
@@ -141,12 +187,76 @@ class ScannerTests(unittest.TestCase):
                 "max_containers",
                 "max_members",
                 "max_nested_jar_bytes",
+                "max_outer_members",
                 "max_resource_bytes",
                 "max_total_nested_jar_bytes",
                 "max_total_resource_bytes",
                 "spool_memory_bytes",
             },
         )
+
+    def test_config_rejects_bool_empty_values_and_inconsistent_limits(self) -> None:
+        valid = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        invalid_configs: list[tuple[str, dict[str, object]]] = []
+
+        for label, mutate in (
+            ("boolean limit", lambda data: data["limits"].__setitem__("max_members", True)),
+            ("empty patterns", lambda data: data.__setitem__("resource_patterns", [])),
+            ("blank pattern", lambda data: data.__setitem__("resource_patterns", [""])),
+            ("empty directories", lambda data: data.__setitem__("localization_directories", [])),
+            ("blank directory", lambda data: data.__setitem__("localization_directories", [" "])),
+            (
+                "blank container glob",
+                lambda data: data.__setitem__(
+                    "container_exclusions",
+                    [{"glob": "", "reason": "third_party_container"}],
+                ),
+            ),
+            (
+                "more containers than outer members",
+                lambda data: data["limits"].__setitem__(
+                    "max_containers", data["limits"]["max_outer_members"] + 1
+                ),
+            ),
+            (
+                "single jar exceeds total",
+                lambda data: data["limits"].__setitem__(
+                    "max_nested_jar_bytes", data["limits"]["max_total_nested_jar_bytes"] + 1
+                ),
+            ),
+            (
+                "single resource exceeds total",
+                lambda data: data["limits"].__setitem__(
+                    "max_resource_bytes", data["limits"]["max_total_resource_bytes"] + 1
+                ),
+            ),
+            (
+                "spool exceeds jar",
+                lambda data: data["limits"].__setitem__(
+                    "spool_memory_bytes", data["limits"]["max_nested_jar_bytes"] + 1
+                ),
+            ),
+        ):
+            candidate = deepcopy(valid)
+            mutate(candidate)
+            invalid_configs.append((label, candidate))
+
+        for index, (label, candidate) in enumerate(invalid_configs):
+            with self.subTest(label=label):
+                path = self.directory / f"invalid-{index}.json"
+                path.write_text(json.dumps(candidate), encoding="utf-8")
+                with self.assertRaises(ScannerError):
+                    load_scanner_config(path)
+
+    def test_config_wraps_json_and_file_errors(self) -> None:
+        malformed = self.directory / "malformed.json"
+        malformed.write_text("{not-json", encoding="utf-8")
+
+        for path in (malformed, self.directory / "missing.json"):
+            with self.subTest(path=path.name):
+                with self.assertRaises(ScannerError) as raised:
+                    load_scanner_config(path)
+                self.assertIsNotNone(raised.exception.__cause__)
 
     def test_container_and_total_nested_jar_budgets_skip_each_excess_container(self) -> None:
         jars = {
@@ -169,6 +279,22 @@ class ScannerTests(unittest.TestCase):
         reasons = {(item.container, item.resource_path): item.reason.value for item in inventory.exclusions}
         self.assertEqual(reasons[("c.jar", "")], "total_nested_jar_bytes_exceeded")
         self.assertEqual(reasons[("d.jar", "")], "container_budget_exceeded")
+
+    def test_outer_member_budget_aborts_before_sorting_or_exclusion_records(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [
+                ("z.txt", b"z"),
+                ("directory/", b""),
+                ("c.txt", b"c"),
+                ("b.txt", b"b"),
+                ("a.txt", b"a"),
+            ],
+        )
+        limits = replace(self.config, max_outer_members=4)
+
+        with self.assertRaisesRegex(ScannerError, "outer archive member budget exceeded: 5 > 4"):
+            scan_archive(source, limits)
 
     def test_member_budget_skips_whole_container_and_can_continue(self) -> None:
         source = write_outer_archive(

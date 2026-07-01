@@ -20,9 +20,23 @@ class ExclusionReason(StrEnum):
     RESOURCE_TOO_LARGE = "resource_too_large"
     TOTAL_NESTED_JAR_BYTES_EXCEEDED = "total_nested_jar_bytes_exceeded"
     TOTAL_RESOURCE_BYTES_EXCEEDED = "total_resource_bytes_exceeded"
+    THIRD_PARTY_CONTAINER = "third_party_container"
     UNSAFE_PATH = "unsafe_path"
     UNSUPPORTED_COMPRESSION = "unsupported_compression"
     UNSUPPORTED_RESOURCE = "unsupported_resource"
+
+
+class ProcessingStatus(StrEnum):
+    OPEN = "open"
+
+
+class ResourceType(StrEnum):
+    FILE_TEMPLATE = "file_template"
+    INSPECTION_DESCRIPTION = "inspection_description"
+    INTENTION_DESCRIPTION = "intention_description"
+    POSTFIX_TEMPLATE = "postfix_template"
+    PROPERTIES = "properties"
+    TIP = "tip"
 
 
 @dataclass(frozen=True, slots=True)
@@ -30,14 +44,20 @@ class ResourceRecord:
     resource_id: str
     container: str
     resource_path: str
+    resource_type: ResourceType
     size: int
+    source_sha256: str
+    processing_status: ProcessingStatus = ProcessingStatus.OPEN
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "resource_id": self.resource_id,
             "container": self.container,
             "resource_path": self.resource_path,
+            "resource_type": self.resource_type.value,
             "size": self.size,
+            "source_sha256": self.source_sha256,
+            "processing_status": self.processing_status.value,
         }
 
 
@@ -61,12 +81,14 @@ class ExclusionRecord:
 class CollisionRecord:
     resource_path: str
     resources: tuple[ResourceRecord, ...]
+    content_identical: bool
     unresolved: bool = True
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "resource_path": self.resource_path,
             "resources": [item.to_dict() for item in self.resources],
+            "content_identical": self.content_identical,
             "unresolved": self.unresolved,
         }
 
