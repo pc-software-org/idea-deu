@@ -1,0 +1,313 @@
+"""Deterministic integrity validation for translated IntelliJ strings."""
+
+from __future__ import annotations
+
+import re
+from collections import Counter
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
+from enum import StrEnum
+from html.parser import HTMLParser
+from typing import Any
+
+
+class Severity(StrEnum):
+    BLOCKING = "blocking"
+    WARNING = "warning"
+
+
+class FindingCode(StrEnum):
+    PLACEHOLDER_MISMATCH = "placeholder_mismatch"
+    MESSAGE_FORMAT_INVALID = "message_format_invalid"
+    MARKUP_STRUCTURE_CHANGED = "markup_structure_changed"
+    LINK_CHANGED = "link_changed"
+    EMPTY_TARGET = "empty_target"
+    LENGTH_RATIO = "length_ratio"
+    GLOSSARY_MISMATCH = "glossary_mismatch"
+
+
+@dataclass(frozen=True, slots=True)
+class Finding:
+    code: FindingCode
+    severity: Severity
+
+    def to_dict(self) -> dict[str, str]:
+        return {"code": self.code.value, "severity": self.severity.value}
+
+
+@dataclass(frozen=True, slots=True)
+class ValidationResult:
+    findings: tuple[Finding, ...]
+
+    @property
+    def is_blocking(self) -> bool:
+        return any(finding.severity is Severity.BLOCKING for finding in self.findings)
+
+    def to_dict(self) -> dict[str, list[dict[str, str]]]:
+        return {"findings": [finding.to_dict() for finding in self.findings]}
+
+
+_PRINTF = re.compile(
+    r"%(?:%|(?:\d+\$)?[-#+ 0,(<]*\d*(?:\.\d+)?(?:[tT][a-zA-Z]|[a-zA-Z]))"
+)
+_TEMPLATE = re.compile(r"\$\{[A-Za-z_][A-Za-z0-9_.-]*\}|\$[A-Za-z_][A-Za-z0-9_]*\$")
+_TAG_LIKE = re.compile(r"</?[A-Za-z][^<>]*>")
+_VOID_TAGS = frozenset(
+    {
+        "area", "base", "br", "col", "embed", "hr", "img", "input",
+        "link", "meta", "param", "source", "track", "wbr",
+    }
+)
+
+
+def validate_translation(
+    source: str,
+    target: str,
+    *,
+    glossary: Mapping[str, str | Sequence[str]] | None = None,
+    context: Mapping[str, Any] | None = None,
+) -> ValidationResult:
+    """Return blocking integrity errors and non-blocking quality warnings."""
+    del context
+    findings: list[Finding] = []
+    if not target.strip():
+        findings.append(Finding(FindingCode.EMPTY_TARGET, Severity.BLOCKING))
+
+    source_markup = _markup(source)
+    target_markup = _markup(target)
+    source_message = _messages_in_content(source, source_markup)
+    target_message = _messages_in_content(target, target_markup)
+    message_relevant = bool(source_message.tokens or target_message.tokens)
+    if message_relevant and not target_message.valid:
+        findings.append(Finding(FindingCode.MESSAGE_FORMAT_INVALID, Severity.BLOCKING))
+
+    markup_relevant = source_markup.relevant or target_markup.relevant
+    if markup_relevant:
+        if not target_markup.valid or source_markup.structure != target_markup.structure:
+            findings.append(Finding(FindingCode.MARKUP_STRUCTURE_CHANGED, Severity.BLOCKING))
+        elif source_markup.links != target_markup.links:
+            findings.append(Finding(FindingCode.LINK_CHANGED, Severity.BLOCKING))
+
+    source_placeholders = _placeholder_multiset(source, source_message)
+    target_placeholders = _placeholder_multiset(target, target_message)
+    if source_placeholders != target_placeholders:
+        findings.append(Finding(FindingCode.PLACEHOLDER_MISMATCH, Severity.BLOCKING))
+
+    if source and len(target) > len(source) * 2.5:
+        findings.append(Finding(FindingCode.LENGTH_RATIO, Severity.WARNING))
+    if glossary and _violates_glossary(target, glossary):
+        findings.append(Finding(FindingCode.GLOSSARY_MISMATCH, Severity.WARNING))
+    return ValidationResult(tuple(_deduplicate(findings)))
+
+
+@dataclass(frozen=True, slots=True)
+class _MessageParse:
+    tokens: tuple[str, ...]
+    valid: bool
+
+
+def _messages_in_content(text: str, markup: _Markup) -> _MessageParse:
+    visible_text = _TAG_LIKE.sub("", text) if markup.relevant else text
+    parses = [_message_tokens(visible_text)]
+    parses.extend(_message_tokens(value) for value in markup.attributes)
+    return _MessageParse(
+        tuple(token for parsed in parses for token in parsed.tokens),
+        all(parsed.valid for parsed in parses),
+    )
+
+
+def _message_tokens(text: str) -> _MessageParse:
+    tokens: list[str] = []
+    index = 0
+    quoted = False
+    valid = True
+    while index < len(text):
+        character = text[index]
+        if character == "'":
+            if index + 1 < len(text) and text[index + 1] == "'":
+                index += 2
+                continue
+            quoted = not quoted
+            index += 1
+            continue
+        if not quoted and character == "{":
+            end = _matching_brace(text, index)
+            if end is None:
+                valid = False
+                break
+            content = text[index + 1 : end]
+            signature = _message_signature(content)
+            if signature is not None:
+                tokens.append(signature)
+                nested = _message_tokens(content)
+                tokens.extend(nested.tokens)
+                valid = valid and nested.valid
+            index = end + 1
+            continue
+        if not quoted and character == "}":
+            valid = False
+        index += 1
+    if quoted:
+        valid = False
+    return _MessageParse(tuple(tokens), valid)
+
+
+def _matching_brace(text: str, start: int) -> int | None:
+    depth = 0
+    quoted = False
+    index = start
+    while index < len(text):
+        if text[index] == "'":
+            if index + 1 < len(text) and text[index + 1] == "'":
+                index += 2
+                continue
+            quoted = not quoted
+        elif not quoted and text[index] == "{":
+            depth += 1
+        elif not quoted and text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def _message_signature(content: str) -> str | None:
+    match = re.match(
+        r"\s*(\d+)\s*(?:,\s*(number|date|time|choice)\s*(?:,\s*(.*))?)?$",
+        content,
+        re.DOTALL,
+    )
+    if match is None:
+        return None
+    argument, kind, style = match.groups()
+    normalized_style = (style or "").strip()
+    return f"mf:{argument}:{kind or ''}:{normalized_style if kind != 'choice' else 'choice'}"
+
+
+def _placeholder_multiset(text: str, message: _MessageParse) -> Counter[str]:
+    tokens = list(message.tokens)
+    tokens.extend(f"printf:{match.group()}" for match in _PRINTF.finditer(text))
+    tokens.extend(f"template:{match.group()}" for match in _TEMPLATE.finditer(text))
+    tokens.extend(_mnemonics(text))
+    return Counter(tokens)
+
+
+def _mnemonics(text: str) -> list[str]:
+    result: list[str] = []
+    index = 0
+    while index < len(text):
+        if text.startswith("&&", index):
+            result.append("escaped:&")
+            index += 2
+        elif text[index] == "&" and index + 1 < len(text) and text[index + 1].isalnum():
+            result.append("mnemonic:&")
+            index += 1
+        elif text.startswith("__", index):
+            result.append("escaped:_")
+            index += 2
+        elif (
+            text[index] == "_"
+            and index + 1 < len(text)
+            and text[index + 1].isalnum()
+            and (index == 0 or not text[index - 1].isalnum())
+        ):
+            result.append("mnemonic:_")
+            index += 1
+        index += 1
+    return result
+
+
+@dataclass(frozen=True, slots=True)
+class _Markup:
+    relevant: bool
+    valid: bool
+    structure: tuple[tuple[str, ...], ...]
+    links: tuple[tuple[str, str, str], ...]
+    attributes: tuple[str, ...]
+
+
+class _FragmentParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.stack: list[str] = []
+        self.structure: list[tuple[str, ...]] = []
+        self.links: list[tuple[str, str, str]] = []
+        self.attributes: list[str] = []
+        self.valid = True
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        tag = tag.lower()
+        event = "void" if tag in _VOID_TAGS else "start"
+        attribute_names = tuple(sorted(name.lower() for name, _value in attrs))
+        self.structure.append((event, tag, *attribute_names))
+        if event == "start":
+            self.stack.append(tag)
+        for name, value in attrs:
+            self.attributes.append(value or "")
+            if name.lower() in {"href", "src"}:
+                self.links.append((tag, name.lower(), value or ""))
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag.lower() not in _VOID_TAGS:
+            self.stack.pop()
+            self.structure[-1] = (
+                "void", tag.lower(), *self.structure[-1][2:]
+            )
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if not self.stack or self.stack[-1] != tag:
+            self.valid = False
+            return
+        self.stack.pop()
+        self.structure.append(("end", tag))
+
+    def handle_decl(self, decl: str) -> None:
+        self.valid = False
+
+    def handle_entityref(self, name: str) -> None:
+        if name not in {"amp", "lt", "gt", "quot", "apos", "nbsp"}:
+            self.valid = False
+
+
+def _markup(text: str) -> _Markup:
+    relevant = bool(_TAG_LIKE.search(text) or "<!DOCTYPE" in text.upper())
+    if not relevant:
+        return _Markup(False, True, (), (), ())
+    parser = _FragmentParser()
+    try:
+        parser.feed(text)
+        parser.close()
+    except (ValueError, AssertionError):
+        parser.valid = False
+    return _Markup(
+        True,
+        parser.valid and not parser.stack,
+        tuple(parser.structure),
+        tuple(parser.links),
+        tuple(parser.attributes),
+    )
+
+
+def _violates_glossary(target: str, glossary: Mapping[str, str | Sequence[str]]) -> bool:
+    for preferred, raw_variants in glossary.items():
+        variants = (raw_variants,) if isinstance(raw_variants, str) else raw_variants
+        for variant in variants:
+            if variant.casefold() == preferred.casefold():
+                continue
+            pattern = rf"(?<!\w){re.escape(variant)}(?!\w)"
+            if re.search(pattern, target, re.IGNORECASE):
+                return True
+    return False
+
+
+def _deduplicate(findings: list[Finding]) -> list[Finding]:
+    result: list[Finding] = []
+    seen: set[FindingCode] = set()
+    for finding in findings:
+        if finding.code not in seen:
+            result.append(finding)
+            seen.add(finding.code)
+    return result
