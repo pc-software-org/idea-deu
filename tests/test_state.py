@@ -10,7 +10,13 @@ from typing import Mapping
 from unittest.mock import patch
 
 from scripts.idea_deu.models import ProcessingStatus, ResourceRecord, ResourceType
-from scripts.idea_deu.state import StateError, read_jsonl, write_jsonl_atomic
+from scripts.idea_deu.state import (
+    StateError,
+    read_jsonl,
+    read_jsonl_at,
+    write_jsonl_atomic,
+    write_jsonl_atomic_at,
+)
 
 
 @dataclass(frozen=True)
@@ -38,6 +44,23 @@ class TypedState:
 class FloatState:
     resource_id: str
     ratio: float
+
+
+class DirFdStateTest(unittest.TestCase):
+    def test_atomic_fd_round_trip_and_symlink_rejection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            descriptor = os.open(directory, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+            try:
+                write_jsonl_atomic_at(descriptor, "state.jsonl", [{"id": "a", "value": "ä"}])
+                self.assertEqual([{"id": "a", "value": "ä"}], read_jsonl_at(descriptor, "state.jsonl", dict))
+                self.assertEqual(0o600, stat.S_IMODE((directory / "state.jsonl").stat().st_mode))
+                (directory / "target").write_text("outside", encoding="utf-8")
+                (directory / "link.jsonl").symlink_to(directory / "target")
+                with self.assertRaises(StateError):
+                    write_jsonl_atomic_at(descriptor, "link.jsonl", [{"id": "b"}])
+            finally:
+                os.close(descriptor)
 
 
 class StateTest(unittest.TestCase):

@@ -1,5 +1,6 @@
 import json
 import multiprocessing
+import os
 import queue
 import tempfile
 import unittest
@@ -150,6 +151,8 @@ class BatchTests(unittest.TestCase):
         contender = context.Process(target=_export_in_process, args=(str(self.root), result))
         holder.start()
         self.assertTrue(ready.wait(5))
+        (self.root / ".batch.lock").unlink()
+        (self.root / ".batch.lock").touch(mode=0o600)
         contender.start()
         with self.assertRaises(queue.Empty):
             result.get(timeout=0.2)
@@ -177,6 +180,33 @@ class BatchTests(unittest.TestCase):
                 export_next_batch(self.root, self.units_path)
         self.assertEqual("untouched", sentinel.read_text(encoding="utf-8"))
 
+    def test_parent_swap_at_actual_write_uses_anchored_directory(self) -> None:
+        outside = self.root / "outside-write"
+        outside.mkdir()
+        sentinel = outside / "sentinel"
+        sentinel.write_text("untouched", encoding="utf-8")
+        original = self.root / "translations"
+        moved = self.root / "translations-moved"
+
+        def swap() -> None:
+            original.rename(moved)
+            original.symlink_to(outside, target_is_directory=True)
+
+        with patch("scripts.idea_deu.batches._write_hook", side_effect=swap):
+            with self.assertRaisesRegex(BatchError, "identity"):
+                export_next_batch(self.root, self.units_path)
+        self.assertEqual("untouched", sentinel.read_text(encoding="utf-8"))
+        self.assertEqual([], list(outside.glob("*.jsonl")))
+
+    def test_idempotent_export_rejects_extra_record_key(self) -> None:
+        batch = export_next_batch(self.root, self.units_path, limit=2)
+        assert batch
+        records = read_jsonl(batch, dict)
+        records[0]["extra"] = "not allowed"
+        write_jsonl_atomic(batch, records)
+        with self.assertRaisesRegex(BatchError, "fields mismatch"):
+            export_next_batch(self.root, self.units_path)
+
     def test_post_commit_cleanup_failure_still_returns_success(self) -> None:
         batch = export_next_batch(self.root, self.units_path, limit=2)
         assert batch
@@ -185,14 +215,14 @@ class BatchTests(unittest.TestCase):
             record["target"] = record["source"]
         write_jsonl_atomic(batch, records)
         import scripts.idea_deu.batches as batches
-        real_remove = batches._remove_transaction_directory
+        real_remove = batches._remove_transaction_directory_at
 
-        def fail_committed(path: Path, **kwargs: object) -> None:
-            if path.name == ".batch-txn.committed":
+        def fail_committed(directory_fd: int, name: str, **kwargs: object) -> None:
+            if name == ".batch-txn.committed":
                 raise OSError("cleanup failed")
-            real_remove(path, **kwargs)
+            real_remove(directory_fd, name, **kwargs)
 
-        with patch("scripts.idea_deu.batches._remove_transaction_directory", side_effect=fail_committed):
+        with patch("scripts.idea_deu.batches._remove_transaction_directory_at", side_effect=fail_committed):
             result = import_batch(self.root, self.units_path, batch, self.glossary_path)
         self.assertEqual(2, result.imported)
         self.assertTrue((self.root / "translations/.batch-txn.committed").exists())
@@ -219,18 +249,18 @@ class BatchTests(unittest.TestCase):
         checkpoint_path = self.root / "translations/checkpoint.json"
         old_checkpoint = checkpoint_path.read_bytes()
         import scripts.idea_deu.batches as batches
-        real_write = batches.write_jsonl_atomic
+        real_write = batches._write_jsonl_at
         state_writes = 0
 
-        def interrupt(path: Path, values: object) -> None:
+        def interrupt(directory_fd: int, name: str, values: object) -> None:
             nonlocal state_writes
-            real_write(path, values)
-            if path == self.units_path.resolve():
+            real_write(directory_fd, name, values)
+            if name == "units.jsonl" and os.fstat(directory_fd).st_ino == self.units_path.parent.stat().st_ino:
                 state_writes += 1
                 if state_writes == 1:
                     raise SystemExit("crash")
 
-        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=interrupt):
+        with patch("scripts.idea_deu.batches._write_jsonl_at", side_effect=interrupt):
             with self.assertRaises(SystemExit):
                 import_batch(self.root, self.units_path, batch, self.glossary_path)
         self.assertNotEqual(old_units, self.units_path.read_bytes())
@@ -247,23 +277,23 @@ class BatchTests(unittest.TestCase):
             record["target"] = record["source"]
         write_jsonl_atomic(batch, records)
         import scripts.idea_deu.batches as batches
-        real_write = batches.write_jsonl_atomic
+        real_write = batches._write_jsonl_at
 
-        def crash_after_units(path: Path, values: object) -> None:
-            real_write(path, values)
-            if path == self.units_path.resolve():
+        def crash_after_units(directory_fd: int, name: str, values: object) -> None:
+            real_write(directory_fd, name, values)
+            if name == "units.jsonl" and os.fstat(directory_fd).st_ino == self.units_path.parent.stat().st_ino:
                 raise SystemExit("crash")
 
-        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=crash_after_units):
+        with patch("scripts.idea_deu.batches._write_jsonl_at", side_effect=crash_after_units):
             with self.assertRaises(SystemExit):
                 import_batch(self.root, self.units_path, batch, self.glossary_path)
 
-        def fail_restore(path: Path, values: object) -> None:
-            if path.resolve() == self.units_path.resolve():
+        def fail_restore(directory_fd: int, name: str, values: object) -> None:
+            if name == "units.jsonl" and os.fstat(directory_fd).st_ino == self.units_path.parent.stat().st_ino:
                 raise OSError("restore failed")
-            real_write(path, values)
+            real_write(directory_fd, name, values)
 
-        with patch("scripts.idea_deu.batches.write_jsonl_atomic", side_effect=fail_restore):
+        with patch("scripts.idea_deu.batches._write_jsonl_at", side_effect=fail_restore):
             with self.assertRaisesRegex(OSError, "restore failed"):
                 export_next_batch(self.root, self.units_path)
         evidence = list((self.root / "translations").glob(".batch-txn.*"))

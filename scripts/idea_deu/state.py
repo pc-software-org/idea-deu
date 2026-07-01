@@ -5,6 +5,7 @@ from __future__ import annotations
 import errno
 import json
 import os
+import secrets
 import stat
 import tempfile
 from collections.abc import Mapping as MappingABC
@@ -19,6 +20,116 @@ T = TypeVar("T")
 
 class StateError(ValueError):
     """Raised when persisted state is invalid or cannot be written safely."""
+
+
+def read_jsonl_at(directory_fd: int, name: str, record_type: type[T]) -> list[T]:
+    """Read a regular JSONL file relative to an already trusted directory FD."""
+    _validate_relative_name(name)
+    descriptor = -1
+    try:
+        descriptor = os.open(
+            name, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0), dir_fd=directory_fd
+        )
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise StateError(f"{name} is not a regular file")
+        with os.fdopen(descriptor, "r", encoding="utf-8", newline="") as stream:
+            descriptor = -1
+            return _read_jsonl_stream(stream, name, record_type)
+    except StateError:
+        raise
+    except (OSError, UnicodeError, TypeError, ValueError) as exc:
+        raise StateError(str(exc)) from exc
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+
+
+def write_jsonl_atomic_at(directory_fd: int, name: str, records: Iterable[T]) -> None:
+    """Atomically replace a JSONL file relative to a trusted directory FD."""
+    _validate_relative_name(name)
+    payload = _serialize_jsonl(records)
+    mode = 0o600
+    try:
+        info = os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+        if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
+            raise StateError(f"refusing unsafe destination: {name}")
+        mode = stat.S_IMODE(info.st_mode)
+    except FileNotFoundError:
+        pass
+    temp_name = f".{name}.{secrets.token_hex(8)}.tmp"
+    descriptor = -1
+    try:
+        descriptor = os.open(
+            temp_name,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0),
+            mode,
+            dir_fd=directory_fd,
+        )
+        with os.fdopen(descriptor, "wb") as stream:
+            descriptor = -1
+            _write_payload(stream, payload)
+        os.replace(
+            temp_name,
+            name,
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+        )
+        os.fsync(directory_fd)
+    except StateError:
+        raise
+    except OSError as exc:
+        raise StateError(str(exc)) from exc
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        try:
+            os.unlink(temp_name, dir_fd=directory_fd)
+        except FileNotFoundError:
+            pass
+
+
+def _validate_relative_name(name: str) -> None:
+    if not isinstance(name, str) or not name or "/" in name or name in {".", ".."}:
+        raise StateError("state name must be one relative path component")
+
+
+def _read_jsonl_stream(stream: Any, label: str, record_type: type[T]) -> list[T]:
+    records: list[T] = []
+    seen_ids: set[str] = set()
+    for line_number, line in enumerate(stream, 1):
+        if not line.strip():
+            raise StateError(f"line {line_number} is empty")
+        try:
+            value = json.loads(
+                line,
+                object_pairs_hook=_object_without_duplicates,
+                parse_constant=_reject_json_constant,
+            )
+        except (json.JSONDecodeError, StateError) as exc:
+            raise StateError(f"{label}: invalid JSON on line {line_number}: {exc}") from exc
+        if not isinstance(value, dict):
+            raise StateError(f"line {line_number} must be a JSON object")
+        _check_duplicate_id(value, seen_ids)
+        records.append(_construct(record_type, value))
+    return records
+
+
+def _serialize_jsonl(records: Iterable[Any]) -> bytes:
+    try:
+        objects = [_as_json_object(record) for record in records]
+        seen_ids: set[str] = set()
+        for value in objects:
+            _check_duplicate_id(value, seen_ids)
+        serialized = [
+            json.dumps(value, allow_nan=False, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            for value in objects
+        ]
+        serialized.sort(key=lambda line: (_record_id(json.loads(line)) or "", line))
+        return (("\n".join(serialized) + "\n") if serialized else "").encode("utf-8")
+    except (StateError, TypeError, ValueError) as exc:
+        if isinstance(exc, StateError):
+            raise
+        raise StateError(str(exc)) from exc
 
 
 def read_jsonl(path: Path, record_type: type[T]) -> list[T]:
