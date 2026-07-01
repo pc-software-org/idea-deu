@@ -21,8 +21,21 @@ class PackageTests(unittest.TestCase):
         record=ResourceRecord("r"*64,container,path,ResourceType.PROPERTIES,len(data),hashlib.sha256(data).hexdigest())
         unit=TranslationUnit("u"*64,"Hello",hashlib.sha256(b"Hello").hexdigest(),"Grüße",
             TranslationContext("Bundle","hello",container,path),ProcessingStatus.TECHNICALLY_REVIEWED,())
-        self.result=generate_resources(Inventory((record,),(),()),(unit,),MappingResourceProvider({(container,path):data}),self.resources)
+        self.inventory=Inventory((record,),(),())
+        self.units=(unit,)
+        self.provider=MappingResourceProvider({(container,path):data})
+        self.result=generate_resources(self.inventory,self.units,self.provider,self.resources)
     def tearDown(self): self.tmp.cleanup()
+
+    def build(self,result,descriptor,destination,*,inventory=None,units=None,provider=None):
+        return build_plugin_package(
+            result,
+            self.inventory if inventory is None else inventory,
+            self.units if units is None else units,
+            self.provider if provider is None else provider,
+            descriptor,
+            destination,
+        )
 
     def test_descriptor_has_exact_identity_compatibility_and_language_bundle(self):
         root = ElementTree.parse(self.descriptor).getroot()
@@ -33,8 +46,8 @@ class PackageTests(unittest.TestCase):
 
     def test_build_is_byte_deterministic_sorted_and_has_fixed_metadata(self):
         one = self.root / "one.zip"; two = self.root / "two.zip"
-        build_plugin_package(self.result, self.descriptor, one)
-        build_plugin_package(self.result, self.descriptor, two)
+        self.build(self.result, self.descriptor, one)
+        self.build(self.result, self.descriptor, two)
         self.assertEqual(hashlib.sha256(one.read_bytes()).digest(), hashlib.sha256(two.read_bytes()).digest())
         with zipfile.ZipFile(one) as archive:
             self.assertEqual(sorted(archive.namelist()), archive.namelist())
@@ -53,11 +66,11 @@ class PackageTests(unittest.TestCase):
 
     def test_ignores_symlink_in_materialized_resource_tree(self):
         (self.resources / "link").symlink_to(self.descriptor.resolve())
-        build_plugin_package(self.result, self.descriptor, self.root/"from-evidence.zip")
+        self.build(self.result, self.descriptor, self.root/"from-evidence.zip")
 
     def test_rejects_invalid_or_wrong_descriptor(self):
         bad = self.root / "plugin.xml"; bad.write_text("<idea-plugin><id>x&amp;y</id></idea-plugin>")
-        with self.assertRaises(PackageError): build_plugin_package(self.result, bad, self.root/"bad.zip")
+        with self.assertRaises(PackageError): self.build(self.result, bad, self.root/"bad.zip")
 
     def test_rejects_descriptor_with_additional_elements_or_attributes(self):
         root = ElementTree.parse(self.descriptor).getroot()
@@ -66,33 +79,43 @@ class PackageTests(unittest.TestCase):
         bad = self.root / "plugin.xml"
         ElementTree.ElementTree(root).write(bad, encoding="utf-8", xml_declaration=True)
         with self.assertRaisesRegex(PackageError, "descriptor"):
-            build_plugin_package(self.result, bad, self.root/"bad.zip")
+            self.build(self.result, bad, self.root/"bad.zip")
 
     def test_rejects_bypass_without_verified_generation_result(self):
         with self.assertRaisesRegex(PackageError,"GenerationResult"):
-            build_plugin_package(self.resources,self.descriptor,self.root/"bad.zip")
+            self.build(self.resources,self.descriptor,self.root/"bad.zip")
 
     def test_rejects_modified_copy_of_generation_result(self):
         forged=replace(self.result,root=self.root,files=())
-        with self.assertRaisesRegex(PackageError,"generation evidence"):
-            build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
+        with self.assertRaisesRegex(PackageError,"result evidence"):
+            self.build(forged,self.descriptor,self.root/"bad.zip")
 
     def test_rejects_arbitrary_directly_constructed_result(self):
         arbitrary=self.root/"arbitrary"; arbitrary.mkdir(); (arbitrary/"evil.xml").write_bytes(b"<evil/>")
         forged=GenerationResult(arbitrary,Inventory((),(),()),(),(),(("evil.xml",b"<evil/>"),),False)
         with self.assertRaises(PackageError):
-            build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
+            self.build(forged,self.descriptor,self.root/"bad.zip")
 
     def test_rejects_forged_empty_generation_result(self):
         forged=GenerationResult(self.root,Inventory((),(),()),(),(),(),False)
         with self.assertRaises(PackageError):
-            build_plugin_package(forged,self.descriptor,self.root/"bad.zip")
+            self.build(forged,self.descriptor,self.root/"bad.zip")
+
+    def test_rejects_internally_consistent_fake_result_against_trusted_inputs(self):
+        data=b"evil=Evil\n"; container="lib/evil.jar"; path="Evil.properties"
+        record=ResourceRecord("e"*64,container,path,ResourceType.PROPERTIES,len(data),hashlib.sha256(data).hexdigest())
+        unit=TranslationUnit("v"*64,"Evil",hashlib.sha256(b"Evil").hexdigest(),"Böse",
+            TranslationContext("Evil","evil",container,path),ProcessingStatus.TECHNICALLY_REVIEWED,())
+        fake=generate_resources(Inventory((record,),(),()),(unit,),MappingResourceProvider({(container,path):data}),
+            self.root/"evil-resources")
+        with self.assertRaisesRegex(PackageError,"trusted|evidence"):
+            self.build(fake,self.descriptor,self.root/"bad.zip")
 
     def test_packaging_uses_evidence_not_mutable_generated_tree(self):
         (self.resources/"Bundle_de.properties").write_text("tampered")
         (self.resources/"X.class").write_bytes(b"x")
         built=self.root/"evidence.zip"
-        build_plugin_package(self.result,self.descriptor,built)
+        self.build(self.result,self.descriptor,built)
         with zipfile.ZipFile(built) as archive, zipfile.ZipFile(archive.open("idea-deu/lib/idea-deu.jar")) as jar:
             self.assertEqual(b"hello=Gr\xc3\xbc\xc3\x9fe\n",jar.read("Bundle_de.properties"))
             self.assertNotIn("X.class",jar.namelist())
@@ -100,19 +123,19 @@ class PackageTests(unittest.TestCase):
     def test_ignores_changed_and_executable_materialized_content(self):
         (self.resources/"Bundle_de.properties").write_text("tampered")
         (self.resources/"X.class").write_bytes(b"x")
-        build_plugin_package(self.result,self.descriptor,self.root/"from-evidence.zip")
+        self.build(self.result,self.descriptor,self.root/"from-evidence.zip")
 
     def test_rejects_symlinked_dist_parent_without_outside_write(self):
         outside=self.root/"outside"; outside.mkdir(); linked=self.root/"linked"; linked.symlink_to(outside,target_is_directory=True)
         with self.assertRaisesRegex(PackageError,"symbolic|unsafe"):
-            build_plugin_package(self.result,self.descriptor,linked/"dist"/"idea-deu.zip")
+            self.build(self.result,self.descriptor,linked/"dist"/"idea-deu.zip")
         self.assertEqual([],list(outside.iterdir()))
 
     def test_rejects_symlink_above_existing_dist_parent_without_outside_write(self):
         outside=self.root/"outside"; existing=outside/"existing"; existing.mkdir(parents=True)
         linked=self.root/"linked"; linked.symlink_to(outside,target_is_directory=True)
         with self.assertRaisesRegex(PackageError,"symbolic|unsafe"):
-            build_plugin_package(self.result,self.descriptor,linked/"existing"/"dist"/"idea-deu.zip")
+            self.build(self.result,self.descriptor,linked/"existing"/"dist"/"idea-deu.zip")
         self.assertEqual([],list(existing.iterdir()))
 
     def test_parent_swap_after_fd_open_cannot_redirect_package(self):
@@ -123,5 +146,5 @@ class PackageTests(unittest.TestCase):
             control.symlink_to(outside,target_is_directory=True)
         with mock.patch("scripts.idea_deu.path_safety._after_parent_open",side_effect=swap,create=True):
             with self.assertRaises(PackageError):
-                build_plugin_package(self.result,self.descriptor,control/"idea-deu.zip")
+                self.build(self.result,self.descriptor,control/"idea-deu.zip")
         self.assertEqual([],list(outside.iterdir()))

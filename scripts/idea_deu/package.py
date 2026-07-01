@@ -3,29 +3,47 @@ from __future__ import annotations
 import io
 import stat
 import zipfile
+from collections.abc import Sequence
 from pathlib import Path
 from xml.etree import ElementTree
-from .generator import GenerationError, GenerationResult, recompute_result
+
+from .generator import GenerationError, GenerationResult, recompute_generation
+from .models import Inventory, TranslationUnit
 from .path_safety import OutputPathError, atomic_write_bytes
 
 class PackageError(ValueError): pass
 
 _TIME=(1980,1,1,0,0,0)
 
-def build_plugin_package(result: GenerationResult, descriptor: Path, destination: Path) -> Path:
+def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
+                         trusted_units: Sequence[TranslationUnit], trusted_provider: object,
+                         descriptor: Path, destination: Path, *,
+                         dedupe_identical: bool = False) -> Path:
     if not isinstance(result, GenerationResult):
         raise PackageError("GenerationResult required")
+    canonical_units = tuple(trusted_units)
     try:
-        entries = recompute_result(result)
+        trusted_sources: dict[tuple[str, str], bytes] = {}
+        for record in trusted_inventory.resources:
+            key = (record.container, record.resource_path)
+            if key not in trusted_sources:
+                trusted_sources[key] = trusted_provider.read(record)  # type: ignore[attr-defined]
+        entries = recompute_generation(trusted_inventory, canonical_units, trusted_sources,
+                                       dedupe_identical=dedupe_identical)
     except GenerationError as exc:
-        raise PackageError(f"invalid generation evidence: {exc}") from exc
+        raise PackageError(f"invalid trusted generation inputs: {exc}") from exc
+    trusted_source_evidence = tuple(
+        (container, path, data) for (container, path), data in sorted(trusted_sources.items())
+    )
     supplied: dict[str, bytes] = {}
     for name, data in result.files:
         if name in supplied:
             raise PackageError(f"duplicate generated evidence: {name}")
         supplied[name] = data
-    if supplied != entries:
-        raise PackageError("generated evidence does not match canonical recomputation")
+    if (result.inventory != trusted_inventory or result.units != canonical_units or
+            result.sources != trusted_source_evidence or
+            result.dedupe_identical is not dedupe_identical or supplied != entries):
+        raise PackageError("result evidence does not match trusted canonical recomputation")
     try: descriptor_bytes = Path(descriptor).read_bytes()
     except OSError as exc: raise PackageError(f"cannot read plugin descriptor: {exc}") from exc
     _validate_descriptor(descriptor_bytes)
