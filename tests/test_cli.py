@@ -3,6 +3,7 @@ import io
 import json
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from scripts.idea_deu.cli import _stale_units, main
@@ -66,3 +67,8 @@ class CliTests(unittest.TestCase):
         self.assertEqual(previous[0].id, stale[0].id)
         self.assertEqual("253", stale[0].scan_build)
         self.assertEqual((), _stale_units(previous, previous, "253"))
+        changed = replace(previous[0], source="Changed", source_sha256="c"*64)
+        revision = _stale_units(previous, (changed,), "254")
+        self.assertEqual("source_changed", revision[0].reason)
+        moved = replace(previous[0], context=replace(previous[0].context, bundle="Other"))
+        self.assertEqual("context_changed", _stale_units(previous, (moved,), "254")[0].reason)

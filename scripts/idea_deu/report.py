@@ -7,10 +7,20 @@ import json
 import shutil
 from collections import Counter
 from dataclasses import asdict, dataclass
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .models import Inventory, ProcessingStatus, TranslationUnit
+
+
+class WorkflowState(StrEnum):
+    SCAN = "scan"
+    TRANSLATE = "translate"
+    VALIDATE = "validate"
+    GENERATE = "generate"
+    PACKAGE = "package"
+    COMPLETE = "complete"
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,6 +35,7 @@ class ReportSnapshot:
     generation: dict[str, bool | str]
     package: dict[str, bool | str]
     stale_units: dict[str, Any]
+    workflow_state: WorkflowState
     next_command: str
 
     def to_dict(self) -> dict[str, Any]:
@@ -54,18 +65,25 @@ def build_report(
     current = checkpoint.get("current_sequence")
     current_batch = checkpoint.get("current_batch")
     if current_batch:
+        workflow_state = WorkflowState.TRANSLATE
         next_command = f"python -m scripts.idea_deu import-batch {current_batch}"
     elif any(unit.status is ProcessingStatus.OPEN for unit in units):
+        workflow_state = WorkflowState.TRANSLATE
         next_command = "python -m scripts.idea_deu next-batch --limit 100"
     elif any(unit.status is ProcessingStatus.TRANSLATED for unit in units):
+        workflow_state = WorkflowState.VALIDATE
         next_command = "python -m scripts.idea_deu validate"
     elif units and not (generation or {}).get("valid", False):
+        workflow_state = WorkflowState.GENERATE
         next_command = "python -m scripts.idea_deu generate"
     elif units and not (package or {}).get("valid", False):
+        workflow_state = WorkflowState.PACKAGE
         next_command = "python -m scripts.idea_deu package"
     elif units:
-        next_command = ""
+        workflow_state = WorkflowState.COMPLETE
+        next_command = "python3 -m scripts.idea_deu status"
     else:
+        workflow_state = WorkflowState.SCAN
         next_command = "python -m scripts.idea_deu scan"
     return ReportSnapshot(
         source=dict(sorted((source or {}).items())),
@@ -78,6 +96,7 @@ def build_report(
         generation=dict(generation or {"present": False, "path": "generated/plugin"}),
         package=dict(package or {"present": False, "path": "dist/idea-deu.zip"}),
         stale_units={"count": len(stale_unit_ids), "ids": sorted(stale_unit_ids)},
+        workflow_state=workflow_state,
         next_command=next_command,
     )
 
@@ -99,7 +118,7 @@ def render_markdown(snapshot: ReportSnapshot) -> str:
     lines.extend(f"| {esc(key)} | {value} |" for key, value in data["findings"]["codes"].items())
     lines += ["", "## Workflow", "", f"- Last completed batch: {esc(data['batches']['last_completed'])}", f"- Current batch: {esc(data['batches']['current_batch'] or 'none')}", f"- Stale units: {data['stale_units']['count']}"]
     lines.extend(f"  - `{esc(identifier)}`" for identifier in data["stale_units"]["ids"])
-    lines += [f"- Generated: {esc(data['generation'].get('present', False))} (`{esc(data['generation'].get('path', ''))}`)", f"- Packaged: {esc(data['package'].get('present', False))} (`{esc(data['package'].get('path', ''))}`)", "", "Next command:", "", f"`{esc(data['next_command'])}`", ""]
+    lines += [f"- Workflow state: `{esc(data['workflow_state'])}`", f"- Generated: present={esc(data['generation'].get('present', False))}, valid={esc(data['generation'].get('valid', False))} (`{esc(data['generation'].get('path', ''))}`)", f"- Package: present={esc(data['package'].get('present', False))}, valid={esc(data['package'].get('valid', False))}, sha256=`{esc(data['package'].get('sha256', 'unavailable'))}`, size={esc(data['package'].get('size', 'unavailable'))} (`{esc(data['package'].get('path', ''))}`)", "", "Next command:", "", f"`{esc(data['next_command'])}`", ""]
     return "\n".join(lines)
 
 

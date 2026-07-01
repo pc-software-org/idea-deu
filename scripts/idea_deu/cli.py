@@ -178,10 +178,21 @@ def _extract_units(inventory: Inventory, provider: DistributionResourceProvider,
 
 def _stale_units(previous: Sequence[TranslationUnit], active: Sequence[TranslationUnit],
                  scan_build: str) -> tuple[StaleTranslationUnit, ...]:
-    active_ids = {unit.id for unit in active}
-    return tuple(StaleTranslationUnit(unit.id, unit.context, unit.source_sha256,
-                 "removed_from_source", scan_build)
-                 for unit in sorted(previous, key=lambda item: item.id) if unit.id not in active_ids)
+    active_by_id = {unit.id: unit for unit in active}
+    stale: list[StaleTranslationUnit] = []
+    for unit in sorted(previous, key=lambda item: item.id):
+        current = active_by_id.get(unit.id)
+        reason: str | None = None
+        if current is None:
+            reason = "removed_from_source"
+        elif current.context != unit.context:
+            reason = "context_changed"
+        elif current.source != unit.source or current.source_sha256 != unit.source_sha256:
+            reason = "source_changed"
+        if reason:
+            stale.append(StaleTranslationUnit(unit.id, unit.context, unit.source_sha256,
+                                              reason, scan_build))
+    return tuple(stale)
 
 
 def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit],

@@ -47,7 +47,7 @@ class ReportTests(unittest.TestCase):
             build_report(inventory, (reviewed,), generation={"valid":False}, package={"valid":False}).next_command)
         self.assertEqual("python -m scripts.idea_deu package",
             build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":False}).next_command)
-        self.assertEqual("",
+        self.assertEqual("python3 -m scripts.idea_deu status",
             build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":True}).next_command)
 
     def test_stale_ids_are_reported(self):

@@ -38,6 +38,26 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(b"# keep\r\nhello = Gr\xc3\xbc\xc3\x9fe\r\nother: unber\xc3\xbchrt\r\n",
             (self.out / "messages/Bundle_de.properties").read_bytes())
 
+    def test_regeneration_atomically_repairs_nonempty_corrupt_tree(self):
+        self.out.mkdir(); (self.out / "junk").write_text("stale")
+        generate_resources(Inventory((self.record,),(),()), (
+            self.unit(self.record,"hello","Hello","Hallo"),
+            self.unit(self.record,"other","untouched","x")),
+            MappingResourceProvider({(self.record.container,self.record.resource_path):self.data}), self.out)
+        self.assertFalse((self.out / "junk").exists())
+        self.assertTrue((self.out / "messages/Bundle_de.properties").is_file())
+
+    def test_regeneration_failure_rolls_back_old_tree(self):
+        self.out.mkdir(); old = self.out / "old"; old.write_text("preserve")
+        with mock.patch("scripts.idea_deu.path_safety._tree_swap_hook", side_effect=OSError("crash")):
+            with self.assertRaises(GenerationError):
+                generate_resources(Inventory((self.record,),(),()), (
+                    self.unit(self.record,"hello","Hello","Hallo"),
+                    self.unit(self.record,"other","untouched","x")),
+                    MappingResourceProvider({(self.record.container,self.record.resource_path):self.data}), self.out)
+        self.assertEqual("preserve", old.read_text())
+        self.assertEqual(["old"], [path.name for path in self.out.iterdir()])
+
     def test_properties_requires_exactly_one_unit_for_every_key(self):
         inventory = Inventory((self.record,), (), ())
         provider = MappingResourceProvider({(self.record.container, self.record.resource_path): self.data})

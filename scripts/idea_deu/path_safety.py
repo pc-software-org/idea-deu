@@ -74,20 +74,17 @@ def atomic_write_bytes(path: Path, data: bytes) -> None:
 
 def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes]) -> None:
     parent_fd, name = _open_output_parent(path)
-    staging = f".{name}.{secrets.token_hex(8)}.tmp"
+    staging = f".{name}.staging"
+    backup = f".{name}.backup"
     staging_fd = -1
     try:
+        _recover_tree_swap(parent_fd, name, staging, backup)
+        existing = False
         try:
             info = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
             if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
                 raise OutputPathError(f"unsafe output root: {path}")
-            existing_fd = os.open(name, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) |
-                                  getattr(os, "O_NOFOLLOW", 0), dir_fd=parent_fd)
-            try:
-                if os.listdir(existing_fd):
-                    raise OutputPathError(f"output root is not empty: {path}")
-            finally:
-                os.close(existing_fd)
+            existing = True
         except FileNotFoundError:
             pass
         os.mkdir(staging, 0o755, dir_fd=parent_fd)
@@ -97,8 +94,28 @@ def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes]) -> None:
             _write_tree_member(staging_fd, PurePosixPath(relative), data)
         os.fsync(staging_fd)
         os.close(staging_fd); staging_fd = -1
-        os.replace(staging, name, src_dir_fd=parent_fd, dst_dir_fd=parent_fd)
+        if existing:
+            os.rename(name, backup, src_dir_fd=parent_fd, dst_dir_fd=parent_fd)
+            os.fsync(parent_fd)
+            _tree_swap_hook("after_backup")
+        os.rename(staging, name, src_dir_fd=parent_fd, dst_dir_fd=parent_fd)
         os.fsync(parent_fd)
+        _tree_swap_hook("after_replace")
+        if existing:
+            _remove_tree_at(parent_fd, backup)
+            os.fsync(parent_fd)
+    except BaseException:
+        try:
+            if _entry_exists(parent_fd, backup):
+                if _entry_exists(parent_fd, name):
+                    _remove_tree_at(parent_fd, name)
+                os.rename(backup, name, src_dir_fd=parent_fd, dst_dir_fd=parent_fd)
+            if _entry_exists(parent_fd, staging):
+                _remove_tree_at(parent_fd, staging)
+            os.fsync(parent_fd)
+        except OSError:
+            pass
+        raise
     finally:
         if staging_fd >= 0:
             os.close(staging_fd)
@@ -107,6 +124,30 @@ def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes]) -> None:
         except FileNotFoundError:
             pass
         os.close(parent_fd)
+
+
+def _recover_tree_swap(parent_fd: int, name: str, staging: str, backup: str) -> None:
+    target_exists = _entry_exists(parent_fd, name)
+    backup_exists = _entry_exists(parent_fd, backup)
+    if backup_exists and not target_exists:
+        os.rename(backup, name, src_dir_fd=parent_fd, dst_dir_fd=parent_fd)
+    elif backup_exists:
+        _remove_tree_at(parent_fd, backup)
+    if _entry_exists(parent_fd, staging):
+        _remove_tree_at(parent_fd, staging)
+    os.fsync(parent_fd)
+
+
+def _entry_exists(directory_fd: int, name: str) -> bool:
+    try:
+        os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+        return True
+    except FileNotFoundError:
+        return False
+
+
+def _tree_swap_hook(_label: str) -> None:
+    """Test seam for interrupted replacement recovery."""
 
 
 def _open_output_parent(path: Path) -> tuple[int, str]:
