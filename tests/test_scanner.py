@@ -169,6 +169,23 @@ class ScannerTests(unittest.TestCase):
         with self.assertRaisesRegex(ScannerError, r"unsupported resource pattern: docs/\*\*/\*\.html"):
             scan_archive(source, invalid)
 
+    def test_direct_config_replacement_rejects_empty_and_malformed_patterns(self) -> None:
+        source = write_outer_archive(self.directory / "idea.zip", [])
+
+        for label, patterns in (
+            ("empty", ()),
+            ("none", None),
+            ("unhashable element", ("*.properties", [])),
+            ("string is not a pattern sequence", "*.properties"),
+        ):
+            with self.subTest(label=label):
+                invalid = replace(self.config, resource_patterns=patterns)
+                with self.assertRaisesRegex(
+                    ScannerError,
+                    "resource_patterns must be a non-empty sequence of non-blank strings",
+                ):
+                    scan_archive(source, invalid)
+
     def test_explicit_third_party_container_rule_excludes_before_nested_scan(self) -> None:
         source = write_outer_archive(
             self.directory / "idea.zip",

@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import zipfile
+from collections.abc import Sequence
 from dataclasses import dataclass, replace
 from fnmatch import fnmatchcase
 from pathlib import Path, PurePosixPath
@@ -124,10 +125,6 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     patterns = data["resource_patterns"]
     directories = data["localization_directories"]
     raw_exclusions = data["container_exclusions"]
-    if not isinstance(patterns, list) or not patterns or not all(
-        isinstance(value, str) and value.strip() for value in patterns
-    ):
-        raise ScannerError("resource_patterns must be a non-empty string list")
     _validate_resource_patterns(patterns)
     if not isinstance(directories, list) or not directories or not all(
         isinstance(value, str) and value.strip() for value in directories
@@ -319,7 +316,7 @@ def _classify_member(
         )
 
 
-def _matches_resource(path: str, patterns: tuple[str, ...]) -> bool:
+def _matches_resource(path: str, patterns: Sequence[str]) -> bool:
     return any(_pattern_matches(path, pattern) for pattern in patterns)
 
 
@@ -331,7 +328,16 @@ def _pattern_matches(path: str, pattern: str) -> bool:
     return "/**/" in pattern and fnmatchcase(path, pattern.replace("/**/", "/"))
 
 
-def _validate_resource_patterns(patterns: Any) -> None:
+def _validate_resource_patterns(patterns: object) -> None:
+    if (
+        isinstance(patterns, (str, bytes))
+        or not isinstance(patterns, Sequence)
+        or not patterns
+        or not all(isinstance(pattern, str) and pattern.strip() for pattern in patterns)
+    ):
+        raise ScannerError(
+            "resource_patterns must be a non-empty sequence of non-blank strings"
+        )
     for pattern in patterns:
         if pattern not in _RESOURCE_PATTERN_TYPES:
             raise ScannerError(f"unsupported resource pattern: {pattern}")
@@ -347,7 +353,7 @@ def _container_exclusion_reason(
     return None
 
 
-def _resource_type(path: str, patterns: tuple[str, ...]) -> ResourceType:
+def _resource_type(path: str, patterns: Sequence[str]) -> ResourceType:
     for pattern in patterns:
         if _pattern_matches(path, pattern):
             return _RESOURCE_PATTERN_TYPES[pattern]
