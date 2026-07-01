@@ -19,6 +19,20 @@ def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
                          descriptor: Path, destination: Path, *,
                          dedupe_identical: bool = False) -> Path:
+    payload = plugin_package_bytes(result, trusted_inventory, trusted_units, trusted_provider,
+                                   descriptor, dedupe_identical=dedupe_identical)
+    destination = Path(destination)
+    try:
+        atomic_write_bytes(destination, payload)
+    except (OSError, OutputPathError) as exc:
+        raise PackageError(str(exc)) from exc
+    return destination
+
+
+def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
+                         trusted_units: Sequence[TranslationUnit], trusted_provider: object,
+                         descriptor: Path, *, dedupe_identical: bool = False) -> bytes:
+    """Independently recompute the exact deterministic package bytes."""
     if not isinstance(result, GenerationResult):
         raise PackageError("GenerationResult required")
     canonical_units = tuple(trusted_units)
@@ -50,12 +64,7 @@ def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
     entries["META-INF/plugin.xml"] = descriptor_bytes
     jar = _zip_bytes(entries)
     payload = {"idea-deu/lib/idea-deu.jar": jar}
-    destination = Path(destination)
-    try:
-        atomic_write_bytes(destination, _zip_bytes(payload))
-    except (OSError, OutputPathError) as exc:
-        raise PackageError(str(exc)) from exc
-    return destination
+    return _zip_bytes(payload)
 
 def _validate_descriptor(data: bytes) -> None:
     try: root=ElementTree.fromstring(data)

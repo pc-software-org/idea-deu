@@ -83,6 +83,20 @@ class TranslationUnit:
 
 
 @dataclass(frozen=True, slots=True)
+class StaleTranslationUnit:
+    id: str
+    context: TranslationContext
+    old_source_sha256: str
+    reason: str
+    scan_build: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"id": self.id, "context": self.context.to_dict(),
+                "old_source_sha256": self.old_source_sha256,
+                "reason": self.reason, "scan_build": self.scan_build}
+
+
+@dataclass(frozen=True, slots=True)
 class ResourceRecord:
     resource_id: str
     container: str

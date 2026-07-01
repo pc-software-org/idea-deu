@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import shutil
 from collections import Counter
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -23,6 +24,7 @@ class ReportSnapshot:
     batches: dict[str, int | str | None]
     generation: dict[str, bool | str]
     package: dict[str, bool | str]
+    stale_units: dict[str, Any]
     next_command: str
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,6 +39,7 @@ def build_report(
     checkpoint: Mapping[str, Any] | None = None,
     generation: Mapping[str, bool | str] | None = None,
     package: Mapping[str, bool | str] | None = None,
+    stale_unit_ids: Sequence[str] = (),
 ) -> ReportSnapshot:
     status_counts = Counter(unit.status.value for unit in units)
     exclusion_counts = Counter(item.reason.value for item in inventory.exclusions)
@@ -56,8 +59,12 @@ def build_report(
         next_command = "python -m scripts.idea_deu next-batch --limit 100"
     elif any(unit.status is ProcessingStatus.TRANSLATED for unit in units):
         next_command = "python -m scripts.idea_deu validate"
-    elif units:
+    elif units and not (generation or {}).get("valid", False):
         next_command = "python -m scripts.idea_deu generate"
+    elif units and not (package or {}).get("valid", False):
+        next_command = "python -m scripts.idea_deu package"
+    elif units:
+        next_command = ""
     else:
         next_command = "python -m scripts.idea_deu scan"
     return ReportSnapshot(
@@ -70,6 +77,7 @@ def build_report(
         batches={"last_completed": completed, "current": current, "current_batch": current_batch},
         generation=dict(generation or {"present": False, "path": "generated/plugin"}),
         package=dict(package or {"present": False, "path": "dist/idea-deu.zip"}),
+        stale_units={"count": len(stale_unit_ids), "ids": sorted(stale_unit_ids)},
         next_command=next_command,
     )
 
@@ -89,11 +97,45 @@ def render_markdown(snapshot: ReportSnapshot) -> str:
     lines.extend(f"| {esc(key)} | {value} |" for key, value in data["exclusions"].items())
     lines += ["", "## Findings and collisions", "", f"- Blocking findings: {data['findings']['counts']['blocking']}", f"- Warning findings: {data['findings']['counts']['warning']}", f"- Collisions: {data['collisions']['total']} ({data['collisions']['unresolved']} unresolved)", "", "| Finding code | Count |", "|---|---:|"]
     lines.extend(f"| {esc(key)} | {value} |" for key, value in data["findings"]["codes"].items())
-    lines += ["", "## Workflow", "", f"- Last completed batch: {esc(data['batches']['last_completed'])}", f"- Current batch: {esc(data['batches']['current_batch'] or 'none')}", f"- Generated: {esc(data['generation'].get('present', False))} (`{esc(data['generation'].get('path', ''))}`)", f"- Packaged: {esc(data['package'].get('present', False))} (`{esc(data['package'].get('path', ''))}`)", "", "Next command:", "", f"`{esc(data['next_command'])}`", ""]
+    lines += ["", "## Workflow", "", f"- Last completed batch: {esc(data['batches']['last_completed'])}", f"- Current batch: {esc(data['batches']['current_batch'] or 'none')}", f"- Stale units: {data['stale_units']['count']}"]
+    lines.extend(f"  - `{esc(identifier)}`" for identifier in data["stale_units"]["ids"])
+    lines += [f"- Generated: {esc(data['generation'].get('present', False))} (`{esc(data['generation'].get('path', ''))}`)", f"- Packaged: {esc(data['package'].get('present', False))} (`{esc(data['package'].get('path', ''))}`)", "", "Next command:", "", f"`{esc(data['next_command'])}`", ""]
     return "\n".join(lines)
 
 
 def write_report(snapshot: ReportSnapshot, json_path: Path, markdown_path: Path) -> None:
     from .path_safety import atomic_write_bytes
-    atomic_write_bytes(json_path, render_json(snapshot).encode("utf-8"))
-    atomic_write_bytes(markdown_path, render_markdown(snapshot).encode("utf-8"))
+    if json_path.parent != markdown_path.parent or json_path.name != "status.json" or markdown_path.name != "status.md":
+        raise ValueError("report pair must use canonical status paths")
+    transaction = json_path.parent / ".report-transaction"
+    if transaction.exists():
+        raise ValueError("unfinished report transaction requires recovery")
+    transaction.mkdir(mode=0o700)
+    try:
+        atomic_write_bytes(transaction / "status.json", render_json(snapshot).encode("utf-8"))
+        atomic_write_bytes(transaction / "status.md", render_markdown(snapshot).encode("utf-8"))
+        atomic_write_bytes(transaction / "manifest.json", b'{"schema_version":1}\n')
+        recover_report_pair(json_path.parent)
+    except Exception:
+        if not (transaction / "manifest.json").exists(): shutil.rmtree(transaction, ignore_errors=True)
+        raise
+
+
+def recover_report_pair(reports: Path) -> None:
+    """Roll a fully staged report pair forward; safe to repeat after a crash."""
+    from .path_safety import atomic_write_bytes
+    transaction = reports / ".report-transaction"
+    if not transaction.exists(): return
+    if transaction.is_symlink() or not transaction.is_dir(): raise ValueError("unsafe report transaction")
+    if (transaction / "manifest.json").read_bytes() != b'{"schema_version":1}\n':
+        raise ValueError("invalid report transaction")
+    json_data = (transaction / "status.json").read_bytes()
+    markdown_data = (transaction / "status.md").read_bytes()
+    atomic_write_bytes(reports / "status.json", json_data)
+    _report_commit_hook("between_files")
+    atomic_write_bytes(reports / "status.md", markdown_data)
+    shutil.rmtree(transaction)
+
+
+def _report_commit_hook(_label: str) -> None:
+    """Test seam for crash simulation."""

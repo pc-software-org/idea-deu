@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.idea_deu.cli import main
+from scripts.idea_deu.cli import _stale_units, main
 from scripts.idea_deu.models import ProcessingStatus, TranslationContext, TranslationUnit
 from scripts.idea_deu.state import write_jsonl_atomic
 
@@ -58,3 +58,11 @@ class CliTests(unittest.TestCase):
             self.root / "translations/units.jsonl", TranslationUnit)[0]
         self.assertTrue(unit.findings)
         self.assertTrue((self.root / "reports/status.json").is_file())
+
+    def test_removed_unit_is_stale_but_reappearing_unit_is_not(self):
+        previous = __import__("scripts.idea_deu.state", fromlist=["read_jsonl"]).read_jsonl(
+            self.root / "translations/units.jsonl", TranslationUnit)
+        stale = _stale_units(previous, (), "253")
+        self.assertEqual(previous[0].id, stale[0].id)
+        self.assertEqual("253", stale[0].scan_build)
+        self.assertEqual((), _stale_units(previous, previous, "253"))

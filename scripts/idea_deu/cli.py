@@ -13,12 +13,14 @@ from typing import Any, Sequence
 
 from .batches import BatchError, export_next_batch, import_batch, validate_all_units
 from .config import ProductConfig, load_product_config
-from .generator import DistributionResourceProvider, GenerationError, generate_resources
+from .generator import (DistributionResourceProvider, GenerationError, GenerationResult,
+                        generate_resources, recompute_generation)
 from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStatus,
-                     ResourceRecord, ResourceType, TranslationContext, TranslationUnit)
-from .package import PackageError, build_plugin_package
+                     ResourceRecord, ResourceType, StaleTranslationUnit,
+                     TranslationContext, TranslationUnit)
+from .package import PackageError, build_plugin_package, plugin_package_bytes
 from .properties import PropertiesError, parse_properties
-from .report import ReportSnapshot, build_report, write_report
+from .report import ReportSnapshot, build_report, recover_report_pair, write_report
 from .scanner import ScannerError, load_scanner_config, scan_archive
 from .source import SourceValidationError, validate_source
 from .state import StateError, read_jsonl, write_jsonl_atomic
@@ -48,6 +50,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         root = _canonical_root(args.root)
         if args.command not in {"status", "validate-source"}:
             _recover_scan(root)
+            recover_report_pair(root / "reports")
         result = _dispatch(root, args)
         if args.command not in {"status", "validate-source"}:
             try:
@@ -87,10 +90,11 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         inventory = scan_archive(Path(config.archive), load_scanner_config(root / "config/scanner.json"))
         old_units = _read_units(root)
         units = _extract_units(inventory, DistributionResourceProvider(Path(config.archive)), old_units)
+        stale = _stale_units(old_units, units, config.build_number)
         checkpoint = _checkpoint(root)
         if checkpoint.get("current_batch") and tuple(units) != tuple(old_units):
             raise BatchError("source inventory changed while a batch is active")
-        _persist_scan(root, inventory, units, checkpoint=checkpoint)
+        _persist_scan(root, inventory, units, stale, checkpoint=checkpoint)
         print(f"scanned {len(inventory.resources)} resources, {len(units)} translation units"); return 0
     if command == "next-batch":
         path = export_next_batch(root, root / "translations/units.jsonl", limit=args.limit)
@@ -105,7 +109,7 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
     if command == "generate":
         result = _generate(root); print(result.root); return 0
     if command == "package":
-        generated = _generate(root)
+        generated = _trusted_generation(root, materialize=False)
         inventory, units = _read_inventory(root), _read_units(root)
         provider = DistributionResourceProvider(Path(_config(root).archive))
         destination = root / "dist/idea-deu.zip"
@@ -119,7 +123,7 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         print(f"Translation units: {snapshot.counts['translation_units']}")
         print(f"Blocking findings: {snapshot.findings['counts']['blocking']}")
         print(f"Next: {snapshot.next_command}")
-        if (root / "translations/.transaction").exists() or (root / ".scan-transaction").exists(): print("Recovery needed: unfinished transaction detected")
+        if (root / "translations/.transaction").exists() or (root / ".scan-transaction").exists() or (root / "reports/.report-transaction").exists(): print("Recovery needed: unfinished transaction detected")
         return 0
     raise ValueError(f"unknown command: {command}")
 
@@ -172,7 +176,16 @@ def _extract_units(inventory: Inventory, provider: DistributionResourceProvider,
     return tuple(sorted(units, key=lambda unit: unit.id))
 
 
-def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit], *, checkpoint: dict[str, Any] | None = None) -> None:
+def _stale_units(previous: Sequence[TranslationUnit], active: Sequence[TranslationUnit],
+                 scan_build: str) -> tuple[StaleTranslationUnit, ...]:
+    active_ids = {unit.id for unit in active}
+    return tuple(StaleTranslationUnit(unit.id, unit.context, unit.source_sha256,
+                 "removed_from_source", scan_build)
+                 for unit in sorted(previous, key=lambda item: item.id) if unit.id not in active_ids)
+
+
+def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit],
+                  stale: Sequence[StaleTranslationUnit] = (), *, checkpoint: dict[str, Any] | None = None) -> None:
     for directory in (root / "inventory", root / "translations", root / "translations/batches"):
         directory.mkdir(parents=True, exist_ok=True)
     checkpoint = checkpoint or {"schema_version": 1, "completed_sequence": 0,
@@ -186,6 +199,7 @@ def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationU
         write_jsonl_atomic(transaction / "exclusions.jsonl", inventory.exclusions)
         write_jsonl_atomic(transaction / "collisions.jsonl", inventory.collisions)
         write_jsonl_atomic(transaction / "units.jsonl", units)
+        write_jsonl_atomic(transaction / "stale-units.jsonl", stale)
         write_jsonl_atomic(transaction / "checkpoint.json", [checkpoint])
         write_jsonl_atomic(transaction / "manifest.jsonl", [{"schema_version": 1, "state": "prepared"}])
         _recover_scan(root)
@@ -204,6 +218,7 @@ def _recover_scan(root: Path) -> None:
     write_jsonl_atomic(root / "inventory/exclusions.jsonl", read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord))
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
+    write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))
     write_jsonl_atomic(root / "translations/checkpoint.json", read_jsonl(transaction / "checkpoint.json", dict))
     shutil.rmtree(transaction)
     descriptor = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
@@ -225,21 +240,94 @@ def _validate_all(root: Path) -> tuple[TranslationUnit, ...]:
 
 
 def _generate(root: Path):
+    return _trusted_generation(root, materialize=True)
+
+
+def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
     inventory, units = _read_inventory(root), _read_units(root)
     provider = DistributionResourceProvider(Path(_config(root).archive))
-    return generate_resources(inventory, units, provider, root / "generated/plugin")
+    if materialize:
+        plugin = root / "generated/plugin"
+        if plugin.exists() and _tree_matches(plugin, _expected_files(inventory, units, provider)):
+            result = _generation_result(plugin, inventory, units, provider)
+        else:
+            result = generate_resources(inventory, units, provider, plugin)
+        manifest = _generation_manifest(root, result)
+        write_jsonl_atomic(root / "generated/manifest.json", [manifest])
+        return result
+    return _generation_result(root / "generated/plugin", inventory, units, provider)
+
+
+def _generation_result(path: Path, inventory: Inventory, units: Sequence[TranslationUnit], provider: object) -> GenerationResult:
+    sources = {(record.container, record.resource_path): provider.read(record) for record in inventory.resources}  # type: ignore[attr-defined]
+    files = recompute_generation(inventory, units, sources)
+    return GenerationResult(path.absolute(), inventory, tuple(units),
+        tuple((container, member, data) for (container, member), data in sorted(sources.items())),
+        tuple(sorted(files.items())), False)
+
+
+def _expected_files(inventory: Inventory, units: Sequence[TranslationUnit], provider: object) -> dict[str, bytes]:
+    return dict(_generation_result(Path("."), inventory, units, provider).files)
+
+
+def _tree_matches(root: Path, expected: dict[str, bytes]) -> bool:
+    if root.is_symlink() or not root.is_dir(): return False
+    actual: dict[str, bytes] = {}
+    for path in root.rglob("*"):
+        if path.is_symlink(): return False
+        if path.is_file(): actual[path.relative_to(root).as_posix()] = path.read_bytes()
+        elif not path.is_dir(): return False
+    return actual == expected
+
+
+def _generation_manifest(root: Path, result: GenerationResult) -> dict[str, Any]:
+    envelope = {"inventory": result.inventory.to_dict(), "units": [unit.to_dict() for unit in result.units],
+                "sources": [[c, p, hashlib.sha256(data).hexdigest()] for c, p, data in result.sources]}
+    digest = hashlib.sha256(json_bytes(envelope)).hexdigest()
+    return {"schema_version": 1, "build": load_product_config(root / "config/product.json").build_number,
+            "input_sha256": digest,
+            "outputs": {name: hashlib.sha256(data).hexdigest() for name, data in result.files}}
+
+
+def json_bytes(value: Any) -> bytes:
+    import json
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
 
 
 def _snapshot(root: Path) -> ReportSnapshot:
     inventory, units = _read_inventory(root), _read_units(root)
     product = load_product_config(root / "config/product.json")
+    stale_path = root / "inventory/stale-units.jsonl"
+    stale = read_jsonl(stale_path, StaleTranslationUnit) if stale_path.exists() else []
+    generation_valid = False
+    trusted: GenerationResult | None = None
+    try:
+        trusted = _trusted_generation(root, materialize=False)
+        manifest_path = root / "generated/manifest.json"
+        generation_valid = (_tree_matches(root / "generated/plugin", dict(trusted.files)) and
+            read_jsonl(manifest_path, dict) == [_generation_manifest(root, trusted)])
+    except (OSError, ValueError):
+        generation_valid = False
     artifact = root / "dist/idea-deu.zip"
-    package: dict[str, bool | str] = {"present": artifact.is_file(), "path": "dist/idea-deu.zip"}
+    package_valid = False
+    expected_package: bytes | None = None
+    if trusted is not None:
+        try:
+            provider = DistributionResourceProvider(Path(_config(root).archive))
+            expected_package = plugin_package_bytes(trusted, inventory, units, provider,
+                                                    root / "plugin/META-INF/plugin.xml")
+            package_valid = artifact.is_file() and artifact.read_bytes() == expected_package
+        except (OSError, ValueError):
+            package_valid = False
+    package: dict[str, bool | str] = {"present": artifact.is_file(), "valid": package_valid,
+                                      "path": "dist/idea-deu.zip"}
     if artifact.is_file(): package.update({"sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(), "size": str(artifact.stat().st_size)})
     return build_report(inventory, units,
         source={"version": product.version, "build": product.build_number, "hash": product.sha256},
         checkpoint=_checkpoint(root),
-        generation={"present": (root / "generated/plugin").is_dir(), "path": "generated/plugin"}, package=package)
+        generation={"present": (root / "generated/plugin").is_dir(), "valid": generation_valid,
+                    "path": "generated/plugin"}, package=package,
+        stale_unit_ids=tuple(item.id for item in stale))
 
 
 def _refresh_report(root: Path) -> ReportSnapshot:

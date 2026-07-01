@@ -2,12 +2,13 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from scripts.idea_deu.models import (
     CollisionRecord, ExclusionReason, ExclusionRecord, Inventory, ProcessingStatus,
     ResourceRecord, ResourceType, TranslationContext, TranslationUnit,
 )
-from scripts.idea_deu.report import build_report, render_json, render_markdown
+from scripts.idea_deu.report import build_report, recover_report_pair, render_json, render_markdown, write_report
 from scripts.idea_deu.validation import Finding, FindingCode, Severity
 
 
@@ -38,3 +39,29 @@ class ReportTests(unittest.TestCase):
         self.assertNotIn("<script>", markdown)
         self.assertIn("1&lt;2", markdown)
 
+    def test_next_command_follows_verified_artifact_states(self):
+        inventory = Inventory((), (), ())
+        reviewed = TranslationUnit("u"*64, "x", "b"*64, "y", TranslationContext("B","k","c","p"),
+                                   ProcessingStatus.TECHNICALLY_REVIEWED, ())
+        self.assertEqual("python -m scripts.idea_deu generate",
+            build_report(inventory, (reviewed,), generation={"valid":False}, package={"valid":False}).next_command)
+        self.assertEqual("python -m scripts.idea_deu package",
+            build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":False}).next_command)
+        self.assertEqual("",
+            build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":True}).next_command)
+
+    def test_stale_ids_are_reported(self):
+        snapshot = build_report(Inventory((),(),()), (), stale_unit_ids=("b", "a"))
+        self.assertEqual({"count": 2, "ids": ["a", "b"]}, snapshot.to_dict()["stale_units"])
+
+    def test_report_pair_crash_is_recoverable(self):
+        with tempfile.TemporaryDirectory() as temp:
+            reports = Path(temp) / "reports"; reports.mkdir()
+            snapshot = build_report(Inventory((),(),()), ())
+            with mock.patch("scripts.idea_deu.report._report_commit_hook", side_effect=OSError("crash")):
+                with self.assertRaises(OSError):
+                    write_report(snapshot, reports / "status.json", reports / "status.md")
+            self.assertTrue((reports / ".report-transaction").is_dir())
+            recover_report_pair(reports)
+            self.assertEqual(json.loads((reports / "status.json").read_text()), snapshot.to_dict())
+            self.assertEqual(render_markdown(snapshot), (reports / "status.md").read_text())
