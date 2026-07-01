@@ -18,12 +18,12 @@ _TIME=(1980,1,1,0,0,0)
 def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
                          descriptor: Path, destination: Path, *,
-                         dedupe_identical: bool = False) -> Path:
+                         dedupe_identical: bool = False, trusted_root: Path | None = None) -> Path:
     payload = plugin_package_bytes(result, trusted_inventory, trusted_units, trusted_provider,
                                    descriptor, dedupe_identical=dedupe_identical)
     destination = Path(destination)
     try:
-        atomic_write_bytes(destination, payload)
+        atomic_write_bytes(destination, payload, trusted_root=trusted_root)
     except (OSError, OutputPathError) as exc:
         raise PackageError(str(exc)) from exc
     return destination

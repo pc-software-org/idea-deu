@@ -19,11 +19,15 @@ def _after_parent_open(_path: Path, _fd: int) -> None:
     """Test seam for exercising path replacement after descriptor binding."""
 
 
-def unsafe_output_parent(path: Path) -> tuple[str, Path] | None:
+def unsafe_output_parent(path: Path, trusted_root: Path | None = None) -> tuple[str, Path] | None:
     """Return the first unsafe component below a trusted control root."""
     parent = Path(path).absolute().parent
-    cwd, temporary = Path.cwd(), Path(tempfile.gettempdir())
-    roots = (cwd.absolute(), cwd.resolve(), temporary.absolute(), temporary.resolve())
+    if trusted_root is not None:
+        anchor = Path(trusted_root).absolute()
+        roots = (anchor,)
+    else:
+        cwd, temporary = Path.cwd(), Path(tempfile.gettempdir())
+        roots = (cwd.absolute(), cwd.resolve(), temporary.absolute(), temporary.resolve())
     candidates = [root for root in roots if parent == root or root in parent.parents]
     if not candidates:
         return "outside trusted control roots", parent
@@ -42,8 +46,8 @@ def unsafe_output_parent(path: Path) -> tuple[str, Path] | None:
     return None
 
 
-def atomic_write_bytes(path: Path, data: bytes) -> None:
-    parent_fd, name = _open_output_parent(path)
+def atomic_write_bytes(path: Path, data: bytes, *, trusted_root: Path | None = None) -> None:
+    parent_fd, name = _open_output_parent(path, trusted_root)
     temp = f".{name}.{secrets.token_hex(8)}.tmp"
     descriptor = -1
     try:
@@ -72,8 +76,8 @@ def atomic_write_bytes(path: Path, data: bytes) -> None:
         os.close(parent_fd)
 
 
-def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes]) -> None:
-    parent_fd, name = _open_output_parent(path)
+def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes], *, trusted_root: Path | None = None) -> None:
+    parent_fd, name = _open_output_parent(path, trusted_root)
     staging = f".{name}.staging"
     backup = f".{name}.backup"
     staging_fd = -1
@@ -150,22 +154,22 @@ def _tree_swap_hook(_label: str) -> None:
     """Test seam for interrupted replacement recovery."""
 
 
-def recover_materialized_tree(path: Path) -> None:
+def recover_materialized_tree(path: Path, *, trusted_root: Path | None = None) -> None:
     """Recover a previously interrupted sibling tree swap without materializing."""
-    parent_fd, name = _open_output_parent(path)
+    parent_fd, name = _open_output_parent(path, trusted_root)
     try:
         _recover_tree_swap(parent_fd, name, f".{name}.staging", f".{name}.backup")
     finally:
         os.close(parent_fd)
 
 
-def _open_output_parent(path: Path) -> tuple[int, str]:
+def _open_output_parent(path: Path, trusted_root: Path | None = None) -> tuple[int, str]:
     target = Path(path).absolute()
-    unsafe = unsafe_output_parent(target)
+    unsafe = unsafe_output_parent(target, trusted_root)
     if unsafe is not None:
         reason, component = unsafe
         raise OutputPathError(f"{reason}: {component}")
-    trusted = _trusted_root(target.parent)
+    trusted = Path(trusted_root).absolute() if trusted_root is not None else _trusted_root(target.parent)
     flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
     descriptor = os.open(trusted, flags)
     try:

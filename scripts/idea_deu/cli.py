@@ -11,14 +11,14 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any, Sequence
 
-from .batches import BatchError, export_next_batch, import_batch, validate_all_units
+from .batches import BatchError, export_next_batch, import_batch, validate_all_units, workflow_lock
 from .config import ProductConfig, load_product_config
 from .generator import (DistributionResourceProvider, GenerationError, GenerationResult,
                         generate_resources, recompute_generation)
 from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStatus,
                      ResourceRecord, ResourceType, StaleTranslationUnit,
                      TranslationContext, TranslationUnit)
-from .package import PackageError, build_plugin_package, plugin_package_bytes
+from .package import PackageError, build_plugin_package
 from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
 from .scanner import ScannerError, load_scanner_config, scan_archive
@@ -49,17 +49,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         return int(exc.code)
     try:
         root = _canonical_root(args.root)
-        if args.command not in {"status", "validate-source"}:
-            _recover_scan(root)
-            recover_report_pair(root / "reports")
-        result = _dispatch(root, args)
-        if args.command not in {"status", "validate-source"}:
-            try:
-                _refresh_report(root)
-            except Exception as exc:
-                print(f"report refresh failed: {exc}", file=sys.stderr)
-                return DOMAIN_ERROR
-        return result
+        read_only = args.command in {"status", "validate-source"}
+        with workflow_lock(root, shared=read_only):
+            if not read_only:
+                _recover_scan(root)
+                recover_report_pair(root / "reports", trusted_root=root)
+            result = _dispatch(root, args)
+            if not read_only:
+                try:
+                    _refresh_report(root)
+                except Exception as exc:
+                    print(f"report refresh failed: {exc}", file=sys.stderr)
+                    return DOMAIN_ERROR
+            return result
     except (BatchError, GenerationError, PackageError, PropertiesError, ScannerError,
             SourceValidationError, StateError, OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
@@ -78,6 +80,11 @@ def _config(root: Path) -> ProductConfig:
     archive = Path(config.archive)
     if archive.is_absolute() or ".." in archive.parts:
         raise ValueError("configured archive must be relative to workflow root")
+    current = root
+    for component in archive.parts:
+        current /= component
+        if current.is_symlink():
+            raise ValueError("configured archive path must not contain symbolic links")
     return replace(config, archive=str(root / archive))
 
 
@@ -114,7 +121,12 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         inventory, units = _read_inventory(root), _read_units(root)
         provider = DistributionResourceProvider(Path(_config(root).archive))
         destination = root / "dist/idea-deu.zip"
-        build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination)
+        build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination,
+                             trusted_root=root)
+        artifact_hash, artifact_size = _file_fingerprint(destination)
+        write_jsonl_atomic(root / "dist/manifest.json", [{"schema_version": 1,
+            "input_sha256": _state_input_digest(inventory, units),
+            "artifact_sha256": artifact_hash, "artifact_size": artifact_size}])
         print(destination); return 0
     if command == "report":
         print(root / "reports/status.json"); return 0
@@ -224,6 +236,9 @@ def _recover_scan(root: Path) -> None:
     transaction = root / ".scan-transaction"
     if not transaction.exists(): return
     if transaction.is_symlink() or not transaction.is_dir(): raise StateError("unsafe scan transaction")
+    if not (transaction / "manifest.jsonl").exists():
+        shutil.rmtree(transaction)
+        return
     if read_jsonl(transaction / "manifest.jsonl", dict) != [{"schema_version": 1, "state": "prepared"}]:
         raise StateError("invalid scan transaction")
     write_jsonl_atomic(root / "inventory/resources.jsonl", read_jsonl(transaction / "resources.jsonl", ResourceRecord))
@@ -260,11 +275,11 @@ def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
     provider = DistributionResourceProvider(Path(_config(root).archive))
     if materialize:
         plugin = root / "generated/plugin"
-        recover_materialized_tree(plugin)
+        recover_materialized_tree(plugin, trusted_root=root)
         if plugin.exists() and _tree_matches(plugin, _expected_files(inventory, units, provider)):
             result = _generation_result(plugin, inventory, units, provider)
         else:
-            result = generate_resources(inventory, units, provider, plugin)
+            result = generate_resources(inventory, units, provider, plugin, trusted_root=root)
         manifest = _generation_manifest(root, result)
         write_jsonl_atomic(root / "generated/manifest.json", [manifest])
         return result
@@ -272,7 +287,9 @@ def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
 
 
 def _recovery_markers(root: Path) -> tuple[Path, ...]:
-    candidates = (root / "translations/.transaction", root / ".scan-transaction",
+    candidates = (root / "translations/.batch-txn.staging",
+                  root / "translations/.batch-txn.active",
+                  root / "translations/.batch-txn.committed", root / ".scan-transaction",
                   root / "reports/.report-transaction", root / "generated/.plugin.staging",
                   root / "generated/.plugin.backup")
     return tuple(path for path in candidates if path.exists())
@@ -301,12 +318,10 @@ def _tree_matches(root: Path, expected: dict[str, bytes]) -> bool:
 
 
 def _generation_manifest(root: Path, result: GenerationResult) -> dict[str, Any]:
-    envelope = {"inventory": result.inventory.to_dict(), "units": [unit.to_dict() for unit in result.units],
-                "sources": [[c, p, hashlib.sha256(data).hexdigest()] for c, p, data in result.sources]}
-    digest = hashlib.sha256(json_bytes(envelope)).hexdigest()
     return {"schema_version": 1, "build": load_product_config(root / "config/product.json").build_number,
-            "input_sha256": digest,
-            "outputs": {name: hashlib.sha256(data).hexdigest() for name, data in result.files}}
+            "input_sha256": _state_input_digest(result.inventory, result.units),
+            "outputs": {name: {"sha256": hashlib.sha256(data).hexdigest(), "size": len(data)}
+                        for name, data in result.files}}
 
 
 def json_bytes(value: Any) -> bytes:
@@ -314,34 +329,68 @@ def json_bytes(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
 
 
+def _state_input_digest(inventory: Inventory, units: Sequence[TranslationUnit]) -> str:
+    envelope = {"inventory": inventory.to_dict(), "units": [unit.to_dict() for unit in units],
+                "sources": [[record.container, record.resource_path, record.source_sha256]
+                            for record in inventory.resources]}
+    return hashlib.sha256(json_bytes(envelope)).hexdigest()
+
+
+def _file_fingerprint(path: Path) -> tuple[str, int]:
+    digest = hashlib.sha256(); size = 0
+    with path.open("rb") as stream:
+        while chunk := stream.read(1024 * 1024): digest.update(chunk); size += len(chunk)
+    return digest.hexdigest(), size
+
+
+def _verify_generation_manifest(root: Path, inventory: Inventory,
+                                units: Sequence[TranslationUnit]) -> tuple[bool, dict[str, Any] | None]:
+    try:
+        records = read_jsonl(root / "generated/manifest.json", dict)
+        if len(records) != 1: return False, None
+        manifest = records[0]
+        if (manifest.get("schema_version") != 1 or
+            manifest.get("input_sha256") != _state_input_digest(inventory, units) or
+            manifest.get("build") != load_product_config(root / "config/product.json").build_number or
+            not isinstance(manifest.get("outputs"), dict)):
+            return False, manifest
+        plugin = root / "generated/plugin"
+        if plugin.is_symlink() or not plugin.is_dir(): return False, manifest
+        seen: set[str] = set()
+        for path in plugin.rglob("*"):
+            if path.is_symlink(): return False, manifest
+            if path.is_file():
+                name = path.relative_to(plugin).as_posix(); seen.add(name)
+                expected = manifest["outputs"].get(name)
+                digest, size = _file_fingerprint(path)
+                if expected != {"sha256": digest, "size": size}: return False, manifest
+            elif not path.is_dir(): return False, manifest
+        return seen == set(manifest["outputs"]), manifest
+    except (OSError, ValueError):
+        return False, None
+
+
 def _snapshot(root: Path) -> ReportSnapshot:
     inventory, units = _read_inventory(root), _read_units(root)
     product = load_product_config(root / "config/product.json")
     stale_path = root / "inventory/stale-units.jsonl"
     stale = read_jsonl(stale_path, StaleTranslationUnit) if stale_path.exists() else []
-    generation_valid = False
-    trusted: GenerationResult | None = None
-    try:
-        trusted = _trusted_generation(root, materialize=False)
-        manifest_path = root / "generated/manifest.json"
-        generation_valid = (_tree_matches(root / "generated/plugin", dict(trusted.files)) and
-            read_jsonl(manifest_path, dict) == [_generation_manifest(root, trusted)])
-    except (OSError, ValueError):
-        generation_valid = False
+    generation_valid, _generation = _verify_generation_manifest(root, inventory, units)
     artifact = root / "dist/idea-deu.zip"
     package_valid = False
-    expected_package: bytes | None = None
-    if trusted is not None:
-        try:
-            provider = DistributionResourceProvider(Path(_config(root).archive))
-            expected_package = plugin_package_bytes(trusted, inventory, units, provider,
-                                                    root / "plugin/META-INF/plugin.xml")
-            package_valid = artifact.is_file() and artifact.read_bytes() == expected_package
-        except (OSError, ValueError):
-            package_valid = False
+    try:
+        package_manifest = read_jsonl(root / "dist/manifest.json", dict)
+        if len(package_manifest) == 1 and artifact.is_file():
+            digest, size = _file_fingerprint(artifact); manifest = package_manifest[0]
+            package_valid = (generation_valid and manifest == {"schema_version": 1,
+                "input_sha256": _state_input_digest(inventory, units),
+                "artifact_sha256": digest, "artifact_size": size})
+    except (OSError, ValueError):
+        package_valid = False
     package: dict[str, bool | str] = {"present": artifact.is_file(), "valid": package_valid,
                                       "path": "dist/idea-deu.zip"}
-    if artifact.is_file(): package.update({"sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(), "size": str(artifact.stat().st_size)})
+    if artifact.is_file():
+        digest, size = _file_fingerprint(artifact); package.update({"sha256": digest, "size": str(size)})
     return build_report(inventory, units,
         source={"version": product.version, "build": product.build_number, "hash": product.sha256},
         checkpoint=_checkpoint(root),
@@ -353,5 +402,5 @@ def _snapshot(root: Path) -> ReportSnapshot:
 def _refresh_report(root: Path) -> ReportSnapshot:
     snapshot = _snapshot(root)
     (root / "reports").mkdir(parents=True, exist_ok=True)
-    write_report(snapshot, root / "reports/status.json", root / "reports/status.md")
+    write_report(snapshot, root / "reports/status.json", root / "reports/status.md", trusted_root=root)
     return snapshot

@@ -134,7 +134,7 @@ def render_markdown(snapshot: ReportSnapshot) -> str:
     return "\n".join(lines)
 
 
-def write_report(snapshot: ReportSnapshot, json_path: Path, markdown_path: Path) -> None:
+def write_report(snapshot: ReportSnapshot, json_path: Path, markdown_path: Path, *, trusted_root: Path | None = None) -> None:
     from .path_safety import atomic_write_bytes
     if json_path.parent != markdown_path.parent or json_path.name != "status.json" or markdown_path.name != "status.md":
         raise ValueError("report pair must use canonical status paths")
@@ -143,28 +143,31 @@ def write_report(snapshot: ReportSnapshot, json_path: Path, markdown_path: Path)
         raise ValueError("unfinished report transaction requires recovery")
     transaction.mkdir(mode=0o700)
     try:
-        atomic_write_bytes(transaction / "status.json", render_json(snapshot).encode("utf-8"))
-        atomic_write_bytes(transaction / "status.md", render_markdown(snapshot).encode("utf-8"))
-        atomic_write_bytes(transaction / "manifest.json", b'{"schema_version":1}\n')
-        recover_report_pair(json_path.parent)
+        atomic_write_bytes(transaction / "status.json", render_json(snapshot).encode("utf-8"), trusted_root=trusted_root)
+        atomic_write_bytes(transaction / "status.md", render_markdown(snapshot).encode("utf-8"), trusted_root=trusted_root)
+        atomic_write_bytes(transaction / "manifest.json", b'{"schema_version":1}\n', trusted_root=trusted_root)
+        recover_report_pair(json_path.parent, trusted_root=trusted_root)
     except Exception:
         if not (transaction / "manifest.json").exists(): shutil.rmtree(transaction, ignore_errors=True)
         raise
 
 
-def recover_report_pair(reports: Path) -> None:
+def recover_report_pair(reports: Path, *, trusted_root: Path | None = None) -> None:
     """Roll a fully staged report pair forward; safe to repeat after a crash."""
     from .path_safety import atomic_write_bytes
     transaction = reports / ".report-transaction"
     if not transaction.exists(): return
     if transaction.is_symlink() or not transaction.is_dir(): raise ValueError("unsafe report transaction")
+    if not (transaction / "manifest.json").exists():
+        shutil.rmtree(transaction)
+        return
     if (transaction / "manifest.json").read_bytes() != b'{"schema_version":1}\n':
         raise ValueError("invalid report transaction")
     json_data = (transaction / "status.json").read_bytes()
     markdown_data = (transaction / "status.md").read_bytes()
-    atomic_write_bytes(reports / "status.json", json_data)
+    atomic_write_bytes(reports / "status.json", json_data, trusted_root=trusted_root)
     _report_commit_hook("between_files")
-    atomic_write_bytes(reports / "status.md", markdown_data)
+    atomic_write_bytes(reports / "status.md", markdown_data, trusted_root=trusted_root)
     shutil.rmtree(transaction)
 
 

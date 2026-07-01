@@ -95,7 +95,9 @@ class CliEndToEndTests(unittest.TestCase):
         mtime, _ = self._successful_mutation(mtime, "generate")
         mtime, _ = self._successful_mutation(mtime, "package")
         mtime, _ = self._successful_mutation(mtime, "report")
-        code, stdout, stderr = self._run("status")
+        with mock.patch("scripts.idea_deu.generator.DistributionResourceProvider.read",
+                        side_effect=AssertionError("status must not read source archive resources")):
+            code, stdout, stderr = self._run("status")
         self.assertEqual(0, code); self.assertEqual("", stderr); self.assertIn("python -m scripts.idea_deu status", stdout)
         report = json.loads((self.root / "reports/status.json").read_text())
         self.assertEqual("complete", report["workflow_state"]); self.assertTrue(report["package"]["valid"])
@@ -177,3 +179,12 @@ class CliEndToEndTests(unittest.TestCase):
         self.assertEqual(before, (backup.stat().st_ino, (backup / "junk").read_bytes()))
         self.assertEqual(0, self._run("generate")[0])
         self.assertFalse(backup.exists()); self.assertFalse((self.root / "generated/plugin/junk").exists())
+
+    def test_source_archive_symlink_is_rejected_without_traceback(self):
+        outside = self.root.parent / f"{self.root.name}-outside.zip"
+        shutil.copy(self.archive, outside); self.archive.unlink(); self.archive.symlink_to(outside)
+        try:
+            code, _stdout, stderr = self._run("validate-source")
+            self.assertNotEqual(0, code); self.assertIn("symbolic", stderr); self.assertNotIn("Traceback", stderr)
+        finally:
+            outside.unlink(missing_ok=True)

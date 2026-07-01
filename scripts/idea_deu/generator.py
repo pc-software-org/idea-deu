@@ -55,7 +55,8 @@ class DistributionResourceProvider:
 
 
 def generate_resources(inventory: Inventory, units: Sequence[TranslationUnit], provider: object,
-                       output: Path, *, dedupe_identical: bool = False) -> GenerationResult:
+                       output: Path, *, dedupe_identical: bool = False,
+                       trusted_root: Path | None = None) -> GenerationResult:
     _validate_generation_structure(inventory, units, dedupe_identical)
     sources: dict[tuple[str, str], bytes] = {}
     for record in inventory.resources:
@@ -63,7 +64,7 @@ def generate_resources(inventory: Inventory, units: Sequence[TranslationUnit], p
         if key not in sources:
             sources[key] = provider.read(record)  # type: ignore[attr-defined]
     rendered = recompute_generation(inventory, units, sources, dedupe_identical=dedupe_identical)
-    _write_tree(output, rendered)
+    _write_tree(output, rendered, trusted_root=trusted_root)
     source_evidence = tuple((container, path, data) for (container, path), data in sorted(sources.items()))
     return GenerationResult(Path(output).absolute(), inventory, tuple(units), source_evidence,
                             tuple(sorted(rendered.items())), dedupe_identical)
@@ -257,9 +258,9 @@ def _supported_record(record: ResourceRecord) -> bool:
     return prefix is not None and path.startswith(prefix) and path.endswith(suffix)
 
 
-def _write_tree(root: Path, resources: Mapping[str,bytes]) -> None:
+def _write_tree(root: Path, resources: Mapping[str,bytes], *, trusted_root: Path | None = None) -> None:
     try:
-        atomic_materialize_tree(root, resources)
+        atomic_materialize_tree(root, resources, trusted_root=trusted_root)
     except (OSError, OutputPathError) as exc:
         raise GenerationError(str(exc)) from exc
 

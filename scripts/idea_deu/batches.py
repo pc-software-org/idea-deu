@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import stat
+import threading
 from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from pathlib import Path
@@ -23,6 +24,7 @@ from .validation import validate_translation
 
 SCHEMA_VERSION = 1
 MAX_BATCH_SIZE = 1000
+_LOCK_STATE = threading.local()
 
 
 class BatchError(ValueError):
@@ -730,30 +732,60 @@ def _write_hook() -> None:
 
 @contextmanager
 def _exclusive_lock(root: Path):
+    with workflow_lock(root, shared=False) as root_fd:
+        yield root_fd
+
+
+@contextmanager
+def workflow_lock(root: Path, *, shared: bool = False):
+    """Reentrant process-wide workflow lock anchored on the root directory."""
     if os.name == "nt" or os.open not in os.supports_dir_fd:
-        raise BatchError("batch mutation requires POSIX dir_fd support")
+        raise BatchError("workflow locking requires POSIX dir_fd support")
+    canonical = Path(root).resolve(strict=True)
+    held_root = getattr(_LOCK_STATE, "root", None)
+    depth = getattr(_LOCK_STATE, "depth", 0)
+    if depth:
+        if held_root != canonical:
+            raise BatchError("cannot nest workflow locks for different roots")
+        if getattr(_LOCK_STATE, "shared", False) and not shared:
+            raise BatchError("cannot upgrade a shared workflow lock")
+        _LOCK_STATE.depth = depth + 1
+        try:
+            yield _LOCK_STATE.fd
+        finally:
+            _LOCK_STATE.depth -= 1
+        return
     directory_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
-    root_fd = os.open(root, directory_flags)
-    _bind_descriptor_identity(root_fd, root, "root")
-    flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0)
-    descriptor = -1
+    root_fd = os.open(canonical, directory_flags)
+    _bind_descriptor_identity(root_fd, canonical, "root")
+    batch_fd = -1
     try:
-        descriptor = os.open(".batch.lock", flags, 0o600, dir_fd=root_fd)
-    except OSError as exc:
-        raise BatchError(f"cannot open batch lock safely: {exc}") from exc
-    try:
-        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
-            raise BatchError("batch lock is not a regular file")
-        _lock_descriptor(root_fd)
-        _lock_descriptor(descriptor)
+        import fcntl
+        fcntl.flock(root_fd, fcntl.LOCK_SH if shared else fcntl.LOCK_EX)
+        flags = os.O_RDWR | getattr(os, "O_NOFOLLOW", 0)
+        if not shared:
+            flags |= os.O_CREAT
+        try:
+            batch_fd = os.open(".batch.lock", flags, 0o600, dir_fd=root_fd)
+        except FileNotFoundError:
+            batch_fd = -1
+        if batch_fd >= 0:
+            if not stat.S_ISREG(os.fstat(batch_fd).st_mode):
+                raise BatchError("batch lock is not a regular file")
+            fcntl.flock(batch_fd, fcntl.LOCK_SH if shared else fcntl.LOCK_EX)
+        _LOCK_STATE.root = canonical; _LOCK_STATE.fd = root_fd
+        _LOCK_STATE.depth = 1; _LOCK_STATE.shared = shared
         try:
             yield root_fd
         finally:
-            _unlock_descriptor(descriptor)
-            _unlock_descriptor(root_fd)
+            _LOCK_STATE.depth = 0; _LOCK_STATE.root = None; _LOCK_STATE.fd = -1
+            _LOCK_STATE.shared = False
+            if batch_fd >= 0:
+                fcntl.flock(batch_fd, fcntl.LOCK_UN)
+            fcntl.flock(root_fd, fcntl.LOCK_UN)
     finally:
-        if descriptor >= 0:
-            os.close(descriptor)
+        if batch_fd >= 0:
+            os.close(batch_fd)
         os.close(root_fd)
 
 
