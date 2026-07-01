@@ -1,0 +1,9 @@
+# IntelliJ distributions are immutable build inputs, not repository content.
+/idea-*.zip
+
+# Generated and local build artifacts.
+/generated/
+/dist/
+/.gradle/
+/build/
+
