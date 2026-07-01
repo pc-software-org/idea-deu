@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest import mock
 
 from scripts.idea_deu.cli import _stale_units, main
 from scripts.idea_deu.models import ProcessingStatus, TranslationContext, TranslationUnit
@@ -72,3 +73,18 @@ class CliTests(unittest.TestCase):
         self.assertEqual("source_changed", revision[0].reason)
         moved = replace(previous[0], context=replace(previous[0].context, bundle="Other"))
         self.assertEqual("context_changed", _stale_units(previous, (moved,), "254")[0].reason)
+
+    def test_malformed_canonical_state_is_domain_error_without_traceback(self):
+        (self.root / "inventory/resources.jsonl").write_text("{bad\n")
+        error = io.StringIO()
+        with contextlib.redirect_stderr(error):
+            self.assertNotEqual(0, main(["--root", str(self.root), "status"]))
+        self.assertNotIn("Traceback", error.getvalue())
+
+    def test_report_refresh_failure_keeps_successful_core_mutation_discoverable(self):
+        error = io.StringIO()
+        with mock.patch("scripts.idea_deu.cli._refresh_report", side_effect=OSError("report disk full")), \
+             contextlib.redirect_stderr(error), contextlib.redirect_stdout(io.StringIO()):
+            self.assertNotEqual(0, main(["--root", str(self.root), "next-batch"]))
+        self.assertTrue(any((self.root / "translations/batches").glob("*.jsonl")))
+        self.assertIn("report refresh failed", error.getvalue()); self.assertNotIn("Traceback", error.getvalue())

@@ -24,6 +24,7 @@ from .report import ReportSnapshot, build_report, recover_report_pair, write_rep
 from .scanner import ScannerError, load_scanner_config, scan_archive
 from .source import SourceValidationError, validate_source
 from .state import StateError, read_jsonl, write_jsonl_atomic
+from .path_safety import recover_materialized_tree
 
 DOMAIN_ERROR = 1
 
@@ -123,7 +124,7 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         print(f"Translation units: {snapshot.counts['translation_units']}")
         print(f"Blocking findings: {snapshot.findings['counts']['blocking']}")
         print(f"Next: {snapshot.next_command}")
-        if (root / "translations/.transaction").exists() or (root / ".scan-transaction").exists() or (root / "reports/.report-transaction").exists(): print("Recovery needed: unfinished transaction detected")
+        if _recovery_markers(root): print("Recovery needed: unfinished transaction detected")
         return 0
     raise ValueError(f"unknown command: {command}")
 
@@ -259,6 +260,7 @@ def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
     provider = DistributionResourceProvider(Path(_config(root).archive))
     if materialize:
         plugin = root / "generated/plugin"
+        recover_materialized_tree(plugin)
         if plugin.exists() and _tree_matches(plugin, _expected_files(inventory, units, provider)):
             result = _generation_result(plugin, inventory, units, provider)
         else:
@@ -267,6 +269,13 @@ def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
         write_jsonl_atomic(root / "generated/manifest.json", [manifest])
         return result
     return _generation_result(root / "generated/plugin", inventory, units, provider)
+
+
+def _recovery_markers(root: Path) -> tuple[Path, ...]:
+    candidates = (root / "translations/.transaction", root / ".scan-transaction",
+                  root / "reports/.report-transaction", root / "generated/.plugin.staging",
+                  root / "generated/.plugin.backup")
+    return tuple(path for path in candidates if path.exists())
 
 
 def _generation_result(path: Path, inventory: Inventory, units: Sequence[TranslationUnit], provider: object) -> GenerationResult:
@@ -338,7 +347,7 @@ def _snapshot(root: Path) -> ReportSnapshot:
         checkpoint=_checkpoint(root),
         generation={"present": (root / "generated/plugin").is_dir(), "valid": generation_valid,
                     "path": "generated/plugin"}, package=package,
-        stale_unit_ids=tuple(item.id for item in stale))
+        stale_units=tuple(stale))
 
 
 def _refresh_report(root: Path) -> ReportSnapshot:

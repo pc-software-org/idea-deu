@@ -11,7 +11,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from .models import Inventory, ProcessingStatus, TranslationUnit
+from .models import Inventory, ProcessingStatus, StaleTranslationUnit, TranslationUnit
 
 
 class WorkflowState(StrEnum):
@@ -21,6 +21,13 @@ class WorkflowState(StrEnum):
     GENERATE = "generate"
     PACKAGE = "package"
     COMPLETE = "complete"
+
+
+@dataclass(frozen=True, slots=True)
+class StaleUnitReport:
+    count: int
+    by_reason: dict[str, int]
+    records: tuple[StaleTranslationUnit, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,12 +41,14 @@ class ReportSnapshot:
     batches: dict[str, int | str | None]
     generation: dict[str, bool | str]
     package: dict[str, bool | str]
-    stale_units: dict[str, Any]
+    stale_units: StaleUnitReport
     workflow_state: WorkflowState
     next_command: str
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        value = asdict(self)
+        value["stale_units"]["records"] = list(value["stale_units"]["records"])
+        return value
 
 
 def build_report(
@@ -50,7 +59,7 @@ def build_report(
     checkpoint: Mapping[str, Any] | None = None,
     generation: Mapping[str, bool | str] | None = None,
     package: Mapping[str, bool | str] | None = None,
-    stale_unit_ids: Sequence[str] = (),
+    stale_units: Sequence[StaleTranslationUnit] = (),
 ) -> ReportSnapshot:
     status_counts = Counter(unit.status.value for unit in units)
     exclusion_counts = Counter(item.reason.value for item in inventory.exclusions)
@@ -81,7 +90,7 @@ def build_report(
         next_command = "python -m scripts.idea_deu package"
     elif units:
         workflow_state = WorkflowState.COMPLETE
-        next_command = "python3 -m scripts.idea_deu status"
+        next_command = "python -m scripts.idea_deu status"
     else:
         workflow_state = WorkflowState.SCAN
         next_command = "python -m scripts.idea_deu scan"
@@ -95,7 +104,9 @@ def build_report(
         batches={"last_completed": completed, "current": current, "current_batch": current_batch},
         generation=dict(generation or {"present": False, "path": "generated/plugin"}),
         package=dict(package or {"present": False, "path": "dist/idea-deu.zip"}),
-        stale_units={"count": len(stale_unit_ids), "ids": sorted(stale_unit_ids)},
+        stale_units=StaleUnitReport(len(stale_units),
+                     dict(sorted(Counter(item.reason for item in stale_units).items())),
+                     tuple(sorted(stale_units, key=lambda item: (item.reason, item.id)))),
         workflow_state=workflow_state,
         next_command=next_command,
     )
@@ -117,7 +128,8 @@ def render_markdown(snapshot: ReportSnapshot) -> str:
     lines += ["", "## Findings and collisions", "", f"- Blocking findings: {data['findings']['counts']['blocking']}", f"- Warning findings: {data['findings']['counts']['warning']}", f"- Collisions: {data['collisions']['total']} ({data['collisions']['unresolved']} unresolved)", "", "| Finding code | Count |", "|---|---:|"]
     lines.extend(f"| {esc(key)} | {value} |" for key, value in data["findings"]["codes"].items())
     lines += ["", "## Workflow", "", f"- Last completed batch: {esc(data['batches']['last_completed'])}", f"- Current batch: {esc(data['batches']['current_batch'] or 'none')}", f"- Stale units: {data['stale_units']['count']}"]
-    lines.extend(f"  - `{esc(identifier)}`" for identifier in data["stale_units"]["ids"])
+    lines.extend(f"  - {esc(reason)}: {count}" for reason, count in data["stale_units"]["by_reason"].items())
+    lines.extend(f"  - `{esc(item['id'])}`: {esc(item['reason'])}, build={esc(item['scan_build'])}, context={esc(json.dumps(item['context'], ensure_ascii=False, sort_keys=True, separators=(',', ':')))}" for item in data["stale_units"]["records"])
     lines += [f"- Workflow state: `{esc(data['workflow_state'])}`", f"- Generated: present={esc(data['generation'].get('present', False))}, valid={esc(data['generation'].get('valid', False))} (`{esc(data['generation'].get('path', ''))}`)", f"- Package: present={esc(data['package'].get('present', False))}, valid={esc(data['package'].get('valid', False))}, sha256=`{esc(data['package'].get('sha256', 'unavailable'))}`, size={esc(data['package'].get('size', 'unavailable'))} (`{esc(data['package'].get('path', ''))}`)", "", "Next command:", "", f"`{esc(data['next_command'])}`", ""]
     return "\n".join(lines)
 

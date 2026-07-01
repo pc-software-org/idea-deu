@@ -47,12 +47,17 @@ class ReportTests(unittest.TestCase):
             build_report(inventory, (reviewed,), generation={"valid":False}, package={"valid":False}).next_command)
         self.assertEqual("python -m scripts.idea_deu package",
             build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":False}).next_command)
-        self.assertEqual("python3 -m scripts.idea_deu status",
+        self.assertEqual("python -m scripts.idea_deu status",
             build_report(inventory, (reviewed,), generation={"valid":True}, package={"valid":True}).next_command)
 
     def test_stale_ids_are_reported(self):
-        snapshot = build_report(Inventory((),(),()), (), stale_unit_ids=("b", "a"))
-        self.assertEqual({"count": 2, "ids": ["a", "b"]}, snapshot.to_dict()["stale_units"])
+        from scripts.idea_deu.models import StaleTranslationUnit
+        context = TranslationContext("B","k","c","p")
+        snapshot = build_report(Inventory((),(),()), (), stale_units=(
+            StaleTranslationUnit("b",context,"1"*64,"source_changed","254"),
+            StaleTranslationUnit("a",context,"2"*64,"removed_from_source","254")))
+        self.assertEqual(2, snapshot.stale_units.count)
+        self.assertEqual({"removed_from_source":1,"source_changed":1}, snapshot.stale_units.by_reason)
 
     def test_report_pair_crash_is_recoverable(self):
         with tempfile.TemporaryDirectory() as temp:

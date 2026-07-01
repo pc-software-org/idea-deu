@@ -104,7 +104,7 @@ def atomic_materialize_tree(path: Path, resources: Mapping[str, bytes]) -> None:
         if existing:
             _remove_tree_at(parent_fd, backup)
             os.fsync(parent_fd)
-    except BaseException:
+    except Exception:
         try:
             if _entry_exists(parent_fd, backup):
                 if _entry_exists(parent_fd, name):
@@ -148,6 +148,15 @@ def _entry_exists(directory_fd: int, name: str) -> bool:
 
 def _tree_swap_hook(_label: str) -> None:
     """Test seam for interrupted replacement recovery."""
+
+
+def recover_materialized_tree(path: Path) -> None:
+    """Recover a previously interrupted sibling tree swap without materializing."""
+    parent_fd, name = _open_output_parent(path)
+    try:
+        _recover_tree_swap(parent_fd, name, f".{name}.staging", f".{name}.backup")
+    finally:
+        os.close(parent_fd)
 
 
 def _open_output_parent(path: Path) -> tuple[int, str]:
