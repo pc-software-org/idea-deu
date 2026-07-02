@@ -261,6 +261,21 @@ class TranslationValidationTests(unittest.TestCase):
         )
         self.assertEqual((), result.findings)
 
+    def test_identical_broken_source_markup_is_not_a_target_blocker(self) -> None:
+        source = "<html>\n<body>\n<p>Description\n<!-- tooltip end -->\n<p>\n</body>\n</html>"
+        target = "<html>\n<body>\n<p>Beschreibung\n<!-- tooltip end -->\n<p>\n</body>\n</html>"
+        result = validate_translation(source, target)
+        self.assertNotIn(
+            FindingCode.MARKUP_STRUCTURE_CHANGED,
+            {finding.code for finding in result.findings},
+        )
+        # Guardrail: a valid source but invalid target still blocks.
+        self.assert_code(
+            "<b>bold</b>",
+            "<b>fett",
+            FindingCode.MARKUP_STRUCTURE_CHANGED,
+        )
+
     def test_malformed_markup_and_external_entities_are_blocked_without_resolution(self) -> None:
         self.assert_code("<b>bold</b>", "<b>fett", FindingCode.MARKUP_STRUCTURE_CHANGED)
         self.assert_code(

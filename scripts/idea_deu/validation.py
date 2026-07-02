@@ -85,7 +85,8 @@ def validate_translation(
 
     markup_relevant = source_markup.relevant or target_markup.relevant
     if markup_relevant:
-        if not target_markup.valid or source_markup.structure != target_markup.structure:
+        target_regressed = source_markup.valid and not target_markup.valid
+        if target_regressed or source_markup.structure != target_markup.structure:
             findings.append(Finding(FindingCode.MARKUP_STRUCTURE_CHANGED, Severity.BLOCKING))
         elif source_markup.links != target_markup.links:
             findings.append(Finding(FindingCode.LINK_CHANGED, Severity.BLOCKING))
