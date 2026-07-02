@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 72413 |
+| open | 72313 |
 | translated | 0 |
-| technically_reviewed | 100 |
+| technically_reviewed | 200 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -36,16 +36,16 @@
 ## Findings and collisions
 
 - Blocking findings: 0
-- Warning findings: 1
+- Warning findings: 2
 - Collisions: 3 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| length_ratio | 1 |
+| length_ratio | 2 |
 
 ## Workflow
 
-- Last completed batch: 1
+- Last completed batch: 2
 - Current batch: none
 - Stale units: 0
 - Workflow state: `translate`
