@@ -1,0 +1,47 @@
+jupyter.onboarding.module.name=Jupyter
+jupyter.onboarding.module.description=Learn how to use Jupyter notebooks.
+
+jupyter.onboarding.lesson.name=Get Acquainted with Jupyter
+jupyter.onboarding.change.ui.settings=For this lesson, <ide/> changes some UI settings to the default state. \
+  Your preferences will be restored when you complete or exit the lesson.
+jupyter.onboarding.wait.indexing=Now <ide/> needs to collect data about the installed package, which should take a few moments.
+jupyter.onboarding.install.pandas=<ide/> highlights errors and problems right in the editor. \
+  The red line indicates that you need to install the {0} package. Move the cursor to the highlighted {1} word and press {2}.
+jupyter.onboarding.confirm.package.installation=Just press {0} to invoke installation.
+jupyter.onboarding.wait.pandas.installation=Wait for the package to be installed.
+jupyter.onboarding.run.first.sample=There is a sample code cell created for this lesson. Press {0} to run it.
+jupyter.onboarding.open.results.in.tool.window=You can preview the results of the cell execution in the output area. \
+  Click {0} to open the data frame in a separate tool window.
+jupyter.onboarding.return.to.notebook=In this tool window, you can have more space for in-depth exploration of the data. \
+  But now let''s get back to the notebook. Press {0} to close the tool window.
+jupyter.onboarding.second.cell.intro=Let's build some matplotlib graphs based on the data frame of the Python kernels. \
+  The second cell is missing the name of the first column, which is needed for the pie chart.
+jupyter.onboarding.install.matplotlib=Let''s install {0}. Press {1} to invoke context actions.
+jupyter.onboarding.insert.second.cell=Now add the second cell. Press {0} or click {1} {2} button.
+jupyter.onboarding.start.completion=You can quickly complete the names of the columns you want to include into the plot: \
+  start typing {0} and the completion list will appear. Alternatively, you can also press {1} and continue typing to reduce the list.
+jupyter.onboarding.finish.completion=Ensure that {0} is selected and press {1}.
+jupyter.onboarding.run.and.select.below=Let''s run this cell and add another one bellow. \
+  We can do it with the {0} action: click {1} or press {2}.
+jupyter.onboarding.third.cell.intro=Now, let's modify the initial data set and calculate the average number of kernels \
+  for Python 3.4 and 3.5.
+jupyter.onboarding.right.click.for.split=Let''s place the function and its usage in different cells. \
+  Right-click and select {0} from the context menu.
+jupyter.onboarding.apply.split=Click {0}.
+jupyter.onboarding.invoke.search.everywhere=You can execute the current cell and all cells below it. \
+  Press {0} twice to look for necessary IDE action.
+jupyter.onboarding.start.typing.run.below=Remember the {0} dialog. It can help you find entities related to actions or \
+  settings in your code or IDE. Just start typing {1}.
+jupyter.onboarding.press.run.below=Press {0} when the necessary item is selected. \
+  Note that there are several other actions that contain {1} and {2}, so be sure to select the right one.
+jupyter.onboarding.debug.introduction=Looks like you have an execution error. By default, the traceback in the output area is folded. \
+  Expand it to preview the details. Let's debug the error.
+jupyter.onboarding.debugging.workflow.description=<strong>Note</strong> that the function definition and its call are located in \
+  the different cells. To perform debugging in such a situation you need firstly run all cells (this has been already done). \
+  Next, you need to start debugging the cell with the definition. Let's do it now.
+jupyter.onboarding.start.to.debug.call=Now you can debug the cell with the function call.
+jupyter.onboarding.balloon.about.debug.panel=The {0} tool window provides a toolbar with various debugging actions.
+jupyter.onboarding.fix.problem=You need to correct the column name to fix the detected error. \
+  Replace {0} (mind the hyphen in the middle) with {1} (underscore is needed).
+jupyter.onboarding.rerun.all=Now you''re ready to rerun the corrected cells. Click {0} or press {1}.
+jupyter.onboarding.congratulations=Congratulations! You've completed the lesson.

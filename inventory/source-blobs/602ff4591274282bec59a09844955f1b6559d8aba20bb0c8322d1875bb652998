@@ -1,0 +1,5 @@
+<html>
+<body>
+Highlights spaces inside URL path segments. HTTP Client will ignore them. For better composing use Split Lines action.
+</body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+<body>
+<p>Reports duplicated stage names in <code>FROM ... AS stage-name</code> command.</p>
+
+<p><b>Examples:</b></p>
+<pre><code>
+  # the commands below will fail
+  FROM ubuntu:latest AS stage1
+  FROM ubuntu:latest AS stage1
+</code></pre>
+</body>
+</html>

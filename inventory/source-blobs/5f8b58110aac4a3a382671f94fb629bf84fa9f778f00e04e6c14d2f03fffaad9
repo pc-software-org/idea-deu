@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports <code>#x</code>-styled access to private fields.
+<br/><br/>
+Such syntax was allowed in the early versions of the specification draft, but is no longer a valid syntax.
+Most recent versions of the draft only allow using <code>this.</code> qualifier explicitly.
+</body>
+</html>

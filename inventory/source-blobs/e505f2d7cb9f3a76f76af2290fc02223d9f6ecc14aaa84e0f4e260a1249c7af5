@@ -1,0 +1,12 @@
+<html>
+<body>
+Checks for <pre><code>@ManyToMany</code></pre> associations with the <pre><code>CascadeType.REMOVE</code></pre> attribute.
+Specifying <pre><code>CascadeType.REMOVE</code></pre> for <pre><code>@ManyToMany</code></pre> doesn’t make sense to be cascaded
+because it will propagate beyond the link table.
+Since the other side might be referenced by other entities on the parent-side, the automatic removal might end up in
+a <pre><code>ConstraintViolationException</code></pre>.
+For example, if <pre><code>@ManyToMany(cascade = CascadeType.ALL)</code></pre> was defined, and the first person would be deleted,
+Hibernate would throw an exception because another person is still associated with the address that’s being deleted.
+For more info see <a href="https://vladmihalcea.com/hypersistence-optimizer/docs/user-guide/#ManyToManyCascadeRemoveEvent">the article</a>.
+</body>
+</html>

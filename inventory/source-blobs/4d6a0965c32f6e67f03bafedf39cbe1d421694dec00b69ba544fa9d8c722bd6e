@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a ternary conditional expression with identical <code>then</code> and <code>else</code> branches.
+</body>
+</html>

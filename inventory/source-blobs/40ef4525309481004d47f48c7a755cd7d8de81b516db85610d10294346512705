@@ -1,0 +1,5 @@
+<html>
+<body>
+Generates multiple INSERT statements from a list of values from the VALUES section.
+</body>
+</html>

@@ -198,7 +198,16 @@ def _unescape(value: str) -> str:
             digits = value[index + 1 : index + 5]
             if len(digits) != 4 or any(c not in "0123456789abcdefABCDEF" for c in digits):
                 raise PropertiesError("malformed unicode escape")
-            result.append(chr(int(digits, 16)))
+            code_unit = int(digits, 16)
+            if 0xD800 <= code_unit <= 0xDBFF and value[index + 5 : index + 7] == "\\u":
+                low_digits = value[index + 7 : index + 11]
+                if len(low_digits) == 4 and all(c in "0123456789abcdefABCDEF" for c in low_digits):
+                    low = int(low_digits, 16)
+                    if 0xDC00 <= low <= 0xDFFF:
+                        result.append(chr(0x10000 + ((code_unit - 0xD800) << 10) + low - 0xDC00))
+                        index += 11
+                        continue
+            result.append(chr(code_unit))
             index += 5
         else:
             result.append(escapes.get(character, character))

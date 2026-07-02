@@ -1,0 +1,17 @@
+<html>
+<body>
+When using <code>@Around</code> advice, remember two things:
+<ul>
+  <li>Calling <code>org.aspectj.lang.ProceedingJoinPoint#proceed</code> is necessary, otherwise the call won't reach the target.</li>
+  <li>Returning the result value (typed <code>java.lang.Object</code>) of that call is necessary, otherwise the return value will never
+    reach the original caller.</li>
+</ul>
+<p>However, the following two conditions almost always indicate a coding error:</p>
+<ul>
+  <li>The signature for the <code>@Around</code> method does not have <code>ProceedingJoinPoint</code> as the first argument: in this case,
+    it's impossible for the call to reach the target.</li>
+  <li>The signature for the <code>@Around</code> method does not have <code>Object</code> as a return type: in this case, the return
+    value of the target method is always lost.</li>
+</ul>
+</body>
+</html>

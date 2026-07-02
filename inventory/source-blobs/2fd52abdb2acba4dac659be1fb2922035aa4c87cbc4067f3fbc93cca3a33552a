@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an unnecessary <code>return</code> statement, that is, a <code>return</code> statement that 
+returns no value and occurs just before the function would have "fallen through" the bottom.
+These statements may be safely removed.
+</body>
+</html>

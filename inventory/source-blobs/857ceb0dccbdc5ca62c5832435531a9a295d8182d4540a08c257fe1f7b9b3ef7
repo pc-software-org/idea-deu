@@ -1,0 +1,4 @@
+webpack.configuration.title=Webpack
+notification.group.webpack=Webpack configuration analysis failed
+js.webpack.config.highlighting.name=Webpack config compliance with JSON Schema
+js.inspection.group.path=JavaScript and TypeScript

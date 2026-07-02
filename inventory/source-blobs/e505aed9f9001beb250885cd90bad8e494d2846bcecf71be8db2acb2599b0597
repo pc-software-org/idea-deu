@@ -1,0 +1,68 @@
+configurable.PrettierConfigurable.display.name=Prettier
+notification.group=Prettier
+
+error.invalid.interpreter=Please specify Node.js interpreter correctly
+error.no.valid.package=No valid package found
+error.package.is.not.installed=Package is not installed
+error.unsupported.version=Failed to reformat: unsupported package version<br>\nPlease upgrade ''prettier'' package to minimum version {0}
+progress.title=Formatting with Prettier\u2026
+processing.0.progress=Processing {0}\u2026
+editor.notification.title=Use code style based on Prettier for this project?
+editor.notification.yes.text=Yes
+editor.notification.no.text=No
+service.not.started.message=Prettier service not started
+reformat.with.prettier.command.name=Reformat Code With Prettier
+not.supported.file=File {0} has unsupported type
+file.was.ignored=File {0} was ignored with .prettierignore
+file.was.ignored.hint=Prettier: file {0} was ignored with .prettierignore
+line.endings.were.updated=Prettier: line endings were updated
+no.lines.changed=Prettier: no lines changed. Content is already properly formatted
+formatted.0.lines=Prettier: formatted {0} lines
+prettier.formatter.hint.0=Prettier: {0}
+prettier.formatter.notification.title=Prettier
+
+dialog.message.cannot.find.absolute.package.path.to.require=Cannot find an absolute package path to require: {0}
+action.PrettierImportCodeStyleAction.text=Apply Prettier Code Style Rules
+action.ReformatWithPrettierAction.text=Reformat with Prettier
+action.ReformatWithPrettierAction.description=Reformat with Prettier
+
+prettier.package.label=&Prettier package:
+prettier.ignore.path.autodetect.configure.automatically.help.text={0} will search for {1} files from the file to format upwards the directory tree and will use the first {1} found.
+prettier.ignore.path.field.label=Path to .prettierignore:
+prettier.ignore.path.field.empty.text=Detect the .prettierignore file automatically
+prettier.format.files.outside.dependency.scope.label=Apply Prettier to files outside the prettier dependency scope
+prettier.format.files.outside.dependency.scope.help.text=Disable this option to suppress applying Prettier to a file as part of the Reformat Code or Run on Save actions if no prettier dependency is found higher in the project tree.
+files.pattern.comment=Use a <a href='https://github.com/isaacs/node-glob#glob-primer'>glob pattern</a>, for example, <code>**/*.{js,ts}</code>
+invalid.pattern=Invalid pattern
+run.for.files.label=Run for &files:
+run.on.code.reformat.label=Run on '&Reformat Code' action
+run.on.save.label=Run on &save
+run.on.paste.label=Run on &paste
+run.on.save.checkbox.on.actions.on.save.page=Run Prettier
+run.on.save.comment.disabled=Prettier integration disabled
+run.on.save.comment.files=Files: {0}
+run.on.save.auto-mode.tooltip=Prettier will run on 'Reformat Code' action if such a package is found.
+
+prettier.code.style.display.name=Prettier
+prettier.checkbox.code.style.modification=Prefer Prettier configuration to IDE code style
+prettier.checkbox.code.style.modification.help.text=\
+  When this option is selected, {0} formatter applies the options from a Prettier configuration file. \
+  If no Prettier configuration file is found, the default Prettier configuration is used. \
+  <br/><br/> \
+  When the option is cleared, {0} formatter uses the default code style settings.\
+  <br/><br/> \
+  If Prettier isn`t applicable to a file, the default {0} code style settings are used no matter whether the option is selected or cleared.
+prettier.action.open.settings.label=Open Prettier Settings\u2026
+prettier.action.disable.for.project.label=Disable Prettier Code Style for Current Project
+prettier.code.style.status.bar.action.group.title=Prettier
+prettier.action.open.configuration.file.label=Edit Configuration File
+prettier.progress.title.resolving.prettier.configuration=Resolving Prettier configuration\u2026
+prettier.notification.config.not.found=No Prettier configuration file is found for the current file. The default Prettier configuration is used.
+prettier.notification.content.code.style.settings.modifier.has.been.disabled=Prettier IDE code style override has been disabled
+prettier.action.reenable.label=Undo
+prettier.automatic.configuration.tooltip.help={0} {1}<br/><br/>{2}
+
+prettier.action.configure.node=Configure Interpreter
+prettier.action.show.details=Show Details
+prettier.action.install.package=Run ''{0}''
+prettier.action.open.settings.simple=Open Settings

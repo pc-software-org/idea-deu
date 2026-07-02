@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a <code>debugger</code> statement used for interaction
+with the Javascript debuggers.  Such statements should not appear in production code.
+</body>
+</html>

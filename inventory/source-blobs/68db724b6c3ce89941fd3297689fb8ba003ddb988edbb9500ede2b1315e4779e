@@ -1,0 +1,6 @@
+<html>
+<body>
+Changes the dialect for the current CSS file to classic CSS. To switch back to the JavaFX dialect, modify the mapping in
+<a href="settings://settings.css.dialects">Settings | Languages &amp; Frameworks | Style Sheets | Dialects</a>.
+</body>
+</html>

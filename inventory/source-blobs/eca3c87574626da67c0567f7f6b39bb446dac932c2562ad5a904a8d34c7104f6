@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a JavaScript call expression where the arguments do not match the signature of the referenced function, including the types of arguments and their number.
+Also, reports if the overloading function doesn't match the overloaded one in terms of parameters and return types.
+
+<p>TypeScript code is ignored.</p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+# React Native
+react.native.config.name=React Native
+react.native.config.platform=Platform:
+react.native.config.arguments=Arguments:
+react.native.config.package=React Native package:
+react.native.config.directory=Working directory:
+react.native.config.env=Environment variables:
+react.native.config.launch=Build and launch application
+react.native.config.hermes=Hermes engine is enabled
+react.native.config.launch.description=Must be started manually on simulator or device if unchecked
+react.native.config.browser=Browser for debugging:
+react.native.config.debug.host=Bundler host:
+react.native.config.debug.port=Bundler port:
+react.native.task.bundler=Start React Native Bundler
+react.native.task.error=Cannot start React Native Bundler. Please ensure it''s configured properly in "{0}" before launch task of "{1}" run configuration.
+
+react.native.packager.config.title=Configure React Native Bundler
+react.native.packager.config.script=Script:
+react.native.packager.config.package=React Native package:
+react.native.packager.config.command=Command:
+react.native.packager.config.validation.react=react-native is not specified
+react.native.packager.config.validation.npm=npm script is not specified
+
+react.native.runner.warning.connection.wait=Waiting for connection to React Native packager. <br/>Make sure you have selected 'Debug JS Remotely' from the Developer Menu.
+react.native.runner.warning.build.failed=Build failed. <br/>Please run the application on the device manually and invoke Debug JS Remotely' from the Developer Menu.
+react.native.runner.action.stop.text=Stop process
+
+react.native.project.generator.description=<a href='https://facebook.github.io/react-native/'>React Native</a> lets you build mobile apps using only JavaScript. It uses the same design as React, letting you compose a rich mobile UI from declarative components.
+react.native.project.generator.package.name=React Native:
+react.native.project.generator.validation={0} is not a valid name for a project. Please use an alphanumeric project name.
+
+react.native.error.invalid.react.native.path=invalid react-native path
+react.native.error.browser.path.empty=browser path is empty
+react.native.error.react.native.not.specified=react-native is not specified
+react.native.error.invalid=invalid react-native

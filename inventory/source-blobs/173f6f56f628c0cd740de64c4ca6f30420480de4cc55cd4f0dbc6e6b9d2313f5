@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports reusing a local variable and overwriting its
+value with a new value that is not related to the original variable usage.  Reusing a local variable in this way may be confusing
+because the intended semantics of the local variable may vary with each usage.  It may also cause bugs, if code changes result in values that were expected to be overwritten while they are actually live.   It is good practices to keep variable lifetimes as short as possible, and not
+reuse local variables for the sake of brevity.
+</body>
+</html>

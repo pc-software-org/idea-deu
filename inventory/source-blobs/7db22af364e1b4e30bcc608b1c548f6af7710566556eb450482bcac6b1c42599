@@ -1,0 +1,12 @@
+# Authorship API labels
+provenance.authorship.compute.action.label=Computing Source Authorship
+
+# History API labels
+provenance.history.compute.action.label=Collecting File Changes
+
+# Provenance storage labels
+provenance.storage.project.closing.flush.action.title=Saving Provenance Entries\u2026
+
+# UI provenance authorship indicators
+provenance.authorship.indicator.ai=AI
+provenance.authorship.indicator.human=\uD83D\uDC64

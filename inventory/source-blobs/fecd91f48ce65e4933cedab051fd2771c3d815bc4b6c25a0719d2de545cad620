@@ -1,0 +1,21 @@
+<!-- Copied from community/java/java-impl/src/inspectionDescriptions/SuspiciousNameCombination.html -->
+<html>
+<body>
+Reports an assignment or a function call where the name of the target variable or the function parameter does not match the name of the value assigned to it.
+<p>Example:</p>
+<pre><code>
+  <b>var</b> x = 0;
+  <b>var</b> y = x;
+</code></pre>
+or
+<pre><code>
+  <b>var</b> x = 0, y = 0;
+  <b>var</b> rc = <b>new</b> Rectangle(y, x, 20, 20);
+</code></pre>
+Here the inspection guesses that <code>x</code> and <code>y</code> are mixed up.
+<!-- tooltip end -->
+<p>Specify the names that should not be used together. An error is reported
+  if a parameter name or an assignment target name contains words from one group while the name of the assigned or passed
+  variable contains words from another group.</p>
+</body>
+</html>

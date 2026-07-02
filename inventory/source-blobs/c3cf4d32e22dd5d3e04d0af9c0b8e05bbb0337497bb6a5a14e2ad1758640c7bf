@@ -1,0 +1,34 @@
+notification.trace.data.sharing.non.commercial.title=Update about data collection
+notification.trace.data.sharing.non.commercial.text=Thank you for being part of our community and helping us improve JetBrains products. \
+  Starting from version {0}, we\u2019ll be collecting more detailed data from users with free non-commercial licenses, \
+  and we\u2019ll use this data for further product improvements, including the training of AI models. \
+  You can easily disable this data collection in Settings | Appearance \\& Behavior | System Settings | Data Sharing. \
+  Learn more <a href="https://www.jetbrains.com/legal/docs/terms/product_data_collection/">here</a>.
+notification.trace.data.sharing.ok=OK
+notification.trace.data.sharing.adjust.settings=Adjust Settings
+notification.trace.data.sharing.internal.title=Help JetBrains Become Better in AI
+notification.trace.data.sharing.internal.text=The IDE may record how you interact with the code, IDE, and plugins (like AI Assistant and Junie). \
+  This helps us to improve the functionality of JetBrains products and train our ML models. \
+  Recorded data is not linked to your JetBrains Account but may contain elements of the text or code you edit. \
+  You can opt out at any time in {0} | Appearance \\& Behavior | System Settings | Data Sharing. <a href="https://www.jetbrains.com/legal/docs/terms/product_data_collection/">Learn more</a>.
+notification.trace.data.sharing.yes=OK
+notification.trace.data.sharing.commercial.title=Thank you for helping us improve JetBrains products!
+notification.trace.data.sharing.commercial.text=Starting from version {0}, we\u2019ll be collecting more detailed data from users who have volunteered to share it with us. \
+  We\u2019ll use this data for further product improvements, including the training of AI models. If you want to continue sharing your data with us, please click OK. \
+  Learn more <a href="https://www.jetbrains.com/legal/docs/terms/product_data_collection/">here</a>.
+notification.trace.enabled.data.sharing.organization.title=Update about data collection
+notification.trace.enabled.data.sharing.organization.text=Your organization admin enabled a detailed code collection for all organization members. \
+  Learn more <a href="https://www.jetbrains.com/legal/docs/terms/product_data_collection/">here</a>. If you want to disable this data sharing, please contact your organization admin.
+action.ShowTraceMachineId.text=TRACE Machine ID
+action.ShowTraceMachineId.description=Show TRACE Machine ID
+action.DecryptTraceEvent.text=Decrypt TRACE Event
+action.DecryptTraceEvent.description=Decrypt and display TRACE state event from Base64-encoded encrypted string
+notification.on.tool.window.title.trace.machine.id=TRACE Machine ID
+notification.content.trace.machine.id.value=TRACE Machine ID: {0}
+notification.action.copy.to.clipboard=Copy to Clipboard
+notification.content.trace.machine.id.unavailable.see.idea.log.for.details=TRACE Machine ID is unavailable. See idea.log for details.
+dialog.decrypt.trace.event.title=Decrypt TRACE Event
+dialog.decrypt.trace.event.message=Enter Base64-encoded encrypted TRACE event:
+notification.title.decrypt.trace.event.success=TRACE Event Decrypted
+notification.title.decrypt.trace.event.failed=Failed to Decrypt TRACE Event
+notification.content.decrypt.trace.event.failed=The provided data could not be decrypted or is invalid. Please check the input and try again.

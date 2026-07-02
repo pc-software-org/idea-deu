@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>
+  Reports syntax errors, type errors, deprecated and unresolvable keys and values in Quarkus <code>.properties</code> configuration files.
+</p>
+<p>
+  Also highlights syntax and type errors.
+</p>
+</body>
+</html>

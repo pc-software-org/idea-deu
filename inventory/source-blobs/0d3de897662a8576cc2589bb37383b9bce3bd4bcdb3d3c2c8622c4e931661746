@@ -1,0 +1,27 @@
+<html>
+<body>
+<p>Reports unquoted port mappings in Docker Compose files.</p>
+<p>
+  According to the <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-1">Compose file specification</a>,
+  mapping ports in the <code>HOST:CONTAINER</code> format may lead to erroneous results when using a container port lower than 60,
+  because YAML parses numbers in the format <code>xx:yy</code> as a base-60 value.
+  For this reason, we recommend always explicitly specifying the port mappings as strings.
+</p>
+<p><b>Examples:</b></p>
+<pre><code>
+  ports:
+    - 3000
+    - 3000-3005
+    - 22:22
+    - 8080:8080
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  ports:
+    - "3000"
+    - "3000-3005"
+    - "22:22"
+    - "8080:8080"
+</code></pre>
+</body>
+</html>

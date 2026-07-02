@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports object allocation where the result of the allocated object is ignored, for example, <code>new Error();</code> as a statement, without any assignment.
+Such allocation expressions may  indicate an odd object initialization strategy. 
+</body>
+</html>

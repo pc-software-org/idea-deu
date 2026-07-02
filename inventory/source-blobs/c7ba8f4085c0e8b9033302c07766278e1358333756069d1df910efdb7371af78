@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports an assignment to a property that is not defined in the type of a variable. <p>Example: </p>
+<pre><code>
+/**
+ * @type {{ property1: string, property2: number }}
+ */
+let myVariable = create();
+
+myVariable.newProperty = 3; // bad
+</code></pre>
+</body>
+</html>

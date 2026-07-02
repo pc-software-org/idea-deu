@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports unused arguments, variables, or parameters.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE FUNCTION foo(PARAMUSED INT, PARAMUNUSED INT) RETURNS INT AS
+$$
+BEGIN
+    RETURN PARAMUSED;
+END
+$$ LANGUAGE plpgsql;</code></pre>
+<p>The <code>PARAMUNUSED</code> parameter is not used in the function and might be deleted.</p>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<html>
+<body>
+Reports an increment (<code>++</code>) or decrement
+(<code>--</code>) expression where the result of the assignment is
+used in a containing expression. Such assignments can result in confusion due to the order
+of operations, as evaluation of the assignment may affect the outer expression in unexpected
+ways. Example: <code>var a = b++</code>
+</body>
+</html>

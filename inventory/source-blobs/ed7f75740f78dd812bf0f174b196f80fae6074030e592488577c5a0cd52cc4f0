@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a deprecated octal integer literal prefixed with <code>0</code> instead of <code>0o</code>.<br/>
+Such literals are not allowed in modern ECMAScript code, and using them in the strict mode is an error.<br/>
+To force this inspection for ES5 and ES3 language levels, select the 'Warn about obsolete octal literals in ES5- code' checkbox below.
+</body>
+</html>

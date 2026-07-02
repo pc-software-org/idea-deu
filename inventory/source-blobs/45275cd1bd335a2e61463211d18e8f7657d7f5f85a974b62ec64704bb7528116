@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an ES6 import whose <code>from</code> part can be shortened. Suggests importing the parent directory.
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<body>
+Reports situations when source code of a database object has been changed.
+  <p>The inspection is triggered when you perform database or object introspection. The introspection is run when you open source code of an
+  object, run statements, and perform code refactoring.
+  Also, you can run introspection by right-clicking an object and selecting <b>Refresh</b>.</p>
+
+<p>The inspection covers the following situations:</p>
+
+<ul>
+  <li>Object source code was changed in the database but code in the editor was not updated. Works in PostgreSQL, Microsoft SQL Server,
+  Oracle, and Sybase ASE.</li>
+  <li>You changed the object source code, introspected the database, but source code has been already changed by someone else.</li>
+  <li>The database introspector was updated in the IDE and you need to download new object properties that were missing in the previous
+    introspector version.</li>
+</ul>
+
+</body>
+</html>

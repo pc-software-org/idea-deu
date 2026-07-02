@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports an arrow function whose body only consists of braces and exactly one statement.
+Suggests  converting to concise syntax without braces.
+<!-- tooltip end -->
+<pre><code>
+    let incrementer = (x) => {return x + 1};
+</code></pre>
+<p>After the quick-fix is applied, the code fragment looks as follows:</p>
+<pre><code>
+    let incrementer = (x) => x + 1;
+</code></pre>
+</body>
+</html>

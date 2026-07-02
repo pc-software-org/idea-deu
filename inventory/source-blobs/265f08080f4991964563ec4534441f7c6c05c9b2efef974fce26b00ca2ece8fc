@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>Reports resource methods with multiple HTTP method annotations (<code>@GET</code>, <code>@POST</code>, <code>@PUT</code>, and so on).</p>
+</body>
+</html>

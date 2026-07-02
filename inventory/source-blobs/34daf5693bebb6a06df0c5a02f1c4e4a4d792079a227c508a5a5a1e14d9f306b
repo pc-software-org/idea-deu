@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports statements that might lead to modification of a database during a read-only connection. <p>To enable read-only mode for a
+  connection,
+  right-click a data source in the <b>Database</b> tool window (<b>View | Tool Windows | Database</b>) and select <b>Properties</b>.
+  In the <b>Data Sources and Drivers</b> dialog, click the <b>Options</b> tab and select the <b>Read-only</b> checkbox.</p>
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo(a INT);
+INSERT INTO foo VALUES (1);</code></pre>
+<p>As <code>CREATE TABLE</code> and <code>INSERT INTO</code> statements lead to a database modification, these statements will be highlighted
+  in read-only connection mode.</p>
+</body>
+</html>

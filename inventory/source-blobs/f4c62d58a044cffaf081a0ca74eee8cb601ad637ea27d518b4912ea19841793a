@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>Reports <code>@Typed</code> annotation usages that violate the following rules:</p>
+<ul>
+  <li>Only producer methods can have the <code>@Typed</code> annotation</li>
+  <li>Bean type must correspond to the types mentioned in the <code>@Typed</code> annotation</li>
+</ul>
+</body>
+</html>

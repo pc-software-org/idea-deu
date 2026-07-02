@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>Reports incorrect <code>@Stereotype</code> annotation classes:</p>
+<ul>
+  <li>Non-empty <code>@Named</code> annotation is not allowed for stereotypes</li>
+  <li>Qualifier annotations are not allowed for stereotypes</li>
+</ul>
+</body>
+</html>

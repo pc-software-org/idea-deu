@@ -1,0 +1,38 @@
+# General
+JBossIntegration.name=JBoss/WildFly
+JBossLocalEditor.instance=Server &Instance:
+JBossRemoteEditor.port = &JMX Port:
+JBossRemoteEditor.ssl = Use &SSL connection
+JBossLocalModel.error.missing = Server instance not specified
+JBossLocalModel.error.invalid = JMX port configuration not found
+JBossLocalModel.error.disabled = JMX access is disabled in configuration
+JBossLocalModel.error.shutdown.invalid = JMX port configuration not found
+JBossLocalModel.error.auth.required = Chosen server instance requires authentication
+JBossLocalModel.error.binding = Wrong port binding set configuration
+JBossLocalModel.error.native.management.invalid = Native management port configuration not found
+JBossLocalModel.error.http.management.invalid = HTTP management port configuration not found
+JBossLocalModel.error.https.management.invalid = HTTPS management port configuration not found
+JBossRemoteModel.error.jmx = JMX port not specified
+JBossRemoteModel.error.management = Management port not specified
+JBossServerModel.error.extension = Artifact ''{0}'' has invalid extension
+JBossServerModel.error.artifact.type = Native deployment method is applicable to archive artifacts only
+JBossServerModel.error.deployment.method.version = Native deployment method is supported since version 7.1
+JBossServerModel.error.server.group = Server group not specified
+JBossLocalModel.error.cannot.acquire.domain.host = Cannot acquire domain host name
+JBossLocalModel.no.single.server.configured = No single server is configured to start for server group ''{0}''
+JBossLocalModel.http.connector.is.not.enabled = HTTP connector is not enabled for server profile
+
+DeploymentStructureDescriptor.title = JBoss 7 Deployment Structure Descriptor
+
+Form.JBossLocalEditor.bindingSet=&Port binding set:
+JBossRemoteEditor.port.management=Management port:
+# JBossDeploymentProvider
+JBossDeploymentProvider.method.staging=Staging
+JBossDeploymentProvider.method.native=Native
+JBossPersistentDataEditor.button.register.schemas=Register Schemas\u2026
+JBossPersistentDataEditor.label.port.offset=&Port offset:
+JBossPersistentDataEditor.radio.button.domain=&domain
+JBossPersistentDataEditor.radio.button.standalone=&standalone
+JBossPersistentDataEditor.label.operating.mode=Operating mode:
+JBossPersistentDataEditor.label.server.group=Server group:
+progress.title.searching.for.schemas=Searching for schemas\u2026

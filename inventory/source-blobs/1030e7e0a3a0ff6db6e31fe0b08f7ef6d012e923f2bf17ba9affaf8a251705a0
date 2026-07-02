@@ -1,0 +1,22 @@
+workspace.error.lldbNotFound=Debug is impossible without lldb binaries required by Kotlin/Native
+
+konan.runconfig.id=KonanRunConfiguration
+konan.runconfig.title=Kotlin/Native Application
+konan.runconfig.description=Kotlin/Native application configuration
+
+konan.runconfig.error.incompatibleVariant=Selected variant {0} is incompatible with the executable.
+konan.runconfig.error.noBeforeLaunchTask=Task of type {0} is required in Before launch.
+konan.runconfig.error.noBinary=Binary information is not provided.
+konan.runconfig.error.noGradleExecutable=There is no executable.
+konan.runconfig.error.noStandaloneExecutable=Specified executable {0} does not exist.
+konan.runconfig.error.noVariant=There is no variant for launch.
+konan.runconfig.error.unexpectedBeforeLaunchTask=Task of type {0} in Before launch breaks standalone mode.
+konan.runconfig.error.wrongGradleExecutable={0} was not found in project.
+
+konan.build.configuration.name=Build Kotlin Artifacts
+
+editor.label.selectStandalone=Select Standalone Executable To Run
+editor.label.executable.file=Executable file:
+editor.label.gradle.executable=Gradle executable:
+editor.label.stick.to.gradle.model=Stick to Gradle model
+editor.label.variant=Variant:

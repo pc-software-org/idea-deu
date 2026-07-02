@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces an integer shift operator <code>&lt;&lt;</code> with a multiplication operator.
+</body>
+</html>

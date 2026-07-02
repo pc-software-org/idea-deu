@@ -1,0 +1,32 @@
+<html>
+<body>
+Reports the following JPA specification errors:
+<ul>
+  <li>Several attributes are configured for a method or field</li>
+  <li>Illegal attribute is used in Embeddable object (JPA 1.0)</li>
+  <li>Persistent attribute metadata is specified not on a field or property getter</li>
+  <li>No setter or getter with property-based access</li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Entity
+  @Table(name = "TABLE")
+  public class JavaEntity {
+
+    private Integer id; // Error: both getter and setter should be present
+
+    public Integer getId() { ... }
+
+
+
+    private String data;
+
+    public String getData() { ... }
+
+    @Basic // Error: persistence annotation should be placed on field or getter method
+    public void setData(String data) { ... }
+  }
+</code></pre><br/>
+</body>
+</html>

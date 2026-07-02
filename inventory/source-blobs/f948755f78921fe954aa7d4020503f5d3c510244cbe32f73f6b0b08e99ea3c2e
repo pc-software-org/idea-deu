@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports s <code>throw</code> statement inside a <code>finally</code>
+block. Such <code>throw</code> statements may mask
+exceptions thrown, and complicate debugging.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an assignment to a variable declared as a <code>for</code> loop parameter.
+Although occasionally intended, this construct can be extremely confusing, and is often a result of an error.
+</body>
+</html>

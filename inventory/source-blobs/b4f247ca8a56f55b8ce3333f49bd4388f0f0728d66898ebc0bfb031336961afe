@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage from 
+<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation">augmentation module</a> without an explicit import.
+</body>
+</html>

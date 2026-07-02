@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a tail recursion, that is, when a function calls itself
+as its last action before returning.  A tail recursion can always be replaced by looping, which will be considerably faster.
+Some JavaScript engines perform this optimization, while others do not.  Thus, tail recursive solutions may have considerably different
+performance characteristics in different environments.
+</body>
+</html>

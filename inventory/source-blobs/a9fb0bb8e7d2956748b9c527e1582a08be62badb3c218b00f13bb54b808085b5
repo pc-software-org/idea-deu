@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a usage of a top-level <code>await</code> expression.
+<!-- tooltip end -->
+While the new 'top-level async' proposal is on its way, using <code>await</code> outside async functions is not allowed.
+</body>
+</html>

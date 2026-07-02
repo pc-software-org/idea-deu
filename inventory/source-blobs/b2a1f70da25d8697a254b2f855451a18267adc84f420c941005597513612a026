@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a redundant <code>import</code> statement.
+This is usually the case if the imported symbols are not used in the source file.
+To avoid side-effects, consider using bare import <code>import 'packageName'</code> instead of the regular one.
+</body>
+</html>

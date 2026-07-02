@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports an <code>if</code> statement with too many
+branches. Such statements may be confusing, and 
+often indicate inadequate levels of design abstraction.
+<!-- tooltip end -->
+<p>
+  Use the field below to specify the maximum number of branches expected.
+</body>
+</html>

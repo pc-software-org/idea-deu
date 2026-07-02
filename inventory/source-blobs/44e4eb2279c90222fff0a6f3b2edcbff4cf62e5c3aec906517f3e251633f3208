@@ -1,0 +1,17 @@
+<html>
+<body>
+<p>Reports incorrect bean/method references in the <code>value</code> parameter of the @MockitoBean, @MockitoSpyBean and @TestBean annotations.
+
+<p><b>Example:</b></p>
+<pre><code>
+@SpringBootTest
+class TestBeanApplicationTests {
+   @TestBean(value = "unknownBean", methodName="createUserService")  // reports 1. "Cannot resolve 'unknownBean' bean"  and 2. "Cannot resolve symbol 'createUserService'"
+   UserService userService;
+
+  @TestBean  // reports "Cannot find static factory method"
+  UserService userService;
+}
+</code></pre>
+</body>
+</html>

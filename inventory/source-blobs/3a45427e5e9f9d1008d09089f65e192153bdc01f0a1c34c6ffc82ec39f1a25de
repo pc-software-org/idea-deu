@@ -1,0 +1,17 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/IncompatibleMask.html -->
+<html>
+<body>
+Reports a bitwise mask expression which for sure 
+evaluates to <code>true</code> or <code>false</code>.
+Expressions are of the form <code>(var & constant1) == constant2</code> or
+<code>(var | constant1) == constant2</code>, where <code>constant1</code>
+and <code>constant2</code> are incompatible bitmask constants.
+<p>Example:</p>
+<pre><code>
+// Incompatible mask: as the last byte in mask is zero,
+// something like 0x1200 would be possible, but not 0x1234
+if ((mask & 0xFF00) == 0x1234) {...}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

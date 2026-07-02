@@ -1,0 +1,25 @@
+el.location.name=Spring
+
+spring.el.name=Spring EL
+SpringElStaticFieldInjectionInspection.cannot.inject.in.static.fields=Injection to static fields is not allowed
+spring.el.inspection.key=Incorrect Spring Expression Language (SpEl) syntax
+spring.el.static.field.inspection.key=Incorrect injecting of SpEL in a static field
+
+spring.el.color.settings.background=Background
+spring.el.color.settings.expression.bounds=Expression bounds
+spring.el.color.settings.keyword=Keyword
+spring.el.color.settings.identifier=Identifier
+spring.el.color.settings.string.text=String text
+spring.el.color.settings.number=Number
+spring.el.color.settings.brackets=Braces and Operators//Brackets
+spring.el.color.settings.braces=Braces and Operators//Braces
+spring.el.color.settings.colon=Braces and Operators//Colon
+spring.el.color.settings.comma=Braces and Operators//Comma
+spring.el.color.settings.dot=Braces and Operators//Dot
+spring.el.color.settings.operation.sign=Braces and Operators//Operation sign
+spring.el.color.settings.parentheses=Braces and Operators//Parentheses
+spring.el.color.settings.bean.prefix=Bean prefix
+spring.el.color.settings.property.key=Property key
+spring.el.color.settings.qualified.type=Qualified type
+spring.el.color.settings.method.call=Method call
+spring.el.color.settings.static.field=Static field

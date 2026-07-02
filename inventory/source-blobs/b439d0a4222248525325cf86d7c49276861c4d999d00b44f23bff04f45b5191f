@@ -1,0 +1,7 @@
+<html>
+<body>
+<p>Reports <code>BootstrapConfiguration</code> included into the Spring Boot application context via a component scan where it might not be needed.</p>
+<p>For more information, see <a href="https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/#customizing-the-bootstrap-configuration">Spring Cloud Commons documentation</a>.</p>
+<!-- tooltip end -->
+</body>
+</html>

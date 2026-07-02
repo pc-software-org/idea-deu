@@ -1,0 +1,26 @@
+<html>
+<body>
+Reports an <code>async</code> function call without an expected <code>await</code> prefix inside an <code>async</code> function.
+Such call returns a <code>Promise</code> and control flow is continued immediately.
+<p>Example:</p>
+<pre><code>
+async function bar() { /* ... */ }
+async function foo() {
+    bar(); // bad
+}
+</code></pre>
+<p>
+After the quick-fix is applied, the <code>await</code> prefix is added:</p>
+<pre><code>
+async function bar() { /* ... */ }
+async function foo() {
+    await bar(); // good
+}
+</code></pre>
+<br/>
+When the 'Report for promises in return statements' checkbox is selected, also suggests adding <code>await</code> in return statements.<br/>
+While this is generally not necessary, it gives two main benefits.<br/><ul><li>
+You won't forget to add <code>await</code> when surrounding your code with <code>try-catch</code>.</li>
+<li>An explicit <code>await</code> helps V8 runtime to provide <a href="https://bit.ly/v8-zero-cost-async-stack-traces">async stack traces</a>.</li></ul>
+</body>
+</html>

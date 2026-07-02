@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an indexed <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">for</a></code>
+loop used on an array. Suggests replacing it with a <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code> loop.
+<br/><code>for..of</code> loops are introduced in ECMAScript 6 and iterate over <code>iterable</code> objects.
+</body>
+</html>

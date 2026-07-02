@@ -1,0 +1,78 @@
+<html>
+<body>
+Reports non-safe data in unescaped EL expressions in JSP pages. Such cases may lead to
+<a href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> vulnerability.
+<p>
+  The description below uses the term <b>untainted</b> data to refer to safe and trusted data as the opposite of <b>tainted</b> (non-safe,
+  untrusted). See <a href="https://en.wikipedia.org/wiki/Taint_checking">taint checking</a> for more information.
+</p>
+<p>
+  A safe (untainted) object is:
+</p>
+<ul>
+  <li>a primitive data type (except <code>char</code>)</li>
+  <li>a result of a call of a method that is marked as untainted</li>
+  <li>a result of an escaping function call</li>
+  <li>a field, which is marked as untainted</li>
+</ul>
+<p>
+The JSP page could have different contexts for provided data, and if data is safe for one context, it is not
+necessarily mean that it is safe for all.
+See <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html#output-encoding">Cross Site
+  Scripting Prevention Cheat Sheet</a> for some examples. This inspection skips data marked as untainted (safe) in <b>ALL</b> contexts.
+</p>
+<p>
+  This inspection supports the following options to mark methods and fields as safe:
+</p>
+<ul>
+  <li>by using any annotation from the configurable list of untainted annotations</li>
+  <li>by configuring the list of safe methods and fields</li>
+  <li>all static final fields could be marked as untainted by choosing "Consider static final fields as untainted" option on "Untainted Methods
+    and Fields" tab</li>
+</ul>
+<p>
+  This inspection does not highlight places where non-safe data reaches the safe tags in JSP pages.
+  For example, the <code>out</code> tag from the JSTL taglib is secure because it escapes the given value by default.
+  The list of safe tags is configurable (omit <code>tag</code> or <code>attribute</code> value to define a whole range).
+</p>
+<p>&quot;Wrap in JSTL &lt;out&gt; tag&quot; quick fix wraps an EL expression with the JSTL <code>&lt;out&gt;</code> tag.</p>
+<p>Before:</p>
+<pre>
+  <code>
+    ${foo}
+  </code>
+</pre>
+<p>After:</p>
+<pre>
+  <code>
+  &lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+  &lt;c:out value=&quot;${foo}&quot;/&gt;
+  </code>
+</pre>
+<p>&quot;Wrap in JSTL escapeXml() function&quot; wraps non-safe value with <code>escapeXml</code> escaping function.</p>
+<p>Before:</p>
+<pre>
+  <code>
+  &lt;%@ taglib prefix=&quot;custom&quot; uri=&quot;WEB_INF/custom.tld&quot; %&gt;
+  &lt;custom:tag value=&quot;${foo}&quot;/&gt;
+  </code>
+</pre>
+<p>After:</p>
+<pre>
+  <code>
+    &lt;%@ taglib prefix=&quot;custom&quot; uri=&quot;WEB_INF/custom.tld&quot; %&gt;
+    &lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;
+    &lt;custom:tag value=&quot;${fn:escapeXml(foo)}&quot;/&gt;
+  </code>
+</pre>
+<p>More quick fixes exist to add selected tags to safe tags or annotate related methods (or fields) with untainted annotation.</p>
+<p>
+  It is possible to add custom escape functions (see "Escape functions" tab).
+  Now it contains functions from the JSTL that return a safe value (e.g., a well-known <code>escapeXml</code> function).
+  It does not require defining JSTL functions twice with different namespace URIs.
+  If one of the "http://java.sun.com/jsp/jstl/functions" or "http://java.sun.com/jstl/functions" were used,
+  another one would also be checked. It is also possible to skip an escaping function everywhere by its name.
+  To do so, leave a namespace URI field empty.
+</p>
+</body>
+</html>

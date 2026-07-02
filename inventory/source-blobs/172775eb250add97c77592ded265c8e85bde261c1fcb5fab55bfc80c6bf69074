@@ -1,0 +1,23 @@
+<html>
+<body>
+<p>Reports incorrect bean definition rules.</p>
+<p>Top-level Java class can be a simple bean if:</p>
+<ul>
+  <li>It is not a parameterized type.</li>
+  <li>It is not a non-static inner class.</li>
+  <li>It is a concrete class, or is annotated with <code>@Decorator</code>.</li>
+  <li>It has an appropriate constructor: either the class has a constructor with no parameters,
+    or the class declares a constructor annotated with <code>@Initializer</code>.
+  </li>
+  <li>It does not implement any of the following interfaces:
+    <code>javax.servlet.Servlet</code>,
+    <code>javax.servlet.Filter</code>,
+    <code>javax.servlet.ServletContextListener</code>,
+    <code>javax.servlet.http.HttpSessionListener</code>,
+    <code>javax.servlet.ServletRequestListener</code>,
+    <code>javax.ejb.EnterpriseBean</code>.
+  </li>
+  <li>It does not extend <code>javax.faces.component.UIComponent</code>.</li>
+</ul>
+</body>
+</html>

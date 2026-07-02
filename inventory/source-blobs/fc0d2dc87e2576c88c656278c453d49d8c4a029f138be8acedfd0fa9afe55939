@@ -1,0 +1,19 @@
+<html>
+<body>
+<p>Reports Hibernate @Find annotation errors</p>
+<ul>
+  <li>The return type of an annotated method must be an entity type <b>E</b>, or one of the following types:
+    <ul>
+      <li>java.util.List&lt;E&gt;</li>
+      <li>org.hibernate.query.Query&lt;E&gt;</li>
+      <li>org.hibernate.query.SelectionQuery&lt;E&gt;</li>
+      <li>jakarta.persistence.Query&lt;E&gt;</li>
+      <li>jakarta.persistence.TypedQuery&lt;E&gt;</li>
+    </ul>
+  </li>
+  <li>The names and types of the parameters of a finder method must match exactly with the names and types of persistent fields of the
+    entity type returned by the finder method.
+  </li>
+</ul>
+</body>
+</html>

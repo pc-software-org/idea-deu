@@ -1,0 +1,212 @@
+remote.interpreter.deployment.level.incompatibility.error=Interpreter and deployment server should be saved on the same level. Please fix incompatibility using any of three links above.
+remote.interpreter.move.interpreter.tooltip=The interpreter will be visible only for this project
+remote.interpreter.move.interpreter.to.app.level.label=<a href=#>Move this interpreter</a> to project settings
+remote.interpreter.move.interpreter.action.link=Move this interpreter
+remote.interpreter.move.interpreter.label=\ to project settings
+remote.interpreter.deployment.configuration.editor.name=Deployment configuration
+configurable.RemoteToolConfigurable.display.name=Remote SSH External Tools
+configurable.SshConsoleOptionsConfigurable.display.name=SSH Terminal
+settings.connection.settings=Connection settings
+settings.current.vagrant=Current Vagrant
+settings.default.encoding=Default encoding:
+remote.external.tool.group.name=Remote External Tools
+
+vagrant.instance.folder.label=Vagrant Instance &Folder:
+vagrant.host.url.label=Vagrant Host URL:
+vagrant.machine.name.label=Machine name:
+
+ssh = SSH
+ssh.configuration.label=SSH configuration:
+no.ssh.configuration.is.selected=No SSH configuration is selected.
+no.ssh.configuration.named.0.found=No SSH configuration named ''{0}'' found
+project.level.ssh.configs.with.application.level.interpreters=Project level SSH configurations are not supported with application level interpreters. Please use any of the two links below.
+application.level.remote.interpreter.works.only.with.application.level.ssh.configs=Application level remote interpreter works only with application level SSH configurations.
+move.config.to.app.level.label=<a href=#>Move</a> this config to IDE settings
+ssh.config.will.be.visible.for.all.projects=SSH configuration will be visible for all projects
+0.is.saved.in.a.href.ide.settings.a.so.it.needs.the.ssh.config.to.be.saved.there.too={0} is saved in <a href=#>IDE settings</a>, so it needs the SSH configuration to be saved there too.
+remote.sdk=Remote SDK
+
+provider.name.sftp.deployment.configurations=SFTP Deployment configurations
+provider.name.0.deployment.configuration=''{0}'' Deployment configuration
+remote.connection.setting.ssh.config.label=SSH configuration
+remote.connection.settings.set.up.configs.action.label=Set up Configurations
+ssh.configuration.credential.type.name=SSH Configuration
+exception.ssh.configuration.is.not.provided=SSH configuration is not provided
+exception.can.t.get.remote.credentials.for.ssh.configuration.0=Can''t get remote credentials for SSH configuration {0}
+remote.connection.settings.option.select.ssh.configuration.on.every.run=Select SSH configuration on every run
+remote.mappings.field.placeholder=(Empty)
+remote.edit.project.path.mappings=Edit Project Path Mappings
+
+action.com.jetbrains.plugins.remotesdk.console.RunSshConsoleAction.text=Start SSH Session\u2026
+action.com.jetbrains.plugins.remotesdk.console.RunSshConsoleInFileAction.text=Start SSH Session in Directory
+action.com.jetbrains.plugins.remotesdk.console.RunSshConsoleAction.description=Starts SSH session
+action.terminal.predefined.new.ssh.session.text=New SSH Session\u2026
+connecting.to=Connecting to {0}\u2026
+settings.specify.sftp.server.in.deployment=Please specify an SFTP server in Deployment settings
+dialog.title.no.host.to.connect=No Host To Connect
+dialog.title.choose.remote.path=Choose Remote Path
+dialog.message.connection.was.canceled=Connection was canceled.
+dialog.title.error.copying.helpers=Error Copying Helpers
+can.t.write.helpers.version=Can't write helpers version
+progress.text.writing.version.file=Writing version file
+dialog.title.connecting.to=Connecting to {0}
+add.vagrant=add Vagrant
+none.combobox.placeholder=(none)
+dialog.message.selected.config.project.level.please.move.it.to.ide.level=The selected config is the project-level. Move it to the IDE level.
+popup.title.select.host.to.connect=Select Host to Connect
+progress.title.connecting.to=Connecting to {0}
+action.system.default.text=<System Default>
+choose.encoding.0=Choose encoding ''{0}''
+cant.execute.remote.external.tool=Cannot execute remote external tool
+run.remote.external.tool=Run Remote External Tool
+dialog.title.select.executable.on.remote.host=Select Executable on the Remote Host
+dialog.title.select.working.directory.on.remote.host=Select Working Directory on the Remote Host
+# used as a sentence together with copy.of.this.deployment.server.in.ide.settings after it
+action.link.create=Create
+# used as a sentence together with label.this.server.to.ide.settings after it
+action.link.move=Move
+created.deployment.server.will.be.visible.for.all.projects=The created deployment server will be visible for all projects
+deployment.server.will.be.visible.for.all.projects=The deployment server will be visible for all projects
+move=Move
+# used as a sentence together with action.link.move before it
+label.this.server.to.ide.settings=this server to IDE settings
+column.name.disabled=Disabled
+column.name.remote.path=Remote Path
+column.name.local.path=Local Path
+dialog.title.choose.local.path=Choose Local Path
+dialog.message.some.paths.are.empty=Some paths are empty
+dialog.message.there.are.duplicate.local.user.defined.paths=There are duplicate local user-defined paths
+dialog.message.deployment.configuration.not.selected=Deployment configuration is not selected
+dialog.message.project.level.deployment.servers.are.not.currently.supported.please.create.one.using.any.two.links.above=Project level deployment servers are not currently supported. Please create one using any of the two links above.
+dialog.message.couldn.t.connect.to.vagrant=Cannot connect to Vagrant
+dialog.message.can.t.get.vagrant.settings=Cannot get Vagrant settings: \n{0}
+dialog.message.vagrant.instance.folder.not.specified=Vagrant instance folder is not specified
+dialog.message.cant.obtain.ssh.credentials.for.vagrant.at=Cannot obtain SSH credentials for Vagrant at {0}
+dialog.message.multiple.machine.configuration.detected.please.select.machine.name=Multiple machine configuration detected. Select a machine name.
+dialog.message.no.credentials.for.vagrant.remote.interpreter.was.loaded=No credentials for the Vagrant remote interpreter was loaded
+dialog.message.error.create.vagrant.remote.interpreter=Error creating a Vagrant remote interpreter:{0}
+dialog.message.error.connecting.to.remote.host.0=Error connecting to a remote host {0}
+ssh.credentials=SSH Credentials
+web.deployment=Web Deployment
+label.ssh.server=SSH Server:
+label.application.directory=Project path on target:
+title.application.directory=Project Path on Target
+label.application.directory.comment=Run configurations would use this path by default in their settings regarding copying necessary files
+dialog.title.connecting.to.remote.host=Connecting to Remote Host
+sentence.remote.sdk=Remote SDK
+link.label.saved.in.href.ide.settings.so.it.needs.deployment.server={0} is saved in <a href=#>IDE settings</a>, so it needs the deployment server to be saved there too. Which do you prefer?
+configurable.name.ssh.to.undefined.location=SSH to undefined location
+configurable.name.ssh.to.0.1=SSH to {0}:{1}
+config.name.remote.host=Remote host
+error.text.connection.failed=Connection failed
+error.text.connection.was.cancelled=Connection was cancelled
+writing.to.0=Writing to {0}
+list.item.edit.credentials=Edit credentials\u2026
+project.root.placeholder=<Project root>
+everything.disabled.placeholder=(Everything disabled)
+wrapped.project.root=&lt;Project root&gt;
+tooltip.user.defined=User-defined
+tooltip.header=Header
+project.path.mappings.for.all.usages.of.the.selected.interpreter=Project path mappings for all usages of the selected interpreter
+loading.vagrant.config=Loading Vagrant config
+default.group.name.remote.tools=Remote Tools
+progress.text.connecting.to.0=Connecting to {0}\u2026
+no.ssh.configuration.for.0=No SSH configuration for {0}
+error.message.remote.file.0.exists.and.isn.t.a.directory=A remote file {0} exists and it isn''t a directory
+error.message.relative.paths.aren.t.supported.tried.0=Relative paths aren''t supported (tried `{0}`).
+progress.text.testing.connection=Testing connection\u2026
+can.t.connect.to.remote.host=Can't connect to remote host
+connection.cancelled=Connection cancelled
+# 0 is file path on host
+# 1 is host name
+# 2 is a file path on target
+progress.text.set.up.uploading.volume.file.0.ssh.1.2=Set up uploading volume file://{0} ==> ssh://{1}{2}
+# 0 is file path on host
+# 1 is host name
+# 2 is a file path on target
+# after this line there will be some lines, each containing relative to #0 path which would be uploaded correspondingly
+progress.text.set.up.batch.uploading.volume.file.0.ssh.1.2=Set up batch uploading volume file://{0} ==> ssh://{1}{2} for paths
+# 0 is file path on host
+# 1 is host name
+# 2 is a file path on target
+progress.text.set.up.downloading.volume.file.0.ssh.1.2=Set up downloading volume file://{0} <== ssh://{1}{2}
+progress\ text.0.have.been.transferred={0} have been transferred\u2026
+progress.text.copied.0=Copied {0}
+progress.text.ignored.0=Skipped {0}
+label.create.sftp.deployment.server.to.configure.connection.credentials.and.path.mappings=Create SFTP deployment server to configure connection credentials and path mappings.
+label.deployment.configuration=Deployment &configuration:
+label.deployment.host.url=Deployment Host URL:
+# used as a sentence together with action.link.create before it
+copy.of.this.deployment.server.in.ide.settings=copy of this deployment server in IDE settings
+ssh.target.rsync.label.to.reduce.upload.time.configure={0}\\&nbsp;To reduce upload time, use rsync: install it or <a>configure existing\u2026</a>
+ssh.target.rsync.checkbox.use.rsync=Use rsync
+ssh.target.button.test.connection=Test Connection
+ssh.target.label.connection.error.has.occurred=Connection error has occurred:
+ssh.target.dialog.message.please.choose.ssh.server=Please choose SSH server
+ssh.target.dialog.title.rsync.connection.check=Rsync Connection Check
+ssh.target.dialog.message.please.edit.ssh.server.0=Please edit SSH server. {0}
+ssh.target.label.checking=Checking\u2026
+ssh.target.label.connected=Connected
+ssh.target.link.label.details=Details
+ssh.target.label.error.occurred=Error occurred.
+ssh.target.rsync.error.dialog.title=Rsync Connection
+exception.message.rsync.upload.failed.with.exit.code.0=Rsync upload failed with exit code {0}
+message.process.finished.with.exit.code.0=Process finished with exit code {0}
+dialog.message.failed.to.find.ssh.settings=Failed to find SSH settings
+dialog.message.please.fill.ssh.settings.0=Please fill SSH settings. {0}
+
+sst.target.connection.step.description=Connecting to SSH server
+ssh.target.connection.configurable.label.ssh.connection=SSH connection:
+ssh.target.connection.configurable.radio.new=New
+ssh.target.connection.configurable.radio.existing=Existing
+sst.target.connection.step.validation.dialog.message.no.configuration.selected=No configuration is selected
+sst.target.connection.step.validation.dialog.message.selected.configuration.invalid.0=Selected configuration is invalid. {0}
+host.label=Host:
+sst.target.connection.step.validation.dialog.message.host.not.provided=Host is not provided
+label.port=Port:
+sst.target.connection.step.validation.dialog.message.port.not.provided=Port is not provided
+sst.target.connection.step.validation.dialog.message.port.value.not.valid.number=Port value is not a valid number
+username.label=Username:
+sst.target.connection.step.validation.dialog.message.username.not.provided=Username is not provided
+ssh.target.connection.step.text.ssh.configuration.must.be.saved.in.ide.settings=SSH target is saved in <a href=#>IDE settings</a>. You can only select IDE-level SSH configurations here.
+ssh.target.connection.step.text.move.ssh.configuration.to.app.level=<a href=#>Move</a> this SSH configuration to IDE settings
+ssh.target.connection.step.validation.dialog.message.project.level.ssh.configs.not.supported=Project-level SSH configurations are not supported
+sst.target.auth.step.description=Connecting to SSH server: {0}
+sst.target.auth.step.authentication.options.label.fail.text=Authentication options for connecting to {0}
+sst.target.auth.step.authentication.options.label.success.text=Connecting to SSH server {0}
+radio.password=Password:
+checkbox.save.password=Save password
+radio.key.pair=Key pair:
+comment.text.openssh.or.putty=OpenSSH or PuTTY
+private.key.label=Private key:
+passphrase.label=Passphrase:
+checkbox.save.passphrase=Save passphrase
+sst.target.auth.step.note.connecting=Connecting\u2026
+sst.target.auth.step.note.successfully.connected.to.0.with.agent=Successfully connected to {0} with agent
+sst.target.introspection.step.message.failed.to.connect.to.0=Failed to connect to {0}
+sst.target.introspection.step.message.successfully.connected.to.0=Successfully connected to {0}
+sst.target.introspection.step.message.checking.rsync.connection=Checking rsync connection\u2026
+sst.target.introspection.step.message.starting.introspection.for.0=Starting introspection for {0}\u2026
+sst.target.introspection.step.message.introspection.completed=Introspection completed
+sst.target.introspection.step.message.introspection.completed.with.error.0=Introspection completed with error. {0}
+sst.target.introspection.step.description=Introspecting SSH server
+sst.target.introspectable.message.command.finished.with.exit.code.0=Command finished with exit code {0}
+sst.target.introspectable.message.execution.was.killed.due.to.timeout=Execution was killed due to timeout
+sst.target.introspectable.message.getting.environment.failed.with.exit.value.0=Getting environment failed with exit value {0}
+sst.target.language.step.description.project.directory=Project directory
+sst.target.language.step.description.project.directory.and.0.runtime.configuration=Project directory and {0} runtime configuration
+sst.target.language.step.checkbox.use.rsync=Use rsync
+sst.target.language.step.description.label.project.path.on.target=Project path on target:
+sst.target.language.step.comment.text.files.required.to.run.application.on.target.will.be.copied.to.this.directory=Files required to run the application on target will be copied to this directory
+sst.target.creation.dialog.title.new.ssh.target=SSH
+sst.target.introspectable.message.failed.to.execute.command=Failed to execute command
+dialog.message.got.unexpected.settings.for.browsing=Got unexpected settings for browsing
+VagrantTargetStep.step.description=Create a new Vagrant target
+VagrantTargetConfigurationStep.cannot.finish.now=Cannot finish now
+
+# {0} - exception message, reason of the failure, or empty sting
+dialog.message.failed.to.prepare.environment=Failed to prepare environment. {0}
+
+# add to the existing Terminal group
+group.advanced.settings.terminal=Terminal
+advanced.setting.start.ssh.session.in.deployment.directory=Start SSH terminal in the deployment directory

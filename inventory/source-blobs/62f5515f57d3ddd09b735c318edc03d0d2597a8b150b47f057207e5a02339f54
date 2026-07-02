@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports situations when you make SELECT from a function or a DBLINK without an alias with a type (for example,
+  <code>AS t1(s VARCHAR)</code>).
+  <p>This requirement does not apply to scalar functions.</p>
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE FUNCTION produce_a_table() RETURNS RECORD AS $$
+SELECT 1;
+$$ LANGUAGE sql;
+SELECT * FROM produce_a_table() AS s (c1 INT);
+SELECT * FROM produce_a_table() AS s (c1);
+SELECT * FROM DBLINK('dbname=mydb', 'SELECT proname, prosrc FROM pg_proc') AS t1;</code></pre>
+<p>The <code>AS s (c1 INT)</code> has a typed alias, while <code>AS s (c1)</code> and <code>AS t1</code> do not.
+  In this case, the second call of <code>produce_a_table()</code> and <code>DBLINK()</code> will be highlighted.
+</p>
+</body>
+</html>

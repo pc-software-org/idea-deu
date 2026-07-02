@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports <b>if</b> statements which have an <b>else</b> branch and a negated condition.
+Flipping the order of the <b>if</b> and <b>else</b>
+branches will usually increase the clarity of such statements.
+</body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports usages of multiple row limiting clauses in a single query.
+
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>create table foo(a int);
+select top 1 * from foo order by a offset 10 rows fetch next 20 rows only;</code></pre>
+
+<p>The SELECT TOP clause is used to specify that only 1 record must be
+  returned. The FETCH clause specifies the number of rows to return after the OFFSET
+  clause has been processed. But as we already have the SELECT TOP limiting clause, the FETCH clause might be redundant.
+</p>
+</body>
+</html>

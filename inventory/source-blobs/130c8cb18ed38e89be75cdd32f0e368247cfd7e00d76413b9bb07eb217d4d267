@@ -1,0 +1,5 @@
+<html>
+<body>
+Infers a parameter type annotation or a JSDoc type from function calls and adds a generic parameter if necessary.
+</body>
+</html>

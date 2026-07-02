@@ -1,0 +1,13 @@
+<html>
+<body>
+<p>Reports erroneous relations in Docker Compose files.</p>
+<p>
+  According to the <a href="https://docs.docker.com/reference/compose-file/services/#volumes">Compose file specification</a>,
+  certain fields may be invalid depending on the other key-value pairs and may cause errors.
+</p>
+<p>
+  For example, one such relation is volume <code>source</code> field, which is invalid when the volume <code>type</code> is <code>tmpfs</code>.
+</p>
+<br>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Simplifies an <code>if...else</b> statement where the <code>else</code> branch is redundant,
+that is, if the last statement of the <code>if</code> branch transfers control unconditionally.
+</body>
+</html>

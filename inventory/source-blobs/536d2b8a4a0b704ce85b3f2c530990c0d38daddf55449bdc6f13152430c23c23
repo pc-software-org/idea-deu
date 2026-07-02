@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an unused locally accessible parameter, local variable, function, class, or private member declaration.
+</body>
+</html>

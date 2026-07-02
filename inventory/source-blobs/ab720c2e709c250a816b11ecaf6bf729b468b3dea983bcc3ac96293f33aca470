@@ -1,0 +1,11 @@
+notification.group.tailwind=Tailwind CSS
+settings.page.tailwind=Tailwind CSS
+settings.page.lsp.server.path.label=&Language Server:
+settings.page.configuration.label=Configuration:
+settings.page.available.options.comment=See <a href='https://github.com/tailwindlabs/tailwindcss-intellisense#extension-settings'>available options</a>
+settings.page.restore.default.configuration.link=<a href='restore'>Restore default configuration</a>
+
+widget.item.server.file.processing.error = The Tailwind CSS server isn't processing this file. <br/> Click the error icon for details and troubleshooting hints.
+
+widget.item.problem.no.node=Node.js interpreter is not specified
+widget.item.problem.wsl.project.not.wsl.node=Node.js interpreter {0} doesn''t work for the project located in WSL

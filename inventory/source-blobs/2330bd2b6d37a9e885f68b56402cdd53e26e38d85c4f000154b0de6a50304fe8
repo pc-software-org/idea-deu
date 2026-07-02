@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces the DISTINCT clause with GROUP BY.
+</body>
+</html>

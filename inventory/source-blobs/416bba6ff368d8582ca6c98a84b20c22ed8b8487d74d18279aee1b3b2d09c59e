@@ -1,0 +1,9 @@
+<html>
+<body>
+Reports situations when a dialect is not assigned to an SQL file.
+<p>For example, when you open a new SQL file without assigning a dialect
+  to it, you see a notification where the best matching dialect is advised. Click the <b>Use &lt;dialect&gt;</b> link to use the advised
+  dialect. Alternatively, click the <b>Change dialect to</b> link to select the other dialect.
+</p>
+</body>
+</html>

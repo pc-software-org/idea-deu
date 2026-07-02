@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>
+  Reports injected fields, observer methods, and bean constructors with private access.
+</p>
+<p>
+  Private access levels on CDI members increase the amount of reflection manipulations necessary to set up a bean.
+  Use package-private or protected access levels instead.
+</p>
+</body>
+</html>

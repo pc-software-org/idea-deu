@@ -1,0 +1,6 @@
+<html>
+<body>
+Renames a file to match the type name of the selected type (an ECMAScript class or a TypeScript class, interface, or enum).<br/><br/>
+File name matching can be framework-specific. For example, for Angular components, the corresponding <a href="https://angular.io/guide/styleguide#style-02-03">style guide</a> is applied.
+</body>
+</html>

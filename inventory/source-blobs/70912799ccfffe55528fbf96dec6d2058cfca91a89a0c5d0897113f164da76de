@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an empty <code>catch</code> block. This indicates that errors are simply ignored instead of handling them.
+<br/><br/>
+Any comment in a <code>catch</code> block mutes the inspection.
+</body>
+</html>

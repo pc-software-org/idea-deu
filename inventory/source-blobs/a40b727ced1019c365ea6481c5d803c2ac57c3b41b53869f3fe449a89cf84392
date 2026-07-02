@@ -1,0 +1,9 @@
+progress.text.clearing.war.overlay.content.for=Clearing war-overlay content for {0}
+progress.text.extracting.war.overlay.content.for=Extracting war-overlay content for {0}
+notification.title.cannot.extract.content=Cannot extract content of {0}
+
+maven.profiler.cant.start.unsupported.goals=Can't profile provided goals
+maven.profiler.working.dir.not.found=Cannot find working directory {0}
+maven.profiler.project.not.found=Cannot find a Maven project with working directory {0}
+maven.profiler.cant.profile.with.submodules.except.exec.java=Can't start profiler: unable to profile project with submodules (except 'exec:java' goal)
+maven.profiler.cant.start.config.property.set=Can''t start profiler: {0} is set and cannot be rewritten

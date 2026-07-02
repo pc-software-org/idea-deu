@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports dynamic expressions where deferred expressions are expected and vice versa.
+
+<p><b>Example:</b></p><br/>
+<pre><code>
+&lt;jsp:useBean id="exampleBean" scope="request" type="java.util.Date"/&gt;
+
+&lt;h:outputText id="${exampleBean.day}" value="#{exampleBean.day}" /&gt; // Good
+&lt;h:outputText id="#{exampleBean.day}" value="${exampleBean.day}" /&gt; // Error: `id` attribute requires dynamic expression, `value` - deferred 
+</code></pre>
+</body>
+</html>

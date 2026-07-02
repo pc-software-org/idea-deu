@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a discrepancy detected by the <a href="http://stylelint.io">Stylelint</a> linter.
+<!-- tooltip end -->
+<br/><br/>
+The highlighting is based on the rule severity specified in the <a href="https://stylelint.io/user-guide/configure">Stylelint configuration file</a> for each individual rule.
+</body>
+</html>

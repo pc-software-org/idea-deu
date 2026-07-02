@@ -1,0 +1,5 @@
+<html>
+<body>
+Merges the branches of an <code>if...else</code> statement with identical bodies into one <code>if</code> statement.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a reference to a JavaScript member that is marked with a <code>@private</code> or <code>@protected</code> tag but
+does not comply with visibility rules that these tags imply.
+</body>
+</html>

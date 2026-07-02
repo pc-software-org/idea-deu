@@ -1,0 +1,46 @@
+endpoints.empty.text=No endpoints found.
+
+endpoints.empty.text.add.endpoints.from=Add OpenAPI specifications
+endpoints.empty.text.help=OpenAPI specifications
+endpoints.loading.text=Loading endpoints\u2026
+endpoints.empty.text.hint=\u0020to enable:
+endpoints.empty.text.hint.search=\u2014 Search everywhere for URLs
+endpoints.empty.text.hint.url.completion=\u2014 Auto-completion for URLs
+endpoints.empty.text.hint.body.completion=\u2014 Auto-completion for request body
+
+action.EndpointsCompactListItems.text=Compact List Items
+action.EndpointsCompactListItems.GoToAction.text=Compact Endpoints List Items
+action.EndpointsShowModules.text=Group by Module
+action.EndpointsShowModules.GoToAction.text=Group Endpoints by Module
+action.EndpointsShowFromLibraries.text=Show From Libraries
+action.EndpointsShowFromLibraries.GoToAction.text=Show Endpoints From Libraries
+action.EndpointsShowFromTests.text=Show From Tests
+action.EndpointsShowFromTests.GoToAction.text=Show Endpoints From Tests
+action.EndpointsShowSidePanel.text=Show Side Panel
+action.EndpointsShowSidePanel.GoToAction.text=Show Endpoints Side Panel
+
+endpoints.tab.documentation.empty.text=Select endpoint to view documentation
+endpoints.tab.documentation=Documentation
+endpoints.tool.window.title=Endpoints
+toolwindow.stripe.Endpoints=Endpoints
+
+action.show.module.endpoints=Show all endpoints of module
+
+group.EndpointsActions.OptionsMenu.text=Options
+group.EndpointsActions.LayoutOptions.separator=Layout
+group.EndpointsActions.FilterOptions.separator=Filter
+
+searcheverywhere.group.name=Endpoints
+searcheverywhere.group.command.name = Search Endpoints
+action.GotoUrlAction.text=Go to Endpoint\u2026
+action.GotoUrlAction.MainMenu.text=_Endpoint\u2026
+group.advanced.settings.se=Search Everywhere
+
+client.generator.side.panel.title=Examples
+action.MicroservicesExampleOpenInScratchFile.text=Export Example to Scratch File
+
+group.MicroservicesExamplesChangeLanguage.text=Framework Languages
+group.MicroservicesExamplesChangeVersion.text=Framework Versions
+
+action.MicroservicesExamplesBoilerplateToggle.text=Show Boilerplate Code
+action.MicroservicesExamplesBoilerplateToggle.description=Show/Hide boilerplate code in examples

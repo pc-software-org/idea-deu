@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports redundant row limiting clauses like FETCH and LIMIT in queries.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TABLE foo(a INT);
+
+SELECT * FROM foo WHERE EXISTS(SELECT * FROM foo LIMIT 2);
+SELECT * FROM foo WHERE EXISTS(SELECT * FROM foo FETCH FIRST 2 ROWS ONLY);</code></pre>
+<p>To fix the warning, you can add OFFSET to limiting clauses. If OFFSET is missing, then LIMIT is redundant because
+the usage of LIMIT does not influence the operation result of EXISTS. In case with OFFSET, we skip first <code>N</code> rows and this will
+influence the output.</p>
+<pre><code>SELECT * FROM foo WHERE EXISTS(SELECT * FROM foo OFFSET 1 ROW LIMIT 2);
+SELECT * FROM foo WHERE EXISTS(SELECT * FROM foo OFFSET 1 ROW FETCH FIRST 2 ROWS ONLY);</code></pre>
+</body>
+</html>

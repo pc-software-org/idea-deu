@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts Helm repository alias to a URL representation provided the repository is added locally
+</body>
+</html>

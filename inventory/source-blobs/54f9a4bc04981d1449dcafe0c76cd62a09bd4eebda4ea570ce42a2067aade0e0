@@ -1,0 +1,9 @@
+cron.language.description=Cron scheduler expression
+
+inlay.cron.provider.name=Cron expression explanation
+inspections.incorrect.cron.display.name=Validate Cron expression
+cron.hint.header=Cron expression explanation
+inspection.cron.languages.group.name=Cron
+CronDocumentationTarget.cron.explanation=<p>Cron explanation: <b>{0}</b></p>
+cron.parser.error=Unable to parse cron expression
+cron.inlay.hints.provider.description=Provides description hints for Cron expressions.

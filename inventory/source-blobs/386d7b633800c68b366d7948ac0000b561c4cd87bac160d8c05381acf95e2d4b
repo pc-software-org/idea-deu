@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports possible EL problems, such as unresolved references and invalid EL locations.
+
+<p><b>Example:</b></p><br/>
+Consider having function `exampleFun(String)` defined in the current namespace.
+<pre><code>
+&lt;jsp:root xmlns:example="urn:jsptld:exampleNamespace.tld"&gt;
+  ${ example:exampleFun("1") + example:unknownFun("2") } // Error: cannot resolve function 'unknownFun'
+  ${ example:exampleFun("1", "2") } // Error: different number of formal and actual parameters
+&lt;/jsp:root&gt;
+</code></pre>
+</body>
+</html>

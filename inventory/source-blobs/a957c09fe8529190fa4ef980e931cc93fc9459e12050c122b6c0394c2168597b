@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a conditional expression in the format <code>true? result1: result2</code> or <code>false? result1: result2</b>.
+Suggests simplifying the expression.
+</body>
+</html>

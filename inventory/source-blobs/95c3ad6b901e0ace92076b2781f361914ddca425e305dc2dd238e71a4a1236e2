@@ -1,0 +1,2 @@
+Declares a reference to the velocity.properties file in an external file
+to avoid cluttering the source file with IntelliJ IDEA-specific comments.

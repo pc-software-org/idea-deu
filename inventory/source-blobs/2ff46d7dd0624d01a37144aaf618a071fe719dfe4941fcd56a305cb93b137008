@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces a CSS color value (#-hex, <code>rgb()</code>, or <code>hsl()</code>) with an equivalent <code>hwb()</code> color function.
+</body>
+</html>

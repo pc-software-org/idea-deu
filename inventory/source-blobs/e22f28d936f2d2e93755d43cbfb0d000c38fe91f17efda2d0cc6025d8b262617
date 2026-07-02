@@ -1,0 +1,22 @@
+<html>
+<body>
+Reports method calls in EL that don't match <code>method-signature</code> constraints in TLD files.
+
+<p><b>Example Java class:</b></p><br/>
+<pre><code lang="java">
+public class ExampleAction {
+  public void goodAction() { ... }
+  public void badAction(String str) { ... }
+}
+</code></pre>
+
+<p><b>Example JSP file:</b></p><br/>
+<pre><code lang="jsp">
+&lt;jsp:useBean id="example" scope="request" type="org.example.ExampleAction"/&gt;
+&lt;f:view&gt;
+  &lt;h:commandButton action="#{example.goodAction}"/&gt; // Good: method accepts zero arguments and returns `void`
+  &lt;h:commandButton action="#{example.badAction}"/&gt; // Error: method `void badAction(String)` returns `java.lang.String` type instead of `void`
+&lt;/f:view&gt;
+</code></pre>
+</body>
+</html>

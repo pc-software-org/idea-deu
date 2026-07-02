@@ -1,0 +1,27 @@
+<html>
+<body>
+Reports the following problems in descriptors that are used to deploy your Web Module to a server:
+<ul>
+  <li>References to non-instantiable classes</li>
+  <li>References to classes that do not extend required class</li>
+  <li>References to classes with inappropriate scope</li>
+  <li>Empty tag and attribute values</li>
+  <li>Tag and attribute values that do not match required pattern (for example, Java Identifiers)</li>
+  <li>Tags that do not include required children tags or attributes</li>
+  <li>Tags that define objects with duplicate names</li>
+</ul>
+
+<p><b>Example:</b></p><br/>
+<pre><code>
+&lt;web-app&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CustomFilter&lt;/filter-name&gt; // Error: either servlet-name or url-pattern child tag should be defined
+  &lt;/filter-mapping&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;CustomServletName&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/ baseUrl&lt;/url-pattern&gt; // Error: URI-pattern must not contain white spaces
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+</body>
+</html>

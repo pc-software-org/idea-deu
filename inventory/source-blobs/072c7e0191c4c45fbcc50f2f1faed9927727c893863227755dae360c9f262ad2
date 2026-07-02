@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an improper usage of a wrapper for primitive types or a property of a primitive type being
+modified, as in the latter case the assigned value will be lost.
+</body>
+</html>

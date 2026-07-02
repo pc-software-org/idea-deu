@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a collection of fields or variables whose contents are either queried and not updated
+or updated and not queried. Such mismatched queries and updates are pointless
+and may indicate either dead code or a typographical error.
+<p>
+Query methods are automatically detected, based on whether they return something, or a callback is passed to them.
+Use the table below to specify which methods are update methods.
+</body>
+</html>

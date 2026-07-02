@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>return</code> statement inside a <code>finally</code>
+block. Such <code>return</code> statements may mask
+exceptions thrown, and complicate debugging.
+</body>
+</html>

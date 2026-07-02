@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a CSS property that is not supported by the specified browsers.
+Based on the <a href="https://github.com/mdn/browser-compat-data">MDN Compatibility Data</a>.
+</body>
+</html>

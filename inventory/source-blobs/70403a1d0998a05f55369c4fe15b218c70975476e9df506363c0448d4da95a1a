@@ -1,0 +1,7 @@
+<html>
+<body>
+If an item is accessed consequently with the same qualifier in variable declarations and/or assignments
+(for example, <code>var x = obj.x; y = obj.y; z = obj.z</code>),
+converts those variables and/or assignments to a destructuring declaration or assignment.
+</body>
+</html>

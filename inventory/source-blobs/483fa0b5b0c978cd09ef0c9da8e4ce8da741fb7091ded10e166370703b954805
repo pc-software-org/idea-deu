@@ -1,0 +1,14 @@
+action.LlmInstallerEditorContextMenuAction.text=AI Actions
+action.LlmInstallerExplainCommitAction.text=Explain Commit with AI Assistant
+action.LlmInstallerGenerateCommitMessageAction.text=Generate Commit Message with AI Assistant
+action.LLmInstallerImproveCommitMessage.text=Improve Commit Message with AI Assistant
+
+intentions.LlmInstallerAIAssistantIntention.text=AI Actions\u2026
+
+intention.category.large.language.models=AI Assistant
+promo.configurable.ai=AI Assistant
+
+promo.configurable.disable.text=Disable contextual AI promotion
+promo.configurable.disable.description=Hides all actions promoting AI Assistant from the UI
+
+promo.explain.with.ai.text=Explain with AI

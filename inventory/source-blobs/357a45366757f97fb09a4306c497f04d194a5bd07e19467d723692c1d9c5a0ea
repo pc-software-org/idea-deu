@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Reports <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/CachePut.html">@CachePut</a>
+and <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/Cacheable.html">@Cacheable</a>
+annotations declared on the same method.</p>
+
+While <code>@Cacheable</code> causes the method to skip the execution using the cache, <code>@CachePut</code> forces the execution in order to update the cache.
+This leads to unexpected behavior and should be avoided, except in very specific cases when conditions in annotations exclude them from each other.
+Note also that such conditions should not rely on the result object (the <code>#result</code> variable) as these are validated upfront to confirm the exclusion.
+</body>
+</html>

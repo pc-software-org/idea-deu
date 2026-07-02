@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a suspicious usage of a bitwise AND ("<code>&</code>") or OR ("<code>|</code>") operator.
+Usually it is a typo and the result of applying boolean operations AND ("<code>&&</code>") and OR ("<code>||</code>")  is expected.
+</body>
+</html>

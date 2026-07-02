@@ -1,0 +1,6 @@
+<html>
+<body>
+<p>Reports missing Hibernate XML configuration files.</p>
+<p>The quick-fix creates a facet if necessary and adds a configuration file to it.</p>
+</body>
+</html>

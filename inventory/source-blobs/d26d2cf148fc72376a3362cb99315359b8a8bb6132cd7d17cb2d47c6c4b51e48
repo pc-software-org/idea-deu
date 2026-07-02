@@ -1,0 +1,36 @@
+# Specification nodes
+protobuf.specification=Protobuf Specification
+protobuf.documentation.rpc=rpc
+protobuf.documentation.service=service
+protobuf.documentation.message=message
+protobuf.documentation.returns.statement=returns
+
+# Request execution
+open.in.http.client.gutter.name=Execute request
+dialog.message.unable.to.access.request=Unable to access request element
+unable.to.create.channel.for.0=Unable to create channel for "{0}"
+dialog.message.no.proto.file.found.for.specified.method=No .proto file found for specified method "{0}"
+method.not.found.in.proto.descriptor.0=No method descriptor found for specified qualified name "{0}"
+request.execution.connection.timeout.for.address.0=Connection timeout. No response was received from "{0}"
+unable.to.build.message.from.provided.request.body=Unable to build message from provided request body
+unsupported.method.type.0.is.called=Unsupported method type "{0}" is called
+unable.to.build.binary.proto.file.representation.to.execute.rpc=An error occurred during protocol buffers file binary assembly. Details are logged
+reflection.rpc.unsuccessful=Unable to access gRPC server reflection endpoint to execute original request
+reflection.rpc.response.parse.error=Unable to parse reflected server information to execute original request
+reflection.rpc.unknown.server.error=Unable to execute RPC. Server responded with message: "{0}"
+reflection.rpc.unknown.error=Reflective gRPC call didn't succeed
+reflection.rpc.no.response.in.timeout=Reflective gRPC call timed out
+connection.refused.0=Connection refused: {0}
+request.ended.with.exception.0=Unknown error occurred during request execution: "{0}"
+action.CreateGrpcRequestAction.synonym.text=gRPC Request
+action.CreateGrpcRequestAction.text=Create GRPC Request in HTTP Client
+grpc.request=gRPC Request
+grpc.collections.file.name=gRPC Requests
+grpc.whats.new.title=gRPC Requests over Secured Connections
+
+grpc.schemes.inspection.name=GRPC request schema can be substituted or omitted
+grpc.schemes.inspection.group.name=Inappropriate gRPC request scheme
+grpc.schemes.inspection.message=Inappropriate scheme `{0}`
+grpc.schemes.replace.fix.name=Replace scheme with `{0}`
+grpc.schemes.remove.fix.name=Remove scheme
+live.template.grpcr.description=gRPC Request

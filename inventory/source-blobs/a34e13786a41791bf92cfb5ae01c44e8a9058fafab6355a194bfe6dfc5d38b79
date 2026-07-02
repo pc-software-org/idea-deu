@@ -1,0 +1,7 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/ConfusingFloatingPointLiteral.html -->
+<html>
+<body>
+Reports any floating point number that does not have a decimal point, or any numbers before the decimal point,
+or and numbers after the decimal point. Such literals may be confusing, and violate several coding standards.
+</body>
+</html>

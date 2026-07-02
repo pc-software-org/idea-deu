@@ -1,0 +1,37 @@
+<html>
+<body>
+<p>Reports incorrect elements in Bean Validation <code>&lt;constraint-mappings&gt;</code> files:</p>
+
+<ul>
+  <li>References to non-instantiable classes</li>
+  <li>References to classes that do not extend required class</li>
+  <li>References to classes with inappropriate scope</li>
+  <li>Empty tag and attribute values</li>
+  <li>Tag and attribute values that do not match the required pattern (for example, Java Identifiers)</li>
+  <li>Tags that do not include required children tags or attributes</li>
+  <li>Tags that define objects with duplicate names</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+<pre><code>
+&lt;constraint-mappings version="1.1"&gt;
+    &lt;bean class="my.UserClass" ignore-annotations="false"&gt;
+        &lt;field name="name"&gt;
+            &lt;constraint annotation="<strong>java.lang.String</strong>"/&gt;  &lt;!--'java.lang.String' is not a Java Annotation --&gt;
+        &lt;/field&gt;
+
+        &lt;field name="name"&gt;
+            &lt;constraint annotation="javax.validation.constraints.Size"&gt;
+                &lt;element name="min"&gt;<strong>non-number</strong>&lt;/element&gt;    &lt;!--Should be a number from '-2,147,483,648' to '2,147,483,647' --&gt;
+            &lt;/constraint&gt;
+        &lt;/field&gt;
+
+        &lt;getter name="<strong>zzz</strong>"&gt; Cannot resolve symbol 'zzz'
+            &lt;valid/&gt;
+        &lt;/getter&gt;
+
+    &lt;/bean&gt;
+&lt;/constraint-mappings&gt;
+</code></pre>
+</body>
+</html>

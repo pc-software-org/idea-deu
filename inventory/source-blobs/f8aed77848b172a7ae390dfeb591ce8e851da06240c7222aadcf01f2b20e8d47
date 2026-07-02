@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports package and object type specifications that are missing body declarations.
+<p>Package specifications and object types that declare routines as well as package specifications with cursors must have body
+  declarations where those routines and cursors are implemented. Absence of a body leads to a runtime error when routines or cursors are
+  invoked in program code.</p>
+<p>Example (Oracle):</p>
+<pre><code>CREATE OR REPLACE PACKAGE ppp IS
+    FUNCTION foo(a INT) RETURN INT;
+END;</code></pre>
+</body>
+</html>

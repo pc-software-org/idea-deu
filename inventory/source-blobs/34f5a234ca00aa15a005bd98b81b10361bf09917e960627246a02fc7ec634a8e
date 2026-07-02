@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a JavaScript file with a <code>@flow</code> flag  that doesn't have an associated <code>.flowconfig</code> file in the project.
+</body>
+</html>

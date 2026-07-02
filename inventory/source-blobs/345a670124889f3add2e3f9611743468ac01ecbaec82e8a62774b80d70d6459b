@@ -1,0 +1,42 @@
+<html>
+<body>
+Reports usages of transaction management statements like COMMIT or ROLLBACK in trigger bodies.
+<p>With COMMIT or ROLLBACK statements in a trigger body, the trigger will not compile.
+  The fail happens because triggers start during transactions. When the trigger starts the current transaction is still not complete. As
+  COMMIT
+  terminates a transaction, both statements (COMMIT and ROLLBACK) would lead to an exception.
+  Changes that are executed in a trigger should be committed (or rolled back) by the owning transaction that started the trigger.</p>
+<p>Example (Oracle):</p>
+<pre><code>CREATE TABLE employee_audit
+(
+    id          INT  NOT NULL,
+    update_date DATE NOT NULL,
+    old_name    VARCHAR2(100),
+    new_name    VARCHAR2(100)
+);
+
+CREATE TABLE employees
+(
+    id   INT           NOT NULL,
+    name VARCHAR2(100) NOT NULL
+);
+
+CREATE OR REPLACE TRIGGER trig_commit
+    AFTER UPDATE OF name
+    ON employees
+    FOR EACH ROW
+BEGIN
+    INSERT INTO employee_audit VALUES (:old.id, SYSDATE, :old.name, :new.name);
+    COMMIT;
+END;
+
+CREATE OR REPLACE TRIGGER trig_rollback
+    AFTER UPDATE OF name
+    ON employees
+    FOR EACH ROW
+BEGIN
+    INSERT INTO employee_audit VALUES (:old.id, SYSDATE, :old.name, :new.name);
+    ROLLBACK;
+END;</code></pre>
+</body>
+</html>

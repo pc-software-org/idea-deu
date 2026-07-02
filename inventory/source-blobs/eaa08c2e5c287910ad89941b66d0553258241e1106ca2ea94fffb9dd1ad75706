@@ -1,0 +1,84 @@
+action.NewJavaDiagram.text=Java Class Diagram
+command.name.create.new.java.class.diagram=Create New Java Class Diagram
+dialog.message.undo.creating.java.class.diagram.0=Undo creating Java Class Diagram {0}?
+dialog.description.set.diagram.name=Set diagram name
+dialog.message.do.you.want.to.remove.dependency.from.0.to.1=Do you want to remove dependency from {0} to {1}?
+dialog.message.error=Error
+dialog.message.expression.0.is.invalid=Expression ''{0}'' is invalid
+dialog.title.create.0=Create {0}
+dialog.title.create.java.class.diagram=Create Java Class Diagram
+dialog.title.remove.dependency=Remove Dependency
+dialog.title.undo=Undo
+popup.title.select.target.module=Select Target Module                         
+popup.title.usages.of.0=Usages of {0}
+task.title.calculating.module.cyclic.dependencies=Calculating Module Cyclic Dependencies
+task.title.calculating.paths.between.modules=Calculating Paths Between Modules
+validation.info.0.already.exists={0} already exists
+validation.info.bad.class.name=Bad class name
+validation.info.directory.shouldn.t.be.empty=Directory shouldn't be empty
+notification.message.no.paths.to.module.0.have.been.found=No paths to module {0} have been found
+action.name.create.new.java.interface=Create new Java Interface
+action.name.create.new.java.record=Create new Java Record
+notification.message.no.cyclic.dependencies=No cyclic dependencies for module {0} have been found
+action.name.new.enum.constant=New Enum Constant
+notification.message.only.few.paths.have.been.shown=Only few paths have been shown
+action.name.create.new.java.field=Create new Java Field
+action.name.create.new.java.enum=Create new Java Enum
+action.name.create.new.java.class=Create new Java Class
+action.name.new.java.constructor=New Java Constructor
+action.name.create.new.method=Create new method
+show.module.cyclic.dependencies=Show Module Cyclic Dependencies
+add.elements.to.diagram=Add elements to diagram
+show.paths.to.a.module=Show Paths to a Module
+add.dependency=Add Dependency\u2026
+add.dependency.for.a.module=Add dependency for a module
+create.new.modifier=Modifier:
+none.modifier=[none]
+java.diagram.implementation.title=Implementations of {0}
+enter.module.name=Enter module name
+action.NewModulesDiagram.text=Module Dependencies Diagram
+action.NewJigsawModuleDiagram.text=Java Module Diagram
+group.Uml.Analyze.text=Analyze
+config.element.show.one.to.one=Show One To One
+config.element.show.one.to.many=Show One To Many
+config.element.show.usages=Show Usages In Code
+config.element.show.links.in.docs=Show Links In Documentation
+config.element.show.cyclic=Show Cyclic
+config.element.others=Others
+category.name.libraries=Libraries
+category.name.test.dependencies=Test dependencies
+create.new.field.empty.type=Type is empty
+create.new.field.empty.name=Name is empty
+create.edge.command.name.annotation=Annotate {0} with {1}
+create.edge.command.name.extends=Make {0} extend {1}
+create.edge.command.name.implements=Make {0} implement {1}
+create.edge.command.name.remove.link=Remove link between {0} and {1}
+unknown.node.tooltip=unknown
+package.info.message=<html><body>Package <font color=green>{0}</font><br>\
+Contains:<br>\
+\\&nbsp;\\&nbsp;\\&nbsp;\\&nbsp;<font color=blue>{1}</font> {2,choice,0#classes|1#class|2#classes}<br>\
+\\&nbsp;\\&nbsp;\\&nbsp;\\&nbsp;<font color=blue>{3}</font> {4,choice,0#subpackages|1#subpackage|2#subpackages}<br>\
+Total:<br>\
+\\&nbsp;\\&nbsp;\\&nbsp;\\&nbsp;<font color=blue>{5}</font> {6,choice,0#classes|1#class|2#classes}<br>\
+\\&nbsp;\\&nbsp;\\&nbsp;\\&nbsp;<font color=blue>{7}</font> {8,choice,0#subpackages|1#subpackage|2#subpackages}\
+</body></html>
+unknown.module.item=-unknown-
+unnamed.empty.library=Unnamed empty library
+new.class.choose.package=Choose Package
+create.new.field.visibility=Visibility:
+create.new.field.type=Type:
+create.new.field.name=Name:
+create.new.field.initializer=Initializer (if needed)
+create.new.field.make.final=<html><body>Make <b color="#000080">final</b></body></html>
+create.new.field.make.static=<html><body>Make <b color="#000080">static</b></body></html>
+new.class.dialog.name=Name:
+new.class.dialog.package=Package:
+new.class.dialog.target.dir=Target &directory:
+node.constructor.tooltip=Constructor
+node.constructor.tooltip.description=Create new constructor
+
+modules.chart.building.title=Building modules diagram\u2026
+modules.chart.show.test.dependencies.action=Test Dependencies
+modules.chart.show.libraries.action=Libraries
+
+intention.name.show.diagram=Show UML diagram

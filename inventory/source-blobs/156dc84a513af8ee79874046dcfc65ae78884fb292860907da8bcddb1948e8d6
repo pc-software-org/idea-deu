@@ -1,0 +1,4 @@
+jpa.kotlin.immutable.collection.like.property.inspection.display.name=Immutable collection-like property
+jpa.kotlin.immutable.collection.like.property.inspection.problem.descriptor=Properties annotated with <code>@{0}</code> should have a mutable collection-like type
+jpa.kotlin.immutable.not.nullable.property.inspection.display.name=Immutable not-nullable JPA property
+jpa.kotlin.immutable.not.nullable.property.inspection.problem.descriptor=Properties annotated with <code>@{0}</code> should be mutable

@@ -1,0 +1,10 @@
+<html>
+<body>
+Checks used URL imports in the JavaScript language.
+Suggests downloading the module for the specified remote URL.
+Such association enables the IDE to provide proper code completion and navigation.
+<br/>
+<br/>
+URLs in import specifiers are supported only for ECMAScript modules in the JavaScript language.
+</body>
+</html>

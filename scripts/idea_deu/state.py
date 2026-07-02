@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import errno
+import io
 import json
 import os
 import secrets
@@ -42,6 +43,13 @@ def read_jsonl_at(directory_fd: int, name: str, record_type: type[T]) -> list[T]
     finally:
         if descriptor >= 0:
             os.close(descriptor)
+
+
+def read_jsonl_bytes(data: bytes, label: str, record_type: type[T]) -> list[T]:
+    try:
+        return _read_jsonl_stream(io.StringIO(data.decode("utf-8")), label, record_type)
+    except (UnicodeError, TypeError, ValueError) as exc:
+        raise StateError(str(exc)) from exc
 
 
 def write_jsonl_atomic_at(directory_fd: int, name: str, records: Iterable[T]) -> None:

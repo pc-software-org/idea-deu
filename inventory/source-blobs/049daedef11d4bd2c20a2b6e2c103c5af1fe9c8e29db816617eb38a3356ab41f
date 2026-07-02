@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an assignment in the form <code>a =+ b</code>.
+Suggests replacing with <code>a += b</code>.
+</body>
+</html>

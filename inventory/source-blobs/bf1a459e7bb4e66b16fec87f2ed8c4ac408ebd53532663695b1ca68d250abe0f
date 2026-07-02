@@ -1,0 +1,85 @@
+inject.http.url.reference=HTTP URL Reference
+inject.http.ws.reference=WebSocket URL Reference
+inject.http.method.reference=HTTP Method Reference
+
+inject.bean.dependency.fix.no.beans.found=No beans matching ''{0}'' found
+inject.bean.dependency.fix.modified=The document has been modified.\nNo dependency added.
+
+beans.tool.window.title=Beans
+
+action.CompactBeansListItemsAction.text=Compact List Items
+action.CompactBeansListItemsAction.GoToAction.text=Compact Beans List Items
+action.ShowBeansSidePanelAction.text=Show Side Panel
+action.ShowBeansSidePanelAction.GoToAction.text=Show Beans Side Panel
+action.ShowBeansModulesAction.text=Group by Module
+action.ShowBeansModulesAction.GoToAction.text=Group Beans by Module
+action.ShowBeansFromLibrariesAction.text=Show From Libraries
+action.ShowBeansFromLibrariesAction.GoToAction.text=Show Beans From Libraries
+action.ShowBeansFromTestsAction.text=Show From Tests
+action.ShowBeansFromTestsAction.GoToAction.text=Show Beans From Tests
+
+beans.empty.text=No beans found
+beans.loading.text=Loading beans\u2026
+beans.tab.documentation=Documentation
+beans.tab.documentation.empty.text=Select bean to view documentation
+group.BeansActions.OptionsMenu.text=Options
+group.BeansActions.LayoutOptions.separator=Layout
+group.BeansActions.FilterOptions.separator=Filter
+
+beans.tool.window.activate.action.description=Activate Beans tool window
+scheduled.method.enable.debugger.html=@Scheduled debugger isn't enabled for the module run configuration.
+scheduled.method.enable.debugger.html.withRestart=@Scheduled debugger isn't enabled for the module run configuration.\
+<br>Would you like to enable it? (Run/Debug restart is required)
+scheduled.method.enable.debugger.ok=Enable
+scheduled.method.enable.debugger.cancel=Cancel
+scheduled.target.process.not.started=There is no running application for this @Scheduled method
+
+install.agent=Install @Scheduled Debugger Agent
+scheduled.target.requires.restart=@Scheduled debugger enabled. Please restart the run configuration
+scheduled.target.requires.start=@Scheduled debugger enabled. You can start an application
+
+injectionType.CONSTRUCTOR.name=Constructor Dependency
+injectionType.CONSTRUCTOR.settings=Constructor
+injectionType.CONSTRUCTOR.description=Inject bean instance via constructor method
+
+injectionType.SETTER.name=Setter Dependency
+injectionType.SETTER.settings=Setter
+injectionType.SETTER.description=Inject bean instance via setter method with @Autowired annotation
+
+injectionType.FIELD.name=@Autowired Dependency
+injectionType.FIELD.settings=Field
+injectionType.FIELD.description=Inject bean instance via field with @Autowired annotation
+
+injectionType.CONFIGURATION_METHOD.name=Configuration Method
+injectionType.CONFIGURATION_METHOD.settings=Configuration Method
+injectionType.CONFIGURATION_METHOD.description=Inject bean as configuration method parameter
+
+injectionType.OBJECT_FACTORY_METHOD.name=Object Factory Dependency
+injectionType.OBJECT_FACTORY_METHOD.settings=Object Factory
+injectionType.OBJECT_FACTORY_METHOD.description=Define a factory which can return a bean instance (possibly shared or independent) when invoked
+
+injectionType.LOOKUP_METHOD.name=Lookup Method Dependency
+injectionType.LOOKUP_METHOD.settings=Lookup Method
+injectionType.LOOKUP_METHOD.description=Create a lookup method that will return the bean instance from BeanFactory
+
+microservices.mq.generic=Message Queue Destination
+microservices.mq.topic.type=Topic
+microservices.mq.queue.type=Queue
+microservices.mq.destination={0} Destination
+microservices.mq.exchange={0} Exchange
+microservices.mq.topic={0} Topic
+microservices.mq.queue={0} Queue
+microservices.mq.direct={0} Direct
+microservices.mq.fanout={0} Fanout
+microservices.mq.headers={0} Headers
+
+microservices.mq.AccessType.ADMINISTRATION=Administration
+microservices.mq.AccessType.RECEIVE=Receive
+microservices.mq.AccessType.SEND=Send
+microservices.mq.AccessType.SEND_AND_RECEIVE=Send and receive
+microservices.mq.AccessType.STREAM_FORWARDING=Stream forwarding
+microservices.mq.AccessType.UNKNOWN=Unknown
+
+inject.mq.destination.generic=Message Queue Reference
+inject.mq.destination={0} Destination Reference
+inject.mq.topic={0} Topic Reference

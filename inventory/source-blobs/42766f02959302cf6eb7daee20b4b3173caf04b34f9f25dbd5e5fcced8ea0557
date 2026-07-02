@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports  a JavaScript access to DOM nodes as text using the <code>innerHTML</code> property.
+Most usages of <code>innerHTML</code> are performed better with explicit
+DOM calls, such as <code>getElementByID()</code> and
+<code>createElement()</code>.  Additionally,
+<code>innerHTML</code> will not work with XML
+DOMs, including DOMs for XHTML if viewed as XML.  This can lead to difficulties in
+diagnosing bugs.
+</body>
+</html>

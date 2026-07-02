@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a call of the <code>eval()</code>, <code>setTimeout()</code>,
+or <code>setInterval()</code> function or an allocation of a <code>Function</code>
+object.  These functions are used to execute arbitrary strings of JavaScript text, which often
+dynamically generated.  This can be very confusing, and may be a security risk.
+<br/><br/>
+Ignores the cases when a callback function is provided to these methods statically, without code generation.
+</body>
+</html>

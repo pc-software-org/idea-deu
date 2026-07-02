@@ -1,0 +1,39 @@
+<html>
+<body>
+Detects JSON files that can be interpreted as a part of OpenAPI/Swagger specification.
+<p>
+  Such files do not contain explicit specification attributes, but they are referenced from primary specification files located nearby.
+</p>
+<!-- tooltip end -->
+
+<p>
+  The following example contains two files located in the same directory. First one is a plain primary specification file.
+  Second is referenced from the first one and thus is suggested to be considered a specification too.
+</p>
+
+<p><b>Primary specification file <code>openapi.yaml</code>:</b></p>
+<pre><code lang="yaml">
+openapi: 3.1.0
+components:
+  schemas:
+    CustomSchema:
+      description: Custom schema object
+      properties:
+        foo:
+          $ref: 'common.components.json#/components/schemas/CommonSchema'
+</code></pre>
+
+<p><b>Specification file candidate <code>common.components.json</code>:</b></p>
+<pre><code lang="json">
+{
+  "components": { // 'Mark file as OpenAPI specification' highlighting
+    "schemas": {
+      "CommonSchema": {
+        "description": "Common schema object reused in several specifications"
+      }
+    }
+  }
+}
+</code></pre>
+</body>
+</html>

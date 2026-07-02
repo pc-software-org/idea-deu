@@ -1,0 +1,23 @@
+<html>
+<body>
+Reports the following unresolved attributes inside EntityGraph-related annotations:<br/>
+<ul>
+  <li> Value in <code>@NamedAttributeNode</code></li>
+  <li> Named subgraph in <code>@NamedAttributeNode</code></li>
+  <li> Name in <code>@NamedEntityGraph</code></li>
+</ul><br/>
+
+<p><b>Example:</b></p><br/>
+<pre><code lang="java">
+  @Entity
+  @NamedEntityGraph(name = "entity-graph", ...)
+  public class JavaEntity {
+    public void foo() {
+      Persistence.createEntityManagerFactory("")
+        .createEntityManager()
+        .getEntityGraph("unknown-entity-graph"); // unresolved reference
+    }
+  }
+</code></pre>
+</body>
+</html>

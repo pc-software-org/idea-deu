@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports a <code>this</code> in closure that is used for referencing properties of outer context. <p>Example:</p>
+<pre><code>
+function Outer() {
+  this.outerProp = 1;
+  function inner() {
+    // bad, because 'outerProp' of Outer
+    // won't be updated here
+    // on calling 'new Outer()' as may be expected
+    this.outerProp = 2;
+  }
+  inner();
+}
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<html>
+<body>
+<div>
+  This is a simple template for a GitHub action file. Each action should be placed under its own folder under <code>.github/actions</code> folder. To reference the action in a workflow file, use the following syntax: <code>./github/actions/$action-folder-name$</code>
+</div>
+<div>
+  For more information, refer to the <a href="https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions">official documentation on GitHub</a>
+</div>
+</body>
+</html>

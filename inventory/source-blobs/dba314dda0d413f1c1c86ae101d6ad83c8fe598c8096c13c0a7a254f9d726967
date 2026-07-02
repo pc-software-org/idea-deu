@@ -1,0 +1,2 @@
+database.config.yaml.datasource.family.name=Create or open an existing datasource from a .yaml file
+database.config.yaml.datasource.name=Datasource from YAML file

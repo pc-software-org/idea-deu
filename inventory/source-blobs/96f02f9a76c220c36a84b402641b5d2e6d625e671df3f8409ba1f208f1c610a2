@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a <code>var</code> declaration that is used instead of <code>let</code> or <code>const</code>.<br/>
+Both <code>let</code> and <code>const</code> are block-scoped and behave more strictly.
+<br/><br/>
+Suggests replacing all <code>var</code> declarations with <code>let</code> or <code>const</code> declarations, depending on the semantics of a particular  value.
+The declarations may be moved to the top of the function or placed before the first usage of the variable to avoid Reference errors.
+<br/>Select the 'Conservatively convert var with Fix all action' option to prevent any changes in these complex cases when using the 'Fix all' action.
+</body>
+</html>

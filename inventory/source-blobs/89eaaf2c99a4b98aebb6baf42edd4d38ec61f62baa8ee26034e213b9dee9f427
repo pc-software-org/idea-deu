@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a string concatenation. Suggests replacing it with a  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template literal</a>
+<p>Example</p>
+<pre><code> "result: " + a + "." </code></pre>
+ <p>After applying the quick-fix the code looks as follows:</p>
+ <pre><code> `result: ${a}.` </code></pre>
+
+</body>
+</html>

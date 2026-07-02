@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Reports cases when the <code>jupyter</code> package is not installed for the selected
+  Python interpreter. Without a properly installed <code>jupyter</code> package, you cannot
+  execute Jupyter notebooks.</p>
+<p>Click the corresponding link on the warning banner to install the missing
+  package. You can also install the package in the Project <b>Settings/Preferences</b> or in the
+  <b>Python Packages</b> tool window.</p>
+<p>See <a href="https://www.jetbrains.com/help/pycharm/installing-uninstalling-and-upgrading-packages.html">Installing Python package</a> for more details.</p>
+</body>
+</html>

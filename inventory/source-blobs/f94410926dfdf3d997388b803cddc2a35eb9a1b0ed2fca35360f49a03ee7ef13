@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports a <code>catch</code> parameter that is not used in the
+corresponding block.  The <code>catch</code> parameters named
+<code>ignore</code> or <code>ignored</code> are ignored.
+<!-- tooltip end -->
+<p>
+    Use the checkbox below to disable this inspection for <code>catch</code>
+    blocks with comments.
+</p>
+</body>
+</html>

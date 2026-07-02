@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a comparison of a <code>typeof</code> expression with a literal string which is not one of the standard types: <code>undefined</code>, <code>object</code>, <code>boolean</code>, <code>number</code>, <code>string</code>, <code>function</code>, or <code>symbol</code>.
+Such comparisons always return <code>false</code>.
+</body>
+</html>

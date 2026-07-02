@@ -1,0 +1,19 @@
+# Actions
+ml.diagnostics.userDump.dialog.title=Collect Diagnostics Data of AI Completion
+ml.diagnostics.userDump.dialog.text=We will now collect detailed logs of AI Completion behavior. Please type code as you normally would and expect completion. For the best results, consider restarting your IDE and triggering this action on a fresh instance. This will allow us to capture logs from the very beginning and better analyze the issue. Logging will stop automatically in {0}. You will then see a confirmation dialog with the log file. You can review and remove any confidential information before sending it to customer support.
+ml.diagnostics.userDump.dialog.yes=Collect Logs
+ml.diagnostics.userDump.successful.dialog.title=Logs Collected Successfully
+ml.diagnostics.userDump.successful.dialog.text=The diagnostic logs have been successfully collected and saved at: {0}. You can now review the file and send it to us for analysis.
+
+action.MLCompletionDiagnostics.text=ML Diagnostics
+
+# Tool Window
+ml.diagnostics.buttons.row.title=Try buttons:
+ml.diagnostics.hide.failed=Hide Failed
+ml.diagnostics.on.hidden=Log Even If This Window Is Hidden
+ml.diagnostics.clear=Clear
+
+# Components
+
+## Side Tabs
+ml.diagnostics.no.data.label=No data

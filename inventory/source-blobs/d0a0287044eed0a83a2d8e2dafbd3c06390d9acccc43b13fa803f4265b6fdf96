@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports  <code>bind</code> used together with an arrow function.<br/>
+Because arrow functions use lexical <code>this</code>,  a <code>bind</code> call will have no effect on them.<br/>
+See <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Lexical_this">here</a> for details.
+</body>
+</html>

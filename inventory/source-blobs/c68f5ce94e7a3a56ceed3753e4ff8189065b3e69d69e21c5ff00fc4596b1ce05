@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a usage of a <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a></code>
+loop on an array. Suggests replacing it with a <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for..of</a></code> loop.
+<br/><code>for..of</code> loops, which are introduced in ECMAScript 6, iterate over <code>iterable</code> objects.
+For arrays, this structure is preferable to <code>for..in</code>, because it works only with array values but not with array object's properties.
+</body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports alias expressions that duplicate names of columns in tables and might be redundant.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TABLE foo(a INT, b INT);
+
+SELECT * FROM foo foo(a, b);
+SELECT * FROM foo foo(a);
+SELECT * FROM foo foo(x);
+SELECT * FROM foo foo(x, y);</code></pre>
+<p>The first two aliases use the same column names as in the <code>foo</code> table. They are considered redundant because they
+  column names are identical.</p>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/ConstantOnWrongSideOfComparison.html -->
+<html>
+<body>
+Reports a comparison operation with a constant in the right-hand side. According to 
+coding conventions, constants should only be in the left-hand side of comparisons.
+</body>
+</html>

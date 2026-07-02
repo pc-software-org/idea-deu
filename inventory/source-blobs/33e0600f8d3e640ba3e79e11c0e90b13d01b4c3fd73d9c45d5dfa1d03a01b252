@@ -1,0 +1,6 @@
+group.spring=Spring
+spring.find.endpoint=Go to URL
+spring.endpoints.tool.window=Endpoints tool window
+spring.endpoint.actions=Show endpoint actions
+spring.inject.entities=Inject Spring entities
+spring.select.in=Select in Spring tool window

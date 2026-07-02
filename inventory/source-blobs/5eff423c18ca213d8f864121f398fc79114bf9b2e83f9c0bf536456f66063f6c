@@ -1,0 +1,17 @@
+<html>
+<body>
+<p>Reports incorrect injection points: fields, methods, and parameters annotated with <code>@Inject</code> that violate the CDI specification.</p>
+
+<p>Requirements for fields:</p>
+<ul>
+  <li>Cannot be static or final</li>
+  <li>Cannot be annotated with <code>@Produces</code></li>
+</ul>
+
+<p>Requirements for methods with injection:</p>
+<ul>
+  <li>Cannot be static or abstract</li>
+  <li>Cannot have parameters with <code>@Disposes</code> and <code>@Observes</code> annotations</li>
+</ul>
+</body>
+</html>

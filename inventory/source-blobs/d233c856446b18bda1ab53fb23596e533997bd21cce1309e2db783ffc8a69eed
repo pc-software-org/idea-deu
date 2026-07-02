@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a function with three or more negation operations (<code>!</code> or <code>!=</code>).
+Such functions may be unnecessarily confusing.
+</body>
+</html>

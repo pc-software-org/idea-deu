@@ -1,0 +1,25 @@
+#tslint
+settings.javascript.linters.tslint.configurable.name=TSLint
+
+tslint.framework.title=TSLint
+tslint.action.fix.all.problem.title=Fix all TSLint problems
+tslint.action.modal.title=TSLint Fixes
+tslint.action.background.title=TSLint fixes
+
+tslint.code.style.apply.message=Apply code style from TSLint?
+
+js.linters.inspection.group.name=Code quality tools
+js.inspection.group.path=JavaScript and TypeScript
+
+action.TslintImportCodeStyleAction.text=Apply TSLint Code Style Rules
+
+linting.javascript.is.not.supported.for.this.version.of.tslint=Linting JavaScript is not supported for this version of TSLint.
+additional.rules.directory.title=Additional Rules Directory
+additional.rules.directory.label=Additional rules directory:
+tslint.package.label=TSLint package:
+lint.javascript.files.label=Lint JavaScript files:
+tslint.configuration.file.title=TSLint Configuration File (*.json or *.yaml)
+tslint.configurable.search.option.description=When linting a TypeScript file, TSLint looks for tslint.json or tslint.yaml starting from the file's folder and then moving up to the filesystem root or in the user's home directory.
+tslint.progress.text.processing.file=Processing file {0}
+tslint.notification.content=TSLint: {0}
+tslint.inspection.message.config.file.was.not.found=Config file was not found.

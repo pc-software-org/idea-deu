@@ -1,0 +1,9 @@
+logs.trace.enabled=Several tracing scenarios are enabled
+logs.trace.description=Extensive logging may affect performance.
+logs.trace.select.all=Select all
+logs.trace.deselect.all=Deselect all
+logs.advanced.settings=Advanced log settings
+choose.trace.scenarios=Choose Trace Scenarios
+choose.trace.scenarios.scenario.column=Scenario
+
+notification.group.trace.scenarios.enabled.notification=Trace scenarios enabled notification

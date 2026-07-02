@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports an unresolved <a href="https://sass-lang.com/documentation/variables">Sass/SCSS placeholder selector</a> reference.
+<p><b>Example:</b></p>
+<pre><code>
+* {
+  @extend %unknown-placeholder-selector;
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

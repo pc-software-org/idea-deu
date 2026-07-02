@@ -1,0 +1,5 @@
+<html>
+<body>
+Generates an OpenAPI file in the resources directory of the current module. The file will contain OpenAPI documentation of the Ktor application.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Moves an ECMAScript class, or a TypeScript class, interface, or enum into a new or an existing file with the name that matches the type name.<br/><br/>
+File name matching can be framework-specific. For example, for Angular components, the corresponding <a href="https://angular.io/guide/styleguide#style-02-03">style guide</a> is applied.
+</body>
+</html>

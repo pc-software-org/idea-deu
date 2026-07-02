@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an attempt to reference a member of an ECMAScript class via the <code>this.</code> qualifier in a nested function that is not a lambda.<br/>
+<code>this</code> in a nested function that is not a lambda is the function's own <code>this</code> and doesn't relate to the outer class.
+</body>
+</html>

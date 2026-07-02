@@ -1,0 +1,18 @@
+<html>
+<body>
+Reports JSP tag body content that does not conform to the TLD body-content specification.
+<p>If empty body content is specified, the tag should have an empty body.</p>
+<p>If scriptless body content is specified, the tag's body should not contain JSP scriptlets.</p>
+<p>The quick-fix removes a tag's body for empty content type, and removes scriptlets if scriptless content type is specified.</p>
+<p><b>Example:</b></p>
+<pre><code>
+&lt;s:empty&gt;body not allowed here&lt;/s:empty&gt;
+&lt;s:scriptless&gt;say: &lt;% System.out.println(&quot;hey&quot;); %&gt;&lt;/s:scriptless&gt;
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+&lt;s:empty/&gt;
+&lt;s:scriptless&gt;say: &lt;/s:scriptless&gt;
+</code></pre>
+</body>
+</html>

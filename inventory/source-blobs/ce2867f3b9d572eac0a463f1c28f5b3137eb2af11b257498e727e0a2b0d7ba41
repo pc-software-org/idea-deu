@@ -1,0 +1,14 @@
+notification.group.station=Toolbox messages
+
+station.download.ide.update.action=Download {0}
+station.switch.to.new.version.action=Switch to {0}
+station.new.version.downloading.action=Downloading {0}\u2026
+
+station.update.widget.update=Update
+station.update.widget.update.ready=Update ready
+
+station.opening.project.progress.title=Opening ''{0}''\u2026
+station.opening.project.project.widget.status=Opening\u2026
+station.opening.project.error.title=Could not open the Project
+station.opening.project.error.generic.text=Could not connect to the Toolbox App
+

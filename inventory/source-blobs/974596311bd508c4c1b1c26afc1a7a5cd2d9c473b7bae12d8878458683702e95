@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports an unresolved <a href="https://sass-lang.com/documentation/variables">Sass/SCSS variable</a> reference.
+<p><b>Example:</b></p>
+<pre><code>
+* {
+  margin: $unknown-var;
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

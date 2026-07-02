@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a statement without a semicolon or a newline at the end.
+<p>Select the 'Terminate statements with semicolons' option in <i>Editor | Code Style | JavaScript or TypeScript - Punctuation</i> to report any statement that doesn't end with a semicolon, even if a newline is used.
+According to  some coding styles, semicolons are preferred to line-breaks for consistency with the other languages.
+</p>
+</body>
+</html>

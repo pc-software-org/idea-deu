@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts Kubernetes resource definitions in a multi-document YAML file into a List.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage of the <code>caller</code> property in a JavaScript function.
+Using this property to access the stack frame of the calling method can be extremely confusing and result in subtle bugs.
+</body>
+</html>

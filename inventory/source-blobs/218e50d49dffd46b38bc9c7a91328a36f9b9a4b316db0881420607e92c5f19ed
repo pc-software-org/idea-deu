@@ -1,0 +1,7 @@
+dialog.password.storage.access.title=Password Storage Access
+dialog.backend.credentials.access.message=The remote IDE backend requests access to your password storage to securely store and retrieve credentials.
+button.always.allow.for.this.backend=Always Allow for This Backend
+button.allow.for.this.session=Allow for This Session
+button.deny=Deny
+
+remote.store.retrieving.progress.title=Retrieving Credentials

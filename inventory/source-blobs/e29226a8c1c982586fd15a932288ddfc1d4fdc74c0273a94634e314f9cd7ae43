@@ -1,0 +1,7 @@
+<html>
+<body>
+Defines an empty-named implicit variable in comment in current file.
+Allows to have all fields and methods of some class as toplevel
+FreeMarker variables and functions.
+</body>
+</html>

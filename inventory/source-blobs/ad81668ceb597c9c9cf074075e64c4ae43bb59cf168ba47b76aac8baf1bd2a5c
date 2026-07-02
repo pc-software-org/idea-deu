@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports any include directives in a JSP file which refer to the containing JSP file.<br/>
+
+<p><b>Example JSP file named main.jsp:</b></p>
+<pre><code>
+  &lt;jsp:include page="./main.jsp" /&gt; // Error: attempt to include the containing file
+  ...
+</code></pre><br/>
+
+<!-- tooltip end -->
+<p>
+  <b>NOTE:</b> Such self-including leads to infinite recursion and so the JSP file cannot be compiled.
+</p>
+</body>
+</html>
+

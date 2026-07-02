@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports comparisons with NULL that can be replaced with IS NULL or IS NOT NULL operators.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE foo ( id int );
+
+SELECT * FROM foo WHERE NULL = NULL;
+SELECT * FROM foo WHERE NULL != NULL;</code></pre>
+<p>The <code>NULL = NULL</code> can be replaced with <code>IS NULL</code>, the <code>NULL != NULL</code> comparison
+  with <code>IS NOT NULL</code>. To do this replacement, you can use <b>Use IS NULL operator</b> or <b>Use IS NOT NULL operator</b>
+  quick-fixes.</p>
+<pre><code>SELECT * FROM foo WHERE NULL IS NULL;
+SELECT * FROM foo WHERE NULL IS NOT NULL;</code></pre>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<body>
+Reports tables that contain two columns with an automatic increment. In MySQL, Microsoft SQL Server, and Db2 dialects, a table can
+  have only one field with a auto-increment option, and this field must be a key.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE my_table
+(
+    id INT AUTO_INCREMENT,
+    c2 INT AUTO_INCREMENT,
+);</code></pre>
+<p>The AUTO_INCREMENT constraint for <code>c2</code> will be highlighted as <code>c1</code> already has this constraint. To fix the warning,
+  you can make <code>id</code> a primary key and delete AUTO_INCREMENT for <code>c2</code>.</p>
+<pre><code>CREATE TABLE my_table
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    c2 INT,
+);</code></pre>
+</body>
+</html>

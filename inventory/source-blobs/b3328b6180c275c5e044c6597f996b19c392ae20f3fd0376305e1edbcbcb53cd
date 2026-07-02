@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports a function that returns a value in
+some cases while in other cases no value is returned. This usually indicates an error.
+<p>Example:</p>
+<pre><code>
+function foo() {
+  if (true)
+    return 3;
+  return;
+}
+</code>
+</pre>
+</body>
+</html>

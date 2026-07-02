@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports variables which should be double-quoted in json body.
+The quick fix suggests wrap variable with double quotes <code>"{{variable}}"</code>.
+</body>
+</html>

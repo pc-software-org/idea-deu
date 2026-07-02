@@ -1,0 +1,4 @@
+error.message.no.executable.for.processname=No executable for processName={0}
+function.breakpoint.tab.title=Kotlin/Native Function Breakpoints
+
+id.runner=BinaryRunner

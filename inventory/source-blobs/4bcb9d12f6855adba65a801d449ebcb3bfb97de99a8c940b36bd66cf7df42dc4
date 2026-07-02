@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a variable that is declared without an initializer and is used much further in the code or in a single nested scope. Suggests moving the variable closer to its usages and joining it with the initializer expression.
+</body>
+</html>

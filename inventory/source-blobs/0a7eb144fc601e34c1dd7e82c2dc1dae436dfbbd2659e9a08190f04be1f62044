@@ -1,0 +1,6 @@
+<html>
+<body>
+Wraps an expression of an iterable type in a <code>for-of</code> loop.
+An iterable type is either an array or a type with a <code>Symbol.iterator</code> property.
+</body>
+</html>

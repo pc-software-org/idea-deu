@@ -1,0 +1,7 @@
+<html>
+<body>
+Acquires Authentication token for Auth config with ID under caret.
+If the IDE already has a valid token, <b>nothing will be done</b>.
+If the IDE already has a refresh token for this ID, the access <b>token will be refreshed</b>.
+</body>
+</html>

@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a discrepancy detected by the <a href="https://eslint.org">ESLint</a> linter.
+<!-- tooltip end -->
+<br/><br/>
+The highlighting is based on the rule severity specified in the <a href="https://eslint.org/docs/user-guide/configuring">ESLint configuration file</a> for each individual rule.
+<br/><br/>
+Clear the  'Use rule severity from the configuration file' checkbox to use the severity configured in this inspection for all ESLint rules.
+</body>
+</html>

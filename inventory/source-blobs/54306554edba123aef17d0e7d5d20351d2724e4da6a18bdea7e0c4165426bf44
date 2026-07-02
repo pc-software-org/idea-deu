@@ -1,0 +1,20 @@
+<html>
+<body>
+Reports cases when you insert NULL values into columns that accept only NOT NULL values.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE br2 (
+id INT NOT NULL,
+col1 NVARCHAR (20) NOT NULL,
+col2 NVARCHAR (20) NOT NULL,
+);
+--
+INSERT INTO br2 (id, col1, col2)
+VALUES (1, NULL, NULL);</code></pre>
+<p>You cannot insert NULL values in <code>col1</code> and <code>col2</code> because they are defined as NOT NULL. If you run the script as
+  is,
+  you will receive an error. To fix this code, replace NULL in the VALUES part with some values (for example, <code>42</code> and
+  <code>'bird'</code>).</p>
+<pre>INSERT INTO br2 (id, col1, col2)
+VALUES (1, 42, 'bird');</pre>
+</body>
+</html>

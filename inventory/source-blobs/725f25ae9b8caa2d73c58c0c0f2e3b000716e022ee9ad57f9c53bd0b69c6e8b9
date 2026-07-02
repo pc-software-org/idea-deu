@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a JavaScript file that is not in the <code>strict</code> mode.
+</body>
+</html>

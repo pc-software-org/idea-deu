@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a method call to <code>document.write()</code> or <code>document.writeln()</code>.
+Most usages of such calls are performed better with explicit
+DOM calls, such as <code>getElementByID()</code> and
+<code>createElement()</code>.  Additionally, the <code>write()</code> and
+<code>writeln()</code> calls will not work with XML
+DOMs, including DOMs for XHTML if viewed as XML.  This can result in difficulty to point out bugs.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Replaces a CSS color value (#-hex, <code>rgb()</code>, <code>gray()</code>, <code>hsl()</code>, <code>color()</code>, <code>lch()</code> or
+<code>hwb()</code>) with an equivalent <code>oklch()</code> color function.
+</body>
+</html>

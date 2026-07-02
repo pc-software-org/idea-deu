@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports a set of longhand CSS properties and suggests replacing an incomplete set of longhand CSS properties with a shorthand form,
+which is however not 100% equivalent in this case.
+<p>
+  For example, 2 properties: <code>outline-color</code> and <code>outline-style</code> may be replaced with a single <code>outline</code>.
+  Such replacement is not 100% equivalent because shorthands reset all omitted sub-values to their initial states.
+  In this example, switching to the <code>outline</code> shorthand means that <code>outline-width</code> is also set to its initial value,
+  which is <code>medium</code>.
+</p>
+<!-- tooltip end -->
+<p>
+  This inspection doesn't handle full sets of longhand properties (when switching to shorthand is 100% safe).
+  For such cases see the 'Properties may be safely replaced with a shorthand' inspection instead.
+</p>
+</body>
+</html>

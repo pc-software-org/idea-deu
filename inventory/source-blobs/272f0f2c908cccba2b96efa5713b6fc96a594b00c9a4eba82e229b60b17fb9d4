@@ -1,0 +1,13 @@
+maven.uml.add.exclude=Add Exclude Definition To
+maven.uml.exclude.dependency=Exclude Maven Dependency
+maven.uml.presentation=Maven dependencies
+maven.uml.action.name=Dependencies
+
+action.Maven.Uml.Exclude.text=Exclude
+visibility.level.provided=Provided
+visibility.level.compile=Compile
+visibility.level.runtime=Runtime
+visibility.level.test=Test
+
+show.conflicts.duplicates=Show Conflicts/Duplicates
+show.group.artifact.version=Show 'groupId':'artifactId':'version'

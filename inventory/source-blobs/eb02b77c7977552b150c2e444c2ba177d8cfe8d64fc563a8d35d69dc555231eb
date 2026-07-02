@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces multiple equality checks with a single IN expression.
+</body>
+</html>

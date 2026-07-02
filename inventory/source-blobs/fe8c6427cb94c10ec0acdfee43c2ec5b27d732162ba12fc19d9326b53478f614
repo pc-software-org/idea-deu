@@ -1,0 +1,16 @@
+<html>
+<body>
+<p>Reports incorrect usages of bean types that cannot be proxied.</p>
+<p>The container can't proxy certain legal bean types:
+  classes which don't have a non-private constructor with no parameters,
+  classes which are declared final,
+  or have final methods, primitive types, and array types.</p>
+
+<p>The inspection reports the following violations for such bean types:</p>
+<ul>
+  <li>Managed bean declaring a passivating scope must be <code>java.io.Serializable</code></li>
+  <li>Bean of non-serializable type cannot be injected into a bean of passivating scope</li>
+  <li>The container must be able to proxy tha injected normal scoped bean</li>
+</ul>
+</body>
+</html>

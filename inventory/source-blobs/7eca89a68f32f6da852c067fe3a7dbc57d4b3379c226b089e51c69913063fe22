@@ -1,0 +1,7 @@
+<html>
+<body>
+Suggests configuring coding assistance for Node.js, for example, <code>require</code> and/or core modules ('path', 'http', 'fs', etc.).
+<p>
+See <a href="https://nodejs.org/api/">https://nodejs.org/api/</a> for the complete list.</p>
+</body>
+</html>

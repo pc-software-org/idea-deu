@@ -1,0 +1,38 @@
+<html>
+<body>
+Reports unresolved references to any database objects inside `orm.xml` configuration files:
+<ul>
+  <li>Tables</li>
+  <li>Columns</li>
+  <li>Schemas</li>
+  <li>Catalogs</li>
+  <li>Sequences</li>
+</ul>
+
+<p><b>Example database table:</b></p><br/>
+<pre><code lang="sql">
+CREATE TABLE DATA_TABLE (
+  ID INTEGER,
+  DATA VARCHAR(100)
+);
+</code></pre><br/>
+
+<p><b>Example orm.xml file:</b></p><br/>
+<pre><code lang="xml">
+&lt;entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" version="1.0"&gt;
+    &lt;package&gt;example&lt;/package&gt;
+    &lt;entity name="JavaEntity" class="JavaEntity"&gt;
+        &lt;table name="DATA_TABLE"/&gt;
+        &lt;attributes&gt;
+          &lt;id name="id"&gt;
+            &lt;column name="UNKNOWN_ID" nullable="false" length="20"/&gt; // Error: unresolved column name
+          &lt;/id&gt;
+          &lt;basic name="data"&gt;
+            &lt;column name="DATA" length="12"/&gt; // Good
+          &lt;/basic&gt;
+        &lt;/attributes&gt;
+    &lt;/entity&gt;
+&lt;/entity-mappings&gt;
+</code></pre>
+</body>
+</html>

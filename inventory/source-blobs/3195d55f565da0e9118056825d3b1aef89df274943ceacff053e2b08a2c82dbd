@@ -1,0 +1,7 @@
+<html>
+<body>
+Converts the parameters of a function to a single object, creates an interface for that object, and replaces the arguments of all calls with the constructed object literal.
+<br/><br/>
+This intention is available only for languages that support types (TypeScript, Flow).
+</body>
+</html>

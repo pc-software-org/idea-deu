@@ -1,0 +1,9 @@
+<html>
+<body>
+Injects and associates a dialect with the selected SQL type.
+Applies this dialect to all the occurrences of the same type (for example, <code>query</code>).
+<p>In the <b>Before</b> example, you can call the <b>Inject by Type</b> intention action on the <code>'SELECT * FROM foo'</code> value, then
+  inject and associate this object type with any SQL dialect. The object type for this value is <code>query</code> (specified by <code>q query DEFAULT 'SELECT * FROM foo'</code>).
+  So, next time you use the <code>query</code> type in code the selected dialect will be injected automatically.</p>
+</body>
+</html>

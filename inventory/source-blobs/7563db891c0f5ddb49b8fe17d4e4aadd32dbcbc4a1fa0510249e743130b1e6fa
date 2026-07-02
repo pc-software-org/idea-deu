@@ -1,0 +1,5 @@
+<html>
+<body>
+Splits a statement with the declaration and initialization of a variable into a statement with the variable declaration and an assignment statement and then moves the newly created <code>var</code> statement to the top of the current scope.
+</body>
+</html>

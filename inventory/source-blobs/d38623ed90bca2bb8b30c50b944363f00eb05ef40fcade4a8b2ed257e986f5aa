@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports missing conditional checks for statements that might modify the whole database.
+<p>For example, usages of JOIN clauses inside DELETE statements without ON or WHERE. Without conditional checks on JOIN, DELETE drops
+  contents of the entire table.</p>
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo (a INT,b INT,c INT);
+CREATE TABLE bar (a INT,b INT,c INT);
+
+DELETE table1 FROM foo table1  INNER JOIN bar table2;</code></pre>
+</body>
+</html>

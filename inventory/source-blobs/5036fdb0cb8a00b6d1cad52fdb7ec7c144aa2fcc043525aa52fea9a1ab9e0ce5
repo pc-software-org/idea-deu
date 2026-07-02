@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Reports <code>@Cache*</code> annotations on interfaces.</p>
+
+<p>You should annotate only concrete classes (and methods of concrete classes) with <code>@Cache*</code>.
+Annotating an interface (or an interface method) with <code>@Cache*</code> requires using interface-based proxies.
+Since Java annotations are not inherited from interfaces, the proxying and weaving infrastructure will not be able to recognize the caching settings
+when using class-based proxies (<code>proxy-target-class="true"</code>) or the weaving-based aspect (<code>mode="aspectj"</code>).
+As a result, the object will not be wrapped in a caching proxy.</p>
+</body>
+</html>

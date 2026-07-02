@@ -1,0 +1,9 @@
+# Inspections and Quick-Fixes
+spring.cloud.inspection.group.name=Spring Cloud
+
+spring.cloud.bootstrap.configuration.inspection.name=Bootstrap configuration included in application context
+spring.cloud.bootstrap.configuration.component.scanned=Bootstrap configuration is included into Spring Boot application context
+
+spring.cloud.config.files.name.setting=Spring Cloud: {0} value
+spring.cloud.custom.config.files.locations=Spring Cloud: custom bootstrap config files location(s)
+spring.cloud.config.files.section.title=Bootstrap Configuration Files

@@ -1,0 +1,22 @@
+<!-- Copyright (c) 2004 - 2009 by Fuhrer Engineering AG, CH-2504 Biel/Bienne, Switzerland -->
+<html>
+<body>
+<p>Reports incorrect JBoss-specific XML deployment descriptors:</p>
+
+<ul>
+  <li><code>jboss-web.xml</code></li>
+  <li><code>jboss-app.xml</code></li>
+  <li><code>jboss.xml</code></li>
+</ul>
+
+<p>Some of the reported issues are:</p>
+
+<ul>
+  <li>References to non-instantiable classes</li>
+  <li>References to classes that do not extend a required class</li>
+  <li>Empty tag and attribute values</li>
+  <li>Tags that do not include required children tags or attributes</li>
+  <li>Tags that define objects with duplicate names</li>
+</ul>
+</body>
+</html>

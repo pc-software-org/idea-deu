@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a function with too many parameters.
+Such functions often indicate problems with design.
+<!-- tooltip end -->
+<p>
+  Use the field below to specify the maximum acceptable number of parameters for a function.
+
+</body>
+</html>

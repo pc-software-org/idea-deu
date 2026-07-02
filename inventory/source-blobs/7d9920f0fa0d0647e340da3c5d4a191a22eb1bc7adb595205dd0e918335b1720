@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports columns that have identical names but belong to different tables.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo(id INT PRIMARY KEY);
+CREATE TABLE bar(id INT PRIMARY KEY);
+
+SELECT foo.id, bar.id FROM foo, bar WHERE id > 0;</code></pre>
+<p>The <code>id</code> column appears in <code>foo</code> and <code>bar</code> tables. You need to qualify the column name to
+  make the query correct.</p>
+<pre><code>SELECT foo.id, bar.id FROM foo, bar WHERE foo.id > 0;</code></pre>
+</body>
+</html>

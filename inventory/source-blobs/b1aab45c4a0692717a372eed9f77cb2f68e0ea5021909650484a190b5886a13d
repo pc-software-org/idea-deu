@@ -1,0 +1,7 @@
+<html>
+<body>
+Defines a path to template root in comment in an implicitly imported file.
+Template root is the path relative to which all absolute paths in FreeMarker
+<code>#include</code> and <code>#import</code> directives are specified.
+</body>
+</html>

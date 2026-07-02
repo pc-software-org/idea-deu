@@ -1,0 +1,8 @@
+<html>
+<body>
+Validates options in  webpack config files (which name should start with `webpack`, e.g. `webpack.config.js`)
+against <a href="https://github.com/webpack/webpack/blob/master/schemas/WebpackOptions.json">webpack options schema</a>.
+<br/><br/>
+Disable this inspection to turn off validation and code completion inside the configuration object.
+</body>
+</html>

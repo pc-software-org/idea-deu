@@ -1,0 +1,22 @@
+<html>
+<body>
+Reports mismatch between the names and the number of parameters within a JSDoc comment and the actual parameters of a function.
+Suggests updating parameters in JSDoc comment.
+<!-- tooltip end -->
+<p><b>Example:</b></p>
+<pre><code>
+/**
+ * @param height Height in pixels
+ */
+function sq(height, width) {} // width is not documented
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+/**
+ * @param height Height in pixels
+ * @param width
+ */
+function sq(height, width) {}
+</code></pre>
+</body>
+</html>

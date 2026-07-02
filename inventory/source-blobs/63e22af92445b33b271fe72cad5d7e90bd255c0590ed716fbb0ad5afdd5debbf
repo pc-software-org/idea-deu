@@ -1,0 +1,227 @@
+# Actions
+action.CodeWithMeUsersActionOldUI.text=User Avatars
+action.CodeWithMeUsersAction.text=User Avatars
+
+group.CodeWithMeToolbarGroupNewUi.text=CodeWithMe
+group.CWMToolbarCallActions.text=Code With Me Call Actions
+group.CWMShowPopupActionGroup.text=Code With Me Popup
+
+action.CWMCallSplitButtonAction.text=Audio and Calls
+action.CWMCallSplitButtonAction.main.tooltip=Unmute
+action.CWMCallSplitButtonAction.more.tooltip=More Options
+action.ForceOthersToFollowAction.text=Make Everyone Follow You
+action.EnableCameraAction.text=Camera
+action.EnableCameraAction.enable.text=Enable Camera
+action.EnableCameraAction.disable.text=Disable Camera
+action.EnableScreenSharingAction.text=Screen Sharing
+action.EnableScreenSharingAction.enable.text=Enable Screen Sharing
+action.EnableScreenSharingAction.enable.in.browser.text=Start Screen Sharing in Browser
+action.EnableScreenSharingAction.disable.text=Disable Screen Sharing
+
+action.EnableMicrophoneAction.text=Microphone
+action.EnableMicrophoneAction.enable.text=Unmute
+action.DisableMicrophoneAction.disable.text=Mute
+action.JoinCallAction.text=Join Call
+progress.join.call.text=Joining call\u2026
+
+action.LeaveCallAction.text=Leave Call
+action.OpenCallWindowAction.text=Code With Me: Show Call Window
+action.OpenPortForwardingToolwindowAction.text=Code With Me: Show Port Forwarding Window
+
+action.OpenCallWindowAction.popup.text=Show Call in Window\u2026
+action.OpenCallWindowAction.popup.browser.text=The call switched to a browser
+action.OpenPortForwardingToolwindowAction.popup.text=Show Port Forwarding Window\u2026
+
+action.CWMOpenSettingsAction.text=Settings\u2026
+action.LearnMore.text=About Code With Me
+action.call.text=Call:
+
+action.CWMCoolIconDemoAction.text=Show CWM Round Icon Test
+
+action.SingleUserFollowAction.text=Follow single user
+action.SingleJumpToCursorAction.text=Jump to cursor
+action.CurrentLeadUnfollowAction.text=Unfollow current lead
+action.EscUnfollowUserAction.text=Unfollow current lead
+action.ReportProblem.text=Submit a Bug Report\u2026
+
+notification.group.cwm.common=Code With Me common notifications
+
+product.status.no.access=Offline
+product.status.access.enabled=Online
+circle.control.state.no.one.joined=No one joined
+circle.control.user.state.host=Host
+circle.control.user.state.you=You
+circle.control.user.state.following=You are following
+circle.control.user.state.follower=Following you
+circle.control.user.state.following.user=Following {0}
+circle.control.user.state.following.stopped=Following stopped
+circle.control.user.state.full.sync.stopped=Pair Coding Stopped
+circle.control.user.state.full.sync.user=Pair Coding With {0}
+circle.control.user.state.followed.by.user=Followed by {0}
+circle.control.user.state.followed.by.users=Followed by {0}, 
+circle.control.user.state.full.sync=Pair Coding
+circle.control.tooltip=<html><div>{0}</div><font color={1}>{2}</font></html>
+circle.control.first.tooltip=Left click to follow user. Right click for more actions
+circle.control.second.tooltip=Left click to unfollow user. Right click for more actions
+circle.control.me.tooltip=Click to make everyone follow you
+
+host.project.close.message=Host has disconnected or closed the project
+settings.user.name=User name:
+settings.user.name.reset=Use System Name
+settings.user.name.warning=New user name will be applied for all new sessions after restart
+settings.lobby.url=Lobby server URL:
+settings.lobby.url.isSetFromOs=Lobby server URL value from the OS is overriding the setting. <a href="https://www.jetbrains.com/help/cwm/configure-the-url-server.html">Click here for information</a>.
+settings.lobby.url.TBEServerComment=Organization Toolbox Enterprise Server
+settings.lobby.url.OrganizationServer=Organization Server
+settings.lobby.url.osLocation=Location: {0}
+on.premise.installation.instruction.description=Set up private on-premise lobby and relay servers <a href="https://www.jetbrains.com/help/cwm/code-with-me-quick-setup.html">Instruction</a>
+manage.user.avatar.colors=<a href="#">Change guests' cursor colors</a>
+action.stop.following=Stop Following
+action.stop.fullSync=Stop Pair Coding
+action.stop=Stop
+action.resume=Resume
+action.jump.to=Jump To Cursor
+action.follow=Follow
+action.full.sync=Pair Coding Mode
+action.user.kick=Remove Guest
+
+error.url.title=Cannot Connect to Remote Session Due to Invalid URL or Rejected Join Request
+
+dialog.EnableScreenSharing.enable.in.browser.title=Open Call with Screen Sharing in Browser
+dialog.EnableScreenSharing.enable.in.browser.message=The call will be opened in browser. Screen sharing is available in browser only.
+
+open.call.toolwindow.tab.name.text=Call
+open.port.forwarding.toolwindow.tab.name.text=Port Forwarding
+
+popup.follow.user.text=Follow {0}
+participants.separator.text=In Session: {0}
+notification.following.started.title=Following started
+notification.following.started=You are following {0}
+notification.following.request.title=Following request
+notification.following.request={0} wants to guide you {1}
+notification.following.user.changed.title=Following changed
+notification.following.user.changed={0} already follows {1}. You follow {1} instead.
+notification.telephonyEnabled.message=Call is started
+notification.telephonyDisabled.message=Call was finished by Host
+notification.user.joined.call.message={0} is on the call
+notification.telephonyChatMessage.title={0} wrote a message
+notification.access.accept=Accept
+notification.access.decline=Decline
+
+color.settings.user1.marker=User 1 cursor
+color.settings.user2.marker=User 2 cursor
+color.settings.user3.marker=User 3 cursor
+color.settings.user4.marker=User 4 cursor
+color.settings.user5.marker=User 5 cursor
+color.settings.user6.marker=User 6 cursor
+color.settings.user1.selection=User 1 selection
+color.settings.user2.selection=User 2 selection
+color.settings.user3.selection=User 3 selection
+color.settings.user4.selection=User 4 selection
+color.settings.user5.selection=User 5 selection
+color.settings.user6.selection=User 6 selection
+
+code.with.me.learn.more=Learn more
+code.with.me.learn.more.link=https://www.jetbrains.com/code-with-me/
+
+connection.dialog.message.security.code=Verify code with host for additional security:
+connection.dialog.clipboard.message=My connection security code is: {0}, check that you see the same numbers in my connection approval dialog.
+connection.dialog.message.copy.security.code.tooltip=Copy Security Code
+connection.dialog.title=Code With Me: Accept Guest
+connection.dialog.message=wants to join "{0}"
+connection.dialog.permissions.message=Current permissions for this session: 
+connection.dialog.change.permissions=Change
+connection.message.verify.the.code=Verify code with guest for additional security:
+connection.dialog.change.permissions.tooltip.files=Files: {0}
+connection.dialog.change.permissions.tooltip.terminal=Terminal: {0}
+connection.dialog.change.permissions.tooltip.run.debug=Run\/Debug: {0}
+connection.dialog.change.permissions.tooltip.other.toolwindows=Other tool windows: {0}
+
+license.free.time.left=<html><font size=-1>{0} <font color={1}>free time left<font><font></html>
+license.free.time.left.new.ui=<html>{0} free time left</html>
+license.buy.link=http://www.jetbrains.com/code-with-me/buy
+license.expired=<html><font color={0} size=-1>License expired</font></html>
+license.retry=Retry
+license.close=Close
+license.ended.title=Code With Me: Session Ended
+license.ended=Session Ended
+license.end=End Session
+license.time.is.up.header=Free 30-minute session has ended
+license.upgrade=Upgrade Now
+license.buy=Buy License\u2026
+forbidden.learnMore=Learn More
+
+toolwindow.mirrored.mode.notification=Tool window is shared with other guests. They can see your actions, and you can see theirs.
+toolwindow.mirrored.mode.notification.hide.link=Hide
+
+toolwindow.factory.title.code.with.me=Code With Me
+toolwindow.factory.title.chat=Call
+call.dialog.title=Code With Me: Call
+call.dialog.one.content=Call with {0}
+call.dialog.content=Call with {0} and {1}
+call.dialog.others=Others
+call.dialog.hide.text=Hide
+call.dialog.hidden.message=You are still sending the video. Open the Call window to see your video.
+call.dialog.hidden.link.text=Show Call in Window
+notification.video.is.shared.title=Video is shared
+notification.video.is.shared.content={0} started to share their video
+notification.screen.is.shared.title={0} started screensharing
+call.dialog.content.no.participants=You are the only one in the call\u2026
+
+state.pane.additional.text=and {0} more\u2026
+action.several.users.additional.text=and {0} more\u2026
+
+user.notification.change.permissions=Change permissions\u2026
+user.notification.html.not.escaped=<html><a href="">{0}</a></html>
+
+closed.toolbar.notification.name=Code With Me controls are hidden
+closed.toolbar.notification.description=Open Code With Me popup with {0}.\nControl calls in the Code With Me tool window.
+closed.toolbar.notification.show.toolbar.action=Show toolbar
+closed.toolbar.notification.show.navigation.bar.action=Show navigation bar
+
+lobby.comment=For better performance, use the nearest JetBrains server. We will use system regional settings to identify the nearest lobby server.
+explore.cwm.text=Work remotely with your teammates on a shared project. Invite them into your\
+  \ collaborative development session, edit code together, follow each other, and\
+  \ see everyone\u2019s changes appear in real time.<br><br>\
+  <a href="https://www.jetbrains.com/code-with-me/">Explore Code With Me</a>
+
+settingsPage.automaticServerLabel=Leave this field blank to use the nearest JetBrains server
+settingsPage.defaultServerLabel=Main
+settingsPage.userDefinedServerLabel=Defined by user
+settingsPage.definedByArgumentsServerLabel=Defined by Java property
+settingsPage.validation.https=Lobby server URL should start with https://
+settingsPage.validation.malformedURL=Lobby server URL should be RFC 3986 compatible https:// URL
+settingsPage.loading=Loading\u2026
+settingsPage.disabled.by.enterprise=Code With Me is disabled by Enterprise Policy. Contact your system administrator for assistance.
+settingsPage.managed.by.enterprise=Code With Me is managed by {0}
+settingsPage.managed.by.os.config=Code With Me is managed by enterprise configuration.
+settingsPage.open.enterprise.server=Open in Browser
+
+session.token.organization=Managed by {0}
+
+connection.tooltip.title=Connection Security
+connection.tooltip.content=The connection is end-to-end encrypted. No third party, including JetBrains, is able to access the connection.
+connection.tooltip.learn.more=Learn more
+connection.tooltip.learn.more.link=https://www.jetbrains.com/help/idea/code-with-me-security-overview.html
+
+code.with.me.popup.managed.by=Managed by {0}
+
+code.with.me.settings=Code With Me
+
+# Lobby Requests
+lobby.request.session.create.name=Create Session
+lobby.request.session.join.name=Join Session
+lobby.request.session.remove.name=Remove Session
+lobby.request.session.info.name=Server Info
+lobby.request.session.get.token.name=Get Session Token
+
+lobby.request.client.connected.name=Client Connected
+lobby.request.client.disconnected.name=Client Disconnected
+lobby.request.client.poll.connected.name=Poll Connected Clients
+
+lobby.request.server.info.name=Server Info
+lobby.request.heartbeat.name=Heartbeat
+
+portForwarding.portsTabName=Port Forwarding
+
+notification.lobby.connection.refused.error=Unable to connect to the lobby server ''{0}''. Please make sure the server is available or check your firewall settings.

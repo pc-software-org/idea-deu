@@ -1,0 +1,6 @@
+<html>
+<body>
+Converts a variable that has an object or an array initializer to a destructuring object or array.
+The usages of the variable are updated accordingly.
+</body>
+</html>

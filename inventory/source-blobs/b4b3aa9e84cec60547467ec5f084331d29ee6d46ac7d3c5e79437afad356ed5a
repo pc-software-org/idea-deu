@@ -1,0 +1,6 @@
+<html>
+<body>
+<p>Reports unresolved <code>#macro</code> and <code>#function</code> directives located in other files.</p>
+<p>The quick-fix suggests using <code>#import</code> or <code>#include</code> for the required files.</p>
+</body>
+</html>

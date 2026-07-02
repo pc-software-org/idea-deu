@@ -1,0 +1,11 @@
+<html>
+<body>
+Converts a destructuring pattern to a series of reference or indexer expressions on the access side.
+New variables will be introduced for every destructuring item with possible side effects in the following cases:
+<ul><li>The pattern has default values</li>
+<li>There are write usages</li>
+<li>The expression on the right side had side effects</li>
+<li>The expression on the right side is not a reference</li></ul>
+This operation is inverse to "Propagate to destructuring declaration".
+</body>
+</html>

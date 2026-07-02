@@ -1,0 +1,332 @@
+button.add.appserver.descriptor=Add Application &Server-specific descriptor\u2026
+warning.delete.deployment.descriptor.title=Delete Deployment Descriptor
+additional.deployment.descriptor.file.description.additional.resource=Additional Resource
+deployment.descriptor.title.application.module=Application Module Deployment Descriptor
+deployment.descriptor.title.web.module=Web Module Deployment Descriptor
+
+label.web.source.roots.text=Source Roots
+action.name.edit.deployment.descriptor=Edit Deployment Descriptor\u2026
+project.view.pane.title.j2ee=Java EE
+select.in.j2ee=Framework Views
+
+dialog.title.packaging.choose.facets=Choose Facets
+link.display.text.configure.j2ee.names=Java EE Names
+label.configure.j2ee.names.prefix.and.suffix.are.taken.from=prefix and suffix are taken from
+
+title.appserver.specific.validators=Application Server-specific validators
+appserver.validator.presentable.text={0} for {1}
+
+#application module editors
+dialog.title.deployment.descriptor.location=Deployment Descriptor Location
+dialog.title.resource.location=Resource Location
+javaee.facet.settings.display.name={0} Settings
+action.name.configure.j2ee.names=_Java EE Names\u2026
+j2ee.facet.fake.file.type=Java EE facet fake file type
+
+message.title.error=Error
+
+dialog.title.edit.0=Edit {0}
+dialog.title.create.new.0=Create {0}
+column.name.description=Description
+
+dialog.title.web.resource.directory.path=Web Resource Directory Path
+dialog.title.web.resource.directory=Web Resource Directory
+dialog.description.web.resource.directory=Choose a web resource directory where web files will be stored.
+label.new.web.root.web.resource.directory.path=Web resource directory &path:
+confirmation.text.create.directory=Create the directory ''{0}'' ?
+message.title.directory.not.found=Directory Not Found
+command.name.creating.web.root.dir=creating dir
+message.text.error.creating.directory=Error creating directory.\n{0}
+message.text.web.resource.directory.should.be.located.under.module.root=Web resource directory should be located under module root.\nPlease press '\u2026' (ellipsis) button to browse module root directories.
+message.title.directory.not.in.module=Directory Not in Module
+message.text.existing.web.resource.directory.configured.in.dir.which.includes.dir=<html><body>There is existing web resource directory configured in ''<b>{0}''</b>,\n\
+  which already includes current directory ''<b>{1}''</b>.</body></html>
+message.title.conflicting.directory.found=Conflicting Directory Found
+message.text.existing.web.resource.directory.configured.in.dir.which.will.be.included.in.dir=<html><body>There is existing web resource directory configured in ''<b>{0}''</b>,\n\
+  which will be included in current directory ''<b>{1}''</b>.</body></html>
+message.text.cannot.find.file=Cannot find file ''{0}''
+message.title.file.not.found=File Not Found
+label.web.root.dialog.relative.path.in.deployment.directory=&Relative path in the deployment directory:
+
+# validation
+action.text.validate.facet=Validate all files in facet ''{0}''
+action.name.validate.location=Validate {0}
+location.to.validate.jsp=file ''{0}''
+location.to.validate.selected.jsps=selected files
+location.to.validate.all.jsps.in.directory=all files in directory ''{0}''
+location.to.validate.all.jsps.in.selected.directories=all files in selected directories
+
+message.text.remove.web.resource.directory=Remove web resource directory ''{0}''?
+message.text.remove.selected.web.resource.directories=Remove selected web resource directories?
+message.title.remove.web.resource.directory=Remove Web Resource Directory
+column.name.edit.web.roots.web.resource.directory=Web Resource Directory
+column.name.edit.web.roots..relative.to.deployment.root=Path Relative to Deployment Root
+warning.duplicate.relative.deployment.path.text=Duplicate relative deployment path ''{0}''
+action.name.create.new.filter=Web Filter
+dialog.title.new.filter=New Web Filter
+action.name.create.new.listener=Web Listener
+dialog.title.new.listener=New Web Listener
+tooltip.text.filter.class=Filter ''{0}'' Class
+tooltip.text.listener.class=Listener ''{0}'' Class
+tooltip.text.servlet.class=Servlet ''{0}'' Class
+action.name.create.new.servlet=Servlet
+action.description.create.new.servlet=Create new Servlet
+dialog.title.choose.class=Choose {0} Class
+label.servlet.properties.package=&Package:
+
+dialog.title.choose.package=Choose Package
+dialog.title.choose.0.package=Choose {0} Package
+label.properties.class=&Class:
+message.text.exists={0} ''{1}'' already exists in this Web facet.
+border.edit.web.module.web.resource.directories=Web Resource Directories
+
+action.name.delete=Delete
+column.name.edit.deployment.descriptors.type=Type
+column.name.edit.deployment.descriptors.path=Path
+border.edit.deployment.descriptors.deployment.descriptors.group=Deployment Descriptors
+
+model.object.type.listener=Listener
+model.object.type.resource.reference=Resource Reference
+model.object.type.resource.environment.reference=Resource Environment Reference
+model.object.type.environment.entry=Environment Entry
+
+# edit deployment descriptor dialog
+combobox.deployment.descriptor.version=Deployment descriptor &version
+error.deployment.descriptor.already.exists=Deployment descriptor on file ''{0}'' already exists
+error.deployment.descriptor.target.in.use=Deployment descriptor target file ''{0}'' is in use
+error.cannot.create.deployment.descriptor=Cannot create {0}\n{1}
+title.edit.deployment.descriptor=Edit Deployment Descriptor
+error.please.specify.path.to.deployment.descriptor=Please specify a path to {0}
+label.choose.or.create.deployment.descriptor.file=Choose existing XML file for {0} or specify directory to create new file.
+deployment.descriptor.panel.directory.path.relative.to.deployment.root.label=Directory &path relative to the deployment root:
+
+# create appserver-specific deployment descriptor dialog
+dialog.title.create.appserver.specific.descriptor=Create Application Server Specific Descriptor
+label.appserver.text=&Application Server:
+label.descriptor.type.text=&Descriptor:
+label.descriptor.version.text=&Version:
+
+intention.add.javaee.jar.text=Add {0} JARs to module dependencies
+
+javaeeapp.facet.display.name=JavaEE Application
+
+command.name.create.0.1=Create {0} ''{1}''
+
+label.deployment.descriptors.wizard.step.text=<html><body>Configure descriptors that will be used to deploy this facet.<br>You may add standard, proprietary and application server specific descriptors here.</body></html>
+label.delete.deployment.descriptor.text=Delete selected deployment descriptor?
+checkbox.also.delete.file.from.disk.text=&Also delete file from disk
+
+inspection.group.display.name.application.server.inspections=Application servers
+
+template.node.java.code.templates=Java code templates
+template.node.deployment.descriptors=Deployment descriptors
+template.node.application=Application
+template.node.web=Web
+
+servlet.reference.canonical.text=Cannot resolve servlet ''{0}''.
+
+#code style settings
+title.j2ee.names=Java EE Names
+title.entity.bean=Entity Bean
+editbox.default.pk.class=Default PK Class:
+label.prefix=Prefix:
+label.suffix=Suffix:
+editbox.j2eenames.ejb.class=EJB Class
+editbox.j2eenames.home.interface=Home Interface
+editbox.j2eenames.remote.interface=Remote Interface
+editbox.j2eenames.local.home.interface=Local Home Interface
+editbox.j2eenames.local.interface=Local Interface
+editbox.j2eenames.ejb.name.tag=<ejb-name> tag
+editbox.j2eenames.transfer.object=Transfer Object
+editbox.j2eenames.servlet.class=Servlet Class
+editbox.j2eenames.servlet.name.tag=<servlet-name> tag
+editbox.j2eenames.filter.class=Filter Class
+editbox.j2eenames.filter.name.tag=<filter-name> tag
+editbox.j2eenames.listener.class=Listener Class
+editbox.j2eenames.service.endpoint.interface=Service Endpoint Interface
+label.j2eenames.session.bean=Session Bean
+label.j2eenames.message.driven.bean=Message Driven Bean
+label.j2eenames.servlet=Servlet
+label.j2eenames.filter=Filter
+label.j2eenames.listener=Listener
+
+#inspections
+group.names.javaee.issues=Java EE
+inspection.javaee.xml.display.name=Java EE application descriptor correctness
+inspection.security.role.name=Security role name correctness
+
+add.web.root=Setup {0} as Web Root
+web.root.family=Setup Web root
+
+#actions
+action.CreateStatelessBean.text=State_less Session Bean
+action.CreateStatefulBean.text=State_ful Session Bean
+action.CreateSingletonBean.text=Sin_gleton Session Bean
+action.CreateContainerManagedEntityBeanAction.text=_CMP Entity Bean
+action.CreateBeanManagedEntityBeanAction.text=_BMP Entity Bean
+action.CreateMessageBean.text=_Message Bean
+action.CreateTransferObject.text=_Transfer Object
+action.CreateCMPField.text=_CMP Field
+action.CreateEJBRelationship.text=EJB _Relationship
+
+action.GenerateResourceReference.text=@Resource Reference
+action.GeneratePersistenceContextReference.text=@PersistenceContext/Unit Reference
+action.GenerateInterceptorMethods.text=Interceptor Methods\u2026
+action.GenerateEntityListenerMethods.text=Entity Listener Methods\u2026
+action.GenerateEJBFinderOrSelectorMethod.text=EJB Finder/Selector Method\u2026
+
+action.OpenPersistenceERDiagramAction.text=ER Dia_gram
+
+action.PackageFile.text=_Package file
+action.PackageFile.description=Add the selected file into the exploded deployment directory or Java EE archive
+
+facet.0.in.module.1.text={0} (in {1})
+facet.0.in.module.1.text.detailed=''{0}'' facet (in module ''{1}'')
+security.role.name.should.accord.to.nmtoken.pattern=Security role name should accord to NMTOKEN pattern
+group.JavaeeMigrationGroup.text=Migration Actions
+
+browser.web.faced.not.configured=Please configure Web Facet first!
+browser.no.suitable.configuration.running=There are no configured/running web-servers found! Please run any web-configuration and hit the Refresh button!
+
+web.context.family=Web context family
+web.context.fix=Set the context folder to ''/'' for {0}
+web.context.fix.for.directory=Set context folder to ''/'' for all files in {0} directory
+
+#starter
+javaee.starter.template.label=Template:
+starter.web.application=Web application
+starter.web.application.hint=Servlet, web.xml, index.jsp
+starter.rest.service=REST service
+starter.rest.service.hint=JAX-RS resource
+starter.library=Library
+starter.library.hint=Dependencies only
+
+javaee.starter.module.builder.description=Module based on <b>Java EE</b> or <b>Jakarta EE</b> specifications.
+
+javaee.starter.library.jakarta-api10.description=Includes most of the Jakarta EE specifications.\
+\nCompatible servers: GlassFish 7.x, Wildfly 27.x
+
+javaee.starter.library.jakarta-api9.description=Includes most of the Jakarta EE specifications.\
+\nCompatible servers: GlassFish 6.x, Open Liberty 21.x, Wildfly 23.x
+
+javaee.starter.library.javaee-api8.description=Includes most of the Java EE specifications (JSR 366).\
+\nCompatible servers: GlassFish 5.x, WebSphere AS Liberty 18.0.0.2, Wildfly 14.x, JBoss Enterprise AP 7.3, WebLogic Server 14.1.1.0.
+
+javaee.starter.library.web-api.description=Includes Servlet, CDI, JPA, Bean Validation, JSF, JAX-RS, WebSocket, JSON-P, JSON-B, Security, EJB, and JTA specifications.
+javaee.starter.library.core-api.description=Includes CDI, JSON-P, JSON-B, and JAX-RS specifications.
+
+javaee.starter.library.batch.description=Framework with a model for developing robust batch processing systems.
+javaee.starter.library.bean-validation.description=Validation model with constraints in the form of annotations placed on a field, method, or class of a JavaBeans component (JSR 380).
+javaee.starter.library.cdi.description=Dependency injection framework for enterprise applications (JSR 365).
+javaee.starter.library.concurrency.description=Asynchronous capabilities, concurrency utilities, and objects as managed objects (JSR 236).
+javaee.starter.library.connector.description=Tool for connecting application servers and enterprise information systems (EIS) as part of enterprise application integration (EAI) solutions (JSR 322).
+javaee.starter.library.data.description=Standardized Data Access with the Repository pattern.
+javaee.starter.library.ejb.description=Server-side component architecture for Java Platform.
+javaee.starter.library.json-b.description=Standard binding layer for converting Java objects to/from JSON messages (JSR 367).
+javaee.starter.library.json-p.description=API to parse, transform, and query JSON data using the object model or the streaming model (JSR 353).
+javaee.starter.library.mvc.description=Template engine API for JAX-RS (JSR 371).
+javaee.starter.library.nosql.description=Framework that streamlines the integration of Java applications with NoSQL databases
+javaee.starter.library.jms.description=Message-oriented middleware API for sending messages between two or more clients.
+javaee.starter.library.jpa.description=Provides an object/relational mapping facility for managing relational data (JSR 338).
+javaee.starter.library.jaxrs.description=Provides support in creating web services according to the Representational State Transfer (REST) architectural pattern (JSR 370).
+javaee.starter.library.security.description=Provides the standard and portable way of handling security concerns in Java containers (JSR 375).
+javaee.starter.library.jsf.description=Server-side UI component framework for building web applications (JSR 372).
+javaee.starter.library.servlet.description=Framework for web applications based on a request-response programming model (JSR 369).
+javaee.starter.library.jta.description=Provides API for handling transactions in a manner that is independent of the transaction manager implementation (JSR 907).
+javaee.starter.library.websocket.description=Provides an alternative to the limitation of efficient communication between the server and the web browser by providing bidirectional, full-duplex, real-time client/server communications (JSR 356).
+javaee.starter.library.jaxws.description=Technology for building web services and clients that communicate using XML, for instance, via SOAP (JSR 224).
+
+javaee.starter.library.cxf.description=A fully featured Web services framework that supports SOAP, JAX-RS, and JAX-WS.
+javaee.starter.library.weld.description=Reference implementation of CDI: Contexts and Dependency Injection for the Java EE Platform.
+javaee.starter.library.activemq.description=Client for ActiveMQ messaging server compatible with JMS API.
+javaee.starter.library.jersey.description=REST framework that provides a JAX-RS (JSR 370) implementation.
+javaee.starter.library.eclipselink.description=ORM framework that allows developers to interact with various data services, including databases, web services, Object XML mapping, and Enterprise Information Systems.
+javaee.starter.library.hibernate.description=Framework for mapping an object-oriented domain model to a relational database.
+javaee.starter.library.hibernate-validator.description=Implementation of the Java Bean Validation (JSR 380).
+javaee.starter.library.mojarra.description=Implementation of the JSF standard.
+javaee.starter.library.resteasy.description=REST framework that provides a JAX-RS (JSR 370) implementation.
+javaee.starter.library.rabbitmq.description=Client for RabbitMQ message-broker.
+javaee.starter.library.thymeleaf.description=Modern server-side Java template engine for both web and standalone environments.
+javaee.starter.library.tyrus-server.description=Reference server implementation for easy development of WebSocket applications.
+javaee.starter.library.tyrus-client.description=Reference client implementation for easy development of WebSocket applications.
+
+javaee.starter.category.implementations.title=Implementations
+javaee.starter.category.specifications.title=Specifications
+javaee.starter.category.specifications.description=Java Enterprise API dependencies.
+javaee.starter.category.implementations.description=Java Enterprise implementation dependencies.
+
+Form.TransportManagerConfigurable.type=Type:
+Form.TransportManagerConfigurable.host=Host:
+LocalTransportHost.name=Same file system
+
+action.AnActionButton.text.help=Help
+
+JavaeeApplicationFrameworkType.javaeeapp.facet.display.name=JavaEE Application
+
+DataSourceAddFromServerAction.server.is.not.connected=Server is not connected
+
+output.path.must.point.to.directory.under.output.root=Output path must point to directory under output root
+web.facet.create.web.xml=Create web.xml
+
+should.be.interface=''{0}'' should be an interface
+should.not.be.interface=''{0}'' should be a class
+interface.should.have.modifier=Interface ''{0}'' should be {1}
+interface.should.not.have.modifier=Interface ''{0}'' should not be {1}
+class.should.have.modifier=Class ''{0}'' should be {1}
+class.should.not.have.modifier=Class ''{0}'' should not be {1}
+
+model.object.type.security.role=Security Role
+
+auto.detected.descriptor.settings.in.0=Automatically detected descriptor settings in: {0}
+
+ejb.er.diagram.presentation.name=EJB ER Diagram
+label.add.jars.to.classpath=Add JARs to the classpath
+artifact.dependencies.checker.label.change.scope.to=Change ''{0}'' scope to ''{1}''
+missing.module.in.artifact.label.add.to.artifact=Add ''{0}'' to the artifact
+artifact.dependency.checker.add.dependencies.recursively.fix.name=Add ''{0}'' and all its dependencies to the artifact
+artifact.dependency.checker.add.all.dependencies.fix.name=Add all missing dependencies of ''{0}'' to the artifact
+descriptor.several.facets.not.registered=Several facets aren't registered in 'application.xml'
+facet.0.not.registered={0} isn''t registered in ''application.xml''
+facet.0.has.incorrect.uri.tag={0} has incorrect ''uri'' tag in ''application.xml''
+descriptor.0.refers.to.directory.rather.than.file=''{0}'' descriptor refers to a directory instead of a file
+javaee.application.archive.title=Java EE Application: Archive
+javaee.application.exploded.title=Java EE Application: Exploded
+dependency.missing.from.the.classpath={0} {1, choice, 1#is|2#are} missing from the classpath of ''{2}''
+module.0.required.for.module.1.is.missing.from.the.artifact=Module ''{0}'' required for module ''{1}'' is missing from the artifact
+library.0.required.for.module.1.is.missing.from.the.artifact=Library ''{0}'' required for module ''{1}'' is missing from the artifact
+for.0=For ''{0}''
+action.create.artifact.from.modules.text=From Modules\u2026
+show.content.of.javaee.facets=Show Content of Java EE Facets
+javaee.facet.resources.title=Java EE Facet Resources
+javaee.facet.classes.title=Java EE Facet Classes
+facet.resources.are.not.included.in.an.artifact=Facet resources are not included in any artifacts
+button.create.artifact=Create Artifact
+popup.title.select.artifact=Select Artifact
+dialog.message.unable.to.set.permissions.for.file=Unable to set permissions for file {0}
+dialog.message.can.t.set.permissions.for.file=Can''t set permissions for file {0}
+dialog.message.can.t.write.file=Cannot write to file {0}
+java.ee.libraries=Java EE libraries
+choose.facets=Choose Facets
+ejb.application.archive=EJB Application: Archive
+label.selected.modules.will.be.included.in.created.artifact.with.all.dependencies=Selected modules will be included in the created artifact with all dependencies
+dialog.title.select.modules=Select Modules
+ejb.application.exploded=EJB Application: Exploded
+label.module.facet=''{0}'' module: ''{1}'' facet {2}
+label.facet.resources={0} facet resources
+web.application.exploded=Web Application: Exploded
+web.application.archive=Web Application: Archive
+command.name.create.filter=Create Filter
+command.name.create.servlet=Create Servlet
+inspection.message.invalid.http.status.code=Invalid HTTP status code ''{0}''
+inspection.message.http.status.code.not.allowed.here=HTTP status code ''{0}'' is not allowed here
+inspection.managed.bean.class=Managed bean class inspection
+
+javaee.app.config.gutter.name=JavaEE:Application configuration file
+javaee.app.config.gutter.action=Open JavaEE:App tool window
+jakartaee.migration.description=Replaces javax.* imports with jakarta.* imports in Java code.\
+\nDoes not affect usages of: 'javax.sql,' 'javax.swing,' 'javax.xml,' 'javax.naming' and 'javax.transaction.xa'.\
+\n\nYou need to add Jakarta EE libraries before the migration.
+notification.group.javaee=JavaEE
+notification.group.javaee.toolwindow=JavaEE execution issue
+command.name.generate.application.xml=Generate application.xml
+command.name.update.application.xml=Update application.xml

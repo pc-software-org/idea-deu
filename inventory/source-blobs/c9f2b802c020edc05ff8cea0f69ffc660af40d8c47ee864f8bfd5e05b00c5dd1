@@ -1,0 +1,3 @@
+action.Console.TableResult.ShowChart.text=Show Chart
+action.Console.TableResult.CloseChart.text=Close Chart
+action.Console.TableResult.SwitchTo.ChartView.text=Switch to Chart

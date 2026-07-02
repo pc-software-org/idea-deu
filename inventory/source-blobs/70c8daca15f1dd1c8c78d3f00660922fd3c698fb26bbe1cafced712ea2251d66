@@ -1,0 +1,9 @@
+<html>
+<body>
+Reports a function whose body contains statements that are too deeply nested within other statements.
+Such functions may be confusing and indicate that refactoring may be necessary.
+<!-- tooltip end -->
+<p>
+  Use the field provided below to specify the maximum acceptable nesting depth allowed in a function.
+</body>
+</html>

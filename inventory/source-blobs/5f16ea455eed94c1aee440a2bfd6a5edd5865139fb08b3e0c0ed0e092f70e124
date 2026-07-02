@@ -1,0 +1,15 @@
+action.lineprofiler.CloseAnnotations.text=Hide Performance Hints
+action.lineprofiler.CloseAnnotations.description=Do not show performance hints in the gutter
+action.lineprofiler.ShowAnnotations.text=Show Performance Hints
+action.lineprofiler.ShowAnnotations.description=Show detailed per-line execution information
+select.to.navigate=Select to navigate
+click.to.navigate=Click to navigate to declaration
+click.to.navigate.to=Click to navigate to {0}
+progress.title.calculate.line.mappings=Calculate line mappings
+progress.text.calculate.line.mappings.for=Calculate line mappings for {0}
+error.stripe.tooltip=Hot code: executed {0}\nthat is {1} of {2}
+percent.of.all=\ of all
+percent.of.parent=\ of {0}
+loading.progress.label=Loading line performance hints
+line.tooltip.hint.time=Total time spent at the line
+line.tooltip.hint.memory=Total memory allocated at the line

@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports situations when you use SQL reserved keywords as identifier names in your query.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE select (identity INT IDENTITY NOT NULL, order INT NOT NULL);</code></pre>
+<p>We use <code>select</code>, <code>identity</code>, and <code>order</code> as table and column names.
+  But they are also reserved keywords in Microsoft SQL Server.
+  Therefore, in order to use them as object names in the query, you must quote these identifiers. To quote them, you can use the
+  <b>Quote identifier</b> quick-fix.</p>
+<p>After the quick-fix is applied:</p>
+<pre><code>CREATE TABLE [select] ([identity] INT IDENTITY NOT NULL, [order] INT NOT NULL);</code></pre>
+</body>
+</html>

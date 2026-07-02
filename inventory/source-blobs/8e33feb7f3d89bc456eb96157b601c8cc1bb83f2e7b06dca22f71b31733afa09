@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a class member initializer which references another non-hoisted class member while the latter may be not initialized yet.
+<br/><br/>
+Initialization of class members happens consequently for fields, so a field cannot reference another field that is declared later.
+</body>
+</html>

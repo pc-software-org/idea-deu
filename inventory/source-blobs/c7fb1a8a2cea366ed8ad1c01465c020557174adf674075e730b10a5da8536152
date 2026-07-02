@@ -1,0 +1,20 @@
+<html>
+<body>
+<p>Reports unresolved channel attributes in <code>@StreamListener</code>, <code>@SendTo</code>, <code>@Output</code>, and <code>@Input</code> annotations.</p>
+<p>Using invalid binding name results in 'bean not found' error at runtime.</p>
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @EnableBinding(Sink.class)
+  public class LogSource {
+    @StreamListener(Sink.class)
+	  public void log1() {
+    }
+
+    @StreamListener("invalid")  // Reports 'Cannot find channel'
+	  public void log2() {
+    }
+  }
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

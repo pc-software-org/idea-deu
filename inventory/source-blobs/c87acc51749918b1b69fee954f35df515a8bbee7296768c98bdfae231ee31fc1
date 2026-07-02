@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports statements that may cause side effects while the data source is in read-only mode.
+<p>The quick-fix turns off the read-only mode for the respective data source.</p>
+<p>Example:</p>
+<pre><code>
+db.my_collection.insertOne()
+</code></pre>
+</body>
+</html>

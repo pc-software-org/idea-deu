@@ -1,0 +1,6 @@
+<html>
+<body>
+Converts a unidirectional relationship to a bidirectional one by generating
+the other side attribute that is linked to the selected attribute.
+</body>
+</html>

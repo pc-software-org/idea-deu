@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports redundant parentheses.
+<!-- tooltip end -->
+<p>In expressions:</p>
+<pre><code>var x = ((1) + 2) + 3</code></pre>
+
+<p>In arrow function argument lists:</p>
+<pre><code>var incrementer = (x) => x + 1</code></pre>
+
+<p>In TypeScript and Flow type declarations:</p>
+<pre><code lang="typescript">type Card = (Suit & Rank) | (Suit & Number)</code></pre>
+</body>
+</html>

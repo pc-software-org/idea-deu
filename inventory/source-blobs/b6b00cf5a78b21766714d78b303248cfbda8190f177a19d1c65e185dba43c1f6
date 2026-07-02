@@ -1,0 +1,305 @@
+#
+# Copyright 2000-2007 JetBrains s.r.o.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+jpa.facet.type.presentable.name=JPA
+framework.title.jpa=JavaEE Persis&tence
+template.node.jpa=JPA
+model.object.type.persistence.unit=Persistence Unit
+model.object.type.persistence.mappings=JPA Mappings
+model.object.type.persistence.entity=Persistence Entity
+model.object.type.persistence.mapped.superclass=Mapped Superclass
+model.object.type.persistence.embeddable=Embeddable
+model.object.type.persistence.query=Named Query
+model.object.type.persistence.entity.listener=Entity Listener
+model.object.type.persistence.named.entity.graph=Named Entity Graph
+model.object.type.persistence.named.subgraph=Named Subgraph
+model.object.type.persistence.named.attribute.node=Named Attribute Node
+persistence.unit.fake.file.type=Persistence Unit fake file type
+
+action.Jpa.AssignDataSources.text=Assign Data Sources\u2026
+action.Hibernate.AssignNamingStrategies.text=Assign Naming Strategies\u2026
+action.Jpa.OpenInDatabaseView=Select in Database View
+action.Jpa.RunQueryInConsole=Run Query in JPA Console
+action.Jpa.ShowERDiagram=Show Entity Relationship Diagram
+action.Jpa.NavigateTo0=Navigate to ''{0}''
+action.Jpa.NavigateToTarget=Navigate to target
+action.Jpa.FindUsagesOf0=Find Usages of ''{0}''
+action.Jpa.FindUsages=Find Usages
+action.Jpa.OpenConsole.text=JPA Console
+
+action.OpenPersistenceERDiagramAction.text=ER Dia_gram
+action.GenerateEntityListenerMethods.text=Entity Listener Methods\u2026
+action.Console.Jpa.Terminate.text=Terminate Process
+action.Console.Jpa.Terminate.description=Terminate JPA console process
+action.Console.Jpa.Close.text=Close
+action.Console.Jpa.Close.description=Close JPA console
+action.Console.Jpa.GenerateDDL.text=Generate DDL
+action.Console.Jpa.GenerateDDL.description=Generate persistence unit DDL
+action.Console.Jpa.GenerateSql.text=Generate SQL
+action.Console.Jpa.GenerateSql.description=Generate SQL for the specified QL
+action.Console.Jpa.Execute.text=Execute Query
+action.Console.Jpa.Execute.description=Execute query in console
+
+group.Jpa.Model.Generation.Scripts.text=JPA Scripts
+group.NewGroupPersistence.text=New Group Persistence
+
+jpa.er.diagram.presentation.name=JPA ER Diagram
+
+persistence.unit.type=Persistence Unit
+persistence.entity.type=Entity
+persistence.mappedsuperclass.type=Mapped Superclass
+persistence.embeddable.type=Embeddable
+persistence.entity.listener.type=Entity Listener
+type.persistence.attr.id=Id
+type.persistence.attr.basic=Basic
+type.persistence.attr.version=Version
+type.persistence.attr.embedded=Embedded
+type.persistence.attr.embedded.id=Embedded Id
+type.persistence.attr.one.to.one=One To One
+type.persistence.attr.one.to.many=One To Many
+type.persistence.attr.many.to.one=Many To One
+type.persistence.attr.many.to.many=Many To Many
+type.persistence.attr.element.collection=Element Collection
+type.persistence.attr.transient=Transient
+
+intentions.category.javaee.persistence=Java EE Persistence
+intention.persistence.add.entity.listener.family=Add EntityListener
+intention.persistence.add.entity.listener.text=Add EntityListener for persistent class ''{0}''
+intention.persistence.add.inverse.attribute.family=Add "the other side" attribute to relationship
+intention.persistence.add.inverse.attribute.text=Add "the other side" attribute to relationship
+intention.persistence.add.inverse.attribute.input.name.text=Enter Attribute name
+intention.persistence.add.inverse.attribute.input.name.title=Create Persistent Attribute
+
+group.names.jpa.issues=JPA
+inspection.javaee.persistence.xml.display.name=persistence.xml problems
+inspection.javaee.persistence.mappings.xml.display.name=Orm.xml problems
+inspection.javaee.persistence.orm.display.name=Unresolved database references in annotations
+inspection.javaee.persistence.orm.xml.display.name=Unresolved database references in XML
+inspection.javaee.persistence.ql.display.name=Query language checks
+inspection.javaee.persistence.query.display.name=Unresolved queries and query parameters
+inspection.javaee.persistence.persistence.xml.facet=Persistence.xml is not added to facet
+inspection.javaee.persistence.graph.name.display.name=Unresolved entity graph names
+inspection.javaee.persistence.graph.name.unresolved.message=Cannot resolve entity graph ''{0}''
+inspection.javaee.persistence.attribute.node.unresolved.message=Cannot resolve attribute node ''{0}''
+inspection.javaee.persistence.subgraph.name.unresolved.message=Cannot resolve subgraph ''{0}''
+
+inspection.jpa.object.class.signature=Persistent object class signature checks
+inspection.jpa.object.missing.id=Persistent entity misses primary key
+inspection.jpa.object.missing.id.adding=Add Entity @Id
+inspection.jpa.attribute.member.signature=Persistent attribute signature checks
+inspection.jpa.attribute.type=Persistent attribute type checks
+inspection.jpa.model.reference=Unresolved references in queries
+inspection.jpa.entity.listener=Entity listener problems
+inspection.jpa.entity.listener.warnings=Entity listener warnings
+
+dialog.title.new.typename=New {0}
+
+action.name.create.entity.listener=Create Entity Listener
+action.name.create.persistent.entity=Create Entity
+action.name.create.mappedsuperclass=Create Mapped Superclass
+action.name.create.embeddable=Create Embeddable
+action.create.attr.1=Create ''{0}''
+
+action.name.create.persistence.unit=Create Persistence Unit
+action.name.create.persistence.mappings=Create Persistence Mappings
+prompt.enter.a.name=Enter name:
+title.new.persistence.unit=New {0}
+title.new.persistence.mappings=New Persistence Mappings
+action.name.generate.persistence.unit.by.database.schema=By Database Schema
+action.name.generate.persistence.unit.by.entity.beans=By Entity Beans
+action.name.generate.persistence.unit.by.hibernate.mappings=By Hibernate Mappings
+command.generate.persistence.mappings=Generate Persistence Mappings {0}
+
+column.name.persistence.entity.tree.name=Name
+column.name.persistence.entity.tree.listen=Listen
+
+dialog.title.import.database.schema=Import Database Schema
+dialog.title.import.hibernate.mappings=Import Hibernate Mappings
+dialog.title.import.entity.beans=Import Entity EJBs
+
+action.text.add.relationship=Add Relationship
+action.text.edit.relationship=Edit Relationship
+action.text.delete.relationship=Delete Relationship
+
+title.choose.entity.listener.method.types=Select Entity Listener Methods to Implement
+dialog.title.apply.entity.listener.bindings.failed=EntityListener Bindings Modification Failed
+command.apply.entity.listener.bindings.command=Modify EntityListener Bindings
+dialog.title.edit.entity.listener.bindings=Edit EntityListener ''{0}'' bindings
+entity.listener.method.container.node.title=EntityListener methods
+border.entity.listener.bindings=EntityListener Bindings
+
+action.text.add.join.column=Add Join Column
+action.text.remove.join.column=Remove Join Column
+border.persistence.relationship.source=Source: {0}
+border.persistence.relationship.target=Target: {0}
+label.persistence.relationship.join.table.combobox=Join Table
+border.persistence.relationship.join.columns=Join Columns
+columninfo.persistence.relationship.source=Source Column
+columninfo.persistence.relationship.source.join=Source Join Column
+columninfo.persistence.relationship.target.join=Target Join Column
+columninfo.persistence.relationship.target=Target Column
+label.persistence.relationship.role.table=Table
+label.persistence.relationship.role.attribute.name=Attribute Name
+label.persistence.relationship.role.type=Type
+label.persistence.relationship.role.map.key=Map Key Column
+
+tooltip.text.data.source.relation=Table Relationship
+
+message.text.select.datasource=No Data Source selected<br>Select one to import schema from.
+message.text.no.tables.found.try.refresh=No Tables loaded for ''{0}'' Data Source<br>Try ''Refresh Tables''.
+combobox.title.choose.datasource=Choose Data Source:
+caption.ejb.import.text=Import Entity Enterprise JavaBeans
+jpa.quickfix.family=JPA model quick-fix
+warning.cfg.xml.not.in.any.facet=File is not configured as JPA facet descriptor
+name.fix.add.to.facet.configuration=Add to JPA Facet configuration
+name.fix.create.facet.and.add.to.facet.configuration=Create JPA facet and add file to its configuration
+popup.title.choose.module.and.facet=Choose Module/Facet
+action.text.select.unit.properties.source=Select Properties Source
+
+dialog.datasource.schema.import.column.database=Database Schema
+dialog.datasource.schema.import.column.map.as=Map As
+dialog.datasource.schema.import.column.type=Mapped Type
+checkbox.database.schema.import.generate.single.xml=Generate Single Mapping &XML:
+checkbox.database.schema.import.annotation.target=Annotation targets:
+checkbox.database.schema.import.annotation.target.field=Fields
+checkbox.database.schema.import.annotation.property=Properties
+checkbox.database.schema.import.generate.separate.xml=Generate Separate XML per Entity
+checkbox.database.schema.import.generate.column.properties=Generate Column Properties
+checkbox.database.schema.import.generate.annotations=Generate JPA &Annotations (Java5)
+checkbox.database.schema.import.add.to.unit=Add to {0}:
+checkbox.database.schema.import.prefer.primitive.types=Prefer primitive &types
+checkbox.database.schema.import.generate.default.relationships=Show default &relationships
+label.database.schema.import.package=Package:
+checkbox.default.entity.listener=&Default EntityListener
+db.schema.import.invalid.type=''{0}'' is not a valid type
+db.schema.import.not.identifier=''{0}'' is not a valid java identifier
+db.schema.import.duplicate.entity.name=Entity name ''{0}'' is used more than once
+db.schema.import.duplicate.attribute.name=Attribute name ''{0}'' is used more than once
+db.schema.import.opposite.table.not.enabled=Relationship references disabled table ''{0}''
+db.schema.import.map.key.field.not.enabled=Map key references disabled attribute ''{0}''
+db.schema.import.joins.not.specified=Join columns not specified
+caption.database.schema.import.text=Import Database Schema
+caption.database.schema.import.description=Generate Java Classes and Persistence Metadata for Database Schema
+border.database.schema.import.general=General Settings
+border.database.schema.import.schema=Database Schema Mapping
+border.database.schema.import.generation=Generation Settings
+label.database.schema.import.entity.suffix=Entity suffix:
+label.database.schema.import.entity.prefix=Entity prefix:
+
+message.text.confirm.generate.orm=The OR mapping is about to be generated.\nDo you want to continue?
+message.text.confirm.discard.orm=The OR mapping will be discarded.\nDo you want to continue?
+action.text.synchronize.datasource.contents=Refresh Tables
+
+action.text.select.all=Select All
+action.text.unselect.all=Unselect All
+
+persistence.validator.description=JPA
+progress.validating.persistence.model.text=Validating Persistence Model\u2026
+
+dialog.title.choose.jpa.classes.package=Choose JPA Classes Package
+
+deployment.descriptor.title.persistence.xml=JPA Configuration Descriptor
+deployment.descriptor.title.orm.xml=JPA Mapping Descriptor
+
+dialog.relation.entity.label=Class: {0}
+dialog.relation.attribute.label=Attribute:
+dialog.relation.multiplicity.label=Multiplicity:
+dialog.relation.multiplicity.many=Many
+dialog.relation.multiplicity.one=One
+dialog.relation.owner.label=Owner
+dialog.relation.optional.label=Optional
+dialog.relation.fetchtype.title=Fetch Type
+dialog.relation.cascade.type.title=Cascade Type
+dialog.relation.title.edit=Edit Relationship
+dialog.relation.title.create=Create Relationship
+dialog.relation.message.no.attributes=Nothing to create
+dialog.relation.message.invalid.name=Invalid attribute name ''{0}''
+dialog.relation.message.attribute.exists=Attribute ''{0}'' already exists
+dialog.embedded.title.create=Create Embeddable Attribute
+dialog.embedded.attribute.label=Enter Attribute Name
+
+command.name.create.relationship=Create Relationship
+command.name.create.embedded=Create Embedded Attribute
+tab.title.jpa.general.settings=General Settings
+
+cannot.resolve.attribute.0=Cannot resolve attribute ''{0}''
+cannot.resolve.catalog.0=Cannot resolve catalog ''{0}''
+cannot.resolve.schema.0=Cannot resolve schema ''{0}''
+cannot.resolve.table.0=Cannot resolve table ''{0}''
+cannot.resolve.sequence.0=Cannot resolve sequence ''{0}''
+cannot.resolve.column.0=Cannot resolve column ''{0}''
+cannot.resolve.query.0=Cannot resolve query ''{0}''
+cannot.resolve.query.parameter.0=Cannot resolve query parameter ''{0}''
+title.select.metadata.targets=Select Metadata Targets
+column.title.targets=Targets
+attribute.0.already.exists=Attribute ''{0}'' already exists
+attribute.0.not.identifier=''{0}'' is not a valid identifier
+ql.usage.type=Usage in QL query
+
+dialog.datasource.include=Include
+dialog.datasource.exclude=Exclude
+ids.error.no.datasource.selected=Nothing to generate. No Data Source choosen.
+ids.error.xml.mapping.file.invalid=Cannot generate mapping XML ''{0}''.
+ids.error.no.mapping.selected=Please choose mapping types XML, Annotations (Java5) or both.
+ids.error.no.unit.selected=Please choose persistence unit.
+ids.error.no.table.selected=Nothing to generate. No tables selected.
+ids.error.inalid.entity.prefix=Invalid prefix ''{0}''
+ids.error.inalid.entity.suffix=Invalid suffix ''{0}''
+ids.error.no.source.selected=Nothing to generate. No source selected.
+ids.error.invalid.package=Invalid package ''{0}''.
+ids.error.unit.required=JPA annotation mappings require at least one {0}
+title.new.persistence.xml=Choose persistence.xml path
+
+message.generating.1=Generating ''{0}''
+message.rearranging.1=Rearranging ''{0}''
+message.adding.1=Adding ''{0}''
+title.choose.persistent.object=Choose Target
+framework.configurable.import.database=Import database schema
+
+border.facet.descriptors=Descriptors
+label.facet.default.jpa.provider=Default JPA Provider
+
+jpa.console.unit.not.found=Persistence Unit not found
+jpa.console.facet.not.found=Persistence Facet not found
+jpa.console.provider.name=JPA Console
+
+JpaConsoleBase.generate.script=Generate Script
+
+default.or.no.data.source=Default or no data source
+open.jpa.consoles.name=Consoles
+
+jpa.form.attribute.name.field.access=&Annotate Field
+jpa.option.attribute.name.generated=&Generated
+jpa.form.attribute.name.inverse=&Inverse:
+jpa.form.attribute.name.name=&Name:
+jpa.form.attribute.name.type=&Type:
+jpa.form.attribute.name.mapped.by=Mapped By:
+jpa.console.vm.env.configuration.text=VM and Env Configuration
+jpa.console.persistence.units.text=Persistence Units
+jpa.console.vm.and.env.configuration=VM and Env Configuration
+jpa.console.process.exited=Process exited
+jpa.console.generated.content.using.file=Using {0}
+jpa.missing.datasource=Missing data source
+jpa.click.to.select.datasource=Select data source
+jpa.no.data.sources=No data sources defined. Add data source from Database tool window first.
+
+jpa.open.persistence.tool.window=Open Persistence tool window
+jpa.gutter.name=JPA Entity mappings
+jpa.composite.entity.gutter.name=Show Entity actions
+jpa.composite.attribute.gutter.name=Show Entity attribute actions
+jpa.config.gutter.name=JPA configuration files
+
+jpa.datasource.error=Current data source is marked as "Local" and cannot be used for JPA console in Dev Container

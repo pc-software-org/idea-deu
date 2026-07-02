@@ -1,0 +1,29 @@
+<html>
+<body>
+Reports async transactional event listener declarations which can be simplified:
+<pre><code>
+@Component
+public class MyEventListener {
+
+    @Async
+    @Transactional
+    @TransactionalEventListener
+    public void on(MyEvent e) {
+        // ...
+    }
+}
+</code></pre>
+
+with <code>@ApplicationModuleListener</code>:
+<pre><code>
+@Component
+public class MyEventListener {
+
+    @ApplicationModuleListener
+    public void on(MyEvent e) {
+        // ...
+    }
+}
+</code></pre>
+</body>
+</html>

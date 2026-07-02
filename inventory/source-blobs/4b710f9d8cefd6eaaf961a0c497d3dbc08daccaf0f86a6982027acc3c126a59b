@@ -1,0 +1,14 @@
+becontrols.not.implemented=Not implemented yet
+becontrols.not.action.owner=Not an action owner
+becontrols.header=Header
+becontrols.unnamed.item=unnamed item
+becontrols.async.icons.only=Async Process Icon only
+becontrols.notification.close="Close"
+action.unavailable=Action Unavailable
+becontrols.dynamic.content.action.failed=Dynamic Content Action Failed
+current.value.is.null=Current value is null
+becontrols.invalid.dynamic.content=Invalid dynamic content
+becontrols.not.implemented.action.button.in.menu=Not implemented (Action Button in Menu)
+becontrols.beaction.can.not.be.created=BeAction can not be created
+waiting.for.network.action.error=No connection to IDE Backend. Trying to reconnect\u2026
+waiting.for.network.editor.header.text=No connection to IDE Backend. Changes in the document might be lost. Trying to reconnect\u2026

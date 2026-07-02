@@ -1,0 +1,6 @@
+gradle.uml.action.name=Dependencies
+gradle.uml.presentation=Gradle Dependencies
+project.path.description=Project {0}
+project.path.unresolved=Unresolved
+gradle.uml.view.standard=Standard
+gradle.uml.show.group.artifact.version=Show 'groupId':'artifactId':'version'

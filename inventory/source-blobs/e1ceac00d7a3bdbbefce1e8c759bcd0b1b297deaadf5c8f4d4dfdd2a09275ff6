@@ -1,0 +1,2 @@
+database.config.properties.datasource.family.name=Create or open an existing datasource from a .properties file
+database.config.properties.datasource.name=Datasource from .properties file

@@ -1,0 +1,5 @@
+<html>
+<body>
+Validates <code>@Pointcut</code> methods: the <code>void</code> return type, no <code>throws</code> clause, and an empty method body.
+</body>
+</html>

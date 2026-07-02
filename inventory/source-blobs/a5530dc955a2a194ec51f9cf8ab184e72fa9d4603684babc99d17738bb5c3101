@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a <code>if</code>, <code>while</code>, <code>for</code>, or <code>with</code> statements whose body is not a block statement.  Using code block in statement bodies is usually safer for downstream maintenance.
+</body>
+</html>

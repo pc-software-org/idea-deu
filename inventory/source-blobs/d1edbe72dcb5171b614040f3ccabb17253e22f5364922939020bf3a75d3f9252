@@ -1,0 +1,7 @@
+filetype.http.request.action.description=HTTP requests
+
+rest.client.refactoring.invalid.dynamic=Rename operation is not supported for dynamic variables
+rest.client.refactoring.invalid.variable.name=Cannot rename environment variable because the name ''{0}'' is invalid
+
+timeout.doc.comment.invalid.duration.format.error=Invalid duration format. Duration must be an integer number with optional 's', 'm' or 'ms' postfix.
+timeout.doc.comment.to.big.duration.error=Duration is too long

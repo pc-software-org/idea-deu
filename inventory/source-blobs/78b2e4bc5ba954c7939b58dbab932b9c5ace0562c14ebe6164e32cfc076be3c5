@@ -1,0 +1,9 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/MagicNumber.html -->
+<html>
+<body>
+Reports a "magic number" that is a numeric literal used without being named by a constant declaration.
+Magic numbers can result in code whose intention is unclear, and may result in errors if a magic
+number is changed in one code location but remains unchanged in another. The numbers 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 1000,
+0.0 and 1.0 are ignored.
+</body>
+</html>

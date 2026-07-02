@@ -1,0 +1,10 @@
+<html>
+<body>
+<div>
+  This is a simple template for a GitHub workflow file.
+</div>
+<div>
+  For more information, refer to the <a href="https://docs.github.com/en/actions/writing-workflows/quickstart">official documentation on GitHub</a>
+</div>
+</body>
+</html>

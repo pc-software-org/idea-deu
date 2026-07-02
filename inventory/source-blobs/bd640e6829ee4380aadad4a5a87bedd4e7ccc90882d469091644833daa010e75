@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a potentially invalid indexed property access, for example, <code>Array[1]</code>.
+</body>
+</html>

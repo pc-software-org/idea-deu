@@ -1,0 +1,31 @@
+<html>
+<body>
+Reports exceptions that are thrown by top-level JSP scriptlets.<br/>
+
+<p><b>Example:</b></p>
+<pre><code lang="jsp">
+  &lt;%!
+  String getFormattedDate() {
+    ...
+    throw new IllegalArgumentException(...); // Error
+  }
+  %&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;title&gt;Hello, JSP!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;i&gt;Today is &lt;%= getFormattedDate() %&gt;&lt;/i&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre><br/>
+
+<!-- tooltip end -->
+<p>
+  <b>NOTE:</b> Such JSP pages will compile, because the servlet container wraps
+  all JSP code in a <b>try {} catch() {}</b> block,
+  but they will produce runtime exceptions when deployed on the server.
+</p>
+</body>
+</html>

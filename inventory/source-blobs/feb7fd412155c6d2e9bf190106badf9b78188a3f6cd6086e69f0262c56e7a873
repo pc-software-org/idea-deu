@@ -1,0 +1,21 @@
+<html>
+<body>
+<p>Reports incorrect Micronaut Data <a href="https://micronaut-projects.github.io/micronaut-data/latest/guide/#querying">repository method
+  return types.</a></p>
+<p>The following return types are supported:</p>
+<list>
+  <li>void</li>
+  <li>Primitive types</li>
+  <li>Simple types</li>
+  <li><code>java.util.List</code> or any common <code>Iterable</code> type</li>
+  <li><code>java.util.stream.Stream</code></li>
+  <li><code>java.util.Optional</code></li>
+  <li><code>io.micronaut.data.model.Page</code></li>
+  <li><code>io.micronaut.data.model.Slice</code></li>
+  <li><code>java.util.concurrent.Future</code> or <code>java.util.concurrent.CompletableFuture</code></li>
+  <li>A Reactive Streams compatible type, such as <code>Publisher</code>, <code>Single</code>, <code>Maybe</code>, <code>Flux</code>, <code>Mono</code>,
+    and so on
+  </li>
+</list>
+</body>
+</html>

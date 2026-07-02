@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a <code>switch</code> statement where the <code>default</code> case
+comes before another case instead of being the very last case, which may cause confusion.
+</body>
+</html>

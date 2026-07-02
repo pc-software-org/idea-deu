@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import gzip
 import os
 import shutil
 import stat
@@ -25,7 +26,7 @@ from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
 from .scanner import ScannerError, load_scanner_config, scan_archive
 from .source import SourceValidationError, validate_source
-from .state import StateError, read_jsonl, write_jsonl_atomic
+from .state import StateError, read_jsonl, read_jsonl_bytes, write_jsonl_atomic
 from .path_safety import atomic_materialize_tree, recover_materialized_tree
 
 DOMAIN_ERROR = 1
@@ -130,7 +131,7 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         provider = BlobResourceProvider(root / "inventory/source-blobs")
         destination = root / "dist/idea-deu.zip"
         build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination,
-                             trusted_root=root)
+                             dedupe_identical=True, trusted_root=root)
         artifact_hash, artifact_size = _file_fingerprint(destination)
         write_jsonl_atomic(root / "dist/manifest.json", [{"schema_version": 1,
             "input_sha256": _state_input_digest(inventory, units),
@@ -164,11 +165,15 @@ def _opened_source(root: Path, config: ProductConfig):
 
 
 def _read_inventory(root: Path) -> Inventory:
-    paths = tuple(root / f"inventory/{name}.jsonl" for name in ("resources", "exclusions", "collisions"))
-    if not any(path.exists() for path in paths): return Inventory((), (), ())
-    if not all(path.exists() for path in paths): raise StateError("incomplete inventory; recovery or scan required")
-    return Inventory(tuple(read_jsonl(paths[0], ResourceRecord)), tuple(read_jsonl(paths[1], ExclusionRecord)),
-                     tuple(read_jsonl(paths[2], CollisionRecord)))
+    resources = root / "inventory/resources.jsonl"; collisions = root / "inventory/collisions.jsonl"
+    compressed = root / "inventory/exclusions.jsonl.gz"; plain = root / "inventory/exclusions.jsonl"
+    if not any(path.exists() for path in (resources, collisions, compressed, plain)): return Inventory((), (), ())
+    if not resources.exists() or not collisions.exists() or not (compressed.exists() or plain.exists()):
+        raise StateError("incomplete inventory; recovery or scan required")
+    exclusions = (read_jsonl_bytes(gzip.decompress(compressed.read_bytes()), str(compressed), ExclusionRecord)
+                  if compressed.exists() else read_jsonl(plain, ExclusionRecord))
+    return Inventory(tuple(read_jsonl(resources, ResourceRecord)), tuple(exclusions),
+                     tuple(read_jsonl(collisions, CollisionRecord)))
 
 
 def _read_units(root: Path) -> tuple[TranslationUnit, ...]:
@@ -269,7 +274,12 @@ def _recover_scan(root: Path) -> None:
     if read_jsonl(transaction / "manifest.jsonl", dict) != [{"schema_version": 1, "state": "prepared"}]:
         raise StateError("invalid scan transaction")
     write_jsonl_atomic(root / "inventory/resources.jsonl", read_jsonl(transaction / "resources.jsonl", ResourceRecord))
-    write_jsonl_atomic(root / "inventory/exclusions.jsonl", read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord))
+    exclusion_path = root / "inventory/exclusions.jsonl"
+    write_jsonl_atomic(exclusion_path, read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord))
+    compressed = gzip.compress(exclusion_path.read_bytes(), mtime=0)
+    compressed_path = root / "inventory/exclusions.jsonl.gz"
+    temporary = compressed_path.with_suffix(".gz.tmp")
+    temporary.write_bytes(compressed); os.replace(temporary, compressed_path); exclusion_path.unlink()
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
     write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))
@@ -310,7 +320,8 @@ def _trusted_generation(root: Path, *, materialize: bool) -> GenerationResult:
         if plugin.exists() and _tree_matches(plugin, _expected_files(inventory, units, provider)):
             result = _generation_result(plugin, inventory, units, provider)
         else:
-            result = generate_resources(inventory, units, provider, plugin, trusted_root=root)
+            result = generate_resources(inventory, units, provider, plugin, dedupe_identical=True,
+                                        trusted_root=root)
         manifest = _generation_manifest(root, result)
         write_jsonl_atomic(root / "generated/manifest.json", [manifest])
         return result
@@ -328,10 +339,10 @@ def _recovery_markers(root: Path) -> tuple[Path, ...]:
 
 def _generation_result(path: Path, inventory: Inventory, units: Sequence[TranslationUnit], provider: object) -> GenerationResult:
     sources = {(record.container, record.resource_path): provider.read(record) for record in inventory.resources}  # type: ignore[attr-defined]
-    files = recompute_generation(inventory, units, sources)
+    files = recompute_generation(inventory, units, sources, dedupe_identical=True)
     return GenerationResult(path.absolute(), inventory, tuple(units),
         tuple((container, member, data) for (container, member), data in sorted(sources.items())),
-        tuple(sorted(files.items())), False)
+        tuple(sorted(files.items())), True)
 
 
 def _expected_files(inventory: Inventory, units: Sequence[TranslationUnit], provider: object) -> dict[str, bytes]:
@@ -408,11 +419,12 @@ def _snapshot(root: Path) -> ReportSnapshot:
     stale = read_jsonl(stale_path, StaleTranslationUnit) if stale_path.exists() else []
     generation_valid = False
     trusted: GenerationResult | None = None
-    try:
-        trusted = _trusted_generation(root, materialize=False)
-        generation_valid = _tree_matches(root / "generated/plugin", dict(trusted.files))
-    except (OSError, ValueError):
-        generation_valid = False
+    if units and all(unit.status is not ProcessingStatus.OPEN for unit in units):
+        try:
+            trusted = _trusted_generation(root, materialize=False)
+            generation_valid = _tree_matches(root / "generated/plugin", dict(trusted.files))
+        except (OSError, ValueError):
+            generation_valid = False
     artifact = root / "dist/idea-deu.zip"
     package_valid = False
     try:

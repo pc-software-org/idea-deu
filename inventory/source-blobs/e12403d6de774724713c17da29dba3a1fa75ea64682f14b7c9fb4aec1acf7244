@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>
+  Detects unresolved stage references in GitLab CI/CD Configuration file.
+</p>
+<p>
+  For more information on stage references, see the <a href="https://docs.gitlab.com/ee/ci/yaml/index.html#stages">GitLab documentation</a>.
+</p>
+</body>
+</html>

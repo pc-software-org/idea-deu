@@ -1,0 +1,12 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/AssignmentUsedAsCondition.html -->
+<html>
+<body>
+Reports an assignment that is used as the condition of an <code>if</code>, <code>while</code>, <code>for</code>, or
+<code>do</code> statement. Although occasionally intended,
+this usage is confusing, and often indicates a typo
+(for example, <code>=</code> instead of <code>==</code>).
+<!-- tooltip end -->
+<p>
+
+</body>
+</html>

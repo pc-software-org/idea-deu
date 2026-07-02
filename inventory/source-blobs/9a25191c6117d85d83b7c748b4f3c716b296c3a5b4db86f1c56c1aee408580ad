@@ -1,0 +1,23 @@
+<html>
+<body>
+<p>
+  Reports endpoints with an empty or malformed version.
+</p>
+<p>
+  A version should have the <a href="https://semver.org/">SemVer</a> format when no custom version parser is configured:
+</p>
+<pre><code lang="java">
+  @RestController
+  class UsersController {
+
+    @GetMapping(
+            value = "/users",
+            version = "1.hello.world" // will be reported as a malformed version
+    )
+    List&lt;String&gt; getUsers() {
+      // ...
+    }
+  }
+</code></pre>
+</body>
+</html>

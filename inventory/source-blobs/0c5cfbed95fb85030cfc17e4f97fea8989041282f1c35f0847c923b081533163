@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a call of the <code>map()</code> method of an array to a separate variable declaration with a <code>for..of</code> loop.
+</body>
+</html>

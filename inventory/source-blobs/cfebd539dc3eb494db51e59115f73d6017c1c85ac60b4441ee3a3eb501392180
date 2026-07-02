@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>Reports deprecated and unresolvable keys and values in Quarkus application YAML configuration files.</p>
+</body>
+</html>

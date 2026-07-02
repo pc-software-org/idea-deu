@@ -1,0 +1,8 @@
+<html>
+<body>
+Using @PreFilter/@PostFilter/@PreAuthorize:
+In proxy mode (which is the default), only external method calls coming in through the proxy are intercepted.
+This means that self-invocation (in effect, a method within the target object calling another method of the target object)
+will not work at runtime even if the invoked method is marked with @PreFilter/@PostFilter/@PreAuthorize
+</body>
+</html>

@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a block statement that is not used as the body of <code>if</code>, <code>for</code>,
+<code>while</code>, <code>do</code>, <code>with</code>, or <code>try</code> statements, or as the
+body of a function declaration. Starting from ECMAScript 6, JavaScript blocks introduce new scopes for <code>let</code> and <code>const</code> variables,
+but still free-standing block statements may be confusing and result in subtle bugs when used with <code>var</code> variables.
+</body>
+</html>

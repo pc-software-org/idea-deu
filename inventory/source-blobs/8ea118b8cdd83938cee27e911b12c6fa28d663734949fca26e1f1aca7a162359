@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>
+  Detects duplicated job usages in GitLab CI/CD Configuration file.
+</p>
+<p>
+  For more information on job references, see the <a href="https://docs.gitlab.com/ee/ci/jobs/index.html">GitLab documentation</a>.
+</p>
+</body>
+</html>

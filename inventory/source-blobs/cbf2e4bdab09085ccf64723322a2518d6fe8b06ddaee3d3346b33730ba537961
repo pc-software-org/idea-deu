@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports all the arguments except for the first expression that does not evaluate to NULL in COALESCE functions.
+<p>Example (MySQL):</p>
+<pre><code>SELECT COALESCE(NULL, NULL, NULL, 42, NULL, 'string') as a;</code></pre>
+<p>The first NOT NULL argument is <code>42</code>, all other arguments will be grayed out.</p>
+</body>
+</html>

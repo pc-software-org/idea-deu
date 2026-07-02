@@ -1,0 +1,9 @@
+spring.data.mongodb.document=document
+spring.data.lineMarker.runMongoQuery=Run Mongo query in console
+spring.data.mongodb.document.not.found=Document not found
+spring.data.mongodb.documents=MongoDB Documents
+spring.data.mongodb.field.not.found=Field not found
+spring.data.mongodb.fields=MongoDB Fields
+spring.data.mongodb.gutter.name=Spring Data MongoDB mapping
+spring.data.mongodb.json.field.inspection.name=Spring Data MongoDB JSON unresolved fields
+spring.data.mongodb.orm.framework.name=Spring Data MongoDB

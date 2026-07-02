@@ -1,0 +1,27 @@
+microservices.diagrams.webservices.WebservicesDiagramRelationship.WEBSOCKET_REQUEST_RELATIONSHIP=Websocket requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.BASE_HTTP_REQUEST_RELATIONSHIP=HTTP requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.ADMINISTRATION_RELATIONSHIP=MQ Administration requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.RECEIVE_RELATIONSHIP=MQ Receive requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.SEND_RELATIONSHIP=MQ Send requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.SEND_AND_RECEIVE_RELATIONSHIP=MQ Send And Receive requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.STREAM_FORWARD_RELATIONSHIP=MQ Stream Forward requests
+microservices.diagrams.webservices.WebservicesDiagramRelationship.UNKNOWN_RELATIONSHIP=Other requests
+
+microservices.diagrams.webservices.category.from.tests=From tests
+microservices.diagrams.webservices.category.from.libraries=From libraries
+
+action.ShowWholeProjectMicroservicesDiagram.text=Show Services Diagram\u2026
+
+microservices.diagrams.webservices.action.presentable.name.capitalized=Services Diagram
+microservices.diagrams.webservices.action.popup.presentable.name.capitalized=Services Diagram (Popup)
+microservices.diagrams.webservices.show.action.tooltip.text=Show Services Diagram
+
+microservices.diagrams.webservices.async.building.background.task.name=Scanning files\u2026
+microservices.diagrams.webservices.searching.internal.http.requests=Searching usages of web APIs\u2026
+microservices.diagrams.webservices.searching.external.http.requests=Searching usages of external web services\u2026
+microservices.diagrams.webservices.group.by.request.targets=Request Targets
+microservices.diagrams.webservices.presentable.name.sentence=Services diagram
+
+microservices.diagrams.webservices.no.data.found.notification=No service modules found for supported web frameworks
+microservices.diagrams.webservices.no.data.found.notification.submit.feedback.action=Submit feedback\u2026
+notification.group.microservices.diagram=Microservices diagram building failed

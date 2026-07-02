@@ -1,0 +1,21 @@
+mn.el.name=Micronaut EL
+mn.el.inspection.key=Incorrect Micronaut Expression Language (MicronautEl) syntax
+
+mn.el.color.settings.background=Background
+mn.el.color.settings.expression.bounds=Expression bounds
+mn.el.color.settings.keyword=Keyword
+mn.el.color.settings.identifier=Identifier
+mn.el.color.settings.string.text=String text
+mn.el.color.settings.number=Number
+mn.el.color.settings.brackets=Braces and Operators//Brackets
+mn.el.color.settings.braces=Braces and Operators//Braces
+mn.el.color.settings.colon=Braces and Operators//Colon
+mn.el.color.settings.comma=Braces and Operators//Comma
+mn.el.color.settings.dot=Braces and Operators//Dot
+mn.el.color.settings.operation.sign=Braces and Operators//Operation sign
+mn.el.color.settings.parentheses=Braces and Operators//Parentheses
+mn.el.color.settings.bean.prefix=Bean prefix
+mn.el.color.settings.property.key=Property key
+mn.el.color.settings.qualified.type=Qualified type
+mn.el.color.settings.method.call=Method call
+mn.el.color.settings.static.field=Static field

@@ -1,0 +1,5 @@
+<html>
+<body>
+Extracts an image encoded as a <code>url(data:image/...)</code> to a separate image file.
+</body>
+</html>

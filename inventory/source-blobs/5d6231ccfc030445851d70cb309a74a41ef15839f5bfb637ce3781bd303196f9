@@ -1,0 +1,6 @@
+<html>
+<body>
+Turn on/off injection of Shell Script language into corresponding script blocks
+in the GitLab CI configuration file.
+</body>
+</html>

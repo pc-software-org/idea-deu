@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports a <code>require()</code> statement. Suggests converting  it to a <code>require()</code> call with an <code>import</code> statement.
+<br/><br/>
+Enable 'Convert require() inside inner scopes with Fix all action'
+to convert all <code>require()</code> calls inside the nested functions and statements when using the 'Fix all' action.
+<br/><br/>
+Please note that converting <code>require()</code> statements inside inner scopes to <code>import</code> statements
+may cause changes in the semantics of the code.
+Import statements are static module dependencies and are hoisted,
+which means that they are moved to the top of the current module. <code>require()</code> calls load modules dynamically.
+They can be executed conditionally, and their scope is defined by the expression in which they are used.
+<br/>Clear the 'Convert require() inside inner scopes with Fix all action' checkbox to prevent any changes in these complex cases when using the 'Fix all' action.
+</body>
+</html>

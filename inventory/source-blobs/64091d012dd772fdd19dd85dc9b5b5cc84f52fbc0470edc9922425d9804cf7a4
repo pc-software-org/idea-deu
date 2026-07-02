@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+  Reports unclosed heredoc delimiters at the end of the file.
+</p>
+<p><b>Examples:</b></p>
+This code will report missing FILE2 and FILE3 delimiters.
+<pre><code>
+  RUN &lt;&lt;FILE1 cat &gt; file1 && &lt;&lt;FILE2 cat &gt; file2 && &lt;&lt;FILE3 cat &gt; file3
+  mkdir -p foo/bar
+  FILE1
+</code></pre>
+</body>
+</html>

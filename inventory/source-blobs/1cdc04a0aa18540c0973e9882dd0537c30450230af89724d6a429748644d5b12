@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an allowed dependency when there's no corresponding module or a named interface.
+</body>
+</html>

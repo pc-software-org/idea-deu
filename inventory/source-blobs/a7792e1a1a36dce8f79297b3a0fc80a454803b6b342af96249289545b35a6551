@@ -1,0 +1,8 @@
+rc.config.file=Configuration file:
+rc.node.options=Node options:
+rc.framework.package={0} package:
+rc.working.dir=Working directory:
+rc.framework.options={0} options:
+rc.environment.variables=Environment variables:
+rc.select.configuration.file=Select {0} Configuration File:
+rc.select.working.dir=Select Working Directory:

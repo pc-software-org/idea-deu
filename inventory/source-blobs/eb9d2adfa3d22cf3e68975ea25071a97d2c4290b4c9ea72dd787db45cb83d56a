@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a class or a function that is annotated with a JSDoc <code>@constructor</code> or <code>@class</code> tag whose names are
+too short, too long, or do not follow the specified regular expression pattern.
+<!-- tooltip end -->
+<p>
+  Use the fields provided below to specify minimum length, maximum length, and a regular expression
+  expected for classes names. Use the standard <code>java.util.regex</code> format for regular expressions.
+</body>
+</html>

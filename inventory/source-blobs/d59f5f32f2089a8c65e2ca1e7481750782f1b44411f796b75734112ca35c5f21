@@ -1,0 +1,27 @@
+<html>
+<body>
+<p>Reports configuration conflicts on <code>&lt;bean&gt;</code> attributes.</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="xml">
+  &lt;beans&gt;
+    &lt;bean class="java.lang.String" factory-bean="factoryBean"/&gt;
+    &lt;!-- Exactly one of 'class' or 'factory-bean' is required --&gt;
+    &lt;bean factory-bean="factoryBean" id="missingFactoryMethod"/&gt; &lt;!-- When factory-bean exists, factory-method is required --&gt;
+
+    &lt;!-- Attribute abstract with default value 'false' is superfluous --&gt;
+    &lt;bean abstract="false" id="superfluousDefaultAttributeAbstract"/&gt;
+
+    &lt;!-- Attribute scope with default value 'singleton' is superfluous --&gt;
+    &lt;bean id="superfluousDefaultAttributeScope" scope="singleton"/&gt;
+
+    &lt;bean class="java.lang.StringBuilder"&gt;
+      &lt;property name="length"&gt;
+        &lt;!-- Attributes id, name, and scope are superfluous --&gt;
+        &lt;bean id="beanId" name="beanName" scope="prototype"/&gt;
+      &lt;/property&gt;
+    &lt;/bean&gt;
+  &lt;/beans&gt;
+</code></pre>
+</body>
+</html>

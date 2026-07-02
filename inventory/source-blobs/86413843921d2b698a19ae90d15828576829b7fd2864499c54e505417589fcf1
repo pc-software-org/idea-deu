@@ -1,0 +1,27 @@
+<html>
+<body>
+Reports unfiltered <code>for-in</code> loops.
+<br/><br/>
+The use of this construct results in processing not only own properties of an object but properties from its prototype as well.
+It may be unexpected in some specific cases, for example, in utility methods that copy or modify all properties
+or when <code>Object</code>'s prototype may be incorrectly modified.
+For example, the following code will print <b>42</b> and <b>myMethod</b>:
+<br/><br/>
+<pre><code>
+Object.prototype.myMethod = function myMethod() {};
+let a = { foo: 42 };
+for (let i in a) {
+  console.log(a[i]);
+}
+</code></pre>
+
+<p>Suggests replacing the whole loop with a <code>Object.keys()</code> method or adding a <code>hasOwnProperty()</code> check. After applying the quick-fix the code looks as follows:</p>
+<pre><code>
+for (let i in a) {
+  if (a.hasOwnProperty(i)) {
+    console.log(a[i]);
+  }
+}
+</code></pre>
+</body>
+</html>

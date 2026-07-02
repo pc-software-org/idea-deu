@@ -1,0 +1,8 @@
+<html>
+<body>
+Qualifies identifiers.
+<!-- tooltip end -->
+<p>A qualified name includes at least one qualifier to clarify the context. For example, it might help in situations when you have two tables
+with similar names located in different schemas.</p>
+</body>
+</html>

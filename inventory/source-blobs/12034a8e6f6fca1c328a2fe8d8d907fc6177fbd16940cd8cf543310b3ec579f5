@@ -1,0 +1,8 @@
+<html>
+<body>
+<p>Reports invalid number of arguments for the Dockerfile commands.</p>
+<p>
+  Docker build will fail after reaching the instruction with an invalid number of arguments.
+</p>
+</body>
+</html>

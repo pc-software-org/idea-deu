@@ -1,0 +1,5 @@
+failed.to.compute.dependencies=Failed to compute dependencies for {0}, next incremental validation may product incorrect results.
+jasper.process.finished.with.exit.code.0=Jasper process finished with exit code {0}
+jasper.validator=Jasper Validator
+java.0.is.not.supported.java.1.will.be.used.instead=Java {0} is not supported, Java {1} will be used instead.
+validating.jsp.files=Validating JSP files

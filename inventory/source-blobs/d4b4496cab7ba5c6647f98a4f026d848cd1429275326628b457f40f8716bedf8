@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports temporary tables creation not in the single-session mode.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TEMPORARY TABLE foo(a INT, b INT);
+</code></pre>
+</body>
+</html>

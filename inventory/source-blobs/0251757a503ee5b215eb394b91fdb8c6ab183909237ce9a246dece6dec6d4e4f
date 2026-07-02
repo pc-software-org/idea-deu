@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a function with too many branching points in a function (too high cyclomatic complexity). Such functions
+may be confusing and hard to test.
+<!-- tooltip end -->
+<p>
+  Use the field provided below to specify the maximum acceptable cyclomatic complexity for a function.
+
+</body>
+</html>

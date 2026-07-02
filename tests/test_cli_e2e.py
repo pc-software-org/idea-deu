@@ -212,3 +212,13 @@ class CliEndToEndTests(unittest.TestCase):
             self.assertNotEqual(0, code); self.assertIn("symbolic", stderr); self.assertNotIn("Traceback", stderr)
         finally:
             outside.unlink(missing_ok=True)
+
+    def test_scan_report_does_not_recompute_generation_while_units_are_open(self):
+        with mock.patch(
+            "scripts.idea_deu.generator.BlobResourceProvider.read",
+            side_effect=AssertionError("open units cannot have a valid generation"),
+        ):
+            code, _stdout, stderr = self._run("scan")
+
+        self.assertEqual((0, ""), (code, stderr))
+        self.assertEqual("translate", json.loads((self.root / "reports/status.json").read_text())["workflow_state"])

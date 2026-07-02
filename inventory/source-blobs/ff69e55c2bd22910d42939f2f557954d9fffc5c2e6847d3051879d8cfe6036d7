@@ -1,0 +1,5 @@
+cwm.client.changelist.name=Changes by {0}
+cwm.guests.contributed.to.this.change={0} contributed to this change
+cwm.unknown.guest=Unknown
+diff.error.permission.cant.open.file=Client has no permissions to open this file
+action.ToggleCreateChangeListForGuestChanges.text=Create Changelists for Guest Changes

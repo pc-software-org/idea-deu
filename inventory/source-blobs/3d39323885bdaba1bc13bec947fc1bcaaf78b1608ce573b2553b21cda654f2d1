@@ -1,0 +1,1 @@
+<html><head><meta charset="UTF-8"><link rel="stylesheet" type="text/css" href="css/tips.css"></head><body><p><b>Jump between errors</b></p><p>Press <span class="shortcut">&shortcut:GotoNextError;</span> or <span class="shortcut">&shortcut:GotoPreviousError;</span> to jump to the next or previous error respectively in the current file.</p></body></html>

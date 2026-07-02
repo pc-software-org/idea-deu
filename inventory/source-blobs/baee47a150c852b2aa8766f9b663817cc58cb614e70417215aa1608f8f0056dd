@@ -1,0 +1,13 @@
+<html>
+<body>
+<p>Reports incorrect usages of the <code>@Specializes</code> annotation.</p>
+
+<ul>
+  <li>Specializing bean must extend another bean</li>
+  <li>Specializing method must override a <code>@Produces</code> method of its direct superclass</li>
+  <li><code>@Named</code> annotation cannot be used on the specializing and specialized class</li>
+  <li>Two or more classes cannot specialize the same superclass</li>
+  <li>Specializing method cannot be static</li>
+</ul>
+</body>
+</html>

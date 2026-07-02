@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a <code>for..of</code> loop that iterates over an array with an equivalent <code>for</code> loop that uses an index to iterate over the array.
+</body>
+</html>

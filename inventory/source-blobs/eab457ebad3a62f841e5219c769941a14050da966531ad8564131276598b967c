@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports invalid usages of UNION in queries.
+<p>The inspection works in MySQL versions that are earlier than 8.0.</p>
+<p>Example (MySQL):</p>
+<pre><code lang="mysql">
+SELECT * FROM (SELECT 1 UNION (SELECT 1 UNION SELECT 2)) a;
+</code></pre>
+</body>
+</html>

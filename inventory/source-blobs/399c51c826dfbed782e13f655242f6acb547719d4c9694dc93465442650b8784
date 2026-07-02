@@ -1,0 +1,12 @@
+# Inspections
+jakarta.data.inspections.group=Jakarta Data
+query.method.parameters.inspection.name=Incorrect repository method parameter
+commons.query.method.inconsistency.inspection.name=Jakarta Data repository method errors
+
+# Providers
+beans.tool.window.name=Jakarta Data
+
+# Query Language
+jakarta.data.ql=Jakarta Data QL
+entity.attribute.not.found.error.message=Cannot resolve attribute
+entity.attribute.expected.type.error.message=Parameter must be of ''{0}'' type

@@ -1,0 +1,66 @@
+# Highlighting categories
+javascript.keyword=Keyword
+javascript.string=String//String text
+javascript.number=Number
+javascript.linecomment=Comments//Line comment
+javascript.doccomment=Comments//Documentation//Text
+javascript.blockcomment=Comments//Block comment
+javascript.regexp=Regular expression
+javascript.operation=Braces and Operators//Operation
+javascript.parens=Braces and Operators//Parenthesis
+javascript.brackets=Braces and Operators//Brackets
+javascript.braces=Braces and Operators//Braces
+javascript.semicolon=Braces and Operators//Semicolon
+javascript.badcharacter=Bad character
+jsdoc.text=Comments//JSDoc//Text
+jsdoc.tag=Comments//JSDoc//Tag
+jsdoc.tag.namepath=Comments//JSDoc//Tag namepath
+jsdoc.type=Comments//JSDoc//Type
+javascript.doctag=Comments//Documentation//Tag
+javascript.doctagvalue=Comments//Documentation//Value
+javascript.valid.string.escape=String//Escape Sequence//Valid
+javascript.invalid.string.escape=String//Escape Sequence//Invalid
+javascript.comma=Braces and Operators//Comma
+javascript.dot=Braces and Operators//Dot
+
+# Symbols
+javascript.parameter=Identifiers//Parameter
+javascript.local.variable=Identifiers//Local variable
+javascript.global.variable=Identifiers//Global variable
+javascript.global.function=Identifiers//Global function
+javascript.local.function=Identifiers//Local function
+javascript.global.decorator=Decorator
+javascript.static.member.function=Classes//Static method
+javascript.static.member.variable=Classes//Static property
+# https://tc39.es/ecma262/#sec-property
+javascript.instance.member.variable=Object//Property
+# https://tc39.es/ecma262/#sec-method
+javascript.instance.member.function=Object//Method
+javascript.module.name=Module name
+javascript.exported.variable=Identifiers//Exported variable
+javascript.exported.function=Identifiers//Exported function
+javascript.exported.class=Classes//Exported class
+javascript.jsx.client.component=JSX client component
+
+javascript.metadata=Metadata
+javascript.class=Classes//Class name
+javascript.interface=Interface
+javascript.label=Identifiers//Label
+javascript.function.arrow=Braces and Operators//Arrow function
+javascript.template.literal.placeholder.delimiters=Template literal//Placeholder delimiters
+
+typescript.module.name=Module name
+typescript.type.alias.name=Types//Type alias
+typescript.enum.name=Enum//Enum name
+typescript.enum.member.name=Enum//Member
+typescript.color.scheme.type.guard.name=Types//Narrowed by a type guard
+typescript.primitive.types.name=Types//Primitive type
+typescript.type.parameter=Types//Type parameter
+typescript.jsdoc.type=Comments//JSDoc type
+
+# JS language version management
+js.language.version.combo.es5=ECMAScript 5.1
+js.language.version.combo.es6=ECMAScript 6+
+js.language.version.combo.es6.description=ECMAScript 2015+, some proposals and JSX
+js.language.version.combo.flow=Flow
+js.language.version.combo.flow.description=Flow and JSX in ECMAScript 6

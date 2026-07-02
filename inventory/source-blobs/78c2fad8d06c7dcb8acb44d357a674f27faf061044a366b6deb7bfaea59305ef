@@ -1,0 +1,14 @@
+<html>
+<body>
+Replaces a column name with a positional reference.
+<p>Some DBMS can reference columns in ORDER BY and GROUP BY by their sequential numbers. ORDER BY is supported in all the dialects except
+  for Cassandra, ClickHouse, Hive, Spark, and HSQLDB. GROUP BY is supported in MySQL, Maria, PostgreSQL (and its subdialects), Exasol, SQLite,
+  and Snowflake.</p>
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TABLE tab(a INT, b INT);
+SELECT * FROM tab ORDER BY 1;</code></pre>
+<p>You can replace <code>1</code> in the SELECT query with a column name by using this intention action. So, after the intention action is applied,
+the query looks as follows.</p>
+<pre><code>SELECT * FROM tab ORDER BY a;</code></pre>
+</body>
+</html>

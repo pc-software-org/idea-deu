@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts an indexed <code>for</code> loop to a call of  the <code>forEach</code> method on an array.
+</body>
+</html>

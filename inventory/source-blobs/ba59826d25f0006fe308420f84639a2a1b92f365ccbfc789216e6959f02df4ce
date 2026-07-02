@@ -1,0 +1,3 @@
+filetype.HelmYaml.description=Helm template files
+filetype.HelmText.description=Helm TEXT template
+filetype.HelmJson.description=Helm JSON template

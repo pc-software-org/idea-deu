@@ -1,0 +1,257 @@
+profiler.configurable.name=Java Profiler
+profiler.exceptions.configurations.patch=Internal error: cannot patch the selected configuration.
+profiler.exceptions.ask.report=Report this error
+profiler.exception.cant.start=Cannot start the profiler: unsupported run configuration
+profiler.exception.cant.profile.many.forks=Can't start profiler: configuration allows multiple forks
+profiler.attach.group.name=Java
+profiler.cant.start.error=Cannot start profiler with run configuration ''{0}'': {1}
+profiler.edit.run.configuration=Edit Run Configuration\u2026
+profiler.cant.attach.error=Cannot attach profiler to process ''{0}'': {1}
+profiler.cant.attach.unknown.reason=Unknown reason
+profiler.cant.attach.scheduled.debugger=The JVM was started with a scheduled debugger agent, which the profiler agent is not compatible with. \
+  Disable the agent manually in the run configuration settings.
+profiler.kotlin.inline.frame.label=inline
+
+async.profiler.dump.name=Async Profiler Dump
+jfr.dump.name=Java Flight Recorder Dump
+unsupported.profiler.snapshot.name=Unsupported
+profiler.unsupported.snapshot=Cannot open {0}: This type of snapshots is not supported
+
+jfr.old.java.message=At least java 11 is required to start Java Flight Recorder
+jfr.default.settings.comment=Low overhead configuration safe for continuous use in production environments, typically less than 1 % overhead
+jfr.profile.settings.comment=Low overhead configuration for profiling, typically around 2% overhead
+
+jfr.cant.configure.options=Flight Recorder VM options can't be changed at runtime. Existing options will be used.
+jfr.stacks.can.be.truncated=When the default Flight Recorder VM Options are used, the 'stackdepth' parameter is set to 64. \
+ Stack traces deeper than 64 frames will be truncated.
+
+jfr.cant.stop.profiler=Can't stop profiler. See logs for details.
+jfr.unexpected.response=Unexpected response from ''{0}'': ''{1}''.
+jfr.cant.attach.unsupported=Can't attach profiler: JFR is not supported by the target VM.
+
+jfr.commercial.message=Commercial Features must be unlocked to start a Flight Recording for the target process.<br>\
+ You can unlock the Commercial Features by invoking ''jcmd {0} VM.unlock_commercial_features''. \
+ You can also add ''-XX:+UnlockCommercialFeatures'' to the command line and restart the target process.<br>\
+ Commercial Features are covered by the Binary Code License.
+jfr.commercial.url.text=Read about the Binary Code License
+
+filetype.jfr.dump.description=Java Flight Recorder snapshot
+filetype.jfr.dump.display.name=JFR Snapshot
+jfr.ui.tab.events=Events
+jfr.ui.tab.properties=Properties
+jfr.ui.tab.stack.trace=Stack Trace
+jfr.ui.column.field=Field
+jfr.ui.column.value=Value
+jfr.ui.timeline.filter.events.label=Filter
+jfr.ui.timeline.nothing.to.filter.tooltip=Nothing to filter
+jfr.ui.timeline.content.button.title=Stack Trace
+jfr.ui.timeline.content.header.full=Stack Trace: {0}, {1}
+jfr.ui.timeline.content.view.hide=Hide Stack Trace View
+jfr.ui.timeline.content.empty.text=To get the stack trace, click the Timeline event
+jfr.ui.timeline.content.no.data.available=No stack trace available
+jfr.ui.timeline.cpu.load.label=CPU {0}
+jfr.ui.timeline.used.heap.size=Used {0} of {1}
+jfr.ui.timeline.stacktrace.native.method={0} (Native Method)
+jfr.ui.timeline.stacktrace.kernel={0} (Kernel)
+jfr.ui.timeline.stacktrace.unknown=Unknown frame
+jfr.ui.timeline.stacktrace.navigation.not.available=Navigation is not available, analyzing the project\u2026
+jfr.ui.timeline.stacktrace.copy.stack=Copy Stack
+jfr.event.cpu.samples.display.name=CPU Samples
+jfr.event.memory.allocations.display.name=Memory Allocations
+jfr.event.wall.cpu.display.name=CPU Time
+jfr.event.wall.total.display.name=Total Time
+jfr.timeline.cpu.events.display.name=CPU Events
+jfr.timeline.memory.events.display.name=Memory Allocation Events
+jfr.timeline.cpu.running.event.tooltip.text=CPU Event (Running)
+jfr.timeline.cpu.sleeping.event.tooltip.text=CPU Event (Sleeping)
+jfr.timeline.memory.event.tooltip.text=Memory Allocation Event
+jfr.configurable.settings.label=Profiling Settings:
+jfr.configurable.settings.radiobutton.default=Default
+jfr.configurable.settings.radiobutton.profile=Profile
+jfr.configurable.settings.custom.file=Custom settings file:
+jfr.configurable.settings.vm.options.label=Profiling VM Options:
+jfr.configurable.settings.vm.options.comment.text=<a href="https://docs.oracle.com/javase/10/tools/java.htm">VM Options List</a>
+
+jfr.error.no.dump.file.message=Failed to generate a profiler dump: check that the JVM supports profiling
+jfr.parser.result.failure.memory=Not enough memory to load the dump
+jfr.parser.result.failure.file.invalid.format=Invalid file format
+jfr.parser.result.failure.cant.parse=Cannot parse the dump file
+jfr.profile.cant.attach=Cannot attach the profiler
+
+jfr.cpu.sampling.events.shown.limited.message=This view shows only the first {0} events. Use other views to analyze the complete information.
+
+dialog.title.jfr.choose.configuration=Choose JFR Configuration
+
+openj9.not.supported.message=Profiling with OpenJ9 is not supported. Consider using a different JDK
+
+dtrace.configurable.settings.only.attach=This configuration can be attach only to a running process
+dtrace.exceptions.cant.attach=Cannot attach the profiler: the target process should be run with the -XX:+PreserveFramePointer VM option
+dtrace.exceptions.cant.find.agent=Cannot find an agent. Set the {0} property
+dtrace.exceptions.details.link=Click here for details
+
+filetype.hprof.dump.description=Hprof memory snapshot
+filetype.hprof.dump.display.name=Hprof memory snapshot
+hprof.dump.name=Hprof dump
+action.hprof-viewer.text=Open Hprof Snapshot
+hprof.status.parse=Hprof: parsing file
+hprof.status.save=Hprof: saving indexes
+hprof.status.calculate.shallow=Hprof: calculating shallow size
+hprof.status.objects=Hprof: collecting objects
+hprof.status.dominators=Hprof: collecting dominators
+hprof.status.reverse=Hprof: collecting references
+hprof.status.compute.dominators=Hprof: calculating dominator tree
+hprof.status.save.dominators=Hprof: saving dominator tree
+hprof.status.compute.retained=Hprof: calculating retained size
+hprof.status.compute.duplicated.strings=Hprof: collecting duplicated strings
+hprof.objects.column.node=Item
+hprof.objects.column.shallow_size=Shallow
+hprof.objects.column.retained_size=Retained
+hprof.classes.column.class=Class
+hprof.classes.column.count=Count
+hprof.classes.column.size=Shallow
+hprof.classes.column.retained=Retained
+hprof.duplicates.column.value=Value
+hprof.duplicates.column.instances.count=Duplicates
+hprof.duplicates.column.waste=Wasted (Bytes)
+hprof.duplicates.empty=No duplicates found
+hprof.stub.unknown=<unknown>
+hprof.stub.unknown.class=<unknown class>
+hprof.stub.unknown.type=<unknown type>
+hprof.stub.first.results=<shown first %,d results>
+hprof.stub.values=<values %,d\u2013%,d>
+hprof.stub.shortest.paths.truncated=<several paths were truncated because they are too long>
+hprof.stub.null.value=null
+hprof.tab.classes=Classes
+hprof.tab.summary=Summary
+hprof.tab.dominators=Dominators
+hprof.tab.packages=Packages
+hprof.tab.biggest.objects=Biggest Objects
+hprof.tab.merged.paths=Merged Paths
+hprof.tab.shortest.paths=Shortest Paths
+hprof.tab.references=Incoming References
+hprof.tab.retained.objects=Retained Objects
+hprof.tab.retained.dominators=Dominator Tree
+hprof.tab.summary.bytes=Total Bytes
+hprof.tab.summary.classes=Total Classes
+hprof.tab.summary.instances=Total Instances
+hprof.tab.summary.classloaders=Classloaders
+hprof.tab.summary.roots=GC Roots
+hprof.tab.summary.thread=Thread with ID = {0}
+hprof.tab.summary.threadWithName=Thread ''{0}'' with ID = {1}
+hprof.tab.summary.thread.loading=Loading threads info\u2026
+hprof.tab.duplicated.strings=Duplicated Strings
+hprof.action.open.new.tab=Open in New Tab
+hprof.action.open.merged.paths=Calculate merged paths
+hprof.action.open.dominators.view=Calculate retained size and biggest objects
+hprof.action.open.roots.view=Show GC roots
+hprof.action.open.shortest.paths=Calculate shortest paths
+hprof.action.open.references=Calculate references
+hprof.action.open.dominators=Calculate dominators
+hprof.action.open.retained.objects=Show retained objects tree
+hprof.action.sunburst.restore=Restore Diagram Location
+hprof.action.sunburst.history.home=Return to ''{0}''
+hprof.action.sunburst.history.back=Back
+hprof.action.sunburst.history.forward=Forward
+hprof.action.duplicated.strings=Count Duplicated Strings
+hprof.object.view.static=statically from
+hprof.object.view.of=of
+hprof.object.view.na=n/a
+hprof.object.view.loading=Loading objects\u2026
+hprof.merged.instances={0} {1,choice,1#instance|2#instances}
+hprof.render.utils.modificators.static=static
+hprof.render.utils.modificators.undefined=undefined
+hprof.render.utils.modificators.gcroot=GC Root: {0}
+hprof.render.utils.values.null=null
+hprof.load.error.failed.with.message=Failed to open the snapshot file with a message:
+hprof.load.error.failed.without.message=Failed to open the snapshot file with an internal error
+hprof.load.error.fileIsCorrupted=Snapshot file is corrupted
+hprof.load.error.yourkitSnapshots=YourKit snapshots are not supported
+hprof.load.error.unsupportedFormat=This type of HPROF snapshot is not supported (wrong binary header: {0})
+hprof.sunburst.tree.others=others (can be incomplete)
+
+settings.async.profiler.readme=Async profiler README.md
+settings.async.profiler.agent.options=Agent options:
+settings.async.profiler.agent=Agent:
+settings.async.profiler.bundled.version=Bundled (Version: {0})
+settings.async.profiler.collect.native.calls=Collect native calls (GC threads, JNI calls, etc.)
+
+
+attach.process.current=current
+
+ui.profiler.welcome.screen=Home
+ui.profiler.welcome.screen.actions.show.filterDevelopmentTools=Show Development Tools
+ui.profiler.welcome.screen.actions.show.highlightIdeProcesses=Highlight IDE Processes
+ui.profiler.welcome.screen.snapshots=Recent Snapshots
+ui.profiler.welcome.screen.snapshots.open=Open Snapshot\u2026
+ui.profiler.welcome.screen.snapshots.setFolder=Change Snapshots' Folder\u2026
+ui.profiler.welcome.screen.processes.locals=Local
+ui.profiler.welcome.screen.processes.application=Process
+ui.profiler.welcome.screen.processes.pid=PID
+ui.profiler.welcome.screen.processes.cpu=CPU
+ui.profiler.welcome.screen.processes.current=Current
+ui.profiler.welcome.screen.processes.attach=Attach Profiler
+ui.profiler.welcome.screen.processes.custom.attach=Attach {0}
+ui.profiler.welcome.screen.processes.edit=Edit Configurations\u2026
+ui.profiler.welcome.screen.processes.capture=Capture Memory Snapshot
+ui.profiler.welcome.screen.processes.capturing=Capturing memory snapshot
+ui.profiler.welcome.screen.processes.capturing.memory.error=Cannot capture memory snapshot for process ''{0}''
+ui.profiler.welcome.screen.processes.get.thread.dump.error=Cannot get thread dump for process ''{0}''
+ui.profiler.welcome.screen.snapshots.hint=No recent snapshots.
+ui.profiler.welcome.screen.snapshots.hint2=Click on the process in the table or
+ui.profiler.welcome.screen.snapshots.hint3=Open snapshot: jfr or hprof file
+ui.profiler.welcome.screen.processes.loading=Loading local Java processes\u2026
+ui.profiler.welcome.screen.processes.notfound=No Java process found
+ui.profiler.welcome.screen.processes.configure=Settings
+ui.profiler.welcome.screen.processes.cpuandmemory=CPU and Memory Live Charts
+ui.profiler.welcome.screen.charts.cannot.load=Cannot connect to target JVM
+ui.profiler.welcome.screen.charts.reshow=Show static CPU and memory charts
+ui.profiler.welcome.screen.tooltips.size=Size: {0}
+ui.profiler.welcome.screen.tooltips.close=Hide from Recent Snapshots
+ui.profiler.welcome.screen.snapshots.menu.open.action=Open
+ui.profiler.welcome.screen.snapshots.menu.hide.action=Hide from Recent Snapshots
+ui.profiler.welcome.screen.charts.showAll=Show All Data
+ui.profiler.welcome.screen.charts.lastMinute=Show Last 60 Seconds
+ui.profiler.welcome.screen.charts.lastFiveMinute=Show Last 5 Minutes
+ui.profiler.welcome.screen.charts.clear=Clear Data
+ui.profiler.welcome.screen.charts.dumpThreads=Get Thread Dump
+ui.profiler.welcome.screen.threads.tab.text=Dump: {0}
+ui.profiler.welcome.screen.charts.gc=Perform GC
+ui.profiler.welcome.screen.snapshots.noFolder.title=Snapshot Folder
+ui.profiler.welcome.screen.snapshots.noFolder.label.text=Snapshot folder:
+ui.profiler.welcome.screen.snapshots.noFolder.comment.text=Generated profiler snapshots saved into this folder
+ui.profiler.welcome.screen.snapshots.folder.noFolder.text=Path doesn't exist
+ui.profiler.welcome.screen.snapshots.folder.notDirectory.text=Path is not a directory
+ui.profiler.welcome.screen.snapshots.folder.write.protected=Folder does not have write permissions
+ui.profiler.snapshots.folder.is.bad=Bad snapshot folder {0}: {1}. Dump will be written to the temp directory.
+ui.profiler.expand.library.calls=+{0} library {0,choice,1#call|2#calls}
+ui.profiler.collapse.library.calls=Hide library calls
+ui.profiler.widget.header=Performance
+ui.profiler.widget.hide=Hide Performance Widget
+download.profiler.dump.from.target.progress.title=Downloading profiler dump from target\u2026
+download.profiler.dump.from.target.failed=Couldn't download profiler dump from target
+download.profiler.dump.from.target.failed.environment.missing=Target environment is not provided
+
+async.profiler.troubleshoot.dump.is.missing=Dump is missing.
+async.profiler.troubleshoot.dump.is.empty=Dump is empty.
+async.profiler.troubleshoot.dump.is.empty.0=Dump is empty. {0}
+async.profiler.troubleshoot.failed.to.attach=Could not attach the profiler.
+async.profiler.troubleshoot.profiler.not.started=Dump is missing. Most likely, profiling hasn't started.
+async.profiler.troubleshoot.reasons={0} Possible reasons:
+async.profiler.troubleshoot.profiler.not.started.short.session=The session might be too short for the profiler to be attached ({0} ms).
+async.profiler.troubleshoot.profiler.not.started.gradle=The actual process might have been spawned by Gradle and profiler wasn't able to catch it.
+async.profiler.troubleshoot.duplicate.arguments=Some of the agent arguments are duplicated. Check the profiler configuration.
+async.profiler.troubleshoot.stopped.before.flushed=The session could have been stopped before the profiler flushed the data to the snapshot.
+async.profiler.troubleshoot.failed.to.run.jfrsync=Failed to activate JFR synchronization.
+async.profiler.troubleshoot.jfrsync.start.failure=Error when starting the recording.
+async.profiler.troubleshoot.jfrsync.incompatible.jdk=Profiling is not supported on Java versions prior 1.8. If you're using Oracle JDK prior to version 11, or HotSpot JDK prior to version 1.8.0_252, add the -XX:+UnlockCommercialFeatures VM option.
+async.profiler.troubleshoot.jfrsync.creation.interrupted=Execution might have been interrupted during JfrSync initialization.
+async.profiler.troubleshoot.jfrsync.start.interrupted=Execution might have been interrupted during JfrSync start.
+async.profiler.troubleshoot.no.data.in.0.ms=Profiler wasn''t able to write the data in {0} ms.
+async.profiler.troubleshoot.no.data.process.killed=Has the profiled process been forcefully killed?
+group.RunTab.ProfileActions.text=Profile the Process
+action.profiler.EnableProfileOnRunToCursor.text=Record Time with Run to Cursor
+action.profiler.DisableProfileOnRunToCursor.text=Disable Recording Time with Run to Cursor
+action.profiler.profileOnRunToCursor.activated.message=Recording performance during Run to Cursor will be enabled in the next debugging session.
+action.profiler.profileOnRunToCursor.cant.start.message=Cannot record performance: {0}
+action.profiler.profileOnRunToCursor.disabled=The debugger session has likely failed because the performance recorder does not support the JVM.\
+     It has been automatically disabled. Please restart your debug session.

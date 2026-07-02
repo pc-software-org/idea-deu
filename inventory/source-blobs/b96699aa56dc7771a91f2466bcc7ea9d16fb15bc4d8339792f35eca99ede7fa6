@@ -1,0 +1,5 @@
+<html>
+<body>
+If a variable is used to access a property or an array element of a destructuring variable, propagates the corresponding property access expression or index expression to the destructuring.
+</body>
+</html>

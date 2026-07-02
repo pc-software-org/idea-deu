@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Reports incorrect observer method definitions.</p>
+
+<ul>
+  <li>Must contain only one <code>@Observes</code> parameter</li>
+  <li>Cannot have parameters annotated with <code>@Disposes</code></li>
+  <li>Cannot be annotated with <code>@Inject</code> and <code>@Produces</code></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+<body>
+<p>
+  Reports heredoc used as a last argument (destination) to ADD/COPY command.
+</p>
+<p><b>Examples:</b></p>
+This code defines invalid destination:
+<pre><code>
+  COPY foo &lt;&lt;EOF1 bar &lt;&lt;EOF2
+  file content 1
+  EOF1
+  file content 2
+  EOF2
+</code></pre>
+</body>
+</html>

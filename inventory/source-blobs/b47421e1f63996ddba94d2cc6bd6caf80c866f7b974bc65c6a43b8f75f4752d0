@@ -1,0 +1,8 @@
+<html>
+<body>
+Suggests using the <code>ng add</code> command to install the dependency.
+<p><code>ng add</code> will use the package manager to download it and invoke a schematic
+  which can update your project with configuration changes, add additional dependencies (e.g. polyfills),
+  or scaffold package-specific initialization code.
+</body>
+</html>

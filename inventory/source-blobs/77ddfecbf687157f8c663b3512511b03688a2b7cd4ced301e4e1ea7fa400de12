@@ -1,0 +1,9 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/OverlyComplexBooleanExpression.html -->
+<html>
+<body>
+Reports a boolean expression with too many terms. Such expressions may be confusing and bug-prone.
+<!-- tooltip end -->
+<p>
+  Use the field below to specify the maximum number of terms allowed in an arithmetic expression.
+</body>
+</html>

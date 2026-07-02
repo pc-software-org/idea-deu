@@ -53,6 +53,18 @@ class ContainerExclusionRule:
 
 
 @dataclass(frozen=True, slots=True)
+class ResourceExclusionRule:
+    container: str
+    resource: str
+    reason: ExclusionReason
+
+@dataclass(frozen=True, slots=True)
+class ResourceSelectionRule:
+    resource: str
+    container: str
+
+
+@dataclass(frozen=True, slots=True)
 class ScannerConfig:
     """Explicit rules and byte ceilings for bounded nested scanning.
 
@@ -70,6 +82,8 @@ class ScannerConfig:
     """
 
     container_exclusions: tuple[ContainerExclusionRule, ...]
+    resource_exclusions: tuple[ResourceExclusionRule, ...]
+    resource_selections: tuple[ResourceSelectionRule, ...]
     resource_patterns: tuple[str, ...]
     localization_directories: tuple[str, ...]
     max_containers: int
@@ -104,6 +118,8 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         raise ScannerError(f"cannot load scanner configuration: {path}") from error
     if not isinstance(data, dict) or set(data) != {
         "container_exclusions",
+        "resource_exclusions",
+        "resource_selections",
         "resource_patterns",
         "localization_directories",
         "limits",
@@ -125,6 +141,8 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     patterns = data["resource_patterns"]
     directories = data["localization_directories"]
     raw_exclusions = data["container_exclusions"]
+    raw_resource_exclusions = data["resource_exclusions"]
+    raw_selections = data["resource_selections"]
     _validate_resource_patterns(patterns)
     if not isinstance(directories, list) or not directories or not all(
         isinstance(value, str) and value.strip() for value in directories
@@ -139,10 +157,27 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     if not all(
         isinstance(rule["glob"], str)
         and bool(rule["glob"].strip())
-        and rule["reason"] == ExclusionReason.THIRD_PARTY_CONTAINER.value
+        and rule["reason"] in {
+            ExclusionReason.THIRD_PARTY_CONTAINER.value,
+            ExclusionReason.ALREADY_LOCALIZED.value,
+        }
         for rule in raw_exclusions
     ):
         raise ScannerError("container exclusion glob/reason values are invalid")
+    if not isinstance(raw_resource_exclusions, list) or not all(
+        isinstance(rule, dict) and set(rule) == {"container", "resource", "reason"}
+        and isinstance(rule["container"], str) and bool(rule["container"].strip())
+        and isinstance(rule["resource"], str) and bool(rule["resource"].strip())
+        and rule["reason"] == ExclusionReason.NON_TRANSLATABLE_RESOURCE.value
+        for rule in raw_resource_exclusions
+    ):
+        raise ScannerError("resource_exclusions must contain valid container/resource/reason objects")
+    if not isinstance(raw_selections, list) or not all(
+        isinstance(rule, dict) and set(rule) == {"container", "resource", "reason"}
+        and all(isinstance(rule[key], str) and rule[key].strip() for key in ("container", "resource"))
+        and rule["reason"] == "official_localization_selection" for rule in raw_selections
+    ):
+        raise ScannerError("resource_selections must contain valid selection objects")
     if limits["max_containers"] > limits["max_outer_members"]:
         raise ScannerError("max_containers cannot exceed max_outer_members")
     if limits["max_nested_jar_bytes"] > limits["max_total_nested_jar_bytes"]:
@@ -159,6 +194,9 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         raise ScannerError("container exclusion rule is invalid") from error
     return ScannerConfig(
         container_exclusions,
+        tuple(ResourceExclusionRule(rule["container"], rule["resource"], ExclusionReason(rule["reason"]))
+              for rule in raw_resource_exclusions),
+        tuple(ResourceSelectionRule(rule["resource"], rule["container"]) for rule in raw_selections),
         tuple(patterns),
         tuple(value.lower() for value in directories),
         limits["max_containers"],
@@ -212,6 +250,24 @@ def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
     except (OSError, zipfile.BadZipFile) as error:
         raise ScannerError(f"cannot read outer archive: {path}") from error
 
+    selections = {rule.resource: rule.container for rule in config.resource_selections}
+    if len(selections) != len(config.resource_selections):
+        raise ScannerError("duplicate resource selection")
+    available = {(item.resource_path, item.container) for item in resources}
+    present_paths = {path for path, _container in available}
+    missing = sorted((path, container) for path, container in selections.items()
+                     if path in present_paths and (path, container) not in available)
+    if missing:
+        raise ScannerError("resource selection is not present: " + ", ".join(f"{c}!/{p}" for p, c in missing))
+    selected_resources: list[ResourceRecord] = []
+    for item in resources:
+        chosen = selections.get(item.resource_path)
+        if chosen is not None and item.container != chosen:
+            exclusions.append(ExclusionRecord(item.container, item.resource_path,
+                                               ExclusionReason.COLLISION_NOT_SELECTED, chosen))
+        else:
+            selected_resources.append(item)
+    resources = selected_resources
     resources.sort(key=lambda item: (item.container, item.resource_path))
     exclusions.sort(key=lambda item: (item.container, item.resource_path, item.reason.value))
     by_path: dict[str, list[ResourceRecord]] = {}
@@ -222,6 +278,7 @@ def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
             resource_path,
             tuple(records),
             content_identical=len({record.source_sha256 for record in records}) == 1,
+            unresolved=len({record.source_sha256 for record in records}) != 1,
         )
         for resource_path, records in sorted(by_path.items())
         if len({record.container for record in records}) > 1
@@ -283,6 +340,8 @@ def _classify_member(
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.NESTED_ARCHIVE))
     elif _is_localized(path, config.localization_directories):
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.LOCALIZED))
+    elif reason := _resource_exclusion_reason(container, path, config.resource_exclusions):
+        exclusions.append(ExclusionRecord(container, path, reason))
     elif not _matches_resource(path, config.resource_patterns):
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.UNSUPPORTED_RESOURCE))
     elif member.file_size > config.max_resource_bytes:
@@ -350,6 +409,15 @@ def _container_exclusion_reason(
 ) -> ExclusionReason | None:
     for rule in rules:
         if fnmatchcase(container, rule.glob):
+            return rule.reason
+    return None
+
+
+def _resource_exclusion_reason(
+    container: str, resource: str, rules: tuple[ResourceExclusionRule, ...]
+) -> ExclusionReason | None:
+    for rule in rules:
+        if fnmatchcase(container, rule.container) and _pattern_matches(resource, rule.resource):
             return rule.reason
     return None
 

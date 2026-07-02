@@ -1,0 +1,7 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/ShiftOutOfRange.html -->
+<html>
+<body>
+Reports a shift operation where the second operand is a constant outside the reasonable range, for example, an integer
+shift operation outside the range <code>0..31</code>, shifting by negative or overly large values.
+</body>
+</html>

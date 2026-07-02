@@ -1,0 +1,162 @@
+ktor.name=Ktor
+
+generate.ktor.project=Generate a <b>Ktor</b> project.
+title.error=Error
+message.failed.to.connect.start.ktor.io=Failed to connect to the Ktor generator website start.ktor.io\nPlease check a URL and network and proxy settings.\n\nError message:\n{0}
+message.state.downloading.project=Generating Ktor Project\u2026
+error.with.description=Error: {0}
+label.advanced.settings=Advanced Settings
+label.build.system=Build system:
+label.server.engine=Engine:
+label.ktor.version=Ktor version:
+label.group=Group:
+label.artifact=Artifact:
+label.configuration.in=Configuration in:
+comment.go.to.documentation=Start with Ktor Server and Client <a href="{0}">tutorials</a>
+comment.go.to.documentation.link=https://ktor.io/docs/
+presentable.name.ktor.starter=Ktor
+plugins.ide.add.button=Add
+plugins.ide.remove.button=Remove
+ktor.plugins.configurable.github.link=See plugin's Github
+ktor.run.configuration.name=Ktor
+ktor.run.configuration.type.description=Ktor application
+ktor.run.configuration.configuration.tab.title=Ktor Configuration
+ktor.run.configuration.class.not.specified=No Ktor application class specified
+ktor.run.configuration.main.class=Ktor main class
+ktor.wizard.combobox.default.tip=Default
+ktor.failed.to.generate.project=Failed to generate Ktor project
+ktor.plugins.required.add=Following plugins will be added along with {0}:\n{1}
+ktor.plugins.dependent.remove=Following plugins that depend on {0} will be removed:\n{1}
+ktor.plugins.required.add.title=Required plugins
+ktor.plugins.dependent.remove.title=Depending plugins
+ktor.plugins.show=Show
+ktor.plugins.hide=Hide
+ktor.plugins.added.count={0} plugins added
+ktor.plugins.added.count.single=1 plugin added
+ktor.endpoints.presentation.title=Ktor HTTP Server
+ktor.endpoints.websockets.presentation.title=Ktor Server Websockets
+creating.ktor.run.configuration=Creating Ktor run configuration
+creating.ktor.run.configuration.for.module=Creating Ktor run configuration for module {0}
+create.run.configuration.automatically=Create run configuration automatically
+ktor.generate.route.test.action=Generate test for current route
+ktor.route.test.name=Test name:
+ktor.message.symbols.not.allowed.in.testfun=The following symbols are not allowed in a test function name: \/, \', \"
+ktor.create.test=Create test
+ktor.create.route.test=Create test for Ktor route
+ktor.create.route.test.title=Create Test For Ktor Route
+ktor.create.module.test=Create test for Ktor module
+ktor.create.module.test.title=Create Test for Ktor Module
+ktor.create.extension.test=Create test for Ktor routes
+ktor.create.extension.test.title=Create Test For Ktor Routes
+ktor.create.test.button.text=Create
+ktor.route.test.class.name=Test class name:
+ktor.generate.test.for.following.routes=Generate tests for the following routes:
+ktor.select.test.routes.table.method.title=Method
+ktor.select.test.routes.table.route.title=Route
+ktor.select.test.routes.table.test.name.title=Test Name (Editable)
+ktor.enter.valid.function.name.message=Please enter a valid Kotlin function name
+ktor.message.class.already.exists=The {0} class already exists in this package. Do you want to add new tests to this class?
+ktor.select.package.test=Package:
+add.imports.automatically=Add imports for Ktor modules automatically
+ktor.category=Ktor
+ktor.plugin.add.status.dependencies.added={0} build system dependencies were added
+ktor.no.urls.selected.to.test=The test class is not created because no tests are selected.
+ktor.documentation.not.loaded=Documentation cannot be loaded at the moment.
+ktor.debugger.label.plugin=plugin: {0}
+ktor.debugger.label.phase=, phase: {0}
+ktor.perform.migration.dialog.project=Migrate project
+ktor.perform.migration.dialog.module=Migrate single module:
+ktor.perform.migration.dialog.title=Migrating to Ktor {0}
+ktor.perform.migration.dialog.ok=Migrate
+ktor.perform.migration.dialog.preparation=Preparing the Ktor Migration dialog
+ktor.perform.migration.dialog.warning=You might need to manually fix some errors after migration
+ktor.migration.unavailable.no.modules=There are no modules available for migration
+ktor.migration.unavailable.network=Failed to perform migration. Probably, Ktor server is unavailable
+ktor.migration.unavailable.no.version=Migration is not available. Couldn't get the latest version
+ktor.migration.progress.title=Migrating to Ktor {0}
+ktor.migration.started=Migration to Ktor {0} Started
+ktor.progress.text.migrating.module=Module: {0}
+ktor.progress.text.getting.latest.migration.for.ktor.server=Getting latest migration for Ktor server\u2026
+ktor.progress.text.updating.ktor.dependencies=Updating Ktor dependencies\u2026
+ktor.progress.text.performing.replace=Replacing: {0}
+ktor.progress.text.updating.imports=Updating imports\u2026
+migration.level.stable=Stable
+migration.level.none=Don't suggest migrations
+
+ktor.notification.groups.errors=Ktor Errors
+ktor.swagger.action.multiple.content.roots.for.module=multiple content roots for {0}
+ktor.swagger.action.openapi.under.sources.root={0} is under sources roots
+ktor.swagger.action.openapi.folder.already.exists=''{0}'' folder already exists under {1}
+ktor.swagger.action.notification.title.cannot.create.resources.root.for.swagger.file=Cannot create new OpenAPI documentation
+ktor.swagger.action.notification.content.cannot.create.resources.root.for.swagger.file=Cannot create resources root for the swagger file: {0}
+ktor.swagger.already.exists.message=OpenAPI documentation for the current module already exists. Do you want to overwrite it?
+ktor.swagger.already.exists.title=Overwrite OpenAPI Documentation
+
+action.MigrateKtorAction.text=Migrate Project to Latest Ktor Version\u2026
+action.MigrateKtorAction.update.text=Migrate to Ktor {0}
+action.MigrateKtorAction.MainMenu.text=Migrate Project to Latest Ktor Version\u2026
+
+action.KtorGenerateOpenApiAction.text=Generate OpenAPI Documentation for Ktor Module
+action.KtorGenerateOpenApiAction.MainMenu.text=Generate OpenAPI Documentation for Ktor Module
+action.KtorGenerateOpenApiAction.MainMenu.text.named=Generate OpenAPI Documentation for Ktor in Module: {0}
+
+ktor.generate.openapi.documentation.progress.message.title=Generating OpenAPI Documentation for Module {0}
+ktor.generate.openapi.progress.message=Generating OpenAPI documentation for module {0}
+ktor.generate.openapi.intention=Generate OpenAPI documentation for current module
+ktor.update.openapi.inspection=OpenAPI documentation for current module is outdated
+ktor.update.openapi.fix=Update OpenAPI documentation for current module
+ktor.generate.openapi=Generate new OpenAPI documentation
+
+ktor.searching.app.extension=Searching for Application Extension
+ktor.searching.routing.call=Searching for Route Extension Calls
+
+ktor.yaml.property.description.host=A host address
+ktor.yaml.property.description.port=A listening port. You can set this property to 0 to run the server on a random port
+ktor.yaml.property.description.sslPort=A listening SSL port. You can set this property to 0 to run the server on a random port
+ktor.yaml.property.description.watch=Watch paths used for auto-reloading.
+ktor.yaml.property.description.rootPath=A servlet context path.
+ktor.yaml.property.description.shutdown.url=A shutdown URL. Note that this option uses the Shutdown URL plugin.
+ktor.yaml.property.description.ssl.keyStore=An SSL key store.
+ktor.yaml.property.description.ssl.keyAlias=An alias for the SSL key store.
+ktor.yaml.property.description.ssl.keyStorePassword=A password for the SSL key store.
+ktor.yaml.property.description.ssl.privateKeyPassword=A password for the SSL private key.
+ktor.yaml.property.description.application.modules=Ktor modules to load.
+
+ktor.extract.route.intention.text=Extract Route to a Separate Method
+ktor.extracted.extension.name=Function name:
+ktor.extract.function.extract.button.text=Extract
+
+ktor.inline.route.intention.text=Inline Route Extension
+
+ktor.inspections.config.yaml=Ktor application.yaml
+ktor.engine.description=Engine that processes network requests
+ktor.create.new.ktor.client=Create new Ktor client
+
+ktor.inspections.group.key=Ktor
+ktor.client.generator.title=Ktor
+
+advanced.settings.ktor=Frameworks. Ktor
+advanced.setting.ktor.run.using.gradle=Run using Gradle
+advanced.setting.ktor.run.using.gradle.description=By default, IDE uses Gradle to build the project and run the tasks. \
+  If disabled, run Ktor configurations using IDE.
+ktor.run.config.fragment.group=Ktor
+ktor.run.config.enable.development.mode.tag=Development mode
+ktor.run.config.enable.development.mode.tag.description=-Dio.ktor.development=true
+ktor.run.config.enable.development.mode.tag.hint=<html>Enable development mode by adding VM option <code>-Dio.ktor.development=true</code></html>
+ktor.config.property.deprecated.reason=Deprecated: {0}
+ktor.config.property.deprecated=Deprecated configuration property ''{0}''
+ktor.config.property.module.duplicated=Module is duplicated: ''{0}''
+ktor.config.property.module.has.multiple.candidates=Module has multiple candidates. Anyone can be loaded
+ktor.config.property.module.cannot.be.private=Module can't be private
+ktor.config.property.module.cannot.have.parameters=Module can't have parameters
+ktor.config.property.folding.empty.value=<empty>
+ktor.documentation.options=Options
+ktor.documentation.usage=Usage
+ktor.documentation.description=Description
+ktor.parameter.to.delegate=Convert Ktor parameter to delegate
+ktor.parameter.to.delegate.error=Cannot be applied for this property
+ktor.add.starters.plugin.dialog.wrapper.title=Add Plugins
+ktor.add.starters.inlay.hint.text=Add Plugins\u2026
+ktor.add.starters.inlay.hint.provider.description=Click to add Ktor plugins.
+ktor.add.starters.inlay.hint.provider.name=Add Ktor plugins
+action.Ktor.Add.Plugins.Action.text=Add Plugins\u2026

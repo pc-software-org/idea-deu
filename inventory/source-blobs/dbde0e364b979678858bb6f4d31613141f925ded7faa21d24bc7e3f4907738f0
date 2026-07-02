@@ -1,0 +1,6 @@
+<html>
+<body>
+Generates a reference path comment to the file where the symbol at the caret is referenced. These comments are used by the  TypeScript compiler. 
+Usually reference path comments are required for global symbols, otherwise the EcmaScript import syntax should be used. 
+</body>
+</html>

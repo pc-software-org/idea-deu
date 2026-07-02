@@ -1,0 +1,34 @@
+action.WebServicesPlugin.CreateRestfulWebService.text=RESTful Web Service
+action.WebServicesPlugin.CreateRestfulWebServiceClient.text=RESTful Web Service Client
+action.export.openapi.draft=Generate OpenAPI draft
+
+annotate.field.with.path.param=Annotate field {0} as @PathParam("{1}")
+
+cant.convert.to=Cannot convert ''{0}'' to {1}
+
+create.field.annotated.path.param=Create String field annotated as @PathParam("{0}")
+create.method.parameter=Create method parameter
+
+gutter.open.in.http.client.name=Open in HTTP Client JAX-RS RequestMapping
+
+remove.annotation=Remove annotation
+
+resource.methods.inspection.class.has.no.public.methods=Class doesn't contain any JAX-RS annotated methods
+resource.methods.inspection.method.must.be.public={0} method must be public
+resource.methods.inspection=@Path class without resource methods
+
+UnresolvedRestParamInspection.display.name=Unresolved @PathParam reference
+
+wadl.config.inspection=Incorrect WADL configuration
+
+webservices.file.templates.group.name=JAX-RS
+webservices.inspections.ambiguous.path.annotation.display.name=Incorrect @Path URI template
+webservices.inspections.default.value.display.name=Incorrect value of @DefaultValue parameter
+webservices.inspections.group.name=RESTful Web Service (JAX-RS)
+webservices.inspections.rest.multiple.method.designators.inspection=Resource method with multiple HTTP method annotations
+webservices.inspections.rest.void.method.annotated.as.get.display.name=@GET annotated method returns a void value
+webservices.inspections.rest.void.method.annotated.as.get.fix.name=Change a return type to String
+webservices.inspections.rest.void.method.annotated.as.get.problem=@GET annotated method returns a void value
+webservices.inspections.unused.path.template=Template ''{0}'' is never used
+webservices.inspections.wrong.path.annotation.value.problem=Path syntax error
+category.name.mappings=Mappings

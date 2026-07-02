@@ -1,0 +1,24 @@
+<html>
+<body>
+<p>Reports incorrect
+  <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/event/EventListener.html">@EventListener</a> methods.</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Configuration @ComponentScan
+  open class Config
+
+  data class MyEvent(val string: String)
+
+  @Component
+  class LogComponent {
+    @EventListener // Method annotated with @EventListener must be public
+    private fun logCommands(commandName: MyEvent) {}
+
+    @EventListener // Method must have maximum one parameter
+    fun processCommand(commandName: MyEvent, text: String) {}
+  }
+</code></pre>
+
+</body>
+</html>

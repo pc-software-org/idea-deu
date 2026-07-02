@@ -1,0 +1,23 @@
+<html>
+<body>
+
+Reports the following problems inside XML configuration files:
+<ul>
+  <li>References to non-instantiable classes</li>
+  <li>References to classes that do not extend required class</li>
+  <li>References to classes with inappropriate scope</li>
+  <li>Tag and attribute values that do not match required pattern (for example, Java Identifiers)</li>
+  <li>Tags that do not include required children tags or attributes</li>
+  <li>Tags that define objects with duplicate names</li>
+</ul>
+
+<p><b>Example:</b></p><br/>
+<pre><code>
+&lt;persistence&gt;
+    &lt;persistence-unit name="example-persistence-unit"&gt;
+        &lt;provider&gt;org.example.SomeRandomClass&lt;/provider&gt; // Error: provider class should implement PersistenceProvider interface
+    &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</code></pre>
+</body>
+</html>

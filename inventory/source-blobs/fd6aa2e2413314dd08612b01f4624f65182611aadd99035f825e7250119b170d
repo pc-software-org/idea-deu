@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports schemas and databases in the current session that are not introspected.
+<p>For example, this warning might occur when you try to create a table in the schema that is not introspected.</p>
+<p>Introspection is a method of inspecting a data source. When you perform introspection, structural information in the data source is
+  inspected to detect tables, columns, functions, and other elements with their attributes.</p>
+</body>
+</html>

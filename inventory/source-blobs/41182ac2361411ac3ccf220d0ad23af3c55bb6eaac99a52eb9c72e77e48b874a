@@ -1,0 +1,6 @@
+<html>
+<body>
+Runs <em>JSLint</em> or <em>JSHint</em> validator for specified file.
+The validation works in JavaScript files.
+</body>
+</html>

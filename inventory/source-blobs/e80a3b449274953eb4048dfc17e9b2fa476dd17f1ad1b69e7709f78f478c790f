@@ -1,0 +1,8 @@
+<html>
+<body>
+Converts a boolean comparison expression <code>a</code> <small>op</small> <code>b</code> to
+!( <code>a</code> <small>negop</small> <code>b</code> ). <br>
+Where <small>op</small> and <small>negop</small> are mutually inverse comparison operators,
+such as <code>==</code> and <code>!=</code> .
+</body>
+</html>

@@ -1,0 +1,13 @@
+<html>
+<body>
+<p>Reports syntax errors and unused URI templates inside <code>@Path</code> annotations.</p>
+<p><b>Example:</b></p>
+<pre><code>
+  @GET
+  @Path("/<b>{unused}</b>") // Template 'unused' is never used
+  public String get() {
+    return "";
+  }
+</code></pre>
+</body>
+</html>

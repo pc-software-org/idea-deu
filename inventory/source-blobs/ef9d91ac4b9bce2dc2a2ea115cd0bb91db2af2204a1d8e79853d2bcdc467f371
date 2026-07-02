@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a TypeScript import statement from the <code>import require('')</code> to <code>import from</code> syntax.
+</body>
+</html>

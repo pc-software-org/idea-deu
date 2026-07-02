@@ -1,0 +1,6 @@
+<html>
+<body>
+Calculates the value of a compiled time constant sub-expression and replaces it with an equivalent literal expression.
+This is helpful for replacing an expression partially instead of entirely.
+</body>
+</html>

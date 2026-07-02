@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a <code>switch</code> statement without a <code>default</code> clause when some possible values are not enumerated.
+</body>
+</html>

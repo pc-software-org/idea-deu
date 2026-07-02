@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a variable that is declared in one <code>case</code> clause of a <code>switch</code> statement but is used in another <code>case</code>
+clause of the same statement.
+For block-scoped variables, this results in throwing a <code>ReferenceError</code>.
+For <code>var</code> variables, it indicates a potential error. <p>Disable the inspection for <code>var</code> variables if this pattern is used intentionally.</p>
+</body>
+</html>

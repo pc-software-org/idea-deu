@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports a redundant usage of <code>await</code>, such as <code>await await</code>, or awaiting a non-promise result.
+<!-- tooltip end -->
+<p>
+  When the 'Report for promises' option is selected, suggests removing <code>await</code> before promises when applicable
+  (in <code>return</code> statements, and with <code>Promise.resolve/reject</code>).
+</p>
+<p>Removing <code>await</code> in such contexts causes two problems.</p>
+<ul>
+  <li>
+    Surrounding your code with <code>try-catch</code> and forgetting to add
+    <code>await</code> will change code semantics while you may fail to notice that.
+  </li>
+  <li>
+    Having an explicit <code>await</code> may prevent the V8 runtime from providing
+    <a href="http://bit.ly/v8-zero-cost-async-stack-traces">async stack traces</a>.
+  </li>
+</ul>
+</body>
+</html>

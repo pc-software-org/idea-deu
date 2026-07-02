@@ -1,0 +1,6 @@
+<html>
+<body>
+Replaces a <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/var()">var()</a></code> CSS function invocation with its fallback
+value.
+</body>
+</html>

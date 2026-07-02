@@ -1,0 +1,128 @@
+MnCronDocumentationTarget.cron.explanation=<p>Cron explanation: <b>{0}</b></p><p>For Cron format explanation, see <a href="https://docs.micronaut.io/latest/api/io/micronaut/scheduling/cron/CronExpression.html">https://docs.micronaut.io/latest/api/io/micronaut/scheduling/cron/CronExpression.html</a>.</p>
+
+action.export.openapi.draft=Generate OpenAPI draft
+
+advanced.setting.micronaut.run.using.gradle=Run using Gradle
+advanced.setting.micronaut.run.using.gradle.description=By default, IDE uses Gradle to build the project and run the tasks. \
+  If disabled, run Micronaut configurations using IDE.
+advanced.settings.micronaut=Frameworks. Micronaut
+
+micronaut.add.bean.dependency.fix.family.name=Add dependency on bean
+micronaut.add.bean.dependency.fix.text=Add dependency with name matching ''{0}''
+
+micronaut.bean=Bean
+micronaut.bean.markers=Contexts and dependency injection
+
+micronaut.cache.annotator.name=Cacheable operations
+micronaut.cache.element.choose.title=Choose Cacheable Operation
+micronaut.cache.element.no.operations=No cacheable operations found
+micronaut.cache.element.tooltip.text=Go to cacheable operation with the same name
+micronaut.cache.presentation.type.name=Cache
+
+micronaut.candidates.popup.empty=No autowired candidates found
+micronaut.candidates.popup.title=Autowired Candidates
+
+micronaut.config.unresolved.duration.value=Value ''{0}'' is not a valid duration
+micronaut.configuration.properties.class.tooltip.text=Configuration properties
+
+micronaut.controller=Controller
+
+micronaut.data.commons.query.method.inconsistency.inspection.name=Incorrect repository method declaration
+micronaut.data.commons.query.method.parameters.inspection.name=Incorrect repository method parameter
+micronaut.data.commons.query.method.return.type.inspection.name=Incorrect repository method return type
+micronaut.data.incorrect.method.return.type.boolean=Boolean type is expected here
+micronaut.data.incorrect.method.return.type.void='void' type is expected here
+micronaut.data.incorrect.method.return.type=''{0}'' type is expected here
+micronaut.data.inspections.group=Micronaut Data
+micronaut.data.mongodb.gutter.name=Micronaut Data MongoDB mapping
+micronaut.data.open.in.db.view=Open in Database View
+micronaut.data.ql=Micronaut Data QL
+micronaut.data.repository=Repository
+
+micronaut.event.class.tooltip.text=Event class
+micronaut.event.listener.tooltip.text=Navigate to event publisher
+micronaut.event.listeners.popup.empty=No listeners found
+micronaut.event.listeners.popup.title=Event Listeners
+micronaut.event.markers=Application events
+micronaut.event.publisher.tooltip.text=Navigate to event listeners
+micronaut.event.publishers.popup.empty=No publishers found
+micronaut.event.publishers.popup.title=Event Publishers
+
+micronaut.factory=Factory
+micronaut.factory.class.tooltip.text=Factory bean
+
+micronaut.goto.related.item.group.name=Micronaut
+
+micronaut.http.client.class.tooltip.text=HTTP client
+micronaut.http.client.framework.title=Micronaut HTTP Client
+micronaut.http.controller.class.tooltip.text=HTTP controller
+micronaut.http.mapping.open.in.http.client.tooltip.text=Open in HTTP Client
+micronaut.http.markers=HTTP mappings
+micronaut.http.method.mapping.tooltip.text=Mapped HTTP endpoint
+micronaut.http.server.framework.title=Micronaut HTTP Server
+
+micronaut.infrastructure.class.tooltip.text=Infrastructure bean
+
+micronaut.inject.popup.empty=No autowired dependencies found
+micronaut.inject.popup.title=Autowired Dependencies
+
+micronaut.inspection.beans.ambiguous.dependency=Ambiguous dependency: there are multiple beans that match the injection point
+micronaut.inspection.beans.unsatisfied.dependency=Unsatisfied dependency: no bean matches the injection point
+micronaut.inspections.cache.annotation.parameters=Unresolved cache annotation parameter reference
+# suppress inspection "GrazieInspection"
+micronaut.inspections.config.properties.missing.closing.bracket=Missing closing ']'
+micronaut.inspections.config.properties.missing.index.value=Missing index value
+micronaut.inspections.config.properties.missing.map.key=Missing map key
+micronaut.inspections.config.properties.non.integer.index=Index value must be Integer
+micronaut.inspections.config.properties=Micronaut application.properties
+micronaut.inspections.config.yaml=Micronaut application.yaml
+micronaut.inspections.group=Micronaut
+micronaut.inspections.unresolved.path.variable=Unresolved @PathVariable reference
+micronaut.intention.category=Micronaut
+
+micronaut.lifecycle.method.tooltip.text=Lifecycle method
+
+micronaut.management.endpoint.class.tooltip.text=Management endpoint
+micronaut.management.framework.title=Micronaut Management Endpoints
+micronaut.management.markers=Management endpoints mappings
+micronaut.management.method.tooltip.text=Management endpoint method
+
+micronaut.mq.kafka.client.bean.text=Kafka client bean
+micronaut.mq.kafka.listener.bean.text=Kafka listener bean
+micronaut.mq.line.markers.name=Micronaut MQ methods
+micronaut.mq.line.markers.popupTitle=Related Message Queues
+micronaut.mq.line.markers.tooltip.single=Navigate to usages of ''{0}''
+micronaut.mq.line.markers.tooltip=Navigate to usages of message queues
+micronaut.mq.rabbit.client.bean.text=RabbitMQ client bean
+micronaut.mq.rabbit.listener.bean.text=RabbitMQ listener bean
+
+micronaut.prototype.class.tooltip.text=Prototype bean
+
+micronaut.run.configuration.class.not.specified=No Micronaut application class is specified
+micronaut.run.configuration.description=Micronaut application
+micronaut.run.configuration.name=Micronaut
+
+micronaut.scheduled.method.tooltip.text=Scheduled method
+
+micronaut.settings.create.run.configuration.tooltip=On (re-)import add Micronaut run configuration if none exists yet
+micronaut.settings.create.run.configuration=Create &run configuration automatically
+
+micronaut.show.candidates.tooltip.text=Navigate to the autowired candidates
+micronaut.show.dependencies.tooltip.text=Navigate to the autowired dependencies
+
+micronaut.starter.description.for.micronaut.project.starter=Create <b>Micronaut</b> applications
+micronaut.starter.features.label=Features:
+micronaut.starter.message.validating.dependencies=Validating features\u2026
+micronaut.starter.message.validation.error=An unknown problem occurred while validating dependencies.
+micronaut.starter.message.validation.title=Invalid Project Configuration
+micronaut.starter.select.features.hint=No features added
+micronaut.starter.selected.features.label=Added features:
+micronaut.starter.server.url.label=Micronaut Launch Server URL
+micronaut.starter.version.label=Micronaut:
+
+micronaut.websocket.client.class.tooltip.text=WebSocket client
+micronaut.websocket.client.framework.title=Micronaut WebSocket Client
+micronaut.websocket.markers=WebSocket mappings
+micronaut.websocket.method.tooltip.text=WebSocket mapped method
+micronaut.websocket.server.class.tooltip.text=WebSocket server
+micronaut.websocket.server.framework.title=Micronaut WebSocket Server

@@ -1,0 +1,78 @@
+action.ConvertJupyterToPythonAction.text=Convert to Python File
+action.JupyterShowImageInPlotsAction.text=Show in Plots
+action.JupyterShowAsImageAction.text=View as Image
+action.OpenDSTableAsImage.text=View as Image
+action.OpenDSTableAsImage.description=View table as Image
+action.ConvertJupyterToPythonAction.description=Convert Jupyter notebook to Python file
+action.ConvertPythonToJupyterAction.text=Convert to Jupyter Notebook
+action.ConvertPythonToJupyterAction.description=Convert Python file to Jupyter notebook
+action.JupyterDebugAction.text=De_bug Cell
+action.JupyterDebugAction.description=Debug cell
+action.OpenDSTableInDataView.text=Open in Data View
+action.OpenDSTableInDataView.description=Open table in Data View
+action.OpenDSTableInNewTab.text=Open In New Tab
+action.JupyterOpenNotebookInBrowserAction.text=Open Notebook in Browser
+action.JupyterOpenNotebookInBrowserAction.remote.not.started=Jupyter Is Not Started
+
+action.PythonJupyterVarsRefreshAction.text=Refresh Variables
+action.PythonJupyterVarsRefreshAction.description=Refresh variables
+action.PyVarsSortByNameAction.text=Sort By Name
+action.PyVarsSortByNameAction.description=Sort by name
+action.PyVarsSortByTypeAction.text=Sort By Type
+action.PyVarsSortByTypeAction.description=Sort by type
+
+group.PythonJupyterVars.SortGroup.text=Sort By
+group.PythonJupyterVars.SortGroup.description=Choose how to sort variables
+group.PythonJupyterVars.Settings.text=Settings
+group.PythonJupyterVars.Settings.description=Settings
+
+group.ConvertJupyterActionGroup.text=Export Notebook As\u2026
+group.ConvertJupyterActionGroup.description=Export notebook as\u2026
+convert.jupyter.action.convert.description=Convert notebook to {0} format
+convert.jupyter.action.error=Cannot convert {1} to {0} format.
+convert.jupyter.action.error.log=Log:
+export.notebook.progress=Exporting {0} notebook to {1}\u2026
+
+### Inspections: INSP ###
+INSP.GROUP.jupyter=Jupyter
+
+
+# QuickFixes
+QFIX.split.cell=Split cell after statement
+
+form.integrated.tools.detect.tests.in.jupyter.notebook=Detect tests in Jupyter Notebooks
+survey.dialog.top.title=Feedback
+survey.dialog.title=Jupyter Notebooks Feedback
+survey.dialog.using.for.label=What do you use the notebooks for?
+survey.dialog.using.for.label.item.explore.label=Exploratory data analysis
+survey.dialog.using.for.label.item.experiment.label=Quick experimentation with code
+survey.dialog.using.for.label.item.prototype.label=Model prototyping
+survey.dialog.using.for.label.item.orchestration.label=Orchestration
+survey.dialog.using.for.label.item.visual.label=Visualization
+survey.dialog.how.long.use.label=How long have you been working with Jupyter Notebooks in PyCharm?
+survey.dialog.rate.label=Rate your recent experience with Jupyter Notebooks in PyCharm:
+dialog.explain.rating.label=Could you explain your rating?
+survey.notification.request.title=Share feedback about Jupyter Notebooks.
+survey.notification.request.content=Tell us about your experience. It will take about 2 minutes.
+action.ShowInIdePycharmJupyterSurveyAction.text=Show Pycharm Jupyter Survey.
+survey.dialog.how.long.use.less_mounth=Less than a month
+survey.dialog.how.long.use.less_year=Less than 1 year
+survey.dialog.how.long.use.less_2_year=Less than 2 years
+survey.dialog.how.long.use.more_2_year=More than 2 years
+survey.notification.response.title=Thank you for your feedback
+survey.notification.response.content=You help make PyCharm better!
+jupyter.server.download.package.started=The ''{0}'' package is being installed. It may take some time.
+jupyter.server.download.package.finished=The ''{0}'' package installed successfully in {1}s.
+install.package.action.name=Install ''{0}''
+progress.text.creating.python.sdk=Please wait while the SDK is being configured
+progress.text.creating.python.sdk.label=SDK Is Being Configured\u2026
+
+notification.ipykernel.process.started=IPyKernel process started for {0}
+notification.ipykernel.process.stopped=IPyKernel process stopped for {0}
+ipykernel.interpreter.type.is.not.supported=IpyKernel can be run only on local or WSL Interpreter
+error.message.no.module.found=Please create a module for your project to start the Jupyter server
+progress.installing.jupyterlab=Installing 'JupyterLab' package\u2026
+progress.installing.ipykernel=Installing 'IPyKernel' package\u2026
+debug.panel.image.chunk.load.failed.invalid.total.size=Invalid image size received: {0}
+label.chunk.loading.failed=Chunk loading failed
+jupyter.servers.shutdown.progress.title=Shutdown Jupyter Managed Servers

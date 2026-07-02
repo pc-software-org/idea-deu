@@ -1,0 +1,48 @@
+spring.bean.dependency.graph.presentation.name=Spring Beans Dependencies
+spring.bean.dependency.graph.edge.injected=depends on
+spring.bean.dependency.graph.edge.creates=creates
+spring.bean.dependency.graph.edge.depends.on=depends on
+spring.bean.dependency.graph.edge.autowired=autowired
+spring.bean.dependency.graph.edge.anno.autowired=@Autowired
+spring.bean.dependency.graph.edge.anno.resource.autowired=@Resource
+spring.bean.dependency.graph.edge.anno.inject.autowired=@Inject
+spring.bean.dependency.graph.edge.anno.imported=@Import
+spring.bean.dependency.graph.edge.anno.java.bean=@Bean
+spring.bean.dependency.graph.edge.inherits=inherits
+
+model.diagram.element.tooltip.contexts=Contexts
+model.diagram.element.tooltip.beans=Beans
+model.diagram.element.tooltip.component.scans=Component Scans
+model.diagram.element.tooltip.imports=Imports
+model.diagram.element.tooltip.imported.resources=Imported Resources
+model.diagram.element.tooltip.imported.configurations=Imported Configurations
+
+category.name.local.context=Local context
+
+local.model.dependencies.diagram.title=Spring Context Dependencies
+gutter.dependencies.diagram.merged.action.title=Spring Diagrams\u2026
+
+diagram.actions.open.beans.dependencies.text=Beans Dependencies Diagram
+diagram.actions.open.beans.dependencies.popup=Beans Dependencies Diagram (popup)
+diagram.actions.open.application.context.dependencies.popup=Context Dependencies Diagram (popup)
+diagram.actions.open.application.context.dependencies=Context Dependencies Diagram
+diagram.actions.gutter.model.dependencies.graph=Model dependencies graph
+diagram.actions.gutter.model.dependencies.graph.xml=Model dependencies graph (XML)
+
+spring.diagrams.dependency.type=Dependency type
+spring.diagrams.choose.dependency.type=Choose Dependency Type
+spring.diagrams.can.t.create.dependency.for.compiled.class=Can't create dependency for compiled class
+spring.diagrams.compiled.class.dependency=Compiled Class Dependency
+spring.diagrams.add.bean.dependencies.action=Add Spring Bean Dependencies
+spring.diagrams.remove.edge.action=Remove edge
+spring.diagrams.setter.injection=Setter Injection
+spring.diagrams.constructor.injection=Constructor Injection
+spring.diagrams.autowired=@Autowired
+
+spring.dependencies.uml.action.name=Dependencies
+category.name.show.library.models=Show library models
+category.name.show.filesets.as.groups=Show filesets as groups
+
+spring.bean.graph.tab.title=Bean Graph
+spring.bean.graph.tab.empty.text=No diagram available
+show.beans.from.libraries=Show beans from libraries

@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports a reference to a variable, mixin, or function that is declared in another file but this file isn't 
+explicitly <a href="https://sass-lang.com/documentation/at-rules/import">imported</a> in the current file.
+<p><b>Example:</b></p>
+<pre><code>
+* {
+  margin: $var-in-other-file;
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

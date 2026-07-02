@@ -1,0 +1,1 @@
+<html><head><meta charset="UTF-8"><link rel="stylesheet" type="text/css" href="css/tips.css"></head><body><p><b>Drag the CSV file to create a table</b></p><p>To add data from a CSV file, drag the file to the <span class="control">tables</span> node of a data source or to the table.</p><p>You can view CSV and TSV files as text or as a table.</p></body></html>

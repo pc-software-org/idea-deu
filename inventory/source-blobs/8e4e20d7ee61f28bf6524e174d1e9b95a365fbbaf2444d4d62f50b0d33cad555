@@ -1,0 +1,7 @@
+<html>
+<body>
+<p>Reports classes annotated with <code>@Path</code> that have no resource methods.
+  The root resource class must have at least one resource method annotated with <code>@Path</code>
+  or with any of <code>@HttpMethod</code> annotations (<code>@GET</code>, <code>@POST</code>, and so on).</p>
+</body>
+</html>

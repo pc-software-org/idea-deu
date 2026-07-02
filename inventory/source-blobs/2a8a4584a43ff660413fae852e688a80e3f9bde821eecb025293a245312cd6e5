@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports an <code>hsl()</code> or <code>hwb()</code> color function or a hexadecimal color notation.
+<p>Suggests replacing such color value with an equivalent <code>rgb()</code> or <code>rgba()</code> color function.</p>
+<p><b>Example:</b></p>
+<pre><code>#0c0fff</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>rgb(12, 15, 255)</code>.</pre>
+<!-- tooltip end -->
+</body>
+</html>

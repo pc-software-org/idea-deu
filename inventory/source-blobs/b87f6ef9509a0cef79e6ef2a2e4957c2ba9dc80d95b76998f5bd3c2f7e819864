@@ -1,0 +1,94 @@
+#SASS
+color.settings.sass.name=Sass/SCSS
+color.settings.sass.variable=Variable
+color.settings.sass.extend=Extend
+color.settings.sass.mixin=Mixin
+color.settings.sass.default=Default
+color.settings.sass.global=Global
+color.settings.sass.optional=Optional
+color.settings.sass.interpolation=Interpolation
+color.settings.sass.parent.selector=Parent selector
+
+filetype.sass.description=Sass style sheet
+filetype.scss.description=SCSS style sheet
+
+inspections.resolved.without.imports.name=Missing import
+inspections.resolved.without.imports.message=Element ''{0}'' is resolved only by name without use of explicit imports
+
+variable=Variable
+inspections.group.name=Sass/SCSS
+inspections.unresolved.variable.name=Unresolved variable
+
+include=Include
+mixin=Mixin
+inspections.unresolved.mixin.name=Unresolved mixin
+inspections.unresolved.mixin=Cannot find mixin ''{0}''
+
+function=Function
+
+inspections.unresolved.placeholder.selector.name=Unresolved placeholder selector
+inspections.unresolved.placeholder.selector=Cannot find placeholder selector ''{0}''
+
+placeholder.selector=Placeholder selector
+
+# annotator errors
+annotator.property.illegal.nesting.error=Illegal nesting: Only properties may be nested beneath properties
+annotator.property.top.level.properties.error=Properties are only allowed within rules, directives, mixin includes, or other properties
+annotator.selector.doesnt.have.properties.warning=This selector doesn't have any properties and will not be rendered
+annotator.delete.ruleset.quickfix.name=Delete empty ruleset
+no.module.with.namespace.0=There is no module with the namespace ''{0}''
+
+suppress.inspection.statement=Suppress for statement
+suppress.inspection.function=Suppress for function
+suppress.inspection.mixin=Suppress for mixin
+suppress.inspection.all.mixin=Suppress all inspections for mixin
+suppress.inspection.ruleset=Suppress for ruleset
+suppress.inspection.all.ruleset=Suppress all inspections for ruleset
+suppress.inspection.atrule=Suppress for at-rule
+suppress.inspection.all.atrule=Suppress all inspections for at-rule
+
+structure.variables.filter=Show Variables
+error.text.functions.can.only.contain.variable.declarations=Functions can only contain variable declarations and control directives
+error.text.invalid.term=Invalid term
+error.text.unclosed.interpolation=Unclosed interpolation
+error.text.unknown.flag=Unknown flag
+popup.title.place.for.declaration=Place for Declaration
+checkbox.text.0.1.occurrences={0} ({1} occurrences)
+
+editor.notification.label.enable.file.watcher.to.compile.sass.to.css.question=Enable File Watcher to compile SASS to CSS?
+label.compiles.sass.files.into.css.files=Compiles .sass files into .css files
+editor.notification.label.enable.file.watcher.to.compile.scss.to.css=Enable File Watcher to compile SCSS to CSS?
+label.compiles.scss.files.into.css.files=Compiles .scss files into .css files
+
+parsing.error.keyframes.name.expected=Keyframes name expected
+parsing.error.keyframes.block.expected=Keyframes block expected
+parsing.error.unclosed.interpolation=Unclosed interpolation
+parsing.error.variable.value.expected=Variable value expected
+parsing.error.mixin.name.expected=Mixin name expected
+parsing.error.value.expected=Value expected
+parsing.error.unexpected.variable=Unexpected variable
+parsing.error.string.expected=String expected
+parsing.error.asterisk.expected=* expected
+parsing.error.function.arguments.expected=Function arguments expected
+parsing.error.function.name.expected=Function name expected
+parsing.error.if.statement.or.new.line.expected=If statement or new line expected
+command.name.extract.variable=Extract Variable
+extract.var.dialog.label.name=&Name:
+extract.var.dialog.label.place.for.declaration=&Place for declaration:
+extract.var.dialog.checkbox.replace.all.occurrences=Replace &all occurrences
+
+parsing.error.content.block.expected=Content block expected
+parsing.error.condition.expected=Condition expected
+parsing.error.property.value.expected=Property value expected
+parsing.error.excl.optional.expected=!optional expected
+parsing.error.with.or.without.query.expected='with' or 'without' query expected
+parsing.error.colon.expected=':' expected
+parsing.error.in.expected='in' expected
+parsing.error.list.expected=List expected
+parsing.error.through.or.to.expected='through' or 'to' expected
+parsing.error.subject.expected=Subject expected
+parsing.error.block.declaration.or.if.expected=Block declaration or 'if' expected
+parsing.error.body.expected=Body expected
+parsing.error.optional.expected='optional' expected
+parsing.error.declaration.block.expected=Declaration block expected
+parsing.error.function.body.expected=Function body expected

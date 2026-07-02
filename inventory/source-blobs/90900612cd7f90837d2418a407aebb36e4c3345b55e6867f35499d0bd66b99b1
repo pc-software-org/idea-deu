@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>Reports incorrect <code>@Cache*</code> annotation names.</p>
+
+<p>At least one cache name should be provided per cache operation: <code>@Cacheable("cache_name")</code> or <code>@Cacheable(cacheNames ="cache_name")</code>.
+<code>@CacheConfig#cacheNames()</code> can be used for sharing common cache-related settings at the class level.</p>
+
+</body>
+</html>

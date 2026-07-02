@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports situations when CASE and COALESCE calls are interchangeable. This inspection has the following intention actions: <b>Replace
+  with 'COALESCE' call</b> and the opposite one <b>Replace with CASE expression</b>.
+<p>Example (MySQL):</p>
+<pre><code>SELECT
+  -- this CASE may be replaced by COALESCE
+	CASE
+		WHEN C1 IS NOT NULL THEN C1
+		ELSE 0
+		END
+FROM dual;</code></pre>
+<p>In the example, the CASE statement can be replaced with <code>SELECT COALESCE(C1, 0)</code> that produces the same output.</p>
+<p>If you prefer using CASE expressions, select the <b>Prefer CASE expressions over COALESCE function</b> option on
+the inspection page.</p>
+</body>
+</html>

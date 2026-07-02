@@ -1,0 +1,6 @@
+<html>
+<body>
+Updates the <code>width</code> and <code>height</code> CSS properties according to the size of the image declared by the <code>background-image</code>
+property.
+</body>
+</html>

@@ -1,0 +1,1054 @@
+local.path.column.name=Local Path
+deploy.path.column.name=Deployment Path
+web.path.column.name=Web Path
+username.is.empty=Username is not specified
+
+# {0} is AccessTypeTitle
+test.connection=Test {0} Connection
+# {0} is AccessTypeTitle
+connecting.by.0=Connecting by {0}\u2026
+# {0} is a server name
+# {1} is AccessTypeTitle
+login.dialog.title=Login to {0} by {1}
+# Used as AccessTypeTitle
+accessType.ftp.title=FTP
+# Used as AccessTypeTitle
+accessType.ftps.title=FTPS
+# Used as AccessTypeTitle
+accessType.sftp.title=SFTP
+# Used as AccessTypeTitle
+accessType.webdav.title=WebDAV
+# Used as AccessTypeTitle
+accessType.mount.title=Local or mounted folder
+# Used as AccessTypeTitle
+accessType.local.title=In place
+
+autodetect.root.path=Autodetect Root Path
+# {0} is a hostname of a server
+connection.to.successful=Successfully connected to {0}.
+# {0} is a hostname of a server
+# {1} is either result of server validation or empty string
+connection.to.failed=Connection to ''{0}'' failed.\n{1}
+logging.in=Logging in\u2026
+running=Running\u2026
+url.is.empty=Root URL is not specified
+url.is.invalid=Root URL is not valid
+upload.path.is.empty=Upload path is not specified.
+local.path.is.empty=Local path is not specified.
+# {0} is a file path
+local.item.not.found=Local item ''{0}'' not found.
+# {0} is a file path
+item.is.out.of.project=Local path ''{0}'' is out of project.
+deploy.path.is.empty=Deployment path is not specified.
+# {0} is a file path
+deploy.path.is.empty.for=<html>Deployment path is not specified for ''{0}''.</html>
+web.path.is.empty=Web path is not specified.
+# {0} is a file path
+web.path.is.empty.for=Web path is not specified for ''{0}''.
+# {0} is a file path
+content.root.is.not.mapped=Project root ''{0}'' is not mapped.
+content.roots.are.not.mapped=Several content roots are not mapped.
+server.is.not.specified=Server is not selected.
+# {0} is a server name
+server.not.exists=Server ''{0}'' does not exist.
+# {0} is a group name
+group.not.exists=Group ''{0}'' does not exist.
+# {0} is a name of a server or a group of servers
+default.server.or.group.not.exists=Default server or group ''{0}'' does not exist.
+# {0} is a server name
+# {1} is validation message
+server.invalid=Server ''{0}'' is not valid: {1}.
+# {0} is a server name
+# {1} is validation message
+default.server.invalid=Default server ''{0}'' is not valid: {1}.
+# {0} is a server group name
+# {1} is validation message
+default.group.invalid=Default group ''{0}'' is not valid: {1}.
+# {0} is a server name
+# {1} is validation message
+remote.host.invalid=Remote host ''{0}'' is not valid: {1}.
+mappings.choose.local.path.title=Choose Local Path
+fix=Fix
+disconnected=Disconnected
+choose.deployment.path=Choose Deployment Path
+empty.server=<None>
+# {0} is a host name
+deployment.configuration.message=Deployment configuration to {0} has been created.
+# {0} is a host name
+ssh.configuration.message=SSH configuration to {0} has been created.
+ssh.configuration.action.text=Configure\u2026
+# {0} is a server name
+upload.to=Upload to {0}
+# {0} is a server name
+download.from=Download from {0}
+# {0} is a short file name or its path
+loading.content.of=Downloading content of {0}\u2026
+# {0} is file path
+# {1} is a description of the reason or the failure
+could.not.load.remote.file.content=Failed to download content of the file ''{0}'': {1}
+# {0} is a short name of a file
+creating.0=Creating {0}\u2026
+# {0} is a path of a file
+create.0.detailed=Create file ''{0}''
+# {0} is a file name
+uploading.0=Uploading {0}\u2026
+uploading.0.rsync=Uploading {0} using rsync\u2026
+# {0} is a parent of files
+uploading.multiple=Uploading files from {0}
+uploading.multiple.no.parent=Uploading files\u2026
+# {0} is a server name
+uploading.to.0=Uploading {0}\u2026
+# {0} and {1} are file paths
+upload.0.to.1=Upload file ''{0}'' to ''{1}''
+upload.0.to.1.rsync=Upload ''{0}'' to ''{1}'' using rsync
+# {0} is a parent of files
+downloading.multiple=Downloading files from {0}
+downloading.multiple.no.parent=Downloading files\u2026
+# {0} and {1} are file paths
+download.0.to.1=Download file ''{0}'' to ''{1}''
+download.0.to.1.rsync=Download ''{0}'' to ''{1}'' using rsync
+# {0} is a file name
+downloading.0=Downloading {0}\u2026
+downloading.0.rsync=Downloading {0} using rsync\u2026
+# {0} is a file name
+deleting.0=Deleting {0}\u2026
+# {0} is a file name
+copying.0=Copying {0}\u2026
+# {0} is a path
+delete.0.detailed=Delete {0, choice, 1#file|2#folder} ''{1}''
+# {0} is a file name or a path
+creating.folder.0=Creating folder {0}\u2026
+# {0} is a path
+create.folder.0.detailed=Create folder ''{0}''
+collecting.files=Collecting files\u2026
+# {0} is a currently processed file path
+collecting.files.0=Collecting files: {0}
+# {0} is a file path or key "files"
+processing.0=Processing {0}\u2026
+operation.failed={0} failed. {1}
+
+
+# {0} is TaskTitle
+warning.running.on.project.close={0} task is running. Proceed with project closing?
+# {0} is TaskTitle
+warning.running.dialog.title={0} Running
+# {0} is TaskTitle
+operation.cancelled={0} canceled
+# {0} is TaskTitle
+# {1} is statistics, may be empty or ": <element1>, <element2>, ... <elementN>", where each <elementK> is a StatisticElement
+operation.finished={0} completed{1}
+# {0} is TaskTitle
+# {1} is time duration, like "2 m 3 s"
+# {2} is statistics, may be empty or ": <element1>, <element2>, ... <elementN>", where each <elementK> is a StatisticElement
+operation.finished.in={0} completed in {1}{2}
+
+# Used as TaskTitle
+auto.upload.task.title=Automatic upload
+# Used as TaskTitle
+sync.with.server.version=Sync with deployed\u2026
+# Used as TaskTitle
+synchronization.task.title=Synchronization
+# Used as TaskTitle
+remote.edit.downloading.content=Downloading content
+
+# Used as StatisticElement
+transfer.details.moved={0} {1, choice, 1#item|2#items} moved
+# Used as StatisticElement
+transfer.details.copied={0} {1, choice, 1#item|2#items} copied
+# Used as StatisticElement
+transfer.details.transferred={0} {1, choice, 1#file|2#files} transferred
+transfer.details.transferred.rsync={0} {1, choice, 1#item|2#items} transferred
+# Used as StatisticElement
+transfer.details.merged={0} {1, choice, 1#file|2#files} merged
+# Used as StatisticElement
+transfer.details.excluded={0} {1, choice, 1#item|2#items} excluded
+# Used as StatisticElement
+transfer.details.failed={0} failed
+# Used as StatisticElement
+transfer.details.deleted={0} {1, choice, 1#item|2#items} deleted
+# Used as StatisticElement
+transfer.details.foldersCreated={0} {1, choice, 1#folder|2#folders} created
+# Used as StatisticElement
+transfer.details.processed={0} {1, choice, 1#item|2#items} processed
+# Used as StatisticElement
+transfer.details.upToDate={0} {1, choice, 1#file is|2#files are} up to date
+# Used as StatisticElement
+transfer.details.skippedByUser={0} {1, choice, 1#file is|2#files are} skipped by user
+# Used as StatisticElement; used in tests only, never in production
+transfer.details.checked={0} {1, choice, 1#item|2#items} checked
+# Used as StatisticElement; used in tests only, never in production
+transfer.details.compared={0} {1, choice, 1#item|2#items} compared
+
+
+transfer.bit.p.s=\ ({0,number,#} bit/s)
+transfer.kilobit.p.s=\ ({0,number,#.#} kbit/s)
+transfer.mega.bit.p.s=\ ({0,number,#.#} Mbit/s)
+size.byte={0,number,#} byte
+size.kilobyte={0,number,#.#} kB
+size.megabyte={0,number,#.#} MB
+action.title.upload.here=&Upload Here
+action.title.upload.all.open.files.here=Upload All Opened Files Here
+# {0} is a name of a server or a group
+action.title.upload.to=&Upload to {0}
+# {0} is a name of a server or a group
+action.title.upload.all.open.files.to=Upload All Opened Files to {0}
+# {0} is a name of a server or a group
+action.title.download=&Download from {0}
+action.title.download.from.here=&Download from Here
+nothing.to.transfer=No files or folders found to process
+duplicate.local.path=Local path is not unique
+add.server.dialog.title=Add Server
+error.getting.children=No such file
+files={0} {1, choice, 1#file|2#files}
+items={0} {1, choice, 1#item|2#items}
+login.label.password=&Password:
+login.label.passphrase=&Passphrase:
+web.server=server
+web.server.capitalized=Remote Host
+web.server.browser=Remote Host
+# {0} is a server name
+browse.server=Browse {0}
+publish.options.configurable.name=Options
+# {0} is a file path
+file.up.to.date=File ''{0}'' is up to date, skipping
+# {0} is a file path
+file.skipped=File ''{0}'' skipped by user
+# {0} is a file path
+file.merge.skipped=File ''{0}'' merge skipped by user
+# {0} is a file path
+failed.to.set.timestamp=Failed to change timestamp of the file ''{0}''
+# {0} is a file path
+# {1} is a reason of the failure
+file.transfer.failed=Failed to transfer file ''{0}''. {1}
+file.transfer.failed.rsync=Failed to transfer folder ''{0}''. {1}
+multi.file.transfer.failed.rsync=Failed to transfer ''{0}''. {1}
+# {0} is a file path
+# {1} is a reason of the failure
+create.failed=Failed to create file ''{0}''. {1}
+# {1} is a file path
+# {2} is a reason of the failure
+failed.to.delete=Failed to delete {0, choice, 1#file|2#folder} ''{1}''. {2}
+# {0} is a file path
+# {1} is a reason of the failure
+failed.to.create.folder=Failed to create folder ''{0}''. {1}
+# {0} is numbe of files
+failed.parallel.operation=Failed to transfer {0} files.\n{1}
+# {0} is a reason of the failure
+collect.files.failed=Failed to collect files: {0}
+refreshing.local.files=Refreshing local files\u2026
+refreshing.remote.files=Refreshing server files\u2026
+# {0} is a file name
+overwrite.local.dialog.text=Overwrite local file "''{0}''" with one from server?
+# {0} is a file path
+# {1} is a server name
+overwrite.remote.dialog.text=File ''{0}'' was changed on ''{1}'' server.
+# {0} is a file path
+# {1} is a server name
+overwrite.remote.dialog.text.binary=Binary file ''{0}'' was changed on ''{1}'' server.
+# {0} is a path
+path.represents.a.folder=Path ''{0}'' represents a folder
+# {0} is a server name
+overwrite.local.dialog.title=Download from {0}
+# {0} is a server name
+overwrite.remote.dialog.title=Upload to {0}
+upload.on.checkin.checkbox.label=Upload files to:
+# {0} is a server name
+# {1} is a commit message
+upload.on.commit=Uploading to {0} after commit: {1}
+# {0} is a file name
+renaming.0=Renaming {0}
+# {0} is a file name
+moving.0=Moving {0}
+file=file
+folder=folder
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+rename.0.1.to.2=Rename {0} ''{1}'' to ''{2}''
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+move.0.1.to.2=Move {0} ''{1}'' to ''{2}''
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+copy.0.1.to.2=Copy {0} ''{1}'' to ''{2}''
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+# {3} is the reason
+rename.failed=Failed to rename {0} ''{1}'' to ''{2}''. {3}
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+# {3} is the reason
+move.failed=Failed to move {0} ''{1}'' to ''{2}''. {3}
+# {0} is "file" or "folder"
+# {1} and {2} are paths
+# {3} is the reason
+copy.failed=Failed to copy {0} ''{1}'' to ''{2}''. {3}
+# {0} is changelist name
+# {1} is server name
+upload.changelist.to=Upload Changelist ''{0}'' to {1}
+# {0} is a number of changes
+# {2} is server name
+upload.changes.to=Upload {0} {1, choice, 1#change|2#changes} to {2}
+server.browser.view.options.label=View Options
+toolwindow.show.date=Show Date
+toolwindow.show.size=Show Size
+toolwindow.show.permissions=Show Permissions
+toolwindow.highlight.symlinks=Highlight Symlinks
+toolwindow.highlight.mappings=Highlight Mappings
+# {0} is a path
+diff.local=Local file: {0}
+# {0} is a path
+diff.deployed=Deployed file: {0}
+# {0} is a server name or "web.server.capitalized"
+upload.before.run.step.title=Upload Files to {0}
+# {0} is a server name or "web.server.capitalized"
+upload.before.run.step.description=Upload files to {0}
+# {0} is a server name or "web.server.capitalized"
+upload.before.run.dialog.title=Upload to {0}
+# {0} is a path
+no.relevant.mapping.for.0=No relevant mapping found for path ''{0}''
+edit.mappings.action.title=&Edit mappings\u2026
+# {0} is a path
+remote.item.is.folder=Remote item ''{0}'' is a folder
+# {0} is a path
+remote.item.is.file=Remote item ''{0}'' is a file
+# {0} is a path
+remote.file.does.not.exist=Remote file ''{0}'' does not exist
+# {0} is a path
+remote.folder.does.not.exist=Remote folder ''{0}'' does not exist
+# {0} is a path
+remote.item.does.not.exist=Remote item ''{0}'' does not exist
+compare.with.local.version=&Compare With Local Version
+# {0} is a server name, {1} is a server host
+choose.root.path=Choose Root Path on {0} ({1})
+root.path.empty=Root path is not specified
+root.path.invalid=Root path is not valid
+compare.with.server.version=Compare with deployed version
+# {0} is a server name
+compare.with.server.0.version=&Compare with Deployed Version on {0}
+prompt.enter.new.folder.name=Enter folder name:
+prompt.enter.new.file.name=Enter file name:
+create.folder.action.title=Create Folder
+create.folder.action.sentence=Create folder
+create.file.action.sentence=Create file
+create.file.action.title=Create File
+delete.item.warning=Are you sure you want to delete {0, choice, 1#file|2#folder} ''{1}''{0, choice, 1#|2# recursively}?
+# {0} is amount of items
+delete.items.warning=Are you sure you want to delete {0} items recursively?
+# {0} is a server name
+delete.items.prompt=Delete Items on {0}
+delete.remote.items.task.title=Delete server items
+failed.to.change.permissions=Failed to change permissions of the {0, choice, 1#file|2#folder} ''{1}''. {2}
+permissions.none=(none)
+change.default.file.permissions.dialog.title=Files Default Permissions
+change.default.folder.permissions.dialog.title=Folders Default Permissions
+invalid.permissions=Invalid permissions
+# {1} is file or folder name
+set.permissions.dialog.title.single={0, choice, 1#File|2#Folder} ''{1}'' Permissions
+set.permissions.dialog.title.multiple={0, choice, 1#Files|2#Items} Permissions
+# {0} is a reason of failure
+failed.to.read.items.types=Failed to read item types: {0}
+invalid.file.permissions=Invalid file permissions
+invalid.folder.permissions=Invalid folder permissions
+set.permissions.task.text=Change permissions
+set.permissions.task.title=Change Permissions
+# {0} is a file or folder name
+changing.0.permissions=Changing {0} permissions\u2026
+# {1} is a path
+# {2} is permissions in rwxrwxrwx form
+change.permissions.detailed=Change permissions of {0, choice, 1#file|2#folder} ''{1}'' to ''{2}''
+trace.level.ERRORS=Errors only
+trace.level.BRIEF=Brief
+trace.level.DETAILS=Details
+# {0} is a server name
+# {1} is a name of run configuration
+upload.on.run=Uploading to {0} on ''{1}'' run
+empty.connections=Number of connections is not specified
+invalid.connections=Number of connections is not valid
+rsync.cannot.be.used=Rsync cannot be enabled. Please check the configuration at Settings | Tools | Rsync.
+# {0} is an exit code
+rsync.failed=Rsync failed with exit code: {0}
+
+# {0} and {1} are both paths
+preparing.upload.0.to.1=Preparing to upload folder ''{0}'' to ''{1}''
+# {0} is a path, {1} is a reason
+preparing.upload.failed=Failed to upload folder ''{0}'': {1}
+
+create.web.project=Create New Project
+create.web.project.choose.scenario.step.title=Choose Your Scenario
+create.web.project.choose.remote.server.step.title=Specify Remote Server
+create.web.project.choose.local.server.step.title=Specify Local Server
+create.web.project.add.remote.server.step.title=Add Remote Server
+create.web.project.add.local.server.step.title=Add Local Server
+create.web.project.choose.remote.path.step.title=Choose Remote Path
+create.web.project.choose.web.path.step.title=Specify Web Path
+create.web.project.choose.local.path.step.title=Specify Local Path
+create.web.project.server.table.name.column=Name
+create.web.project.server.table.host.column=Host
+create.web.project.server.table.url.column=URL
+server.name.empty=Server name is not specified
+# {0} is a server name
+checking.connection=Checking connection to {0}
+downloading.project.files=Downloading project files
+# {0} is a path
+failed.to.create.project.directory=Failed to create project directory ''{0}''
+page.not.found=Page not found
+# {0} is a path
+web.path.label.text=Web path for project root ''{0}'':
+mounted.folder.is.empty=Folder is not specified
+# {0} is a path
+mounted.folder.not.found=Folder ''{0}'' not found
+# {0} is a path
+deploy.path.is.not.relative=Deployment path ''{0}'' is not relative
+# {0} is a path
+unc.path.not.supported=UNC path ''{0}'' is not supported
+create.web.project.server.table.mounted.folder.column=Local or Mounted Folder
+project.name.empty=Project name is not specified
+path.empty=Project local path is not specified
+# {0} is a path
+path.is.under.mounted.folder=Project cannot reside in the folder ''{0}''
+mounted.folder.is.not.absolute=Path to folder should be absolute
+create.web.project.add.local.server.rb.text=Add new local server
+create.web.project.add.remote.server.rb.text=Add new remote server
+create.web.project.choose.local.server.step.summary=Specify the local server.
+create.web.project.choose.remote.server.step.summary=Specify the remote server your files are on.
+create.web.project.choose.directory.step.title=Choose Project Directory
+host.undefined=(not specified)
+# {0} is server name
+server.is.local=Cannot upload files to the local server ''{0}''
+create.web.project.publish.options.step.title=Review Deployment Options
+deployment.configurable.name=Deployment
+deployment.configurable.tab.connection=Connection
+deployment.configurable.tab.mappings=Mappings
+deployment.not.configured=Not configured
+deployment.configurable.remove.servers.delete.silently.dont.ask=Delete servers and groups silently
+select.in.remote.host=Select in Remote Host
+deployment.config.welcome.message=Add a web server to configure
+deployment.config.unselected.message=Select web server
+use.as.default.action.text=Use as Default
+dont.use.as.default.action.text=Stop Using as Default
+use.as.default.action.description=Use the selected server or group as default for project files synchronization and execution
+dont.use.as.default.action.description=Stop using the selected server or group as default for project files synchronization and execution
+validation.took.more.than.expected=Validation took more time than expected
+resolving.mounted.root=Resolving folder\u2026
+validating.server=Validating server\u2026
+revalidate=Refresh\u2026
+# {0} is a path
+# {1} is a reason
+mounted.folder.invalid=Folder ''{0}'' is not valid: {1}
+# {0} is a path
+path.is.not.absolute=Path ''{0}'' is not absolute.
+choose.server.to.upload.to=Choose Server to Upload To
+choose.server.to.download.from=Choose Server to Download From
+mappings.tab.stub.text=Open or create project to configure mappings
+excluded.paths.tab.stub.text=Open or create project to configure excluded paths
+# {0} is a path
+# {1} is a reason
+failed.to.process=Failed to process folder ''{0}'': {1}
+# {0} is a path
+# {1} is a reason
+failed.to.process.change=Failed to process change ''{0}'': {1}
+errors.during.prepare=Errors occurred while collecting files.
+review.deployment.config=<a href="#a">Review</a> your deployment settings.
+create.web.project.choose.scenario.step.summary=This wizard helps you create a project from existing sources.
+create.web.project.add.server.step.summary=Specify parameters for a new server.
+create.web.project.choose.remote.path.step.summary=Specify root folder on the remote server.
+create.web.project.choose.web.path.step.summary=Specify project web path on your server. It will be appended to the server root URL.
+create.web.project.file.chooser.step.summary=Mark as Project Root a directory to create the project in.
+create.web.project.publish.options.step.summary=Review deployment options for a new project. These options can be changed later in Settings | Deployment | Options panel.
+create.web.project.specify.local.path.step.summary=Specify the project name and local path to download project files to.
+# {0} and {1} are file names
+rename.server.node=Rename ''{0}'' to ''{1}''
+directory.file.1.already.exists={0, choice, 1#Directory|2#File} ''{1}'' already exists.
+0.already.exists=''{0}'' already exists.
+enter.new.name.for.0=Enter new name for ''{0}''
+rename.dialog.title=Rename
+rename.task.title=Rename
+move.error.title=Move Remote Items
+copy.error.title=Copy Remote Items
+can.t.move.folder.into.its.descendant.folder=Can't move folder into its descendant folder.
+WebDeploymentTransportHostTargetEditor.dialog.title=Choose target path
+WebDeploymentTransportHostTarget.uploading.status=Uploading to {0}
+WebDeploymentTransportService.type.name.ftp=ftp
+WebDeploymentTransportService.type.name.sftp=sftp
+WebDeploymentTransportService.type.name.ftps=ftps
+WebDeploymentTransportService.type.name.mounted.folder=Local or mounted folder
+WebDeploymentTransportHostTarget.deleting.status=Deleting from {0}
+Form.WebDeploymentTransportHostTargetEditor.path.from.root=Path from root:
+UploadBeforeRunTaskForm.server=&Server:
+overwrite.remote.dialog.merge.action.name=&Merge and upload
+overwrite.remote.dialog.overwrite.action.name=&Overwrite
+overwrite.remote.dialog.skip.action.name=&Skip this file
+merge.on.upload.title=Merge ''{0}'' Before Uploading to {1}
+merge.on.upload.local.version.title=Local file ''{0}''
+merge.on.upload.result.title=Merge result
+merge.on.upload.remote.version.title=Deployed file ''{0}''
+merge.on.upload.file.changed.while.merge=File ''{0}'' was changed on server {1} while merging
+merge.on.upload.ok.button=&Save and Upload
+merge.on.upload.left.button=Accept &Left and Upload
+merge.on.upload.right.button=Accept &Right
+merge.again=&Merge again
+revisions.cache.corrupted.balloon.message=Base revisions storage is corrupted.<br/>Base revision for each file will be stored on its next sync.
+# suppress inspection "UnusedProperty"
+propmt.on.remote.overwrite.NONE=No
+# suppress inspection "UnusedProperty"
+propmt.on.remote.overwrite.CHECK_TIMESTAMP=Compare timestamp \\& size
+# suppress inspection "UnusedProperty"
+propmt.on.remote.overwrite.CHECK_CONTENT=Compare content
+merge.dialog.cancel.prompt=Skip file ''{0}'' from upload?
+checking.remote.revision=Checking the deployed version of {0}\u2026
+merge.on.upload.option.on=Base revision for each file will be stored on its next sync.
+merge.on.upload.option.off=Base revisions for all the project files will be deleted permanently.
+sync.with.local.version=&Sync With Local\u2026
+sync.with.server.0.version=&Sync with Deployed to {0}\u2026
+excluded.paths.title=Excluded Paths
+choose.remote.excluded.path.title=Choose Remote Excluded Path
+remove.path.from.excluded.error.title=Remove Path From Excluded
+file.0.is.child.of.excluded.file.change.parent.settings.warning.message=''{0}''\nis a child of excluded folder\n''{1}''.\nRemove parent from excluded?
+remove.path.from.excluded.action.title=Remove Path From Exc&luded
+exclude.path.action.title=Exc&lude Path
+excluded.message=Excluded path ''{0}''
+excluded.settings.legend=Any matching file, directory or its child are excluded from download and upload
+excluded.from.index.action.text=&Excluded from Project Analysis
+excluded.from.index.action.description=Folder will be excluded from project analysis and made invisible for IDE
+resource.root.action.title=&Resource Root
+resource.root.action.description=Folder will be used as resource root
+project.root.action.text=Pro&ject Root
+project.root.action.description=Set selected folder as project root
+excluded.from.download.action.title=Excluded from &Download
+exclude.path.action.description=Add path to excluded ones to avoid downloading or uploading anything to or from it or its children.
+remove.from.excluded.paths.action.description=Remove path from excluded to allow downloading and uploading to or from it.
+remote.file.on.0.is.changed=Deployed file on ''{0}'' is changed.
+action.title.merge=Merge
+action.description.merge.local.and.remote.versions.in.local.file=Merge local and deployed versions in local file
+action.name.download=Download
+action.description.download.remote.version.from.0=Download deployed version from ''{0}''
+browse.0=Browse ''{0}''
+error.message.remote.file.0.loading=Remote file ''{0}'' loading
+remote.file.on.0.is.removed=Deployed file on ''{0}'' is removed.
+delete.local.file=Delete local file
+failed.to.delete.local.file.0.1=Failed to delete local file ''{0}''. {1}
+file.needs.to.be.synchronized=File needs to be synchronized with its deployed version on ''{0}'': base revision is not stored yet.
+remote.file=Deployed file
+local.file=Local file
+some.paths.were.skipped.as.excluded.by.name.change.that.setting.in.settings.deployment.options=Some paths were skipped as excluded by name.\
+  \nChange that setting in Settings | Deployment | Options
+update.from.0=Update from {0}
+failed.to.check.remote.file.0=Failed to check remote file ''{0}''
+failed.to.check.remote.file.0.1=Failed to check remote file ''{0}''. {1}
+merging.0=Merging ''{0}''
+merging.0.with.1=Merging ''{0}'' with ''{1}''
+local.file.0.was.deleted.and.corresponding.deployed.file.was.changed.download.it=Local file ''{0}'' was deleted and corresponding deployed \
+  file was changed. Download it?
+failed.to.load.local.file.0.content=Failed to load local file ''{0}'' content
+failed.to.load.remote.file.0.content=Failed to load remote file ''{0}'' content
+equal.content.just.making.revision=Equal content. Just making revision
+file.merged=File ''{0}'' merged
+failed.to.merge.file.0.1=Failed to merge file ''{0}''. {1}
+title.merge.file.0.1=Merge File ''{0}'' from {1}
+deployed.file.for.0.was.removed.delete.local.file=Deployed file for ''{0}'' was removed. Delete local file?
+upload.to.0=Upload to {0}
+deployed.file.0.was.deleted.and.corresponding.local.file.was.changed.upload.it=Deployed file ''{0}'' was deleted and corresponding \
+  local file was changed. Upload it?
+local.file.for.0.was.removed.delete.deployed.file=Local file for ''{0}'' was removed. Delete deployed file?
+mounted.server.description=Project is deployed to the specified location on an internal,<br/> external, network, or mounted drive.
+local.server.description=Project is stored under the web server document root and<br/> is developed directly on the server.
+always.use.selected.server=Always use selected server or group of servers
+constantly.fail.to.connect.to.server.0.maybe.configure.turn.off.auto.notification=Maybe <a href=\"#configure\">turn off</a> auto \
+  notification? Constantly fail to connect to server {0}
+hide.excluded.files=Hide Excluded Files
+remove.excluded.files.from.comparison=Remove excluded files from comparison
+failed.to.copy.file.0.1=Failed to copy file ''{0}'': {1}
+destination.differs.from.mapped.destination=destination differs from mapped destination
+failed.to.upload.file.0=Failed to upload file ''{0}''
+unknown.reason=Unknown reason
+failed.to.create.local.file.0=Failed to create local file ''{0}''
+failed.to.download.file.0=Failed to download file ''{0}''
+failed.to.delete.remote.file.0=Failed to delete remote file ''{0}''
+remote.diff.title.0.on.server.1={0} ({1})
+diff.between.0.and.1=Diff between {0} and {1}
+warning.while.copying.file.0.got.more.content.than.file.size=Warning: while copying file ''{0}'' got more content than file size.
+warning.file.0.was.changed.on.server.while.retrying.to.copy.from.it=Warning: file ''{0}'' was changed on server while retrying to copy from it.
+remote.file.is.too.large.recent.revision.might.not.be.saved=Remote file is too large, recent revision might not be saved.
+compare.with.remote.file=Compare with remote file
+progress.title.for.change.notifier=Checking remote file change for ''{0}''
+remote.file.check.was.cancelled=Remote file check was canceled.
+hide=Hide
+open.options=Open options
+retry.command=Retry
+no.command=No
+composite.diff.element.name=<multiple {0, choice, 1#directories|2#files|3#directories and files}{1, choice, 0#|1# under project root}>
+composite.diff.element.presentable.path={0, choice, 0#|1#local }{1, choice, 1#directories|2#files|3#directories and files}{0, choice, 0# on |1#}{2}
+automatic.upload.title=Automatic Upload
+# {0} is a name of a server of a group
+# {1} is "web.server" or "group"
+default.server.0.has.no.valid.mappings=Default {1} {0} has no valid mappings.
+# {0} is a name of a server of a group
+# {1} is a reason
+# {2} is "web.server" or "group"
+default.server.0.is.invalid.1=Default {2} ''{0}'' is invalid. {1}
+# {0} is a name of a server of a group
+# {1} is "web.server" or "group"
+default.server.0.does.n.t.need.automatic.upload=Default {1} ''{0}'' does not need automatic upload, it already contains project.
+default.server.or.group.is.not.configured.and.no.valid.servers=Default server or group is not configured, and no valid mapped servers found to be set as default.
+choose.default.server.or.group=Choose Default Server or Group of Them for Actions
+0.n.automatic.upload.is.not.enabled={0}\nAutomatic upload is not enabled.
+default.server.is.not.configured=Default server or group of servers is not configured. Files will not be uploaded automatically.
+# {0} is a name of a server of a group
+# {1} is a reason
+# {2} is "web.server" or "group"
+automatic.upload.will.not.work.because.default.server.0.is.invalid.1=Automatic upload will not work, because default {2} ''{0}'' is invalid. {1}
+# {0} is a name of a server of a group
+# {1} is "web.server" or "group"
+automatic.upload.will.not.work.because.default.server.0.has.no.valid.mappings=Automatic upload will not work, because default {1} ''{0}'' has no valid mappings.
+path.in.root.0.1=<{0}>/{1}
+0.in.angle.brackets=<{0}>
+file.0.can.not.be.found=File ''{0}'' cannot be found.
+choose.server.to.sync.with=Choose Server to Sync With
+choose.server.to.compare.with=Choose Server to Compare With
+auto.upload.options.always=Always
+auto.upload.options.never=Never
+auto.upload.options.on.explicit.save.action.0=On explicit save action ({0})
+auto.upload.options.on.explicit.save.part=On explicit save action
+auto.upload.options.on.explicit.save.action.file.save.all.or.0=On explicit save action (File | Save All or {0})
+auto.upload.options.on.explicit.save.action.file.save.all=On explicit save action (File | Save All)
+toggle.auto.upload.action.always=&Automatic Upload (Always)
+toggle.auto.upload.action.on.explicit.save=&Automatic Upload (on Explicit Save)
+toggle.auto.upload.action.never=&Automatic Upload
+upload.changed.files.option.description=&Upload changed files automatically to the default server
+actions.on.save.page.upload.to.default.server.action.name=Upload to default server
+actions.on.save.page.configure.servers.link=Configure servers\u2026
+actions.on.save.page.open.deployment.settings.link=Open deployment settings\u2026
+actions.on.save.warning.default.server.not.configured=Default server is not configured
+actions.on.save.comment.default.server.0=Default server: {0}
+web.deployment.balloon.group.id=FTP/SFTP connectivity
+web.deployment.toolwindow.group.id=File Transfer:FTP/SFTP connectivity
+ftps.wrong.port.warning.message=Explicit FTPS connection usually uses port 21, and implicit connection uses 990
+can.not.build.diff.for.file.0.file.is.too.big.and.there.are.too.many.changes=Unable to build diff for file {0}. File is too big and there are too many changes.
+can.not.provide.content.of.file.0.probably.it.s.a.recursive.symlink=Unable to provide content of file {0}. It is possible that it''s a recursive symlink.
+ftps.data.channel.protection.level.c.title=Clear
+ftps.data.channel.protection.level.p.title=Private
+ftps.data.channel.protection.level.default.title=<default>
+deployment.path.0.is.out.of.root.folder.1=Deployment path ''{0}'' is out of root folder ''{1}''
+
+no.authentication.data.provided.set.it.up.here=No authentication data provided. Set it up <a href\=\\"\\">here</a>
+wrong.authentication.data.provided.set.it.up.here=Wrong authentication data provided. Set it up <a href\=\\"\\">here</a>
+can.not.connect.to.0=Cannot connect to {0}
+no.authentication.data.provided=No authentication data provided
+wrong.authentication.data.provided=Wrong authentication data provided
+empty.keep.alive.timeout=Keep-alive timeout is not specified
+invalid.keep.alive.timeout=Keep-alive timeout is not valid
+excluded.action.title=&Excluded
+test.sources.action.title=&Test Sources
+test.sources.action.description=Folder will be used as test source root
+
+
+# {0} is ActionName
+# {1} may be file path in or without quotes, or see key "items"
+# {2} is file path in or without quotes
+0.1.to.2={0} {1} to {2}
+# Used as ActionName
+action.move=Move
+# Used as ActionName
+action.copy=Copy
+# Used as ActionName
+action.download=Download
+# Used as ActionName
+action.upload=Upload
+# Used as ActionName
+action.move.to.server=Move to server
+# Used as ActionName
+action.move.from.server=Move from server
+
+failed.to.move=Failed to move {0}
+failed.to.copy=Failed to copy {0}
+failed.to.download=Failed to download {0}
+failed.to.upload=Failed to upload {0}
+failed.to.move.to.server=Failed to move to server {0}
+failed.to.move.from.server=Failed to move from server {0}
+
+action.move.items.to.server=Move items to server
+action.move.items.from.server=Move items from server
+0.items={0} items
+move.selected.items.here=Move selected items here
+upload.selected.items.here=Upload selected items here
+merge.folder.message=Folder ''{0}'' already exists. Merge folders?
+overwrite.file.message=File ''{0}'' already exists. Overwrite it?
+use.it.for.all.0=Use it for all {0, choice, 0#files|1#folders}
+credentials.dialog.title=SSH Session
+credentials.dialog.access.type=SSH
+
+configurable.panel.title.sftp.advanced.options.replacement=Set up advanced SFTP options in <hyperlink>SSH Configuration</hyperlink> settings.
+connecting=Connecting.
+# {0} is a number of attempts to connect: 1, 2, 3, ...
+# {1} is ConnectionTime
+attempt.0.failed.to.connect.waiting.for.1.to.retry=Attempt {0} failed to connect. Waiting for {1} to retry.
+# Used as ConnectionTime
+0.minutes={0} minutes
+# Used as ConnectionTime
+a.minute=a minute
+# Used as ConnectionTime
+a.second=a second
+# Used as ConnectionTime
+0.seconds={0} seconds
+
+action.RemoteHostView.EditRemoteFile.text=Edit Re&mote File
+action.RemoteHostView.EditRemoteFile.description=Edit remote file in the editor
+remote.edit.please.associate.0.with.some.file.type.in.settings.editor.file.types=Associate ''{0}'' with some file type in Settings | Editor | File Types
+remote.edit.message.title=Open Remote File
+remote.edit.getting.content.of.0=Getting content of ''{0}''
+remote.edit.remote.file.0.is.a.symlink.and.the.destination.failed.to.be.found.1=Remote file ''{0}'' is a symlink, and the destination failed to be found\: {1}
+remote.edit.remote.file.0.is.a.symlink.ndo.you.want.to.edit.destination.1=Remote file ''{0}'' is a symlink.\nDo you want to edit destination ''{1}''?
+remote.edit.can.not.open.remote.file.0.in.editor.file.type.1.is.not.supported=Unable to open remote file ''{0}'' in the editor\: file type {1} is not supported
+remote.edit.remote.file.0.was.closed.and=Remote file ''{0}'' was closed, and its changes are not uploaded .\nDo you want to reopen the editor and proceed?
+remote.edit.fs.messages.title=Remote Files
+remote.edit.close.project.message=Remote file ''{0}'' is opened for editing, and its changes are not uploaded .\nDo you want to close the project and lose them?
+remote.edit.some.remote.files.are.opened.for.editing.and.their.changes.are.not.uploaded=Some remote files are opened for editing, and their changes are not uploaded\:
+remote.edit.do.you.want.to.close.the.project.and.lose.them=Do you want to close the project and lose them?
+#Used as TaskTitle
+remote.edit.uploading.edited.content.of.remote.files=Uploading edited content of remote files
+remote.edit.refresh.content.of.remote.files=Refreshing content of remote files\u2026
+remote.edit.the.file.is.changed.upload=The file has been modified. Upload?
+remote.edit.the.file.is.identical.to.remote.one=The file is identical to remote one.
+remote.edit.diff.action.title=Compare with Last Uploaded Version
+remote.edit.diff.action.description=Compare with last uploaded version
+remote.edit.last.uploaded=Last uploaded
+remote.edit.current.content=Current content
+remote.edit.revert.action.title=Revert to Last Uploaded Version
+remote.edit.revert.action.description=Revert to last uploaded version
+remote.edit.revert.edited.remote.file=Revert Edited Remote File
+remote.edit.failed.to.upload.content.of.remote.file.0.from.server.1.n.2=Failed to upload content of remote file ''{0}'' from server ''{1}''\:\n{2}
+remote.edit.failed.to.refresh.content.of.remote.file.0.from.server.1.n.2=Failed to refresh content of remote file ''{0}'' from server ''{1}''\:\n{2}
+remote.edit.uploading.content.of=Uploading content of ''{0}''
+remote.edit.refreshing.content.of=Refreshing content of ''{0}''\u2026
+remote.edit.remote.file.upload.messages.title=Remote File Upload
+remote.edit.remote.file.refresh.messages.title=Remote File Refresh
+remote.edit.file.0.was.deleted.on.1.server=File ''{0}'' was deleted on ''{1}'' server.\nDo you want to upload edited version?
+remote.edit.upload=&Upload
+remote.edit.failed.to.upload=Failed to upload content of remote file ''{0}'' from server ''{1}''.
+remote.edit.remote.file.content=Remote file content
+# {0} is a name of deleted server
+remote.edit.deleted.ex.0=Deleted (ex {0})
+action.WD.UploadCurrentRemoteFileAction.text=Upload Current Remote File
+action.WD.UploadCurrentRemoteFileAction.description=Upload current remote file
+action.WD.RefreshCurrentRemoteFileAction.text=Refresh Current Remote File
+action.WD.RefreshCurrentRemoteFileAction.description=Refresh current remote file
+
+auto.upload.check.for.related.changes.took.too.much.time.and.was.cancelled=Automatic upload: check for related changes from File Watchers \
+  took too much time and was canceled.
+auto.upload.checking.0=Checking {0}
+auto.upload.wait.for.related.changes.to.apply.before.upload=Automatic upload: wait for related changes to be applied before upload
+remember.for.this.upload.do.not.ask.again=&Remember for this upload. Do not ask again
+node.loading=Loading\u2026
+
+move.remote.items.title=Move Remote Items
+moving.0.to.1=Moving {0} to {1}
+upload.preserve.original.file.permissions=Preserve original file permissions
+
+#for elements of plugin.xml
+group.DeploymentVcsActions.text=Deployment
+action.SelectInRemoteHost.text=Select in Remote Host
+action.CreateWebProject.text=New Project from Existing Files\u2026
+action.CreateWebProject.description=You can create a new web project from the existing files on the server.
+action.WelcomeScreen.CreateWebProject.text=New Project from Existing Files\u2026
+action.WelcomeScreen.CreateWebProject.description=You can create a new web project from the existing files on the server.
+action.RemoteHostView.CopyPaths.text=C_opy Paths
+action.RemoteHostView.CopyPaths.description=Copy server paths to clipboard
+action.RemoteHostView.EditSource.text=&Edit Local File
+action.RemoteHostView.EditSource.description=Open local file in the editor
+action.RemoteHostView.Rename.text=&Rename\u2026
+action.RemoteHostView.Rename.description=Rename
+action.RemoteHostView.SetPermissions.text=Change &Permissions\u2026
+action.RemoteHostView.SetPermissions.description=Change server item permissions
+action.RemoteHostView.CreateFolder.text=Dir&ectory
+action.RemoteHostView.CreateFolder.description=Create a child folder on the server
+action.RemoteHostView.CreateFile.text=&File
+action.RemoteHostView.CreateFile.description=Create a child file on the server
+group.RemoteHost.NewGroup.text=&New
+group.PublishGroupPopupMenu.text=Deployment
+action.WebDeployment.BrowseServers.text=&Browse Remote Host
+action.WebDeployment.BrowseServers.description=Open a tool window that displays the server file tree
+action.WebDeployment.ToggleAutoUpload.text=&Automatic Upload
+action.WebDeployment.ToggleAutoUpload.description=Toggles whether changed files should be automatically uploaded to the default server on save
+action.WebDeployment.Options.text=Options\u2026
+action.WebDeployment.Options.description=Set up deployment options
+action.WebDeployment.Configuration.text=Configuration\u2026
+action.WebDeployment.Configuration.description=Configure deployment servers and paths
+group.PublishGroup.text=D&eployment
+action.PublishGroup.SyncLocalVsRemoteWith.text=Sync with Deployed To\u2026
+action.PublishGroup.SyncLocalVsRemoteWith.description=Sync local subtree with the deployed
+action.PublishGroup.SyncLocalVsRemote.text=Sync Local Subtree with Deployed
+action.PublishGroup.SyncLocalVsRemote.description=Sync local subtree with the deployed on the default server
+action.PublishGroup.CompareLocalVsRemoteWith.text=Compare with Deployed To\u2026
+action.PublishGroup.CompareLocalVsRemoteWith.description=Compare the local file with the deployed version
+action.PublishGroup.CompareLocalVsRemote.text=Compare Local File with Deployed Version
+action.PublishGroup.CompareLocalVsRemote.description=Compare the local file with the deployed version
+action.PublishGroup.DownloadFrom.text=Download From\u2026
+action.PublishGroup.DownloadFrom.description=Download selected items from any server
+action.PublishGroup.Download.text=Download from Default Server
+action.PublishGroup.Download.description=Download selected items from the default server
+action.PublishGroup.UploadTo.text=Upload To\u2026
+action.PublishGroup.UploadTo.description=Upload selected items to any server
+action.PublishGroup.Upload.text=Upload to Default Server
+action.PublishGroup.Upload.description=Upload selected items to the default server
+
+action.PublishGroup.UploadAllOpenFilesTo.text=Upload All Open Files To\u2026
+action.PublishGroup.UploadAllOpenFilesTo.description=Upload all open files to any server
+action.PublishGroup.UploadAllOpenFiles.text=Upload All Open Files to Default Server
+action.PublishGroup.UploadAllOpenFiles.description=Upload all open files to the default server
+
+QuickList.Deployment.text=Deployment
+QuickList.Deployment.description=Deployment actions
+
+#Forms
+server.name.label=&Name:
+server.type.label=&Type:
+server.ssh.config.label=&SSH configuration:
+add.server.arrows.tooltip=Pressing Up or Down arrows while in the editor changes the type
+do.not.check.http=&Do not check HTTP connection to server
+add.server.step.server.name.label=Na&me:
+host.label=&Host:
+user.name.label=&Username:
+private.key.label=&Private key:
+password.label=P&assword:
+checkbox.save=&Save
+server.revalidation.tooltip=Force server revalidation
+server.folder.label=&Folder:
+server.port.label=&Port:
+server.root.path.label=&Root path:
+server.web.path.label=&Web server URL:
+server.save.password=Sa&ve password
+server.test.connection.button=Test &Connection
+server.autodetect.button=Autodetect
+server.autodetect.button.tooltip=Configure the root folder according to the user home folder on the server.
+visible.only.for.this.project=Visible only for this project
+server.h_ost=H&ost:
+server.form.anonymous.checkbox=Login as a&nonymous
+server.root.path.info.label=Used as a root directory for browsing the remote file system and setting the server path mappings and excluded paths. Click Autodetect to set it to the home folder of the logged-in user based on the provided credentials.
+upload.before.run.local.roots.to.upload=&Local roots to upload:
+permissions.files=Files
+permissions.folders=Folders
+group.configurable.name=Name:
+group.configurable.for.current.project=For current project
+group.configurable.add.new.server=Add new server
+choose.server.step.add.new.remote.server=&Add new remote server
+choose.server.step.use.existing.server=&Use existing server:
+choose.web.path.step.web.path=&Web path for project root:
+shoose.web.path.step.project.url=Project URL:
+# suppress inspection "HttpUrlsUsage"
+choose.web.path.step.url.preview=http://
+local.path.step.project.name=P&roject name:
+local.path.step.project.local.path=Project &local path:
+local.path.step.options.description=Deployment options (can be changed later at Settings | Deployment | Options panel):
+local.path.step.options.default=&Default
+local.path.step.options.custom=&Custom
+mappings.local.path=&Local path:
+mappings.deployment.path=D&eployment path:
+mappings.web.path=&Web path:
+mappings.add.new.mapping=A&dd New Mapping
+permissions.owner=&Owner
+permissions.group=&Group
+permissions.others=O&thers
+permissions.read=&R
+permissions.write=&W
+permissions.execute=&X
+permissions.octal=Octa&l:
+scenario.step.select.scenario=Select scenario:
+scenario.step.inplace=Web server is installed locally, source files are located under its document &root.
+scenario.step.inplace.description=You are ready to go without copying anything.
+scenario.step.local=Web server is installed locally, source files are located else&where locally.
+scenario.step.local.description=Source files are copied to project root, then synchronized with server when necessary.
+scenario.step.mounted=Web server is on remote host, files are accessible via network &share or mounted drive.
+scenario.step.mounted.description=Source files are downloaded to project root, then synchronized with server when necessary.
+scenario.step.remote=Web server is on remote host, files are accessible via &FTP/SFTP/FTPS/WebDAV.
+scenario.step.remote.description=Source files are downloaded to project root, then synchronized with server when necessary.
+scenario.step.no.server=Source files are in a local directory, no Web server is yet c&onfigured.
+scenario.step.no.server.description=A folder with source files is added to project, server synchronization can be set up later.
+advanced.tls=TLS:
+advanced.tls.explicit=E&xplicit
+advanced.tls.implicit=&Implicit
+advanced.data.channel.protection=&Data channel protection level:
+advanced.reuse.ssl.session=Reuse SSL session
+advanced.ftps.disable.tls.13=Disable TLS 1.3
+advanced.ftp.passive=&Passive mode
+advanced.ftp.hidden=&Show and process hidden files
+advanced.ftp.use.list.command=Use  LIST command:
+advanced.ftp.list.compatible=&Compatible with old version of listing children
+advanced.ftp.list.mlsd=Instead of MLSD
+advanced.connections=Number of conn&ections:
+advanced.keep.alive.messages=Send &keep-alive messages each
+advanced.keep.alive.seconds=seconds
+advanced.keep.alive.command=Keep-&alive command:
+advanced.command.encoding=&Encoding for client-server communication:
+options.exclude.items.by.name=<html><u>&E</u>xclude items by name:</html>
+options.exclude.items.description=<html>use <b>;</b> as delimiter, <b>*</b> and <b>?</b> as wildcards</html>
+options.logging=&Operations logging:
+options.overwrite.up.to.date.files=Over&write up-to-date files
+options.preserve.files.timestamps=&Preserve file timestamps
+options.delete.target.items=&Delete target items when source ones do not exist (when transferring from Project view or Remote Host view)
+options.create.empty.directories=&Create empty directories
+options.prompt.on.local=P&rompt when overwriting or deleting local items
+options.skip.external.changes=Skip e&xternal changes
+options.no=No
+options.yes=Yes
+options.files.default.permissions=O&verride default permissions on files:
+options.folders.default.permissions=Overr&ide default permissions on folders:
+options.prompt.remote=Warn when uploading over &newer file:
+options.notify.remote.changes=Notify of remote c&hanges
+options.delete.remote.files.when.local.are.deleted=Delete remote files when local are deleted
+
+skipping.duplicate.path.0.looks.like.a.recursive.symlink.to.1=Skipping duplicate path: {0} looks like a recursive symlink to {1}
+path.0.is.not.supported.because.it.contains=Path ''{0}'' is not supported because it contains ''\\\\''.
+new.server.name=New server name:
+new.group.name=New group name:
+delete.selected.servers=Delete selected items?\nApplication-level servers might be used in other projects. This operation cannot be undone.
+delete.selected.groups=Delete selected items?\nAll servers in groups will also be deleted. This operation cannot be undone.
+delete.selected.servers.and.groups=Delete selected items?\nApplication-level servers and groups might be used in other projects. All servers in groups will also be deleted. This operation cannot be undone.
+rename.action=Rename
+rename.provide.a.name.for.the.0=Provide a name for the {0}
+rename.server.or.group.named.0.already.exists=Server or group named ''{0}'' already exists
+rename.new.name=New name:
+toggle.default.proceed=Proceed
+toggle.default.changed.files.will.now.be.automatically.uploaded.to.0.instead.of.1=Changed files will now be automatically uploaded to ''{0}'' instead of ''{1}''
+toggle.default.change.default.server=Change Default Server
+toggle.default.changed.files.will.no.longer.be.automatically.uploaded.to.this.server=Changed files will no longer be automatically uploaded to this server
+toggle.default.stop.using.server.as.default=Stop Using Server as Default
+add.server.create.new.server=Create New Server
+add.group.server.group=Server Group
+add.group.create.new.group=Create New Group
+copy.action.duplicate=Duplicate
+action.RemoteHost.NewRemoteItem.text=New\u2026
+options.external.changes.description=Do not automatically upload files changed outside the code editor. Such changes may originate from both the actions performed inside the IDE (for example, VCS-related actions) and running external scripts or tools.
+exception.connection.was.interrupted=Connection was interrupted
+exception.connection.failed=Connection failed
+exception.connection.was.cancelled=Connection was canceled
+error.message.failed.to.resolve.0=Failed to resolve ''{0}''
+ok.remove=Remove
+group.0.not.found=Group ''{0}'' not found.
+0.n.failed.1={0}\n failed:{1}
+unnamed=Unnamed
+server.form.provided.private.key.requires.a.passphrase=Provided private key requires a passphrase
+server.form.advanced=Advanced
+server.form.browse=Browse
+server.form.html.0.html=<html>{0}</html>
+remote.host.this.group.contains.no.servers=This group contains no servers
+copy.action.duplicate.server=Duplicate Server
+copy.action.duplicate.group=Duplicate Group
+excluded.paths.no.excluded.paths.added=No excluded paths added.
+excluded.paths.add.excluded.path=Add excluded path
+excluded.paths.local.path.column.name=Local Path
+excluded.paths.deploy.path.column.name=Deployment Path
+group.configurable.empty.description=A server group allows deploying an application to all servers at once, or to a single server from this group. Drag-n-drop a server to a group to add it.
+# {0} is a server name, result is a new server name
+0.project.level={0} (project level)
+server.is.not.configured.properly.0=Server is not configured properly: {0}
+server.is.ignored.no.related.mappings.found=Server is ignored: no related mappings found
+
+# Overall mapping description message is either
+# mappings.local.path.is.absolute mappings.description.no.server
+# or
+# mappings.local.path.is.absolute mappings.description.deployment.path mappings.description.web.path
+mappings.local.path.is.absolute=Local path is absolute.
+mappings.description.no.server=Web path is relative to the web server URL.<br/>Deployment path is relative to the server root path.
+# {0} is path or mappings.not.provided
+mappings.description.deployment.path=Deployment path is relative to the server root path ({0}).<br/>
+# {0} is URL or mappings.not.provided
+mappings.description.web.path=Web path is relative to the web server URL ({0}).
+# Used in mappings.description.deployment.path and mappings.description.web.path instead of {0} when path or URL is not available
+mappings.not.provided=not provided
+
+remote.files.merging=Remote files merging
+yes=&Yes
+no=&No
+always=&Always
+never=N&ever
+cancel=Cancel
+rejected=rejected
+
+
+trouble.info.deployment=Deployment
+trouble.info.deployment.deployment.settings=DEPLOYMENT SETTINGS
+trouble.info.default.server=Default Server
+trouble.info.group=Group
+trouble.info.project.level=Project level
+trouble.info.additional.settings=ADDITIONAL SETTINGS
+trouble.info.exclude.items.by.name=Exclude items by name
+trouble.info.operations.logging=Operations logging
+trouble.info.overwrite.up.to.date.files=Overwrite up-to-date files
+trouble.info.preserve.file.timestamps=Preserve file timestamps
+trouble.info.delete.target.items.when.source.do.not.exist=Delete target items when source do not exist
+trouble.info.create.empty.directories=Create empty directories
+trouble.info.prompt.when.overwriting.or.deleting.local.items=Prompt when overwriting or deleting local items
+trouble.info.upload.changed.files.automatically=Upload changed files automatically
+trouble.info.upload.external.changes=Upload external changes
+trouble.info.upload.delete=Delete remote files on automatic upload
+trouble.info.override.default.permissions.on.files=Override default permissions on files
+trouble.info.override.default.permissions.on.folders=Override default permissions on folders
+trouble.info.warn.when.uploading.over.newer.file=Warn when uploading over newer file
+trouble.info.notify.of.remote.changes=Notify of remote changes
+trouble.info.server.name=Server name
+trouble.info.server.type=Server type
+trouble.info.host=Host
+trouble.info.port=Port
+trouble.info.root.path=Root path
+trouble.info.web.url=Web URL
+trouble.info.mappings=Mappings
+trouble.info.excluded.paths=Excluded paths
+trouble.info.auth.type=Auth Type
+trouble.info.use.rsync=Use rsync for upload/download/sync
+trouble.info.use.sudo=Use sudo to run SFTP server
+trouble.info.compatibility.mode=Compatibility mode
+trouble.info.protect.data.chanel=Protect data chanel
+trouble.info.ftps.enabled.protocols=FTPS enabled protocols
+trouble.info.passive.mode=Passive mode
+trouble.info.show.and.process.hidden.files=Show and process hidden files
+trouble.info.use.keep.alive.command=Use keep-alive command
+trouble.info.always.use.list.command=Always use LIST command
+trouble.info.control.encoding=Control encoding
+trouble.info.send.keep.alive.messages.each.s=Send keep-alive messages each (s)
+trouble.info.connections=Number of connections
+group=group
+servers.editor.action.text.delete=Delete
+servers.editor.action.text.add=Add
+tab.title.file.transfer=File Transfer
+toolwindow.stripe.File_Transfer=File Transfer
+toolwindow.stripe.Remote_Host=Remote Host
+can.t.get.content=Cannot get content
+
+disabled.keep.alive.settings.tooltip=Keep-alive settings for SFTP can be changed in the SSH Configuration.
+error.message.failed.to.resolve.local.path.0=Failed to resolve local path ''{0}''
+
+# {0} is a title of failed parent operation
+rerun.title=Run Failed Operations from {0}
+# use the same word in rerun.action and the last part of rerun.question
+rerun.action=Retry
+rerun.question=Some operations have failed. Retry?
+rerun.download.question=Some download operations have failed. Retry?
+rerun.download.question.title=Project Downloading Failed
+advanced.sftp.rsync=Use rsync for download/upload/sync
+advanced.sftp.sudo.enable=Use sudo to run SFTP server
+
+
+widget.tooltip=Configured default deployment server
+widget.no.default.server=<no default server>
+widget.name=Default Deployment Server
+
+
+macro.remote.project.file.dir.description=Full path to the project directory on a remote server
+confirm.before.files.uploading=Confirm uploading files
+confirm.before.files.uploading.title=Confirm Uploading
+confirm.before.files.uploading.message=Files will be uploaded to remote host ''{0}''.\nDo you want to proceed?
+confirm.before.files.uploading.yes=Yes
+confirm.before.files.uploading.no=No
+web.deployment.rsync.settings=Rsync Settings
+
+label.password.saved.until.ide.restart=Password saved until IDE restart
+label.password.saved.permanently=Password saved permanently
+link.label.reset=Reset
+
+tooltip.choose.between.saving.password.permanently.or.until.ide.restart=Choose between saving password permanently or until IDE restart
+selest.open.file=Select Opened File in Remote Host
+confirm.deleting.files=Confirm deleting remote files (except rsync)
+progress.title.uploading=Uploading
+option.use.temp.file=Use a temporary file during upload
+
+plugin.is.not.unload.safe.tasks.are.running=Plugin is not unload-safe because of the currently running deployment tasks

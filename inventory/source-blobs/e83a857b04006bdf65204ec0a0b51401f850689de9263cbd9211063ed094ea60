@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports JSP import directives without a URI or tagdir attributes.
+
+<p><b>Example:</b></p>
+<pre><code>
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;%@ taglib prefix="html"%&gt; // Error: either `uri` or `tagdir` attribute should be specified
+    ...
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</body>
+</html>

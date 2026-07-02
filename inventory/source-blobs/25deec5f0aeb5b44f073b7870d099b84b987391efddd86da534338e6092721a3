@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a JavaScript reserved word used as a name.  The JavaScript specification
+reserves a number of words which are currently not used as keywords.  Using those words as identifiers may
+result in broken code if later versions of JavaScript start using them as keywords.
+</body>
+</html>

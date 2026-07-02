@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports possible requests in injected XML/HTML body where request separator <code>###</code> is missing. 
+The quick fix suggests adding the separator <code>###</code> before the request.
+</body>
+</html>

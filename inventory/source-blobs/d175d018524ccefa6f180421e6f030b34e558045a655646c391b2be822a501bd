@@ -1,0 +1,6 @@
+<html>
+<body>
+<p>Reports methods annotated with <code>@GET</code> that do not return anything.
+  Methods annotated with <code>@GET</code> must have a non-void return type.</p>
+</body>
+</html>

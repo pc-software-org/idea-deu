@@ -214,6 +214,68 @@ class ScannerTests(unittest.TestCase):
             raw["container_exclusions"],
         )
 
+    def test_explicit_non_translatable_resource_rule_excludes_only_exact_member(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("lib/vendor.jar", jar_bytes([
+                ("vendor/Binary.properties", b"\x00\xff"),
+                ("messages/Ui.properties", b"name=Visible"),
+            ]))],
+        )
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["resource_exclusions"] = [{
+            "container": "lib/vendor.jar",
+            "resource": "vendor/Binary.properties",
+            "reason": "non_translatable_resource",
+        }]
+        path = self.directory / "scanner.json"
+        path.write_text(json.dumps(raw), encoding="utf-8")
+
+        inventory = scan_archive(source, load_scanner_config(path))
+
+        self.assertEqual([item.resource_path for item in inventory.resources], ["messages/Ui.properties"])
+        self.assertIn(
+            ("vendor/Binary.properties", "non_translatable_resource"),
+            [(item.resource_path, item.reason.value) for item in inventory.exclusions],
+        )
+
+    def test_explicit_already_localized_container_is_excluded(self) -> None:
+        source = write_outer_archive(
+            self.directory / "idea.zip",
+            [("plugins/localization-ja/lib/localization-ja.jar",
+              jar_bytes([("messages/App.properties", "name=名前".encode())]))],
+        )
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["container_exclusions"].append({
+            "glob": "plugins/localization-ja/lib/localization-ja.jar",
+            "reason": "already_localized",
+        })
+        path = self.directory / "scanner.json"
+        path.write_text(json.dumps(raw), encoding="utf-8")
+
+        inventory = scan_archive(source, load_scanner_config(path))
+
+        self.assertEqual((), inventory.resources)
+        self.assertEqual("already_localized", inventory.exclusions[0].reason.value)
+
+    def test_explicit_resource_selection_keeps_only_named_collision_member(self) -> None:
+        source = write_outer_archive(self.directory / "idea.zip", [
+            ("a.jar", jar_bytes([("messages/Same.properties", b"name=A")])),
+            ("b.jar", jar_bytes([("messages/Same.properties", b"name=B")])),
+        ])
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["resource_selections"] = [{
+            "resource": "messages/Same.properties", "container": "b.jar",
+            "reason": "official_localization_selection",
+        }]
+        path = self.directory / "scanner.json"; path.write_text(json.dumps(raw), encoding="utf-8")
+
+        inventory = scan_archive(source, load_scanner_config(path))
+
+        self.assertEqual(["b.jar"], [item.container for item in inventory.resources])
+        self.assertEqual((), inventory.collisions)
+        self.assertIn("collision_not_selected", [item.reason.value for item in inventory.exclusions])
+
     def test_config_declares_cumulative_scan_budgets(self) -> None:
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
 

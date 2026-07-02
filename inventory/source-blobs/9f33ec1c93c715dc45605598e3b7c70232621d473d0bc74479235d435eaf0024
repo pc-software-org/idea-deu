@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports Micronaut Data repository methods that do not match the
+<a href="https://micronaut-projects.github.io/micronaut-data/latest/guide/#criteria">query pattern criteria</a>.
+</body>
+</html>

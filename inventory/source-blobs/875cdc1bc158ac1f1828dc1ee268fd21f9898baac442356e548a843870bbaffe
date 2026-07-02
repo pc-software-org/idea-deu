@@ -1,0 +1,5 @@
+<html>
+<body>
+Checks that <pre><code>@lombok.Builder</code></pre> used in JPA entities.
+</body>
+</html>

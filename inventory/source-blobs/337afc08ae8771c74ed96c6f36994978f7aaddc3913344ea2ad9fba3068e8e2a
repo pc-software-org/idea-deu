@@ -1,0 +1,28 @@
+<html>
+<body>
+Reports invalid usages of SQL aggregate functions.
+<p>The following situations are considered:</p>
+<ul>
+  <li><p>Columns that are used in HAVING and ORDER BY clauses but are missed in GROUP BY clauses.</p>
+    <pre><code>CREATE TABLE foo(id INT PRIMARY KEY, a INT, b INT);
+SELECT a, MAX(b) FROM foo GROUP BY a HAVING b > 0;
+SELECT * FROM foo GROUP BY a ORDER BY b;</code></pre>
+    <p>This rule does not apply when grouping is made by the primary key.</p>
+    <pre><code>SELECT * FROM foo GROUP BY id ORDER BY b;</code></pre>
+  </li>
+  <li><p>Aggregate functions in a wrong context. Usually, you can use aggregate functions in the following contexts: a list of expressions in
+    SELECT; in HAVING and ORDER BY sections; and other dialect-specific cases. The following queries will display an error.</p>
+    <pre><code>SELECT a FROM foo WHERE MAX(b) > 0;
+SELECT a FROM foo GROUP BY MAX(a);</code></pre>
+  </li>
+  <li><p>Nested calls of aggregate functions.</p>
+    <pre><code>SELECT MAX(SUM(a)) FROM foo GROUP BY a;</code></pre>
+    <p>This rule does not apply to analytic functions. The following query is valid and correct.</p>
+    <pre><code>SELECT MAX(SUM(a) OVER ()) FROM foo;</code></pre>
+  </li>
+  <li><p>Usages of HAVING without aggregate functions. In this case, consider rewriting your code using the WHERE section.</p>
+    <pre><code>SELECT a, MAX(b) FROM foo GROUP BY a HAVING a > 0;</code></pre>
+  </li>
+</ul>
+</body>
+</html>

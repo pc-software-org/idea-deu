@@ -1,0 +1,16 @@
+<html>
+<body>
+Reports possible problems caused by non-standard EL extensions:
+JSF EL expressions outside attributes, non-standard EL expressions, and so on.
+
+<p><b>Example:</b></p><br/>
+<pre><code>
+&lt;f:view&gt;
+  &lt;h:form&gt;
+    &lt;f:loadBundle var="example"/&gt;
+    &lt;h:commandButton action="${example.size()}"/&gt; // Warning: method call is nonstandard extension
+  &lt;/h:form&gt;
+&lt;/f:view&gt;
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports a conditional expression of the form
+<pre><code>
+condition ? true : false
+condition ? false : true
+</code></pre>
+<p>
+  These expressions may be safely converted to
+</p>
+<pre><code>
+condition
+!condition
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

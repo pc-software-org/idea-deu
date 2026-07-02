@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a suspicious combination of <code>+</code> or <code>-</code>
+characters in JavaScript code (for example, <code>a+++b</code>.  Such sequences are confusing,
+and their semantics may change through changes in the whitespace.
+</body>
+</html>

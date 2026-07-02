@@ -1,0 +1,5 @@
+<html>
+<body>
+Defines configuration key from application <code>.properties</code> configuration file in <code>META-INF/additional-spring-configuration-metadata.json</code>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Converts an <code>array.forEach()</code> to a <code>for..of</code> loop.
+Although these code constructs are similar, a <code>for..of</code> loop allows using <code>continue</code> and <code>break</code> statements.
+</body>
+</html>

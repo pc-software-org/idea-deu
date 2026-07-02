@@ -1,0 +1,45 @@
+filetype.less.description=Less style sheet
+variable=Variable
+file=File
+mixin=Mixin
+color.settings.less.name=Less
+color.settings.less.variable=Variable
+color.settings.less.injected.code.delimiter=JS code delimiter
+color.settings.less.injected.code=JS code injection
+color.settings.less.parent.selector=Parent selector
+
+inspections.group.name=Less
+inspections.unresolved.variable.name=Unresolved variable
+inspections.unresolved.mixin.name=Unresolved mixin
+inspections.resolved.without.imports.name=Missing import
+inspections.unresolved.mixin=Cannot find mixin ''{0}''
+inspections.unresolved.namespace=Cannot find namespace-mixin ''{0}''
+inspections.resolved.without.imports.message=Element ''{0}'' is resolved only by name without use of explicit imports
+annotator.unknown.import.type=Unknown import type
+
+find.usages.less.mixin.invocation=Mixin invocation
+find.usages.less.mixin.namespace=Namespace
+
+suppress.inspection.statement=Suppress for statement
+suppress.inspection.mixin=Suppress for mixin
+suppress.inspection.all.mixin=Suppress all inspections for mixin
+suppress.inspection.ruleset=Suppress for ruleset
+suppress.inspection.all.ruleset=Suppress all inspections for ruleset
+suppress.inspection.atrule=Suppress for at-rule
+suppress.inspection.all.atrule=Suppress all inspections for at-rule
+unexpected.arguments.in.mixin.declaration=Unexpected arguments in mixin declaration
+
+structure.variables.filter.text=Show Variables
+editor.notification.label.enable.file.watcher.to.compile.less.to.css=Enable File Watcher to compile LESS to CSS?
+label.compiles.less.files.into.css.files=Compiles .less files into .css files
+parsing.error.unclosed.interpolation=Unclosed interpolation
+parsing.error.guard.expected=Guard expected
+parsing.error.condition.expected=Condition expected
+parsing.error.interpolation.prefix=Interpolation prefix
+parsing.error.identifier=Identifier
+parsing.error.invalid.string.escape=Invalid string escape
+parsing.error.mixin.name=Mixin name
+parsing.error.colon.or.underscore.expected=':' or '_' expected
+parsing.error.parameter.expected=Parameter expected
+parsing.error.argument.expected=Argument expected
+parsing.error.variable=Variable

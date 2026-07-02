@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>module.export</code> statement. Suggests replacing it with an <code>export</code> or <code>export default</code> statement.
+<br/><br/>
+Please note that the quick-fix for converting <code>module.export</code> into <code>export</code> is not available for <code>module.export</code> inside functions or statements because <code>export</code> statements can only be at the top level of a module.
+</body>
+</html>

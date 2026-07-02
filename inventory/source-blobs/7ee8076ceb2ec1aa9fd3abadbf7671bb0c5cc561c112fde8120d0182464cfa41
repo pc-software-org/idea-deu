@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports an <code>if</code>, <code>while</code>, <code>for</code>, or <code>with</code> statement with an empty body. Such statements often result from typos, and may cause confusion.
+<!-- tooltip end -->
+<p>
+  Use the checkbox below to specify whether the statements with empty block statements as bodies 
+should be reported.
+</p>
+</body>
+</html>

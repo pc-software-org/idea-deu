@@ -1,0 +1,5 @@
+<html>
+<body>
+Let IntelliJ IDEA know that at runtime objects of a particular type will have more methods or properties than declared in the Java type.
+</body>
+</html>

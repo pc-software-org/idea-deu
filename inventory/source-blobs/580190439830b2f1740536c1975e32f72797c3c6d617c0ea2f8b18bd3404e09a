@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a missing required <a href="https://developer.mozilla.org/en-US/docs/web/css/@property/syntax">syntax</a>, <a href="https://developer.mozilla.org/en-US/docs/web/css/@property/inherits">inherits</a>, or <a href="https://developer.mozilla.org/en-US/docs/web/css/@property/initial-value">initial-value</a> property in a declaration of a custom property.
+</body>
+</html>

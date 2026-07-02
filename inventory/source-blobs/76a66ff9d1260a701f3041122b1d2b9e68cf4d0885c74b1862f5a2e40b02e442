@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage that requires an explicit option in <code>tsconfig.json</code>.
+For example, to use JSX in <code>.tsx</code> files, <code>tsconfig.json</code> must contain <code>"jsx"</code> property.
+</body>
+</html>

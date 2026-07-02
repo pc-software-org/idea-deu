@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a misplaced <code>@charset</code> at-rule or an incorrect charset value.
+</body>
+</html>

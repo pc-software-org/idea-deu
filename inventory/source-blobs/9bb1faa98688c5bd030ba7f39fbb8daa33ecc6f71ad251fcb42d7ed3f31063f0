@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a public constructor of an abstract class and suggests making it protected (because it is useless to have it public).
+</body>
+</html>

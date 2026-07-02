@@ -1,0 +1,90 @@
+model.inspection.group.name=CDI (Contexts and Dependency Injection)
+
+inspection.name.stereotype.restriction.errors=Bean has collision of scope in stereotypes
+inspection.name.injected.errors=Incorrect dependency injection place
+inspection.name.observer.method.errors=Incorrect observer method
+inspection.name.alternative.errors=Vetoed @Alternative bean
+inspection.name.decorator.errors=Incorrect @Decorator class
+inspection.name.specialize.errors=Incorrect @Specializes usage
+inspection.name.managed.bean.inconsistency.errors=Incorrect managed bean definition
+inspection.name.disposer.method.errors=Incorrect disposer method
+inspection.name.disposer.method.to.produces.errors=Disposer method parameter without producers
+inspection.name.interceptor.errors=@Interceptor class without binding types
+inspection.name.unproxyable.bean.types.inconsistency.errors=Incorrect usage of bean type that cannot be proxied
+inspection.name.stereotype.errors=Incorrect @Stereotype annotation class
+inspection.name.ambiguous.dependencies=Injection point with ambiguous dependencies
+inspection.name.typed.annotation=Incorrect @Typed annotation usage
+inspection.name.bean.normal.scope.inconsistency=Bean with non-default scope declares public fields
+inspection.name.bean.scope.inconsistency=Incorrect bean scope
+inspection.name.beans.configuration.errors=Incorrect bean definitions in beans.xml
+
+CdiManagedBeanInconsistencyInspection.no.appropriate.constructor=Managed bean must have a constructor with no parameters or a constructor annotated with @Inject
+CdiManagedBeanInconsistencyInspection.unallowed.ancestor=Managed bean must not inherit ''{0}''
+CdiManagedBeanInconsistencyInspection.parameterized.class=Managed bean must not be a parameterized type
+CdiManagedBeanInconsistencyInspection.static.inner.class=Managed bean must not be a non-static inner class
+CdiManagedBeanInconsistencyInspection.not.concrete.class=Managed bean must be a concrete class or @Decorator
+
+CdiInjectionInspection.field.cannot.be.static=@Inject annotation not allowed on static fields
+CdiInjectionInspection.field.cannot.be.final=@Inject annotation not allowed on final fields
+
+CdiInjectInspection.more.than.one.injected.constructor=Managed bean must only one constructor annotated with @Inject
+CdiInjectInspection.wrong.injected.method.annotation=@Inject method cannot be annotated with ''{0}''
+CdiInjectInspection.injected.method.cannot.be.static=@Inject method cannot be static
+CdiInjectInspection.injected.with.disposes.parameters=@Inject method cannot have parameters annotated with ''{0}''
+CdiInjectInspection.injected.method.cannot.be.abstract=@Inject method cannot be abstract
+CdiInjectInspection.field.cannot.be.annotated.produces=Injected field cannot be annotated with @Produces
+CdiInjectInspection.field.should.not.be.initialized=Injected field should not be initialized
+
+CdiStereotypeRestrictionsInspection.different.scopes.in.stereotypes = All stereotypes must specify the same scope OR a scope must be specified on the bean
+
+CdiObservesInspection.multiple.observes.parameters.not.allowed = Method must have only one @Observes parameter
+CdiObservesInspection.wrong.observe.method.annotation= Observer method cannot be annotated with ''{0}''
+CdiObservesInspection.observer.method.with.wrong.parameters=Observer method cannot have parameters annotated with ''{0}''
+
+CdiDecoratorInspection.cannot.find.decorates=Decorator must have delegate attribute annotated with @Delegate
+CdiDecoratorInspection.too.many.decorates.in.decorator=Decorator must have exactly one delegate attribute annotated with @Delegate
+CdiDecoratorInspection.annotation.not.allowed.for.decorator=''{0}'' annotation not allowed for decorator class
+CdiDecoratorInspection.decorates.type.must.implements.all.decorator.interfaces=The delegate type of a decorator must implement or extend every decorated type. Unsupported: {0}
+CdiDecoratorInspection.injection.point.must.be.constructor.or.initializer=Method with @Delegate parameter must be a constructor or an initializer method (@Injected)
+CdiDecoratorInspection.delegate.injection.point.expected=@Delegate field must be annotated with @Injected
+CdiDecoratorInspection.class.must.be.decorator=Bean class that is not a decorator cannot have an injection point annotated with @Delegate
+CdiDecoratorInspection.class.cannot.be.final=Decorator class can't be final
+
+CdiSpecializesInspection.specializes.method.must.be.non.static=Specializing method cannot be static
+CdiSpecializesInspection.specializes.method.must.be.producer=Specializing method must be annotated with @Produces
+CdiSpecializesInspection.specializes.method.must.override.producer.of.superclass=Specializing method must override a @Produces method on the direct superclass
+CdiSpecializesInspection.specialized.class.has.multiple.specializes=More than one class that specialized the same super class: {0}
+CdiSpecializesInspection.specialized.class.not.defined=Specializing bean must extend another bean
+CdiSpecializesInspection.specialized.class.has.duplicated.named.anno=@Named annotation cannot be used on specializing and specialized class
+
+CdiDisposerMethodInspection.too.many.dispose.parameters=Method cannot have more than one parameter annotated with @Disposes
+CdiDisposerMethodInspection.non.abstract.disposer.method=Disposer method cannot be abstract
+
+CdiInterceptorInspection.no.binding.type=@Interceptor must specify at least one interceptor binding
+
+CdiUnproxyableBeanTypesInspection.unproxyable.type.detected=Injected normal scoped bean is not proxyable
+CdiUnproxyableBeanTypesInspection.injected.in.passivating.scoped.bean.must.be.serializable=Cannot inject bean of non-serializable type into bean of passivating scope
+CdiUnproxyableBeanTypesInspection.passivating.scoped.bean.must.be.serializable= Managed bean declaring a passivating scope must be java.io.Serializable
+
+CdiStereotypeInspection.qualified.annotations.not.allowed=Qualifier annotations aren't allowed for stereotypes
+CdiStereotypeInspection.non.empty.named.annotations.not.allowed=Non-empty @Named annotation isn't allowed for stereotypes
+CdiStereotypeInspection.not.allowed.for.stereotypes=Not allowed for stereotypes
+
+CdiInspectionPointsInspection.unsatisfied.dependency=Unsatisfied dependency: no bean matches the injection point
+CdiInspectionPointsInspection.ambiguous.dependency=Ambiguous dependency: there are multiple beans that match the injection point
+CdiInspectionPointsInspection.new.annotation.with.other.qualifiers=@New cannot be combined with other qualifiers
+
+CdiTypedAnnotationInspection.incorrect.bean.type=Bean type doesn't correspond to types of @Typed annotation.
+CdiTypedAnnotationInspection.non.producer=Should be applied to producers
+
+CdiScopeInspection.singleton.bean.incorrect.scopes=Singleton bean must be @ApplicationScoped or @Dependent
+CdiScopeInspection.session.stateless.bean.incorrect.scopes=Session stateless bean must be of @Dependent scope
+
+CdiNormalScopeInspection.public.field.in.normal.scoped.beans=Bean with non-default scope must not have public fields
+CdiDomBeansInspection.class.must.be={0} class expected here
+CdiDomBeansInspection.add.annotation=Add @{0}
+CdiDomBeansInspection.add.annotation.family=Add annotation
+CdiDomBeansInspection.duplicated.alternative.classes=Class is already defined in <alternatives>
+CdiDomBeansInspection.duplicated.stereotype.classes=Stereotype is already defined in <alternatives>
+alternative.bean.should.not.be.vetoed=Alternative bean should not be vetoed
+CdiUnknownProducersForDisposerMethodInspection.cannot.find.corresponding.producers=Cannot find corresponding producers

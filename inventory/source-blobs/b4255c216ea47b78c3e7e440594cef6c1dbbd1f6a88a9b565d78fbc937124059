@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces a series of <code>if...else</code> statements with an equivalent <code>switch</code> statement.
+</body>
+</html>

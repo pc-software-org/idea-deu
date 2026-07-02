@@ -1,0 +1,15 @@
+<html>
+<body>
+<p>Reports variables undeclared in the current environment HTTP Client.</p>
+<p>
+  Executing requests with undeclared variables probably fail.
+  Consider adding a variable to the environment or selecting an environment with this variable.
+</p>
+<!-- tooltip end -->
+<p>Inspection doesn't report variables in request bodies, because it can be a valid syntax of the body.</p>
+<p>
+  Some variables may be not reported as unresolved, because they are declared in response or pre-request handler scripts via
+  <code>client.global.set</code> or <code>request.variables.set</code> functions call.
+</p>
+</body>
+</html>

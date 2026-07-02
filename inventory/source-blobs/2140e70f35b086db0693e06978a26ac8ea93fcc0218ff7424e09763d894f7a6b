@@ -1,0 +1,26 @@
+<html>
+<body>
+<p>Reports Spring Data CRUD repository methods with incorrect return types.</p>
+<p>The following return types are supported:</p>
+<list>
+  <li><code>void</code></li>
+  <li>Primitive types</li>
+  <li>Wrapper types</li>
+  <li><code>T</code> when the query method is expected to return one result at most. Returns <code>null</code> if there are no results and
+    throws <code>IncorrectResultSizeDataAccessException</code> if there is more than one result.
+  </li>
+  <li><code>java.util.List</code> or any common <code>Iterable</code> type</li>
+  <li><code>java.util.stream.Stream</code></li>
+  <li><code>java.util.Optional</code> or <code>scala.Option</code> when the query method is expected to return one result at most. Returns
+    <code>Optional.empty()</code> or <code>Optional.absent()</code> if there are no results and throws <code>IncorrectResultSizeDataAccessException</code>
+    if there is more than one result.
+  </li>
+  <li><code>io.micronaut.data.model.Page</code></li>
+  <li><code>io.micronaut.data.model.Slice</code></li>
+  <li><code>java.util.concurrent.Future</code>, <code>java.util.concurrent.CompletableFuture</code>, or <code>ListenableFuture</code> if the
+    method is annotated with <code>@Async</code> and Spring asynchronous method execution is enabled
+  </li>
+  <li><code>GeoResults&lt;T&gt;</code>, <code>GeoResult&lt;T&gt;</code>, or <code>GeoPage&lt;T&gt;</code></li>
+</list>
+</body>
+</html>

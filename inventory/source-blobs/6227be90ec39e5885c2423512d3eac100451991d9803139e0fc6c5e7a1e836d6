@@ -1,0 +1,5 @@
+# Actions
+action.AddCellPromoAction.text=AI
+action.AddCellPromoAction.description=AI Generate Code
+action.EditCellPromoAction.text=AI Edit Cell
+action.FixCellPromoAction.text=AI Fix Cell

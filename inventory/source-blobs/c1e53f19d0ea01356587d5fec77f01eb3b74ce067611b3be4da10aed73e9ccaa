@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>Reports incorrect bean scopes:</p>
+<ul>
+  <li>Singleton bean must be either <code>@ApplicationScoped</code> or <code>@Dependent</code></li>
+  <li>Session stateless bean must be <code>@Dependent</code></li>
+</ul>
+</body>
+</html>

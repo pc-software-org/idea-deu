@@ -1,0 +1,13 @@
+# editor floating toolbar
+action.Kubernetes.Floating.Toolbar.AddContexts.text=Add Clusters
+action.Kubernetes.ContextSwitcherAction.text=Set current cluster
+floating.toolbar.current.cluster.not.set.expandable.combobox.action.text=Set current cluster
+action.Kubernetes.NamespaceSwitcherAction.text=Namespace
+floating.toolbar.namespace.placeholder.combobox.action.text=Namespace
+floating.toolbar.set.current.cluster.to.perform.something.action.description=Set the current cluster to <b>{0}</b>
+action.Kubernetes.Floating.Toolbar.Apply.text=Apply
+action.Kubernetes.Floating.Toolbar.Delete.text=Delete
+action.Kubernetes.Floating.Toolbar.ReloadContent.text=Reload Content From Cluster
+action.Kubernetes.Floating.Toolbar.CompareWithCluster.text=Compare with Cluster
+action.Kubernetes.Floating.Toolbar.AlwaysShow.text=Always Show Kubernetes Floating Toolbar
+action.Kubernetes.Floating.Toolbar.AlwaysShow.description=Always show the Kubernetes Floating Toolbar in Editor for applicable files

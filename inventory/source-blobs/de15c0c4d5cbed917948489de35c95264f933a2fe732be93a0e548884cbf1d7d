@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports a usage of a trailing comma in an array literal.
+
+<p>The warning is reported only when the JavaScript language version is set to ECMAScript 5.1.</p>
+
+<p>Although trailing commas in arrays are allowed by the specification, some browsers may throw an error when a trailing comma is used.</p>
+
+<p>You can configure formatting options for trailing commas in <b>Code Style</b> | <b>JavaScript</b> or <b>TypeScript</b> | <b>Punctuation</b>. </p>
+</body>
+</html>

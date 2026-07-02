@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>Reports <code>@Interceptor</code> classes without binding types. An interceptor must specify at least one interceptor binding.</p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+configuration.type.description.protractor.kotlin=Protractor (Kotlin)
+configuration.type.name.protractor.kotlin=Protractor
+protractor.cannot.locate.wrapper.config.file=Cannot locate wrapper config file
+protractor.configurator.dialog.title.select.protractor.configuration.file=Select Protractor Configuration File
+protractor.configurator.error.no.such.0=No such {0}
+protractor.configurator.error.unspecified.0=Unspecified {0}
+protractor.configurator.error.unspecified.selenium.address=Unspecified Selenium address
+protractor.configurator.label.configuration.file=\\&Configuration file:
+protractor.configurator.label.environment.variables=\\&Environment variables:
+protractor.configurator.label.extra.protractor.options=E\\&xtra Protractor options:
+protractor.configurator.label.node.interpreter=Node \\&interpreter:
+protractor.configurator.label.protractor.package=\\&Protractor package:
+protractor.configurator.label.selenium.address=\\&Selenium address:
+protractor.configurator.label.test.file=\\&Test file:
+protractor.configurator.name.configuration.file=configuration file
+protractor.configurator.name.protractor.package=protractor package
+protractor.configurator.name.test.file=test file

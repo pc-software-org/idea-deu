@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>Reports vulnerabilities in Gradle and Maven dependencies imported into your project.
+  A full list of Gradle and Maven dependencies is shown in the Project tool window under External Libraries.</p>
+<p>Fixing the reported problems helps prevent your software from being compromised by an attacker.</p>
+<p>To solve a problem, you can update to a version where the vulnerability is fixed (if available) or switch to a dependency that doesn't have the vulnerability.</p>
+<p>The quick-fixes available may suggest updating to a safe version or visiting the website to learn more about a particular vulnerability.</p>
+<!-- tooltip end -->
+</body>
+</html>

@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts the parameters of a function to a single object and replaces the arguments in all calls of the function with the generated object literal.
+</body>
+</html>

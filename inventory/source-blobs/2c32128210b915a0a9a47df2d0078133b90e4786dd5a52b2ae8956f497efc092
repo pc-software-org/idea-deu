@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports unused common table expressions (CTE) inside the query.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TABLE foo(a INT);
+
+WITH a AS (SELECT 1 AS x FROM foo)
+SELECT 1 + 2 FROM foo;</code></pre>
+<p>By using WITH, we create a temporary named result set with the name <code>a</code>, also known as a common table expression (CTE). But
+  we do not use this CTE later in the code. The unused CTE is greyed out.</p>
+</body>
+</html>

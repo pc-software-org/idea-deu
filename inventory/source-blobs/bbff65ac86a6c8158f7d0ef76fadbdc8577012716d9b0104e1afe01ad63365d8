@@ -1,0 +1,15 @@
+<html>
+<body>
+<p>
+Adds <a href="https://kotl.in/docs/spring-compiler-plugin">Spring Kotlin compiler plugin</a> to project build files:
+</p>
+<p>
+Kotlin has classes and their members <code>final</code> by default, which makes it inconvenient to use frameworks
+and libraries that require classes to be <code>open</code>.
+</p>
+<p>
+The <code>kotlin-spring</code> compiler plugin adapts Kotlin to the requirements of the Spring framework and makes classes
+annotated with a Spring-specific annotation and their members opened without the explicit <code>open</code> keyword.
+</p>
+</body>
+</html>

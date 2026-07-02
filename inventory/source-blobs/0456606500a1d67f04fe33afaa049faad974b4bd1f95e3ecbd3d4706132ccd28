@@ -1,0 +1,6 @@
+<html>
+<body>
+Replaces a series of consequent <code>await</code> expressions that are assigned to variables
+with a <code>Promise.all</code> and a destructuring for better performance.
+</body>
+</html>

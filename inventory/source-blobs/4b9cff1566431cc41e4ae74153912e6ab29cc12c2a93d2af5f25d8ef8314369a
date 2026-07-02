@@ -1,0 +1,59 @@
+<html>
+<body>
+<table width="100%" border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse">
+  <tr>
+    <td colspan="3">
+      <font face="verdana" size="-1">
+        This built-in template is used for filling in the body of a method every time it is generated, for example,
+        through the <code>Create method from usage</code> intention action.<br>
+        The template is editable. Along with JavaScript expressions and comments, you can also use predefined variables.
+        These variables will be replaced with the corresponding values when the template is applied.
+      </font>
+    </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse">
+  <tr>
+    <td colspan="3"><font face="verdana" size="-1">Predefined variables will take the following values:</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${IS_ASSIGNMENT_TARGET}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">returns 'true' if the created method is an assignment target</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${IS_NEW_CALL}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">returns 'true' if the created method is under 'new' call</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${HAS_EXPECTED_TYPE}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">returns 'true' if the created method is in location with expected type</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${DEFAULT_RETURN_VALUE}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">default value of expected type for the created method ('undefined' if no expected type)</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${METHOD_NAME}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">name of the created method</font></td>
+  </tr>
+  <tr>
+    <td valign="top"><nobr><font face="verdana" size="-2"><b>${SEMICOLON}</b></font></nobr></td>
+    <td width="10">&nbsp;</td>
+    <td width="100%" valign="top"><font face="verdana" size="-1">semicolon or empty, based on code style options</font></td>
+  </tr>
+  <tr>
+    <td colspan="3"><font face="verdana" size="-1">All the predefined variables from the <i>File Header</i> template (<i>Includes</i> tab) are also available
+      (e.g.
+      <font face="verdana" size="-2"><b>${USER}</b></font>,
+      <font face="verdana" size="-2"><b>${DATE}</b></font>,
+      etc.)</font>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

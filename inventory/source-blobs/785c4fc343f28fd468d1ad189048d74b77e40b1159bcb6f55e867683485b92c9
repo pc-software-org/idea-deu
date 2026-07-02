@@ -1,0 +1,2 @@
+Declares an implicit Velocity variable in an external file. The variable will
+be available in every Velocity template in the current module.

@@ -1,0 +1,7 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/PointlessBitwiseExpression.html -->
+<html>
+<body>
+Reports an expression that includes <code>and</code> with zero, <code>or</code> by zero, or 
+shifting by zero. Such expressions may result from not fully completed automated refactorings.
+</body>
+</html>

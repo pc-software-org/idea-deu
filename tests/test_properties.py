@@ -37,6 +37,12 @@ class PropertiesTest(unittest.TestCase):
         document = parse_properties(data)
         self.assertEqual(render_properties(document, {}), data)
 
+    def test_combines_java_utf16_surrogate_escape_pair(self) -> None:
+        document = parse_properties(b"icon=\\uD83D\\uDCA1\n")
+
+        self.assertEqual(document.values["icon"], "💡")
+        self.assertEqual(render_properties(document, {}), b"icon=\\uD83D\\uDCA1\n")
+
     def test_replaces_only_known_values_and_escapes_them(self) -> None:
         data = b"first = old\ncontinued=old\\\n  value\nlast:keep\n"
         document = parse_properties(data)

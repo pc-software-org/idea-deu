@@ -1,0 +1,29 @@
+<html>
+<body>
+Reports usages of backward GOTO statements and GOTO statements used to exit a loop.
+<p>The extensive use of GOTO statements is generally
+  not recommended. For details, see <a href="https://www.ibm.com/docs/no/db2/11.5?topic=procedures-goto-statement-in-sql">GOTO statement in
+    SQL
+    procedures at ibm.com</a>.</p>
+
+<p>Instead of jumping back to a previous statement using GOTO, consider using a loop.</p>
+<p>Instead of exiting the WHILE loop with GOTO, consider using other control-of-flow statements (for example, RETURN or BREAK).</p>
+<p>Example (Oracle):</p>
+<pre><code>CREATE PROCEDURE test(n INT) AS
+DECLARE
+    x INT;
+BEGIN
+    x := 0;
+    GOTO a;
+    &lt;&lt;a&gt;&gt; x := 1;
+    IF (n = 0) THEN
+        GOTO a;
+    END IF;
+    WHILE TRUE
+        LOOP
+            GOTO b;
+        END LOOP;
+    &lt;&lt;b&gt;&gt; x := 3;
+END;</code></pre>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>this</code> expression outside an object literal or a constructor body.  Such <code>this</code>
+expressions reference the top-level "global" JavaScript object, 
+but are mostly useless.
+</body>
+</html>

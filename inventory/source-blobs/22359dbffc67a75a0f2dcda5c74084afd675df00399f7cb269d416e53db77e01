@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports a multi-line selector. Most likely this means that several single-line selectors are actually intended
+but a comma is missing at the end of one or several lines.
+<p><b>Example:</b></p>
+<pre><code>
+input /* comma has probably been forgotten */
+.button {
+  margin: 1px;
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

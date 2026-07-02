@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a usage of <code>await</code> in a function that was possibly intended to be async but is actually missing the <code>async</code> modifier.
+<!-- tooltip end -->
+Although <code>await</code> can be used as an identifier, it is likely that it was intended to be used as an operator, so
+the containing function should be made <code>async</code>.
+</body>
+</html>

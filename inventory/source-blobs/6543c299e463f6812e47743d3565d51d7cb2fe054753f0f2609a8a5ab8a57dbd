@@ -1,0 +1,5 @@
+<html>
+<body>
+Checks that all-args constructor exists for <pre><code>@lombok.Builder</code></pre> in JPA entities.
+</body>
+</html>

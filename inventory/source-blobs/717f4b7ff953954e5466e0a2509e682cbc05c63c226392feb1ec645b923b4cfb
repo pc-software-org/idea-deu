@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>Reports incorrect MIME types (for example, in <code>Content-Type</code> strings) for HTTP servers and clients.</p>
+</body>
+</html>

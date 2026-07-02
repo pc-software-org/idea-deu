@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Reports issues in AOP pointcut expressions</p>
+<ul>
+  <li>Unresolved references</li>
+  <li>Incompatible number of arguments to pointcut</li>
+  <li>Unresolved pointcuts</li>
+  <li>etc.</li>
+</ul>
+</body>
+</html>

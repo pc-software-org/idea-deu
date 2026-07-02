@@ -1,0 +1,39 @@
+action.CreateCDIBeansXmlFile.description=Creates beans.xml config file
+action.CreateCDIBeansXmlFile.text=CDI Beans Descriptor (beans.xml)
+
+beans.tool.window.name=Beans
+
+category.name.decorator=@Decorator
+category.name.inject=@Inject
+category.name.produces=@Produces
+
+cdi.add.bean.dependency.fix.family.name=Add dependency on bean
+cdi.add.bean.dependency.fix.text=Add dependency with name matching ''{0}''
+cdi.bean=Bean
+cdi.diagram.unknown.element=<unknown>
+cdi.related.item.group=CDI
+cdi.uml.presentation.name=CDI Dependencies
+
+diagram.choose.dependency.type.message=Choose a dependency type
+diagram.choose.dependency.type.title=Dependency Type
+
+gutter.choose.bean=Choose Bean
+gutter.choose.goto.fires=Choose Fire Point to Navigate
+gutter.choose.goto.observes=@Observes Parameters
+gutter.choose.injected.point=Choose Injection Point
+gutter.injection.points=Injection points
+gutter.navigate.method.injections.action=Navigate to Injected Bean
+gutter.navigate.method.injections.empty=No injected dependencies found
+gutter.navigate.method.injections.tooltip=Navigate to injected bean
+gutter.navigate.to.fires=Navigate to fire point
+gutter.navigate.to.injection.point.action=Navigate to Injection Points
+gutter.navigate.to.injection.point.empty=No injection candidates found
+gutter.navigate.to.injection.point.tooltip=Navigate to injection points
+gutter.navigate.to.observes=Navigate to @Observes
+gutter.navigate.to.producers=Navigate to producer
+gutter.producers.and.disposers=Producers for Disposer methods
+
+logical.structure.injected.in=Injected In
+logical.structure.injects=Injects
+
+tool.window.name=CDI

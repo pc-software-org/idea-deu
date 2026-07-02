@@ -1,0 +1,5 @@
+<html>
+<body>
+Splits a statement with the declaration and initialization of a variable into a statement with the variable declaration and an assignment statement.
+</body>
+</html>

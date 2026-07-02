@@ -1,0 +1,6 @@
+<html>
+<body>
+Gets the latest information about charts from the repository.
+Information is cached locally, where it is used by completion and inspections.
+</body>
+</html>

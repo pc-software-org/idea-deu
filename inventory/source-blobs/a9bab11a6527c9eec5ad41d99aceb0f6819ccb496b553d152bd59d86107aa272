@@ -1,0 +1,16 @@
+<html>
+<body>
+Reports a labeled statement inside a <code>switch</code> statement, which 
+often results from a typo.
+<p>Example:</p>
+<pre><code>
+    <b>switch</b>(x)
+    {
+        <b>case</b> 1:
+        case2:   //typo!
+        <b>case</b> 3:
+            <b>break</b>;
+    }
+</code></pre>
+</body>
+</html>

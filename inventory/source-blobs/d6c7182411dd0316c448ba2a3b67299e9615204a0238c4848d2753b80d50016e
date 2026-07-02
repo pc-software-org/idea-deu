@@ -1,0 +1,29 @@
+<html>
+<body>
+<p>
+  Reports unnecessary `grpc` or standard `http[s]` schemes usage in gRPC requests
+</p>
+<p>
+  Example requests:
+</p>
+<pre><code>
+# `grpc` scheme may be omitted since insecure connection is assumed by default
+GRPC grpc://localhost/TestService/testRpc
+</code></pre>
+
+<pre><code>
+# `http` scheme may be omitted: prefer empty scheme for insecure connection and a dedicated `grpcs` scheme for a secure one
+GRPC http://localhost/TestService/testRpc
+</code></pre>
+
+<pre><code>
+# `https` scheme should be replaced by `grpcs`: prefer a dedicated `grpcs` scheme to indicate that transport layer security should be enabled to execute the request
+GRPC https://localhost/TestService/testRpc
+</code></pre>
+<!-- tooltip end -->
+<p>
+  To avoid confusion, it is recommended to use dedicated `grpcs` scheme in a gRPC request, when the request should use secure channel
+  underneath. Otherwise, the scheme might be completely omitted
+</p>
+</body>
+</html>

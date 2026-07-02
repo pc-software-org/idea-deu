@@ -1,0 +1,5 @@
+<html>
+<body>
+Checks that delete/update queries are annotated with the <pre><code>@Modifying</code></pre> annotation.
+</body>
+</html>

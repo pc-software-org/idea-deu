@@ -1,0 +1,6 @@
+<html>
+<body>
+Detects incorrect use of <pre><code>@Column</code></pre> annotation for association attributes with <pre><code>@OneToOne</code></pre>
+and <pre><code>@ManyToOne</code></pre> annotations.
+</body>
+</html>

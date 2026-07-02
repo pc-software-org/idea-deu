@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a function nested inside another function.
+Although JavaScript allows functions to be nested, such constructs may be confusing.
+<!-- tooltip end -->
+<p>
+  Use the checkbox below to ignore anonymous nested functions.
+</p>
+</body>
+</html>

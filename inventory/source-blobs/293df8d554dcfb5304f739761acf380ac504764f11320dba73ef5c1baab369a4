@@ -1,0 +1,5 @@
+<html>
+<body>
+Checks nested .devcontainer folders with ambiguous Dev Container context or a missing parent .devcontainer folder where it is needed.
+</body>
+</html>

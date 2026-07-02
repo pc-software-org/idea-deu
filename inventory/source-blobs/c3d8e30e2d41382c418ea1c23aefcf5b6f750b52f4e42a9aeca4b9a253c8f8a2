@@ -1,0 +1,2 @@
+Declares a reference to the velocity.properties file in an external file. Files accessible via the
+<code>file.resource.loader.path</code> property will be available in every Velocity template in the current module.

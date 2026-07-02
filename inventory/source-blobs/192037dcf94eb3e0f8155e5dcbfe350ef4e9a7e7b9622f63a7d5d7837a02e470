@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a chained equality comparison (i.e. <code>a==b==c</code>).  Such comparisons are confusing.
+</body>
+</html>

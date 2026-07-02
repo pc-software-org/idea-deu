@@ -1,0 +1,39 @@
+{
+  "collision_content": {"distinct": 0, "identical": 33},
+  "counts": {
+    "collisions": 33,
+    "exclusions": 583291,
+    "resources": 4392,
+    "source_blob_bytes": 11824262,
+    "source_blobs": 4260,
+    "translation_units": 94605,
+    "unresolved_collisions": 0
+  },
+  "exclusion_reasons": {
+    "already_localized": 3,
+    "collision_not_selected": 15,
+    "directory": 2264,
+    "localized": 1271,
+    "nested_archive": 38,
+    "non_translatable_resource": 609,
+    "not_jar": 1898,
+    "unsupported_resource": 577193
+  },
+  "resource_types": {
+    "file_template": 254,
+    "inspection_description": 2297,
+    "intention_description": 726,
+    "properties": 925,
+    "tip": 190
+  },
+  "schema_version": 1,
+  "source": {
+    "archive": "idea-2025.3.1.1.win.zip",
+    "build_number": "253.29346.240",
+    "product_code": "IU",
+    "sha256": "755b9549eb41ddec86ea111e4aba94b4fd6e39a60b1de7945c92652c70f80026",
+    "since_build": "253.29346.240",
+    "until_build": "253.29346.240",
+    "version": "2025.3.1.1"
+  }
+}

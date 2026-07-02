@@ -1,0 +1,30 @@
+<html>
+<body>
+<p>Reports incorrect spacing for key-value pairs in <code>ARG</code>, <code>ENV</code>, and <code>LABEL</code> commands.</p>
+<p>
+  While it is not explicitly specified in the <a href="https://docs.docker.com/engine/reference/builder/#arg">Dockerfile specification</a>,
+  some combinations of spacing for key-value pairs are not allowed.
+  Docker build will fail after reaching the problem instruction.
+</p>
+<!-- tooltip end -->
+<p><b>Examples:</b></p>
+<ul>
+  <li>The <code>ARG</code> command does not allow any spaces around '='</li>
+  <li><code>ENV</code> and <code>LABEL</code> do not allow spaces after '='</li>
+</ul>
+<pre><code>
+  # all the commands below will fail
+  ARG answer = 42
+  ARG version= "1.0.0"
+  LABEL "maintained.by"= someone@gmail.com
+  ENV JAVA_HOME= "/docker-java-home"
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  ARG answer=2
+  ARG version="1.0.0"
+  LABEL "maintained.by"=someone@gmail.com
+  ENV JAVA_HOME="/docker-java-home"
+</code></pre>
+</body>
+</html>

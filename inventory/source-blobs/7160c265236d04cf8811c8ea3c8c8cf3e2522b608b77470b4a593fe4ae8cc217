@@ -1,0 +1,2 @@
+spring.cron.expression.disabled=Disabled
+SpringCronDocumentationTarget.cron.explanation=<p>Cron explanation: <b>{0}</b></p><p>For Cron format explanation, see <a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html#scheduling-cron-expression">https://docs.spring.io/spring-framework/reference/integration/scheduling.html#scheduling-cron-expression</a>.</p>

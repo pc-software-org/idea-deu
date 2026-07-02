@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports incorrect type of: 
+<ul>
+  <li>a parameter in a function call</li>
+  <li>a return value</li>
+  <li>an assigned expression</li>
+</ul>
+<p>TypeScript code is ignored.</p>
+</body>
+</html>

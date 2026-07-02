@@ -1,0 +1,6 @@
+jupyter.package.start.error.title=Jupyter Start Error
+old.notebook.version.message=Python {0} supports Notebook version 7 or later. To use the current version, you need to install 'setuptools'.
+notebook.version.update.notebook.package=Update Notebook to 7+
+Jupyter.remote.download.from.jupyter=Downloading from Jupyter {0}
+Jupyter.remote.uploading.to.jupyter=Uploading to Jupyter {0}
+notebook.version.install.setuptools=Install 'setuptools'

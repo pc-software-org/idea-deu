@@ -1,0 +1,28 @@
+commit.message.completion.feedback.title=Cloud Completion in Commit Messages
+commit.message.completion.feedback.description=<h2 style="margin-bottom: 0px;"> Help us improve Cloud Completion in VCS!</h2>
+commit.message.completion.feedback.description.2=We would appreciate your feedback on the new text completion in the Commit Messages.<br>Your responses will remain confidential.
+
+commit.message.completion.feedback.description.disable=<h2 style="margin-bottom: 0px;">Thanks for trying out the new Commit Message Completion!</h2>
+commit.message.completion.feedback.description.disable.2=We're sorry to see you go. Please share your thoughts.
+
+commit.message.completion.feedback.question.relativity=How well did the suggestions match what you wanted to write?
+commit.message.completion.feedback.question.relativity.leftHint=Not at all
+commit.message.completion.feedback.question.relativity.rightHint=Perfectly
+commit.message.completion.feedback.question.length=Was the completion length appropriate?
+commit.message.completion.feedback.question.length.leftHint=Too short
+commit.message.completion.feedback.question.length.rightHint=Too long
+
+commit.message.completion.feedback.other=Write any other thoughts or feedback about the commit message completion.
+commit.message.completion.feedback.other.placeholder=For example, bugs, missing features, or suggestions.
+
+commit.message.completion.feedback.question.disable=Why did you turn off commit message completions?
+commit.message.completion.feedback.question.disable.reason.irrelevant=Irrelevant suggestions
+commit.message.completion.feedback.question.disable.reason.distracting=Too distracting
+commit.message.completion.feedback.question.disable.reason.slow=Too slow
+commit.message.completion.feedback.question.disable.reason.long=Too long / bloated
+commit.message.completion.feedback.question.disable.reason.short=Too short / cut off
+commit.message.completion.feedback.question.disable.reason.many=Too many suggestions
+commit.message.completion.feedback.question.disable.reason.security=Security/privacy concerns
+
+action.FullLine.CommitMessageCompletionOptInSurveyAction.text=Show Cloud Completion in Commit Messages Feedback Dialog
+action.FullLine.CommitMessageCompletionOptInSurveyAction.description=Opens dialog to provide feedback about Cloud Completion in Commit Messages functionality

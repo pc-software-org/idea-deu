@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a <code>break</code> statements. Ignores <code>break</code> statements that end case blocks.
+</body>
+</html>

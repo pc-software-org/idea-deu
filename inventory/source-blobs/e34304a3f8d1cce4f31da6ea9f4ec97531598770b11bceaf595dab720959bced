@@ -1,0 +1,22 @@
+<html>
+<body>
+<p>Reports missing continuation characters in <code>RUN</code> command.</p>
+<p>
+  In the <i>shell</i> form of <code>RUN</code> command you should use a '\' (backslash)
+  to continue a single <code>RUN</code> instruction onto the next line.
+  Otherwise, Docker build will fail.
+</p>
+<!-- tooltip end -->
+<p><b>Examples:</b></p>
+<pre><code>
+  # the command below will fail
+  RUN /bin/bash -c 'source $HOME/.bashrc;
+      echo $HOME'
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  RUN /bin/bash -c 'source $HOME/.bashrc; \
+      echo $HOME'
+</code></pre>
+</body>
+</html>

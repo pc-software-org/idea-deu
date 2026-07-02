@@ -1,0 +1,23 @@
+<html>
+<body>
+Reports arguments that are used without names in routine calls. By default, this inspection is disabled.
+<p>For more information about the difference between named and unnamed parameters, see <a
+    href="https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/binding-parameters-by-name-named-parameters">
+    Binding Parameters by Name (Named Parameters) at docs.microsoft.com
+  </a>.</p>
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE FUNCTION foo(n INT, m INT) RETURNS INT AS
+BEGIN
+    RETURN n + m;
+END;
+
+CREATE PROCEDURE test AS
+BEGIN
+    foo n = 1, m = 2;
+
+--- The following call misses parameter names and will be highlighted
+    foo 1, 2;
+END;</code></pre>
+<p>Parameters <code>1, 2</code> in the <code>foo 1, 2;</code> call are highlighted because they miss names.</p>
+</body>
+</html>

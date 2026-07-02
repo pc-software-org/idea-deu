@@ -1,0 +1,42 @@
+<html>
+<body>
+<p>
+  The inspection reports <code>apiVersion()</code> method calls of <code>MockMvcTester</code> and <code>WebTestClient</code>
+  when <code>ApiVersionInserter</code> isn't configured for a test.
+</p>
+<p>
+  For example:
+</p>
+<pre><code lang="java">
+@WebMvcTest(MyController.class)
+public class MvcTest {
+
+    @Test
+    void testEndpoint(@Autowired MockMvcTester tester) {
+        tester.get().uri("/hello")
+                .apiVersion(1.1)
+                .assertThat()
+                .hasStatusOk();
+    }
+}
+</code></pre>
+<p>
+  In this case a test configuration should be added for the test:
+</p>
+<pre><code lang="java">
+@WebMvcTest(MyController.class)
+public class MvcTest {
+
+    // ... tests
+
+    @TestConfiguration
+    static class MvcTestConfig implements MockMvcBuilderCustomizer {
+        @Override
+        public void customize(ConfigurableMockMvcBuilder<?> builder) {
+            builder.apiVersionInserter(ApiVersionInserter.useHeader("Api-Version"));
+        }
+    }
+}
+</code></pre>
+</body>
+</html>

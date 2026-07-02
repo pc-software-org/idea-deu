@@ -1,0 +1,6 @@
+<html>
+<body>
+Replaces the asterisk (<code>*</code>) with a column list from the table. The intention works inside SELECT clauses.
+<!-- tooltip end -->
+</body>
+</html>

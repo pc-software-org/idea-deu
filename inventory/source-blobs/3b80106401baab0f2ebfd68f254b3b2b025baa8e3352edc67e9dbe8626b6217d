@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports unreachable statements inside SQL routines.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE FUNCTION foo() RETURNS INT AS
+BEGIN
+    THROW;
+    RETURN 1;
+END;</code></pre>
+<p>In Microsoft SQL Server, the <code>THROW</code> statement raises an exception and transfers execution to the CATCH block of the TRY...CATCH
+  construct. Therefore, the <code>RETURN 1;</code> part will never be executed.</p>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an unnecessary <code>continue</code> statement at the end of a loop. Suggests removing such statements.
+</body>
+</html>

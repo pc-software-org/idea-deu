@@ -1,0 +1,22 @@
+<html>
+<body>
+Reports the following JPA specification errors:<br/>
+<ul>
+  <li>Entity listener classes without public no-argument constructors</li>
+  <li>Entity listener methods with incorrect signatures</li>
+</ul><br/>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Entity
+  @EntityListeners(value = JavaEntityListener.class)
+  class JavaEntity { ... }
+
+  class JavaEntityListener {
+
+    @PostLoad
+    void postLoad(String parameter) { ... } // Error: method 'postLoad' should take parameter of type 'Object' here
+  }
+</code></pre>
+</body>
+</html>

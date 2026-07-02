@@ -1,0 +1,6 @@
+<html>
+<body>
+If an item is indexed consequently in variable declarations and/or assignments (for example, <code>var x = r[0]; y = r[1]; z = r[55]</code>),
+converts those variables and/or assignments to a destructuring declaration or assignment.
+</body>
+</html>

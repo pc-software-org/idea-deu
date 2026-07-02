@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports unresolved SQL references.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE users(id INT, name VARCHAR(40));
+CREATE TABLE admins(id INT, col1 INT);
+
+SELECT users.id, admins.id FROM admins WHERE admins.id > 1;</code></pre>
+<p>The <code>users.id</code> column is unresolved because the <code>users</code> table is missing in the FROM clause.</p>
+</body>
+</html>

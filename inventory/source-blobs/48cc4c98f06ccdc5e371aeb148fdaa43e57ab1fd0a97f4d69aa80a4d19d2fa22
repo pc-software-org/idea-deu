@@ -1,0 +1,26 @@
+<html>
+<body>
+Reports truncations of string arguments in ISNULL functions.
+
+<p>The ISNULL syntax is <code>ISNULL(check_expression, replacement_value)</code>.
+</p>
+
+<p>According to <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/isnull-transact-sql" target="_blank">ISNULL at
+  docs.microsoft.com</a>, <code>replacement_value</code> will be truncated if <code>replacement_value</code> is longer than
+  <code>check_expression</code>.
+</p>
+
+<p>Example (Microsoft SQL Server):</p>
+
+<pre><code>DECLARE @name1 VARCHAR(2) = NULL;
+DECLARE @name2 VARCHAR(10) = 'Example';
+DECLARE @name3 VARCHAR(2) = 'Hi';
+
+  -- `@name2` is VARCHAR(10) and will be truncated
+SELECT ISNULL(@name1, @name2);
+
+  -- `@name3` is VARCHAR(2) as `@name1` and will not be truncated
+SELECT ISNULL(@name1, @name3);</code></pre>
+
+</body>
+</html>

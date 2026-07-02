@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a template reference variable that is not assigned to a directive when using <code>exportAs</code> or is assigned to multiple
+directives.
+</body>
+</html>

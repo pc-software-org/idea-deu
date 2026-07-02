@@ -1,0 +1,5 @@
+<html>
+<body>
+Merges sequential <code>if</code> statements that have identical conditions. Note that this may change the order of execution.
+</body>
+</html>

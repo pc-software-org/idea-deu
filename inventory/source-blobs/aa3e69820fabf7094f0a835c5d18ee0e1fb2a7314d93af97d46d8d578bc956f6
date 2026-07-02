@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a URL of an external JavaScript library that is not associated with
+any locally stored file. Suggests downloading the library.
+Such association enables the IDE to provide proper code completion and navigation. 
+</body>
+</html>

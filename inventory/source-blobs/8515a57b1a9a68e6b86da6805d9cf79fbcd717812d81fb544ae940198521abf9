@@ -1,0 +1,16 @@
+<html>
+<body>
+Reports a <code>typeof</code> or <code>instanceof</code> unsound type guard check.
+The <code>typeof x</code> type guard can be unsound in one of the following two cases:
+<ul>
+<li><code>typeof x</code> never corresponds to the specified value (for example, <code>typeof x === 'number'</code> when <code>x</code> is of the type 'string | boolean')</li>
+<li><code>typeof x</code> always corresponds to the specified value (for example,  <code>typeof x === 'string'</code> when <code>x</code> is of the type 'string')</li>
+</ul>
+<br>
+The <code>x instanceof A</code> type guard can be unsound in one of the following two cases:
+<ul>
+  <li>The type of <code>x</code> is not related to <code>A</code></li>
+  <li>The type of <code>x</code> is <code>A</code> or a subtype of <code>A</code></li>
+</ul>
+</body>
+</html>

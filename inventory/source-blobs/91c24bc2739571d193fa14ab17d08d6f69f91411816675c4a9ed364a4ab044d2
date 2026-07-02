@@ -1,0 +1,6 @@
+<html>
+<body>
+Highlights request name in run block which has no specified import file. 
+Suggests adding import for the file which contains this named request.
+</body>
+</html>

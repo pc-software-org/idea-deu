@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a function with multiple return points.
+Such functions are hard to understand and maintain.
+</body>
+</html>

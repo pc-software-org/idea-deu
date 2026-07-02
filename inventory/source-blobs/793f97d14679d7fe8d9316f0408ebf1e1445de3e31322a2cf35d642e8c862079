@@ -1,0 +1,5 @@
+<html>
+<body>
+Extracts hard-coded <code>&lt;property&gt;</code> value in the Spring <code>&lt;bean&gt;</code> definitions into configuration file.
+</body>
+</html>

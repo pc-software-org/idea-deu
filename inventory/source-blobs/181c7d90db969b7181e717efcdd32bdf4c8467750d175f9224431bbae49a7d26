@@ -1,0 +1,7 @@
+<html>
+<body>
+Creates a non-existent macro or function and places it in an implicitly imported
+FreeMarker file so that there will be no declaration in source code, but references
+will be correctly resolved and validated. Used for dynamic macro or functions.
+</body>
+</html>

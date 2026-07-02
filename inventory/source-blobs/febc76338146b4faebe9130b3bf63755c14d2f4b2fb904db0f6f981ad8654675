@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a function with <code>Promise</code> chains in the <code>return</code> statement to an <code>async</code> function with <code>await</code> expressions and <code>catch</code> handling.
+</body>
+</html>

@@ -10,14 +10,17 @@ from .validation import Finding
 
 
 class ExclusionReason(StrEnum):
+    ALREADY_LOCALIZED = "already_localized"
     CONTAINER_BUDGET_EXCEEDED = "container_budget_exceeded"
     CORRUPT_ARCHIVE = "corrupt_archive"
+    COLLISION_NOT_SELECTED = "collision_not_selected"
     DIRECTORY = "directory"
     DUPLICATE_MEMBER = "duplicate_member"
     LOCALIZED = "localized"
     MEMBER_BUDGET_EXCEEDED = "member_budget_exceeded"
     NESTED_ARCHIVE = "nested_archive"
     NESTED_JAR_TOO_LARGE = "nested_jar_too_large"
+    NON_TRANSLATABLE_RESOURCE = "non_translatable_resource"
     NOT_JAR = "not_jar"
     RESOURCE_TOO_LARGE = "resource_too_large"
     TOTAL_NESTED_JAR_BYTES_EXCEEDED = "total_nested_jar_bytes_exceeded"

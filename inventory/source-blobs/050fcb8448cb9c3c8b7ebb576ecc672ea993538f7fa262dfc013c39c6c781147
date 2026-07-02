@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>Reports attempts to inject Spring Expression Language (SpEL) into static fields ('null' value is injected).</p>
+
+<p><b>Example:</b></p>
+<pre><code>
+@Controller
+public class MyController {
+    <strong>@Value</strong>("#{systemProperties['some.key']}")  //  Injection to static fields is not allowed
+    static String spelWithDefaultValue;
+}
+</code></pre>
+</body>
+</html>

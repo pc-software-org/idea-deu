@@ -1,0 +1,11 @@
+<html>
+<body>
+Verifies that the <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">font-family</a></code> property
+contains a generic font family name as a fallback alternative.
+<p>
+  Generic font family names are: <code>serif</code>, <code>sans-serif</code>, <code>cursive</code>, <code>fantasy</code>,
+  and <code>monospace</code>.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

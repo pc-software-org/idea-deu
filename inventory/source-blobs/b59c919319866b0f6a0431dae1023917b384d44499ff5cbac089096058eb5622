@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a discrepancy detected by the <a href="https://standardjs.com/">JavaScript Standard Style</a> linter.
+<!-- tooltip end -->
+<br/><br/>
+The highlighting severity in the editor is based on the severity level the linter reports.
+</body>
+</html>

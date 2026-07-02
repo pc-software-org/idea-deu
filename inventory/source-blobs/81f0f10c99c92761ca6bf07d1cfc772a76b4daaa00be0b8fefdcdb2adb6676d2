@@ -1,0 +1,11 @@
+<html>
+<body>
+Checks <a href="https://github.com/postcss/postcss-media-minmax">range context</a> syntax, which may alternatively be used for
+media features with a 'range' type.
+<!-- tooltip end -->
+<p>Example:</p>
+<pre><code>
+@media screen and (500px &lt;= width &lt;= 1200px) {}
+</code></pre>
+</body>
+</html>

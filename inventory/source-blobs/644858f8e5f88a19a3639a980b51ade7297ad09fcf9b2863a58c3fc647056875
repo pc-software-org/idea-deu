@@ -1,0 +1,8 @@
+<html>
+<body>
+Quotes identifiers.
+<!-- tooltip end -->
+<p>Identifiers delimited by quotation marks can be either reserved keywords or can contain characters that are not generally
+  allowed by syntax rules for identifiers.</p>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a private field that can be made readonly (for example, if the field is assigned only in the constructor).
+</body>
+</html>

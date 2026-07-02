@@ -1,0 +1,25 @@
+<html>
+<body>
+Reports unresolved symbols in named and native queries and related API methods:
+<ul>
+  <li>Unknown named query</li>
+  <li>Unknown query parameter</li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Entity
+  @NamedQuery(name = "SelectByConditionQuery", query = "...")
+  public class JavaEntity { ... }
+
+  class Main {
+    public static void executeQuery() {
+      Persistence.createEntityManagerFactory("")
+        .createEntityManager()
+        .createNamedQuery("SelectAllQuery") // Error: unknown query name
+        ...
+    }
+  }
+</code></pre>
+</body>
+</html>

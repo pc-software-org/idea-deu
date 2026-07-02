@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports unresolved properties from <code>*.properties</code> files.
+
+<p><b>Example JSP file:</b></p>
+<pre><code>
+&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;%@ taglib uri="/tags/fmt" prefix="fmt" %&gt;
+
+&lt;fmt:message bundle="bundle.properties" key="unknown.property"/&gt; // Error: no such property inside referenced file
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+<p>Reports missing or empty <code>prefix</code> attribute value in the <code>@io.smallrye.config.ConfigMapping</code> annotation.</p>
+<p>The IDE requires a correctly specified prefix to look up configuration properties.</p>
+</body>
+</html>

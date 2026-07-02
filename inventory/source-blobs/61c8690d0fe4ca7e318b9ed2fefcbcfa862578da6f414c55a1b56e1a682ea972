@@ -1,0 +1,19 @@
+<html>
+<body>
+Reports a common JavaScript pattern for detecting
+the browser or operating system in which the script is run. In addition
+to pointing out non-portable constructs, these platform detection patterns
+are often incomplete and easily fooled. For most cases, detection of individual
+environment features is preferable to attempting to detect the entire platform.
+<p>Patterns detected include: </p>
+<ul>
+  <li><code>document.all</code></li>
+  <li><code>document.layers</code></li>
+  <li><code>navigator.userAgent</code></li>
+  <li><code>navigator.oscpu</code></li>
+  <li><code>navigator.appName</code></li>
+  <li><code>navigator.appCodeName</code></li>
+  <li><code>navigator.platform</code></li>
+</ul>
+</body>
+</html>

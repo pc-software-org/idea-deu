@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage of a Universal Module Definition (UMD) global variable if the current file is a module (ECMAScript or CommonJS).
+Referencing UMD variables without explicit imports can lead to a runtime error if the library isn't included implicitly.
+</body>
+</html>

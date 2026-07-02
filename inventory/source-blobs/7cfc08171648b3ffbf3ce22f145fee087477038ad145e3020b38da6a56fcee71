@@ -1,0 +1,7 @@
+<html>
+<body>
+Joins a series of subsequent variable declaration statements of the same kind into a single statement.
+For example, <code>var a; var b;</code> becomes <code>var a, b;</code>
+<!-- tooltip end -->
+</body>
+</html>

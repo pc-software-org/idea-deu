@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an invalid Angular component specified in the module’s <code>bootstrap</code> or <code>entryComponents</code> property.
+</body>
+</html>

@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a module from a <code>require()</code> call or an <code>import</code> statement that is not installed or is not listed in package.json dependencies.
+<p>Suggests installing the module and/or including it into package.json.</p>
+<p>For <code>require()</code> calls, works only in the files from the scope of <em>Node.js Core</em> JavaScript library.</p>
+</body>
+</html>

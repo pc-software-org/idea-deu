@@ -1,0 +1,18 @@
+<html>
+<body>
+Reports property type mismatch for JPA attributes.
+
+<p><b>Example:</b></p><br/>
+<pre><code lang="java">
+  @Entity
+  public class JavaEntity {
+
+    @OneToOne
+    Map&lt;Integer, AnotherEntity&gt; incorrectRelationship; // Error: 'One To One' attribute type should be an entity, not a map
+
+    @ManyToMany
+    Map&lt;Integer, AnotherEntity&gt; correctRelationship;
+  }
+</code></pre>
+</body>
+</html>

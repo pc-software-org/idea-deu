@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports an <code>if</code> statement that
+can be simplified to a single assignment or
+a <code>return</code> statement.  <p>Example:</p>
+<pre><code>
+if(foo())
+ {
+  return true;
+ }
+ else
+ {
+   return false;
+ }
+</code></pre>
+<p>After applying the quick-fix the code looks as follows:</p>
+<pre>
+ <code>return foo();</code>
+</pre>
+</body>
+</html>

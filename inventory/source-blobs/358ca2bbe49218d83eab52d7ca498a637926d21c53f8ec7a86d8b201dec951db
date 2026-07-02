@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a <code>switch</code> statement where control can proceed from a branch to the next one.  Such "fall-through" often
+indicates an error, for example, a missing <code>break</code> or <code>return</code>.
+</body>
+</html>

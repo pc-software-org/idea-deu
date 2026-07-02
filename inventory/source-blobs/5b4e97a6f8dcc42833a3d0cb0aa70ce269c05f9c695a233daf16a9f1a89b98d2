@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports redundant ordering directions like ASC and DESC in ORDER BY clauses.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo(a INT, b INT, c INT);
+SELECT * FROM foo ORDER BY a ASC, b DESC, c ASC;</code></pre>
+<p>The ORDER BY keyword sorts the records in the ascending order by default. So, the <code>ASC</code> keyword for <code>a</code> and
+  <code>c</code> columns is redundant.</p>
+</body>
+</html>

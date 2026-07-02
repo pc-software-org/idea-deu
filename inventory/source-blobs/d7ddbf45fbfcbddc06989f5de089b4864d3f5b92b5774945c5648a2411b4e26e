@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a labeled <code>break</code> statement
+whose labels may be removed without changing the flow of control.
+</body>
+</html>

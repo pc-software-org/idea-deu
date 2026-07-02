@@ -1,0 +1,6 @@
+<html>
+<body>
+Extracts inline CSS (<code>style</code> attribute value) to a <code>&lt;style&gt;</code> tag in the current HTML file or to a separate style
+sheet file.
+</body>
+</html>

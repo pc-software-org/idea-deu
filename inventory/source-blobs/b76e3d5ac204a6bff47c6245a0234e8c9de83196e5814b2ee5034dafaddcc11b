@@ -1,0 +1,57 @@
+<html>
+<body>
+<p>Reports issues with the <a href="https://spring.io/projects/spring-security">Spring Security</a> XML-based context:</p>
+
+<ul>
+  <li>Unresolved bean references</li>
+  <li>Missing required tags or attributes</li>
+  <li>Incorrect property types</li>
+  <li>Inconsistent <code>enum</code> properties</li>
+  <li>Incorrect types of referenced beans</li>
+</ul>
+
+<p>Also reports the following issues:</p>
+
+<ul>
+  <li>&lt;https&gt; configuration errors
+    <ul>
+      <li>&lt;http&gt; with the pattern '/**' must be the last one</li>
+      <li>Multiple &lt;http&gt; elements without 'pattern' are not allowed</li>
+    </ul>
+  </li>
+  <li>&lt;http&gt; configuration errors
+    <ul>
+      <li>Empty tag if <code>security='none'</code></li>
+    </ul>
+  </li>
+  <li>&lt;user-service&gt;
+    <ul>
+      <li>Must either have attribute 'properties' or list of &lt;user&gt; elements</li>
+    </ul>
+  </li>
+  <li>&lt;ldap-server&gt;
+    <ul>
+      <li>'manager-password' is required when 'manager-dn' is used</li>
+      <li>Must either have 'user-context-mapper-ref' or 'user-details-class'</li>
+    </ul>
+  </li>
+  <li> &lt;authentication-provider&gt;
+    <ul>
+      <li>Only one kind of user-service is allowed</li>
+    </ul>
+  </li>
+  <li>&lt;global-method-security&gt;
+    <ul>
+      <li>'pre-post-annotations' must have the value 'enabled' to use &lt;pre-post-annotation-handling&gt;'</li>
+      <li>Cannot use 'mode' with value 'aspectj' for &lt;protect-pointcut&gt; and &lt;intercept-url&gt;</li>
+      <li>'requires-channel' attribute only allowed for parent &lt;http&gt;</li>
+    </ul>
+  </li>
+  <li>&lt;protect&gt;
+    <ul>
+      <li>Mixing &lt;protect&gt; with &lt;global-method-security&gt; is not recommended</li>
+    </ul>
+  </li>
+</ul>
+</body>
+</html>

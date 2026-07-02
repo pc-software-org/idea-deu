@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports INSERT statements that assign values to generated columns. Generated columns can be read, but their values can not be directly
+  written.
+<p>Example (PostgreSQL):</p>
+<pre><code>CREATE TABLE foo
+(
+   col1 INT,
+   col2 INT GENERATED ALWAYS AS (col1 + 1) STORED
+);
+INSERT INTO foo(col1, col2) VALUES (1, 2);</code>
+</pre>
+<p>You cannot insert <code>2</code> into the <code>col2</code> column because this column is generated.
+  For this script to work, you can change <code>2</code> to DEFAULT.</p>
+<code>INSERT INTO foo(col1, col2) VALUES (1, DEFAULT);</code>
+</body>
+</html>

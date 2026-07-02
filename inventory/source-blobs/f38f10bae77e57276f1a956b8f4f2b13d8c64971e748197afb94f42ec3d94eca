@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports duplicate EnvVars in Kubernetes container definitions.
+<br>
+</body>
+</html>

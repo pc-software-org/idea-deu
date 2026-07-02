@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports a common mistake in TypeScript code, when a class field is declared as a constructor parameter, and then this parameter is assigned.<br/>
+In this case, the corresponding field <i>won't</i> be assigned, only the local parameter value is modified.
+<pre><code>
+class Foo {
+  constructor(private p: number) {
+    p = 1; //must be this.p = 1;
+  }
+}
+</code></pre>
+</body>
+</html>

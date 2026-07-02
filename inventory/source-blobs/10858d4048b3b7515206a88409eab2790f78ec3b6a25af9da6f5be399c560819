@@ -1,0 +1,24 @@
+<html>
+<body>
+Reports the following problems inside `application.xml` configuration files:
+<ul>
+  <li>References to non-instantiable classes</li>
+  <li>References to classes that do not extend required class</li>
+  <li>References to classes with inappropriate scope</li>
+  <li>Tag and attribute values that do not match required pattern (for example, Java Identifiers)</li>
+  <li>Tags that do not include required children tags or attributes</li>
+  <li>Tags that define objects with duplicate names</li>
+</ul>
+
+<p><b>Example:</b></p><br/>
+<pre><code>
+&lt;application&gt;
+    &lt;module id="ExampleWebModule"&gt;
+      &lt;web&gt; // Error: 'web-uri' child tag should be defined
+        &lt;context-root&gt;ExampleWebApp&lt;/context-root&gt;
+      &lt;/web&gt;
+    &lt;/module&gt;
+&lt;/application&gt;
+</code></pre>
+</body>
+</html>

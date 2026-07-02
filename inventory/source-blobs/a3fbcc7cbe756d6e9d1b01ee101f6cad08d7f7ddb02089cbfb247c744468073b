@@ -1,0 +1,9 @@
+<html>
+<body>Reports a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function">function</a> expression.
+Suggests converting it to an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">arrow function</a>.
+<p>Example:</p>
+<pre><code>arr.map(function(el) {return el + 1})</code></pre>
+<p>After applying the quick-fix the code looks as follows:</p>
+<pre><code>arr.map(el => el + 1)</code></pre>
+</body>
+</html>

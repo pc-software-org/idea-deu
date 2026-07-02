@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports usages of DELETE or UPDATE statements without WHERE clauses.
+  <p>Without WHERE clauses, DELETE drops all the data from the table, and UPDATE overwrites values for all the table rows.</p>
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE t1 (a TEXT, b INT, c BOOLEAN);
+update t1 set  a = 'Smith';
+delete from t1;</code></pre>
+</body>
+</html>

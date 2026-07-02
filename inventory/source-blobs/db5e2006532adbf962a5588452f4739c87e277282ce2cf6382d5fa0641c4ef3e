@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a <code>let</code> declaration that can be made <code>const</code>.<br/>
+</body>
+</html>

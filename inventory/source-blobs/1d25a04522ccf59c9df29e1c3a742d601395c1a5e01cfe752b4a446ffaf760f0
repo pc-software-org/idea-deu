@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a component that is matched on an embedded template element <code>&lt;ng-template&gt;</code> or multiple components matched
+on any other element.
+</body>
+</html>

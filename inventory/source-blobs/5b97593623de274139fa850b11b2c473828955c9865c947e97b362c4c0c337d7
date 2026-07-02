@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports a type argument that is equal to the default one and can be removed.
+<p>
+Example:
+<pre><code>
+type Foo&lt;T=number&gt; = T;
+let z: Foo&lt;number&gt;;
+</code></pre>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<html>
+<body>
+Adds the current file to the list of external schema specifications if it contains a <code>CustomResourceDefinition</code>.
+</body>
+</html>

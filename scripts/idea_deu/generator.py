@@ -41,17 +41,26 @@ class MappingResourceProvider:
 
 class DistributionResourceProvider:
     """Read an inventoried member from its nested JAR without extraction."""
-    def __init__(self, archive: object): self.archive = archive if hasattr(archive, "read") else Path(archive)  # type: ignore[arg-type]
+    def __init__(self, archive: object):
+        self.archive = archive if hasattr(archive, "read") else Path(archive)  # type: ignore[arg-type]
+        if hasattr(self.archive, "seek"): self.archive.seek(0)  # type: ignore[union-attr]
+        self._outer = zipfile.ZipFile(self.archive)
+        self._container_name: str | None = None
+        self._nested: zipfile.ZipFile | None = None
+
     def read(self, record: ResourceRecord) -> bytes:
         try:
-            if hasattr(self.archive, "seek"): self.archive.seek(0)  # type: ignore[union-attr]
-            with zipfile.ZipFile(self.archive) as outer:
-                info = _unique_zip_member(outer, record.container)
+            if self._container_name != record.container:
+                if self._nested is not None: self._nested.close()
+                info = _unique_zip_member(self._outer, record.container)
                 if _zip_symlink(info): raise GenerationError(f"symbolic-link container: {record.container}")
-                with outer.open(info) as stream, zipfile.ZipFile(io.BytesIO(stream.read())) as nested:
-                    resource = _unique_zip_member(nested, record.resource_path)
-                    if _zip_symlink(resource): raise GenerationError(f"symbolic-link resource: {record.resource_path}")
-                    return nested.read(resource)
+                with self._outer.open(info) as stream:
+                    self._nested = zipfile.ZipFile(io.BytesIO(stream.read()))
+                self._container_name = record.container
+            assert self._nested is not None
+            resource = _unique_zip_member(self._nested, record.resource_path)
+            if _zip_symlink(resource): raise GenerationError(f"symbolic-link resource: {record.resource_path}")
+            return self._nested.read(resource)
         except GenerationError: raise
         except (OSError, zipfile.BadZipFile, KeyError) as exc: raise GenerationError(f"cannot read source resource: {exc}") from exc
 

@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>
+  Reports unknown HTTP headers that do not match any <a href="https://www.iana.org/assignments/message-headers/message-headers.xml">publicly
+  known headers</a>. The quick fix suggests adding the header to the list of custom headers to avoid triggering this inspection in the
+  future.
+</p>
+<!-- tooltip end -->
+<p>Custom HTTP headers are listed for the inspection with the same name in the HTTP Client group.</p>
+</body>
+</html>

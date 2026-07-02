@@ -1,0 +1,33 @@
+spring.modulith=Spring Modulith
+
+inspection.api.usage.name=Restricted module API usage
+inspection.api.usage.no.allowed.dependencies=Module ''{0}'' has no allowed dependencies
+inspection.api.usage.not.allowed.dependency=Module ''{0}'' depends on: ''{1}''. But allowed dependencies are: [''{2}'']
+inspection.api.usage.not.exposed.dependency=Module ''{0}'' depends on non-exposed type ''{1}'' from module ''{2}''
+
+inspection.invalid.dependency.name=Invalid dependency declaration
+inspection.invalid.dependency.malformed=Malformed dependency identifier
+inspection.invalid.dependency.empty=Module dependency identifier can't be empty
+inspection.invalid.dependency.missing.module=Module ''{0}'' does not exist
+inspection.invalid.dependency.missing.named.interface=Named interface ''{0}'' does not exist
+
+inspection.simplify.event.listener.declaration=Event listener declaration can be simplified
+inspection.simplify.event.listener.declaration.message=Event listener declaration can be simplified with '@ApplicationModuleListener'
+
+quickfix.add.allowed.dependency=Add ''{0}'' as an allowed dependency of the ''{1}'' module
+quickfix.add.allowed.dependency.command=Adding Allowed Dependency
+
+quickfix.mark.class.named.interface=Annotate ''{0}'' with ''@NamedInterface''
+quickfix.mark.class.named.interface.command=Annotating a Class as a Named Interface
+
+quickfix.move.to.base.package=Move ''{0}'' to the ''{1}'' module base package
+
+quickfix.make.module.open=Make the ''{0}'' module open
+
+quickfix.simplify.event.listener=Simplify with '@ApplicationModuleListener'
+
+structure.modulith.modules=Modules
+structure.module.id=Id
+structure.module.allowed.dependencies=Allowed Dependencies
+structure.module.open=OPEN
+structure.named.interfaces=Named Interfaces

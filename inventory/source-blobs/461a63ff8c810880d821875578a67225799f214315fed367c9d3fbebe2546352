@@ -1,0 +1,3 @@
+notification.docker.invalid_image_definition.content=Unable to find JDK and set project SDK on current Docker image. Please change Docker image definition to proceed with project setup.
+notification.docker.invalid_image_definition.action.close_project.text=Close project
+notification.docker.invalid_image_definition.connection_break_reason.message=The IDE is closing due to a missing JDK in the Docker container

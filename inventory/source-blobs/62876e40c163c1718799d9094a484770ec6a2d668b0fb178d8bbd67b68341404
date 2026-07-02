@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an anonymous function. An explicit name of a function expression may be helpful for debugging.
+Ignores function expressions without names if they have a <code>name</code> property specified in the ECMAScript 6 standard.
+For example, <code>var bar = function() {};</code> is not reported.
+</body>
+</html>

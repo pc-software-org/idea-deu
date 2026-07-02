@@ -1,0 +1,5 @@
+<html>
+<body>
+Highlights references to non-existent Auth configurations. Suggests creating a new one in the current environment.
+</body>
+</html>

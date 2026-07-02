@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an <code>if</code> statement with identical <code>then</code> and <code>else</code> branches. Such statements are almost
+certainly an error.
+</body>
+</html>

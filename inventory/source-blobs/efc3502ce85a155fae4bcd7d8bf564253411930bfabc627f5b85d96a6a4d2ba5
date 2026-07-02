@@ -1,0 +1,69 @@
+#facet
+web.facet.display.name=Web
+
+#wizard
+framework.title.web.application=&Web Application
+
+#web.xml validator
+web.xml.validator.description=Web.xml
+progress.validating.web.xml.text=Validating web.xml descriptors\u2026
+
+warning.message.duplicate.welcome.file=Duplicate welcome-file
+error.message.duplicate.url.pattern=Duplicate url-pattern
+error.message.uri.pattern.must.not.contain.whitespaces=URI-pattern must not contain white spaces
+error.message.servlet.name.or.uri.pattern.should.be.defined=Either servlet-name or url-pattern child tag should be defined
+group.WebResourcesGroup.text=Web Page
+
+action.GenerateFilterAction.text=&Filter\u2026
+action.GenerateServletAction.text=&Servlet\u2026
+
+web.contexts.no.contexts=No web directories found, add one in Project Settings | Facets first
+web.contexts=Web Contexts
+web.context=Web Context
+web.contexts.caption=To change Web Context settings that {0} uses to resolve web paths \
+  in HTML and JSP for a file, a directory, or the entire project, \
+  add its path if necessary and then choose a context from the drop-down list.
+filter.should.have.a.mapping=Filter should have a mapping
+servlet.should.have.a.mapping=Servlet should have a mapping
+action.CreateJavaeeWebPageAction.text=JSP/JSPX Page
+action.CreateJavaeeWebPageAction.description=Creates new JSP/JSPX page
+JasperValidatorConfigurable.run.jasper.validator=Run Jasper validator
+
+inspection.javaee.web.xml.name=Web.xml errors
+inspection.javaee.web.warnings.name=Web.xml warnings
+inspection.javaee.web.xml.mime.type=MIME type
+inspection.javaee.web.xml.mime.type.message=''{0}'' is not a valid MIME type
+inspection.javaee.web.servlet.mapping=Servlet mapping
+web.group.names.javaee.issues=Java EE
+
+model.object.type.servlet=Servlet
+model.object.type.filter=Filter
+terms.web.directory=Web Directory
+web.project.structure.root.type.name.java.web=Java Web
+web.project.structure.root.type.name.web=Web
+prefix.name.suffix.panel.name=&Name:
+create.jsp.jspx.page=Create JSP/JSPX Page
+jsp.kind.file=JSP file
+jspx.kind.file=JSPX file
+web.application=Web Application
+specification.version=Specification version:
+label.descriptor.version=Descriptor Version
+no.descriptor=<no descriptor>
+validation.tab.name=Validation
+web.framework.type=Web
+
+cannot.find.jasper.validator.for.0=Cannot find Jasper validator for {0}
+jasper.validator.jars.not.downloaded=Jasper validator JARs were not downloaded
+failed.to.download.jasper.validator.jars.0=Failed to download Jasper validator JARs: {0}
+cannot.run.jsp.validation.project.jdk.isn.t.specified=Cannot run JSP validation: project JDK is not specified
+cannot.run.jsp.validation.failed.to.determine.version.of.project.jdk.0=Cannot run JSP validation: failed to determine the version of the project JDK {0}
+javaee.web.option.create.java.6.annotated.class=Create Java EE 6+ annotated class
+jsp.2.0.validation.is.not.supported.anymore.jsp.2.1.will.be.used.instead=JSP 2.0 validation is not supported anymore. JSP 2.1 will be used instead
+
+web.gutter.name=Web classes: Servlet, Filter, Listener
+web.open.tool.window=Open Web tool window
+web.config.gutter.name=Web web.xml configuration file
+
+group.JspActions.text=JSP Actions
+action.ValidateJsp.text=_Validate JSP
+action.ValidateJsp.description=Validate selected JSP files

@@ -1,0 +1,7 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/NestedAssignment.html -->
+<html>
+<body>
+Reports an assignment expression nested inside another expression, for example, <code>a = b = 1</code>.
+Such expressions may be confusing and violate the general design principle that a given construct should do precisely one thing.
+</body>
+</html>

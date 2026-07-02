@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+  Reports incorrect <code>@Scheduled</code> method declarations.
+</p>
+<p>
+  According to the <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/Scheduled.html">Spring Documentation</a>,
+  methods to be scheduled must not expect any arguments.
+</p>
+<p>
+  If a method needs to interact with other objects from an <code>Application Context</code>, they should be provided through dependency injection.
+</p>
+</body>
+</html>

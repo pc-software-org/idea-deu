@@ -1,0 +1,5 @@
+<html>
+<body>
+Checks for the presence of <pre><code>@Converter</code></pre> annotation on JPA converter.
+</body>
+</html>

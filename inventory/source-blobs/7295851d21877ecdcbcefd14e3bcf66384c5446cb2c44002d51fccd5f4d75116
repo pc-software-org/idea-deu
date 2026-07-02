@@ -1,0 +1,16 @@
+<html>
+<body>
+<p>Reports managed beans with public instance fields that are not in the default <code>@Dependent</code> scope.
+  According to the CDI specification, contextual scopes
+  (<code>@RequestScoped</code>, <code>@ApplicationScoped</code>, <code>@SessionScoped</code>, and <code>ConversationScoped</code>)
+  are not allowed for managed beans with public instance fields.
+</p>
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @ApplicationScoped // Warning: Bean with non-default scope must not have public fields
+  class Car {
+    public String engine;
+  }
+</code></pre>
+</body>
+</html>

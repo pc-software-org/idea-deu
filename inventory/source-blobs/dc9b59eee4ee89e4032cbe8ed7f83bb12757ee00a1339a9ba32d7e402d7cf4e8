@@ -1,0 +1,8 @@
+<html>
+<body>
+<a href="https://docs.spring.io/spring-framework/reference/integration/cache/annotations.html">Using @Cacheable</a>:
+In proxy mode (which is the default), only external method calls coming in through the proxy are intercepted.
+This means that self-invocation (in effect, a method within the target object calling another method of the target object) will not lead to an actual
+caching at runtime even if the invoked method is marked with @Cacheable
+</body>
+</html>

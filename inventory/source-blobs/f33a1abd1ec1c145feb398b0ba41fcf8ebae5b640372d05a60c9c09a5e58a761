@@ -1,0 +1,15 @@
+<html>
+<body>
+<p>
+  Reports endpoint methods without the <code>@Produces</code> or <code>@Consumes</code> annotations.
+</p>
+<p>
+  Quarkus analyzes these annotations and restricts the number of JAX-RS providers included in the native executable to the minimum required
+  by the application. This reduces the size of the native executable.
+</p>
+<p>
+  Annotate methods or the whole class with <code>@Produces</code> or <code>@Consumes</code> (if supported by the HTTP method) and specify
+  the target MIME types.
+</p>
+</body>
+</html>

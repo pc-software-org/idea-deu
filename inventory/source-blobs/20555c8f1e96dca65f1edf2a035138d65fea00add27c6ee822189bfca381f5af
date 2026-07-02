@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports invalid security role names.
+
+<p><b>Example:</b></p>
+<pre><code>
+  &lt;web-app&gt;
+    &lt;security-role&gt;
+      &lt;role-name&gt;custom#role&lt;/role-name&gt; // Error: invalid name
+    &lt;/security-role&gt;
+    &lt;security-role&gt;
+      &lt;role-name&gt;customRole&lt;/role-name&gt; // Good name
+    &lt;/security-role&gt;
+  &lt;/web-app&gt;
+</code></pre>
+</body>
+</html>

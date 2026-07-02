@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports  a <code>break</code> or <code>continue</code> statement inside a <code>finally</code>
+block. Such statements are very confusing, may hide exceptions, and
+complicate debugging.
+</body>
+</html>

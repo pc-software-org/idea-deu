@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a function call whose target is another function call, for example, <code>foo().bar()</code>
+</body>
+</html>

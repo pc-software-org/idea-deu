@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports incorrectly defined persistent object classes in the following cases:
+
+<ul>
+  <li>Class is not top-level</li>
+  <li>Class is final</li>
+  <li>Class is annotated several times</li>
+  <li>Class is defined as both a persistent entity and an entity listener</li>
+</ul>
+
+<p><b>Example:</b></p><br/>
+<pre><code lang="java">
+  @Entity
+  @EntityListeners(value = JavaEntity.class) // Error: both @Entity and @EntityListener annotations are pointing to the same class
+  public final class JavaEntity { // Error: persistent entity should not be final
+    ...
+  }
+</code></pre>
+</body>
+</html>

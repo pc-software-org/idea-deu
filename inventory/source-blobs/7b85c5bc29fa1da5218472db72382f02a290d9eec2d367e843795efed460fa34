@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces NATURAL JOIN with the JOIN-USING construction.
+</body>
+</html>

@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports unresolved references in MongoDB and JavaScript code.
+<p>Example:</p>
+<pre><code>db
+use foo
+  -- a reference to a non-existing collection
+db.non_existing_collection
+db['non_existing_collection']
+db['non_existing_collection'].find().hasNext()</code></pre>
+<p>The <code>non_existing_collection</code> collection does not exist in the database and will be reported.</p>
+</body>
+</html>

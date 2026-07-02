@@ -1,0 +1,6 @@
+<html>
+<body>
+Replaces a single-quoted string literal with an equivalent double-quoted string literal
+and makes sure that the double quotes are properly escaped within the string.<br>
+</body>
+</html>

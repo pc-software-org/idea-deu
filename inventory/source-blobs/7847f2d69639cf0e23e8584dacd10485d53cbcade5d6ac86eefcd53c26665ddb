@@ -1,0 +1,8 @@
+<html>
+<body>
+<p>
+  Reports vetoed <code>@Alternative</code> beans.
+  A bean is considered vetoed when it is annotated with <code>@Vetoed</code> or it is declared in a vetoed package.
+</p>
+</body>
+</html>

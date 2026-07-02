@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a non-ASCII symbol in a name.<br/><br/>
+If the 'Allow only ASCII names' option is selected, reports all names that contain non-ASCII symbols.<br/>
+Otherwise reports all names that contain both ASCII and non-ASCII symbols.
+</body>
+</html>

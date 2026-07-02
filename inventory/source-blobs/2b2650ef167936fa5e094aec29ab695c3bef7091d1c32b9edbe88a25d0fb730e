@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports a misplaced <code>@import</code> statement.
+<p>
+  According to the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">specification</a>,
+  an <code>@import</code> rule must be defined at the top of the stylesheet, before any other at-rule
+  (except <code>@charset</code> and <code>@layer</code>) and style declarations, or it will be ignored.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

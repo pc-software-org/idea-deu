@@ -1,0 +1,30 @@
+<html>
+<body>
+Reports illegal cursor states inside SQL routines.
+<ul>
+  <li>A routine has CLOSE or FETCH statements but a cursor might be closed.</li>
+  <li>A routine has the OPEN statement but a cursor might be opened.</li>
+</ul>
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE t(col INT);
+
+CREATE PROCEDURE foo() AS
+BEGIN
+DECLARE my_cursor CURSOR FOR SELECT * FROM t;
+DECLARE a INT;
+FETCH my_cursor INTO a;
+CLOSE my_cursor;
+END;</code></pre>
+<p>According to <a href="https://docs.microsoft.com/en-us/sql/t-sql/language-elements/close-transact-sql">CLOSE (Transact-SQL) at
+  docs.microsoft.com</a>, CLOSE must be issued on an open cursor, and CLOSE is not allowed on cursors that have only been declared or are
+  already closed. So, we need to open the cursor to fix the warning.</p>
+<pre><code>CREATE PROCEDURE foo() AS
+BEGIN
+DECLARE my_cursor CURSOR FOR SELECT * FROM t;
+DECLARE a INT;
+OPEN my_cursor;
+FETCH my_cursor INTO a;
+CLOSE my_cursor;
+END;</code></pre>
+</body>
+</html>

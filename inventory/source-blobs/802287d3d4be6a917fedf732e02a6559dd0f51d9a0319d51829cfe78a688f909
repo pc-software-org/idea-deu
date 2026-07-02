@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>Reports syntax errors in the Spring Expression Language (SpEL) code, such as unresolved references and invalid locations.</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+@Controller
+public class MyController {
+    @Value("#{T(java.lang.Math).<strong>unknown</strong>()}") // Cannot resolve property or method 'unknown'
+    public void setValue(String s) {}
+}
+</code></pre>
+</body>
+</html>

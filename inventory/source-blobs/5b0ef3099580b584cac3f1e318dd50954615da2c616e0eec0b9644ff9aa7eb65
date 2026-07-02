@@ -1,0 +1,16 @@
+<html>
+<body>
+Reports string literals that use national characters without the <code>N</code> prefix.
+<p>Without the N prefix, the string is converted to the default
+  code page of the database. This default code page may not recognize certain characters. For more information, see
+  <a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/nchar-and-nvarchar-transact-sql" target="_blank">nchar and nvarchar
+    (Transact-SQL)
+    at docs.microsoft.com</a>.</p>
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>SELECT 'abcde' AS a;
+SELECT N'abcde' AS b;
+SELECT 'абвгд' AS c;
+SELECT N'абвгд' AS d;</code></pre>
+<p>The <code>SELECT 'абвгд' AS c;</code> does not have the <code>N</code> prefix, the <code>'абвгд'</code> part will be highlighted.</p>
+</body>
+</html>

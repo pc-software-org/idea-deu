@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports missing persistence.xml configuration files and suggests adding the file to the persistence facet.
+</body>
+</html>

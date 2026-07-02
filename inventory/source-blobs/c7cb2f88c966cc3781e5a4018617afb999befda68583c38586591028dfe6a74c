@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports duplicate conditions in different branches of an
+<code>if</code> statement. Duplicate conditions usually represent programmer oversight.
+<p>Example:</p>
+<pre><code>
+  if (a) {
+    ...
+  } else if (a) {
+    ...
+  }
+</code>
+</pre>
+</body>
+</html>

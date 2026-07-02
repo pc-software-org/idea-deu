@@ -1,0 +1,24 @@
+<html>
+<body>
+<p>Reports invalid destination directories in <code>ADD</code> and <code>COPY</code> commands.</p>
+<p>
+  According to the <a href="https://docs.docker.com/engine/reference/builder/#add">Dockerfile specification</a>,
+  if multiple sources are specified, then the destination must be a directory, and it must end with a slash '/'.
+  Otherwise, Docker build will fail.
+</p>
+<!-- tooltip end -->
+<p><b>Examples:</b></p>
+<pre><code>
+  # all the commands below will fail
+  ADD textA.txt textB.txt relativeDir
+  ADD ["binaryA.jar", "binary2.jar", "destination"]
+  COPY text3.txt text4.txt /absolute/path
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  ADD textA.txt textB.txt relativeDir/
+  ADD ["binaryA.jar", "binary2.jar", "destination/"]
+  COPY text3.txt text4.txt /absolute/path/
+</code></pre>
+</body>
+</html>

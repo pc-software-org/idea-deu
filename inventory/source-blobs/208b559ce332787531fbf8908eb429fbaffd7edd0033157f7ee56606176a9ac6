@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage of a potentially invalid constructor function, for example: a function that is not a constructor after <code>new</code>, using
+a constructor's prototype or calling a constructor without <code>new</code>. A constructor function is assumed to have an upper case name (optional) or have an explicit JSDoc <code>@constructor</code> tag.
+</body>
+</html>

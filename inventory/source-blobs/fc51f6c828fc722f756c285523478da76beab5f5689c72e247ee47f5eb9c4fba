@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports SELECT aliases with names that match column names in the FROM clause.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo (a INT, b INT, c INT);
+SELECT a b, c FROM foo;</code></pre>
+<p>The <code>a</code> column uses the <code>b</code> alias but the <code>b</code> name is also used by the column from the <code>foo</code>
+table.</p>
+</body>
+</html>

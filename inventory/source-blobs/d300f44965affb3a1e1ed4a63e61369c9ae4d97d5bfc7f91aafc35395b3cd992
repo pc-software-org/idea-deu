@@ -1,0 +1,17 @@
+<!-- Copied from community/plugins/InspectionGadgets/src/inspectionDescriptions/ReplaceAssignmentWithOperatorAssignment.html -->
+<html>
+<body>
+Reports an assignment operation that can be replaced by an operator assignment to make your code shorter and probably clearer.
+<p>
+  Example:
+<pre>
+<code>  x = x + 3;</code>
+  <code>x = x / 3;</code>
+</pre>
+<p>After the quick fix is applied the result looks like:
+<pre>
+  <code>x += 3;</code>
+  <code>x /= 3;</code>
+</pre>
+</body>
+</html>

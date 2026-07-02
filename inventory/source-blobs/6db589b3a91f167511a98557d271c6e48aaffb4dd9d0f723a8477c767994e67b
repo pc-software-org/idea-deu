@@ -1,0 +1,47 @@
+<html>
+<body>
+<p>
+  Highlights endpoints' <code>version</code> attributes when a module has no API versioning configured.
+</p>
+<p>
+  API versioning can be configured in two ways:
+</p>
+<ul>
+  <li>
+    in a configuration file for Spring Boot projects
+  </li>
+  <li>
+    or providing an implementation of the <code>org.springframework.web.servlet.config.annotation.WebMvcConfigurer</code>
+    and overriding the <code>configureApiVersioning</code> method.
+  </li>
+</ul>
+<p>
+  For example:
+</p>
+<pre><code lang="Properties">
+  # For Spring Boot projects
+  spring.mvc.apiversion.use.header=Api-Version
+  spring.mvc.apiversion.default=1.0
+  spring.mvc.apiversion.detect-supported=false
+</code></pre>
+
+<p>
+  or:
+</p>
+
+<pre><code lang="java">
+  // This way is supported both for Spring Boot and Spring Framework projects
+  @Configuration
+  public class MyWebConfig implements WebMvcConfigurer {
+
+      @Override
+      public void configureApiVersioning(ApiVersionConfigurer configurer) {
+          configurer
+                  .useRequestHeader("Api-Version")
+                  .setDefaultVersion("1.0")
+                  .detectSupportedVersions(false);
+      }
+  }
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports <code>@AspectJ</code> Introduction inconsistency: it checks whether the <code>defaultImpl</code> is required and if yes, whether it implements
+the given interface.
+</body>
+</html>

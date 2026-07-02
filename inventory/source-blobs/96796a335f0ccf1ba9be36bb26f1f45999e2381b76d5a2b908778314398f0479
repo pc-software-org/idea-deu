@@ -1,0 +1,9 @@
+<html>
+<body>
+<p>Reports Hibernate XML configuration DB-related mapping errors including:</p>
+<ul>
+  <li>References to unrecognized catalogs/schemas/tables</li>
+  <li>References to unrecognized columns</li>
+</ul>
+</body>
+</html>

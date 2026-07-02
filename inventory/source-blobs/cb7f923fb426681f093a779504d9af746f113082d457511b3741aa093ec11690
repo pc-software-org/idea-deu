@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports missing identification property persistence objects.<br/>
+
+<p><b>Example:</b></p><br/>
+<pre><code lang="java">
+  @Entity
+  public class JavaEntity { // Error: entity class should have an @Id annotated property
+
+  }
+</code></pre>
+</body>
+</html>

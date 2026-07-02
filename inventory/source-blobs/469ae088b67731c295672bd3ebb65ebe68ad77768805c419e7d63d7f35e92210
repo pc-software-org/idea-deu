@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports references inside the following Spring Data JDBC annotations if they cannot be resolved within the configured datasource:<br/>
+<ul>
+  <li> @Table(name, schema)</li>
+  <li> @Column(name)</li>
+  <li> @MappedCollection(idColumn, keyColumn)</li>
+</ul><br/>
+
+<!-- tooltip end -->
+<p>
+  <b>NOTE:</b> Datasource can be configured via `Assign datasource` action or the corresponding gutter icon for entity class
+</p>
+</body>
+</html>

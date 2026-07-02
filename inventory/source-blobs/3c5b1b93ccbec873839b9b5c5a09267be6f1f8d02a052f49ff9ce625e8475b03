@@ -1,0 +1,112 @@
+http.request.ssl.cannot.determine.key.for.cert.error=Cannot determine private key for the certificate
+http.request.ssl.cert.file.already.contains.key.error=Certificate file already contains a private key
+http.request.ssl.cannot.add.key.to.key.store.error=Cannot add key to key store:\n{0}
+http.request.ssl.cannot.add.key.store.to.ssl.context.error=Cannot add key store to SSL context:\n{0}
+http.request.ssl.encrypted.key.without.passphrase.error=File contains an encrypted private key, but no passphrase provided
+http.request.ssl.no.cert.in.file.error=File does not contain a certificate
+http.request.ssl.cannot.read.certificate.error=Cannot open certificate:\n{0}
+http.request.ssl.cannot.read.p12.key.store.error=Cannot read P12 key store:\n{0}
+http.request.ssl.no.key.in.file.error=File does not contain a private key
+http.request.ssl.cannot.read.key.error=Cannot read key file:\n{0}
+http.request.ssl.error.response=SSL configuration error: {0}
+
+http.request.placeholder.run.ignore=Ignore ''{0}'' because the request is incomplete. Replace the ''$placeholder'' variable to run the request.
+rest.client.cannot.execute.response.handler.failed.title=Execution of JavaScript response handler failed
+rest.client.request.cannot.find.response.handler=Cannot find ''{0}'' response handler script
+rest.client.cannot.execute.pre.request.handler.failed.title=Execution of JavaScript pre-request handler failed
+rest.client.request.cannot.find.pre.request.handler=Cannot find ''{0}'' pre-request handler script
+rest.client.request.query.is.invalid=Cannot execute request because query parameter ''{0}'' is invalid
+rest.client.request.url.is.invalid=Cannot execute request because URL is invalid
+rest.client.request.cannot.create.file=Cannot create tmp file for multipart field ''{0}''
+rest.client.request.cannot.create.file.post=Cannot create tmp file for POST body
+rest.client.request.file.path.is.empty=Path to input file is empty
+rest.client.request.file.path.is.invalid=Cannot find input file ''{0}'' at {1}
+rest.client.request.file.path.is.invalid.fallback=Cannot find input file ''{0}''
+rest.client.request.cannot.dereference.psi=Cannot access request PSI
+rest.client.request.executor.not.found=Cannot execute request because no suitable runners were found
+rest.client.request.ambiguous.variable.error=Cannot execute request, because it references ambiguous variable ''{0}''
+
+rest.client.request.test.result=Tests failed: {0}, passed: {1}
+
+http.request.mime.type.registry.text.name=Text
+http.request.mime.type.registry.binary.name=Binary
+
+rest.client.request.error.status=Error in the request
+
+rest.client.request.pre.request.handler.failed.on.execution=Failed to execute pre-request handler
+rest.client.request.response.handler.failed.on.execution=Failed to execute the response handler
+rest.client.request.response.handler.finished.message=Script finished
+http.request.file.0.is.not.found.error.message=File ''{0}'' is not found
+http.request.failed.reading.0.error.message=Failed reading {0}
+rest.client.handler.script.compilation.error.heading=Syntax error: {0}
+rest.client.handler.script.compilation.error.at.position.description={0} at {1}:{2}
+rest.client.handler.script.compilation.error.at.position=at {0}:{1}
+rest.client.handler.script.runtime.error=Runtime error: {0}
+rest.client.handler.script.runtime.full.error={0} (at {1}:{2})
+
+# crypto
+http.client.crypto.support.unknown.encoding.error=Unknown encoding ''{0}''
+http.client.crypto.support.hex.length.error=Hex length must be divisible by 2, but ''{0}'' provided
+
+# Request error
+http.client.request.error.message.begin=Invalid request because of {0} at {1}
+http.client.request.substitution.error.message.begin=No substitution for {0} at {1}
+http.client.request.error.message.description=unsubstituted variable ''{0}''
+http.client.request.error.message.iteration.description=Invalid request because of {0} at {1} with index: {2}
+http.client.request.error.message.quickfixes.title=Possible solutions:
+http.client.request.error.message.add.to.env.quickfix=Add Variable To Existing Environment
+http.client.request.error.message.add.env.file.quickfix=Add new environment file
+http.client.request.error.message.run.with.env.quickfix=Run with environment
+http.client.request.read.timeout.error=Read timeout configuration error: {0}
+http.client.request.connection.timeout.error=Socket timeout configuration error: {0}
+http.client.request.no.file.error=Failed to find the file with name: {0}
+http.client.request.recursive.file.processing.error=Recursion limit was reached
+http.client.request.fil.already.in.processing.error=Recursive call. File {0} is already in processing
+http.client.request.no.request.error=Failed to find the request with name: {0} in specified imports: {1}
+
+# 'import' and 'export' preprocessor
+http.client.export.import.processor.export.not.top.level.message='export' must be top level
+http.client.export.import.processor.import.not.top.level.message='import' must be top level
+http.client.export.import.processor.module.expected.message=expected module name
+http.client.export.import.processor.from.expected.message=expected 'from'
+http.client.export.import.processor.class.exporting.message=class exporting is not supported
+http.client.export.import.processor.quotes.unsupported.message=quote aliases are unsupported
+http.client.export.import.processor.reexporting.message=exporting from another module is unsupported
+http.client.export.import.processor.quotes.non-default.no.name.message=non-default exported function has no name
+http.client.export.import.processor.quotes.destruction.message=destructing expression in export is unsupported
+http.client.export.import.processor.no.default.export.message=''{0}'' does not have a default export
+http.client.export.import.processor.no.export.message=''{0}'' does not export ''{1}''
+http.client.export.import.processor.unresolved.module.message=cannot find file for module ''{0}''
+http.client.export.import.processor.ambiguous.default.export.message=ambiguous default export, must be at most 1 default export
+
+# response info
+http.response.headers.with.content.type.summary=(Headers) \u2026{0}\u2026
+http.response.headers.without.content.type.summary=Headers
+
+# GraphQL
+http.client.graphql.over.ws.no.url.error.message=Cannot create GraphQL request over WebSocket: there is no URL in request
+http.client.graphql.over.ws.no.body.error.message=Cannot create GraphQL request over WebSocket: there is no request body in request
+http.client.graphql.empty.body.error=Cannot create GraphQL request: empty query
+
+# websockets
+http.client.ws.handshake.status.message=Handshake status:
+http.client.ws.unresolved.address.error.message=Cannot resolve address
+default.environment=<Default Environment>
+no.environment=<No Environment>
+
+#
+http.client.internal.error=Internal error
+
+# URLSearchParams
+url.search.params.unexpected.options.parameter=Unexpected options parameter: ''{0}''. Expected string, flat object or iterable of pairs.
+url.search.params.unexpected.iterable.entry=Unexpected iterable entry ''{0}''. Elements of the iterable must be pairs of strings, e.g. [\"a\", \"b\"].
+
+# Settings
+http.client.configurable.display.name=HTTP Client
+http.client.configurable.validation.failed=Invalid HTTP method: {0}
+http.client.configurable.command.line.editor.row.name=Custom HTTP methods:
+http.client.script_assertion_message=Assertion Error: ''{0}''
+http.client.configurable.custom.methods.row.comment=Comma-separated list of custom HTTP methods
+
+# JS
+http.client.js.import.file.not.found=File not found at path specified: ''{0}''

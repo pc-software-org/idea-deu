@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an arithmetic expression that include adding or subtracting zero, multiplying by
+zero or one, division by one, and shift by zero. Such expressions may result from not fully completed automated refactoring.
+</body>
+</html>

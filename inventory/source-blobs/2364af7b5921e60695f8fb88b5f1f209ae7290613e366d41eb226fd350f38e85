@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports if an <code>argNames</code> attribute is not defined in an <code>@AspectJ</code> annotation.
+<p>Defining <code>argNames</code> attributes in <code>@AspectJ</code> annotations is recommended since the method parameter names
+may not be available at runtime.</p>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a <code>for</code>, <code>while</code>, or <code>do</code> statement
+whose bodies are guaranteed to execute at most once. Normally, this indicates an error.
+</body>
+</html>

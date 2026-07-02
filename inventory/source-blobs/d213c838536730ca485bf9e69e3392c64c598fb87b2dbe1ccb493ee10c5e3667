@@ -1,0 +1,10 @@
+<html>
+<body>
+Checks for the non-owning side of the <pre><code>@OneToOne</code></pre> associations with the <pre><code>FetchType.Lazy</code></pre> attribute.
+Specifying <pre><code>FetchType.LAZY</code></pre> for the non-owning side of the <pre><code>@OneToOne</code></pre> association will not affect the loading.
+The related entity will still be loaded as if the <pre><code>FetchType.EAGER</code></pre> is defined.
+For more info see <a
+  href="https://docs.jboss.org/hibernate/orm/6.1/userguide/html_single/Hibernate_User_Guide.html#associations-one-to-one-bidirectional-lazy">the
+  documentation</a>.
+</body>
+</html>

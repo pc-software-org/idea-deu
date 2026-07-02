@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports functions that have no RETURN statements.
+
+<p>Example (Oracle):</p>
+
+<pre>
+<code>CREATE FUNCTION foo RETURN int AS
+BEGIN
+END;
+</code></pre>
+
+<p>The <code>foo</code> function must return the integer value but the function body returns nothing. To fix the error,
+  add a RETURN statement (for example, <code>return 1;</code>).</p>
+
+<pre><code>CREATE FUNCTION foo RETURN int AS
+BEGIN
+ RETURN 1;
+END;</code></pre>
+</body>
+</html>

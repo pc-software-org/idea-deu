@@ -1,0 +1,6 @@
+<html>
+<body>
+Acquires Authentication token for Auth config with ID under caret.
+If the IDE already has a token for this ID, it will delete it and <b>acquire the token again</b>.
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html>
+<body>
+Creates a setter for a field. The field becomes private and is renamed according to the code style settings (by default, a <code>_</code>
+prefix is added).
+</body>
+</html>

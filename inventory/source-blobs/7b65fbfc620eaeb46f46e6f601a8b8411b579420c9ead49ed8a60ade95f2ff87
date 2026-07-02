@@ -1,0 +1,18 @@
+<html>
+<body>
+Reports a set of longhand properties. Suggests replacing a complete set of longhand CSS properties with an equivalent shorthand form.
+<p>
+  For example, 4 properties: <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and
+  <code>padding-left</code>
+  can be safely replaced with a single <code>padding</code> property.
+</p>
+<p>
+  Note that this inspection doesn't show up if the set of longhand properties is incomplete
+  (e.g. only 3 <code>padding-xxx</code> properties in a ruleset)
+  because switching to a shorthand may change the result.
+  For such cases consider the 'Properties may probably be replaced with a shorthand'
+  inspection.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

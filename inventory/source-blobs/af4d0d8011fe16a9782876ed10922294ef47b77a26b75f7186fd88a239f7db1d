@@ -1,0 +1,20 @@
+<html>
+<body>
+Reports incorrect usages of transition table variables in triggers.
+<p>Example (HSQLDB):</p>
+<pre><code>CREATE TABLE foo(a INT);
+
+CREATE TRIGGER trg
+ AFTER DELETE ON foo
+BEGIN
+   SELECT * FROM NEW;
+END;
+
+CREATE TRIGGER trig AFTER INSERT ON foo
+   REFERENCING OLD ROW AS newrow
+   FOR EACH ROW WHEN (a > 1)
+   INSERT INTO foo VALUES (1)</code></pre>
+<p>In HSQLDB, DELETE triggers may be used only with the OLD state while INSERT triggers may have only the NEW state. So, in the previous
+  example, NEW in <code>SELECT * FROM NEW;</code> will be highlighted as well as OLD in <code>REFERENCING OLD ROW AS newrow</code>.</p>
+</body>
+</html>

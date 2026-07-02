@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports an object property that can be converted to ES6 shorthand style and provides a quick-fix to do it.
+<!-- tooltip end -->
+<p>Example:</p>
+<pre><code>
+var obj = {foo:foo}
+</code></pre>
+<p>After applying the quick-fix the code looks as follows:</p>
+<pre><code>
+var obj = {foo}
+</code></pre>
+
+</body>
+</html>

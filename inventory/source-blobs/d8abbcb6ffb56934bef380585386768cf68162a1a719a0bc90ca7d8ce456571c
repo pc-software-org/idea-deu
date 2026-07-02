@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a ternary conditional expression within another ternary condition.
+Such nested conditionals may be extremely confusing, and best replaced by more explicit conditional
+logic.
+</body>
+</html>

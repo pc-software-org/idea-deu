@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts the type alias for a set of string literals to an enum with string values that correspond with the initial literals.
+</body>
+</html>

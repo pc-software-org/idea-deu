@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an unresolved reference to a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">custom property</a>
+among the arguments of the <code>var()</code> function.
+</body>
+</html>

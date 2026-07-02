@@ -1,0 +1,15 @@
+config.unresolved.value=Invalid value ''{0}''
+config.unresolved.static.value=Invalid value ''{1}'', must be one of {0}
+config.unresolved.enum.value=Cannot resolve field ''{1}'' in enum ''{0}''
+config.unresolved.enum.key=Cannot resolve enum constant ''{0}''{1}
+config.unresolved.key.in.class=\ in {0}
+config.unresolved.bean.property.key=Cannot resolve property ''{0}''{1}
+config.unresolved.number.value=Cannot convert ''{1}'' to {0}
+config.show.duplicates=Show duplicates
+config.show.duplicates.for.key=Show Duplicates for ''{0}''
+config.duplicate.key=Duplicate configuration key ''{0}''
+config.duplicates.for=Duplicate for ''{0}''
+config.insert.key=Insert Configuration Key ''{0}''
+config.completion.ad=Press {0} to see all configuration keys with different prefix
+config.non.assignable.class={0} is not assignable to {1}
+config.key.value.quick.info="{0}" [{1}]

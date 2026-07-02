@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports nested instances of a string or a template literal. Suggests inlining the nested instances into the containing template string.
+<!-- tooltip end -->
+<p>Example: </p>
+<pre><code>
+let a = `Hello, ${`Brave ${"New"}`} ${"World"}!`
+</code></pre>
+<p>After applying the quick-fix the code looks as follows:</p>
+<pre><code>
+let a = `Hello, Brave New World!`
+</code></pre>
+</body>
+</html>

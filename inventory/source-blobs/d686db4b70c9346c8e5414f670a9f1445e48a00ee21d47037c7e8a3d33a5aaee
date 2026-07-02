@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage of a variable where the variable type is narrowed by a type guard.
+Note that severity level doesn't affect this inspection.
+</body>
+</html>

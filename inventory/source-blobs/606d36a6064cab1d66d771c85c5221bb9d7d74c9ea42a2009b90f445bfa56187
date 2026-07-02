@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports signature issues for built-in functions.
+<p>The inspection will report a wrong number of arguments, invalid keywords, wrong data types, and other issues.</p>
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo (a INT, b INT, c INT)
+
+SELECT IFNULL() FROM foo; -- error
+SELECT IFNULL(a) FROM foo; -- error
+SELECT IFNULL(a, b) FROM foo; -- OK
+SELECT IFNULL(a, b, c) FROM foo; -- error</code></pre>
+<p>In MySQL, the <code>IFNULL()</code> function accepts strictly two arguments. So, only the <code>SELECT IFNULL(a, b) FROM foo;</code>
+  query is correct.</p>
+</body>
+</html>

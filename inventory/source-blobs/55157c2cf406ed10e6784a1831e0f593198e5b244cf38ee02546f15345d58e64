@@ -1,0 +1,62 @@
+<html>
+<body>
+Reports warnings on incorrectly used proxy methods.
+
+Spring Framework 5.2 has introduced an optimization for @Configuration class processing that can be enabled via an attribute
+@Configuration(proxyBeanMethods = false).
+<p>
+If you disable <code>proxyBeanMethods</code>,
+the proxy instances are no longer created and calling the method invokes it again (returning a new instance every time).
+As a result, you have no guarantee that you're actually injecting the corresponding bean in the context.
+</p>
+<!-- tooltip end -->
+<p>Incorrect bean method call example:</p>
+<pre><code lang="java">
+@Configuration(proxyBeanMethods = false)
+class TestConfiguration {
+  @Bean
+  public FirstBean firstBean() {
+    return new FirstBean();
+  }
+
+  @Bean
+  public SecondBean secondBean() {
+    return new SecondBean(firstBean()); // -> incorrect call
+  }
+}
+</code></pre>
+
+<p>You can set <code>proxyBeanMethods</code> to true or rewrite the code as follows:</p>
+<pre><code lang="java">
+@Configuration(proxyBeanMethods = false)
+class TestConfiguration {
+  @Bean
+  public FirstBean firstBean() {
+    return new FirstBean();
+  }
+
+  @Bean
+  public SecondBean secondBean(FirstBean someBean) { // -> correct injected instance
+    return new SecondBean(someBean);
+  }
+}
+</code></pre>
+
+<p>Also, the inspection checks <code>@Bean</code> method calls in a class without the <code>@Configuration</code> stereotype (in "bean lite mode"):</p>
+<pre><code lang="java">
+@Component
+class TestComponent {
+  @Bean
+  public FirstBean firstBean() {
+    return new FirstBean();
+  }
+
+  @Bean
+  public SecondBean secondBean() {
+    return new SecondBean(firstBean()); // -> incorrect call
+  }
+}
+</code></pre>
+
+</body>
+</html>

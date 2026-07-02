@@ -1,0 +1,8 @@
+<html>
+<body>
+Checks that declarations of local variables declared with <b>var</b> are at the top of a function scope.
+<br/><br/>
+By default, variable declarations are always moved ("hoisted") invisibly to the top of their containing scope when the code is executed.
+Therefore, declaring them at the top of the scope helps represent this behavior in the code.
+</body>
+</html>

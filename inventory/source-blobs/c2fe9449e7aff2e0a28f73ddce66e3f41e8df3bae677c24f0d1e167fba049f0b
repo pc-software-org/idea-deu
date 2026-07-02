@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a pipe expression to an equivalent call chain of functions with a single parameter.
+</body>
+</html>

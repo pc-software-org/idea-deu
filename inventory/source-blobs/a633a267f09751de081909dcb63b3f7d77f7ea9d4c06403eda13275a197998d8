@@ -1,0 +1,7 @@
+<html>
+<body>
+Saves a relation between tables as a virtual foreign key. The default location is <code>external-data.xml</code>.
+<p>For more information about virtual foreign keys, see <a href="https://www.jetbrains.com/help/datagrip/foreign-keys.html">the Foreign keys
+  topic in the IDE documentation.</a></p>
+</body>
+</html>

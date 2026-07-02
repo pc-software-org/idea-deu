@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>with</code> statements. Such 
+statements result in potentially confusing implicit bindings, and may behave
+strangely in setting new variables.
+</body>
+</html>

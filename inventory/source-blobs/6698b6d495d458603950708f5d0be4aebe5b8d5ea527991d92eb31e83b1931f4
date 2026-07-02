@@ -1,0 +1,21 @@
+<html>
+<body>
+<p>
+  Reports unresolved document fields specified inside of <code>org.springframework.data.mongodb.repository.Query</code> annotation.
+</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+@Document
+class User {
+  @Field
+  String name;
+}
+
+interface UserRepository extends Repository&lt;User, Long&gt; {
+  @Query("{ age: { $gt: ?0 } }") // 'age' is highlighted as unresolved
+  List&lt;User&gt; findUsersOlderThan(Integer age);
+}
+</code></pre>
+</body>
+</html>

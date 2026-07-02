@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports a CSS class or an element IDs that appears in selectors but is not used in HTML.
+<p>
+  Note that complete inspection results are available only when running it via <b>Code | Inspect Code</b> or
+  <b>Code | Analyze Code | Run Inspection by Name</b>.
+  Due to performance reasons, style sheet files are not inspected on the fly.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

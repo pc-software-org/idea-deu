@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports problems in JSP TLD files.
+<p>TLD files should conform to the JSP tag library schema.</p>
+</body>
+</html>

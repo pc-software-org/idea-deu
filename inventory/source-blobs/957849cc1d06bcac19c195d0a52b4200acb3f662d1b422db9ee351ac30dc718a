@@ -1,0 +1,5 @@
+<html>
+<body>
+Converts a string template with visible line separators (<code>\n</code>) to a multi-line template string.
+</body>
+</html>

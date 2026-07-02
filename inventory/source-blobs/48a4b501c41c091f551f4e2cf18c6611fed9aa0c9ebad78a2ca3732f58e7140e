@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports statements that can cause side effects while the data source is in read-only mode.
+<p>For more information about enabling read-only mode, see
+  <a href="https://www.jetbrains.com/help/datagrip/configuring-database-connections.html#enable-read-only-mode-for-a-connection">Enable
+    read-only mode for a connection in the IDE documentation</a>.</p>
+<p>The <b>Disable read-only mode</b> quick-fix turns off the read-only mode for the respective data source.</p>
+<p>Example:</p>
+<pre><code>
+db.my_collection.insertOne()
+</code></pre>
+</body>
+</html>

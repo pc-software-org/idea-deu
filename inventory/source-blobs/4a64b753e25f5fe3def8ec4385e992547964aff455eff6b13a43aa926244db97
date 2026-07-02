@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports a comma expression. Such
+expressions are often a sign of overly clever code, and may lead to subtle bugs.
+Comma expressions in the initializer or in the update section of <code>for</code>
+loops are ignored.
+</body>
+</html>

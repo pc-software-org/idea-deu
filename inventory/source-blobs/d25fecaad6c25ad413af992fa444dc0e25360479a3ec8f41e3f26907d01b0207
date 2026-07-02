@@ -1,0 +1,28 @@
+
+dialog.message.to.profile.indexing.caches=To profile indexing caches should be invalidated and {0} restarted.
+dialog.title.profile.indexing=Profile Indexing
+button.text.invalidate.and.restart=Invalidate and Restart
+
+stop.capture.cpu.usage.data.action.name=Stop CPU Usage Profiling
+stop.async.profiler.action.label=Stop Async Profiler
+start.async.profiler.action.label=Start Async profiler
+starting.async.profiler=Starting profiler
+
+async.profiler.parameters.title=Async Profiler Parameters
+async.profiler.parameters.help.text=Input below comma-separated parameters to {0, choice, 1#start|2#stop} async profiler
+
+executor.started=CPU Profiling is already executing.
+async.profiling.compress.results.progress=Compressing async profiler results
+async.profile.report.ready=Async profile is ready.
+
+action.text.show.profile=Show Profile
+action.CaptureCPUUsageData.text=Start CPU Usage Profiling
+action.CaptureCPUUsageData.description=Capture CPU usage data
+action.performancePlugin.StartAsyncProfilerAction.text=Start Async Profiler
+action.performancePlugin.StartAsyncProfilerAction.description=Start async profiler
+action.performancePlugin.ProfileIndexingAction.text=Profile Indexing
+action.performancePlugin.ProfileIndexingAction.description=Profile Indexing on next restart
+
+action.text.start=&Start
+action.text.stop=&Stop
+capture.snapshot.status.bar.widget.name=Start CPU Usage Profiling

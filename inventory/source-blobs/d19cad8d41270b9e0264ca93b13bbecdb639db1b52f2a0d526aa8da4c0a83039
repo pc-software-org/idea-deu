@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>switch</code> statement that is
+nested in another <code>switch</code> statement.  Nested <code>switch</code> statements may be
+very confusing, particularly if indenting is inconsistent.
+</body>
+</html>

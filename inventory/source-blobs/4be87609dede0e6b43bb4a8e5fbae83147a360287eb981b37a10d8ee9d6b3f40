@@ -1,0 +1,17 @@
+inspection.jvm.languages.group.name=JVM languages
+
+jvm.inspections.sql.source.to.sink.flow.display.name=Non-safe string is used as SQL
+jvm.inspections.sql.source.unsafe.to.sink.flow.untainted.annotations=Untainted annotations:
+jvm.inspections.sql.source.unsafe.to.sink.flow.untainted.annotations.comment=These annotations will be used as '@Untainted' annotations during the analysis
+jvm.inspections.sql.source.to.sink.flow.too.complex=Too complex to check that the string, which is used in SQL, is safe
+jvm.inspections.sql.source.to.sink.flow.unsafe=String, which is used in SQL, can be unsafe
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.warn.if.complex=Report strings that are too complex to verify
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.warn.if.complex.comment = It can be useful to check such strings manually
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.private.methods=Consider parameters of private methods as safe
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.private.methods.comment = If disabled, parameters of private methods will be considered as unknown
+jvm.inspections.sql.source.unsafe.to.sink.flow.safe.class=Safe classes:
+jvm.inspections.sql.source.unsafe.to.sink.flow.safe.class.comment=These classes are considered to contain only safe data
+jvm.inspections.sql.source.unsafe.to.sink.flow.untainted.methods=Untainted methods:
+jvm.inspections.sql.source.unsafe.to.sink.flow.untainted.methods.comment=These methods are considered to return only safe objects
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.private.final.field = Consider private or final fields in the same class as safe
+jvm.inspections.sql.source.unsafe.to.sink.flow.check.private.final.field.comment = If it is enabled, then private or final fields are considered as safe, otherwise they will be processed according to rules

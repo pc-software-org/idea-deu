@@ -1,0 +1,9 @@
+<html>
+<body>
+Reports queries with excessive number of JOINS.
+<p>Using too many joins is generally
+  not recommended for performance reasons.</p>
+
+<pre><code>SELECT * FROM a inner join b using(id) inner join c using (id) inner join d using (id) inner join e using (id)</code></pre>
+</body>
+</html>

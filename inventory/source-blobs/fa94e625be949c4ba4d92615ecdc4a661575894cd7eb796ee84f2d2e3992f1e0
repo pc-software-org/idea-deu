@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an empty <code>finally</code> block, which usually indicates an error.
+</body>
+</html>

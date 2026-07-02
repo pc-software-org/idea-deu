@@ -1,0 +1,4 @@
+data.wrangler.transform.with.ai.command.action.name=Transform with AI
+jupyter.visualization.cell.action.link=Ask AI to build the visualization
+action.VisualizationCellAi.text="Open AI chat"
+action.VisualizationCellAi.description="Open AI chat if it is available or show a popup with promotion"

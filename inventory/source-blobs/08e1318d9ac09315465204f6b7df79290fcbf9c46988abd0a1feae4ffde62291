@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports an assignment to a function parameter, including increment and decrement operations.
+Although occasionally intended, this construct can be extremely confusing, and is often a result of an error.
+</body>
+</html>

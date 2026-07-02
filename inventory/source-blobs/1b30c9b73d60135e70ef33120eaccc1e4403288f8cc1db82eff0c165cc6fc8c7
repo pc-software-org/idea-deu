@@ -1,0 +1,11 @@
+coverage.namespace=package
+coverage.namespace_plural=packages
+coverage.module=module
+coverage.module_plural=modules
+coverage.class=class
+coverage.class_plural=classes
+coverage.method=method
+coverage.method_plural=methods
+coverage.statement=instruction
+coverage.block=branch
+coverage.show.empty.blocks=false

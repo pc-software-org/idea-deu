@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a class method that can be safely made <code>static</code>.
+A method can be <code>static</code> if it does not reference any of its class' non-static methods
+and non-static fields and is not overridden in a subclass.
+<!-- tooltip end -->
+<p>
+  Use the first checkbox below to inspect only <code>private</code>  methods.
+</body>
+</html>

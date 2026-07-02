@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an unresolved reference to a JSX component.
+Suggests adding a missing import statement if the referenced component is defined in the project or its dependencies or creating a new component with this name.
+<p>The template for a new component can be modified in Editor | File and Code Templates.</p>
+</body>
+</html>

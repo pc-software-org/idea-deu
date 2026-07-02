@@ -1,0 +1,8 @@
+<html>
+<body>
+Converts an arrow function to an anonymous function expression.
+<br/><br/>
+Note that this conversion is not suggested for arrow functions that use <code>this</code> because this value can change for anonymous functions.<br/>
+Please refer to <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Lexical_this">https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Lexical_this</a>.
+</body>
+</html>

@@ -1,0 +1,1 @@
+<html><head><meta charset="UTF-8"><link rel="stylesheet" type="text/css" href="css/tips.css"></head><body><p><b>Navigate to implementation</b></p><p>To navigate to the implementations of an abstract method, position the caret at its usage or its name in the declaration and press <span class="shortcut">&shortcut:GotoImplementation;</span>.</p></body></html>

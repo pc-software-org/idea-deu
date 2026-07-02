@@ -1,0 +1,28 @@
+<html>
+<body>
+Reports any references to classes from the default package in JSP files.
+
+<p><b>Example:</b></p>
+<pre><code lang="jsp">
+  &lt;%!
+  Integer countSomeUsefulStuff() {
+    ...
+    new ClassFromDefaultPackage(...); // Error
+    new com.example.GoodClass(...); // Good
+  }
+  %&gt;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;Hello, JSP!&lt;/title&gt;
+    &lt;/head&gt;
+  &lt;/html&gt;
+</code></pre><br/>
+<!-- tooltip end -->
+<p>
+  <b>NOTE:</b> Such references will not be resolved during compilation of the JSP
+  because a compiled class for the JSP will be usually placed in non-default package
+  (for example, "org.apache.jsp" in case of Tomcat, "com.ibm._jsp" in case of WebSphere),
+  but importing from the default package is not allowed in Java.
+</p>
+</body>
+</html>

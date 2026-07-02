@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports attempts to create NOT NULL columns without DEFAULT values.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE foo (a INT, b  INT)
+
+ALTER TABLE foo ADD c INT NOT NULL;</code></pre>
+<p>By default, a column holds NULL values. In the example, we use the NOT NULL constraint that enforces a column not to accept NULL values.
+  If we prohibit to use NULL values, we must set the DEFAULT value that SQL can use when we create a new record.
+</p>
+<pre><code>ALTER TABLE foo ADD c INT NOT NULL DEFAULT 42;</code></pre>
+<p>You can quickly add the DEFAULT value by using the <b>Add DEFAULT value</b> quick-fix.</p>
+</body>
+</html>

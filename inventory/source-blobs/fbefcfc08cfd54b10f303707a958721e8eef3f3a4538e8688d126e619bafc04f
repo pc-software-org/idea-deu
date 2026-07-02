@@ -1,0 +1,8 @@
+model.inspection.group.name=Bean Validation
+create.constraint.validator=Create constraint validator {0}
+min.max.inspection=Incorrect 'min' and 'max' values in Bean Validation annotations
+max.value.is.less.than.min='max' value is less than 'min' value
+swap.min.max=Swap 'min' and 'max'
+swap.min.max.quick.fix=Set min={0} and max={1}
+min.value.is.negative='min' value is negative
+create.enum.constant=Create ''{0}'' constant in ''{1}'' class

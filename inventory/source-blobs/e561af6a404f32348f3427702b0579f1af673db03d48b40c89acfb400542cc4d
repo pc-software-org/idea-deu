@@ -1,0 +1,4 @@
+#DataFrame
+dataframe.csv.parser.error=Issues while reading file
+dataframe.csv.parser.error.in.line=Loaded file might have issues on line {0}. Data there may be unreliable.
+dataframe.csv.parser.error.in.lines=Loaded file might have issues on lines {0}. Data there may be unreliable.

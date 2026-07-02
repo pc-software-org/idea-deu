@@ -1,0 +1,23 @@
+stylelint.configurable.name=Stylelint
+stylelint.settings.package.label=&Stylelint package:
+stylelint.settings.config.file.label=&Configuration file:
+stylelint.settings.config.file.auto.detect=Auto-detect
+stylelint.select.config.file.title=Select Stylelint Config File
+stylelint.settings.run.for.files.label=Run for &files:
+stylelint.settings.run.for.files.comment=Use a <a href='https://github.com/isaacs/node-glob#glob-primer'>glob pattern</a>, for example, <code>**/*.{css,html}</code>
+stylelint.settings.run.on.save.checkbox=R&un stylelint --fix on save
+
+stylelint.run.on.save.checkbox=Run stylelint --fix
+stylelint.run.on.save.disabled.comment=Stylelint integration disabled
+stylelint.run.on.save.for.files.comment=Run for files: {0}
+stylelint.run.on.save.link.enable.stylelint=Enable Stylelint\u2026
+
+stylelint.inspection=Stylelint
+stylelint.error.prefix=Stylelint:
+stylelint.starting.process.progress.title=Starting stylelint\u2026
+specify.stylelint.package.correctly.dialog.message=Specify the Stylelint package correctly: the stylelint binary not found
+
+action.Stylelint.Fix.text=Fix Stylelint Problems
+action.Stylelint.Fix.description=Fix Stylelint problems by calling 'stylelint --fix'
+stylelint.fix.modal.title=Stylelint Fix
+stylelint.fix.background.title=Running stylelint --fix\u2026

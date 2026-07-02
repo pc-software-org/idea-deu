@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>Reports disposer methods without the corresponding producer method.</p>
+<p>Each disposer method must have exactly one disposed parameter of the same type as the corresponding producer method or
+  the producer field return type. When searching the disposer methods for a producer method or producer field, the container
+  considers the type and qualifiers of the disposed parameter. If the disposed parameter resolves to a producer method or
+  producer field declared by the same bean class, the container must call this method when destroying any instance returned by
+  that producer method or producer field.</p>
+</body>
+</html>

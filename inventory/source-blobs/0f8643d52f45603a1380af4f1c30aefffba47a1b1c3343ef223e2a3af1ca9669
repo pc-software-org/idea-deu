@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a consecutive comma in an array literal. The skipped element accepts the <code>undefined</code> value,
+but it could be done unintentionally, for example, when commas are at the end of one line and at the beginning of the next one.
+</body>
+</html>

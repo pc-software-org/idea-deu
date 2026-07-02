@@ -1,0 +1,10 @@
+title.new.filetype=New {0}
+prompt.enter.new.0=Enter a new {0} name
+
+title.cannot.create.filetype=Cannot Create {0}
+
+progress.creating.filetype.in.directory=Creating {0} "{1}" in {2}
+edit.refresh.action.text=Edit and Rerun
+
+webservices.inspections.unresolved.symbol=Unresolved symbol
+invoke.external.code.progress=Launching {0}

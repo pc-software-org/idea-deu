@@ -1,0 +1,56 @@
+# Diagnostics
+ml.completion.diagnostics.caches.button.reset.plugin.caches=Reset Plugin Caches
+ml.completion.diagnostics.caches.raw.title=Raw Caches
+ml.completion.diagnostics.caches.analyzed.title=Analyzed Caches
+ml.completion.diagnostics.native.server.address=Native server address: {0}:{1}
+ml.completion.diagnostics.native.server.terminated.with=terminated with exit code {0}
+ml.completion.diagnostics.native.server.started=started
+ml.completion.diagnostics.native.server.grpc.channel.state=GRPC channel state: {0}
+ml.completion.diagnostics.native.server.is.not.started={0}is not started
+ml.completion.diagnostics.contexts.copy.button.label=Copy Context
+ml.completion.diagnostics.no.semantic.correctness.information=no semantic correctness information
+ml.completion.diagnostics.mock.response.title=Model response
+ml.completion.diagnostics.mock.streaming.mode.title=Streaming mode:
+ml.completion.diagnostics.mock.streaming.mode.disabled=Disabled
+ml.completion.diagnostics.mock.streaming.mode.char.by.char=Char by char with delay {0}
+ml.completion.diagnostics.mock.streaming.mode.line.by.line=Line by line with delay {0}
+ml.completion.diagnostics.mock.button.reset.mock=Reset Mock
+ml.completion.diagnostics.mock.button.reset.mock.and.plugin.caches=Reset Mock and Plugin Caches
+ml.completion.diagnostics.mock.button.add=Add to Existing
+ml.completion.diagnostics.completion.title=Completion:
+ml.completion.diagnostics.preview.title=Preview:
+
+ml.completion.tooltip.action.inline.hint=Show Hint in Editor
+ml.completion.tooltip.action.settings=Inline Completion Settings\u2026
+
+# Configurable
+ml.completion.configurable.name=ML Completion
+ml.completion.trigger.on.typing.enabled=Enable automatic completion on typing
+ml.completion.trigger.on.typing.comment=If disabled, completion suggestions can still be invoked via <b>{0}</b> shortcut
+ml.completion.enable.multi.line.completion.enable=Enable multi-line suggestions
+ml.completion.enable.multi.line.completion.comment=If disabled, only single-line suggestions will be shown
+ml.completion.no.plugins.text=You do not have any JetBrains inline code completion plugins enabled:<ul>{0}</ul>
+ml.completion.advise.aia.name=JetBrains AI Assistant
+ml.completion.advise.full.line.name=Full Line Code Completion
+ml.completion.advise.full.line.unavailable.suffix=is unavailable in Remote Development
+ml.completion.go.to.code.completion.settings=Go to <a>Code Completion settings page</a> to adjust lookup completion settings
+
+# Conflicts
+ml.completion.third.parties.conflict.content.single={0} is now disabled since the following plugins are enabled:{1}To enable {2}, \
+  you will need to disable them first.
+ml.completion.third.parties.conflict.content.multiple={0} and {1} are now disabled since the following plugins are enabled:{2}To enable {3} and {4}, \
+  you will need to disable the conflicting plugins first.
+ml.completion.notifications.third.parties.conflict.detect.title={0} is disabled
+ml.completion.notifications.third.parties.conflict.resolve.title={0} is enabled
+ml.completion.notifications.third.parties.conflict.resolve.content=There is no longer any conflict with other plugins. \
+  {0} has now been re-enabled and is able to suggest completions.
+ml.completion.notifications.common.name=JetBrains inline code completion
+ml.completion.notifications.third.parties.conflict.action.plugin.settings.title=Plugins settings
+ml.completion.notifications.third.parties.conflict.action.more.info.title=More info
+
+action.ml.inline.completion.ClearCompletionCache.text=Clear Cache for Cloud Completion
+
+ml.completion.enable.lookup.sync.checkbox=Synchronize inline and popup completions
+ml.completion.enable.lookup.sync.checkbox.comment=When enabled, inline completions will be shown in the popup completion list to avoid shortcut conflicts
+
+action.MLCompletionDiagnostics.text=ML Completion Diagnostics

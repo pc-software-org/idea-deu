@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports an overly long function.
+Function length is calculated by counting up the number of non-empty statements in the function.
+Functions that are too long are error-prone and difficult to test.
+<!-- tooltip end -->
+<p>
+  Use the field below to specify the maximum acceptable number of statements in a function.
+
+</body>
+</html>

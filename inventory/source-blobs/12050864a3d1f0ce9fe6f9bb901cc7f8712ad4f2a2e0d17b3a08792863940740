@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a usage of a JSX construction without importing namespace.
+Having the namespace in the file scope ensures proper code compilation.
+</body>
+</html>

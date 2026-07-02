@@ -1,0 +1,6 @@
+<html>
+<body>
+Converts a React class component to a stateless function component.
+To customize the generated code, use the React Function Component code templates in Editor | File and Code Templates.
+</body>
+</html>

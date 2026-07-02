@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports an unresolved name or binding in an <code>import</code> declaration in TypeScript code.
+</body>
+</html>

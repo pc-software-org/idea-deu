@@ -1,0 +1,38 @@
+<html>
+<body>
+Reports references inside the following Persistence ORM annotations if they cannot be resolved within the configured datasource:<br/>
+<ul>
+  <li> Table</li>
+  <li> Column</li>
+  <li> [Any]To[Any]</li>
+  <li> JoinColumn / JoinTable</li>
+  <li> NamedQuery / NativeQuery</li>
+  <li> Embeddable</li>
+</ul><br/>
+
+Suggests refreshing the datasource or assigning a different one.<br/>
+
+<p><b>Example database table:</b></p>
+<pre><code lang="sql">
+  CREATE TABLE DATA_TABLE (
+    ID INTEGER,
+    DATA VARCHAR(100)
+);
+</code></pre><br/>
+
+<p><b>Example JPA entity class:</b></p>
+<pre><code lang="java">
+  @Entity
+  @Table(name = "UNKNOWN_TABLE") // unresolved reference
+  public class JavaEntity {
+    @Column(name = "ID") // cannot resolve columns in a table that's not defined
+    Integer id;
+  }
+</code></pre><br/>
+
+<!-- tooltip end -->
+<p>
+  <b>NOTE:</b> Datasource can be configured via `Assign datasource` action or the corresponding gutter icon for entity class
+</p>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports situations when a number of parameters in VALUES does not match a number of columns
+  in a target table.
+<p>Example (MySQL):</p>
+<pre><code>CREATE TABLE foo(a INT, b INT, c INT);
+
+INSERT INTO foo VALUES (1,2,3,4)</code></pre>
+<p>The <code>foo</code> table has three columns but in the INSERT INTO statement we pass four.</p>
+</body>
+</html>

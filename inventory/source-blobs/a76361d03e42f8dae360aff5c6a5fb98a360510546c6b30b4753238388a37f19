@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports an assignment expression where the result of the assignment is
+used in the containing expression. Such assignments often indicate coding errors, 
+for example,  <code>=</code> instead of <code>==</code>.
+Moreover, they can result in confusion due to the order
+of operations, as evaluation of the assignment may affect the outer expression in unexpected
+ways.
+<p>Expressions in parentheses are ignored.</p>
+</body>
+</html>

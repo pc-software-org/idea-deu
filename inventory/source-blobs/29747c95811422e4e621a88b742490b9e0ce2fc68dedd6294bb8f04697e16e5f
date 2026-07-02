@@ -1,0 +1,12 @@
+<html>
+<body>
+<p>Reports unresolved Spring MVC View references.</p>
+<p>Example:</p>
+<pre><code lang="java">
+  @RequestMapping
+  public String viewHandler() {
+    return "viewName"; // will be highlighted if no view with "viewName" can be found
+  }
+</code></pre>
+</body>
+</html>

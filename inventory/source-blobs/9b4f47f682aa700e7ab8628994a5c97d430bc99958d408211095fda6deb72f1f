@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports columns that are not in the GROUP BY clause or inside an aggregate function call.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE t1 (a INT, b INT);
+SELECT a, b FROM t1 GROUP BY a;</code></pre>
+<p>If you run the SELECT query, you will receive an error because Microsoft SQL Server expects the <code>b</code> column in GROUP BY or used
+  inside an aggregate function. The following two examples will fix the error.</p>
+<pre><code>SELECT a, b FROM t1 GROUP BY a, b;
+SELECT a, max(b) max_b FROM t1 GROUP BY a;</code></pre>
+</body>
+</html>

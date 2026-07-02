@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a function parameter whose name is too short,
+too long, or doesn't follow the specified regular expression pattern.
+<!-- tooltip end -->
+<p>
+  Use the fields provided below to specify minimum length, maximum length and regular expression
+  expected for local variables names. Use the standard <code>java.util.regex</code> format regular expressions.
+</body>
+</html>

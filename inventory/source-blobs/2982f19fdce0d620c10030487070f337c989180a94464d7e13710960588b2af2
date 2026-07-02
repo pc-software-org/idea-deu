@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports declarations of procedures and functions that are missing their implementation in code.
+<p>In Oracle, you can declare a procedure or a function without its body, and write the implementation later. The inspection will report names
+of such procedures or functions that are left without implementation.</p>
+<p>Example (Oracle):</p>
+<pre><code>DECLARE PROCEDURE foo(a int, b varchar2);
+BEGIN
+    NULL;
+END;</code></pre>
+<p>The <code>foo</code> procedure is declared but is missing implementation. We can add the implementation to get rid of the error.</p>
+<pre><code>DECLARE PROCEDURE foo(a int, b varchar2);
+  PROCEDURE foo(a int, b varchar2) IS
+BEGIN
+    NULL;
+END;
+BEGIN
+    NULL;
+END;</code></pre>
+</body>
+</html>

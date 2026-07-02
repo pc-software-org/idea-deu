@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports multiple destructuring properties with identical keys. Suggests merging the properties.
+</body>
+</html>

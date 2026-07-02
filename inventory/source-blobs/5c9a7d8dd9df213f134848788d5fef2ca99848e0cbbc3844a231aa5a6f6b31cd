@@ -1,0 +1,6 @@
+livetemplate.description.descr=Inserts describe() block
+livetemplate.description.bfe=Inserts beforeEach() block
+livetemplate.description.it=Inserts it() block
+livetemplate.description.afe=Inserts afterEach() block
+livetemplate.description.af=Inserts after() block
+livetemplate.description.bf=Inserts before() block

@@ -1,0 +1,4 @@
+version=0.15.1.761.dev1
+kotlinVersion=2.2.20
+currentBranch=253-release
+currentSha=55d185a6ec43bc8785c9442f92b4b296466db325

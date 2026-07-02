@@ -1,0 +1,6 @@
+<html>
+<body>
+If the same item is indexed in the values of object properties (for example, <code>var x = {a: r[0], b: r[1]}</code>),
+those properties may be preliminarily assigned using a destructuring and then used in a shorthand form, unless any name conflicts are detected.
+</body>
+</html>

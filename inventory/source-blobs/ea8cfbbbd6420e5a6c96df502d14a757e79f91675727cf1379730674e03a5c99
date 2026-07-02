@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a function call that returns a <code>Promise</code> that is not used later.
+Such calls are usually unintended and indicate an error.
+</body>
+</html>

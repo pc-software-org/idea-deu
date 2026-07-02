@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a function which must either recurse
+infinitely or throw an exception. Such functions may not return normally.
+</body>
+</html>

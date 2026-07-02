@@ -1,0 +1,26 @@
+<html>
+<body>
+Reports usages when the <code>ORDER BY</code> clause is used without <code>TOP</code>, <code>OFFSET</code>, or <code>FOR XML</code> in views,
+inline functions, derived tables, subqueries, and common table expressions.
+<p>For more information about usages of <code>ORDER BY</code>, see <a
+    href="https://docs.microsoft.com/en-us/sql/t-sql/queries/select-order-by-clause-transact-sql">SELECT - ORDER BY Clause (Transact-SQL) at
+  docs.microsoft.com</a>.</p>
+<p>Example (Microsoft SQL server):</p>
+<pre><code>CREATE TABLE foo (a INT NOT NULL, b  INT NOT NULL);
+
+SELECT *
+FROM (SELECT a, b
+FROM foo A
+WHERE a &lt; 89
+ORDER BY b) ALIAS;
+</code></pre>
+<p>In a subquery, ORDER BY will be highlighted as an error. You can add TOP, OFFSET, or FOR XML to a subquery.
+  Alternatively, use the <b>Delete element</b> quick-fix to delete the ORDER BY section.</p>
+<p>After the quick-fix is applied:</p>
+<pre><code>SELECT *
+FROM (SELECT a, b
+FROM foo A
+WHERE a &lt; 89) ALIAS;
+</code></pre>
+</body>
+</html>

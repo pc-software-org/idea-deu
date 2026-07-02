@@ -1,11 +1,15 @@
 import hashlib
+import io
 import tempfile
 import unittest
+import zipfile
 from dataclasses import replace
 from pathlib import Path
 from unittest import mock
 
-from scripts.idea_deu.generator import GenerationError, GenerationResult, MappingResourceProvider, generate_resources
+from scripts.idea_deu.generator import (DistributionResourceProvider, GenerationError, GenerationResult,
+    MappingResourceProvider, generate_resources)
+from tests.fixtures.scanner_factory import jar_bytes
 from scripts.idea_deu.models import (CollisionRecord, Inventory, ProcessingStatus,
     ResourceRecord, ResourceType, TranslationContext, TranslationUnit)
 from scripts.idea_deu.validation import Finding, FindingCode, Severity
@@ -28,6 +32,25 @@ class GeneratorTests(unittest.TestCase):
         return TranslationUnit(hashlib.sha256((record.resource_id+key).encode()).hexdigest(), source,
             hashlib.sha256(source.encode()).hexdigest(), target,
             TranslationContext("Bundle", key, record.container, record.resource_path), status, ())
+
+    def test_distribution_provider_reuses_open_container_for_adjacent_resources(self):
+        class CountingStream(io.BytesIO):
+            zero_seeks = 0
+            def seek(self, offset, whence=0):
+                if offset == 0 and whence == 0: self.zero_seeks += 1
+                return super().seek(offset, whence)
+        nested = jar_bytes([("a.properties", b"a=1"), ("b.properties", b"b=2")])
+        archive = CountingStream()
+        with zipfile.ZipFile(archive, "w") as outer: outer.writestr("lib/app.jar", nested)
+        provider = DistributionResourceProvider(archive)
+        first = self.resource("lib/app.jar", "a.properties", b"a=1")
+        second = self.resource("lib/app.jar", "b.properties", b"b=2")
+
+        self.assertEqual(b"a=1", provider.read(first))
+        seeks_after_first = archive.zero_seeks
+        self.assertEqual(b"b=2", provider.read(second))
+
+        self.assertEqual(seeks_after_first, archive.zero_seeks)
 
     def test_properties_replaces_value_and_preserves_physical_content(self):
         inventory = Inventory((self.record,), (), ())

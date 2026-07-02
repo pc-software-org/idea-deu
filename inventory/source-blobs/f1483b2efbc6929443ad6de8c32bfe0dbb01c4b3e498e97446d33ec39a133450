@@ -1,0 +1,20 @@
+<html>
+<body>
+Reports cases when you try to drop columns from indexed tables. This inspection is available in Microsoft SQL Server and Sybase ASE.
+<p>Example (Microsoft SQL Server):</p>
+<pre><code>CREATE TABLE test_index
+(
+col  INT NOT NULL,
+col2 INT NOT NULL,
+col3 INT NOT NULL UNIQUE,
+col4 VARCHAR(200)
+);
+
+CREATE UNIQUE INDEX aaaa ON test_index (col, col2);
+
+ALTER TABLE test_index
+DROP COLUMN col;</code></pre>
+<p>You cannot delete the <code>col</code> column because it is in the indexed table. To delete the column, you need to delete the
+  <code>aaaa</code> index first (for example, DROP INDEX aaaa).</p>
+</body>
+</html>

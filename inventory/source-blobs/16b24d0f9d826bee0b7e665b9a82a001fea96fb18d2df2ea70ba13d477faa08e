@@ -1,0 +1,14 @@
+<html>
+<body>
+Reports a duplicated CSS property within a ruleset. Respects shorthand properties.
+<p><b>Example:</b></p>
+<pre><code>
+.foo {
+  margin-bottom: 1px;
+  margin-bottom: 1px; /* duplicates margin-bottom */
+  margin: 0; /* overrides margin-bottom */
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

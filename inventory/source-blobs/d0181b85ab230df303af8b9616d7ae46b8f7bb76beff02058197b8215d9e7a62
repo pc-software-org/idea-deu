@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+  Reports excessive whitespace trims in Go template expressions.
+  Inspection follows the following logic applied to each statement:<br>
+  1. Doesn't have any trims → Skip it<br>
+  2. Has both trims and is surrounded by non-blank elements → Problem<br>
+  3. Has both trims and has preceding or succeeding non-blank elements → Problem if it produces values (e.g., it is a non-empty element
+  itself)<br>
+  4. Has the left trim and preceding non-blank element → Same as the previous one<br>
+  5. Has the right trim and succeeding non-blank element → Same as the previous one<br>
+</p>
+</body>
+</html>

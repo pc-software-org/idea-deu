@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports an implicit declaration of a global variable.
+<p>Example:</p>
+<pre><code>
+  var aaa = 1; // good
+  bbb = 2; // bad, if bbb is not declared with 'var' somewhere
+</code></pre>
+</body>
+</html>

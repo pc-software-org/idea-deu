@@ -1,0 +1,16 @@
+<html>
+<body>
+Reports entity listener classes without any entity listener methods.
+
+<p><b>Example:</b></p><br/>
+<pre><code lang="java">
+  @Entity
+  @EntityListeners(value = JavaEntityListener.class)
+  public class JavaEntity { ... }
+
+  class JavaEntityListener { // Error: no entity listener-specific methods found
+
+  }
+</code></pre>
+</body>
+</html>

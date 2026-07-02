@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports an unknown CSS property or a property used in a wrong context.
+<!-- tooltip end -->
+<p>Add the unknown property to the 'Custom CSS properties' list to skip validation.</p>
+</body>
+</html>

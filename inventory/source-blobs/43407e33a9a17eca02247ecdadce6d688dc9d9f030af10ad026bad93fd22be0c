@@ -1,0 +1,5 @@
+<html>
+<body>
+Opens a query file and executes the query.<p>Works for Hibernate, JPA, JDBC and MongoDB, and other persistence frameworks.
+</body>
+</html>

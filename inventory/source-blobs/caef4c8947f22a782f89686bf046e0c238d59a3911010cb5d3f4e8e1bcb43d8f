@@ -1,0 +1,34 @@
+<html>
+<body>
+Reports incorrect <a href="https://spring.io/projects/spring-integration">Spring Integration</a> endpoint method declarations.
+
+<p><b>Example:</b></p>
+<pre><code>
+class MyEndpoints {
+  @InboundChannelAdapter("channel")
+  public void <strong>cannotBeVoid</strong>() {...} // A method annotated with @InboundChannelAdapter must have a return type
+
+  @InboundChannelAdapter("channel")
+  public String <strong>cannotHaveParams</strong>(String s) {..} // A method annotated with @InboundChannelAdapter can't have arguments
+
+  @<strong>Filter</strong>(inputChannel = "channel", // Endpoint can have only one poller
+    outputChannel = "channel2",
+    poller = {@Poller(fixedDelay = "100"), @Poller(fixedRate = "100")})
+  public void testMultiplePollers() {
+  }
+
+  @Filter(inputChannel = "channel",
+  outputChannel = "channel2",
+  poller = @<strong>Poller</strong>(value = "poller", maxMessagesPerPoll = "100"))
+  public void testValue() {
+  }
+
+  @Filter(inputChannel = "channel",
+    outputChannel = "channel2",
+    poller = @<strong>Poller</strong>(trigger = "trigger", cron = "0 */10 * * * *")) // 'trigger' attribute is mutually exclusive with other attributes
+  public void testTrigger() {
+  }
+}
+</code></pre>
+</body>
+</html>

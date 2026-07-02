@@ -1,0 +1,10 @@
+<html>
+<body>
+Inlines table aliases and replaces all alias references with references to the source table.
+<!-- tooltip end -->
+<p>Re-qualification of references that were previously qualified by the alias is done in accordance with settings under
+  <b>Editor</b> | <b>General</b> | <b>Smart Keys</b> | <b>SQL</b>. For more information about object qualifications, see
+  <a href="https://www.jetbrains.com/help/datagrip/settings-smart-keys.html#smartkeys_sql">the Smart Keys topic in the
+  IDE documentation</a>.</p>
+</body>
+</html>

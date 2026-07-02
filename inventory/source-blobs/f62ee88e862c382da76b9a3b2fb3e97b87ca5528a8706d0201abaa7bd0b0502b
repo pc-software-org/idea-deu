@@ -1,0 +1,19 @@
+<html>
+<body>
+<p>Reports Micronaut Cache annotations where the value of the <code>parameters</code> attribute contains names of undefined method
+  parameters.</p>
+<p>The following annotations are supported:</p>
+<ul>
+  <li><code>io.micronaut.cache.annotation.Cacheable</code></li>
+  <li><code>io.micronaut.cache.annotation.CachePut</code></li>
+  <li><code>io.micronaut.cache.annotation.CacheInvalidate</code></li>
+</ul>
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @CachePut(parameters = "myParameter") // Error: Cannot resolve symbol 'myParameter'
+  public String cachedMethod(String name_is_not_equal_to_myParameter) {
+    return "...";
+  }
+</code></pre>
+</body>
+</html>

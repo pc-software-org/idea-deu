@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports basic syntax issues and inconsistencies with language specification, such as invalid usages of keywords, usages of incompatible numeric format, or multiple parameters to getters/setters.
+<br>
+Generally, such errors must always be reported and shouldn't be disabled.
+But in some cases, such as issues due to the dynamic nature of JavaScript, the use of not yet supported language features, or bugs in IDE's checker, it may be handy to disable reporting these very basic errors.
+</body>
+</html>

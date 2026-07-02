@@ -1,0 +1,250 @@
+not.specified=Not Specified
+unknown.specification=Unknown Specification
+openapi.specification=OpenAPI Specification
+asyncapi.specification=AsyncAPI Specification
+
+general.yaml.live.templates.presentable.name=General .yaml file
+general.json.live.templates.presentable.name=General .json file
+swagger.yaml.live.templates.presentable.name=OpenAPI/Swagger [.yaml]
+swagger.json.live.templates.presentable.name=OpenAPI/Swagger [.json]
+live.template.description.yaml.opnp=OpenAPI 3.1.0 Specification (.yaml)
+live.template.description.json.opnp=OpenAPI 3.1.0 Specification (.json)
+live.template.description.yaml.swag=Swagger 2.0 Specification (.yaml)
+live.template.description.json.swag=Swagger 2.0 Specification (.json)
+live.template.description.endp=Inserts endpoint description section
+
+specification.swagger.yaml.title=Swagger 2 (.yaml)
+specification.swagger.json.title=Swagger 2 (.json)
+specification.openapi.yaml.title=OpenAPI 3 (.yaml)
+specification.openapi.json.title=OpenAPI 3 (.json)
+specification.asyncapi.yaml.title=AsyncAPI 2 (.yaml)
+
+swagger.2.0.json.schema=Swagger 2.0
+openapi.3.json.schema=OpenAPI 3.0
+openapi.3.1.json.schema=OpenAPI 3.1
+asyncapi.2.json.schema=AsyncAPI 2
+asyncapi.3.json.schema=AsyncAPI 3
+
+swagger.2.0.specification.file.presentation=Swagger 2.0
+openapi.3.0.specification.file.presentation=OpenAPI 3.0
+openapi.3.1.specification.file.presentation=OpenAPI 3.1
+asyncapi.2.specification.file.presentation=AsyncAPI 2
+
+openapi.multiple.base.paths=Multiple Base Paths
+openapi.notification.title=OpenAPI specifications
+
+settings.display.name=OpenAPI Specifications
+settings.remote.specification.table.title=Specification URLs
+# suppress inspection "TrailingSpacesInProperty"
+settings.remote.specification.empty.text=No remote specifications added.\u0020
+# suppress inspection "TrailingSpacesInProperty"
+settings.remote.specification.add.text=Add specification\u0020
+settings.remote.specification.add.link=URL
+# suppress inspection "TrailingSpacesInProperty"
+settings.remote.specification.or.text=\u0020or\u0020
+settings.remote.specification.search.swagger.hub.text=search SwaggerHub
+actions.reload.all.remote.specifications=Reload All Specifications
+actions.reload.all.remote.specifications.title=Loading remote specifications
+settings.remote.specifications.hint.text=The contents of added remote OpenAPI/Swagger specifications will be available in the Endpoints view and as options for URL completion
+settings.remote.specifications.title=Remote Specifications
+settings.remote.specification.add.url=URL
+settings.remote.specification.add.from.hub=Swagger Hub
+settings.remote.specification.private=Private
+settings.remote.specification.public=Public
+settings.remote.specification.published=Published
+settings.remote.specification.unpublished=Unpublished
+settings.remote.specification.owned.by=by
+settings.remote.specification.add.url.from.hub.title=Add Specifications from Swagger Hub
+settings.remote.specification.add.selected.specifications=Add Selected
+settings.remote.specification.loading.empty.text=Loading\u2026
+settings.remote.specification.nothing.found.empty.text=No Specifications Found
+
+settings.editor.features.title=Editor Features
+settings.editor.visual.editing=Gutter icons for quick specification edits
+settings.hub.title=Swagger Hub
+settings.hub.filters.owner=Owner
+settings.hub.filters.sort.by=Sort by
+settings.hub.filters.visibility=Visibility
+settings.hub.filters.state=State
+settings.hub.filters.any.value.accepted=All
+settings.hub.filters.newest=Newest
+settings.hub.filters.oldest=Oldest
+settings.hub.filters.recently.updated=Recently updated
+settings.hub.filters.least.recently.updated=Least recently updated
+settings.hub.filters.spec.name.az=Spec name (a->z)
+settings.hub.filters.spec.name.za=Spec name (z->a)
+settings.hub.filters.owner.name.az=Owner name (a->z)
+settings.hub.filters.owner.name.za=Owner name (z->a)
+settings.hub.filters.published=Published
+settings.hub.filters.unpublished=Unpublished
+settings.hub.filters.public=Public
+settings.hub.filters.private=Private
+settings.hub.custom.host=On-Premise Installation Address
+settings.hub.custom.host.info=<a href="https://app.swaggerhub.com/help/enterprise/index">More details</a>
+settings.hub.token.field.label=SwaggerHub API key:
+settings.hub.token.field.comment=Paste API key here to be able to search among private specifications
+
+run.configuration.codegen.type.description=Runs Swagger Codegen against the specified file and creates module with generated code inside opened project
+run.configuration.codegen.display.name=OpenAPI/Swagger Code Generator
+run.configuration.codegen.generate.to=Output Directory
+run.configuration.codegen.generator.type=Code Generator
+run.configuration.codegen.language=Language
+run.configuration.codegen.basic.options.title=Code Generation Settings
+run.configuration.codegen.parameters=Generation Parameters
+run.configuration.codegen.parameters.from.file=With .json file:
+run.configuration.codegen.parameters.from.properties.table=With properties:
+run.configuration.codegen.custom.templates.path=Custom Templates Path
+run.configuration.codegen.jre.path=JRE
+run.configuration.codegen.specification.path=Specification Path
+action.run.codegen.title=Generate Code
+run.configuration.codegen.parameter.name.title=Parameter Name
+run.configuration.codegen.parameter.value.title=Parameter Value
+run.configuration.codegen.parameters.empty.text=No parameters added
+run.configuration.codegen.parameters.add.link.text=Add parameter
+run.configuration.codegen.validation.unspecified.0.property="{0}" is not specified
+run.configuration.codegen.validation.file.does.not.exist=Specified "{0}" does not exist
+run.configuration.codegen.validation.0.is.not.a.file=Specified "{0}" is not a file
+run.configuration.codegen.validation.no.jdk=No JRE was found
+run.configuration.codegen.validation.directories.not.created=Unable to create directories to run code generation
+run.configuration.codegen.validation.generator.not.downloaded=Generator JAR is not downloaded
+run.configuration.codegen.validation.generator.doesnt.conform=Chosen generator does not support the selected specification version
+run.configuration.codegen.validation.unknown.language=Chosen generator does not support the specified language
+run.configuration.codegen.validation.unknown.property=Some properties are not supported by chosen language
+run.configuration.bundled.swagger.codegen=Swagger Codegen {0}
+run.configuration.bundled.openapi.generator=OpenAPI Generator {0}
+run.configuration.default.java.executable.title=Default
+
+batch.requests.generation.progress.title=Batch HTTP request generation
+batch.requests.generation.step.prepare.file=Creating an HTTP file
+batch.requests.generation.step.collect.endpoints=Collecting specification endpoints
+batch.requests.generation.step.generate.request=Generating request for endpoint
+action.SwGenerateAllHttpRequestsInFileAction.text=Generate Requests in HTTP Client
+action.SwGenerateAllHttpRequestsInFileAction.description=Generate HTTP requests from all endpoints declared in OpenAPI/Swagger specification file
+action.ConvertSwaggerToHttpFileAction.text=OpenAPI/Swagger Specification\u2026
+action.ConvertSwaggerToHttpFileAction.description=Generate HTTP requests from all endpoints declared in OpenAPI/Swagger specification file
+action.ConvertSwaggerToHttpFileAction.popup.title=Choose Specification to Import Requests
+action.CreateOpenapiSpecification.text=OpenAPI Specification
+action.CreateOpenapiSpecification.description=Create OpenAPI/Swagger specification file
+actions.create.specification.name.0=Create API Specification "{0}"
+actions.create.specification.popup.title=New API Specification
+action.SwMarkFileAsSpecificationIntention.name=Mark as OpenAPI specification
+action.SwMarkFileAsSpecificationAction.text=Mark as OpenAPI Specification
+actions.unmark.as.specification.title=Unmark as OpenAPI Specification
+actions.ignore.mark.as.specification.title=Ignore possible OpenAPI Specification candidate
+structure.view.categories.paths=Paths
+structure.view.categories.swagger.v2.definitions=Definitions
+structure.view.categories.openapi.v3.top.level.schemes=Schemas
+structure.view.categories.openapi.v3.request.bodies=Request Bodies
+structure.view.categories.openapi.v3.components=Components
+structure.view.categories.openapi.v3.headers=Headers
+structure.view.categories.openapi.v3.examples=Examples
+structure.view.categories.openapi.v3.callbacks=Callbacks
+structure.view.categories.openapi.v3.links=Links
+structure.view.categories.openapi.v3.security.schemes=Security Schemes
+structure.view.categories.parameters=Parameters
+structure.view.categories.responses=Responses
+object.definitions.parameter.hint=Parameter
+object.definitions.swagger.v2.definition.hint=Definition
+object.definitions.response.hint=Response
+
+notifications.codegen.success=Code generated successfully
+notifications.openapi.specifications.title=OpenAPI specifications
+notifications.remote.specification.downloaded.successfully=Remote specifications updated successfully
+notifications.remote.specification.error.description={0} of {1} specifications failed to load.
+notifications.remote.specification.try.reload=Try to Reload Failed Specifications
+
+remote.specifications.show.in.endpoints.view=Show in Endpoints Tool Window
+actions.open.generated.file.title=Show Generated Files
+actions.import.to.0.model.title=Import to {0}
+actions.mark.as.generated.sources=Mark As Generated Sources Root
+
+action.ConfigureSpecificationSources.text=Configure OpenAPI Specifications\u2026
+action.OasEndpointsSidePanelSaveAction.text=Export Draft of OpenAPI Specification
+action.SwGenerateYamlSelfContainedSpecificationAction.text=Export Self-Contained Specification (YAML)
+action.SwGenerateJsonSelfContainedSpecificationAction.text=Export Self-Contained Specification (JSON)
+
+intention.extract.model.declaration.name=Extract model declaration
+intention.extract.model.declaration.category=OpenAPI specifications
+progress.export.openapi.draft=Exporting OpenAPI draft
+
+action.ComputeSwaggerDiffBetweenPhysicalFiles.text=Compare OpenAPI Specifications
+action.ComputeDiffWithPreviousRevisionAction.text=Compare with Last Specification Revision
+diff.top.level.header=OpenAPI Specifications Diff
+diff.markers.new.element=(added)
+diff.markers.removed.element=(removed)
+diff.markers.created=Created
+diff.markers.removed=Deleted
+diff.markers.modified=Modified
+diff.primitive.element.0.was.1.and.became.2={0} was {1} and became {2}
+diff.top.level.endpoints.header=Endpoints
+diff.top.level.models.header=Models
+diff.top.level.unknown.elements.header=Elements
+diff.fields.required.title="Required"
+diff.fields.defined.in.title="Defined In"
+diff.fields.deprecated.title="Deprecated"
+diff.fields.media.type.title="Media Type"
+diff.fields.type.title="Type"
+diff.fields.object.definition.title="Object definition"
+diff.fields.name.title="Name"
+diff.fields.format.title="Format"
+diff.elements.url.title=URL
+diff.elements.http.method.title=HTTP-Method
+diff.elements.parameter.title=Parameter
+diff.elements.response.title=Response
+diff.elements.object.schema.title=Object schema
+diff.elements.object.definition.title=Object definition
+diff.elements.property=Property
+diff.elements.media.type=Media Type
+diff.computation.task.title=Calculating specifications diff
+ui.preparing.component.task.title=Preparing {0}
+action.SwEditorReloadPageAction.text=Reload Specification Content
+action.SwEditorReloadPageAction.description=Forces specification preview reloading (e.g. after content change)
+action.SwEditorAutoScrollPreviewToggleAction.text=Auto-Scroll
+action.SwEditorAutoScrollPreviewToggleAction.description=Enables/disables synchronous scroll to the same endpoint both in text editor and in preview
+action.SwDynamicSwitchPreviewProviderAction.text=Switch OpenAPI Preview Type
+action.SwDynamicSwitchPreviewProviderAction.description=Switches between available editor preview types (Swagger UI and Redoc)
+ui.switch.to.0.preview.type=Switch To {0} Preview
+diff.revision.title=vs last file revision
+open.in.http.client.gutter.name=Open Swagger/OpenAPI request in HTTP Client
+swagger.endpoints.unavailable=OpenAPI view is not available for selected endpoints
+
+completion.file.hint=File
+completion.directory.hint=Directory
+
+command.refactoring.rename=Rename OpenAPI Path Variable
+
+action.DumpOasModel.text=Dump OpenAPI For Module
+
+inspection.openapi.group.name=OpenAPI specifications
+inspection.maybe.specification.name=Possible OpenAPI/Swagger specification candidate
+inspection.maybe.specification.problem.spec.candidate.text=File could be considered an OpenAPI Specification
+inspection.maybe.specification.problem.stop.considering.spec.text=Stop considering the file an OpenAPI Specification
+inspection.unresolved.reference=Unresolved reference
+
+preview.error.resource.unknown.text=Resource does not exist: {0}
+preview.error.unknown.path=Unknown path provided: {0}
+preview.error.unable.build.specification.model=Unable to build a specification model for the file: {0}
+preview.error.specification.was.not.found=Specification file was not found: {0}
+preview.error.unknown.content.type=Unknown content type: {0}
+preview.error.internal.server.error=Something went wrong\u2026
+preview.error.only.get.method.is.supported="Only GET method is supported"
+preview.error.no.metadata.provided="Internal error: Project/Specification file/Selected preview type metadata was not provided"
+preview.error.validation=Validation failed for file: {0}
+preview.error.validation.unknown.reference=Unknown reference:
+preview.error.validation.syntax.error=Reason: {0}
+preview.error.validation.limit.reached=Validation limit was reached, please check possible circular dependencies
+
+gutter.actions.new.url=URL
+gutter.actions.new.endpoint=Endpoint
+gutter.actions.new.schema=Schema
+gutter.actions.new.example=Example
+gutter.actions.new.parameter=Parameter
+gutter.actions.new.header=Header
+gutter.actions.new.response=Response
+gutter.actions.new.callback=Callback
+gutter.actions.new.request.body=Request Body
+gutter.actions.new.security.scheme=Security Scheme
+gutter.actions.new.server=Server
+
+gutter.actions.add.new.element.prefix=Add Child {0} to "{1}"
+gutter.actions.add.new.sibling.element.prefix=Add Sibling {0} before "{1}"

@@ -1,0 +1,22 @@
+<html>
+<body>
+Reports a usage of an equality operator that may cause unexpected type coercions.
+Suggests replacing  <code>==</code> and <code>!=</code> with type-safe equality operators <code>===</code> and <code>!==</code>.
+<p>Depending on the option selected, one of the following cases will be reported:</p>
+<ul>
+  <li>
+    All usages of <code>==</code> and <code>!=</code> operators.
+  </li>
+  <li>
+    All usages except comparison with null. Some code styles allow using <code>x == null</code> as a replacement for
+    <code>x === null || x === undefined</code>.
+  </li>
+  <li>
+    Only suspicious expressions, such as: <code>==</code> or <code>!=</code> comparisons
+    with <code>0</code>, <code>''</code>,
+    <code>null</code>, <code>true</code>,
+    <code>false</code>, or <code>undefined</code>.
+  </li>
+</ul>
+</body>
+</html>

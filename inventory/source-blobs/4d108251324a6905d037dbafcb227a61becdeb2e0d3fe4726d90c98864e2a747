@@ -1,0 +1,6 @@
+<html>
+<body>
+Defines an empty-named implicit variable in comment in a file implicitly included by IntelliJ IDEA.
+Allows to have all fields and methods of some class as toplevel FreeMarker variables and functions.
+</body>
+</html>

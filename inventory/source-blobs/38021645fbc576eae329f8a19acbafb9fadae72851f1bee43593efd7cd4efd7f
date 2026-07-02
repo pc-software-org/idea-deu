@@ -1,0 +1,20 @@
+<html>
+<body>
+Reports the following errors inside Persistence QL queries:
+<ul>
+  <li>Mismatching expression types</li>
+  <li>Incorrect parameters</li>
+  <li>Empty or constant conditions</li>
+  <li>Unresolved symbols</li>
+</ul>
+
+<p><b>Example queries:</b></p>
+<pre><code lang="sql">
+SELECT OBJECT(e) FROM JavaEntity e WHERE TRUE // Warning: constant condition
+
+SELECT OBJECT(e) FROM JavaEntity e WHERE e.id BETWEEN 0 AND '2' // Error: expected a numeric value but got a string
+
+SELECT e from JavaEntity e where e.id=?1 and e.name=?3 // Error: there are only 2 actual query parameters
+</code></pre>
+</body>
+</html>

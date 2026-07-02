@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a string literal that contains a <code>&lt;/</code> sequence.  Such strings
+may result in incorrect parsing of any HTML in which the JavaScript code is embedded.
+</body>
+</html>

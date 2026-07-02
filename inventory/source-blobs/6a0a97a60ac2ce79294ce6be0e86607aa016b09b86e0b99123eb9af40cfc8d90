@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports inconsistency  of a <code>paths</code>, <code>checkJs</code>, or <code>extends</code> property in a tsconfig.json file.
+<br>
+The <code>checkJs</code> property requires <code>allowJs</code>.
+<br>
+The <code>extends</code> property should be a valid file reference.
+
+</body>
+</html>

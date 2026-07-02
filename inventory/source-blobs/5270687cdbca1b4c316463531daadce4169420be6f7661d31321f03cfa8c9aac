@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>Reports incorrect <code>@Decorator</code> bean definitions.</p>
+
+<ul>
+  <li>Cannot be final.</li>
+  <li>Must have exactly one delegate attribute (field or parameter) annotated with <code>@Delegate</code>.</li>
+</ul>
+</body>
+</html>

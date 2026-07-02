@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a <code>throw</code> statement whose exceptions are always
+caught by the containing <code>try</code> statement. Using <code>throw</code>
+statements as a <code>goto</code> to change the local flow of control is confusing.
+</body>
+</html>

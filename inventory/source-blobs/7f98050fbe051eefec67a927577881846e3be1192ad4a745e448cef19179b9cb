@@ -1,0 +1,6 @@
+<html>
+<body>
+Reports a <code>for</code>, <code>while</code>, or <code>do</code> statement which
+can only exit by throwing an exception. Such statements often indicate coding errors.
+</body>
+</html>

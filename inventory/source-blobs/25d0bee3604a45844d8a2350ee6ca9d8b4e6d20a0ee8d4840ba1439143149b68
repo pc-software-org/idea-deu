@@ -1,0 +1,5 @@
+<html>
+<body>
+Replaces <code>a || b</code> with <code>!(!a && !b)</code> or <code>a && b</code> with <code>!(!a || !b)</code> within a boolean expression.
+</body>
+</html>

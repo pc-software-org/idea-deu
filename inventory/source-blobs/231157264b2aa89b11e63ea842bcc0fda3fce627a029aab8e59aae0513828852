@@ -1,0 +1,33 @@
+error.message.could.not.find.debug.adapter.with.id={0} debugging is not supported
+
+message.starting.debug.adapter=Launching debug adapter {0}
+message.initializing.debug.adapter=Initializing {0} debug adapter
+message.stopping.debug.adapter=Stopping debug adapter {0}
+message.initializing.debug.session=Initializing debug session
+message.launching.debuggee=Launching program
+message.attaching.to.debuggee=Attaching to program
+
+session.state.not.started=Preparing for start
+session.state.starting=Connecting
+session.state.running=The application is running
+session.state.paused=Paused
+session.state.stopped=Disconnected
+
+dap.frames.unknown_source=Unknown source
+
+dap.notification.connection.closed=The connection to the debug adapter closed unexpectedly
+dap.notification.failed.to.launch.debug.adapter=Failed to launch {0} debug adapter
+dap.notification.failed.to.initialize.debug.adapter=Failed to initialize {0} debug adapter
+dap.notification.failed.to.launch.program=Failed to launch program
+dap.notification.failed.to.attach.to.the.program=Failed to attach to the program
+dap.notification.initialization.timeout=Debug adapter initialization timeout
+dap.notification.launch.debuggee.timeout=Program launch timeout
+dap.notification.attach.to.debuggee.timeout=Program attach timeout
+dap.notification.failed.to.initialize.breakpoints=Failed to initialize breakpoints
+dap.notification.failed.to.add.breakpoint.in.file=Failed to add breakpoint in file {0}
+popup.title.step.into.function=Step Into Function
+
+error.message.failed.to.compute.full.value=Failed to compute full value
+error.message.failed.to.compute.children=Failed to compute children
+
+dialog.message.command.timed.out=Command timed out

@@ -1,0 +1,27 @@
+<html>
+<body>
+<p>Reports incorrect channel attributes in endpoint method annotations:
+<a href="https://docs.spring.io/spring-integration/api/org/springframework/integration/annotation/Gateway.html">@Gateway</a>,
+<a href="https://docs.spring.io/spring-integration/api/org/springframework/integration/annotation/ServiceActivator.html">@ServiceActivator,</a>
+<a href="https://docs.spring.io/spring-integration/api/org/springframework/integration/annotation/Filter.html">@Filter</a>, and so on.</p>
+
+<p><b>Example:</b></p>
+
+<pre><code>
+  @Component
+  public class MyComponent {}
+     @Gateway(requestChannel = "requestChannel", replyChannel = "replyChannel")
+     public void gateway() {...}
+
+     @Gateway(
+        requestChannel ="<strong>simpleBean</strong>",   // Bean must be one of these types: org.springframework.integration.MessageChannel,org.springframework.messaging.MessageChannel
+        replyChannel = "<strong>unknownChannel</strong>")   // Cannot find channel
+     public void errors() {...}
+
+     @Bean
+     public MyBean simpleBean() {...}
+  }
+</code></pre>
+</body>
+</html>
+

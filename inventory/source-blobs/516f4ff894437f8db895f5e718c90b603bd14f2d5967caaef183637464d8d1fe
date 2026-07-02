@@ -1,0 +1,12 @@
+<html>
+<body>
+<p>Reports missing <code>exec</code> in the shell form of ENTRYPOINT command.</p>
+<p>
+  To ensure that <code>docker stop</code> will signal any long running ENTRYPOINT executable correctly,
+  it needs to be started with <code>exec</code>.
+</p>
+<p>
+  See <a href="https://docs.docker.com/reference/dockerfile/#shell-form-entrypoint-example">Dockerfile reference</a> for more information.
+</p>
+</body>
+</html>

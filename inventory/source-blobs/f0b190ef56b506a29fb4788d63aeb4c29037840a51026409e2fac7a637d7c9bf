@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a duplicated <code>case</code> label on a <code>switch</code> statement, which normally indicates an error.
+</body>
+</html>

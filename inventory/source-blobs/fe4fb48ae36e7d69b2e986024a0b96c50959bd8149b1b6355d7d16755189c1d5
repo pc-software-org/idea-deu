@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a comparison with NaN. Comparisons like <code>expr == NaN</code> or <code>expr === NaN</code> are always evaluated to <code>false</code>.
+</body>
+</html>

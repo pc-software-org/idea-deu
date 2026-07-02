@@ -1,0 +1,19 @@
+<html>
+<body>
+Reports absolute paths in JSP files.
+<p>Absolute paths are prohibited in JSP, because they won't be resolved if your application context is not empty.</p>
+<p>The quick-fix adds a dynamic prefix to your path.</p>
+<p><b>Example:</b></p>
+<pre><code>
+  &lt;%@page contentType=&quot;text/html; ISO-8859-1&quot; %&gt;
+
+  &lt;a href=&quot;/hey.jsp&quot;&gt;hey&lt;/a&gt;
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  &lt;%@page contentType=&quot;text/html; ISO-8859-1&quot; %&gt;
+
+  &lt;a href=&quot;${pageContext.request.contextPath}/hey.jsp&quot;&gt;hey&lt;/a&gt;
+</code></pre>
+</body>
+</html>

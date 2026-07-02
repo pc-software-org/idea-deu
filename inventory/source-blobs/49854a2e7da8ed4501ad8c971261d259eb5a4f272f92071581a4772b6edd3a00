@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>Reports FreeMarker calls that do not match the macro declaration (for example, missing parameters, wrong type, and so on).</p>
+</body>
+</html>

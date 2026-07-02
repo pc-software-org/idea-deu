@@ -1,0 +1,11 @@
+<html>
+<body>
+Reports paths that start with the tilde character in LOAD statements.
+<p>Example (MySQL):</p>
+<pre><code lang="mysql">CREATE TABLE table_name (id int);
+LOAD DATA LOCAL INFILE '~/Documents/some_file.txt'
+INTO TABLE table_name FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'
+IGNORE 1 LINES;</code></pre>
+<p>Instead of the tilde character, use a full path to the file.</p>
+</body>
+</html>

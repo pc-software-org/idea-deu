@@ -1,0 +1,5 @@
+<html>
+<body>
+Suggests replacing the path in an <code>import "from"</code> statement with one of the available equivalent paths.
+</body>
+</html>

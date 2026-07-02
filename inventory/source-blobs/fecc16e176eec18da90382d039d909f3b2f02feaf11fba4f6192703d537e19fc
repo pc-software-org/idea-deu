@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports warnings implied by <em>Google Closure Compiler</em> annotations including correct use of <code>@abstract</code>, <code>@interface</code>, and <code>@implements</code> tags.
+</body>
+</html>

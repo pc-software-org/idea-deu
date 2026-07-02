@@ -1,0 +1,15 @@
+<html>
+<body>
+Reports an unnecessary local variable that does not make
+a function more comprehensible: <ul>
+<li>a local variable that is immediately returned</li>
+<li>a local variable that is immediately assigned to another variable and is not used anymore</li>
+<li>a local variable that always has the same value as another local variable or parameter.</li></ul>
+<!-- tooltip end -->
+<p>
+Use the checkbox below to have this inspection ignore variables that are immediately
+returned or thrown.  Some coding styles suggest using such variables for clarity and
+ease of debugging.
+</p>
+</body>
+</html>

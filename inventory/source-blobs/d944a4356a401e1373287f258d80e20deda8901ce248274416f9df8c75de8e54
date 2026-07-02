@@ -1,0 +1,282 @@
+ejb.facet.display.name=EJB
+
+ejb.validator.description=EJB
+progress.validating.ejbs.text=Validating EJBs\u2026
+
+ejb.model.object.type.entity.bean=Entity Bean
+ejb.model.object.type.message.driven.bean=Message Driven Bean
+ejb.model.object.type.session.bean=Session Bean
+ejb.model.object.type.interceptor=Interceptor
+ejb.model.object.type.cmp.field=CMP Field
+ejb.model.object.type.cmr.field=CMR Field
+ejb.model.object.type.ejb.relation=EJB Relation
+
+label.edit.cmp.field.description=&Description:
+checkbox.cmp.field.properties.generate.setter.in.remote.interface=R&emote Interface
+checkbox.cmp.field.properties.generate.setter.in.local.interface=Local &Interface
+checkbox.cmp.field.properties.generate.getter.in.remote.interface=&Remote Interface
+checkbox.cmp.field.properties.generate.getter.in.local.interface=&Local Interface
+label.cmp.field.properties.generate.setter.in=Generate setter in:
+label.cmp.field.properties.generate.getter.in=Generate getter in:
+dialog.title.choose.ejb.message.listener.interface=Choose EJB Message Listener Interface
+dialog.title.choose.ejb.service.endpoint.interface=Choose EJB Service Endpoint Interface
+label.ejb.class.properties.message.listener.interface=&Message Listener:
+label.ejb.class.properties.service.endpoint.interface=&Service Endpoint:
+
+border.interceptor.binding=Interceptor Bindings
+column.name.ejb.business.tree.name=Name
+column.name.ejb.business.tree.intercept=Intercept
+checkbox.default.interceptor=&Default Interceptor
+
+template.node.ejb=EJB
+ejb.template.node.java.code.templates=Java code templates
+ejb.template.node.deployment.descriptors=Deployment descriptors
+ejb.model.object.type.abstract.schema.name=Abstract Schema Name
+
+ejb.dialog.title.primary.key.class=Primary Key Class
+label.pk.class.dialog.pk.class.cant.contain.compound.primary.key=<html>PK Class ''{0}'' can''t contain compound Primary Key.<br>Please either:<ul><li>Specify primary key class which can hold all CMP fields, or</li><li>Provide package and class names to create new Primary Key Class for you</li></html>
+border.pk.class.dialog.primary.key.class.package=Primary Key Class Package:
+dialog.title.choose.primary.key.class.package=Choose Primary Key Class Package
+border.pk.class.dialog.primary.key.class.name=Primary Key Class Name:
+
+class.role.ejb.class=EJB class
+class.role.home.interface=Home Interface
+class.role.local.home.interface=Local Home Interface
+class.role.local.interface=Local Interface
+class.role.remote.interface=Remote Interface
+class.role.business.local.interface=Local Business Interface
+class.role.business.remote.interface=Remote Business Interface
+class.role.service.endpoint.interface=Service Endpoint Interface
+class.role.unknown.ejb.class=Unknown EJB class
+
+model.object.type.service.reference=Web Service Reference
+model.object.type.managed.bean=Managed Bean
+model.object.type.ejb.reference=EJB Reference
+model.object.type.ejb.local.reference=EJB Local Reference
+model.object.type.ejb.message.destination.reference=Message Destination Reference
+
+ejb.declaration.action.home.interface.not.found=Home Interface Not Found
+ejb.declaration.action.bean.interface.not.found=Bean Interface Not Found
+ejb.declaration.action.add.method=Add Method
+EjbFrameworkSupportProvider.create.ejb.jar.xml=Create ejb-jar.xml
+
+message.text.class.not.found.in.project=Class ''{0}'' not found in the project
+confirmation.text.regenerate.equals.and.hashcode.for.class=Regenerate equals and hashCode methods for class ''{0}''?
+message.title.primary.key.class.changed=Primary Key Class Has Been Changed
+
+deployment.descriptor.title.ejb.module=EJB Module Deployment Descriptor
+
+role.for.ejb.name.string.representation={0} for EJB ''{1}''
+role.for.interceptor.name.string.representation={0} for ''{1}''
+method.role.finder.method.declaration=Finder Method Declaration
+method.role.create.method.declaration=Create Method Declaration
+method.role.business.method.declaration=Business Method Declaration
+method.role.cmp.field.getter.declaration=CMP Field Getter Declaration
+method.role.cmp.field.setter.declaration=CMP Field Setter Declaration
+method.role.cmr.field.getter.declaration=CMR Field Getter Declaration
+method.role.cmr.field.setter.declaration=CMR Field Setter Declaration
+method.role.home.business.method.declaration=Home Business Method Declaration
+method.role.unknown.method.declaration=Unknown Method Declaration
+method.role.home.business.method.implementation=Home Business Method Implementation
+method.role.finder.method.implementation=Finder Method Implementation
+method.role.selector.method.implementation=Selector Method Implementation
+method.role.create.method.implementation=Create Method Implementation
+method.role.post.create.method.implementation=Post Create Method Implementation
+method.role.business.method.implementation=Business Method Implementation
+method.role.cmp.field.getter.implementation=CMP Field Getter Implementation
+method.role.cmp.field.setter.implementation=CMP Field Setter Implementation
+method.role.cmr.field.getter.implementation=CMR Field Getter Implementation
+method.role.cmr.field.setter.implementation=CMR Field Setter Implementation
+method.role.method.implementation=Method Implementation
+
+command.name.create.directory=Create directory
+message.title.error=Error
+
+ejb.dialog.title.new.typename=New {0}
+ejb.type.bmp.entity.bean=BMP Entity Bean
+ejb.type.cmp.entity.bean=CMP Entity Bean
+ejb.type.entity.bean=Entity Bean
+ejb.type.session.bean=Session Bean
+ejb.type.stateful.bean=Stateful Session Bean
+ejb.type.stateless.bean=Stateless Session Bean
+ejb.type.singleton.bean=Singleton Session Bean
+ejb.type.message.bean=Message Bean
+ejb.interceptor.type=Interceptor
+
+#Delete ejb
+checkbox.delete.ejb.delete.following.classes=&Delete following classes:
+command.name.delete.ejb.class=Delete EJB Class
+local.vcs.label.name.deleting.ejb.class=Deleting ejb class {0}
+dialog,title.remove.ejb.remote.interface=Remove EJB Remote Interface
+dialog.title.remove.ejb.local.interface=Remove EJB Local Interface
+
+dialog.title.create.new.cmp.field=Create CMP Field
+
+#Creating ejb
+label.text.creating.ejb=Creating EJB ''{0}''
+dialog.title.create.new.ejb.0=Create New EJB ''{0}''
+
+#actions
+action.name.create.bmp.entity.bean=Create BMP Entity Bean
+action.name.create.cmp.entity.bean=Create CMP Entity Bean
+action.name.new.ejb.relationship=New EJB Relationship
+action.description.create.new.ejb.relationship=Create new EJB relationship
+message.text.must.be.cmp.entity.bean.with.local.interface=There must be at least one CMP Entity Bean with local interface
+message.title.cannot.create.relationship=Cannot Create Relationship
+action.name.create.message.bean=Create Message Bean
+action.name.create.stateless.bean=Create Stateless Session Bean
+action.name.create.stateful.bean=Create Stateful Session Bean
+action.name.create.singleton.bean=Create Singleton Session Bean
+action.name.create.new.transfer.object=Transfer Object
+command.name.create.transfer.object=Create Transfer Object
+
+label.ejb.class.properties.ejb.class=EJB &Class:
+
+tooltip.text.primary.key.class=Primary Key Class
+
+dialog.title.cant.create.class=Unable to Create Class
+class.role.interceptor.class=Interceptor
+action.name.create.interceptor=Create Interceptor
+interceptor.method.container.node.title=Interceptor methods
+
+value.should.either.0.or.1=Value should either {0} or {1}
+
+#intentions
+intention.add.method.to.ejb.class.family=Add Method to EJB Class
+intention.add.method.to.ejb.class.text=Add ''{0}'' to bean implementation class {1}
+intention.add.method.to.ejb.class.error.no.impl.class.message=Bean implementation class was not found. No methods were generated.
+
+#actions
+action.CreateStatelessBean.text=State_less Session Bean
+action.CreateStatefulBean.text=State_ful Session Bean
+action.CreateSingletonBean.text=Sin_gleton Session Bean
+action.CreateContainerManagedEntityBeanAction.text=_CMP Entity Bean
+action.CreateBeanManagedEntityBeanAction.text=_BMP Entity Bean
+action.CreateMessageBean.text=_Message Bean
+action.CreateTransferObject.text=_Transfer Object
+action.CreateCMPField.text=_CMP Field
+action.CreateCMPField.description=Create new CMP field
+action.CreateEJBRelationship.text=EJB _Relationship
+action.CreateEJBInterceptor.text=_Interceptor
+action.CreateServletAction.text=_Servlet
+action.CreateServletAction.description=Create new servlet
+action.CreateFilterAction.text=_Filter
+action.CreateFilterAction.description=Create new filter
+action.CreateListenerAction.text=_Listener
+action.CreateListenerAction.description=Create new listener
+action.GenerateEJBReference.text=@EJB Reference
+action.GenerateResourceReference.text=@Resource Reference
+action.GeneratePersistenceContextReference.text=@PersistenceContext/Unit Reference
+action.GenerateInterceptorMethods.text=Interceptor Methods\u2026
+action.GenerateEntityListenerMethods.text=Entity Listener Methods\u2026
+action.GenerateEJBFinderOrSelectorMethod.text=EJB Finder/Selector Method\u2026
+
+action.OpenPersistenceERDiagramAction.text=ER Dia_gram
+action.ValidateJsp.text=_Validate JSP
+action.ValidateJsp.description=Validate selected JSP files
+action.PackageFile.text=_Package file
+action.PackageFile.description=Add selected file into exploded deployment directory or Java EE archive
+
+group.GeneratePersistenceMapping.text=Generate Persistence Mapping
+group.JspActions.text=JSP Actions
+group.JavaeeMigrationGroup.text=Migration Actions
+
+action.GenerateFilterAction.text=&Filter\u2026
+action.GenerateServletAction.text=&Servlet\u2026
+group.NewGroupPersistence.text=Persistence
+group.J2EEGenerateGroup.text=J2EE
+group.WebResourcesGroup.text=Web Page
+
+EJBImplementationAction.bean.class.not.found=Bean Class Not Found
+EjbFrameworkSupportProvider.template.node.ejb=EJB
+
+message.title.change.ejb.classes=Change EJB Classes
+dialog.title.choose.ejb.class=Choose EJB Class
+label.ejb.class.properties.package=&Package:
+dialog.title.choose.ejb.classes.package=Choose EJB Classes Package
+dialog.title.choose.ejb.home.interface=Choose EJB Home Interface
+label.ejb.class.properties.remote.interface=&Home:
+label.ejb.class.properties.local.home=L&ocal Home:
+label.ejb.class.properties.remote=R&emote:
+label.ejb.class.properties.local=Loc&al:
+dialog.title.choose.ejb.remote.interface=Choose EJB Remote Interface
+dialog.title.choose.ejb.local.home.interface=Choose EJB Local Home Interface
+dialog.title.choose.ejb.local.interface=Choose EJB Local Interface
+label.ejb.class.properties.primary.key.class=Primary &Key Class:
+dialog.title.choose.ejb.primary.key.class=Choose EJB Primary Key Class
+message.text.ejb.exists.in.ejb.facet=EJB ''{0}'' already exists in this EJB facet.
+checkbox.edit.ejb.class.enable.local.interface=&Local Interface
+checkbox.edit.ejb.class.enable.remote.interface=&Remote Interface
+label.edit.ejb.class.cmp.version=CMP &Version
+ejb.interface.entry.point=EJB interface methods
+
+title.choose.interceptor.method.types=Select Interceptor Methods to Implement
+command.apply.interceptor.bindings.command=Modify Interceptor Bindings
+dialog.title.edit.interceptor.bindings=Edit Interceptor ''{0}'' bindings
+
+dialog.title.ejb.relationship.properties=EJB Relationship Properties
+message.text.entity.bean.not.specified.for.cmr.field=Existing Entity EJB name should be specified
+label.edit.relationship.ejb=EJB:
+dialog.title.choose.cmp.field.class=Choose CMP Field Class
+label.edit.cmp.field.name=&Name:
+message.text.cmp.field.exists=CMP field ''{0}'' already exists.
+message.text.cmp.field.name.not.valid=CMP field name ''{0}'' is not a valid identifier.
+message.text.cmp.field.name.should.begin.with.a.lower.case.letter=CMP field name should begin with a lower case letter.
+checkbox.edit.cmp.field.primary.key=&Primary Key
+message.text.type.not.found=Type ''{0}'' not found.
+label.edit.cmp.field.type=&Type:
+confirmation.text.class.does.not.exist.create.it=Class {0} does not exist. Do you want to create it?
+confirmation.text.classes.do.not.exist.create.them=Classes\n{0}\ndo not exist. Do you want to create them?
+dialog.title.choose.entity.bean.primary.key.class=Choose Entity Bean Primary Key Class
+message.text.duplicate.role.names=Duplicate role names
+message.text.cmr.field.0.already.defined=CMR field ''{0}'' already defined in {1}.
+message.text.cmr.field.name.should.begin.with.a.lower.case.letter=CMR field name should begin with a lower case letter.
+message.text.name.is.not.valid.identifier={0} is not a valid identifier
+label.ejb.roots.text=Source roots for EJB classes
+
+#Create transfer object
+message.text.recommended.transfer.object.class.agrees.with.pattern=It is recommended that Transfer Object class name\nagrees with following pattern: {0}
+label.create.transfer.object.transfer.object.class.name=Transfer Object class name:
+checkbox.create.transfer.object.generate.getter.in.interface=Generate &getter in {0} interface
+checkbox.create.transfer.object.generate.setter.in.interface=Generate &setter in {0} interface
+message.text.select.field.to.include.in.transfer.object=Please select at least one field to include in Transfer Object.
+dialog.title.select.accessors.of.fields.to.include.in.transfer.object=Select Accessors of Fields to Include in Transfer Object
+dialog.title.edit.ejb.ql.query=Edit EJB QL Query
+
+dialog.title.rename.0=Rename {0}
+inspection.ejb.display.name=EJB Classes Errors
+inspection.ejb.xml.display.name=EJB descriptor
+inspection.javaee.ejb.ql.display.name=EJB QL Problems
+
+border.relationship.editor.role.1=Role 1
+border.relationship.editor.role.2=Role 2
+label.edit.relationship.field.type=Field Type:
+label.edit.relationship.field.name=Field Name:
+label.edit.relationship.role.name=Role name:
+label.edit.relationship.multiplicity=Multiplicity:
+label.edit.relationship.description=&Description:
+label.edit.relationship.relationship.name=Relationship &Name:
+checkbox.edit.relationship.enable.cmr.field=CMR Field
+checkbox.edit.relationship.getter=Getter
+checkbox.edit.relationship.setter=Setter
+checkbox.edit.relationship.cascade.delete=Cascade Delete
+
+#intentions
+intention.add.method.to.ejb.interface.family=Add Method to EJB Interface
+intention.add.method.to.ejb.interface.text=Add ''{0}'' to bean interface
+intention.add.method.to.ejb.interface.error.no.home.interface=Bean home interface class was not found. No methods were generated.
+intention.add.method.to.ejb.interface.error.no.interface=Bean interface class was not found. No methods were generated.
+intention.add.method.to.ejb.interface.command.name=Adding methods
+intention.add.method.to.ejb.interface.chooser.title=Select interfaces
+intention.add.method.to.ejb.interface.chooser.label=Add ''{0}'' to
+
+message.title.class.not.found={0} not found
+message.title.no.fields.selected=No Fields Selected
+
+action.EditInterceptorBindingsAction.text=Edit Interceptor _Bindings\u2026
+action.OpenEjbERDiagramAction.text=Entity Relationship Diagram
+ejb.form.abstract.schema.name=Abstract schema name:
+
+ejb.config.gutter.action=Open EJB tool window
+ejb.config.gutter.name=EJB configuration file
+ejb.annotations.gutter.name=EJB annotations

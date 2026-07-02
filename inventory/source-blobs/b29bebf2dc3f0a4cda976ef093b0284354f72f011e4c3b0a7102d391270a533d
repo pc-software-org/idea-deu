@@ -1,0 +1,35 @@
+<html>
+<body>
+Reports cases for Java and Kotlin languages when a non-safe string is passed to a method as a SQL query.
+It can be a cause of SQL injections.
+The list of methods is taken from <b>Settings</b> - <b>Language Injections</b> for
+<code>SQL</code>, <code>JPA QL</code>, <code>Hibernate QL</code> and <code>PostgreSQL</code>
+<p>
+  A safe object is:
+<ul>
+  <li>a string literal, interface instance, or enum object, int and its wrapper, boolean and its wrapper, class object</li>
+  <li>a call result of a method, whose receiver and arguments are safe</li>
+  <li>a private field in the same file, which is assigned only with a string literal and has a safe initializer</li>
+  <li>a final field in the same file, which has a safe initializer</li>
+  <li>a local variable which is assigned from safe-objects</li>
+</ul>
+This field, local variable, or parameter must not be passed as arguments to methods or used as a qualifier or must be a primitive, its
+wrapper or immutable.
+
+Static final fields are considered as safe.
+<p>
+  The analysis is performed only inside one file.
+  Example:
+<pre>
+<code lang="java">
+    public void save(String sql) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.queryForList(sql);
+    }
+</code>
+</pre>
+
+<!-- tooltip end -->
+<p><small>New in 2023.2</small></p>
+</body>
+</html>

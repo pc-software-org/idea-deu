@@ -1,0 +1,13 @@
+<html>
+<body>
+Reports a reference to a variable or mixin that is declared in another file, which is not explicitly
+<a href="http://lesscss.org/features/#import-atrules-feature">imported</a> in the current file.
+<p><b>Example:</b></p>
+<pre><code>
+* {
+  margin: @var-in-other-file;
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

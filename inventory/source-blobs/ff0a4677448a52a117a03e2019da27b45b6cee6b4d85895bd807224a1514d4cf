@@ -1,0 +1,5 @@
+<html>
+<body>
+Splits an <code>if</code> statement with an <code>OR</code> expression as condition into a series of <code>if...else</code> statements with identical bodies.
+</body>
+</html>

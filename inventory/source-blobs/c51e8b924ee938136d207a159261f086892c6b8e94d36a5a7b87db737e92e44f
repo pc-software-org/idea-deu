@@ -1,0 +1,10 @@
+<html>
+<body>
+<p>Reports incorrect disposer methods.</p>
+
+<ul>
+  <li>Cannot be abstract.</li>
+  <li>Must have exactly only one disposed parameter annotated with <code>@Disposes</code>.</li>
+</ul>
+</body>
+</html>

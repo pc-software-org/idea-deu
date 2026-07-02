@@ -1,0 +1,16 @@
+dialog.close.running.toolbox.title=Close the Running Toolbox?
+dialog.close.running.toolbox.description=If there are running connections, they will be terminated
+dialog.close.running.toolbox.no.text=Cancel
+dialog.close.running.toolbox.yes.text=Close and Continue
+
+action.InstallToolboxAction.text=Install Toolbox [Old]
+action.InstallOrUpdateToolboxActionWrapper.text=Install Toolbox
+action.ForgetToolboxWasOpenedAction.text=Forget Toolbox promo has been clicked
+action.ForgetToolboxWasOpenedAction.description=Reset the flag corresponding to the fact that a user has clicked on the `Open Toolbox` button on the promotional banner
+action.InstallOrUpdateToolboxActionWrapper.update.text=Update Toolbox
+action.InstallOrUpdateToolboxActionWrapper.open.text=Open Toolbox
+action.InstallOrUpdateToolboxActionWrapper.installing.text=Installing\u2026
+action.InstallOrUpdateToolboxActionWrapper.looking.up.text=Looking for already installed Toolbox\u2026
+action.InstallOrUpdateToolboxActionWrapper.description=Install/Update Toolbox to launch remote IDE backend
+
+gateway.install.toolbox.progress=Installing

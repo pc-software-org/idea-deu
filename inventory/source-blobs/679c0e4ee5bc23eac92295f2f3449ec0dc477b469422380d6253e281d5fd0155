@@ -1,0 +1,5 @@
+<html>
+<body>
+Reports a <code>switch</code> statement with an empty body, or with only one <code>case</code> branch, or with a <code>default</code> branch only.
+</body>
+</html>

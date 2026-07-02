@@ -1,0 +1,12 @@
+<html>
+<body>
+Reports a reference to a <a href="http://lesscss.org/features/#variables-feature">Less variable</a> that is not resolved.
+<!-- tooltip end -->
+<p><b>Example:</b></p>
+<pre><code>
+* {
+  margin: @unknown-var;
+}
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<body>
+<p>
+  Reports a single quoted string in JSON array format.
+</p>
+<p>
+  JSON array form, must use double-quotes (") around words not single-quotes ('). Otherwise, Docker build will fail.
+</p>
+<!-- tooltip end -->
+<p><b>Examples:</b></p>
+<pre><code>
+  # all the commands below will fail
+  RUN ['/bin/bash', '-c', 'echo hello']
+  ADD ['binaryA.jar', 'binary2.jar', 'destination/']
+  COPY ['binaryA.jar', 'binary2.jar', 'destination/']
+</code></pre>
+<p>After the quick-fix is applied:</p>
+<pre><code>
+  RUN ["/bin/bash", "-c", "echo hello"]
+  ADD ["binaryA.jar", "binary2.jar", "destination/"]
+  COPY ["binaryA.jar", "binary2.jar", "destination/"]
+</code></pre>
+</body>
+</html>

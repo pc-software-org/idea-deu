@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a ternary conditional expression.  Some coding standards
+prohibit such expressions in favor of explicit <code>if</code>
+statements.
+</body>
+</html>

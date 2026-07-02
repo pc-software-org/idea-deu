@@ -1,0 +1,46 @@
+# Inspections
+inspections.group.path.name=Spring Security
+spring.security.framework.name=Spring Security
+
+model.inspection.model=Incorrect Spring Security XML-based application context
+model.inspection.model.http.must.not.contain.children=Must be empty tag for security='none'
+model.inspection.model.user.service.either.properties.or.users=Must either have attribute 'properties' or list of <user> elements
+model.inspection.model.ldap.server.manager.dn.without.manager.password='manager-password' is required when 'manager-dn' is used
+model.inspection.model.ldap.either.user.context.mapper.ref.or.user.details.class=Must either have 'user-context-mapper-ref' or 'user-details-class'
+model.inspection.model.http.pattern.all.must.be.last=<http> with pattern '/**' must be last
+model.inspection.model.http.not.multiple.without.pattern=Multiple <http> elements without 'pattern' not allowed
+model.inspection.model.authentication.provider.only.one.kind.of.user.service=Only one kind of user-service is allowed
+model.inspection.global.method.security.pre.post.annotations.not.enabled='pre-post-annotations' must have value 'enabled' for using <pre-post-annotation-handling>
+mode.inspection.global.method.security.not.aspectj.with.protect.pointcut=Cannot use 'mode' with value 'aspectj' for <protect-pointcut>
+model.inspection.model.intercept.url.attribute.only.inside.http=Attribute only allowed for parent <http>
+model.inspection.model.access.denied.handler.no.http.access.denied.page=Must not be used with <http> 'access-denied-page'
+model.inspection.model.protect.pointcut.expression.only.execution=Only 'execution' pointcut designator is supported here
+model.inspection.model.user.service.ref.required=Multiple user-services found, 'user-service-ref' required
+model.inspection.model.protect.do.not.mix.with.global.method.security=Mixing <protect> with <global-method-security> is not recommended
+
+model.inspection.debug.activated=Debug mode is activated in the Spring Security configuration
+model.inspection.debug.activated.message=Active Debug mode may expose sensitive data
+
+spring.bean.resolve.in.annotation.inspection.display.name=Incorrect configuration of Spring beans referenced in the Spring Security annotation
+security.role.type=Security Role
+action.show.security.matcher.registration=Show security configurations for URL
+spring.secured.url.not.found.title=Spring Secured Configurations
+spring.secured.configuration.not.found=Spring secured configurations not found
+spring.secured.configurations=Spring Security Configurations
+secured.url.matcher.inlay.provider.name=Secured URL matcher inlay
+inlay.spring.secured.url.matcher.inlay.hints.description=Spring Secured URL matcher in code. The icon provides quick access to secured URLs provided by matcher.
+spring.secured.url.not.found=Spring secured URLs not found
+spring.secured.url.matcher.inlay=Show secured URLs for matcher
+spring.secured.url.matcher.navigate.title=Navigate to secured URL
+spring.secured.configurations.search=Searching for security configurations
+spring.secured.urls.search=Searching for secured URLs
+
+spring.secured.urls.inlay.hide.inlays.intention.name=Hide secured URLs inlays for current language
+spring.secured.urls.inlay.show.inlays.enable.intention.name=Show secured URLs inlays for current language
+spring.secured.urls.inlay.settings.inlays.intention.hint.message=You can {0,choice,0#disable|1#enable} secured URLs inlay via intention or
+spring.secured.urls.inlay.settings.inlays.intention.hint.link= in settings
+spring.pre.filter.self.method.calls.inspection.display.name=@PreFilter/@PreAuthorize/@PostFilter self-invocation method calls
+spring.pre.filter.self.method.calls=@{0} self-invocation (in effect, a method within the target object calling another method of the target object). The annotation will be ignored at runtime
+spring.meta.filter.self.method.calls=Proxied method self-invocation (in effect, a method within the target object calling another method of the target object). The annotation will be ignored at runtime
+
+logical.spring.security.matchers=Access Control

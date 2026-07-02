@@ -1,0 +1,20 @@
+<html>
+<body>
+Reports a <code>for</code> loop
+that contains neither initialization nor an update component. Suggests replacing the loop with a simpler <code>while</code> statement.
+<p>Example:</p>
+<pre><code>
+  for(; exitCondition(); ) {
+    process();
+  }
+</code></pre>
+<p>After the quick-fix is applied the result looks like:</p>
+<pre><code>
+  while(exitCondition()) {
+    process();
+  }
+</code></pre>
+<!-- tooltip end -->
+<p>Use the checkbox below if you wish this inspection to ignore <b>for</b> loops with trivial or non-existent conditions.</p>
+</body>
+</html>
