@@ -45,10 +45,15 @@ class RealInventoryTests(unittest.TestCase):
         self.assertEqual(unit_ids, sorted(unit_ids))
         self.assertEqual(len(unit_ids), len(set(unit_ids)))
 
-    def test_units_are_open_and_have_properties_or_whole_file_shape(self):
+    def test_units_have_valid_status_target_and_shape(self):
         kinds = {(r["container"], r["resource_path"]): r["resource_type"] for r in self.resources}
-        self.assertTrue(all(unit["status"] == "open" and unit["target"] == "" for unit in self.units))
+        reviewed = {"technically_reviewed", "linguistically_reviewed"}
         for unit in self.units:
+            if unit["status"] == "open":
+                self.assertEqual("", unit["target"])
+            else:
+                self.assertIn(unit["status"], reviewed)
+                self.assertNotEqual("", unit["target"])
             kind = kinds[(unit["context"]["container"], unit["context"]["path"])]
             self.assertEqual(kind != "properties", unit["context"]["key"] == "")
 
