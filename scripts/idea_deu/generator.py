@@ -40,18 +40,41 @@ class MappingResourceProvider:
 
 
 class DistributionResourceProvider:
-    """Read an inventoried member from its nested JAR without extraction."""
+    """Read an inventoried member from its nested JAR without extraction.
+
+    Owns an open ``ZipFile`` handle and any transiently opened nested JAR;
+    close via ``close()`` or the context-manager protocol to release both.
+    """
     def __init__(self, archive: object):
         self.archive = archive if hasattr(archive, "read") else Path(archive)  # type: ignore[arg-type]
         if hasattr(self.archive, "seek"): self.archive.seek(0)  # type: ignore[union-attr]
-        self._outer = zipfile.ZipFile(self.archive)
+        self._outer: zipfile.ZipFile | None = zipfile.ZipFile(self.archive)
         self._container_name: str | None = None
         self._nested: zipfile.ZipFile | None = None
 
+    def __enter__(self) -> "DistributionResourceProvider":
+        return self
+
+    def __exit__(self, exc_type, exc, traceback) -> bool:
+        self.close()
+        return False
+
+    def close(self) -> None:
+        nested, self._nested = self._nested, None
+        outer, self._outer = self._outer, None
+        self._container_name = None
+        try:
+            if nested is not None: nested.close()
+        finally:
+            if outer is not None: outer.close()
+
     def read(self, record: ResourceRecord) -> bytes:
+        if self._outer is None:
+            raise GenerationError("distribution provider is closed")
         try:
             if self._container_name != record.container:
-                if self._nested is not None: self._nested.close()
+                if self._nested is not None:
+                    self._nested.close(); self._nested = None
                 info = _unique_zip_member(self._outer, record.container)
                 if _zip_symlink(info): raise GenerationError(f"symbolic-link container: {record.container}")
                 with self._outer.open(info) as stream:

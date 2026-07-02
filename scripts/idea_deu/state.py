@@ -171,6 +171,50 @@ def _read_jsonl_stream(stream: Any, label: str, record_type: type[T]) -> list[T]
     return records
 
 
+def serialize_jsonl(records: Iterable[Any]) -> bytes:
+    """Deterministically serialize records to the canonical JSONL byte stream.
+
+    Uses the same normalization, key sort, ID deduplication and terminating
+    newline policy as ``write_jsonl_atomic`` so callers can pipe the bytes into
+    additional layers (gzip, hashes, verifiers) and get byte-for-byte identical
+    output to the on-disk representation.
+    """
+    return _serialize_jsonl(records)
+
+
+def write_bytes_atomic(path: Path, payload: bytes) -> None:
+    """Atomically replace a regular file with ``payload`` bytes."""
+    path = Path(path)
+    if path.is_symlink():
+        raise StateError(f"refusing to replace symbolic link: {path}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    existing_mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o600
+    descriptor = -1
+    temp_path: Path | None = None
+    try:
+        descriptor, temp_name = tempfile.mkstemp(
+            prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
+        )
+        temp_path = Path(temp_name)
+        os.fchmod(descriptor, existing_mode)
+        with os.fdopen(descriptor, "wb") as stream:
+            descriptor = -1
+            _write_payload(stream, payload)
+        os.replace(temp_path, path)
+        temp_path = None
+        _fsync_directory(path.parent)
+    except OSError as exc:
+        raise StateError(str(exc)) from exc
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        if temp_path is not None:
+            try:
+                temp_path.unlink()
+            except FileNotFoundError:
+                pass
+
+
 def _serialize_jsonl(records: Iterable[Any]) -> bytes:
     try:
         objects = [_as_json_object(record) for record in records]

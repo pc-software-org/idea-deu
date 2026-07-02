@@ -26,7 +26,7 @@ from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
 from .scanner import ScannerError, load_scanner_config, scan_archive
 from .source import SourceValidationError, validate_source
-from .state import StateError, read_jsonl, read_jsonl_bytes, write_jsonl_atomic
+from .state import StateError, read_jsonl, read_jsonl_bytes, serialize_jsonl, write_bytes_atomic, write_jsonl_atomic
 from .path_safety import atomic_materialize_tree, recover_materialized_tree
 
 DOMAIN_ERROR = 1
@@ -104,9 +104,9 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
             validate_source(config, source)
             inventory = scan_archive(source, load_scanner_config(root / "config/scanner.json"))
             old_units = _read_units(root)
-            source_provider = DistributionResourceProvider(source)
-            units = _extract_units(inventory, source_provider, old_units)
-            blobs = {record.source_sha256: source_provider.read(record) for record in inventory.resources}
+            with DistributionResourceProvider(source) as source_provider:
+                units = _extract_units(inventory, source_provider, old_units)
+                blobs = {record.source_sha256: source_provider.read(record) for record in inventory.resources}
         stale = _stale_units(old_units, units, config.build_number)
         checkpoint = _checkpoint(root)
         if checkpoint.get("current_batch") and tuple(units) != tuple(old_units):
@@ -274,12 +274,12 @@ def _recover_scan(root: Path) -> None:
     if read_jsonl(transaction / "manifest.jsonl", dict) != [{"schema_version": 1, "state": "prepared"}]:
         raise StateError("invalid scan transaction")
     write_jsonl_atomic(root / "inventory/resources.jsonl", read_jsonl(transaction / "resources.jsonl", ResourceRecord))
-    exclusion_path = root / "inventory/exclusions.jsonl"
-    write_jsonl_atomic(exclusion_path, read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord))
-    compressed = gzip.compress(exclusion_path.read_bytes(), mtime=0)
+    exclusions = read_jsonl(transaction / "exclusions.jsonl", ExclusionRecord)
     compressed_path = root / "inventory/exclusions.jsonl.gz"
-    temporary = compressed_path.with_suffix(".gz.tmp")
-    temporary.write_bytes(compressed); os.replace(temporary, compressed_path); exclusion_path.unlink()
+    write_bytes_atomic(compressed_path, gzip.compress(serialize_jsonl(exclusions), mtime=0))
+    plain_leftover = root / "inventory/exclusions.jsonl"
+    if plain_leftover.exists() and not plain_leftover.is_symlink():
+        plain_leftover.unlink()
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
     write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))

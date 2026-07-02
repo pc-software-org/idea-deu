@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "container_exclusions": [
     {
       "glob": "**/lib/jna-platform.jar",

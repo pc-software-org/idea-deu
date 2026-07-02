@@ -13,6 +13,19 @@ from pathlib import Path, PurePosixPath
 from tempfile import SpooledTemporaryFile
 from typing import Any
 
+
+SCANNER_CONFIG_SCHEMA_VERSION = 1
+
+# Ancillary members of the bundled JetBrains language-pack containers that do
+# not represent translatable IDE resources. They match the broad ``*.properties``
+# pattern for structural reasons (Maven POMs, JetBrains bundle indices) or are
+# binary payloads that inadvertently match a resource glob. Removing them keeps
+# the reference union limited to real UI properties without widening the
+# resource pattern language for the outer scan.
+_REFERENCE_UNION_EXTRA_EXCLUDED_PREFIXES = ("META-INF/plugin",)
+_REFERENCE_UNION_EXTRA_EXCLUDED_SUFFIXES = (".class", ".svg", ".png")
+_REFERENCE_UNION_EXTRA_EXCLUDED_SUBSTRINGS = ("__index__",)
+
 from .models import (
     CollisionRecord,
     ExclusionReason,
@@ -120,6 +133,7 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise ScannerError(f"cannot load scanner configuration: {path}") from error
     if not isinstance(data, dict) or set(data) != {
+        "schema_version",
         "container_exclusions",
         "resource_exclusions",
         "resource_selections",
@@ -130,6 +144,10 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         "limits",
     }:
         raise ScannerError("scanner configuration has invalid top-level keys")
+    if data["schema_version"] != SCANNER_CONFIG_SCHEMA_VERSION or type(data["schema_version"]) is not int:
+        raise ScannerError(
+            f"scanner configuration schema_version must be {SCANNER_CONFIG_SCHEMA_VERSION}"
+        )
     limits = data["limits"]
     expected_limits = {
         "max_containers",
@@ -271,8 +289,13 @@ def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
         raise ScannerError("duplicate resource selection")
     available = {(item.resource_path, item.container) for item in resources}
     present_paths = {path for path, _container in available}
+    absent_paths = sorted(path for path in selections if path not in present_paths)
+    if absent_paths:
+        raise ScannerError(
+            "resource selection resource not present: " + ", ".join(absent_paths)
+        )
     missing = sorted((path, container) for path, container in selections.items()
-                     if path in present_paths and (path, container) not in available)
+                     if (path, container) not in available)
     if missing:
         raise ScannerError("resource selection is not present: " + ", ".join(f"{c}!/{p}" for p, c in missing))
     selected_resources: list[ResourceRecord] = []
@@ -417,20 +440,26 @@ def _translation_reference_paths(outer: zipfile.ZipFile, config: ScannerConfig) 
         if total_bytes > config.max_total_nested_jar_bytes:
             raise ScannerError("translation references exceed total nested JAR limit")
         try:
-            with outer.open(info) as stream:
-                data = stream.read(config.max_nested_jar_bytes + 1)
-            with zipfile.ZipFile(__import__("io").BytesIO(data)) as nested:
-                total_members += len(nested.filelist)
-                if total_members > config.max_members:
-                    raise ScannerError("translation references exceed member limit")
-                for member in nested.filelist:
-                    path = member.filename
-                    if (not member.is_dir() and _safe_path(path)
-                            and _matches_resource(path, config.resource_patterns)
-                            and not _is_localized(path, config.localization_directories)
-                            and not path.startswith("META-INF/plugin")
-                            and "__index__" not in path and not path.lower().endswith((".class", ".svg", ".png"))):
-                        paths.add(path)
+            with SpooledTemporaryFile(max_size=config.spool_memory_bytes) as temporary:
+                with outer.open(info) as stream:
+                    _copy_bounded(stream, temporary, config.max_nested_jar_bytes)
+                temporary.seek(0)
+                with zipfile.ZipFile(temporary) as nested:
+                    total_members += len(nested.filelist)
+                    if total_members > config.max_members:
+                        raise ScannerError("translation references exceed member limit")
+                    for member in nested.filelist:
+                        path = member.filename
+                        lower_path = path.lower()
+                        if (not member.is_dir() and _safe_path(path)
+                                and _matches_resource(path, config.resource_patterns)
+                                and not _is_localized(path, config.localization_directories)
+                                and not any(path.startswith(prefix)
+                                            for prefix in _REFERENCE_UNION_EXTRA_EXCLUDED_PREFIXES)
+                                and not any(fragment in path
+                                            for fragment in _REFERENCE_UNION_EXTRA_EXCLUDED_SUBSTRINGS)
+                                and not lower_path.endswith(_REFERENCE_UNION_EXTRA_EXCLUDED_SUFFIXES)):
+                            paths.add(path)
         except (OSError, zipfile.BadZipFile, EOFError, RuntimeError, NotImplementedError) as error:
             raise ScannerError(f"cannot read required translation reference {container}: {error}") from error
     if not paths:

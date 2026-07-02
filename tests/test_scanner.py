@@ -26,7 +26,8 @@ class ScannerTests(unittest.TestCase):
         self.addCleanup(self.temporary_directory.cleanup)
         self.directory = Path(self.temporary_directory.name)
         self.config = replace(load_scanner_config(ROOT / "config" / "scanner.json"),
-                              require_translation_reference=False)
+                              require_translation_reference=False,
+                              resource_selections=())
 
     def reference_config(self, *containers: str):
         return replace(self.config, translation_reference_containers=containers,
@@ -286,6 +287,7 @@ class ScannerTests(unittest.TestCase):
         )
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
         raw["require_translation_reference"] = False
+        raw["resource_selections"] = []
         raw["resource_exclusions"] = [{
             "container": "lib/vendor.jar",
             "resource": "vendor/Binary.properties",
@@ -310,6 +312,7 @@ class ScannerTests(unittest.TestCase):
         )
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
         raw["require_translation_reference"] = False
+        raw["resource_selections"] = []
         raw["container_exclusions"].append({
             "glob": "plugins/localization-ja/lib/localization-ja.jar",
             "reason": "already_localized",
@@ -513,6 +516,36 @@ class ScannerTests(unittest.TestCase):
             [(item.resource_path, item.reason.value) for item in inventory.exclusions],
             [("messages/C.properties", "total_resource_bytes_exceeded")],
         )
+
+    def test_resource_selection_for_missing_resource_fails_closed(self) -> None:
+        source = write_outer_archive(self.directory / "idea.zip", [
+            ("a.jar", jar_bytes([("messages/Real.properties", b"x=1")])),
+        ])
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["require_translation_reference"] = False
+        raw["resource_selections"] = [{
+            "resource": "messages/DoesNotExist.properties", "container": "a.jar",
+            "reason": "official_localization_selection",
+        }]
+        path = self.directory / "scanner.json"; path.write_text(json.dumps(raw), encoding="utf-8")
+
+        with self.assertRaisesRegex(ScannerError, "resource selection resource not present"):
+            scan_archive(source, load_scanner_config(path))
+
+    def test_config_requires_schema_version_field(self) -> None:
+        raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        self.assertEqual(raw.get("schema_version"), 1)
+        del raw["schema_version"]
+        path = self.directory / "no-schema.json"
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        with self.assertRaises(ScannerError):
+            load_scanner_config(path)
+
+        raw["schema_version"] = 2
+        path = self.directory / "wrong-schema.json"
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        with self.assertRaises(ScannerError):
+            load_scanner_config(path)
 
     def test_total_resource_budget_reserves_candidate_bytes_before_decompression(self) -> None:
         nested = with_unsupported_compression(

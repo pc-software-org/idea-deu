@@ -29,6 +29,7 @@ class CliEndToEndTests(unittest.TestCase):
         shutil.copy(repo / "config/scanner.json", self.root / "config/scanner.json")
         scanner = json.loads((self.root / "config/scanner.json").read_text())
         scanner["require_translation_reference"] = False
+        scanner["resource_selections"] = []
         (self.root / "config/scanner.json").write_text(json.dumps(scanner))
         shutil.copy(repo / "glossary/de.json", self.root / "glossary/de.json")
         shutil.copy(repo / "plugin/META-INF/plugin.xml", self.root / "plugin/META-INF/plugin.xml")
