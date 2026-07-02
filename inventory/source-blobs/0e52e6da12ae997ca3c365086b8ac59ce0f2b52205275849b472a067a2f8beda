@@ -1,0 +1,6 @@
+<html>
+<body>
+Add Micronaut bean dependency.
+<br>The template is available for unresolved references inside classes marked as Micronaut component.
+</body>
+</html>

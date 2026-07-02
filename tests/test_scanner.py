@@ -25,7 +25,69 @@ class ScannerTests(unittest.TestCase):
         self.temporary_directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary_directory.cleanup)
         self.directory = Path(self.temporary_directory.name)
-        self.config = load_scanner_config(ROOT / "config" / "scanner.json")
+        self.config = replace(load_scanner_config(ROOT / "config" / "scanner.json"),
+                              require_translation_reference=False)
+
+    def reference_config(self, *containers: str):
+        return replace(self.config, translation_reference_containers=containers,
+                       require_translation_reference=True)
+
+    def test_translation_reference_filters_operational_properties_and_keeps_ui(self) -> None:
+        reference = "plugins/localization-ja/lib/localization-ja.jar"
+        source = write_outer_archive(self.directory / "idea.zip", [
+            (reference, jar_bytes([("messages/App.properties", b"name=localized")])),
+            ("lib/app.jar", jar_bytes([
+                ("messages/App.properties", b"name=English"),
+                ("META-INF/maven/x/pom.properties", b"version=1"),
+            ])),
+        ])
+
+        inventory = scan_archive(source, self.reference_config(reference))
+
+        self.assertEqual(["messages/App.properties"], [item.resource_path for item in inventory.resources])
+        self.assertIn("not_in_translation_reference", [item.reason.value for item in inventory.exclusions])
+
+    def test_translation_reference_does_not_suppress_structural_resources(self) -> None:
+        reference = "plugins/localization-ja/lib/localization-ja.jar"
+        source = write_outer_archive(self.directory / "idea.zip", [
+            (reference, jar_bytes([("messages/App.properties", b"name=localized")])),
+            ("lib/app.jar", jar_bytes([
+                ("tips/Welcome.html", b"<html>Tip</html>"),
+                ("postfixTemplates/ForEach/description.html", b"<html>For each</html>"),
+            ])),
+        ])
+
+        inventory = scan_archive(source, self.reference_config(reference))
+
+        self.assertEqual(
+            [("postfixTemplates/ForEach/description.html", "postfix_template"),
+             ("tips/Welcome.html", "tip")],
+            [(item.resource_path, item.resource_type.value) for item in inventory.resources],
+        )
+
+    def test_translation_reference_uses_union_of_all_reference_containers(self) -> None:
+        ja = "plugins/localization-ja/lib/localization-ja.jar"
+        ko = "plugins/localization-ko/lib/localization-ko.jar"
+        source = write_outer_archive(self.directory / "idea.zip", [
+            (ja, jar_bytes([("messages/One.properties", b"x=1")])),
+            (ko, jar_bytes([("messages/Two.properties", b"x=2")])),
+            ("lib/app.jar", jar_bytes([("messages/One.properties", b"x=one"),
+                                        ("messages/Two.properties", b"x=two")])),
+        ])
+
+        inventory = scan_archive(source, self.reference_config(ja, ko))
+
+        self.assertEqual(["messages/One.properties", "messages/Two.properties"],
+                         [item.resource_path for item in inventory.resources])
+
+    def test_required_translation_reference_missing_or_corrupt_fails(self) -> None:
+        reference = "plugins/localization-ja/lib/localization-ja.jar"
+        for label, entries in (("missing", [("lib/app.jar", jar_bytes([]))]),
+                               ("corrupt", [(reference, b"not a jar")])):
+            with self.subTest(label=label):
+                source = write_outer_archive(self.directory / f"{label}.zip", entries)
+                with self.assertRaisesRegex(ScannerError, "translation reference"):
+                    scan_archive(source, self.reference_config(reference))
 
     def test_inventory_classifies_resources_and_records_every_exclusion(self) -> None:
         core = jar_bytes(
@@ -223,6 +285,7 @@ class ScannerTests(unittest.TestCase):
             ]))],
         )
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["require_translation_reference"] = False
         raw["resource_exclusions"] = [{
             "container": "lib/vendor.jar",
             "resource": "vendor/Binary.properties",
@@ -246,6 +309,7 @@ class ScannerTests(unittest.TestCase):
               jar_bytes([("messages/App.properties", "name=名前".encode())]))],
         )
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["require_translation_reference"] = False
         raw["container_exclusions"].append({
             "glob": "plugins/localization-ja/lib/localization-ja.jar",
             "reason": "already_localized",
@@ -264,6 +328,7 @@ class ScannerTests(unittest.TestCase):
             ("b.jar", jar_bytes([("messages/Same.properties", b"name=B")])),
         ])
         raw = json.loads((ROOT / "config" / "scanner.json").read_text(encoding="utf-8"))
+        raw["require_translation_reference"] = False
         raw["resource_selections"] = [{
             "resource": "messages/Same.properties", "container": "b.jar",
             "reason": "official_localization_selection",

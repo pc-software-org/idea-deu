@@ -30,6 +30,7 @@ _RESOURCE_PATTERN_TYPES = {
     "intentionDescriptions/**/*.html": ResourceType.INTENTION_DESCRIPTION,
     "fileTemplates/**/*.html": ResourceType.FILE_TEMPLATE,
     "postfixTemplates/**/*.xml": ResourceType.POSTFIX_TEMPLATE,
+    "postfixTemplates/**/*.html": ResourceType.POSTFIX_TEMPLATE,
     "tips/**/*.html": ResourceType.TIP,
 }
 
@@ -84,6 +85,8 @@ class ScannerConfig:
     container_exclusions: tuple[ContainerExclusionRule, ...]
     resource_exclusions: tuple[ResourceExclusionRule, ...]
     resource_selections: tuple[ResourceSelectionRule, ...]
+    translation_reference_containers: tuple[str, ...]
+    require_translation_reference: bool
     resource_patterns: tuple[str, ...]
     localization_directories: tuple[str, ...]
     max_containers: int
@@ -120,6 +123,8 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         "container_exclusions",
         "resource_exclusions",
         "resource_selections",
+        "translation_reference_containers",
+        "require_translation_reference",
         "resource_patterns",
         "localization_directories",
         "limits",
@@ -143,6 +148,8 @@ def load_scanner_config(path: Path) -> ScannerConfig:
     raw_exclusions = data["container_exclusions"]
     raw_resource_exclusions = data["resource_exclusions"]
     raw_selections = data["resource_selections"]
+    raw_references = data["translation_reference_containers"]
+    require_reference = data["require_translation_reference"]
     _validate_resource_patterns(patterns)
     if not isinstance(directories, list) or not directories or not all(
         isinstance(value, str) and value.strip() for value in directories
@@ -178,6 +185,12 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         and rule["reason"] == "official_localization_selection" for rule in raw_selections
     ):
         raise ScannerError("resource_selections must contain valid selection objects")
+    if (not isinstance(raw_references, list) or not raw_references
+            or not all(isinstance(value, str) and value.strip() and not any(c in value for c in "*?[")
+                       for value in raw_references)
+            or len(set(raw_references)) != len(raw_references)
+            or type(require_reference) is not bool):
+        raise ScannerError("translation reference configuration is invalid")
     if limits["max_containers"] > limits["max_outer_members"]:
         raise ScannerError("max_containers cannot exceed max_outer_members")
     if limits["max_nested_jar_bytes"] > limits["max_total_nested_jar_bytes"]:
@@ -197,6 +210,8 @@ def load_scanner_config(path: Path) -> ScannerConfig:
         tuple(ResourceExclusionRule(rule["container"], rule["resource"], ExclusionReason(rule["reason"]))
               for rule in raw_resource_exclusions),
         tuple(ResourceSelectionRule(rule["resource"], rule["container"]) for rule in raw_selections),
+        tuple(raw_references),
+        require_reference,
         tuple(patterns),
         tuple(value.lower() for value in directories),
         limits["max_containers"],
@@ -224,6 +239,7 @@ def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
                     "outer archive member budget exceeded: "
                     f"{outer_member_count} > {config.max_outer_members}"
                 )
+            reference_paths = _translation_reference_paths(outer, config)
             for member in sorted(outer.filelist, key=lambda item: item.filename):
                 container = member.filename
                 if member.is_dir():
@@ -244,7 +260,7 @@ def scan_archive(path: Any, config: ScannerConfig) -> Inventory:
                     )
                 else:
                     budget.nested_jar_bytes += member.file_size
-                    _scan_nested(outer, member, config, budget, resources, exclusions)
+                    _scan_nested(outer, member, config, budget, resources, exclusions, reference_paths)
                 if container.lower().endswith(".jar") and _safe_path(container) and not member.is_dir():
                     budget.containers += 1
     except (OSError, zipfile.BadZipFile) as error:
@@ -293,6 +309,7 @@ def _scan_nested(
     budget: _ScanBudget,
     resources: list[ResourceRecord],
     exclusions: list[ExclusionRecord],
+    reference_paths: frozenset[str] | None,
 ) -> None:
     container = jar_info.filename
     try:
@@ -315,7 +332,8 @@ def _scan_nested(
                         exclusions.append(ExclusionRecord(container, resource_path, ExclusionReason.DUPLICATE_MEMBER))
                         continue
                     seen.add(resource_path)
-                    _classify_member(nested, member, container, config, budget, resources, exclusions)
+                    _classify_member(nested, member, container, config, budget, resources, exclusions,
+                                     reference_paths)
     except (zipfile.BadZipFile, EOFError) as error:
         exclusions.append(ExclusionRecord(container, "", ExclusionReason.CORRUPT_ARCHIVE, str(error)))
     except (NotImplementedError, RuntimeError) as error:
@@ -330,6 +348,7 @@ def _classify_member(
     budget: _ScanBudget,
     resources: list[ResourceRecord],
     exclusions: list[ExclusionRecord],
+    reference_paths: frozenset[str] | None,
 ) -> None:
     path = member.filename
     if member.is_dir():
@@ -344,6 +363,9 @@ def _classify_member(
         exclusions.append(ExclusionRecord(container, path, reason))
     elif not _matches_resource(path, config.resource_patterns):
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.UNSUPPORTED_RESOURCE))
+    elif (reference_paths is not None and _resource_type(path, config.resource_patterns) is ResourceType.PROPERTIES
+          and path not in reference_paths):
+        exclusions.append(ExclusionRecord(container, path, ExclusionReason.NOT_IN_TRANSLATION_REFERENCE))
     elif member.file_size > config.max_resource_bytes:
         exclusions.append(ExclusionRecord(container, path, ExclusionReason.RESOURCE_TOO_LARGE, str(member.file_size)))
     elif budget.resource_bytes + member.file_size > config.max_total_resource_bytes:
@@ -378,6 +400,42 @@ def _classify_member(
 
 def _matches_resource(path: str, patterns: Sequence[str]) -> bool:
     return any(_pattern_matches(path, pattern) for pattern in patterns)
+
+
+def _translation_reference_paths(outer: zipfile.ZipFile, config: ScannerConfig) -> frozenset[str] | None:
+    if not config.require_translation_reference:
+        return None
+    by_name = {item.filename: item for item in outer.filelist if not item.is_dir()}
+    paths: set[str] = set(); total_bytes = 0; total_members = 0
+    for container in config.translation_reference_containers:
+        info = by_name.get(container)
+        if info is None or not _safe_path(container):
+            raise ScannerError(f"required translation reference is missing: {container}")
+        if info.file_size > config.max_nested_jar_bytes:
+            raise ScannerError(f"translation reference exceeds nested JAR limit: {container}")
+        total_bytes += info.file_size
+        if total_bytes > config.max_total_nested_jar_bytes:
+            raise ScannerError("translation references exceed total nested JAR limit")
+        try:
+            with outer.open(info) as stream:
+                data = stream.read(config.max_nested_jar_bytes + 1)
+            with zipfile.ZipFile(__import__("io").BytesIO(data)) as nested:
+                total_members += len(nested.filelist)
+                if total_members > config.max_members:
+                    raise ScannerError("translation references exceed member limit")
+                for member in nested.filelist:
+                    path = member.filename
+                    if (not member.is_dir() and _safe_path(path)
+                            and _matches_resource(path, config.resource_patterns)
+                            and not _is_localized(path, config.localization_directories)
+                            and not path.startswith("META-INF/plugin")
+                            and "__index__" not in path and not path.lower().endswith((".class", ".svg", ".png"))):
+                        paths.add(path)
+        except (OSError, zipfile.BadZipFile, EOFError, RuntimeError, NotImplementedError) as error:
+            raise ScannerError(f"cannot read required translation reference {container}: {error}") from error
+    if not paths:
+        raise ScannerError("required translation reference union is empty")
+    return frozenset(paths)
 
 
 def _pattern_matches(path: str, pattern: str) -> bool:

@@ -8,14 +8,14 @@
 
 ## Counts
 
-- Resource files: 4392
-- Translation units: 94605
+- Resource files: 4147
+- Translation units: 72513
 
 ## Statuses
 
 | Status | Count |
 |---|---:|
-| open | 94605 |
+| open | 72513 |
 | translated | 0 |
 | technically_reviewed | 0 |
 | linguistically_reviewed | 0 |
@@ -25,19 +25,19 @@
 | Reason | Count |
 |---|---:|
 | already_localized | 3 |
-| collision_not_selected | 15 |
+| collision_not_selected | 20 |
 | directory | 2264 |
 | localized | 1271 |
 | nested_archive | 38 |
-| non_translatable_resource | 609 |
+| not_in_translation_reference | 1003 |
 | not_jar | 1898 |
-| unsupported_resource | 577193 |
+| unsupported_resource | 577039 |
 
 ## Findings and collisions
 
 - Blocking findings: 0
 - Warning findings: 0
-- Collisions: 33 (0 unresolved)
+- Collisions: 3 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|

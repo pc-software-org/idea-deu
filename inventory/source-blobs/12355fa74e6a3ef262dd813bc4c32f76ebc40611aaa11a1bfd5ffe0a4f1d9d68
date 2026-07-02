@@ -1,0 +1,6 @@
+<html>
+<body>
+Completes the SELECT statement with the FROM part. Also, adds the JOIN clause if only a single option for JOIN exists.
+You need to use the template after the table that you want to add to the FROM section.
+</body>
+</html>

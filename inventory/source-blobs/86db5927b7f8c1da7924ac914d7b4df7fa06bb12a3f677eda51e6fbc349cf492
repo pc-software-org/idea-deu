@@ -1,0 +1,5 @@
+<html>
+<body>
+Creates the SELECT statement with all the columns from the table that was used with this postfix template. Each column is added with an
+alias.</body>
+</html>

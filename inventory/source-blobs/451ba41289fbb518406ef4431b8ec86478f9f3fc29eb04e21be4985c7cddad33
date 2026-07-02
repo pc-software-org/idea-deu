@@ -1,0 +1,6 @@
+<html>
+<body>
+Add CDI bean dependency.
+<br>The template is available for unresolved references inside classes with a bean defining annotation.
+</body>
+</html>

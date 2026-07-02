@@ -1,0 +1,5 @@
+<html>
+<body>
+Wraps an expression in an <code>if</code> statement that checks that the type of the expressions is not <code>undefined</code>.
+</body>
+</html>

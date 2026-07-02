@@ -1,0 +1,5 @@
+<html>
+<body>
+Iterates over an object via its <code>Symbol.iterator</code> or over the values of an array using a destructuring pattern.
+</body>
+</html>

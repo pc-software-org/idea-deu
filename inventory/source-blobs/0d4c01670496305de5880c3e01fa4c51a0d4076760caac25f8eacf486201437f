@@ -1,0 +1,5 @@
+<html>
+<body>
+Wraps an expression in an <code>if</code> statement that checks that the expression values to <code>null</code>.
+</body>
+</html>

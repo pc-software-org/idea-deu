@@ -1,0 +1,6 @@
+<html>
+<body>
+Creates the SELECT statement with all the columns from the table that was used with this postfix template. As opposed to the <b>afrom</b>
+template, each column is added without an alias.
+</body>
+</html>

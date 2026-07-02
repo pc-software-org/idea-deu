@@ -1,0 +1,5 @@
+<html>
+<body>
+Wraps an expression in a <code>switch</code> statement and generates case clauses when possible.
+</body>
+</html>

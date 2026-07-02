@@ -1,29 +1,45 @@
 {
-  "collision_content": {"distinct": 0, "identical": 33},
+  "collision_content": {"distinct": 0, "identical": 3},
   "counts": {
-    "collisions": 33,
-    "exclusions": 583291,
-    "resources": 4392,
-    "source_blob_bytes": 11824262,
-    "source_blobs": 4260,
-    "translation_units": 94605,
+    "collisions": 3,
+    "exclusions": 583536,
+    "resources": 4147,
+    "source_blob_bytes": 6765992,
+    "source_blobs": 4067,
+    "translation_units": 72513,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
     "already_localized": 3,
-    "collision_not_selected": 15,
+    "collision_not_selected": 20,
     "directory": 2264,
     "localized": 1271,
     "nested_archive": 38,
-    "non_translatable_resource": 609,
+    "not_in_translation_reference": 1003,
     "not_jar": 1898,
-    "unsupported_resource": 577193
+    "unsupported_resource": 577039
+  },
+  "reference_coverage": {
+    "candidate_paths": 4928,
+    "candidate_paths_in_reference": 3954,
+    "candidate_paths_not_in_reference": 974,
+    "reference_paths": 7264,
+    "reference_paths_not_present_in_idea": 3310,
+    "not_present_by_type": {
+      "file_template": 341,
+      "inspection_description": 1562,
+      "intention_description": 498,
+      "postfix_template": 197,
+      "properties": 712
+    },
+    "suspicious_missing_candidate_paths": 0
   },
   "resource_types": {
     "file_template": 254,
     "inspection_description": 2297,
     "intention_description": 726,
-    "properties": 925,
+    "postfix_template": 154,
+    "properties": 526,
     "tip": 190
   },
   "schema_version": 1,

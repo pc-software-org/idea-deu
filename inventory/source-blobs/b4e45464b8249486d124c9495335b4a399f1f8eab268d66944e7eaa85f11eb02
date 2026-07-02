@@ -1,0 +1,5 @@
+<html>
+<body>
+Wraps a boolean expression in an <code>if</code> statement that checks that the expression values to <code>false</code>.
+</body>
+</html>

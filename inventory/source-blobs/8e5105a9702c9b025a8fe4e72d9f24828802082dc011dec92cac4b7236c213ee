@@ -1,0 +1,7 @@
+<html>
+<body>
+Inserts a TypeScript type assertion and wraps it in parentheses if needed.<br/>
+Available only in TypeScript.<br/><br/>
+A type assertion is inserted in the form of a prefix, except for TSX files, where the <code>as</code> expression is used.
+</body>
+</html>

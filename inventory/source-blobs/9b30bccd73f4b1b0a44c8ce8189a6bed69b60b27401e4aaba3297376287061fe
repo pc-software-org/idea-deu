@@ -1,6 +1,0 @@
-group.jupyter=Jupyter
-jupyter.add.cell=Add cell
-jupyter.run.cell=Run Cell
-jupyter.preview.markdown.cell=Preview Markdown cell
-jupyter.cell.type=Change cell type
-jupyter.compare.notebooks=Compare Jupyter notebooks

@@ -27,6 +27,9 @@ class CliEndToEndTests(unittest.TestCase):
         for directory in ("config", "glossary", "plugin/META-INF"):
             (self.root / directory).mkdir(parents=True, exist_ok=True)
         shutil.copy(repo / "config/scanner.json", self.root / "config/scanner.json")
+        scanner = json.loads((self.root / "config/scanner.json").read_text())
+        scanner["require_translation_reference"] = False
+        (self.root / "config/scanner.json").write_text(json.dumps(scanner))
         shutil.copy(repo / "glossary/de.json", self.root / "glossary/de.json")
         shutil.copy(repo / "plugin/META-INF/plugin.xml", self.root / "plugin/META-INF/plugin.xml")
         self.archive = self.root / "idea.zip"

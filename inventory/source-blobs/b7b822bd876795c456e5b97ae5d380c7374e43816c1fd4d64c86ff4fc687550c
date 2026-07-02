@@ -1,0 +1,5 @@
+<html>
+<body>
+Wraps an expression in an <code>if</code> block with an <code>instanceof</code> check.
+</body>
+</html>

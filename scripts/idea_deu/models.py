@@ -20,6 +20,7 @@ class ExclusionReason(StrEnum):
     MEMBER_BUDGET_EXCEEDED = "member_budget_exceeded"
     NESTED_ARCHIVE = "nested_archive"
     NESTED_JAR_TOO_LARGE = "nested_jar_too_large"
+    NOT_IN_TRANSLATION_REFERENCE = "not_in_translation_reference"
     NON_TRANSLATABLE_RESOURCE = "non_translatable_resource"
     NOT_JAR = "not_jar"
     RESOURCE_TOO_LARGE = "resource_too_large"
