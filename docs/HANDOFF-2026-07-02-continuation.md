@@ -1,19 +1,27 @@
 # Fortsetzungs-Übergabe: Deutsches IntelliJ-Sprachpaket
 
-Ergänzt `docs/HANDOFF-2026-07-02.md`. Beim Ausstellen dieser Übergabe waren
-Task 9 abgeschlossen und die ersten sechs Übersetzungs-Batches importiert und
-gepusht.
+Ergänzt `docs/HANDOFF-2026-07-02.md`. Beim erneuten Aktualisieren dieser
+Übergabe sind Task 9 abgeschlossen, ein zweiter Validator-Fix
+(`message_format_invalid`) beigesteuert und fünfzehn Übersetzungs-Batches
+importiert und gepusht.
 
 ## Aktueller Stand
 
-- HEAD: `ca8555b` (auf `feature/language-pack-pipeline`, gepusht)
-- Testsuite: 203 Tests, alle grün
+- HEAD: `2ed1d90` (auf `feature/language-pack-pipeline`, gepusht)
+- Testsuite: 204 Tests, alle grün
 - Ressourcen: 4.147 (unverändert)
 - Übersetzungseinheiten: 72.513
-- Bereits übersetzt und mindestens technisch reviewed: 600
-- Offene Einheiten: 71.913
+- Bereits übersetzt und mindestens technisch reviewed: 1.500
+- Offene Einheiten: 71.013
 - Ungelöste Kollisionen: 0
-- Verbleibende Batches à 100: 720
+- Verbleibende Batches à 100: 711
+
+Ergänzung zum Validator seit dem Vor-Update:
+
+- `MESSAGE_FORMAT_INVALID` feuert nur noch, wenn Source valide MessageFormat
+  ist und das Target dagegen regressiert. Damit lassen sich Bundle-Strings mit
+  invalidem Choice-Muster im Source (z. B. `{0,choice,|1#…|2#…}`) verlustfrei
+  übersetzen. Regressionstest ergänzt.
 
 Aus `python3 -m scripts.idea_deu --root . status` beim Übergabezeitpunkt:
 
