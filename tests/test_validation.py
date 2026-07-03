@@ -261,6 +261,21 @@ class TranslationValidationTests(unittest.TestCase):
         )
         self.assertEqual((), result.findings)
 
+    def test_identical_broken_source_message_format_is_not_a_target_blocker(self) -> None:
+        source = "The opened report with {0,choice,|1#1 problem|2#{0} problems} does not correspond to {1}"
+        target = "Der geöffnete Bericht mit {0,choice,|1#1 Problem|2#{0} Problemen} passt nicht zu {1}"
+        result = validate_translation(source, target)
+        self.assertNotIn(
+            FindingCode.MESSAGE_FORMAT_INVALID,
+            {finding.code for finding in result.findings},
+        )
+        # Guardrail: a valid MessageFormat source but invalid target still blocks.
+        self.assert_code(
+            "{0,choice,0#none|1#one|2#many}",
+            "{0,choice,2#many|1#one|0#none}",
+            FindingCode.MESSAGE_FORMAT_INVALID,
+        )
+
     def test_identical_broken_source_markup_is_not_a_target_blocker(self) -> None:
         source = "<html>\n<body>\n<p>Description\n<!-- tooltip end -->\n<p>\n</body>\n</html>"
         target = "<html>\n<body>\n<p>Beschreibung\n<!-- tooltip end -->\n<p>\n</body>\n</html>"

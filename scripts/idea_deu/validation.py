@@ -80,7 +80,7 @@ def validate_translation(
     source_message = _messages_in_content(source, source_markup)
     target_message = _messages_in_content(target, target_markup)
     message_relevant = source_message.recognized or target_message.recognized
-    if message_relevant and not target_message.valid:
+    if message_relevant and source_message.valid and not target_message.valid:
         findings.append(Finding(FindingCode.MESSAGE_FORMAT_INVALID, Severity.BLOCKING))
 
     markup_relevant = source_markup.relevant or target_markup.relevant
