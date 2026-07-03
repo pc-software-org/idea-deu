@@ -2,19 +2,19 @@
 
 Ergänzt `docs/HANDOFF-2026-07-02.md`. Beim erneuten Aktualisieren dieser
 Übergabe sind Task 9 abgeschlossen, ein zweiter Validator-Fix
-(`message_format_invalid`) beigesteuert und fünfzehn Übersetzungs-Batches
+(`message_format_invalid`) beigesteuert und zwanzig Übersetzungs-Batches
 importiert und gepusht.
 
 ## Aktueller Stand
 
-- HEAD: `2ed1d90` (auf `feature/language-pack-pipeline`, gepusht)
+- HEAD: `a173cd7` (auf `feature/language-pack-pipeline`, gepusht)
 - Testsuite: 204 Tests, alle grün
 - Ressourcen: 4.147 (unverändert)
 - Übersetzungseinheiten: 72.513
-- Bereits übersetzt und mindestens technisch reviewed: 1.500
-- Offene Einheiten: 71.013
+- Bereits übersetzt und mindestens technisch reviewed: 2.000
+- Offene Einheiten: 70.513
 - Ungelöste Kollisionen: 0
-- Verbleibende Batches à 100: 711
+- Verbleibende Batches à 100: 706
 
 Ergänzung zum Validator seit dem Vor-Update:
 
