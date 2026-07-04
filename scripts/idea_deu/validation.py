@@ -72,7 +72,7 @@ def validate_translation(
     """Return blocking integrity errors and non-blocking quality warnings."""
     del context
     findings: list[Finding] = []
-    if not target.strip():
+    if not target.strip() and source.strip():
         findings.append(Finding(FindingCode.EMPTY_TARGET, Severity.BLOCKING))
 
     source_markup = _markup(source)

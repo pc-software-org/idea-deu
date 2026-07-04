@@ -224,7 +224,7 @@ def _import_batch_locked(root: Path, units_path: Path, batch_path: Path, glossar
             if record[key] != expected[key]:
                 raise BatchError(f"changed {key} for {identifier}")
         target = record["target"]
-        if not isinstance(target, str) or not target.strip():
+        if not isinstance(target, str) or (not target.strip() and unit.source.strip()):
             raise BatchError(f"missing target for {identifier}")
         validation = validate_translation(unit.source, target, glossary=glossary.validation_terms(), context=unit.context.to_dict())
         status = ProcessingStatus.TRANSLATED if validation.is_blocking else ProcessingStatus.TECHNICALLY_REVIEWED

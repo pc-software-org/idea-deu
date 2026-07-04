@@ -41,6 +41,11 @@ class TranslationValidationTests(unittest.TestCase):
             with self.subTest(target=target):
                 self.assert_code("Text", target, FindingCode.EMPTY_TARGET)
 
+    def test_empty_target_is_clean_when_source_is_also_empty(self) -> None:
+        result = validate_translation("", "", glossary=())
+        self.assertEqual((), result.findings)
+        self.assertFalse(result.is_blocking)
+
     def test_message_format_placeholders_preserve_multiset_and_context(self) -> None:
         cases = (
             ("Open {0} from {1}", "Öffne {0}"),

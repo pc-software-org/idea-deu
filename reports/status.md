@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 65013 |
+| open | 64814 |
 | translated | 15 |
-| technically_reviewed | 7485 |
+| technically_reviewed | 7684 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -35,22 +35,22 @@
 
 ## Findings and collisions
 
-- Blocking findings: 84750
-- Warning findings: 24
+- Blocking findings: 84477
+- Warning findings: 26
 - Collisions: 3 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| empty_target | 65013 |
-| length_ratio | 24 |
-| markup_structure_changed | 5653 |
+| empty_target | 64796 |
+| length_ratio | 26 |
+| markup_structure_changed | 5639 |
 | message_format_invalid | 1 |
-| placeholder_mismatch | 14083 |
+| placeholder_mismatch | 14041 |
 
 ## Workflow
 
-- Last completed batch: 64
-- Current batch: translations/batches/65-1a8b0cd411ee.jsonl
+- Last completed batch: 65
+- Current batch: none
 - Stale units: 0
 - Workflow state: `translate`
 - Generated: present=False, valid=False (`generated/plugin`)
@@ -58,4 +58,4 @@
 
 Next command:
 
-`python -m scripts.idea_deu import-batch translations/batches/65-1a8b0cd411ee.jsonl`
+`python -m scripts.idea_deu next-batch --limit 100`
