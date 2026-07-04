@@ -7,14 +7,14 @@ importiert und gepusht.
 
 ## Aktueller Stand
 
-- HEAD: `99030fd` (auf `feature/language-pack-pipeline`, gepusht)
+- HEAD: `245d0a7` (auf `feature/language-pack-pipeline`, gepusht)
 - Testsuite: 204 Tests, alle grün
 - Ressourcen: 4.147 (unverändert)
 - Übersetzungseinheiten: 72.513
-- Bereits übersetzt und mindestens technisch reviewed: 3.600
-- Offene Einheiten: 68.913
+- Bereits übersetzt und mindestens technisch reviewed: 4.000
+- Offene Einheiten: 68.513
 - Ungelöste Kollisionen: 0
-- Verbleibende Batches à 100: 690
+- Verbleibende Batches à 100: 686
 
 Ergänzung zum Validator seit dem Vor-Update:
 
