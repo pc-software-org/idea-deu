@@ -51,9 +51,11 @@ class RealInventoryTests(unittest.TestCase):
         for unit in self.units:
             if unit["status"] == "open":
                 self.assertEqual("", unit["target"])
+                self.assertNotEqual("", unit["source"])
             else:
                 self.assertIn(unit["status"], non_open)
-                self.assertNotEqual("", unit["target"])
+                if unit["source"] != "":
+                    self.assertNotEqual("", unit["target"])
             kind = kinds[(unit["context"]["container"], unit["context"]["path"])]
             self.assertEqual(kind != "properties", unit["context"]["key"] == "")
 

@@ -67,7 +67,7 @@ def validate_all_units(root: Path, units_path: Path, glossary_path: Path) -> tup
             for unit in _read_jsonl_at(state_fd, "units.jsonl", TranslationUnit):
                 validation = validate_translation(unit.source, unit.target, glossary=glossary,
                                                   context=unit.context.to_dict())
-                if not unit.target:
+                if not unit.target and unit.source:
                     status = ProcessingStatus.OPEN
                 elif validation.is_blocking:
                     status = ProcessingStatus.TRANSLATED
