@@ -1,40 +1,49 @@
 # Fortsetzungs-Übergabe: Deutsches IntelliJ-Sprachpaket
 
-Ergänzt `docs/HANDOFF-2026-07-02.md`. Beim erneuten Aktualisieren dieser
-Übergabe sind Task 9 abgeschlossen, ein zweiter Validator-Fix
-(`message_format_invalid`) beigesteuert und zwanzig Übersetzungs-Batches
-importiert und gepusht.
+Ergänzt `docs/HANDOFF-2026-07-02.md`. Diese Übergabe reflektiert den Stand
+nach Batch 122. Batchgröße wurde von 100 auf 200 hochgezogen. Ab Batch 59
+werden die Übersetzungen von isolierten Subagenten erstellt (Sources +
+Regeln werden pro Aufruf mitgegeben, Rückgabe nur „OK: N/N written").
 
 ## Aktueller Stand
 
-- HEAD: `a739adf` (auf `feature/language-pack-pipeline`, gepusht)
-- Testsuite: 204 Tests, alle grün
+- HEAD: `a576096` (auf `feature/language-pack-pipeline`, gepusht)
+- Testsuite: 205 Tests, alle grün
 - Ressourcen: 4.147 (unverändert)
 - Übersetzungseinheiten: 72.513
-- Bereits übersetzt und mindestens technisch reviewed: 5.300
-- Offene Einheiten: 67.213
+- Bereits übersetzt und mindestens technisch reviewed: 19.100
+- Offene Einheiten: 53.413
 - Ungelöste Kollisionen: 0
-- Verbleibende Batches à 100: 673
+- Verbleibende Batches à 200: ~267
+- Verbleibende Batches à 100: ~534
 
-Ergänzung zum Validator seit dem Vor-Update:
+Ergänzungen zum Validator und Import seit dem Vor-Update:
 
 - `MESSAGE_FORMAT_INVALID` feuert nur noch, wenn Source valide MessageFormat
   ist und das Target dagegen regressiert. Damit lassen sich Bundle-Strings mit
   invalidem Choice-Muster im Source (z. B. `{0,choice,|1#…|2#…}`) verlustfrei
   übersetzen. Regressionstest ergänzt.
+- `EMPTY_TARGET` feuert nur noch, wenn Source nicht-leer ist. Manche
+  Properties-Bundles enthalten legitim leere Werte (z. B.
+  `ImportSettingsBundle/settings.category.system.description`) und die
+  korrekte deutsche Übersetzung ist ebenfalls leer. `import-batch` akzeptiert
+  jetzt leeres Target genau dann, wenn Source auch leer ist.
+- `validate_all_units` behält den `technically_reviewed`-Status für solche
+  leeren-Source-Units nach dem Revalidate. Regressionstest ergänzt.
+- Kontrakt-Test in `tests/test_real_inventory.py` an neuen Invariant
+  angepasst.
 
 Aus `python3 -m scripts.idea_deu --root . status` beim Übergabezeitpunkt:
 
 ```text
 Resource files: 4147
 Translation units: 72513
-Blocking findings: 71313
+Blocking findings: 69619
 Next: python -m scripts.idea_deu next-batch --limit 100
 ```
 
-„Blocking findings" spiegelt hier ausschließlich die noch offenen Einheiten
-mit leerem Target wider (der Validator meldet `empty_target` als Blocker,
-sobald `python -m scripts.idea_deu validate` alle Einheiten frisch bewertet).
+„Blocking findings" spiegelt weiterhin ausschließlich die noch offenen
+Einheiten mit leerem Target wider.
 
 ## Zwischenzeitliche Änderungen an der Pipeline
 
