@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 66413 |
+| open | 66213 |
 | translated | 11 |
-| technically_reviewed | 6089 |
+| technically_reviewed | 6289 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -35,21 +35,21 @@
 
 ## Findings and collisions
 
-- Blocking findings: 86550
-- Warning findings: 20
+- Blocking findings: 86297
+- Warning findings: 21
 - Collisions: 3 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| empty_target | 66413 |
-| length_ratio | 20 |
-| markup_structure_changed | 5763 |
+| empty_target | 66213 |
+| length_ratio | 21 |
+| markup_structure_changed | 5750 |
 | message_format_invalid | 1 |
-| placeholder_mismatch | 14373 |
+| placeholder_mismatch | 14333 |
 
 ## Workflow
 
-- Last completed batch: 57
+- Last completed batch: 58
 - Current batch: none
 - Stale units: 0
 - Workflow state: `translate`
