@@ -16,8 +16,8 @@
 | Status | Count |
 |---|---:|
 | open | 69013 |
-| translated | 1 |
-| technically_reviewed | 3499 |
+| translated | 0 |
+| technically_reviewed | 3500 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -35,7 +35,7 @@
 
 ## Findings and collisions
 
-- Blocking findings: 89959
+- Blocking findings: 89958
 - Warning findings: 11
 - Collisions: 3 (0 unresolved)
 
@@ -44,7 +44,7 @@
 | empty_target | 69013 |
 | length_ratio | 11 |
 | markup_structure_changed | 5994 |
-| placeholder_mismatch | 14952 |
+| placeholder_mismatch | 14951 |
 
 ## Workflow
 
