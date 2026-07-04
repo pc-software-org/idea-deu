@@ -50,7 +50,7 @@
 ## Workflow
 
 - Last completed batch: 64
-- Current batch: none
+- Current batch: translations/batches/65-1a8b0cd411ee.jsonl
 - Stale units: 0
 - Workflow state: `translate`
 - Generated: present=False, valid=False (`generated/plugin`)
@@ -58,4 +58,4 @@
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu import-batch translations/batches/65-1a8b0cd411ee.jsonl`
