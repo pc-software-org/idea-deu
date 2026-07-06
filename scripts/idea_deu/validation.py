@@ -302,10 +302,16 @@ def _printf_tokens(text: str) -> list[str]:
     for match in _PRINTF.finditer(text):
         token = match.group()
         prefix = text[:match.start()].rstrip()
+        # A space-flag token ("% x") that follows a number or a MessageFormat
+        # placeholder ("50% off", "{0}% classes") and runs into a word is prose
+        # percent, not a printf conversion. Dropping it prevents a spurious,
+        # language-dependent placeholder mismatch when the word after "%" differs
+        # between English and German. A genuine "% d"-style conversion (as in
+        # "Signed % dms") does not follow a digit or "}" and is kept.
         prose_percent = (
             token.startswith("% ")
             and bool(prefix)
-            and prefix[-1].isdigit()
+            and (prefix[-1].isdigit() or prefix[-1] == "}")
             and match.end() < len(text)
             and text[match.end()].isascii()
             and text[match.end()].isalpha()

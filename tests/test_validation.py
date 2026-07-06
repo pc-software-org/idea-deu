@@ -170,6 +170,10 @@ class TranslationValidationTests(unittest.TestCase):
             ("100% complete", "100 % abgeschlossen"),
             ("50% discount", "50% Rabatt"),
             ("50% discount", "50 % Rabatt"),
+            # percentage prose after a MessageFormat placeholder: the word after
+            # "%" differs between languages and must not be read as a conversion
+            ("{0}% classes", "{0}% Klassen"),
+            ("Specify a value from {0}% to {1}%", "Wert zwischen {0}% und {1}% angeben"),
         ):
             with self.subTest(source=source, target=target):
                 result = validate_translation(source, target)
