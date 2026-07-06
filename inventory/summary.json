@@ -1,20 +1,20 @@
 {
   "collision_content": {
     "distinct": 0,
-    "identical": 2
+    "identical": 0
   },
   "counts": {
-    "collisions": 2,
-    "exclusions": 594191,
-    "resources": 4192,
+    "collisions": 0,
+    "exclusions": 594193,
+    "resources": 4190,
     "source_blob_bytes": 6790933,
     "source_blobs": 4110,
-    "translation_units": 72142,
+    "translation_units": 71452,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
     "already_localized": 3,
-    "collision_not_selected": 20,
+    "collision_not_selected": 22,
     "directory": 2306,
     "localized": 1273,
     "nested_archive": 40,
@@ -41,7 +41,7 @@
     "inspection_description": 2330,
     "intention_description": 725,
     "postfix_template": 153,
-    "properties": 540,
+    "properties": 538,
     "tip": 190
   },
   "schema_version": 1,

@@ -216,7 +216,12 @@ def _validate_generation_structure(inventory: Inventory, units: Sequence[Transla
     if unknown_resources:
         raise GenerationError("translation units without inventory resource: " + ", ".join(
             f"{container}!/{path}" for container, path in unknown_resources))
-    missing = [r.resource_id for r in inventory.resources if (r.container,r.resource_path) not in by_resource]
+    # A keyless (e.g. empty) .properties bundle legitimately yields no units and
+    # renders to an empty localized file; only non-properties resources, which
+    # always carry exactly one whole-file unit, must be present here.
+    missing = [r.resource_id for r in inventory.resources
+               if (r.container, r.resource_path) not in by_resource
+               and r.resource_type is not ResourceType.PROPERTIES]
     if missing: raise GenerationError("missing translation units: " + ", ".join(missing))
 
 
@@ -303,8 +308,14 @@ def _supported_record(record: ResourceRecord) -> bool:
         ResourceType.TIP: "tips/",
     }
     prefix = prefixes.get(record.resource_type)
-    suffix = ".xml" if record.resource_type is ResourceType.POSTFIX_TEMPLATE else ".html"
-    return prefix is not None and path.startswith(prefix) and path.endswith(suffix)
+    if prefix is None or not path.startswith(prefix):
+        return False
+    # Postfix templates ship both an .xml definition and a translatable
+    # description.html; the scanner classifies both as POSTFIX_TEMPLATE, so the
+    # generator must accept either extension. Other description types are HTML.
+    if record.resource_type is ResourceType.POSTFIX_TEMPLATE:
+        return path.endswith(".xml") or path.endswith(".html")
+    return path.endswith(".html")
 
 
 def _write_tree(root: Path, resources: Mapping[str,bytes], *, trusted_root: Path | None = None) -> None:

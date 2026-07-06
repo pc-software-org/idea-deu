@@ -8,8 +8,8 @@
 
 ## Counts
 
-- Resource files: 4192
-- Translation units: 72142
+- Resource files: 4190
+- Translation units: 71452
 
 ## Statuses
 
@@ -17,7 +17,7 @@
 |---|---:|
 | open | 0 |
 | translated | 0 |
-| technically_reviewed | 72142 |
+| technically_reviewed | 71452 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -25,7 +25,7 @@
 | Reason | Count |
 |---|---:|
 | already_localized | 3 |
-| collision_not_selected | 20 |
+| collision_not_selected | 22 |
 | directory | 2306 |
 | localized | 1273 |
 | nested_archive | 40 |
@@ -36,22 +36,22 @@
 ## Findings and collisions
 
 - Blocking findings: 0
-- Warning findings: 333
-- Collisions: 2 (0 unresolved)
+- Warning findings: 332
+- Collisions: 0 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| length_ratio | 333 |
+| length_ratio | 332 |
 
 ## Workflow
 
 - Last completed batch: 29
 - Current batch: none
 - Stale units: 0
-- Workflow state: `generate`
-- Generated: present=False, valid=False (`generated/plugin`)
-- Package: present=False, valid=False, sha256=`unavailable`, size=unavailable (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`2849ca540634e2870f80ab7761b71d16fb7ddce9dc4a20d0f5e1f6a896b715f3`, size=2782669 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu generate`
+`python -m scripts.idea_deu status`

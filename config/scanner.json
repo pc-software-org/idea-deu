@@ -104,6 +104,11 @@
       "reason": "official_localization_selection"
     },
     {
+      "resource": "messages/GatewayBundle.properties",
+      "container": "plugins/gateway-plugin/lib/gateway-plugin.jar",
+      "reason": "official_localization_selection"
+    },
+    {
       "resource": "messages/JavaErrorBundle.properties",
       "container": "plugins/java/lib/java-impl.jar",
       "reason": "official_localization_selection"
@@ -116,6 +121,11 @@
     {
       "resource": "messages/JavaPsiBundle.properties",
       "container": "plugins/java/lib/java-impl.jar",
+      "reason": "official_localization_selection"
+    },
+    {
+      "resource": "messages/LicenseBundle.properties",
+      "container": "lib/product-backend.jar",
       "reason": "official_localization_selection"
     },
     {

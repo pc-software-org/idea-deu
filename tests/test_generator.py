@@ -93,6 +93,21 @@ class GeneratorTests(unittest.TestCase):
             generate_resources(inventory, (hello, self.unit(self.record,"other","untouched","x"), extra), provider, self.out)
         self.assertIn("messages/Bundle.properties:absent", str(surplus.exception))
 
+    def test_postfix_template_html_description_is_supported(self):
+        data = b"<html>Wrap</html>\n"
+        record = self.resource("lib/app.jar", "postfixTemplates/X/description.html",
+                               data, ResourceType.POSTFIX_TEMPLATE)
+        unit = self.unit(record, "", "<html>Wrap</html>\n", "<html>Umschließen</html>\n")
+        generate_resources(Inventory((record,), (), ()), (unit,),
+            MappingResourceProvider({(record.container, record.resource_path): data}), self.out)
+        self.assertEqual(unit.target.encode(), (self.out / record.resource_path).read_bytes())
+
+    def test_empty_properties_bundle_without_units_is_allowed(self):
+        record = self.resource("lib/app.jar", "messages/Empty.properties", b"")
+        generate_resources(Inventory((record,), (), ()), (),
+            MappingResourceProvider({(record.container, record.resource_path): b""}), self.out)
+        self.assertEqual(b"", (self.out / "messages/Empty_de.properties").read_bytes())
+
     def test_whole_file_is_utf8_at_exact_path(self):
         data = b"<html>Hello</html>\n"
         record = self.resource("lib/app.jar", "tips/Welcome.html", data, ResourceType.TIP)
@@ -166,9 +181,17 @@ class GeneratorTests(unittest.TestCase):
         for unit in units: self.assertIn(unit.id, str(caught.exception))
 
     def test_missing_unit_and_hash_mismatch_fail(self):
-        provider = MappingResourceProvider({(self.record.container, self.record.resource_path): b"changed"})
+        # A whole-file (non-properties) resource must carry its one unit; a
+        # keyless properties bundle is exempt (see the empty-bundle test).
+        whole = self.resource("lib/app.jar", "tips/Welcome.html", b"<html>Hi</html>\n", ResourceType.TIP)
         with self.assertRaisesRegex(GenerationError, "missing translation units"):
-            generate_resources(Inventory((self.record,), (), ()), (), provider, self.out)
+            generate_resources(Inventory((whole,), (), ()), (),
+                MappingResourceProvider({(whole.container, whole.resource_path): b"<html>Hi</html>\n"}), self.out)
+        # A non-empty properties bundle with a missing key unit is still caught.
+        with self.assertRaisesRegex(GenerationError, "incomplete properties units"):
+            generate_resources(Inventory((self.record,), (), ()), (),
+                MappingResourceProvider({(self.record.container, self.record.resource_path): self.data}), self.out)
+        provider = MappingResourceProvider({(self.record.container, self.record.resource_path): b"changed"})
         with self.assertRaisesRegex(GenerationError, "SHA-256"):
             generate_resources(Inventory((self.record,), (), ()), (self.unit(self.record,"hello","Hello","Hallo"),), provider, self.out)
 
