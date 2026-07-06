@@ -1,0 +1,403 @@
+driver.class=Driver class
+liquibase=Liquibase
+SettingsPage.liquibase.libraryNotFound=Liquibase library not found
+SettingsPage.liquibase.autoDetectedVersion=Auto-detect version: {0}
+Validation.changeLogFileExists=Changelog file with such name already exists in specified directory
+change.set.already.contains.table=Changeset "{0}" already contains create table with "{1}" name
+change.set.already.contains.view=Changeset "{0}" already contains create view with "{1}" name
+change.set.already.contains.index=Changeset "{0}" already contains create index with "{1}" name
+change.set.already.contains.sequence=Changeset "{0}" already contains create sequence with "{1}" name
+change.set.already.contains.procedure=Changeset "{0}" already contains create procedure with "{1}" name
+change.set=Changeset
+fixes.createChangelogFamily=Create changelog
+fixes.createEmptyChangelogFile=Create empty changelog file
+fixes.createDiffChangelogFile=Create diff changelog file
+inspection.group=Liquibase
+inspection.DuplicateChangeSetIdInspection=Duplicate changeset's `id` attribute within one file for the same `author`. Adjust the changeset's `author` or `id` value.
+inspection.message.unknown.table=Unknown table ''{0}''
+inspection.message.unknown.sequence=Unknown sequence ''{0}''
+id=Id
+author=Author
+procedure=Procedure
+procedure.name=Procedure name
+sequence=Sequence
+sequence.name=Sequence name
+alter.sequence=Alter sequence
+view=View
+table.name=Table name
+table=Table
+column=Column
+columns=Columns
+first.column.name=First column name
+second.column.name=Second column name
+final.column.name=Final column name
+final.column.type=Final column type
+join.string=Join string
+index=Index
+index.name=Index name
+view.name=View name
+path=Path
+auto.increment=Auto increment
+default.value=Default value
+not.null.constraint=Not Null Constraint
+primary.key=Primary key
+unique.constraint=Unique constraint
+lookup.table=Lookup table
+existing.table.name=Existing table name
+existing.column.name=Existing column name
+new.table.name=New table name
+new.column.name=New column name
+foreign.key.constraint=Foreign key constraint
+base.table.name=Base table name
+base.column.names=Base column names
+referenced.table.name=Referenced table name
+referenced.column.names=Referenced column names
+constraint.name=Constraint name
+merge.columns=Merge columns
+
+all.foreign.key.constraints=All foreign key constraints
+cannot.map.sql.type=Cannot map Java type to SQL/Liquibase type
+save.mapping=Save Mapping Type
+save.mapping.description=<html>Could not map some DB types to Java types automatically. Please define the mapping in the table below. IDEA will remember your choice and apply it to further reverse engineering operations. You can change the saved mapping configuration at any time in the settings (Tools -> JPA Reverse Engineering -> Mapping types).
+undefined.mapping.detected.title=Undefined Mapping Detected
+undefined.mapping.detected.description=<html>Could not map some Java types to SQL/Liquibase types automatically.<br>\
+Please define the mappings in the table below and run the script generation again.
+problem.closing.connection=The database connection could not be closed properly. The following steps might fail.
+new.liquibase.database.change.log=New Liquibase Database Changelog
+db.type=DB type
+source.root=Source root
+directory=Directory
+file.name=File name
+file.type=File type
+project.root=Project root
+module.root=Module root
+root.changelog.file=Root changelog file
+attribute.not.found=Entity attribute not found: {0}
+explicitly.specify.map.sql.type=You can explicitly specify the SQL/Liquibase mapping type in the <a href="{0}"><b>Type Mappings</b> settings</a>.
+select.db.connection=Select DB connection
+select.persistence.unit=Select persistence unit
+select.snapshot.file=Select snapshot file
+context=Context
+labels=Labels
+generate.liquibase.diff.change.log=Generating diff changes
+generate.liquibase.snapshot=Generate Data Model Snapshot
+no.changes.found=No changes detected!
+old.column.name=Old column name
+old.view.name=Old view name
+new.view.name=New view name
+old.sequence.name=Old Sequence name
+new.sequence.name=New Sequence name
+old.table.name=Old table name
+sql=SQL
+sql.file=SQL file
+relative.to.changelog.file=Relative to changelog file
+delete=Delete
+load.data=Load data
+load.update.data=Load update data
+modify.data.type=Modify data type
+new.data.type=New data type
+insert=Insert
+update=Update
+custom.change=Custom change
+class=Class
+columns.field.tooltip=Name of column(s). Comma-separate if multiple
+columns.field.tooltip.constraint=Name of the column(s) to create the {0} on. Comma-separated if multiple
+referenced.column.names.tooltip=Column(s) the foreign key points to. Comma-separate if multiple
+include=Include
+file=File
+scratch.file=Scratch file
+show.project.snapshots=Show project snapshots
+include.all=Include all
+include.to=Include to
+include.folder=Include folder
+include.context=Include context
+property=Property
+name=Name
+value=Value
+change.log=Changelog
+choose.change.set=Choose Change Set
+choose.change.log=Choose Changelog
+diff.database.change.log=Diff Database Changelog
+show.other.actions=Show Other Actions
+select.all.danger.level=Select All {0}
+db.change.log.files.already.exists=<html>The following files already exist.</br>\
+Do you want to add the generated changes to these files?\
+<ul>{0}</ul></html>
+append.changes=Append Changes
+no.exclude.changes=No excluded changes
+exclude.from.liquibase.diff.generation=Exclude changes from liquibase/flyway diff generation
+change.log.field.is.required=Field "{0}" is required for DB changelog "{1}"
+change.set.field.is.required=Field "{0}" is required for change set "{1}"
+diff.liquibase.changelog=Diff Liquibase Changelog
+ddl.by.entities.preview=DDL by Entities Preview
+ddl.preview=DDL Preview
+db.type.selection=DB Type Selection
+db.type.selection.descr=<html>Please select the DB types to generate changelog files.<br>\
+  In the future, you can change your choice in the settings: <i>File</i> -> <i>Settings\u2026</i> -> <i>Tools</i> -> <i>Database Versioning</i> -> <i>Liquibase</i></html>
+no.select.db.type=Please select at least one DB type
+changelog.velocity.template.description=<ul>\
+<li>macros <b>#date([format])</b> - Returns the current system date processed according to the SimpleDateFormat specification.</li>\
+<li>macros <b>#increment([start], [step], [decimalFormat])</b> - Returns the start value according to the DecimalFormat specification.<br>\
+If the name is not unique, it continues to add step.</li>\
+<li>variable <b>semVer</b> - Semantic versioning is a widely adopted version scheme that uses a sequence of three digits (Major.Minor.Patch),\
+ an optional pre-release tag and optional build meta tag.</li>\
+</ul>
+diff.source.title=Source (referenceURL)
+diff.source.description.title=The actual state of the model
+diff.source.description=The source for the comparison. The referenceURL attribute represents your source database which is the starting point and the basis for the database you want to compare.
+db=DB
+model=Model
+diff.target.title=Target (URL)
+diff.target.description.title=The previous state of the model
+diff.target.description=The target of the comparison. The url attribute stands for your target database which you want to compare to the source database. You typically perform actions and run the commands and against this database.
+snapshot=Snapshot
+json.snapshot=Data Model Snapshot
+source.type=Source type
+source.value=Source value
+snapshot.dir=Snapshot directory
+snapshot.filename=Snapshot filename
+save.as=Save as
+snapshot.file.exist.message=Snapshot file "{0}" already exists.\n\
+Do you want to replace it?
+snapshot.file.exist.title=Replace file
+invalid.update.change.log.file=Invalid changelog file
+changelog.field.empty.text=e.g. src/main/resources/db/changelog/db.changelog-master.xml
+invalid.snapshot.path=Snapshot file does not exists or is invalid
+settings.changes.title=Highlight level is used in the <b>Liquibase Changelog</b> or <b>Flyway Versioned Migration</b><br> preview dialog \
+and allows you to multiselect and deal easily with many similar change sets at once. <br>\
+You can also completely disable change generation for some categories.
+log.level=Log level
+
+liquibase.library.not.found=Liquibase Library Not Found
+liquibase.library.not.found.description=<html>The "Liquibase Update" action is not possible. <br/> \
+Please add a dependency (maven, gradle, etc\u2026) to Liquibase or add Liquibase library via the <b>Project Structure</b> dialog.
+default.connection.persistence.unit=Default connection for persistence unit
+db.not.synchronized=This exception happens when the database is not synchronized with JPA entities. <br/> \
+Generate DDL to upgrade your database, run it and repeat the operation.
+generate.diff.changes=Generate diff changes
+update.null.values=Update NULL values
+set.value=Set value
+value.type=Value type
+start.value=Start value
+increment.by=Increment by
+incorrect.start.value=Incorrect start value - "{0}"
+incorrect.increment.by=Incorrect increment by value - "{0}"
+changelog.tag.add.not.null.constraint.not.found=DB changelog tag for add not null constraint not found
+description=Description
+diff.changes.generator.error=Diff Changes Generator Error
+show.sql.error=Show SQL Error
+db.to.snapshot.diff.unavailable=DB to snapshot diff unavailable
+db.connection.is.inactive=DB connection is inactive
+unlimited.db.identifier.length=Unlimited DB identifier length
+generation.time=Generation time - {0}s
+generating.sql=Generating SQL\u2026
+unable.to.resolve.changelog.info=Unable to resolve changelog info
+loading.database.model.error=Loading Database Model Error
+loading.database.model.canceled=Loading database model has been canceled
+generating.sql.canceled=Generating SQL has been canceled
+generating.snapshot.canceled=Generating snapshot has been canceled
+generating.diff.canceled=Generating diff changes has been canceled
+unnecessary.changes.detected=Unnecessary Changes Detected
+unnecessary.changes.detected.description=<html>After the changes were merged, it is likely that the following changes are no longer needed. <br> \
+Select the changes you would like to remove.
+cache.db.schema=DB schema cache
+same.column.names=Column names cannot be the same
+same.sequence.names=Sequence names cannot be the same
+same.table.names=Table names cannot be the same
+same.view.names=View names cannot be the same
+attribute.table=Attribute table
+navigate.parent.changelog=Navigate to parent changelog
+remove.selected=Remove selected
+slow.loading.detected.msg=If your DB schema is not being changed while reverse engineering, we recommend to enable DB schema caching.
+slow.loading.detected.title=Slow DB Connection Detected
+db.connection=DB connection
+turn.on.cache.db.schema=Enable DB Schema Cache
+load.schema.from.db.each.time=Load Schema From DB Each Time
+empty.changeSet=Empty changeSet
+attribute.type.is.empty="{0}" attribute type is empty
+select.mapping.type=Please select at least one mapping type to save
+target.type.is.empty="{0}" target type is empty
+save.and.run.generation=Save and Run Generation
+save=Save
+scope=Scope:
+init.schema.changelog=Init Schema Changelog
+tag.database=Tag database
+tag=Tag
+remarks=Remarks
+set.table.remarks=Set table remarks
+set.column.remarks=Set column remarks
+hsqldb.file.path.not.absolute=Only absolute path for File HSQL DB is supported. Please provide an absolute path for ''{0}'' database.
+copy.query.to.console=Copy Query to DB Console
+
+liquibase.init.changelog=Liquibase Init Changelog
+
+diff.ddl=Diff DDL
+init.ddl=Init DDL
+generate.liquibase.init.change.log=Generating init changes
+liquibase.update=Liquibase Update
+add.liquibase.change=Add Liquibase Change
+generate.liquibase.init.schema=Generate Liquibase Init Schema
+generate.liquibase.diff.schema=Generate Liquibase Diff Changes
+update.successful=Database "{0}" updated
+updating.database.canceled=Updating database has been canceled
+changelog.preview=Changelog Preview
+diff.changes.location=Location
+diff.danger.level=Danger level
+diff.context=Context
+diff.labels=Labels
+
+database.migration.description=<html>Database Migration Settings allow you to define and redefine exists mapping SQL type.</html>
+database.migration.not.empty.dbms=Database should have non-empty dbms type
+no.override.mappings=No override mappings
+java.type=Attribute/Converter/Hibernate Type
+type.parameters=Type Parameters
+
+target.type=Target Type
+create.index.for.fk=Create index for association foreign key constraint
+primary.key.constraint=Primary key constraint name
+liquibase.db.types=Db Types
+liquibase.version=Liquibase version
+changeSet.author=Changeset author
+changeSet.fileType=File type
+changeSet.addRollback=Add empty rollback to changesets which don't support implicit one
+changeSet.templates=Changeset Templates
+changeSet.createPreconditions=Create Preconditions
+mapping.type.editor=Mapping Type Editor
+liquibase.changelog.templates=Changelog Templates
+primary.changelog.dir=Primary directory
+primary.changelog.name=Primary name
+secondary.changelog.name=Secondary name
+secondary.changelog.dir=Secondary directory
+physical.naming.strategy=Physical naming strategy
+sequence.naming.strategy=Sequence naming strategy
+sequence.naming.strategy.comment=For Hibernate 6+ only
+sequence.naming.strategy.AUTO_DETECT=Auto detect
+sequence.naming.strategy.SINGLE_SEQUENCE=Single sequence
+sequence.naming.strategy.SEQUENCE_PER_ENTITY=Sequence per entity
+database.versioning=Database Versioning
+database.mappingTypes=Mapping types
+database.migration.unsedDbId=<unset DB id>
+max.db.identifier.length=Max DB identifier length
+Validation.cannot.compile.custom.naming.strategy=Cannot compile custom naming physical strategy class
+Validation.maxIdentifier.incorrect.number=Invalid max DB identifier length: "{0}"
+Validation.maxIdentifier.less.10=Max DB identifier length must be more than 10
+refresh.custom.naming.strategy=Reload custom physical naming strategy class
+
+changelog.save=Save
+changelog.command.addIncludeChangelogTags=Add Include Changelog Tags
+unnecessary.changes.columns.change=Change
+
+typeMappings.configurable.title=Type Mappings
+diffChanges.configurable.title=Diff Changes
+command.name.writing.changelog.file=Writing Changelog File
+
+liquibase.change.location.primary=Primary
+liquibase.change.location.secondary=Secondary
+liquibase.change.location.ignore=Mark Ignored
+liquibase.change.location.hide=Disregard
+
+liquibase.change.category.column=Column
+liquibase.change.category.comment=Comment
+liquibase.change.category.foreignKey=Foreign Key
+liquibase.change.category.index=Index
+liquibase.change.category.primaryKey=Primary Key
+liquibase.change.category.sequence=Sequence
+liquibase.change.category.table=Table
+liquibase.change.category.uniqueConstraint=Unique Constraint
+notification.specify.liquibase.version=Specify the version explicitly to activate the liquibase functionality
+notification.title.error.liquibase.updating=Error liquibase updating
+notification.content.db.changelog.file=DB changelog file: {0}\n{1}
+tab.title.liquibase.update=Liquibase Update
+liquibase.common.panel.useByDefault=Use {0} by default
+liquibase.common.panel.use.persistent.unit.strategy=Use persistent unit strategy
+select.change.dialog.newChangeLog=New Changelog
+select.change.dialog.newChangeSet=New Changelog
+column.name.type.parameter=Type Parameter
+column.name.target.type=Target Type
+column.name.attribute.type=Attribute Type
+command.name.create.changelog.file=Create Changelog File
+command.name.append.changes.to.exists.changelog.file=Append Changes to Exists Changelog File
+
+target.type.help=<html>In order to simplify type mapping, database versioning introduces DB-agnostic SQL types, that are \
+transformed into the DB-specific type. For example, <code>varchar</code> is transformed into <code>varchar2</code> \
+for Oracle DB and left as <code>varchar</code> for PostgreSQL.\
+<br><br>Each DB-agnostic type has a set of aliases (e.g. <code>java.sql.Types.VARCHAR</code> or <code>character varying</code>), \
+which in most cases are interchangeable.\
+<br><br>Unknown types are used as is without any transformations.<html>
+type.parameters.help=<html>Database versioning allows specifying which parameters should be considered while scripts generation. \
+You can customize the behavior for each database.\
+<br><br>Suppose the attribute precision and scale values are set on the persistent layer. \
+In that case, you can choose the value "nothing" and the script without these parameters will be generated.<html>
+modifying.type.is.not.available.during.indexing=Modifying mapping types is not available during the project analysis.<br> \
+  Please close the settings dialog and wait for the project analysis to complete.
+named=Named
+unnamed=Unnamed
+liquibase.successful.message=update has been successful
+action.reload=Reload
+trustServerCertificateInstructionForIdeaUltimate=Make sure that the JDBC URL contains <b>;trustServerCertificate=true</b> parameter. \
+  See <a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/connecting-with-ssl-encryption">details.</a></li>
+integratedSecurityInstructionForIdeaUltimate=If you are using <b>Windows credentials</b> authentication, for a successful connection please follow these steps:<ol>\
+  <li>Make sure the JDBC URL contains <b>;integratedSecurity=true</b> parameter. See <a href="https://docs.microsoft.com/sql/connect/jdbc/building-the-connection-url?view=sql-server-ver15#connection-examples">details.</a></li>\
+  <li>Download <a href="{0}">Windows authentication library archive</a></li>\
+  <li>Extract downloaded jar file to "{1}" directory</li>\
+  <li>Restart IDEA</li>\
+  </ol>
+change.createNew=Create new changeset
+command.name.create.change.set=Create Changeset and {0}
+command.name.create=Create {0}
+ChangeSetWrapItem.noId=no id
+column.name.name=Name
+column.name.type=Type
+column.name.value=Value
+column.name.tag.name=Tag Name
+column.name.table.column.constraint.index.name=Table/Column/Constraint/Index Name
+button.show.sql=Show SQL
+button.update=Update
+
+action.CreateInitLiquibaseChangeLog.text=Liquibase Init Changelog\u2026
+action.CreateLiquibaseSnapshot.text=Data Model Snapshot\u2026
+action.AddLiquibaseChangeLog.text=Add Changelog
+action.AddLiquibaseChangeSet.text=Add Changeset
+action.RemoveLiquibaseChangesActionGroup.text=Remove from Changelog
+action.RemoveFromLiquibaseIgnore.text=Restore from Ignored
+action.MoveToAnotherLiquibaseChangeLogFile.text=Move to Another Changelog
+action.SetLiquibaseContext.text=Set Context
+action.SetLiquibaseLabel.text=Set Label
+
+action.CreateLiquibaseInit.text=Liquibase Init Schema
+action.CreateLiquibaseInit.description=Create liquibase init schema
+action.CreateLiquibaseDiff.text=Liquibase Diff Changes
+action.CreateLiquibaseDiff.description=Create Liquibase diff changes
+action.LiquibaseRemoveFromChangeLog.text=Remove from Changelog
+action.LiquibaseRemoveAndIgnore.text=Remove and Ignore
+action.CreateDiffLiquibaseChangeLog.text=Liquibase Changelog\u2026
+action.CreateDiffLiquibaseChangeLog.DatabaseViewPopup.text=Create Liquibase Changelog\u2026
+action.RunLiquibaseUpdate.text=Run Liquibase Update\u2026
+generated.empty.ddl=Generated empty DDL
+
+action.CreateLiquibaseChangelogFromTemplate.text=Liquibase Empty Changelog
+action.CreateLiquibaseChangelogFromTemplate.description=Create a new Liquibase changelog file for versioned database changes
+actions.create.liquibase.changelog.name=Create Liquibase Changelog File
+
+liquibase.changelog=New Liquibase Changelog
+liquibase.changelog.xml=XML format
+liquibase.changelog.yaml=YAML format
+
+envers.use.spring.properties=Use values specified in *.properties files
+envers.revision.field.name=Revision field name
+envers.revision.type.field.name=Revision type field name
+envers.default.schema=Default name of the schema containing audit tables
+envers.audit.version=Treat optimistic locking properties as unversioned
+envers.track.entities.changed=Track entity names that have been changed during each revision
+envers.global.with.modified.flag=Activate modified properties flag feature
+envers.modified.flag.suffix=Suffix of modified flag columns
+
+audit.table.prefix=Audit table prefix
+audit.table.suffix=Audit table suffix
+
+LiquibaseSettingsAuthorProvider.source=Liquibase settings
+LiquibaseSystemUserAuthorProvider.source=System user
+LiquibaseGitAuthorProvider.source=Git user
+liquibase.notifications=JPA diff generation notifications
+
+inspection.LiquibaseXmlUnresolvedProperty=Unresolved Liquibase property

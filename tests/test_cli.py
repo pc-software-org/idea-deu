@@ -7,9 +7,76 @@ from dataclasses import replace
 from pathlib import Path
 from unittest import mock
 
-from scripts.idea_deu.cli import _stale_units, main
-from scripts.idea_deu.models import ProcessingStatus, TranslationContext, TranslationUnit
+import hashlib
+
+from scripts.idea_deu.cli import _extract_units, _stale_units, main
+from scripts.idea_deu.models import (
+    Inventory, ProcessingStatus, ResourceRecord, ResourceType,
+    TranslationContext, TranslationUnit,
+)
 from scripts.idea_deu.state import write_jsonl_atomic
+
+
+class _FakeProvider:
+    def __init__(self, data: bytes) -> None:
+        self._data = data
+
+    def read(self, record: ResourceRecord) -> bytes:
+        return self._data
+
+
+class ExtractUnitsCarryoverTest(unittest.TestCase):
+    def test_recovers_translation_across_container_rename(self) -> None:
+        data = b"k=Hello\n"
+        source_hash = hashlib.sha256("Hello".encode("utf-8")).hexdigest()
+        previous = (TranslationUnit(
+            "old-id", "Hello", source_hash, "Hallo",
+            TranslationContext("B", "k", "old-name.jar", "messages/B.properties"),
+            ProcessingStatus.TECHNICALLY_REVIEWED, ()),)
+        record = ResourceRecord(
+            resource_id="r", container="new-name.jar", resource_path="messages/B.properties",
+            resource_type=ResourceType.PROPERTIES, size=len(data),
+            source_sha256=hashlib.sha256(data).hexdigest())
+        inventory = Inventory((record,), (), ())
+
+        units = _extract_units(inventory, _FakeProvider(data), previous)
+
+        self.assertEqual(1, len(units))
+        unit = units[0]
+        self.assertEqual("Hallo", unit.target)  # recovered despite the JAR rename
+        self.assertEqual(ProcessingStatus.TECHNICALLY_REVIEWED, unit.status)
+        self.assertEqual("new-name.jar", unit.context.container)
+        self.assertNotEqual("old-id", unit.id)  # id is container-derived, so it changed
+
+    def test_changed_source_is_not_recovered(self) -> None:
+        data = b"k=Hello changed\n"
+        previous = (TranslationUnit(
+            "old-id", "Hello", hashlib.sha256("Hello".encode("utf-8")).hexdigest(), "Hallo",
+            TranslationContext("B", "k", "old-name.jar", "messages/B.properties"),
+            ProcessingStatus.TECHNICALLY_REVIEWED, ()),)
+        record = ResourceRecord(
+            resource_id="r", container="new-name.jar", resource_path="messages/B.properties",
+            resource_type=ResourceType.PROPERTIES, size=len(data),
+            source_sha256=hashlib.sha256(data).hexdigest())
+
+        units = _extract_units(Inventory((record,), (), ()), _FakeProvider(data), previous)
+
+        self.assertEqual("", units[0].target)  # source changed -> must be retranslated
+        self.assertEqual(ProcessingStatus.OPEN, units[0].status)
+
+    def test_empty_source_unit_is_reviewed_not_open(self) -> None:
+        data = b"k=\n"  # empty properties value -> empty source, nothing to translate
+        record = ResourceRecord(
+            resource_id="r", container="c.jar", resource_path="messages/B.properties",
+            resource_type=ResourceType.PROPERTIES, size=len(data),
+            source_sha256=hashlib.sha256(data).hexdigest())
+
+        units = _extract_units(Inventory((record,), (), ()), _FakeProvider(data), ())
+
+        self.assertEqual("", units[0].source)
+        self.assertEqual("", units[0].target)
+        self.assertEqual(ProcessingStatus.TECHNICALLY_REVIEWED, units[0].status)
+        self.assertEqual((), units[0].findings)
 
 
 class CliTests(unittest.TestCase):
@@ -19,9 +86,9 @@ class CliTests(unittest.TestCase):
         for name in ("config", "inventory", "translations/batches", "reports"):
             (self.root / name).mkdir(parents=True)
         (self.root / "config/product.json").write_text(json.dumps({
-            "archive":"source.zip", "version":"2025.3.1.1", "build_number":"253.29346.240", "product_code":"IU",
-            "sha256":"a"*64, "since_build":"253.29346.240", "until_build":"253.29346.240",
-            "plugin_id":"org.pc-software.idea-deu", "plugin_version":"2025.3.1.1"}))
+            "archive":"source.zip", "version":"2026.1.3", "build_number":"261.25134.95", "product_code":"IU",
+            "sha256":"a"*64, "since_build":"261.25134.95", "until_build":"261.25134.95",
+            "plugin_id":"org.pc-software.idea-deu", "plugin_version":"2026.1.3"}))
         write_jsonl_atomic(self.root / "translations/units.jsonl", [TranslationUnit(
             "u"*64, "Hello", "b"*64, "", TranslationContext("B", "k", "c.jar", "B.properties"), ProcessingStatus.OPEN, ())])
         for name in ("resources", "exclusions", "collisions"):

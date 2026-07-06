@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports <code>val</code> properties used as JPA entity attributes.
+
+Use of <code>val</code> is discouraged for the following reasons:
+<ul>
+  <li>
+    Immutability of the property only holds when an object is accessed from the source code.
+    Persistence provider is still able to update properties through reflection.
+    This might lead to incorrect Kotlin data flow analysis leading to runtime errors.
+  </li>
+  <li>
+    Missing setter and/or final backing field can prevent some features, such as Spring Data JPA Auditing, from working correctly.
+  </li>
+</ul>
+</body>
+</html>

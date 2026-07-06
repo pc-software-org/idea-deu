@@ -1,0 +1,7 @@
+<html>
+<body>
+Reports a type annotation that doesn't match the current code style for explicit types.
+<!-- tooltip end -->
+<p>In some cases it is preferable to always have explicit types - this prevents accidental type changes and makes code more explicit.</p>
+</body>
+</html>

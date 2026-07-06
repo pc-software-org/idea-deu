@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+  Reports usages of open modifier for Spring framework classes.
+</p>
+<p>
+  Instead of having open modifier for class explicitly in the code, it is recommended to use <code>kotlin-spring</code> compiler plugin and omit that modifier.
+</p>
+<p>
+  <code>kotlin-spring</code> compiler plugin generates an additional zero-argument constructor for classes with a specific annotation.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

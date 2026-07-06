@@ -1,0 +1,111 @@
+progress.text.zipping.index.pack=Zipping index pack
+progress.text2.scanning.files=Scanning files
+progress.text.collecting.files.to.index=Collecting files to index
+progress.text.finalizing.indexes=Finalizing indexes
+progress.text.closing.indexes=Closing index storages
+progress.text.hashing.files=Calculating hashes of files
+progress.text.indexing.files=Indexing files
+progress.text.dumping.indexed.files.list=Saving list of indexed files of the project: {0}
+downloading.shared.indexes=Downloading shared indexes for {0}
+presentable.chunk.name.the.project=the project
+presentable.chunk.name.the.maven=Maven Library {0}
+configuring.shared.indexes=Configuring shared indexes
+packing.to.xz=Compressing\u2026
+choose.shared.index.dump.directory=Choose Directory to Store Shared Project Index
+building.shared.index=Building Shared Index\u2026
+dumping.indexes.success.to.file=Indexes have been dumped to {0}
+dumping.indexes.failure.reason=Failed to dump shared indexes: {0}
+index.exporter.processing.exporter.extension=Processing {0}
+group.Internal.SharedIndexes.text=Shared Indexes
+action.ShowAttachedSharedIndexesAction.text=Show Attached Shared Indexes
+action.SharedIndexes.DebugShowConsentNotification.text=Notify Shared Index Consent
+action.SharedIndexes.DebugDownloadCompletedNotification.text=Notify Shared Index Downloaded
+action.SharedIndexes.Download.text=Download Shared Indexes
+action.SharedIndexes.Download.description=Restarts pre-built shared indexes download for current project
+action.SharedIndexes.DumpSharedIndex.text=Dump Shared Project Index
+action.SharedIndexes.DumpSharedIndex.description=Creates shared index from a current project files
+action.SharedIndexes.DumpGitRecentCommitsAction.text=Dump Git Recent Commits
+action.SharedIndexes.DumpGitFileHashes.text=Dump Git Tree Hashes
+action.SharedIndexes.ComputeGitBlobHashAction.text=Shared Indexes Compute File Git Blob Hash
+
+notificationGroup.title.shared.indexes.recommendations=Shared indexes recommendations
+notificationGroup.title.shared.indexes.log=Shared indexes events
+notificationGroup.title.shared.indexes.user.action=Shared indexes user action response or request
+
+progress.title.permanent.auth.testing=Checking login with permanent token
+progress.message.permanent.auth.testing={0}
+notification.title.permanent.auth=Log in with permanent token
+notification.content.permanent.auth={0}\nrequires authentication with permanent token
+notification.action.permanent.enter=Enter token
+action.text.permanent.reset=Reset Permanent Token {0}
+action.text.synonym1.permanent.reset=Invalidate Permanent Token "{0}"
+action.text.synonym2.permanent.reset=Log out Permanent Token "{0}"
+action.description.permanent.reset=Invalidate Permanent token "{0}" for {1}
+
+message.auth.permanent.token=Permanent Token Auth
+
+message.title.permanent.enter=Enter Permanent Token
+message.text.permanent.enter=Enter permanent token for\n{0}\nto authenticate shared indexes download. \n\
+  For details, check the intellij.yaml file in the project or ask your team
+message.text.permanent.enter.error=Failed to connect to the\n{0}\nwith the current token. Enter another one?
+
+notification.consent.title=Download pre-built shared indexes
+notification.consent.content=Reduce the project analysis time and CPU load with pre-built {0} shared indexes
+notification.consent.content.kind.jdk=JDK
+notification.consent.content.kind.project=project
+notification.consent.content.kind.maven=Maven library
+
+notification.consent.action.alwaysAllow=Always download
+notification.consent.action.moreActions=More actions
+notification.consent.action.allowOnce=Download once
+notification.consent.action.doNotShow=Don't show again
+notification.consent.action.configure=Configure\u2026
+
+eventLog.downloaded.jdk=Shared indexes for JDK "{0}" are downloaded
+eventLog.downloaded.project=Shared indexes for the project are downloaded
+eventLog.downloaded.maven=Shared indexes for maven library "{0}" are downloaded
+eventLog.downloaded.textAndSize={0} ({1} in {2})
+eventLog.downloaded.textAndSize.merged=Shared indexes are downloaded for {2} in {1} ({0})
+
+eventLog.indexing.completed=Indexing completed in {0}. Shared indexes were applied to {3}% of files ({1} of {2}), they have saved approximately {4}.
+
+progress.title.resolving.shared.indexes=Checking available shared indexes\u2026
+progress.text.resolving.shared.indexes.requests=Collecting requests
+progress.text.resolving.shared.indexes.checking=Looking for downloadable pre-built shared indexes
+
+configuration.displayName=Shared Indexes
+configuration.title.public.shared.indexes=Public Shared Indexes
+configuration.text.public.about.comment=Download pre-built shared indexes for the project dependencies
+
+configuration.section.jdk=JDKs:
+configuration.section.maven=Maven Libraries:
+configuration.section.project=Project:
+
+configuration.combobox.option.allow=Download automatically
+configuration.combobox.option.ask=Ask before download
+configuration.combobox.option.deny=Don't download, use local indexes
+configuration.combobox.comment.with.url={0}
+
+configuration.section.project.titledRow=Project Shared Indexes
+configuration.text.default.project.about.comment=Project shared indexes are configured on per-project basis. Currently, they are configured for the following locations
+configuration.text.project.about.comment=Download shared indexes for the project from the following locations:
+
+configuration.project.note=The project pre-built shared indexes download is configured <a>manually</a>.
+no.configuration.text.project.about.comment=The project pre-built shared indexes download is not configured, it should be done <a>manually</a>.
+
+auth.presentable.text=Shared Indexes download
+progress.text.auth=Authorizing access for pre-built shared indexes download
+
+suspend.indexing.message=Checking available shared indexes
+
+progress.text.resolving.recent.git.commits=Listing recent git commits
+progress.text.resolving.recent.git.hashes=Listing recent git hashes
+
+progress.text.resolving.hash.generators.for.export=Resolving hash generators
+progress.title.git.hashes.resolve=Loading Git file hashes for shared indexes
+
+invalidateCaches.exclude.description=Invalidate downloaded shared indexes
+invalidateCaches.exclude.comment=Download fresh shared indexes if they are available. Otherwise, indexes will be re-built locally.
+
+shared.index.detach.message=Closing attached shared indexes\u2026
+drop.shared.indexes.recovery.action.name=Drop Shared Indexes

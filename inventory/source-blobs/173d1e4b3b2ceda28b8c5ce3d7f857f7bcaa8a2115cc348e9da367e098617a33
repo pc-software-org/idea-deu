@@ -1,0 +1,81 @@
+# Notifications, Descriptions
+ds.table.loading.remaining.values=Loading table data
+ds.table.loading.cancelled=Loading of table data has been interrupted
+ds.table.load.error.message=Results may be incomplete
+ds.table.load.error.title=Table data could not be loaded
+ds.table.editor.type.name=Table
+ds.table.loading.table.data=Loading table data
+ds.table.type.is.not.supported=Type {0} isn''t supported in tables
+ds.table.editor.tab.name=Table Data
+ds.table.dimensions.info={0} rows \u00D7 {1} cols
+notification.group.table.copy=Copying data into a table failed
+notification.group.table.load=Loading table data failed
+static.output.description=This output was not generated in the current session. Run code again to update the output.
+
+# Settings
+settings.ds.table.main.page=Tables
+settings.ds.table.column.statistics.row=Default column statistics mode:
+settings.table.show.compact.stat.headers.for.small.tables.checkbox=<html>Automatically display '<b>Compact</b>' statistics for small tables</html>
+settings.table.show.compact.stat.headers.for.small.tables.checkbox.comment=Applies to tables with 50 to 600,000 rows
+settings.table.numpy.display.checkbox=Display NumPy, PyTorch, TensorFlow as table
+settings.table.count.number.visible.column.checkbox=Limit the number of rendered columns
+settings.table.count.number.visible.comment=Set the maximum number of columns to display
+settings.table.count.number.visible.validation.title=Cannot save settings
+settings.table.count.number.visible.validation.message=The number of rendered columns should be positive
+settings.table.run.inspection.checkbox=Run data quality checks after table creation
+settings.table.run.inspection.checkbox.comment=Works only for pandas DataFrames. After the table is rendered, automatically scans for duplicates, missing values, and other basic data issues.
+settings.dataview.group.name=Data View
+settings.dataview.dg.local.filters.checkbox=Enable local filters by default in Data View
+settings.dataview.dg.local.filters.comment=Local filters apply only to rows currently visible in a table
+
+# Filters
+ds.TableFiltering.FilterView.panel.name=Filter View
+ds.TableFiltering.FilterView.panel.delete=Delete
+ds.TableFiltering.FilterView.panel.addFilter=Add filter
+ds.TableFiltering.FilterView.panel.where=Where
+ds.TableFiltering.FilterView.panel.group.text=Additional Filter Actions
+ds.TableFiltering.FilterView.panel.group.description=Additional actions for one filter
+ds.TableFiltering.FilterView.panel.removeFilter=Remove Filter
+ds.TableFiltering.FilterView.panel.duplicateFilter=Duplicate Filter
+ds.TableFiltering.FilterView.panel.operator.or=Or
+ds.TableFiltering.FilterView.panel.operator.and=And
+ds.TableFiltering.FilterView.panel.text.field=Enter a variable or Python expression
+ds.TableFiltering.FilterView.panel.duplicate.rows.label=Duplicate rows detected
+ds.TableFiltering.FilterView.panel.value.field.wrap.with.quotes.action.text=Wrap with Quotes
+ds.DataManager.cannot.get.dataframe=Cannot get DataFrame info
+
+# Actions
+action.DS.DimensionsWidget.text=Show Table Dimensions
+action.DS.OpenResultInNewTab.text=Open In New Tab
+action.DS.TableFiltering.OpenFilterView.text=Open Filter View
+action.DS.Console.TableResult.DSShowDumpDialogGrid.text=Export Data to File
+action.DS.StaticOutput.text=Static Output
+action.DS.Open.Tables.Settings.text=Settings\u2026
+action.DataViewOpenTableDocumentationAction.text=Open Table Documentation\u2026
+action.DSCustomizeTablesRightToolbarAction.text=Customize Tables Toolbar\u2026
+
+# Groups
+group.PY.Tables.Right.Toolbar.Customize.Actions.Group.text=Tables Toolbar
+group.PY.StatisticsPanel.Show.text=Show Column Statistics
+group.PY.Tables.Right.Toolbar.text=Right
+group.DS.Table.TableResult.GoTo.text=Go To
+
+# Statistics Tables Headers
+ds.table.tooltip.statistics.data.type=Data Type
+ds.table.tooltip.statistics.missing=None Count
+ds.table.tooltip.statistics.count=Count
+ds.table.tooltip.statistics.unique=Distinct
+ds.table.tooltip.statistics.top=Top
+ds.table.tooltip.statistics.freq=Frequency
+ds.table.tooltip.statistics.percentile5=5th pctl
+ds.table.tooltip.statistics.percentile25=25th pctl
+ds.table.tooltip.statistics.median=50th pctl (Median)
+ds.table.tooltip.statistics.percentile75=75th pctl
+ds.table.tooltip.statistics.percentile95=95th pctl
+ds.table.tooltip.statistics.stdDeviation=Std. Deviation
+ds.table.tooltip.statistics.min=Min
+ds.table.tooltip.statistics.max=Max
+ds.table.tooltip.statistics.mean=Mean
+ds.table.visualisation.unique=Unique values
+ds.table.visualisation.other=Other
+ds.table.tooltip.statistics.enable.hint=Enable column statistics to see details

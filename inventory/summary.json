@@ -1,55 +1,57 @@
 {
-  "collision_content": {"distinct": 0, "identical": 3},
+  "collision_content": {
+    "distinct": 0,
+    "identical": 2
+  },
   "counts": {
-    "collisions": 3,
-    "exclusions": 583536,
-    "resources": 4147,
-    "source_blob_bytes": 6765992,
-    "source_blobs": 4067,
-    "translation_units": 72513,
+    "collisions": 2,
+    "exclusions": 594191,
+    "resources": 4192,
+    "source_blob_bytes": 6790933,
+    "source_blobs": 4110,
+    "translation_units": 72142,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
     "already_localized": 3,
     "collision_not_selected": 20,
-    "directory": 2264,
-    "localized": 1271,
-    "nested_archive": 38,
-    "not_in_translation_reference": 1003,
-    "not_jar": 1898,
-    "unsupported_resource": 577039
+    "directory": 2306,
+    "localized": 1273,
+    "nested_archive": 40,
+    "not_in_translation_reference": 945,
+    "not_jar": 1942,
+    "unsupported_resource": 587662
   },
   "reference_coverage": {
-    "candidate_paths": 4928,
-    "candidate_paths_in_reference": 3954,
-    "candidate_paths_not_in_reference": 974,
-    "reference_paths": 7264,
-    "reference_paths_not_present_in_idea": 3310,
+    "candidate_paths": 4978,
+    "candidate_paths_in_reference": 1629,
+    "candidate_paths_not_in_reference": 3349,
     "not_present_by_type": {
-      "file_template": 341,
-      "inspection_description": 1562,
-      "intention_description": 498,
+      "file_template": 327,
+      "intention_description": 490,
       "postfix_template": 197,
-      "properties": 712
+      "properties": 773
     },
+    "reference_paths": 3416,
+    "reference_paths_not_present_in_idea": 1787,
     "suspicious_missing_candidate_paths": 0
   },
   "resource_types": {
     "file_template": 254,
-    "inspection_description": 2297,
-    "intention_description": 726,
-    "postfix_template": 154,
-    "properties": 526,
+    "inspection_description": 2330,
+    "intention_description": 725,
+    "postfix_template": 153,
+    "properties": 540,
     "tip": 190
   },
   "schema_version": 1,
   "source": {
-    "archive": "idea-2025.3.1.1.win.zip",
-    "build_number": "253.29346.240",
+    "archive": "idea-2026.1.3.win.zip",
+    "build_number": "261.25134.95",
     "product_code": "IU",
-    "sha256": "755b9549eb41ddec86ea111e4aba94b4fd6e39a60b1de7945c92652c70f80026",
-    "since_build": "253.29346.240",
-    "until_build": "253.29346.240",
-    "version": "2025.3.1.1"
+    "sha256": "71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e",
+    "since_build": "261.25134.95",
+    "until_build": "261.25134.95",
+    "version": "2026.1.3"
   }
 }

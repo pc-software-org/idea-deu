@@ -1,6 +1,0 @@
-<html>
-<body>
-Add Spring bean dependency.
-<br>The template is available for unresolved references inside classes marked as Spring component.
-</body>
-</html>

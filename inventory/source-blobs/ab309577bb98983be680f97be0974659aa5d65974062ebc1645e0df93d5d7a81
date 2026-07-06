@@ -1,0 +1,55 @@
+ComposeErroneousRelationInspection.display.name=Erroneous relation in docker-compose YAML
+ComposeErroneousRelationInspection.error.message=Field <code>{0}</code> requires sibling <code>{1}</code> with one of the following values: <code>{2}</code>
+
+ComposeUnknownKeysInspection.display.name=Unknown docker-compose YAML keys
+ComposeUnknownValuesInspection.display.name=Unknown docker-compose YAML values
+ComposeMissingKeysInspection.display.name=Missing docker-compose YAML keys
+
+ComposeUnquotedPortsInspection.display.name=Unquoted port mappings
+ComposeUnquotedPortsInspection.error.message=Unquoted port mapping may be interpreted as a base-60 value
+ComposeUnquotedPortsInspection.warning.message=Unquoted port mapping not recommended
+ComposeUnquotedPortsInspection.quick.fix=Add quotes
+
+ComposeFileRunLineMarkerProvider.ServiceLineMarkerInfo.up.tooltip=docker-compose up {0}
+ComposeFileRunLineMarkerProvider.ServiceLineMarkerInfo.restart.tooltip=docker-compose restart {0}
+ComposeFileRunLineMarkerProvider.AllServicesLineMarkerInfo.tooltip=docker-compose up
+
+ComposeStrictStringType.validation.error=String value expected
+ComposeStrictStringType.quick.fix=Surround with quotes
+
+ComposeLimitedIntegerType.validation.error=Expected value in range from {0} to {1}
+
+ByteValueType.error.cant.parse.value=Byte type value expected: <number>[<unit>]
+ByteValueType.error.unknown.unit=Byte type value expected, supported units are `b`, `k`, `m`, `g`
+DockerImageReferenceType.error.multiple=Single image reference expected
+DockerImageReferenceType.error.format=Invalid image reference format
+
+IPType.ip.value.expected=IP value expected
+IPType.ipv4.value.expected=IPv4 value expected
+IPType.ipv6.value.expected=IPv6 value expected
+
+PortScalarType.ports.mapping.expected=Ports mapping expected
+PortScalarType.not.valid.internet.protocol={0} is not valid internet protocol. Possible values: tcp, udp, sctp
+PortScalarType.not.valid.host.ip={0} is not valid host IP
+PortScalarType.spaces.not.allowed=Spaces are not allowed in ports mapping format
+PortScalarType.not.valid.port.range=The port number must be greater than or equal to 0 and less than 65536
+
+Platform.error.format=The platform format must follow os[/arch[/variant]] syntax
+PublishedPortType.validation.error=The published port range must be in the format START-END, and port numbers must be in the 1\u201365535 range
+DurationType.duration.value.expected=''{0}'' is not a valid duration value. Format the duration as ''5h34m56s''.
+UnsignedType.unsigned.value.expected=The value must be greater than or equal to 0
+CidrType.cidr.format.expected=CIDR format expected
+action.Docker.ComposeEditorGroup.SyncWithServiceView.text=Synchronization with Services
+SyncComposeFileWithServiceView.disable.sync.text=Do not synchronize with the Services tool window
+SyncComposeFileWithServiceView.enable.sync.text=Synchronize with the Services tool window
+SyncComposeFileWithServiceView.enable.sync.description=\n            All services defined in this file will be shown in the Services tool window,\n            even if no containers for this service exist.
+
+docker.compose.file.type.display.name=Docker Compose YAML
+docker.compose.file.type.description=Docker Compose configuration
+
+notification.group.docker.compose=Docker Compose
+docker.compose.notification.auto.detected=This file was auto-detected as a Docker Compose configuration based on its content.
+docker.compose.notification.not.compose=Not a Compose file
+docker.compose.notification.keep=Keep as Docker Compose
+docker.compose.notification.excluded.message=Docker Compose detection disabled for this file.
+docker.compose.notification.mark.as.compose=Mark as Docker Compose

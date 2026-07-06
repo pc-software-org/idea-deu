@@ -1,0 +1,30 @@
+
+spring.boot.run.config.type.name=Spring Boot
+spring.boot.run.config.type.description=Spring Boot Application
+
+spring.boot.application.run.configuration.class.not.specified=No Spring Boot application class specified
+spring.boot.application.run.configuration.invalid.class=Not a valid Spring Boot application class
+spring.boot.application.run.configuration.invalid.parameter=Empty property name in row {0}
+
+spring.boot.choose.class.dialog.title=Choose Spring Boot Class
+
+spring.boot.run.config.fragment.framework.group=Spring
+spring.boot.run.config.fragment.launch.optimization=Disable launch optimi&zation
+
+spring.boot.run.config.settings.background.compilation.enabled=Background compilation enabled
+spring.boot.application.run.configuration.launch.optimization.tooltip=<html>When enabled, adds VM options <code>-XX:TieredStopAtLevel=1</code> and <code>-noverify</code> (only for JDK versions lower than 13) to speed up startup.<br>Please verify these options do not have adverse impact on your specific project.</html>
+spring.boot.application.run.configuration.debug.output=Enable &debug output
+spring.boot.application.run.configuration.debug.output.tooltip=<html>Enables debug output by adding VM option <code>-Ddebug</code></html>
+spring.boot.application.run.configuration.hide.banner=&Hide banner
+spring.boot.application.run.configuration.hide.banner.tooltip=<html>Hides banner by adding VM option <code>-Dspring.main.banner-mode=OFF</code><br>(<code>-Dspring.main.show-banner=false</code> for Spring Boot 1.4.x or earlier)</html>
+spring.boot.application.run.configuration.enable.scheduled.debugger=Enable &Scheduled Debugger
+spring.boot.application.run.configuration.enable.scheduled.debugger.tooltip=<html>Loads Scheduled debugger agent <code>-agentpath:.../libschedule.so</code></html>
+
+spring.boot.application.run.configuration.active.profiles=Active profiles
+spring.boot.application.run.configuration.active.profiles.tooltip=Comma-separated list of profiles
+spring.boot.run.config.fragment.override.properties=Override configuration &properties
+additional.params.table.name=Name
+additional.params.table.value=Value
+additional.params.table.empty.text=No parameters added.
+additional.params.table.add=Add parameter
+additional.params.table.quick.doc=Application Property Quick Documentation

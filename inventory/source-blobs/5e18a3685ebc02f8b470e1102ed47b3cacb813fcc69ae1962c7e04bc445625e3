@@ -1,0 +1,96 @@
+# Diagnostics
+ml.completion.diagnostics.caches.button.reset.plugin.caches=Reset Plugin Caches
+ml.completion.diagnostics.caches.raw.title=Raw Caches
+ml.completion.diagnostics.caches.analyzed.title=Analyzed Caches
+ml.completion.diagnostics.native.server.address=Native server address: {0}:{1}
+ml.completion.diagnostics.native.server.terminated.with=terminated with exit code {0}
+ml.completion.diagnostics.native.server.started=started
+ml.completion.diagnostics.native.server.grpc.channel.state=GRPC channel state: {0}
+ml.completion.diagnostics.native.server.is.not.started={0}is not started
+ml.completion.diagnostics.contexts.copy.button.label=Copy Context
+ml.completion.diagnostics.no.semantic.correctness.information=no semantic correctness information
+ml.completion.diagnostics.mock.response.title=Model response
+ml.completion.diagnostics.mock.streaming.mode.title=Streaming mode:
+ml.completion.diagnostics.mock.streaming.mode.disabled=Disabled
+ml.completion.diagnostics.mock.streaming.mode.char.by.char=Char by char with delay {0}
+ml.completion.diagnostics.mock.streaming.mode.line.by.line=Line by line with delay {0}
+ml.completion.diagnostics.mock.button.remove.last=Remove Last
+ml.completion.diagnostics.mock.button.reset.mock=Reset Mock
+ml.completion.diagnostics.mock.button.reset.mock.and.plugin.caches=Reset Mock and Plugin Caches
+ml.completion.diagnostics.mock.button.add=Add to Existing
+ml.completion.diagnostics.mock.added.responses.title=Added mocks:
+ml.completion.diagnostics.mock.add.responses.title=Add new mock:
+ml.completion.diagnostics.completion.title=Completion:
+ml.completion.diagnostics.preview.title=Preview:
+
+ml.completion.tooltip.action.inline.hint=Show Hint in Editor
+ml.completion.tooltip.action.settings=Inline Completion Settings\u2026
+
+# Configurable
+ml.completion.configurable.name=ML Completion
+ml.completion.trigger.on.typing.enabled=Enable automatic completion on typing
+ml.completion.trigger.on.typing.comment=If disabled, completion suggestions can still be invoked via <b>{0}</b> shortcut
+ml.completion.enable.multi.line.completion.enable=Enable multi-line suggestions
+ml.completion.enable.multi.line.completion.comment=If disabled, only single-line suggestions will be shown
+ml.completion.no.plugins.text=You do not have any JetBrains inline code completion plugins enabled:<ul>{0}</ul>
+ml.completion.advise.aia.name=JetBrains AI Assistant
+ml.completion.advise.full.line.name=Full Line Code Completion
+ml.completion.advise.full.line.unavailable.suffix=is unavailable in Remote Development
+ml.completion.go.to.code.completion.settings=Go to <a>Code Completion settings page</a> to adjust lookup completion settings
+
+# Conflicts
+ml.completion.third.parties.conflict.content.single={0} is now disabled since the following plugins are enabled:{1}To enable {2}, \
+  you will need to disable them first.
+ml.completion.third.parties.conflict.content.multiple={0} and {1} are now disabled since the following plugins are enabled:{2}To enable {3} and {4}, \
+  you will need to disable the conflicting plugins first.
+ml.completion.notifications.third.parties.conflict.detect.title={0} is disabled
+ml.completion.notifications.third.parties.conflict.resolve.title={0} is enabled
+ml.completion.notifications.third.parties.conflict.resolve.content=There is no longer any conflict with other plugins. \
+  {0} has now been re-enabled and is able to suggest completions.
+ml.completion.notifications.common.name=JetBrains inline code completion
+ml.completion.notifications.third.parties.conflict.action.plugin.settings.title=Plugins settings
+ml.completion.notifications.third.parties.conflict.action.more.info.title=More info
+
+action.ml.inline.completion.ClearCompletionCache.text=Clear Cache for Cloud Completion
+
+ml.completion.enable.lookup.sync.checkbox=Synchronize inline and popup completions
+ml.completion.enable.lookup.sync.checkbox.comment=When enabled, inline completions will be shown in the popup completion list to avoid shortcut conflicts
+
+action.MLCompletionDiagnostics.text=ML Completion Diagnostics
+
+# New Settings (Inline Completion)
+ml.inline.settings.description=Displays AI suggestions as inline gray text while typing
+ml.inline.settings.enable=Enable inline completion using language models:
+ml.inline.settings.enable.context.help=Does not consume AI Credits. Unlimited cloud completion is included with the AI subscription.
+ml.inline.setting.only.cloud.available.enable=Enable inline completion using cloud language models
+ml.inline.settings.mode.local=Local
+ml.inline.settings.mode.cloud.and.local=Cloud and local
+ml.inline.settings.mode.cloud=Cloud
+ml.inline.settings.install.aia=<a href="JetBrains AI Assistant">Install AI Assistant</a>
+ml.inline.settings.enable.aia=<a href="JetBrains AI Assistant">Enable AI Assistant</a>
+ml.inline.settings.display.suggestions.for=Display Suggestions For
+ml.inline.settings.languages.label=Languages:
+ml.inline.settings.features.label=Features:
+ml.inline.settings.completion.details.button=Advanced Settings\u2026
+ml.inline.settings.no.languages=No supported languages installed
+ml.inline.settings.group.behavior=Behavior
+ml.inline.settings.matrix.dialog.title=Inline Completion: Language Support by Feature
+ml.inline.settings.show.in.popup=Synchronize inline and popup completion
+ml.inline.settings.show.in.popup.comment=When enabled, inline completions will be shown in the completion popup to avoid shortcut conflicts
+ml.inline.settings.universal.completion.checkbox=All others
+ml.inline.settings.universal.completion.matrix.title=All others languages
+ml.inline.settings.universal.completion.checkbox.comment=Shows suggestions in files of any other type, not shown in the list
+ml.inline.settings.link.to.ai.assistant.models=Configure a custom model in <a>AI Assistant | Models<\a>
+ml.inline.settings.local.model.is.chosen.enabled.checkbox.comment=Model is overridden in <a>AI Assistant | Models</a>
+ml.inline.settings.nes.group.label=Next Edit Suggestions
+
+ml.inline.settings.language.matrix.language.title=Language and Features
+ml.inline.settings.language.matrix.local.title=Local Completion
+ml.inline.settings.language.matrix.cloud.title=Cloud Completion
+ml.inline.settings.language.matrix.nes.title=Next Edits
+
+group.advanced.settings.code.completion=Code Completion
+advanced.setting.ml.completion.indicator=Enable code completion indicator for cloud models
+advanced.setting.ml.completion.indicator.description=The caret will be highlighted during code completion
+advanced.setting.ml.completion.typing=Enable automatic completion on typing
+advanced.setting.ml.completion.typing.description=If disabled, completion suggestions can still be invoked via shortcut

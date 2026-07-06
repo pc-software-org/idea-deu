@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+  Reports usages of zero-argument constructor for JPA entities.
+</p>
+<p>
+  Instead of having zero-argument constructor explicitly in the code, it is recommended to use <code>kotlin-jpa</code> compiler plugin and omit that constructor.
+</p>
+<p>
+  <code>kotlin-jpa</code> compiler plugin generates an additional zero-argument constructor for classes with a specific annotation.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

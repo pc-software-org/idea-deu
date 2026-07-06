@@ -1,0 +1,34 @@
+<html>
+<body>
+Reports data classes used as JPA entities without overridden equals, hashCode and toString.
+<p>
+  Default data class implementations of equals, hashCode and toString are not recommended for JPA entities.
+  They do not consider possible proxies and might break lazy initialization of entity attributes.
+  This can lead to issues with correctness and performance, such as duplicated entries in hash-based collections
+  and preemptive eager fetch from the database.
+</p>
+<p>
+  Example:
+</p>
+<pre><code>
+@Entity
+data class Employee(
+    @Id @GeneratedValue
+    var id: Long? = null,
+    var name: String = "",
+    var department: String = ""
+)
+</code></pre>
+After applying the quickfix:
+<pre><code>
+@Entity
+class Employee(
+    @Id @GeneratedValue
+    var id: Long? = null,
+    var name: String = "",
+    var department: String = ""
+)
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

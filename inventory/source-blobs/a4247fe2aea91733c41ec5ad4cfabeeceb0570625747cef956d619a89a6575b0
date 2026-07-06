@@ -1,0 +1,36 @@
+<html>
+<body>
+<p>Reports request patterns in Spring Security matcher methods that are incompatible with the
+  <code>PathPatternParser</code> used by default since Spring Security 7.0.</p>
+
+<p>Spring Security 7.0 switched from Ant-style path matching (<code>AntPathMatcher</code>) to
+  <code>PathPatternParser</code>, which enforces stricter rules for wildcard segments.</p>
+
+<p>The following patterns are flagged:</p>
+<ul>
+  <li>Wildcard segments (<code>**</code> or <code>{*variable}</code>) placed in the middle of a pattern
+    rather than at the start or end.</li>
+  <li>More than one wildcard segment (<code>**</code> or <code>{*variable}</code>) in the same pattern.</li>
+</ul>
+
+<p><b>Examples of incorrect patterns:</b></p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers("/api/**/admin").permitAll()   // '**' in the middle
+    .requestMatchers("/{*a}/{*b}").permitAll()      // multiple {*...} segments
+  );
+</code></pre>
+
+<p><b>Examples of correct patterns:</b></p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers("/api/admin/**").permitAll()   // '**' at the end
+    .requestMatchers("/{*path}").permitAll()        // single {*...} segment
+    .requestMatchers("/api/*/details").permitAll()  // single '*' is fine anywhere
+  );
+</code></pre>
+
+<p>This inspection is active only when Spring Security 7.0 or later is present and
+  <code>spring.mvc.pathmatch.matching-strategy</code> is not set to <code>ant_path_matcher</code>.</p>
+</body>
+</html>

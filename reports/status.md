@@ -2,22 +2,22 @@
 
 ## Source
 
-- build: `253.29346.240`
-- hash: `755b9549eb41ddec86ea111e4aba94b4fd6e39a60b1de7945c92652c70f80026`
-- version: `2025.3.1.1`
+- build: `261.25134.95`
+- hash: `71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e`
+- version: `2026.1.3`
 
 ## Counts
 
-- Resource files: 4147
-- Translation units: 72513
+- Resource files: 4192
+- Translation units: 72142
 
 ## Statuses
 
 | Status | Count |
 |---|---:|
-| open | 2597 |
-| translated | 281 |
-| technically_reviewed | 69635 |
+| open | 5675 |
+| translated | 275 |
+| technically_reviewed | 66192 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -26,30 +26,30 @@
 |---|---:|
 | already_localized | 3 |
 | collision_not_selected | 20 |
-| directory | 2264 |
-| localized | 1271 |
-| nested_archive | 38 |
-| not_in_translation_reference | 1003 |
-| not_jar | 1898 |
-| unsupported_resource | 577039 |
+| directory | 2306 |
+| localized | 1273 |
+| nested_archive | 40 |
+| not_in_translation_reference | 945 |
+| not_jar | 1942 |
+| unsupported_resource | 587662 |
 
 ## Findings and collisions
 
-- Blocking findings: 3668
-- Warning findings: 323
-- Collisions: 3 (0 unresolved)
+- Blocking findings: 2071
+- Warning findings: 307
+- Collisions: 2 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| empty_target | 2597 |
-| length_ratio | 323 |
-| markup_structure_changed | 331 |
+| empty_target | 1374 |
+| length_ratio | 307 |
+| markup_structure_changed | 212 |
 | message_format_invalid | 4 |
-| placeholder_mismatch | 736 |
+| placeholder_mismatch | 481 |
 
 ## Workflow
 
-- Last completed batch: 376
+- Last completed batch: 0
 - Current batch: none
 - Stale units: 0
 - Workflow state: `translate`

@@ -1,0 +1,9 @@
+action.ErrorAutoReporterStateInternalAction.text=State of Sending Error Reports
+
+notification.error.auto.report.enable=Enable
+notification.error.auto.report.dismiss=Dismiss
+notification.error.auto.report.text=Help us improve JetBrains products by automatically sending error reports
+
+auto.report.enabled.title=Thank you for your assistance!
+auto.report.enabled.text=New errors will be reported automatically.
+auto.report.enabled.settings.action=Open settings

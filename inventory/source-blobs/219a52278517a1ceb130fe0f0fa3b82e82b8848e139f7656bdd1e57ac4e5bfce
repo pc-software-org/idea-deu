@@ -1,0 +1,5 @@
+kotlin.notebooks.dataframe.output.sort_column_not_comparable.error=Could not sort by column {0}
+kotlin.notebooks.dataframe.output.sort_column_not_comparable.error.message=Unable to sort by a column of a non-comparable type
+kotlin.notebooks.dataframe.output.cannot.render.dataframe.error=Failed to render dataframe
+kotlin.notebooks.dataframe.output.cannot.parse.dataframe.error.unknown=Unable to display the dataframe. Please consider submitting an exception report.
+kotlin.notebooks.dataframe.output.too.many.columns.error=Could not display table data. Too many columns.

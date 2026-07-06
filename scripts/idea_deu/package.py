@@ -163,9 +163,9 @@ def _validate_descriptor(data: bytes) -> None:
     expected = (
         ("id", {}, "org.pc-software.idea-deu", ()),
         ("name", {}, "German Language Pack", ()),
-        ("version", {}, "2025.3.1.1", ()),
+        ("version", {}, "2026.1.3", ()),
         ("vendor", {}, "PC-Software", ()),
-        ("idea-version", {"since-build": "253.29346.240", "until-build": "253.29346.240"}, "", ()),
+        ("idea-version", {"since-build": "261.25134.95", "until-build": "261.25134.95"}, "", ()),
         ("depends", {}, "com.intellij.modules.platform", ()),
         ("extensions", {"defaultExtensionNs": "com.intellij"}, "", (
             ("languageBundle", {"locale": "de"}, "", ()),

@@ -1,0 +1,9 @@
+action.DebuggerMcp.CopyDebuggerSkillToAgents.text=Copy Debugger Skill to Agents
+action.DebuggerMcp.CopyDebuggerSkillToAgents.description=Copy the bundled debugger skill to ~/.codex and ~/.claude in the user home directory
+notification.copy.debugger.skill.success.title=Debugger skill copied to agent directories
+notification.copy.debugger.skill.success.content=Restart your agents.<br/><br/>Copied to:<br/>{0}
+notification.copy.debugger.skill.error.title=Failed to copy debugger skill to agent directories
+notification.copy.debugger.skill.error.no.roots=Neither ~/.codex nor ~/.claude exists in the user home directory.
+notification.copy.debugger.skill.error.resource.missing=Bundled resource /ij-debugger-skill.md was not found.
+notification.copy.debugger.skill.error.targets=Failed to copy to:<br/>{0}
+notification.copy.debugger.skill.error.partial=Copied to:<br/>{0}<br/><br/>Failed to copy to:<br/>{1}

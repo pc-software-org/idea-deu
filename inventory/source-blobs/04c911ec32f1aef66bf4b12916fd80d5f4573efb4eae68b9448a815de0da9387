@@ -1,0 +1,33 @@
+configurable.DatabaseSettingsConfigurable.AiTools.display.name=AI Tools
+
+settings.ai.tools.group=Permissions
+settings.ai.tools.description=Controls whether AI tools can read or modify data and schema in all databases without confirmation
+settings.ai.tools.can.read.database.schema=Read database schemas
+settings.ai.tools.can.read.database.schema.description=Improves query generation quality. Note: this also results in higher quota consumption.
+settings.ai.tools.can.read.database.data=Read database data
+settings.ai.tools.can.read.database.data.description=For example, by running SELECT queries
+settings.ai.tools.can.write.database.data=Modify database data
+settings.ai.tools.can.write.database.data.description=For example, by running INSERT, UPDATE, or DELETE statements or calling routines
+settings.ai.tools.can.write.database.schema=Modify database schemas
+settings.ai.tools.can.write.database.schema.description=For example, by running CREATE, ALTER, or DROP statements
+
+ai.consent.dialog.title.read.data=Allow {0} to Read Database Data
+ai.consent.dialog.message.read.data=This statement will read database data. {0} will send the data to the AI model.<br/>Allow {0} to read data in this schema? For example, by running SELECT queries.
+ai.consent.dialog.remember.choice.read.data=Always allow {0} to read database data
+ai.consent.dialog.title.write.data=Allow {0} to Modify Database Data
+ai.consent.dialog.message.write.data=This statement will modify database data.<br/>Allow {0} to modify data in this schema? For example, by running INSERT, UPDATE, or DELETE statements, or by calling a routine.
+ai.consent.dialog.remember.choice.write.data=Always allow {0} to modify database data
+ai.consent.dialog.title.read.schema=Allow {0} to Read Database Schema
+ai.consent.dialog.message.read.schema={0} will read the database schema.<br/>Allow {0} to read this schema?
+ai.consent.dialog.message.read.all.schemas={0} will read the database schemas.<br/>Allow {0} to read these schemas?
+ai.consent.dialog.remember.choice.read.schema=Always allow {0} to read database schemas
+ai.consent.dialog.title.write.schema=Allow {0} to Modify Database Schema
+ai.consent.dialog.message.write.schema=This statement will modify the database schema.<br/>Allow {0} to modify this schema? For example, by running CREATE, ALTER, or DROP statements.
+ai.consent.dialog.remember.choice.write.schema=Always allow {0} to modify database schemas
+ai.consent.dialog.title.unknown=Allow {0} to Execute Statement
+ai.consent.dialog.message.unknown=This statement may read or modify database data. Safety analysis is not available for this SQL dialect.<br/>Allow {0} to execute this statement?<br/>
+ai.consent.dialog.message.context.datasource=<strong>{0}</strong>
+ai.consent.dialog.message.context.schema=<strong>{0}</strong>
+ai.consent.dialog.remember.choice.comment=This setting can be changed in Settings | Tools | Database | AI Tools
+ai.consent.dialog.button.allow=Allow
+ai.consent.dialog.button.deny=Deny

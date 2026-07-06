@@ -1,0 +1,18 @@
+<html>
+<body>
+<p>
+Adds the recommended <code>kotlin-jpa</code> compiler plugin for better support of JPA annotations in Kotlin.
+</p>
+<p>
+It generates an additional zero-argument constructor for classes with a specific annotation.
+</p>
+<p>
+This allows the Java Persistence API (JPA) to instantiate a class, although it doesn't have the zero-parameter constructor from Kotlin or Java point of view (see the description of kotlin-jpa plugin below).
+</p>
+<p>
+Effectively, kotlin-jpa is wrapped on top of no-arg compiler plugin:
+The plugin specifies <code>@Entity</code>, <code>@Embeddable</code>, and <code>@MappedSuperclass</code> no-arg annotations automatically.
+</p>
+<!-- tooltip end -->
+</body>
+</html>

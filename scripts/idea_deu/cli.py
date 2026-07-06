@@ -192,6 +192,16 @@ def _checkpoint(root: Path) -> dict[str, Any]:
 def _extract_units(inventory: Inventory, provider: DistributionResourceProvider,
                    previous: Sequence[TranslationUnit]) -> tuple[TranslationUnit, ...]:
     old = {unit.id: unit for unit in previous}
+    # Container-independent recovery. A unit id is sha256(container\0path\0key),
+    # so a released IDE that renames or repackages a JAR (common between minor
+    # versions) changes the id of an otherwise unchanged string and would drop
+    # its translation. Recover such translations by their logical identity
+    # (path, key, source hash), which does not depend on the container.
+    logical: dict[tuple[str, str, str], TranslationUnit] = {}
+    for unit in previous:
+        if unit.status is ProcessingStatus.OPEN or not unit.target:
+            continue
+        logical.setdefault((unit.context.path, unit.context.key, unit.source_sha256), unit)
     units: list[TranslationUnit] = []
     for record in inventory.resources:
         data = provider.read(record)
@@ -207,12 +217,23 @@ def _extract_units(inventory: Inventory, provider: DistributionResourceProvider,
             context = TranslationContext(bundle, key, record.container, record.resource_path)
             identifier = hashlib.sha256(f"{record.container}\0{record.resource_path}\0{key}".encode()).hexdigest()
             source_hash = hashlib.sha256(source.encode("utf-8")).hexdigest()
-            prior = old.get(identifier)
-            preserve = prior is not None and prior.source == source and prior.source_sha256 == source_hash and prior.context == context
-            units.append(TranslationUnit(identifier, source, source_hash,
-                prior.target if preserve else "", context,
-                prior.status if preserve else ProcessingStatus.OPEN,
-                prior.findings if preserve else ()))
+            if source == "":
+                # An empty source has nothing to translate; its empty target is
+                # already complete and carries no EMPTY_TARGET finding, so record
+                # it as reviewed rather than surfacing a no-op translation task.
+                target, status, findings = "", ProcessingStatus.TECHNICALLY_REVIEWED, ()
+            else:
+                prior = old.get(identifier)
+                if prior is not None and prior.source == source and prior.source_sha256 == source_hash and prior.context == context:
+                    inherit = prior
+                else:
+                    recovered = logical.get((record.resource_path, key, source_hash))
+                    inherit = recovered if recovered is not None and recovered.source == source else None
+                if inherit is not None:
+                    target, status, findings = inherit.target, inherit.status, inherit.findings
+                else:
+                    target, status, findings = "", ProcessingStatus.OPEN, ()
+            units.append(TranslationUnit(identifier, source, source_hash, target, context, status, findings))
     return tuple(sorted(units, key=lambda unit: unit.id))
 
 

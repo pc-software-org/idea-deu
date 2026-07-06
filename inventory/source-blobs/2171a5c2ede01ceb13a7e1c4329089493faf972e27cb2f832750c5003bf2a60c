@@ -1,0 +1,104 @@
+# Full line code completion
+
+full.line.name=Full Line Code Completion
+full.line.name.second=Built-in local inline code completion
+
+full.line.settings.header=Enable local Full Line completion suggestions
+full.line.settings.header.description=Runs entirely on your <b>local</b> device without sending anything over the internet
+full.line.settings.header.warning.icon=<icon src='AllIcons.General.Warning'>
+full.line.settings.header.comment.avx2.unsupported=Full Line Code Completion is disabled due to lack of AVX2 support on your processor
+full.line.settings.header.comment.launch.errors=As your device is currently not supported or there are issues with Full Line execution, you may not see suggestions. Please contact customer support.
+full.line.plugin.title=Full line code completion plugin
+full.line.configurable.name=Full Line Code Completion
+full.line.settings.not.available=Currently, Full Line is available only for Python, JS and TS languages, please install one of plugins or use PyCharm and WebStorm
+
+full.line.settings.download.policy.label=Download models:
+full.line.settings.language.downloading.comment=Downloading
+full.line.settings.language.download.start.comment=Download starts after settings close
+full.line.settings.language.download.button=Download (100 MB)
+
+full.line.settings.download.policy.automatically.name=Automatically
+full.line.settings.download.policy.automatically.description=New models will be downloaded as encountered
+full.line.settings.download.policy.ask.name=Ask before downloading
+full.line.settings.download.policy.ask.description=Once a new model is added, you will be asked to download it
+full.line.settings.download.policy.manually.name=Manually
+full.line.settings.download.policy.manually.description=You will have to download models via Settings page
+
+# UI-helpers
+full.line.top.n.use=Show only
+full.line.top.n.use.suffix=best suggestions
+
+########################################################################################################################
+
+# Notifications
+full.line.notifications.generate.context.title=Full line issue context generated
+full.line.notifications.generate.context.text=Issue Context was copied to clipboard as a ZIP file. Create an issue using the link below and attach the generated archive to it.
+full.line.notifications.generate.context.button.context=Generated issue context
+full.line.notifications.generate.context.button.issue=Create issue
+
+full.line.notifications.feedback.title=Full Line Code Completion
+full.line.notifications.feedback.button=Share feedback
+full.line.notifications.explicit.feedback.multiline.content=You may have noticed that the Full Line Code Completion plugin now offers multi-token proposals. Please share your opinion on this. We really appreciate your feedback!
+full.line.notifications.explicit.feedback.context.rag.content=You may have noticed that the Full Line Code Completion plugin now utilises the code from other files. Please share your opinion on this. We really appreciate your feedback!
+full.line.notifications.explicit.feedback.context.fim.content=You may have noticed that the Full Line Code Completion plugin now sees the code under the caret. Please share your opinion on this. We really appreciate your feedback!
+full.line.notifications.uninstall.feedback.content=Thank you for trying the Full Line Code Completion plugin! We\u2019re sorry to see you go! To help us improve the product, please share your feedback with us.
+
+full.line.ask.download.model.title=Download Full Line Code Completion model
+full.line.ask.download.model.content=Full Line Code Completion is a built-in plugin that enhances code completion with inline suggestions. The plugin uses <b>only local</b> LLMs and does not send any of your data over the internet.<br><br>Full Line Code Completion offers an LLM for <b>{0}</b>. Would you like to download this model?
+full.line.ask.download.model.action.consented.content=Download model
+full.line.ask.download.model.action.consent.automatic.content=Automatically download models
+full.line.ask.download.model.action.consent.manual.content=Don't suggest again
+
+# Actions
+group.FullLine.InternalGroup.text=Full Line (Internal)
+action.FullLine.GenerateMarkerAction.text=Generate Marker
+action.FullLine.GenerateMarkerAction.description=Generate a Full Line marker based on the current file
+action.FullLine.ShowSettingsAction.text=Show Full Line settings
+action.FullLine.ShowSettingsAction.description=Show Full Line settings configuration panel
+action.FullLine.GenerateContextAction.text=Submit Full Line Issue
+action.FullLine.GenerateContextAction.description=Show Full Line settings configuration panel
+action.FullLine.ShowFeedbackDialogsAction.text=Show Full Line Feedback Dialog
+action.FullLine.ShowFeedbackDialogsAction.description=Opens dialog to provide feedback about Full Line code completion functionality
+full.line.progress.downloading.models.title=Updating full line models.
+full.line.tooltip.action.open.more.info=More Info\u2026
+
+group.FullLineGroup.text=Full Line
+
+# Inline completion
+full.line.inline.provider.display.name=Full Line completion
+full.line.inline.provider.display.comment=runs locally
+full.line.ux=Full Line completion UX
+full.line.mode=Completion mode:
+
+# Markers
+full.line.marker.add.sample=\
+  Add a sample 'anti'-sample\
+  to verify your result Regex
+column.name.suggestion=Suggestion
+column.name.type=Type
+column.name.correct=Correct
+error.illegal.element=Illegal element: `{0}`
+
+# Survey
+full.line.survey.title=Feedback on Built-in AI Code Completion Suggestions in {0}
+full.line.survey.description=We would appreciate your feedback on the {0} built-in AI code completion feature.<br>Any information you provide will be confidential.
+full.line.survey.question.last.text=What could we improve about our built-in AI code completion?
+full.line.survey.question.multiline=How often would you say the multi-line code suggestions made by the built-in AI code completion are useful?
+full.line.survey.question.context=How would you rate the {0} built-in AI code completion\u2019s awareness of your current project context?
+full.line.survey.question.feature.request=Which features do you consider the most important for built-in AI code completion?
+full.line.survey.answer.always=Almost always
+full.line.survey.answer.majority=In the majority of cases
+full.line.survey.answer.half=In about half of the cases
+full.line.survey.answer.minority=In the minority of cases
+full.line.survey.answer.never=Almost never
+full.line.survey.answer.none=I haven\u2019t seen (enough) multi-line code suggestions
+full.line.survey.answer.excellent=Excellent
+full.line.survey.answer.good=Good
+full.line.survey.answer.average=Average
+full.line.survey.answer.poor=Poor
+full.line.survey.answer.awful=Awful
+full.line.survey.answer.multiline=Multi-line code completion suggestions
+full.line.survey.answer.fim=Awareness of the code around the caret
+full.line.survey.answer.rag=Whole project context awareness
+full.line.survey.answer.redcode=Syntactic correctness of suggested code
+full.line.survey.answer.other.specify=Other, please specify:

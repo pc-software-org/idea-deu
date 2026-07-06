@@ -1,0 +1,57 @@
+create.react.app.name=React
+create.react.app.description=<a href=\"https://github.com/facebookincubator/create-react-app\">Create React App</a> is a new officially supported way to create single-page React applications. It offers a modern build setup with no configuration.
+create.react.app.scripts.version=Scripts &version
+create.react.app.typescript.checkbox=Create &TypeScript project
+create.react.project.cli.name=React &CLI
+
+action.ReactClassToFunctionComponentAction.description=Convert to function component
+action.ReactFunctionToClassComponentAction.description=Convert to class component
+action.ReactExtractComponentAction.description=Extract component
+action.ReactExtractComponentAction.text=Extract Component\u2026
+action.ReactFunctionToClassComponentAction.text=Convert to Class Component
+action.ReactClassToFunctionComponentAction.text=Convert to Function Component
+refactoring.extract.react.component.label.name=Name: 
+refactoring.extract.react.component.label.type=Type: 
+refactoring.extract.react.component.label.separate.file=Create in separate file
+refactoring.extract.react.component.label.target.file=Target file: 
+refactoring.extract.react.component.title=Extract Component
+refactoring.extract.react.component.no.expression=Selection does not form a JSX expression
+refactoring.extract.react.component.no.scope=Could not find scope to place created component
+refactoring.extract.react.component.invalid.identifier=Invalid identifier: ''{0}''
+refactoring.create.react.component.title=Create Component
+refactoring.react.function.to.class.refactoring.title=Convert to Class Component
+refactoring.react.function.to.class.intention.title=Convert to class component
+refactoring.react.function.to.class.used.in.new.conflict={0} is used in ''new'' expression
+refactoring.react.function.to.class.used.in.call.conflict={0} is used in call expression
+refactoring.react.class.to.function.conflict.used.with.ref={0} is used with ''ref'' attribute. Stateless function components cannot be given refs
+refactoring.react.class.to.function.refactoring.title=Convert to Function Component
+refactoring.react.class.to.function.intention.title=Convert to function component
+refactoring.react.class.to.function.dialog.message=Component Name:
+refactoring.react.could.not.find.in.template=Failed to refactor. Could not find element with name {0}. Possibly code template {1} is invalid?
+react.function.to.class.caret.at.function=Caret should be positioned at function to convert
+react.class.to.function.caret.at.class=Caret should be positioned at class to convert
+react.class.component.type.class=Class
+react.class.component.type.function=Function
+
+react.inspection.unresolved.ref.to.state.fix.family.name=Create component state
+react.inspection.unresolved.ref.to.state.fix.text=Create ''{0}'' state in ''{1}'' component
+react.inspection.unresolved.ref.to.prop.fix.text=Create ''{0}'' prop in ''{1}'' component
+react.inspection.unresolved.prop.quick.fix.family.name=Create component prop
+react.inspection.unresolved.prop.quick.fix.text=Create component prop ''{0}''
+react.inspection.unresolved.prop.action.name=Create Component Prop
+react.inspection.unresolved.component.prop=Unresolved component prop ''{0}''
+react.inspection.unresolved.prop.validation.message.component.source.not.found=Component source not found
+react.inspection.unresolved.prop.validation.message.writable.source.not.found=Writable component source not found
+react.inspection.unresolved.prop.validation.message.writable.props.not.found=Writable properties type object not found
+
+javascript.fix.create.function.component.jsx.name=Create function component ''{0}''
+javascript.fix.create.function.component.jsx.family=Create function component
+javascript.fix.create.class.component.jsx.name=Create class component ''{0}''
+javascript.fix.create.class.component.jsx.family=Create class component
+javascript.fix.create.function.component.jsx.in.file.name=Create function component ''{0}'' in a separate file
+javascript.fix.create.class.component.jsx.in.file.name=Create class component ''{0}'' in a separate file
+
+react.filter.display.name=React
+
+react.convert.html.attributes.to.react=Convert HTML attribute names when pasting code into React JSX files
+react.smart.keys.configurable.display.name=React

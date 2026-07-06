@@ -1,0 +1,28 @@
+kotlin.jupyter.settings.jvm.debug=Debug Options
+kotlin.jupyter.settings.jvm.debug.port.check.box=Open debug port on session startup
+kotlin.jupyter.settings.jvm.debug.port.check.box.description=If unchecked, no debug port will be opened on Kernel side
+kotlin.jupyter.settings.jvm.debug.port.comment=Kernel version should be at least {0} for debug instrumentation to take effect
+kotlin.jupyter.settings.jvm.debug.variables=Show notebook session variables
+kotlin.jupyter.settings.jvm.debug.variables.description=If checked, variables' state is shown in a separate window
+kotlin.jupyter.settings.jvm.debug.variables.comment=Can't be configured without a sufficient Kernel version for establishing debug connection
+kotlin.jupyter.settings.jvm.debug.variables.focus.check.box=Open the variables' tab after cell execution
+kotlin.jupyter.settings.jvm.debug.variables.focus.check.box.description=If checked, the Notebook Tool Window will receive focus after cell execution
+kotlin.jupyter.settings.jvm.debug.features.separate.process.note=Debug features are available only when a notebook runs in Separate Process mode
+kotlin.jupyter.settings.jvm.debug.features=Debugging Features
+kotlin.jupyter.settings.jvm.debug.navigate.editor.on.stop=Navigate back to the notebook editor once the debug cell action is completed
+kotlin.jupyter.settings.jvm.debug.navigate.editor.on.stop.description=If checked, the notebook editor will be brought to focus when debugging stops
+
+kotlin.jupyter.toolbar.tabs.variables=Variables
+
+kotlin.jupyter.debug.line.breakpoint=Kotlin Notebook Line Breakpoint
+kotlin.jupyter.debug.node.default.message=Variables are not available. Enable in Kotlin Notebook settings.
+kotlin.jupyter.debug.node.not.enabled.message=Variables are not available for Kotlin Notebooks running in the IDE process.
+kotlin.jupyter.debug.node.rebuild.message=Variables will be rebuilt after a connection is established
+kotlin.jupyter.debug.node.empty.no.connection.message=Variables are not available, no connection is established
+kotlin.jupyter.debug.node.empty.not.attached.message=Variables are not available, the process is not attached
+kotlin.jupyter.debug.node.empty.session.variables.message=No variables are defined yet
+kotlin.jupyter.debug.node.no.context.message=Computations are not available without suspended context
+
+action.KotlinNotebookDebugCellAction.text=Debug Cell
+action.KotlinNotebookDebugCellAction.description=Run current cell with debug support for project breakpoints
+action.KotlinNotebookDebugCellAction.disabled.hint=Select Any Project Dependencies for the Notebook to Enable Debugging

@@ -1,0 +1,25 @@
+ui.dfa.show.trace.action.display.name=Show {0} trace {1}
+ui.dfa.show.trace.action.marker.invalidation=No longer valid
+ui.dfa.show.trace.panel.trace.node.label=Trace:
+ui.dfa.show.trace.panel.node.source.label=Source
+ui.dfa.show.trace.panel.node.sink.label=Sink
+ui.dfa.show.trace.panel.node.step.label={0}
+ui.dfa.show.trace.panel.trace.node.unknown.source=Unknown
+ui.dfa.trace.viewer.title=DFA Trace Viewer
+ui.dfa.trace.viewer.description=View and analyze data flow traces.
+ui.security.analysis.panel.tab.name=Security Analysis
+ui.security.analysis.panel.tab.close.text=Close
+#TODO: use in the inspections module
+ui.security.analysis.taint.analysis.inspection.short.name=JvmTaintAnalysis
+ui.security.analysis.taint.annotator.inspection.short.name=TaintConfigAnnotator
+
+ui.security.analysis.tab.closed.notificationGroup=Security analysis tab closed
+ui.security.analysis.tab.closed.notification.title=Security analysis disabled
+ui.security.analysis.tab.closed.notification.message=Enable security analysis in the settings.
+
+action.SecurityAnalysis.ShowProblemTab.text=Show Security Analysis Tab
+action.SecurityAnalysis.ExpandAllTracesAction.text=Expand All Traces
+action.SecurityAnalysis.CollapseAllTracesAction.text=Collapse All Traces
+
+advanced.settings.SecurityAnalysis=Security Analysis
+advanced.setting.SecurityAnalysis.canShowProblemTab=Show Problem Tab

@@ -1,0 +1,23 @@
+vite.configuration.title=Vite
+vite.project.generator.name=Vite
+vite.project.generator.description=Create a new <a href='https://vitejs.dev/'>Vite</a> project using <a href='https://github.com/vitejs/vite/tree/main/packages/create-vite'>create-vite</a> package.
+vite.project.generator.presentable.package.name=&Vite:
+vite.project.generator.template=&Template:
+vite.project.generator.template.error=Template is not selected
+vite.project.generator.use.ts.template=&Use TypeScript template
+vite.project.generator.template.vanilla=vanilla
+vite.project.generator.template.react=react
+vite.project.generator.template.vue=vue
+vite.project.generator.template.svelte=svelte
+vite.project.generator.template.preact=preact
+vite.project.generator.template.lit=lit
+vite.project.generator.template.solid=solid
+vite.project.generator.template.qwik=qwik
+notification.group.vite=Vite configuration analysis failed
+
+vite.missing.package.error=Vite package is required for analysis and should be installed
+
+vite.editor.notification=Vite: {0}
+vite.editor.notification.missing.package.error='vite' package not found
+vite.editor.notification.missing.package.error.help=<div width="300">{0} integration with Vite requires the ''vite'' package to be installed either in your project or globally. \
+  Add ''vite'' package to your package.json and then run ''{1}''.</div>

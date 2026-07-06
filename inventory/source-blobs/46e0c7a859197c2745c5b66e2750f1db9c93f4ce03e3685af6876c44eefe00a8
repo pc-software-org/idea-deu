@@ -1,0 +1,215 @@
+# suppress inspection "UnusedProperty" for a whole file
+
+jupyter.kotlin.file.type.description=Provides support for Kotlin Notebooks.
+meta.file.type.description=Provides support for Jupyter Kotlin commands, magics, etc.
+
+# jkt.meta.description.* properties are actually used, but identifier is formed generically
+jkt.meta.description.help=Show help
+jkt.meta.description.classpath=Show the current classpath
+jkt.meta.description.vars=Get visible variable values
+jkt.meta.description.use=Inject code for supported libraries: artifact resolution, default imports, initialization code, type renderers
+jkt.meta.description.trackClasspath=Log classpath changes. Useful for debugging artifact resolution failures
+jkt.meta.description.trackExecution=Log code being executed. Useful for debugging library integrations
+jkt.meta.description.dumpClassesForSpark=Store compiled REPL classes in a special directory for integration with Spark
+jkt.meta.description.useLatestDescriptors=Use the latest available versions of library descriptors. By default, bundled descriptors are used
+jkt.meta.description.output=Manage output capturing settings
+jkt.meta.description.logLevel=Set the logging level
+jkt.meta.description.logHandler=Manage logging handlers
+
+action.ShowKotlinNotebookPreferencesAction.text=Kotlin Notebook Plugin Settings\u2026
+action.ShowKotlinNotebookPreferencesAction.description=Edit Kotlin notebook plugin settings
+action.RestartKotlinNotebookHighlighting.text=Restart Highlighting in Kotlin Notebook
+action.RestartKotlinNotebookSession.text=Restart current session{0}
+
+KotlinNotebookEnableSeparateProcessMode.text=Run in Separate Process
+KotlinNotebookEnableIdeProcessMode.text=Run in IDE Process
+KotlinNotebookEnableAttachedProcessMode.text=Attach to Running Kernel
+
+kotlin.jupyter.attached.process.mode.settings.group=Attaching to Running Kernel
+
+action.ToggleShowExecutionCount.text=Show Execution Count
+
+action.CreateNewScratchKotlinNotebook.error.dialog.text=Failed to create a Kotlin Notebook file. Error: {0}
+
+NewKotlinNotebookAction.text=Kotlin Notebook
+NewKotlinNotebookAction.description=Create new Kotlin notebook
+action.OpenKotlinNotebookAction.text=Open
+action.OpenSelectedNotebookAction.text=Open Selected
+action.RevealNotebookInFinderAction.text=Show in Explorer
+action.CopyNotebookPathAction.text=Copy Path
+action.RemoveNotebookFromListAction.text=Remove from Recent Notebooks
+kotlin.notebook.remove.recent.confirmation.question=Remove {0} from recent notebooks?
+kotlin.notebook.remove.recent.confirmation.title=Remove Recent Notebook
+kotlin.notebook.remove.recent.confirmation.ok=Remove
+kotlin.notebook.remove.recent.confirmation.cancel=Cancel
+
+kotlin.jupyter.action.create.notebook.dialog.title=New Kotlin Notebook
+kotlin.jupyter.action.create.notebook.dialog.kind=New Kotlin notebook
+kotlin.jupyter.action.create.notebook.name=Create Kotlin Notebook {0}
+
+kotlin.jupyter.settings.title=Kotlin Notebook
+kotlin.jupyter.settings.k2.title=Kotlin Notebook K2
+kotlin.jupyter.settings.JDK.path=JDK path
+kotlin.jupyter.settings.JDK.action.preview=Specify JDK settings
+kotlin.jupyter.settings.JDK.comment=JDK version should be at least {0}
+kotlin.jupyter.settings.JDK.comment.empty.runtime={0} runtime version
+kotlin.jupyter.settings.jvm.target.for.snippets=JVM target for snippets
+kotlin.jupyter.settings.jvm.target.for.snippets.comment=Target for snippets could be at most {0} (IDE JDK version)
+kotlin.jupyter.settings.selected.jdk.default=Selected JDK default
+kotlin.jupyter.settings.kernel.version=Kernel version
+kotlin.jupyter.settings.kernel.explore.button.name=Browse Kernels Folder
+kotlin.jupyter.settings.kernel.restore.default.version=Reset to Bundled Version
+kotlin.jupyter.settings.kernel.version.description=Choosing a kernel version other than bundled may lead to compatibility issues
+kotlin.jupyter.settings.kernel.version.default={0} (bundled)
+kotlin.jupyter.settings.kernel.mode=Kotlin Notebook session run mode
+kotlin.jupyter.settings.jvm.max.heap=Max heap size
+kotlin.jupyter.settings.jvm.max.heap.units=MiB
+kotlin.jupyter.settings.jvm.extra.args=JVM extra arguments
+kotlin.jupyter.settings.jvm.extra.args.comment=These arguments are applied only in "Separate process" mode
+kotlin.jupyter.settings.compiler.extra.args=Compiler extra arguments
+kotlin.jupyter.settings.environment.variables=Environment variables
+kotlin.jupyter.settings.build=JVM and Build
+kotlin.jupyter.settings.session=Kernel Session
+kotlin.jupyter.settings.session.attached.host=Kernel Host
+kotlin.jupyter.settings.session.attached.ports=Kernel Session Port
+kotlin.jupyter.settings.typeHints=Type Hints
+kotlin.jupyter.settings.appearance=Appearance
+kotlin.jupyter.settings.outputs=Outputs
+kotlin.jupyter.settings.outputs.swing.dataframe=Render DataFrame tables natively
+kotlin.jupyter.settings.outputs.swing.letsPlot=Render Kandy plots natively
+
+kotlin.notebook.settings.analysis.compiler.plugins.title=Compiler Plugins (Experimental)
+kotlin.notebook.settings.analysis.compiler.plugins.bundled.title=Bundled Plugins
+kotlin.notebook.settings.analysis.compiler.plugins.bundled.hint=Bundled plugins to be added to the analysis session
+
+action.CopySwingComponentScreenshot.text=Copy Screenshot
+action.CopySwingComponentScreenshot.description=Copy a screenshot of the Swing component to the clipboard
+kotlin.notebook.outputs.swing.component.frame.text=JFrame "{0}" is opened in its own window.
+kotlin.notebook.outputs.swing.component.frame.no.size.text=JFrame "{0}" cannot be shown because it is either invisible or has no size defined.
+kotlin.notebook.outputs.swing.component.dialog.text=JDialog is opened in its own window.
+kotlin.notebook.outputs.swing.component.dialog.no.size.text=JDialog cannot be shown because it is either invisible or has no size defined.
+kotlin.notebook.outputs.swing.component.export.failed.notification.message=Creating a screenshot failed
+kotlin.notebook.collapsed.swing.component.output.text=Swing Output
+kotlin.notebook.collapsed.swing.component.no_size.text=Swing component has no size or is invisible.
+
+kotlin.jupyter.settings.new.notebook.title=Settings for New Notebooks
+kotlin.jupyter.settings.new.notebook.description=Configure the default settings used for newly created Kotlin notebooks
+checkbox.should.add.libraries=Add project libraries to the notebook classpath
+
+kotlin.jupyter.missing.jdk.notification.not.selected.text=JDK for running Kotlin Notebooks is not selected
+kotlin.jupyter.missing.jdk.notification.not.found.text=JDK "{0}" selected for running Kotlin Notebooks is not found
+kotlin.jupyter.missing.jdk.select.jdk.action=Select JDK
+
+kotlin.jupyter.session.jdk.inconsistent.error=Selected JDK "{0}" is not compatible with JDK used to build the module "{1}"
+kotlin.jupyter.session.jdk.inconsistent.fix.action=Use compatible JDK version
+
+kotlin.jupyter.refactor.changed.definition.rerun=Consider executing the cell for changes to take effect across the notebook.
+kotlin.jupyter.refactor.changed.definition=Refactoring the declaration would have no effect on existing {0} usages.
+kotlin.jupyter.refactor.compiled.script=Refactoring of a compiled script declaration \
+  would have no effect on a bytecode. Consider proper redeclaration.
+
+kotlin.jupyter.toolbar.title=Kotlin Kernel: {0}
+kotlin.jupyter.toolbar.tabs.variables=Variables
+kotlin.jupyter.toolbar.tabs.log=Kernel Logs
+
+kotlin.jupyter.toolbar.actions.stop=Stop Kernel Process
+kotlin.jupyter.toolbar.session.name=Kotlin Kernel Session
+
+kotlin.jupyter.dependencies.build.error.outdated=Outdated dependencies will be used because of the build failure. Execution result is not guaranteed.
+kotlin.jupyter.dependencies.build.error.severe=Project-level dependencies cannot be provided nor replaced due to build error. Consider fixing build.
+kotlin.jupyter.dependencies.build.error.throwable=Project-level dependencies cannot be provided during session initializing. Cell execution aborted.
+
+kotlin.jupyter.session.initial.setup=Internal dependencies for Notebook are not provided.
+kotlin.jupyter.session.restart=Restarting the kernel session. Previous state is aborted.
+kotlin.jupyter.session.classloader.error=Cell class was compiled by a more recent version of Runtime.
+
+kotlin.jupyter.session.restartNeeded=Notebook settings have changed. Kernel must be restarted for them to take effect.
+
+plugin.updater.notification.group=Kotlin Notebook plugin updates available
+kotlin.notebook.session.notification.group=Kotlin Notebook session notifications
+kotlin.jupyter.output.error.notification.group=Kotlin Notebook plugin output error notification
+inlay.hint.description.prefix=Show inlay hints for {0} in Kotlin Notebook
+
+checkbox.should.typehint.only.active.cell=Show type hints only in the active cell
+checkbox.should.show.execution.count=Display execution count
+checkbox.should.show.foldable.regions=Show foldable regions
+checkbox.should.stop.execution.on.failure=Stop execution on failure
+checkbox.should.stop.execution.on.failure.detailed=When multiple cells are run, execution will be stopped after the first failure
+checkbox.resolve.sources=Resolve sources
+checkbox.replCompilerMode.k1Mode=K1 mode
+checkbox.replCompilerMode.k2Mode=K2 mode (experimental)
+
+kotlin.jupyter.settings.refactoring.progress=Processing Kotlin notebooks\u2026
+kotlin.jupyter.settings.dependencies.deselect.all=Deselect All
+kotlin.jupyter.settings.dependencies.select.all=Select All
+
+kotlin.jupyter.editor.dnd.csv.dataframe.command=Importing CSV as Kotlin DataFrame
+kotlin.jupyter.editor.dnd.xls.dataframe.command=Importing XLS as Kotlin DataFrame
+kotlin.jupyter.editor.dnd.json.dataframe.command=Importing JSON as Kotlin DataFrame
+kotlin.jupyter.editor.dnd.parquet.dataframe.command=Importing Parquet file as Kotlin DataFrame
+kotlin.jupyter.editor.dnd.geo.dataframe.command=Importing GEO data as Kotlin DataFrame
+
+kotlin.jupyter.highlighting.symbols.styles.shadowed.unresolved.description=Not yet provided symbol
+kotlin.jupyter.highlighting.symbols.styles.shadowed.error.description=Improper usage
+kotlin.jupyter.highlighting.service.null.cells.warning="Cells are null during pass creation, nothing can be done"
+kotlin.jupyter.highlighting.traffic.configuration.empty=Loading configuration
+kotlin.jupyter.highlighting.traffic.configuration.update=Updating notebook dependencies
+
+kotlin.notebook.outdated.dependencies.hint.text=There have been changes to the notebook's dependencies.<br>\
+  The kernel must be restarted for these changes to take effect.
+
+kotlin.notebook.kernel.settings.changed.hint.text=There have been changes to the kernel settings.<br>\
+  The kernel must be restarted for these changes to take effect.
+
+# the above property is expected to be passed as a parameter into this template
+kotlin.notebook.outdated.dependencies.hint.message=<html>\
+  {0}<br>\
+  <a href=#dont-show-again>Don''t show again</a>\
+  </html>
+kotlin.notebook.progress.title.kotlin.kernel.downloading=Downloading Kotlin Notebook Artifacts ({0})\u2026
+kotlin.notebook.kernel.version.warning.content=Current kernel version ({0}) is older than the version bundled with the plugin ({1})
+kotlin.notebook.kernel.version.warning.action.fix.text=Use bundled version
+kotlin.notebook.kernel.version.warning.action.ignore.text=Ignore this version
+kotlin.notebook.no.kernel.to.attach=Unable to connect: no kernel with provided configuration is running
+
+dialog.title.session.shutdown.prompt=Session Configuration Changes
+label.session.shutdown.prompt=The session needs to be restarted for the changes to be applied.<br>Shut down the session now?
+
+action.KotlinNotebookDependenciesComboBoxAction.NoDependenciesAction.text=No Dependencies
+action.KotlinNotebookDependenciesComboBoxAction.AllProjectLibrariesAction.text=All Project Libraries
+
+kotlin.notebook.welcome.tab.title=Kotlin Notebooks
+
+kotlin.notebook.project.templates.empty.name=Empty
+kotlin.notebook.project.templates.empty.description=Start from scratch with a blank notebook
+kotlin.notebook.project.templates.quickApiTest.name=Quick API Test
+kotlin.notebook.project.templates.quickApiTest.description=Play with HTTP endpoints
+kotlin.notebook.project.templates.dataAnalysis.name=Data Analysis
+kotlin.notebook.project.templates.dataAnalysis.description=Titanic example
+
+kotlin.notebook.create.project.progress=Creating a Kotlin Notebook project\u2026
+action.new.notebook.from.template.single.text=New Notebook
+progress.title.opening.kotlin.notebook.project=Opening Kotlin Notebook project\u2026
+kotlin.notebook.welcome.screen.search=Search notebooks
+kotlin.notebook.root.type.display.name=Kotlin Notebooks
+
+notebook.error.output.traceback.kotlin.ellipsis=Stacktrace\u2026
+
+kotlin.notebook.settings.new.notebook.settings.title=New Notebook
+kotlin.notebook.new.notebook.dialog.title=New Notebook
+kotlin.notebook.new.notebook.dialog.name.already.exists=File {0} already exists in this location
+kotlin.notebook.new.notebook.dialog.type.label=Type:
+kotlin.notebook.new.notebook.dialog.location.label=Location:
+kotlin.notebook.new.notebook.dialog.name.label=Name:
+kotlin.notebook.new.notebook.dialog.template.label=Template:
+kotlin.notebook.new.notebook.dialog.type.segmented.button.standard.text=In Folder
+kotlin.notebook.new.notebook.dialog.type.standard.description=Create a notebook in a new project or add it to an existing project
+kotlin.notebook.new.notebook.dialog.type.segmented.button.light.text=Scratch
+kotlin.notebook.new.notebook.dialog.type.light.description=Create a notebook in the Scratches folder without adding it to a project
+kotlin.notebook.new.notebook.dialog.ok.text=Create
+kotlin.notebook.new.notebook.dialog.cancel.text=Cancel
+kotlin.notebook.new.notebook.dialog.created.in.existent.project=The notebook will be created in the existing project: {0}
+kotlin.notebook.new.notebook.dialog.created.in.newly.initialized.project=The notebook will be created in a new project in {0}
+kotlin.notebook.file.type.in.chooser=Kotlin notebooks
+kotlin.notebook.no.recent.notebooks.found=No recent notebooks. Create a new notebook or open an existing one
+kotlin.notebook.recent.notebooks.tree.accessible.name=Recent notebooks

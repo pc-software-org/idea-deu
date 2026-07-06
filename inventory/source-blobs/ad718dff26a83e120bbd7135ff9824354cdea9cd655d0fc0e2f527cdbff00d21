@@ -1,0 +1,25 @@
+action.ToolboxWelcomeRemdevAction.text=Remote Development
+popup.title.remote.development.moves.to.toolbox=Remote Development moves to JetBrains Toolbox
+popup.message.remote.development.moves.to.toolbox=Connect via SSH or plugins like CodeCanvas.<br/>All your remote development now runs through JetBrains Toolbox.
+popup.action.remote.development.moves.to.toolbox.install=Install JetBrains Toolbox
+popup.action.remote.development.moves.to.toolbox.open=Open JetBrains Toolbox
+popup.action.remote.development.moves.to.toolbox.update=Update and Open JetBrains Toolbox
+popup.action.remote.development.try.again=Try again
+popup.message.progress.searching.for.toolbox=Searching for JetBrains Toolbox\u2026
+popup.message.progress.toolbox.is.installing=Installing JetBrains Toolbox\u2026
+popup.message.progress.opening.toolbox=Opening JetBrains Toolbox\u2026
+popup.message.error.toolbox.version.not.supported=Toolbox version is not supported
+progress.title.installing.toolbox=Installing JetBrains Toolbox\u2026
+
+group.FileMenu.RemoteDevelopmentActions.Combined.text=Remote Development
+action.CombinedWelcomeRemdevAction.text=Remote Development
+action.CombinedWelcomeRemdevAction.popupHint=<html>Remote workflows are fully supported in the Toolbox App.<br>JetBrains Gateway remains available,<br>but we recommend switching to the Toolbox App.</html>
+group.CombinedWelcomeRemdevProjectViewAction.text=Remote Development
+action.WelcomeOpenGateway.text=Open JetBrains Gateway
+action.WelcomeOpenToolbox.text=Open the Toolbox App
+action.WelcomeOpenToolbox.install.text=Install the Toolbox App
+action.WelcomeOpenToolbox.update.text=Update the Toolbox App
+action.recommended.hint=Recommended
+action.classic.hint=Classic
+action.UseGatewayByDefault.text=Use JetBrains Gateway as Default
+action.UseToolboxByDefault.text=Use the Toolbox App as Default

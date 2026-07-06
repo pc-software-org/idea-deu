@@ -75,8 +75,13 @@ def parse_properties(data: bytes) -> PropertiesDocument:
         key_raw, value_raw, value_start = _split_property(logical)
         key = _unescape(key_raw)
         value = _unescape(value_raw)
-        if key in values:
-            raise PropertiesError(f"duplicate logical key: {key}")
+        # Java properties are last-one-wins. A key repeated with a differing
+        # value is genuine ambiguity and stays a blocking parse error. A key
+        # repeated with an identical value is benign redundancy that real
+        # JetBrains bundles ship (e.g. JupyterPyDapBundle); accept it and keep
+        # tracking every physical occurrence so render translates them all.
+        if key in values and values[key] != value:
+            raise PropertiesError(f"conflicting duplicate logical key: {key}")
         values[key] = value
 
         prefix_end_char = logical_offsets[value_start]

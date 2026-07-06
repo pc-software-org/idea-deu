@@ -13,3 +13,6 @@ __pycache__/
 *.py[cod]
 /.venv/
 /.batch.lock
+
+# Subagent-driven-development scratch ledger.
+/.superpowers/

@@ -1,0 +1,122 @@
+quarkus.edit.extensions.inlay.provider.name=Add Quarkus extensions
+quarkus.edit.extensions.inlay.provider.description=Click to add Quarkus extensions.
+quarkus.edit.extensions.dialog.title=Add Extensions
+quarkus.edit.extensions.loading.text=Loading extensions\u2026
+action.Quarkus.Edit.Extensions.Action.text=Add Extensions\u2026
+action.QuarkusOpenDevUI.text=Open Quarkus Dev UI
+action.QuarkusOpenDevUI.description=Opens Quarkus Dev UI as an editor tab
+dev.ui.editor.tab.title=Quarkus Dev UI
+
+inspection.group.name=Quarkus
+
+inspection.name.private.bean.members=Wrong access modifier of bean members with CDI annotations
+inspection.message.private.bean.members=Private access modifier usage is not recommended for Quarkus CDI members
+
+inspection.name.undeclared.path.mime.types=Undeclared '@Produces' / '@Consumes' MIME types for '@Path'
+inspection.message.undeclared.path.mime.types=Neither class nor method declares @{0} annotation with supported MIME types
+inspection.smallrye.config.mapping=Missing or empty 'prefix' attribute value in the '@ConfigMapping' annotation
+inspection.smallrye.config.mapping.missing.prefix='prefix' attribute is required
+inspection.smallrye.config.mapping.empty.prefix='prefix' cannot be empty
+
+inspection.fix.remove.private.modifier=Remove 'private' modifier
+
+description.for.quarkus.project.starter=Create <b>Quarkus</b> applications
+
+quarkus.starter.extensions.label=Extensions:
+quarkus.starter.selected.extensions.label=Added extensions:
+quarkus.starter.select.extensions.hint=No extensions added
+quarkus.starter.version.label=Quarkus:
+quarkus.starter.artifact.must.contain.only.lowercase.characters=Must contain only lowercase characters
+quarkus.starter.extensions.platform.only.checkbox=Include non-platform extension
+
+quarkus.inspections.config.properties=Invalid Quarkus application.properties configuration
+quarkus.inspections.config.properties.missing.map.key=Missing map key
+quarkus.inspections.config.properties.missing.closing.bracket=Missing closing ']'
+quarkus.inspections.config.properties.missing.index.value=Missing index value
+quarkus.inspections.config.properties.non.integer.index=Index value must be Integer
+
+quarkus.inspections.config.yaml=Invalid Quarkus YAML configuration
+
+quarkus.config.unresolved.sub.key=Cannot resolve configuration item ''{0}''
+quarkus.config.unresolved.duration.value=Value ''{0}'' is not a valid duration
+quarkus.config.unresolved.memory.size.value=Value ''{0}'' is not in correct format (regular expression): [0-9]+[BbKkMmGgTtPpEeZzYy]?
+quarkus.config.deprecated.key=Deprecated configuration property ''{0}''
+
+quarkus.settings.create.run.configuration=Create &run configuration automatically
+quarkus.settings.create.run.configuration.tooltip=On (re-)import add Quarkus run configuration if none exists yet
+
+run.configuration.name=Quarkus
+run.configuration.description=Quarkus application
+run.configuration.application.module=Application module
+run.configuration.environment=Environ&ment
+run.configuration.no.module.selected=No module selected
+run.configuration.configuration.tab=Configuration
+run.configuration.profile=Run &profile
+run.configuration.group=Quarkus
+run.configuration.emulate.terminal=&Emulate Terminal
+run.configuration.arguments.label=Arguments:
+run.configuration.arguments.name=Add a&rguments
+run.configuration.resolve.workspace.artifacts=Resolve &Workspace artifacts
+run.configuration.runner.options.group=Java Options
+
+application.run.configuration.name=Quarkus Application
+application.run.configuration.emulate.terminal=Emulate terminal
+application.run.configuration.class.not.specified=No Quarkus application class is specified
+application.run.configuration.class.not.annotated=Application class must be annotated with '@QuarkusMain'
+
+quarkus.cache.line.marker.name=Cacheable operations
+quarkus.cache.element.choose.title=Choose Cacheable Operation
+quarkus.cache.element.tooltip.text=Go to cacheable operation with the same name
+quarkus.cache.presentation.type.name=Cache
+quarkus.cache.element.no.operations=No cacheable operations found
+quarkus.wizard.built.in=Quarkus (Built-in)
+
+quarkus.scheduled.tasks=Scheduled tasks
+quarkus.scheduled.method=Scheduled method
+
+quarkus.qute=Qute
+
+qute.highlighting.colors.operator.sign=Braces and Operators//Operator sign
+qute.highlighting.colors.boolean=Boolean
+qute.highlighting.colors.comment=Comment
+qute.highlighting.colors.identifier=Identifier
+qute.highlighting.colors.number=Number
+qute.highlighting.colors.secondary.keyword=Secondary keyword
+qute.highlighting.colors.string=String
+qute.highlighting.colors.tag.braces=Braces and Operators//Tag braces
+qute.highlighting.colors.tag.parentheses=Braces and Operators//Parentheses
+qute.highlighting.colors.tag.brackets=Braces and Operators//Brackets
+qute.highlighting.colors.tag.dot=Braces and Operators//Dot
+qute.highlighting.colors.tag.comma=Braces and Operators//Comma
+qute.highlighting.colors.tag.name=Tag name
+qute.highlighting.colors.background=Template background
+
+qute.live.template.each=Qute 'each' section
+qute.live.template.eval=Qute 'eval' section
+qute.live.template.for=Qute 'for' section
+qute.live.template.if=Qute 'if' section
+qute.live.template.ifelse=Qute 'if-else' section
+qute.live.template.ifelseif=Qute 'if-elseif' section
+qute.live.template.include=Qute 'include' section
+qute.live.template.insert=Qute 'insert' section
+qute.live.template.let=Qute 'let' section
+qute.live.template.set=Qute 'set' section
+qute.live.template.parameter=Qute parameter declaration
+qute.live.template.switch=Qute 'switch' section
+qute.live.template.when=Qute 'when' section
+qute.live.template.with=Qute 'with' section
+
+qute.parser.error.tag.name.expected=Tag name expected, got: {0}
+qute.parser.error.missing.tag.name=Missing tag name
+qute.parser.error.unexpected.tag=Unexpected tag `{0}`
+qute.parser.error.unexpected.tag.expected=Unexpected tag `{0}`, expecting {1}
+qute.parser.error.unexpected.token=`{0}` expected, got `{1}`
+qute.parser.error.when.recovery.error=Unexpected token. is/else/when tags expected
+qute.parser.error.switch.recovery.error=Unexpected token. case/switch tags expected
+
+qute.identifier=identifier
+qute.open.template=Navigate to Qute template
+qute.no.template.found=Qute template not found
+QsCronDocumentationTarget.cron.explanation=<p>Cron explanation: <b>{0}</b></p><p>For Cron format explanation, see <a href="https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html</a>.</p>
+
+quarkus.intention.category=Quarkus

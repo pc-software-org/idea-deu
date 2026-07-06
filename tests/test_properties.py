@@ -82,9 +82,19 @@ class PropertiesTest(unittest.TestCase):
         document = parse_properties(b"one=1\ntwo=2\n")
         self.assertEqual(render_properties(document, {"one": "eins"}), b"one=eins\ntwo=2\n")
 
-    def test_rejects_duplicate_logical_keys(self) -> None:
-        with self.assertRaisesRegex(PropertiesError, "duplicate.*same key"):
+    def test_rejects_conflicting_duplicate_logical_keys(self) -> None:
+        with self.assertRaisesRegex(PropertiesError, "conflicting duplicate.*same key"):
             parse_properties(b"same\\ key=one\nsame\\ key:two\n")
+
+    def test_accepts_identical_duplicate_keys_and_translates_every_occurrence(self) -> None:
+        # Real JetBrains bundles (JupyterPyDapBundle) repeat a key verbatim.
+        # Last-one-wins means every physical line must carry the translation.
+        document = parse_properties(b"k=Connected\nk=Connected\n")
+        self.assertEqual(dict(document.values), {"k": "Connected"})
+        self.assertEqual(
+            render_properties(document, {"k": "Verbunden"}),
+            b"k=Verbunden\nk=Verbunden\n",
+        )
 
     def test_rejects_malformed_input(self) -> None:
         cases = {

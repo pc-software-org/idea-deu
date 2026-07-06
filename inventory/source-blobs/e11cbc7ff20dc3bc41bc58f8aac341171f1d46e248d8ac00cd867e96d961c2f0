@@ -1,0 +1,75 @@
+action.AddRemoteJupyter.text=Add Jupyter Connection\u2026
+action.NewJupyterConnection.text=Jupyter Connection
+Jupyter.remote.remove.connection.confirmation=Are you sure you want to remove connection to {0}?
+Jupyter.remote.remove.multiple.files=Delete {0} Jupyter files?
+action.ReconnectToRemoteJupyter.text=Reconnect to Jupyter\u2026
+action.ReloadRemoteFileAction.text=Reload from Jupyter Server\u2026
+action.ReloadRemoteFileAction.description=Reload the latest changes from the server
+
+Jupyter.remote.reload.file.from.server.all.files.are.up.to.date=All files are up to date
+Jupyter.remote.failed.to.load.remote=Error while loading the server file
+Jupyter.remote.server.is.unreachable=Server is unreachable
+Jupyter.remote.verify.url.malformed=Malformed URL. Please provide Jupyter URL like http://my.jupyter.org:8888
+Jupyter.remote.verify.url.connection.error=Connection error
+Jupyter.remote.verify.url.wrong.response=Jupyter connection error. Error code: {0}, message: {1}
+Jupyter.remote.verify.url.unexpected.error=Unexpected error
+Jupyter.remote.verify.url.connecting.progress=Checking Jupyter Connection\u2026
+Jupyter.remote.verify.url.connecting.error.title=Jupyter Connection Error
+Jupyter.remote.refactoring.rename=Rename
+Jupyter.remote.refactoring.renaming.to=Rename ''{0}'' to:
+Jupyter.remote.refactoring.rename.notebook=Rename notebook
+Jupyter.remote.refactoring.rename.file=Rename file
+Jupyter.remote.refactoring.rename.directory=Rename directory
+Jupyter.remote.copying=Copying ''{0}'' to ''{1}''\u2026
+Jupyter.remote.copying.multiple=Copying multiple files to ''{0}''\u2026
+Jupyter.remote.unable.to.create.target.dir=Unable to create target directory ''{0}''
+Jupyter.remote.unknown.remote.file.status.copying.aborted=Unable to check if the server ''{0}'' file exists. The copying process is aborted.
+notification.group.jupyter.remote=Jupyter remote notebooks
+change.jupyter.config.dialog.confirm.message=The current session for {0} will be stopped. All variables will be lost.
+  and=all variables will be lost. \
+  Do you want to create a new Managed Server configuration and switch to it?
+change.jupyter.config.dialog.confirm.title=Jupyter Config Change
+change.jupyter.kernel.dialog.confirm.title=Jupyter Kernel Change
+change.jupyter.kernel.dialog.confirm.message=If you switch to the new {0} kernel, the current session will be stopped. \
+  All variables will be lost.
+change.jupyter.config.dialog.confirm.after.apply.message=If you switch to the new {0}, the current session for {1} will be stopped. \
+  All variables will be lost.
+change.jupyter.config.dialog.confirm.after.apply.ok=Switch Connection
+change.jupyter.config.dialog.confirm.after.apply.cancel=Keep Current
+separator.server.actions=Kernel Actions
+separator.config.actions=Jupyter Servers
+jupyter.server.node.not.loaded=Double-click to load the connection\u2026
+
+change.jupyter.kernel.dialog.choose.title=Select Jupyter Kernel
+change.jupyter.kernel.dialog.choose.label=Kernel:
+
+
+action.JupyterConnectToServerAction.text=Connect to Server
+action.JupyterConnectToServerAction.description=Connect to the Jupyter server
+action.JupyterKernelManagementAction.text=Switch Kernel ({0})
+action.JupyterKernelManagementAction.description=Switch Jupyter kernel for the notebook
+Jupyter.remote.reload.file.from.server.progress.title=Reloading files from Jupyter server\u2026
+Jupyter.remote.reload.file.from.server.progress.item.title=Reloading {0}\u2026
+Jupyter.remote.save.file.to.server.progress.text=Uploading {0} to Jupyter Server\u2026
+Jupyter.remote.download.file.from.server.progress.text=Downloading {0}\u2026
+open.file.progress.title=Opening {0}\u2026
+connection.error.not.connected=Jupyter connection is not established
+Jupyter.remote.server.connection.error=Cannot connect to Jupyter
+Jupyter.remote.reload.file.from.server.error=Cannot reload Jupyter files
+Jupyter.remote.cannot.delete.non.empty.file=Directory {0} is not empty
+Jupyter.remote.cannot.delete=Cannot delete {0}
+connection.notebook.disconnected.read.only=The notebook is disconnected. The file is read-only.
+Jupyter.server.settings.discover.local.servers.link=Discover local servers
+Jupyter.server.settings.discover.local.servers.progress.title=Discovering local Jupyter servers\u2026
+Jupyter.server.settings.discover.local.servers.no.sdk.found.message=Jupyter is not installed in the selected interpreter.<br>Please install it to discover local servers.
+Jupyter.server.settings.discover.local.servers.no.servers.found.message=No running Jupyter servers were found
+Jupyter.server.settings.discover.local.servers.no.servers.found.title=Discover Jupyter Servers
+Jupyter.server.settings.discover.local.servers.dialog.title=Discovered Servers
+Jupyter.server.settings.discover.local.servers.dialog.server.label=Server:
+connection.settings.changed=Connection settings have changed
+jupyter.url.validation.should.not.be.empty=URL should not be empty
+connection.error.cannot.auth.to.sage.maker=Cannot auth to SageMaker
+Jupyter.managed.server.sdk.is.not.selected=<Select Python Interpreter>
+action.JupyterServerChooserAction.text.no.module=Notebook is out of the project
+
+action.JupyterTryRestoreSessionAction.text=Restore Remote Session

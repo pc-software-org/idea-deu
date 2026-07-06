@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 
-_EXACT_BUILD = "253.29346.240"
+_EXACT_BUILD = "261.25134.95"
 _SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 
 

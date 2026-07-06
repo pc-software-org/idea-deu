@@ -1,0 +1,581 @@
+model.property.error.message=Cannot resolve property ''{0}''
+model.add.constructor.args.for.method.quickfix.message=Add <constructor-arg>(s) for ''{0}''
+model.add.constructor.args.for.method.quickfix.message.family.name=Add <constructor-arg>(s)
+model.add.constructor.args.for.method.quickfix.description=Generate missing 'constructor-arg' tags
+model.method.signature.parse.error.message=Could not parse signature ''{0}''
+model.method.resolve.class.error.message=Could not resolve class ''{0}''
+model.bean.not.found.error.message=Could not find bean with name ''{0}''
+model.method.choose.method=Choose Method
+
+model.bean.quickfix.message=Create new bean ''{0}''
+model.bean.quickfix.message.family.name=Create new bean
+
+model.inspection.display.name=Incorrect Spring Core XML-based application context
+model.inspection.display.bean.name.convention=Spring bean name violates conventions
+model.inspection.bean.property.value=Unassignable injection point type in XML application context
+model.inspection.bean.constructor.arg=Incorrect constructor injection in XML Spring bean
+model.inspection.bean.autowiring=Incorrect XML Spring bean autowiring
+model.inspection.validator.progress.text=Validating Spring Model\u2026
+
+model.goto.related.item.group.context=Spring Context: "{0}"
+model.goto.related.item.group.application.context=Spring Application Contexts
+model.goto.related.item.group.test.context=Spring Test Contexts
+
+scopes.inspection.display.name=Unknown <bean> scope
+
+inspection.group.code=Code
+inspection.group.xml=XML
+
+model.inspection.invalid.identifier.message=''{0}'' does not follow bean naming convention
+model.inspection.invalid.lowercase.name.message=''{0}'' should start with a lowercase letter
+
+model.inspection.bean.factory.method=Incorrectly defined method referenced in a "factory-method" attribute
+model.inspection.bean.public.factory.method=Incorrect non-public method referenced in a "factory-method" attribute
+method.must.be.static=Factory method ''{0}'' must be static
+method.must.not.be.static=Factory method ''{0}'' must not be static
+method.must.be.public=Factory method ''{0}'' should be public
+method.cannot.instantiate.bean=Factory method ''{0}'' cannot instantiate bean
+
+bean.autowiring.by.type.none=Could not autowire. No beans of ''{0}'' type found.
+bean.autowiring.by.type.no.beans=Could not autowire. No beans of ''{0}'' or ''{1}'' types found.
+bean.autowiring.by.type=Could not autowire. There is more than one bean of ''{0}'' type. Beans: {1}. Properties: ''{2}''
+bean.class.autowired.by.type=Could not autowire. There is more than one bean of ''{0}'' type.
+bean.autowiring.by.type.no.parameter.for.autowired.method= Autowired {0} without parameters
+bean.class.autowired.incorrect.qualifier.type=Could not autowire. Qualified bean must be of ''{0}'' type.
+bean.class.unknown.qualifier.bean=Cannot find bean with qualifier ''{0}''
+
+bean.bad.property.type=Property of ''{0}'' type cannot be injected by ''{1}''
+idref.cannot.be.added.in.collection=Cannot be added in a collection of ''{0}'' type
+timeout.parsing.bean=Custom bean parsing took too long
+process.unexpectedly.terminated=Process unexpectedly terminated{0}
+try.parsing.custom.beans=Try parsing custom beans
+internal.error.parsing.bean=Internal error parsing bean; output:\n{0}
+
+cannot.find.bean.constructor.with.parameters.count=No matching constructor found in class ''{0}''
+cannot.find.factory.method.with.parameters.count=No matching factory method found in class
+
+cannot.find.constructor.arg.index=Cannot find constructor with argument index {0}
+cannot.find.constructor.arg.index.in.class=Cannot find constructor with argument index {0} in class {1}
+cannot.find.factory.method.index=Cannot find factory method with argument index {0} in class {1}
+
+incorrect.constructor.arg.index.not.unique=Index must be unique
+constructor.arg.incorrect.value.type=Injected value type must correspond to constructor arg type
+
+spring.bean=Spring Bean
+spring=Spring
+
+config.display.name=Configuration
+config.no.contexts.defined=No application contexts defined
+config.detecting.contexts=Detecting application contexts\u2026
+
+spring.bean.class.tooltip.navigate.declaration=Navigate to the Spring bean declaration(s)
+spring.bean.class.tooltip.show.in.description=Select in Spring View
+navigate.to.autowired.dependencies=Navigate to the autowired dependencies
+navigate.to.by.name.autowired.dependencies=Navigate to 'byName' autowired dependencies
+autowired.dependencies.goto.related.item.group.name=Autowired Dependencies
+
+spring.bean.show.beans.candidates.title=Bean Candidates
+
+gutter.navigate.no.matching.beans=No matching beans found
+spring.bean.class.navigate.choose.class.title=Choose Bean
+spring.bean.property.tooltip.navigate.declaration=Navigate to the Spring bean property
+spring.bean.property.navigate.choose.class.title=Choose Bean Containing The Property
+spring.bean.constructor.tooltip.navigate.declaration=Navigate to the Spring bean
+spring.bean.constructor.navigate.choose.class.title=Choose Bean Containing The Constructor
+spring.bean.methods.tooltip.navigate.declaration=Navigate to the Spring bean method declarations
+spring.bean.method.tooltip.navigate.declaration=Navigate to the Spring bean {0} method declaration
+spring.bean.filter.tooltip=Start typing to filter elements
+
+config.file.not.found=File not found
+config.files.not.found=No files found
+config.file.is.not.spring=The file is not recognized as a Spring configuration
+config.unmapped.configs.popup.title=Unmapped Spring Configuration Files in {0}
+spring.bean.lookup.method.inspection=Incorrectly configured XML bean lookup-method
+spring.bean.lookup.method.incorrect.return.type=Incorrect lookup method return type
+spring.bean.lookup.method.constructor.not.allowed=Constructor is not allowed here
+spring.bean.lookup.method.return.type.mismatch=Lookup method return type does not match the ''{0}'' bean class
+spring.bean.lookup.method.bean.has.no.class=''{0}'' bean has no class
+spring.bean.lookup.method.must.be.public.or.protected=Method must be public or protected
+spring.bean.lookup.method.must.have.no.parameters=Method must have no parameters
+spring.bean.lookup.method.must.be.not.static=Static method not allowed here
+
+model.inspection.injection.value.style=Injection value in XML application context violates conventions
+model.inspection.injection.value.style.message=Usage of explicit <value> element
+model.inspection.injection.value.style.value.fix=Replace <value> element with "{0}" attribute
+model.inspection.injection.value.style.value.fix.family.name=Replace <value> element with attribute
+model.inspection.injection.value.style.ref.fix=Replace <ref> element with "{0}" attribute
+model.inspection.injection.value.style.ref.fix.family.name=Replace <ref> element with attribute
+model.inspection.injection.value.style.ref.message=Usage of explicit <ref> element
+
+spring.bean.property=Property
+spring.bean.constructor.arg=Constructor argument
+spring.bean.map.entry=Map entry
+
+model.inspection.injection.value.consistency=Inconsistent injection value in XML application context
+model.inspection.injection.value.message={0} must specify a ref or value
+spring.bean.property.value.inconsistency.ref.or.value.sub.element.must.defined={0} is only allowed to contain either "ref" attribute OR "value" attribute OR sub-element
+spring.bean.property.value.inconsistency.more.one.sub.element ={0} must not contain more than one sub-element
+spring.bean.ref.attributes.inconsistency=<ref> tag is only allowed to contain either "bean" attribute OR "local" attribute OR "parent" attribute
+spring.bean.ref.attributes.must.specify=<ref> tag must specify a bean
+spring.bean.idref.attributes.inconsistency=<idref> tag is only allowed to contain either "bean" attribute OR "local" attribute
+spring.bean.idref.attributes.must.specify=<idref> tag must specify a bean
+model.inspection.injection.value.entry.key=Map entry must specify a key
+spring.bean.property.value.inconsistency.key=Map entry is only allowed to contain either "key" attribute OR "key-ref" attribute OR <key> sub-element
+
+model.inspection.injection.value.add.ref=Add "ref" attribute
+model.inspection.injection.value.add.list=Add <list> tag
+model.inspection.injection.value.add.set=Add <set> tag
+model.inspection.injection.value.add.array=Add <array> tag
+model.inspection.injection.value.add.map=Add <map> tag
+
+
+spring.bean.abstract.bean.references.inspection=Incorrect reference to abstract bean
+spring.bean.referenced.by.abstract.bean=Abstract bean cannot be used here
+
+spring.bean.autowire.escape.inspection.name=Unnecessary autowired dependency in XML application context
+spring.bean.use.autowire=Unnecessary autowired dependency
+spring.bean.autowire.escape=Make autowired dependency explicit
+
+spring.bean.duplicated.bean.name.inspection=Duplicated bean names in XML-based application context
+spring.bean.duplicate.bean.name=Bean name duplicated
+
+spring.bean.instantiation.by.factory=Spring Bean (Instantiated By a Factory Bean)
+spring.bean.instantiation.using.factory.method=Spring Bean (Instantiated By a Static Factory Method)
+spring.generate.properties=Properties\u2026
+spring.generate.setter.dependencies=Setter Dependency\u2026
+spring.generate.constructor.dependencies=Constructor Dependency\u2026
+action.Spring.Beans.Generate.Setter.Dependency.Action.text=Spring Setter Dependency\u2026
+action.Spring.Beans.Generate.Constructor.Dependency.Action.text=Spring Constructor Dependency\u2026
+spring.bean.properties.chooser.title=Choose Properties
+spring.bean.dependencies.chooser.title=Select Bean
+spring.beans.chooser.show.context.files=Show Context Files
+spring.beans.chooser.all.context.files=All beans
+spring.beans=Produced Beans
+util.schema.inspection.name=Incorrectly configured 'util' schema beans defined in XML application context
+util.required.class.message=Class must be inheritor of ''{0}''
+
+spring.bean.instantiation.inspection=Invalid non-abstract bean instantiation
+mark.bean.as.abstract=Mark bean as abstract
+abstract.class.not.allowed=Abstract class not allowed for non-abstract beans
+interface.not.allowed=Interface not allowed for non-abstract beans
+
+spring.parent.bean.tooltip=Navigate to the child declarations
+
+spring.choose.bean.templates.dialog.title=Add {0} Beans
+spring.choose.bean.templates.dialog.beans=Beans
+
+facet.context.default.name=Spring Application Context
+
+facet.context.xml.files=XML-based configurations
+facet.context.code.files=Code-based configurations
+facet.context.properties.files=Additional properties files
+facet.context.other.files=Other files
+facet.context.autodetected.suffix= (autodetected)
+
+facet.context.new.title=New Application Context
+facet.context.edit.title=Edit Application Context ''{0}''
+facet.context.edit.name.label=&Name\:
+facet.context.edit.parent.label=&Parent context\:
+facet.context.edit.parent.none.selected=<none>
+facet.context.edit.name.validation.not.empty=Name must not be empty
+facet.context.edit.name.validation.already.exists=Context with such name already exists. If you deleted existing context with such name, you must use "Apply" first.
+facet.context.edit.add.file.choose.type=Choose Type
+
+facet.context.remove.title=Remove
+facet.context.remove.message=Do you really want to remove application context "{0}"? (No files will be deleted)
+
+config.new.file=Spring Config
+create.new.spring.configuration.file=Create new Spring configuration file
+
+introduce.bean.intention=Introduce bean
+
+parse.custom.bean.intention=Parse custom bean
+parsing.custom.bean=Running custom Spring bean handlers\u2026
+parse.custom.bean.error=Error Parsing Custom Bean
+parse.custom.bean.success=Custom Handler Has Finished Successfully
+parse.no.custom.beans=Parser produced no beans
+parse.only.infrastructure.beans=Parser produced only infrastructure beans
+parse.these.beans=Custom namespace handler produced the following bean definitions:\n{0}
+parse.these.beans.induct=Custom namespace handler produced the following bean definition:\n{0}\n\n\
+  Do you want to assume that all beans \n\
+  from namespace ''{1}'' with local name ''{2}''\n\
+  have the same class and take their id from ''{3}'' attribute?
+parse.these.beans.induct.only.this=This Bean
+parse.these.beans.induct.all.beans=All Beans
+parse.no.namespace.handler=Cannot find custom handler for namespace ''{0}''
+unparsed.custom.bean.inspection=Unparsed custom Spring beans
+unparsed.custom.bean.message=This custom Spring bean has not yet been parsed
+custom.bean.no.id=IntelliJ IDEA can't find this bean's id in a config file. Renaming will probably produce\nincorrect code. Do you want to proceed?
+custom.bean.no.id.title=Warning
+
+do.you.want.to.move.bean.to.the.top.level=Do you want to move the bean to the top level?
+move.bean.to.the.top.level=Move Bean To the Top Level
+move.bean=Move Bean
+update.schema.intention=Convert to Spring XML schema
+use.p.namespace=Convert to p-namespace
+xml.schema.will.be.updated=XML schema will be updated to spring-beans.xsd. \nDo you want to proceed?
+xml.schema.update.is.required=XML Schema Update Is Required
+
+model.qualifiers.in.class.inspection.display.name=Incorrect autowiring in Spring bean components
+required.properties.inspection=@Required Spring bean property is not injected
+required.property.not.mapped=Required property ''{0}'' is not injected
+create.missing.mappings=Create missing mappings for ''{0}''
+create.missing.mappings.family.name=Create missing mappings
+
+spring.required.property.inspection=Missing @Required property injections in the spring XML bean declaration
+required.properties.missed=Required properties missing: ''{0}''
+create.missing.properties=Create missing properties
+cannot.find.bean.qualified.by=Cannot find bean qualified with {0}
+cannot.autowire.bean.of.type=Could not autowire. Bean should be of ''{0}'' type
+required.spring.bean.type.inspection=Incorrect injected bean type
+placeholders.inspection.display.name=Unresolved placeholders configured in the Spring XML application context
+bean.property.extract.name=Extract property value to configuration file
+
+spring.incorrect.resource.type.inspection=Incorrect resource type
+SpringIncorrectResourceTypeInspection.incorrect.resource.type=Incorrect resource type
+SpringIncorrectResourceTypeInspection.expected.resource.types=Incorrect resource type. Expected types: {0}
+spring.import.resource.inspection.display.name=Unresolved file references in @ImportResource locations
+spring.property.source.inspection.display.name=Unresolved file references in @PropertySource and @TestPropertySource locations
+spring.configuration.proxy.methods.display.name=@Configuration proxyMethods usage warnings
+spring.context.configuration.inspection.display.name=Invalid @ContextConfiguration
+spring.testing.sql.inspection.display.name=Invalid @Sql and @SqlGroup configurations
+spring.transaction.inspection.display.name=Invalid 'PlatformTransactionManager' declaration in @Transactional component
+spring.transactional.method.calls.inspection.display.name=@Transactional self-invocation method calls
+spring.transactional.self.method.calls=@Transactional self-invocation (in effect, a method within the target object calling another method of the target object) does not lead to an actual transaction at runtime
+spring.lookup.inspection.display.name=Incorrectly referenced bean in @Lookup annotation of a Spring component
+spring.test.override.bean.resolve.inspection.display.name=Incorrectly referenced bean in @MockitoBean, @MockitoSpyBean and @TestBean annotations
+spring.test.override.bean.resolve.inspection.cannot.find.factory.method=Cannot find static factory method
+spring.scheduled.inspection.display.name=Incorrectly referenced bean in @Scheduled annotation
+spring.depends.on.inspection.display.name=Incorrectly referenced bean in @DependsOn annotation
+SpringContextConfigurationInspection.cannot.find.default.app.context=Cannot find default application context file {0}
+SpringContextConfigurationInspection.create.nested.configuration.class=Create nested 'ContextConfiguration' class
+action.generate.autowired.dependencies.action.text=@Autowired Dependency\u2026
+SpringAutowiringInspection.add.qualifier.fix=Add qualifier
+context.schema.inspection.name=Invalid filter definition in XML-based component scans
+ContextComponentScanInconsistencyInspection.annotation.is.expected.here=Annotation is expected here
+spring.import.resource.error.message.trailing.space=Trailing space in ''{0}''
+spring.add.bean.dependency.fix.text=Add dependency with name matching ''{0}''
+spring.add.bean.dependency.command.name=Add Dependency with Name Matching ''{0}''
+spring.add.bean.dependency.fix.family.name=Add dependency on bean
+
+spring.profile.expression.inspection=Incorrectly configured @Profile expression
+spring.profile.expression.empty=Profile expression must contain text
+spring.profile.expression.malformed=Malformed profile expression
+spring.profile.unresolved.message=Unknown profile
+
+editor.panel.profiles.tooltip=Active Profile
+editor.panel.profiles.tooltip.action.name=Change profiles\u2026
+
+SpringInactiveProfilesHighlightingPass.inactive.profile=Inactive profile
+spring.dom.component.scan.stereotypes=Choose Stereotype
+spring.dom.component.scan.stereotypes.title=Navigate to components
+ContextJavaBeanUnresolvedMethodsInspection.display.name=Unknown init/destroy method in the @Bean annotation
+ContextJavaBeanUnresolvedMethodsInspection.cannot.resolve.method=Cannot resolve method
+
+ActivateSpringProfileIntentionAction.activate.profile=Activate profile ''{0}''
+ActivateSpringProfileIntentionAction.activate.profile.family.name=Activate profile
+ActivateSpringProfileIntentionAction.deactivate.profile=Deactivate profile ''{0}''
+ActivateSpringProfileIntentionAction.deactivate.profile.family.name=Deactivate profile
+
+spring.app.context.to.navigate=Choose Application Context
+spring.app.context.navigate.tooltip=Navigate to Application Context
+
+SpringStaticMembersAutowiringInspection.display.name=Incorrect Spring component autowiring or injection on a static class member
+static.members.autowiring=Don't autowire static members
+
+gutter.choose.autowired.candidates.title=Choose Autowired Candidate
+gutter.navigate.to.autowired.candidates.title=Navigate to autowired candidates
+gutter.navigate.no.matching.autowired.candidates=No matching autowired candidates found
+process.explicitly.annotated.beans=Process explicitly annotated beans
+configuration.tab.additional.settings=Additional settings
+
+gutter.choose.bean.factory.calls.title=Choose BeanFactory.getBean(\u2026) Usages
+gutter.navigate.no.bean.factory.calls=No matching BeanFactory usages found
+gutter.navigate.to.bean.factory.calls.title=Navigate to BeanFactory.getBean(\u2026) usages
+
+multiple.context.tooltip.text=Active Context
+multiple.context.description.in.module.text=<html><body>  in module <b>{0}</b>.</body></html>
+multiple.context.description.label.text=<html><body>File is included in <b>{0} contexts</b>.</body></html>
+multiple.context.description.in.modules.label.text=<html><body>File is included in <b>{0} contexts</b> in <b>{1}</b> modules.</body></html>
+class.without.matching.constructor.for.autowiring=Class doesn't contain a matching constructor for autowiring
+multiple.autowiring.constructor=Only one constructor can have @Autowired annotation
+class.is.not.spring.bean.autowired=Autowired members must be defined in valid Spring bean (@Component|@Service|...)
+
+model.inspection.inactive.profile=Inactive profile highlighting
+spring.bean.attributes.inspection.key=Conflicting Spring bean attribute
+component.scan.setup.inspection.key=Invalid package in @ComponentScan or its meta-annotation
+custom.namespace.registration.inspection.key=Unresolved file or class reference in 'spring.handlers' or 'spring.schemas' file
+
+spring.event.publisher.choose.title=Choose Event Publisher
+spring.event.publisher.tooltip.text=Go to event publisher
+spring.event.publisher.empty.tooltip.text=No event publishers found
+
+spring.event.listener.choose.title=Choose Event Listener
+spring.event.listener.tooltip.text=Go to event listener
+spring.event.listener.empty.tooltip.text=No event listeners found
+spring.cacheable.annotations.inspection.display.name=Incorrectly configured 'caching' annotation
+spring.cacheable.names.inspection.display.name=Incorrect required cache names definition
+spring.cacheable.and.cache.put.on.the.same.method.display.name=Incorrect usage of @CachePut and @Cacheable on the same method
+spring.cacheable.method.calls.inspection.display.name=@Cacheable self-invocation method calls
+spring.cacheable.self.method.calls=@Cacheable self-invocation (in effect, a method within the target object calling another method of the target object). The cache annotation will be ignored at runtime
+
+spring.cacheable.annotations.on.interfaces=Cache* annotations defined on interfaces/interface methods
+cacheable.annotations.should.be.defined.on.public.methods=Caching annotations should be defined on public methods
+cacheable.no.cache.could.be.resolved.for.cache.operation=At least one non-empty cache name is required per cache operation.
+cacheable.should.be.defined.on.concrete.method=Spring doesn't recommend annotating interface methods with @Cache* annotation
+cacheable.and.cache.put.on.the.same.method=Spring doesn't recommend using @CachePut and @Cacheable annotate on the same method
+event.listener.method.parameters.count=Method must have maximum one parameter
+event.listener.method.visibility.nonstatic=Method annotated with @EventListener must be non-static
+
+spring.cacheable.element.choose.title=Choose Cacheable Operation
+spring.cacheable.element.tooltip.text=Go to cacheable operation with the same name
+
+SpringAutowiredFieldsWarningInspection.inspection.display.name=Non-recommended field injections
+field.injection.is.not.recommended=Field injection is not recommended
+field.injection.create.constructor.family.warning=Change field injection. Create constructor
+field.injection.add.parameter.family.warning=Change field injection. Add parameter(s) to constructor
+field.injection.create.constructor.injection=<html>Create constructor: {0}</html>
+field.injection.add.parameters=<html>Add parameter(s) to constructor: {0}</html>
+spring.testing.context.dirties.inspection.display.name=Invalid @DirtiesContext 'mode' configuration
+spring.testing.transactional.inspection.display.name=Invalid transactional lifecycle method declaration
+spring.testing.model.dirties.method.mode.error.message=Setting the method mode on an annotated test class has no meaning.  For class-level control, use classMode instead.
+spring.testing.model.dirties.class.mode.error.message=Setting the class mode on an annotated test method has no meaning. For method-level control use methodMode instead.
+spring.testing.model.dirties.hierarchy.mode.error.message='hierarchyMode' is required when the context is configured as part of the hierarchy via @ContextHierarchy
+spring.testing.transactional.wrong.number.of.arguments.error.message=Wrong number of arguments
+spring.testing.transactional.void.method.return.type.error.message=Expected method return type is 'void'
+ScheduledMethodInspection.inspection.display.name=Incorrect @Scheduled method signature
+ScheduledMethodInspection.non.void.return.type=@Scheduled methods must not return anything
+ScheduledMethodInspection.has.parameters=@Scheduled methods must not take any arguments
+method.parameters.removing.fix.family.name=Remove method parameters
+method.parameters.removing.fix.text=Change ''{0}'' to no-arg
+AsyncMethodInspection.inspection.display.name=Incorrect @Async method signature
+AsyncMethodInspection.incorrect.signature=Method annotated with @Async should return 'void' or "Future-like" type
+SpringEventListenerInspection.inspection.display.name=Incorrectly configured @EventListener methods
+# suppress inspection "UnusedProperty"
+method.return.type.make.async.family.name=Change method to return a "Future-like" value
+method.return.type.make.async.fix.text=Change method to return ''{0}''
+ImplicitSubclassInspection.display.forClass.annotated=Classes annotated with ''@{0}'' could be implicitly subclassed and must not be final
+ImplicitSubclassInspection.display.forMethod.annotated=Methods annotated with ''@{0}'' must be overridable
+ImplicitSubclassInspection.display.bean.in.configuration=@Bean-method in @Configuration must be overridable
+navigate.to.fileset.configuration=Navigate to application context configurations
+
+bean.method.called.from.configuration.without.proxy=Method annotated with @Bean is called directly in a @Configuration where proxyBeanMethods set to false. Set proxyBeanMethods to true or use dependency injection.
+bean.method.called.without.proxy=Method annotated with @Bean is called directly. Use dependency injection instead.
+
+action.DumpSpringConfiguration.text=Dump Spring Configuration
+group.Internal.Spring.text=Spring
+action.SpringChangeActiveProfiles.text=Change Active Spring Profiles\u2026
+action.Spring.Create.Context.File.text=Spring Config
+group.Spring.Beans.Generate.Action.text=Spring Bean
+action.SpringConfigurationCheckAction.text=Check Spring Configuration
+
+spring.settings.configuration.file.editor=Configuration Files Editor
+spring.settings.profiles.panel=Show &Profiles panel
+spring.settings.profiles.panel.tooltip=Allow choosing active profile(s)
+spring.settings.multiple.context.panel=Show &Multiple Contexts panel
+spring.settings.multiple.context.panel.tooltip=Allow choosing active context if a file is used in multiple contexts
+
+fileset.editor.help.label=<html>Configuration files referenced via <b>\\&lt;import .../\\&gt;</b> or <b>@Import</b> will be added implicitly.<br/>Configuration files used for testing must <em>not</em> be added to contexts.</html>
+fileset.circular.dependencies=Circular dependencies between contexts:<br/>{0}<br/>{1}
+fileset.contains.testing.configs.short={0, choice, 1#Configuration file|1<{0, number} configuration files} used for testing must <em>not</em> be added to contexts
+fileset.contains.testing.configs.full={0, choice, 1#Configuration file|1<{0, number} configuration files} used for testing must <em>not</em> be added to contexts:<br/>{1}
+spring.facet.validation.help.action=Show help
+spring.facet.validation.disable.action=Disable\u2026
+spring.facet.detection.will.be.disabled.for.whole.project=Detection will be disabled for whole project.\n\
+  Note that most Spring related features will not work if Spring facet configuration is not performed.\n\n\
+  Project Structure | Facets | Detection\n can be used to exclude specific files/folders only and to re-enable.
+spring.facet.config.detection=Spring Config Detection
+spring.facet.detection.disable.detection=Disable Detection
+spring.configuration.check=Spring configuration check
+unmapped.configuration.fix.instruction=Please configure Spring facet or use ''{0}'' to add one including all unmapped files.
+unmapped.configuration.configure.facet=Please configure Spring facet.
+unmapped.configuration.create.default.context=Create default context
+unmapped.configuration.files.count={0, choice, 1#1 file|1<{0, number} files}
+unmapped.configuration.files.found=Unmapped Spring configuration files found.
+unmapped.configuration.files.not.found=No unmapped Spring configuration files found.
+unmapped.configuration.files.short={0, choice, 1#Unmapped Spring configuration file|1<{0, number} unmapped Spring configuration files}
+unmapped.configuration.files.full={0, choice, 1#Unmapped Spring configuration file|1<{0, number} unmapped Spring configuration files}:<br/>{1}
+unmapped.configuration.is.not.available.during.index.update= ''{0}'' is not available, analyzing the project\u2026
+unmapped.configuration.open.facet.configuration=Open Facet Configuration
+unmapped.configuration.spring.configuration=Spring Configuration
+unmapped.configuration.autodetected.context.found.for=Autodetected context found for {0} .\nPlease check and setup additional manual context (if required).
+checking.spring.configuration=Checking Spring configurations in module ''{0}''
+searching.for.stereotype.usages=Searching for stereotype usages\u2026
+searching.for.implicit.usages=Searching for implicit usages\u2026
+
+spring.core.autowired.annotator.name=Autowired
+spring.core.bean.annotator.name=Bean
+spring.core.dom.annotator.name=Configuration (XML)
+spring.core.properties.annotator.name=Properties
+spring.core.test.configuration.annotator.name=Test configuration
+spring.core.cacheable.annotator.name=Cacheable operations with the same names
+spring.core.event.listener.annotator.name=Application events
+
+spring.model.actions.dump.model.gathering.spring.models=Gathering Spring Models\u2026
+spring.model.actions.dump.model.scanning.spring.models=Scanning Spring models\u2026
+spring.model.actions.dump.model.generating.json=Generating JSON\u2026
+spring.model.actions.generate.beans=Create Spring Bean
+custom.namespace.quick.fixes.family.name=Create custom namespace bean
+custom.namespace.quick.fixes.create.custom.namespace.bean=Create custom namespace bean ({0} variants)\u2026
+custom.namespace.quick.fixes.create.custom.namespace.bean.with.id=Create Custom Namespace Bean {0}
+custom.namespace.quick.fixes.create.name=Create {0}
+custom.namespace.quick.fixes.popup.title=Create Custom Namespace Bean
+
+use.existing.quick.fixes.use.existing.bean.family.name=Use existing bean
+use.existing.quick.fixes.use.existing.bean.from.context=Use existing bean from context ''{0}''\u2026
+use.existing.quick.fixes.choose.fix.for=Choose Fix For ''{0}''
+use.existing.quick.fixes.add.dependency.to.context=Add dependency to context ''{0}''
+use.existing.quick.fixes.add.spring.xml.to.fileset.action=Add ''{0}'' to context ''{1}''
+use.existing.quick.fixes.add.import.action=Add <import> for ''{0}''
+use.existing.quick.fixes.open.spring.facet.settings=Open Spring facet settings\u2026
+
+duplicated.bean.name.inspection.name.view.duplicates=View duplicates
+duplicated.bean.quick.fix.popup.title=View Duplicates
+duplicated.bean.quick.fix.description=Navigate to duplicates
+UnparsedCustomBeanInspection.unsupported.tag=Unsupported tag ''{0}'' for namespace ''{1}'', please file issue (Help|{2})
+change.active.profile.dialog.spring.profiles=Change Active Spring Profiles
+change.active.profile.dialog.module=Module ''{0}''
+change.active.profile.dialog.context=Context ''{0}''
+SpringUpdateSchemaIntention.spring.schema.update=Spring Schema Update
+SpringUpdateSchemaIntention.schema.update.failed.for.invalid.file=Schema update failed for invalid file {0}
+reference.injector.spring.resource.path=Spring Resource Path
+reference.injector.spring.bean.name=Spring Bean Name
+reference.injector.spring.placeholder=Spring Placeholder
+SpringSpiRegistrationAnnotator.choose.registration=Choose Registration
+SpringSpiRegistrationAnnotator.tooltip=Navigate to registration in 'spring.factories'
+action.Spring.Beans.View.Configuration.Implicit.text=Show Implicit Beans
+action.Spring.Beans.View.Configuration.Infrastructure.text=Show XML Infrastructure Beans
+
+application.context.configuration=Application context configuration
+ChangeActiveProfileDialogUi.radio.button.project=Project
+ChangeActiveProfileDialogUi.radio.button.module=Module
+ChangeActiveProfileDialogUi.radio.button.context=Context
+ChangeActiveProfileDialogUi.radio.button.comment=Comma-separated list of profiles
+ChangeActiveProfileDialogUi.radio.button.profiles=Profiles:
+ChangeActiveProfileDialogUi.radio.button.scope=Scope:
+
+SpringBeanMoveHandler.no.other.files.found=No other Spring files found
+SpringBeanMoveHandler.choose.file=Choose File
+
+message.navigation.available.during.indexing=Navigation is not available, analyzing the project\u2026
+
+dependency.node.in.module.tail=(in Module {0})
+
+spring.bean.already.exists=Spring Bean with name ''{0}'' already exists in {1}
+
+spring.intention.category=Spring
+spring.factories.file.type=Spring Factories
+spring.aliases=Aliases
+spring.profile=Profile
+spring.scope=Scope
+
+spring.scheduled.tasks=Scheduled tasks
+spring.scheduled.method=Trigger the @Scheduled method
+notification.group.spring.beans=Spring custom bean parsing failed
+notification.group.spring.configuration=Spring configuration issues detected
+spring.settings.smartCompletionAvailability=Smart beans completion
+
+action.Spring.Events.Generate.Listener.text=Event Listener\u2026
+GenerateEventListenerMethodAction.command.title=Generate Event Listener Method
+GenerateEventListenerMethodAction.popup.title=Select Event
+GenerateEventListenerMethodAction.popup.project.events=Project
+GenerateEventListenerMethodAction.popup.context.events=Context
+GenerateEventListenerMethodAction.popup.lifecycle.events=Lifecycle
+GenerateEventListenerMethodAction.popup.other.events=Other
+GenerateEventListenerMethodAction.search.events.progress.title=Searching events\u2026
+
+spring.settings.configuration.completion=Completion
+
+checkbox.remember.my.choice=Remember my choice
+popup.title.select.injection.type=Select Injection Type
+popup.title.select.prototypeInjection.type=Select Prototype Injection Type
+
+spring.injection.autowiring.code.style=Autowiring Code Style
+spring.injection.default.beans.inject.strategy=Default bean injector strategy:
+spring.injection.injectToBeanMethodSignature=Use method parameter injection for @Bean methods
+spring.injection.variants.qualifier={0}
+spring.injection.variants.primary=primary
+spring.injection.variants.collection=collection
+
+AutowireBeanGenerateAction.search.beans.progress.title=Searching beans\u2026
+AutowireBeanGenerateAction.popup.beans.title=Autowire Bean
+
+injection.lookup.defaultMethodCommentText=This method will be overridden by Spring and return a new instance of {0}
+SpringSpiRegistrationAnnotator.spring.factories.registration=spring.factories registration
+
+action.Spring.Beans.Generate.Autowiring.Action.text=Autowire Bean\u2026
+action.Spring.Beans.Generate.Autowiring.SearchInLibraries.Action.text=Show From Libraries
+action.Spring.Beans.Generate.Autowiring.ShowProjectBeans.Action.text=Show Project Beans
+action.Spring.Beans.Generate.Autowiring.ShowRepositoryBeans.Action.text=Show Repositories
+action.Spring.Beans.Generate.Autowiring.ShowServices.Action.text=Show Services
+action.Spring.Beans.Generate.Autowiring.ShowPackagesAction.Action.text=Show Packages
+action.Spring.Beans.Generate.Autowiring.ShowBeanImplAction.Action.text=Show Bean Implementation Class
+action.Spring.Beans.Generate.Autowiring.ViewSuperClassesAction.Action.text=Group By Base Classes
+action.Spring.Beans.Generate.Autowiring.UseGroupsAction.Action.text=Use Groups
+action.Spring.Beans.Generate.Autowiring.Filter.Separator.text=Filter
+action.Spring.Beans.Generate.Autowiring.View.Separator.text=View
+
+spring.injection.group.project=Project
+spring.injection.group.service=Service
+spring.injection.group.repository=Repository
+spring.injection.group.libraries=Libraries
+spring.injection.variants.default=default
+
+logical.spring.bean.autowired.in=Autowired In
+logical.spring.bean.autowires=Autowires
+logical.spring.bean.requires=Requires
+logical.spring.bean.implementations=Implementations
+logical.spring.service.methods=Methods
+logical.spring.configuration.imports=Imports
+logical.spring.configuration.import.resources=Imported Resources
+logical.spring.scanned.components=Scanned Components
+logical.spring.event.listeners=Listeners
+logical.spring.event.publishers=Publishers
+
+spring.template.context.type=Spring
+
+live.template.component.description=Spring '@Component' template
+live.template.configuration.description=Spring '@Configuration' template
+live.template.service.description=Spring '@Service' template
+live.template.bean.description=Spring '@Bean' template
+group.spring.config=Config
+group.spring.components=Components
+action.Spring.Create.Component.Java.text=Spring Component (Java)
+action.Spring.Create.Component.Java.description=Create a new Java Spring Component
+action.Spring.Create.Component.Kotlin.text=Spring Component (Kotlin)
+action.Spring.Create.Component.Kotlin.description=Create a new Kotlin Spring Component
+action.Spring.Create.Component.dialog.title=New Spring Component
+progress.creating.component=Creating Spring Component {0}
+spring.component.template.component=Component
+spring.component.template.service=Service
+spring.component.template.configuration=Configuration
+spring.component.template.application=Application
+spring.component.template.configuration.properties=Configuration Properties
+create.component.action.this.already.exists=File {0} already exists
+action.Spring.Create.Component.Generate.text=Spring Component\u2026
+action.Spring.Create.Component.Generate.description=Create a new Spring Component
+spring.component.template.boot.test=Spring Boot Test
+spring.component.template.bean=Bean
+create.component.fix.text=Create ''{0}'' component\u2026
+create.component.rename.reference=Rename Class Reference
+spring.component.container.current.file=current file
+
+spring.application.auto.configuration=Auto Configuration
+spring.stereotype.service=Service
+spring.stereotype.configuration=Configuration
+spring.stereotype.component=Component
+spring.stereotype.bean=Bean
+
+spring.core.testing.inject.annotator.name=Testing beans
+spring.core.testing.annotator.navigate.to.overridden=Navigate to overridden beans
+spring.create.bean.dependency.fix.text=Search and autowire a Spring bean
+spring.create.bean.dependency.fix.family.name=Create a new bean
+spring.configurable.create.bean.tab.title=To accept the suggestion, press Tab.
+spring.no.matching.beans.title=No Matching Beans Found
+spring.create.new.bean.prompt=Do you want to create a new one?
+spring.search.matching.beans.title=Searching for Matching Beans\u2026
+spring.component.container.custom.package=Custom Package\u2026
+spring.component.container.custom.package.dialog.title=Select Source Root and Package
+spring.component.container.custom.package.dialog.source.root=Source root:
+spring.component.container.custom.package.dialog.package=Package:
+spring.component.container.custom.package.dialog.select.package=Choose Package

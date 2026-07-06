@@ -1,0 +1,20 @@
+jpa.kotlin.immutable.collection.like.property.inspection.display.name=Immutable collection-like property
+jpa.kotlin.immutable.collection.like.property.inspection.problem.descriptor=Properties annotated with <code>@{0}</code> should have a mutable collection-like type
+jpa.kotlin.immutable.not.nullable.property.inspection.display.name=Immutable not-nullable JPA property
+jpa.kotlin.immutable.not.nullable.property.inspection.problem.descriptor=Properties annotated with <code>@{0}</code> should be mutable
+
+jpa.kotlin.no.kotlin.jpa.compiler.plugin.inspection.problem.descriptor=Enable Kotlin JPA compiler plugin
+jpa.kotlin.no.kotlin.jpa.compiler.plugin.inspection.problem.display.name=Add Kotlin JPA compiler plugin to module build
+jpa.kotlin.no.kotlin.jpa.compiler.plugin.inspection.problem.quick.fix=Add Kotlin JPA compiler plugin
+
+jpa.kotlin.redundant.default.constructor.kotlin.jpa.compiler.plugin.inspection.problem.descriptor=Remove redundant default constructor for JPA entity
+jpa.kotlin.redundant.default.constructor.kotlin.jpa.compiler.plugin.inspection.problem.display.name=Redundant default constructor
+jpa.kotlin.redundant.default.constructor.kotlin.jpa.compiler.plugin.inspection.problem.quick.fix.0=Remove redundant default constructor{0,choice,0#|1# and add Kotlin JPA compiler plugin}
+
+jpa.kotlin.jpa.entity.with.val.attributes.display.name=JPA entity with val attributes
+jpa.kotlin.jpa.entity.with.val.attributes.problem.descriptor='val' properties in JPA entities are not truly immutable \u2014 they will be modified by Jakarta Persistence provider via reflection.
+jpa.kotlin.jpa.entity.with.val.attributes.quickfix.replace.val.with.var=Convert 'val' properties to 'var'
+jpa.kotlin.data.class.entity.without.equals.hashcode.to.string.problem.descriptor=Data classes conflict with JPA entity requirements. Their immutability and generated equality methods cause issues with field updates, identity checks, and lazy loading.
+jpa.kotlin.data.class.entity.without.equals.hashcode.to.string.display.name=Missing 'equals', 'hashCode' and 'toString' in data class entity
+jpa.kotlin.data.class.entity.without.equals.hashcode.to.string.quickfix.remove.data.modifier=Remove 'data' modifier
+jpa.kotlin.data.class.entity.without.equals.hashcode.to.string.quickfix.generate.missing.functions=Generate overrides for {0}

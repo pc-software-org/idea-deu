@@ -1,5 +1,0 @@
-<html>
-<body>
-Replaces a CSS color value (#-hex, <code>rgb()</code>, or <code>hsl()</code>) with an equivalent <code>gray()</code> function if possible.
-</body>
-</html>

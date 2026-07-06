@@ -1,0 +1,35 @@
+ui.security.analysis.panel.display.name=Dataflow-powered security analysis for Java and Kotlin
+ui.security.analysis.installed.title=Dataflow-powered security analysis plugin installed
+ui.security.analysis.panel.text=<html><body>\
+  <p><b>Detect vulnerabilities in your code, such as:</b></p> \
+  <ul style="margin-top: 10; margin-bottom: 0;"> \
+    <li style="margin-bottom: 7;">Cross-Site Scripting (XSS)</li> \
+    <li style="margin-bottom: 7;">Command Injection</li> \
+    <li style="margin-bottom: 7;">SQL Injection</li> \
+    <li style="margin-bottom: 7;">Path Traversal</li> \
+  </ul></body></html>
+
+ui.security.analysis.install.notificationGroup=Install security analysis plugin
+ui.security.analysis.install.success.notification.title=Restart required
+ui.security.analysis.install.success.notification.message=The plugin has been installed. Please restart the IDE for changes to take effect.
+ui.security.analysis.enable.success.notification.message=The plugin has been enabled. Please restart the IDE for changes to take effect.
+ui.security.analysis.install.failure.title=The Plugin Was Not Installed
+ui.security.analysis.download.failure.message=There Is No Compatible Security Analysis Plugin Available to Install.
+ui.security.analysis.install.failure.message=An exception occurred during the installation of the plugin.
+ui.security.analysis.install.progress.message=Downloading\u2026
+ui.security.analysis.install.restart.required=Restart Required
+ui.security.analysis.documentation.plugin.url=https://www.jetbrains.com/help/qodana/taint-analysis.html
+ui.security.analysis.documentation.link.label=Learn more
+
+group.SecurityAnalysis.AnalysisWindowGroup.text=Security Analysis
+group.SecurityAnalysis.AnalysisWindowGroup.description=Security analysis
+action.SecurityAnalysis.InstallPluginAction.text=Install Plugin
+action.SecurityAnalysis.EnablePluginAction.text=Enable Plugin
+action.SecurityAnalysis.ShowDemoAction.text=Show Analysis Demo
+action.ShowSecurityAnalysisDemoAction.indicator.text=Show analysis demo
+action.SecurityAnalysis.RunAnalysisAction.text=Run Taint Analysis
+action.SecurityAnalysis.RunAnalysisAction.jdk.not.configured.text=Configure project JDK
+action.SecurityAnalysis.RunAnalysisAction.inspection.disabled.text=Enable Taint Analysis inspection
+action.SecurityAnalysis.RunAnnotatorAction.text=Highlight Taint Configuration
+ui.security.analysis.taint.analysis.inspection.short.name=JvmTaintAnalysis
+ui.security.analysis.taint.annotator.inspection.short.name=TaintConfigAnnotator

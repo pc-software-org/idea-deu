@@ -1,0 +1,37 @@
+action.ml.inline.completion.ClearCompletionCache.text=Clear Completion Cache
+action.ml.llm.ClearCompletionAvailability.text=Clear Availability State for Cloud Completion
+action.ml.inline.completion.DumpDiagnosticsAction.text=Collect AI Completion Logs
+
+cloud.completion.name={0} Code Completion
+
+cloud.completion.configurable.name={0} Completion
+cloud.completion.enabled.comment=Cloud completion models powered by {0}. <a>Settings</a>
+
+cloud.completion.kit.type.language.label=Languages:
+cloud.completion.kit.type.feature.label=Features:
+
+cloud.completion.comments.enabled.checkbox=Enable suggestions in Code Comments using cloud models
+
+# Universal Completion
+cloud.completion.universal.completion.checkbox=All other
+cloud.completion.universal.completion.checkbox.comment=Shows suggestions in files of any other type, not shown in the list
+cloud.completion.universal.completion.exclude.files.label=Exclude files types
+cloud.completion.universal.completion.exclude.files.example.text=Example: ext1, ext2
+cloud.completion.universal.completion.exclude.files.comment=Extensions of files to be excluded from code completion, comma-separated
+
+# Completion policy
+cloud.completion.policy.label=Completion policy:
+cloud.completion.policy.comment=Balance the number of suggestions and how strictly errors are filtered
+cloud.completion.policy.creative.name=Creative
+cloud.completion.policy.balanced.name=Balanced
+cloud.completion.policy.focused.name=Focused
+
+# Settings panel
+settings.checkbox.enable.inline.completion.feature=Enable cloud completion suggestions
+settings.checkbox.enable.completion.indicator.feature=Enable code completion indicator
+settings.checkbox.enable.completion.indicator.description=When enabled, the caret will be highlighted during code completion
+
+# Deprecated
+completion.cloud.tooltip.comment=Cloud Completion powered by {0}
+
+cloud.completion.activation.link=<a>Go to activation</a>
