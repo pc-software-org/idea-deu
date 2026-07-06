@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 75 |
+| open | 0 |
 | translated | 353 |
-| technically_reviewed | 71714 |
+| technically_reviewed | 71789 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -35,27 +35,26 @@
 
 ## Findings and collisions
 
-- Blocking findings: 464
-- Warning findings: 333
+- Blocking findings: 375
+- Warning findings: 334
 - Collisions: 2 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| empty_target | 68 |
-| length_ratio | 333 |
-| markup_structure_changed | 140 |
+| length_ratio | 334 |
+| markup_structure_changed | 132 |
 | message_format_invalid | 9 |
-| placeholder_mismatch | 247 |
+| placeholder_mismatch | 234 |
 
 ## Workflow
 
-- Last completed batch: 28
+- Last completed batch: 29
 - Current batch: none
 - Stale units: 0
-- Workflow state: `translate`
+- Workflow state: `validate`
 - Generated: present=False, valid=False (`generated/plugin`)
 - Package: present=False, valid=False, sha256=`unavailable`, size=unavailable (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu validate`
