@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 2075 |
+| open | 1875 |
 | translated | 331 |
-| technically_reviewed | 69736 |
+| technically_reviewed | 69936 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -49,7 +49,7 @@
 
 ## Workflow
 
-- Last completed batch: 18
+- Last completed batch: 19
 - Current batch: none
 - Stale units: 0
 - Workflow state: `translate`
