@@ -11,16 +11,36 @@ translatable resource in the nested IDE/plugin JARs, stores source and
 translation state as deterministic JSONL, validates every translation, and
 packages a byte-deterministic plugin ZIP.
 
+## Versions and framework conditions
+
+| Component | Value |
+|---|---|
+| Target IDE | IntelliJ IDEA **Ultimate** (`IU`) |
+| Target version | **2026.1.3**, build **261.25134.95** |
+| Declared compatibility | `since-build = 261`, `until-build = 261.*` (whole 2026.1 line) |
+| Pack version | 2026.1.3 |
+| Locale | `de` (German) |
+| Build toolchain | **Python 3.12+**, standard library only (no third-party deps) |
+| Source archive | `idea-2026.1.3.win.zip`, SHA-256 `71b0e287…f80026` (git-ignored build input) |
+| Plugin Verifier (optional) | JetBrains `verifier-cli` 1.408, any JDK 17+ (verified with JDK 25) |
+
+The pack is built from exactly build 261.25134.95 but declares compatibility
+with the whole 2026.1 line, so it also loads on 2026.1.x patch releases.
+Verified `Compatible` by the JetBrains Plugin Verifier.
+
 ## Prerequisites
 
-- Python 3.12+ (standard library only; no third-party runtime dependencies).
-- The exact source archive `idea-2026.1.3.win.zip` placed in the repository
-  root. It is a build input, not repository content (git-ignored). Verify it:
+- **Python 3.12+** (standard library only; no third-party runtime dependencies).
+- For a full re-scan / re-translation only: the exact source archive
+  `idea-2026.1.3.win.zip` in the repository root. Verify it:
   ```
   shasum -a 256 idea-2026.1.3.win.zip
   # 71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e
   ```
-- JDK 21 only if you want to run the optional Gradle Plugin Verifier (below).
+  Building the ZIP does **not** need the archive — the committed
+  `inventory/source-blobs/` hold every source byte, so the pack (and CI) builds
+  from repository state alone.
+- JDK 17+ only if you want to run the optional JetBrains Plugin Verifier.
 
 ## Repository layout
 
@@ -39,17 +59,27 @@ packages a byte-deterministic plugin ZIP.
 
 ## Build the pack
 
+Build the ZIP from repository state (no source archive needed — this is what CI
+does):
+
 ```bash
-python3 -m scripts.idea_deu validate-source   # verify the archive matches config
-python3 -m scripts.idea_deu scan               # inventory + carry over translations
-python3 -m scripts.idea_deu validate           # revalidate the whole corpus
 python3 -m scripts.idea_deu generate           # write generated/plugin/
 python3 -m scripts.idea_deu package            # write dist/idea-deu.zip
-shasum -a 256 dist/idea-deu.zip                 # matches dist/idea-deu.zip.sha256
+shasum -a 256 dist/idea-deu.zip                 # 69a19bff…430d5
 ```
 
 The build is deterministic: repeating `generate` + `package` produces a
 byte-identical `dist/idea-deu.zip` (fixed entry order, fixed timestamps).
+
+### Full re-scan (only to retarget or refresh from the distribution)
+
+Requires the source archive in the repository root:
+
+```bash
+python3 -m scripts.idea_deu validate-source    # verify the archive matches config
+python3 -m scripts.idea_deu scan               # re-inventory + carry over translations
+python3 -m scripts.idea_deu validate           # revalidate the whole corpus
+```
 
 ## Status and continuation
 

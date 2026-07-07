@@ -1,0 +1,90 @@
+name: build
+
+on:
+  push:
+    branches: [main, "feature/**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # needed by the release job to attach the artifact
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -q
+
+      - name: Static checks
+        run: |
+          python -m compileall -q scripts tests
+          git diff --check
+
+      - name: Build language pack (from committed state, no source archive)
+        run: |
+          python -m scripts.idea_deu generate
+          python -m scripts.idea_deu package
+          shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
+
+      - name: Verify deterministic rebuild
+        run: |
+          first=$(shasum -a 256 dist/idea-deu.zip | cut -d' ' -f1)
+          python -m scripts.idea_deu generate
+          python -m scripts.idea_deu package
+          second=$(shasum -a 256 dist/idea-deu.zip | cut -d' ' -f1)
+          echo "first=$first"; echo "second=$second"
+          test "$first" = "$second"
+
+      - name: Verify descriptor matches config
+        run: |
+          python - <<'PY'
+          import io, json, zipfile
+          cfg = json.load(open("config/product.json"))
+          outer = zipfile.ZipFile("dist/idea-deu.zip")
+          jar = zipfile.ZipFile(io.BytesIO(outer.read("idea-deu/lib/idea-deu.jar")))
+          xml = jar.read("META-INF/plugin.xml").decode()
+          assert f'since-build="{cfg["since_build"]}"' in xml, xml
+          assert f'until-build="{cfg["until_build"]}"' in xml, xml
+          assert f"<version>{cfg['plugin_version']}</version>" in xml, xml
+          assert "<languageBundle" in xml and 'locale="de"' in xml, xml
+          print("descriptor OK")
+          PY
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: idea-deu-${{ github.sha }}
+          path: |
+            dist/idea-deu.zip
+            dist/idea-deu.zip.sha256
+          if-no-files-found: error
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build
+        run: |
+          python -m scripts.idea_deu generate
+          python -m scripts.idea_deu package
+          shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/idea-deu.zip
+            dist/idea-deu.zip.sha256
+          generate_release_notes: true
