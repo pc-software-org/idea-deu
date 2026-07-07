@@ -21,9 +21,11 @@ _TIME=(1980,1,1,0,0,0)
 def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
                          descriptor: Path, destination: Path, *,
+                         version: str, since_build: str, until_build: str,
                          dedupe_identical: bool = False, trusted_root: Path | None = None) -> Path:
     payload = plugin_package_bytes(result, trusted_inventory, trusted_units, trusted_provider,
-                                   descriptor, dedupe_identical=dedupe_identical)
+                                   descriptor, version=version, since_build=since_build,
+                                   until_build=until_build, dedupe_identical=dedupe_identical)
     destination = Path(destination)
     try:
         atomic_write_bytes(destination, payload, trusted_root=trusted_root)
@@ -34,7 +36,8 @@ def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
 
 def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
-                         descriptor: Path, *, dedupe_identical: bool = False) -> bytes:
+                         descriptor: Path, *, version: str, since_build: str, until_build: str,
+                         dedupe_identical: bool = False) -> bytes:
     """Independently recompute the exact deterministic package bytes."""
     if not isinstance(result, GenerationResult):
         raise PackageError("GenerationResult required")
@@ -61,19 +64,27 @@ def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
             result.sources != trusted_source_evidence or
             result.dedupe_identical is not dedupe_identical or supplied != entries):
         raise PackageError("result evidence does not match trusted canonical recomputation")
-    try: descriptor_bytes = Path(descriptor).read_bytes()
+    try: template_bytes = Path(descriptor).read_bytes()
     except OSError as exc: raise PackageError(f"cannot read plugin descriptor: {exc}") from exc
-    _validate_descriptor(descriptor_bytes)
+    descriptor_bytes = render_descriptor(template_bytes, version=version,
+                                         since_build=since_build, until_build=until_build)
+    _validate_descriptor(descriptor_bytes, version=version,
+                         since_build=since_build, until_build=until_build)
     entries["META-INF/plugin.xml"] = descriptor_bytes
     jar = _zip_bytes(entries)
     payload = {"idea-deu/lib/idea-deu.jar": jar}
     return _zip_bytes(payload)
 
 
-def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path) -> bool:
+def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path, *,
+                          version: str, since_build: str, until_build: str) -> bool:
     """Strictly verify an existing deterministic outer and inner plugin ZIP."""
     try:
-        descriptor_bytes = Path(descriptor).read_bytes(); _validate_descriptor(descriptor_bytes)
+        template_bytes = Path(descriptor).read_bytes()
+        descriptor_bytes = render_descriptor(template_bytes, version=version,
+                                             since_build=since_build, until_build=until_build)
+        _validate_descriptor(descriptor_bytes, version=version,
+                             since_build=since_build, until_build=until_build)
         expected = dict(result.files); expected["META-INF/plugin.xml"] = descriptor_bytes
         canonical_inner = _zip_bytes(expected)
         with Path(path).open("rb") as outer_file, zipfile.ZipFile(outer_file) as outer:
@@ -157,16 +168,38 @@ def _raw_deflate(data: bytes) -> bytes:
     compressor = zlib.compressobj(9, zlib.DEFLATED, -15)
     return compressor.compress(data) + compressor.flush()
 
-def _validate_descriptor(data: bytes) -> None:
+_DESCRIPTION = ("German (Deutsch) language pack for IntelliJ IDEA 2026.1. Translates the IDE "
+                "user interface, inspection and intention descriptions, tips, and file and "
+                "postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.")
+
+
+def render_descriptor(template: bytes, *, version: str, since_build: str, until_build: str) -> bytes:
+    """Fill the plugin.xml template's version/compatibility placeholders from config.
+
+    config/product.json is the single source of truth for the plugin version and
+    the since/until-build range; a build never derives them from a git tag."""
+    text = template.decode("utf-8")
+    for token, value in (
+        ("@PLUGIN_VERSION@", version),
+        ("@SINCE_BUILD@", since_build),
+        ("@UNTIL_BUILD@", until_build),
+    ):
+        if token not in text:
+            raise PackageError(f"plugin descriptor template missing placeholder {token}")
+        text = text.replace(token, value)
+    return text.encode("utf-8")
+
+
+def _validate_descriptor(data: bytes, *, version: str, since_build: str, until_build: str) -> None:
     try: root=ElementTree.fromstring(data)
     except ElementTree.ParseError as exc: raise PackageError(f"invalid plugin XML: {exc}") from exc
     expected = (
         ("id", {}, "org.pc-software.idea-deu", ()),
         ("name", {}, "German Language Pack", ()),
-        ("description", {}, "German (Deutsch) language pack for IntelliJ IDEA 2026.1. Translates the IDE user interface, inspection and intention descriptions, tips, and file and postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.", ()),
-        ("version", {}, "2026.1.3", ()),
+        ("description", {}, _DESCRIPTION, ()),
+        ("version", {}, version, ()),
         ("vendor", {}, "PC-Software", ()),
-        ("idea-version", {"since-build": "261", "until-build": "261.*"}, "", ()),
+        ("idea-version", {"since-build": since_build, "until-build": until_build}, "", ()),
         ("depends", {}, "com.intellij.modules.platform", ()),
         ("extensions", {"defaultExtensionNs": "com.intellij"}, "", (
             ("languageBundle", {"locale": "de"}, "", ()),

@@ -13,13 +13,33 @@ The plugin is registered on JetBrains Marketplace as
 Without the secret the release job still builds and publishes a GitHub Release;
 it just logs a notice and skips the Marketplace upload.
 
+## Versioning
+
+The plugin version lives **only** in `config/product.json` → `plugin_version`
+(`plugin.xml` is a template filled from it at build time). Scheme:
+`<ide-version>.<patch>` — a translation-only fix bumps the 4th segment.
+
+| Change | plugin_version |
+|---|---|
+| First release for 2026.1.3 | `2026.1.3.1` |
+| Translation fix (same IDE) | `2026.1.3.2`, `2026.1.3.3`, … |
+| Re-scan onto a new IDE (e.g. 2026.2) | `2026.2.0.1` |
+
+A local build (`generate`/`package`) reads the version from config; **no git
+tag is involved**, so offline builds are unaffected. The tag is only a release
+marker, and CI fails the release if the tag does not equal `plugin_version`.
+
 ## Release a new version
 
 ```bash
-# build.yml runs on the tag: builds, verifies, creates a GitHub Release, and
-# uploads the ZIP to Marketplace (channel: stable).
-git tag v2026.1.3
-git push origin v2026.1.3
+# 1. bump the version (translation fix example)
+#    edit config/product.json: "plugin_version": "2026.1.3.2"
+git commit -am "release 2026.1.3.2"
+
+# 2. tag it v<plugin_version> and push. build.yml verifies tag == plugin_version,
+#    builds, creates a GitHub Release, and uploads to Marketplace (channel stable).
+git tag v2026.1.3.2
+git push origin main v2026.1.3.2
 ```
 
 The upload uses the documented Marketplace API:

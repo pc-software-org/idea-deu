@@ -41,7 +41,7 @@ Vorschläge oder Probleme sind gerne gesehen. Bitte wenn möglich über github I
 | Target IDE | IntelliJ IDEA **Ultimate** (`IU`) |
 | Target version | **2026.1.3**, build **261.25134.95** |
 | Declared compatibility | `since-build = 261`, `until-build = 261.*` (whole 2026.1 line) |
-| Pack version | 2026.1.3 |
+| Plugin version | 2026.1.3.1 — scheme `<ide-version>.<patch>`; the 4th segment bumps for translation-only fixes on the same IDE |
 | Locale | `de` (German) |
 | Build toolchain | **Python 3.12+**, standard library only (no third-party deps) |
 | Source archive | `idea-2026.1.3.win.zip`, SHA-256 `71b0e287…f80026` (git-ignored build input) |
@@ -88,11 +88,24 @@ does):
 ```bash
 python3 -m scripts.idea_deu generate           # write generated/plugin/
 python3 -m scripts.idea_deu package            # write dist/idea-deu.zip
-shasum -a 256 dist/idea-deu.zip                 # 69a19bff…430d5
+shasum -a 256 dist/idea-deu.zip                 # compare to dist/idea-deu.zip.sha256
 ```
 
 The build is deterministic: repeating `generate` + `package` produces a
 byte-identical `dist/idea-deu.zip` (fixed entry order, fixed timestamps).
+
+### Versioning and releases
+
+`config/product.json` → `plugin_version` is the **single source of truth** for
+the plugin version. `plugin/META-INF/plugin.xml` is a template whose
+`@PLUGIN_VERSION@`/`@SINCE_BUILD@`/`@UNTIL_BUILD@` placeholders are filled from
+config at build time. A **local build takes the version from config only** —
+there is no git tag involved, so `generate`/`package` work the same offline.
+
+To cut a release, bump `plugin_version` (a translation-only fix bumps the 4th
+segment, e.g. `2026.1.3.1` → `2026.1.3.2`), commit, then tag `v<plugin_version>`
+and push. CI checks that the tag equals `plugin_version`, builds, publishes a
+GitHub release, and uploads to the Marketplace. See `docs/publishing.md`.
 
 ### Full re-scan (only to retarget or refresh from the distribution)
 

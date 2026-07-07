@@ -84,6 +84,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Verify tag matches plugin version
+        run: |
+          # The plugin version is the single source of truth in config; the tag
+          # only marks the release and must agree with it (vX -> plugin_version X).
+          tag="${GITHUB_REF_NAME#v}"
+          cfg="$(python -c "import json;print(json.load(open('config/product.json'))['plugin_version'])")"
+          echo "tag=$tag  config.plugin_version=$cfg"
+          if [ "$tag" != "$cfg" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match plugin_version $cfg in config/product.json"
+            exit 1
+          fi
       - name: Build
         run: |
           python -m scripts.idea_deu generate

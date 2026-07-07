@@ -27,6 +27,10 @@ class PackageTests(unittest.TestCase):
         self.result=generate_resources(self.inventory,self.units,self.provider,self.resources)
     def tearDown(self): self.tmp.cleanup()
 
+    VERSION = "2026.1.3.1"
+    SINCE = "261"
+    UNTIL = "261.*"
+
     def build(self,result,descriptor,destination,*,inventory=None,units=None,provider=None):
         return build_plugin_package(
             result,
@@ -35,10 +39,29 @@ class PackageTests(unittest.TestCase):
             self.provider if provider is None else provider,
             descriptor,
             destination,
+            version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL,
         )
 
+    def verify(self, path, result=None, descriptor=None):
+        return verify_plugin_package(
+            path, self.result if result is None else result,
+            self.descriptor if descriptor is None else descriptor,
+            version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL,
+        )
+
+    def rendered_descriptor_root(self):
+        from scripts.idea_deu.package import render_descriptor
+        data = render_descriptor(self.descriptor.read_bytes(),
+                                 version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL)
+        return ElementTree.fromstring(data)
+
+    def template_root(self):
+        # The raw template (placeholders intact) so a mutated copy still renders
+        # and is then rejected by descriptor structure validation, not by render.
+        return ElementTree.fromstring(self.descriptor.read_bytes())
+
     def test_descriptor_has_exact_identity_compatibility_and_language_bundle(self):
-        root = ElementTree.parse(self.descriptor).getroot()
+        root = self.rendered_descriptor_root()
         self.assertEqual("org.pc-software.idea-deu", root.findtext("id"))
         idea = root.find("idea-version"); self.assertEqual("261", idea.attrib["since-build"])
         self.assertEqual("261.*", idea.attrib["until-build"])
@@ -66,14 +89,14 @@ class PackageTests(unittest.TestCase):
 
     def test_strict_verifier_rejects_noncanonical_boundaries_comments_flags_and_compression(self):
         canonical = self.root / "canonical.zip"; self.build(self.result, self.descriptor, canonical)
-        self.assertTrue(verify_plugin_package(canonical, self.result, self.descriptor))
+        self.assertTrue(self.verify(canonical))
         for label, payload in (("prepended", b"JUNK" + canonical.read_bytes()),
                                ("appended", canonical.read_bytes() + b"JUNK")):
             path = self.root / f"{label}.zip"; path.write_bytes(payload)
-            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor))
+            self.assertFalse(self.verify(path))
         commented = self.root / "commented.zip"; commented.write_bytes(canonical.read_bytes())
         with zipfile.ZipFile(commented, "a") as archive: archive.comment = b"comment"
-        self.assertFalse(verify_plugin_package(commented, self.result, self.descriptor))
+        self.assertFalse(self.verify(commented))
         for label, local_offset, central_offset, value in (
             ("encrypted", 6, 8, 1), ("unsupported", 8, 10, 99)):
             content = bytearray(canonical.read_bytes())
@@ -82,7 +105,7 @@ class PackageTests(unittest.TestCase):
             content[local + offset:local + offset + 2] = value.to_bytes(2,"little")
             content[central + central_offset:central + central_offset + 2] = value.to_bytes(2,"little")
             path = self.root / f"{label}.zip"; path.write_bytes(content)
-            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor))
+            self.assertFalse(self.verify(path))
 
     def test_strict_verifier_rejects_local_header_mutations_and_level_one_deflate(self):
         canonical = self.root / "canonical.zip"; self.build(self.result, self.descriptor, canonical)
@@ -94,7 +117,7 @@ class PackageTests(unittest.TestCase):
         for label, (offset, replacement) in mutations.items():
             content = bytearray(original); content[local+offset:local+offset+len(replacement)] = replacement
             path = self.root / f"local-{label}.zip"; path.write_bytes(content)
-            self.assertFalse(verify_plugin_package(path, self.result, self.descriptor), label)
+            self.assertFalse(self.verify(path), label)
         with zipfile.ZipFile(canonical) as archive:
             inner = archive.read("idea-deu/lib/idea-deu.jar")
         level_one = self.root / "level-one.zip"
@@ -102,7 +125,7 @@ class PackageTests(unittest.TestCase):
         info.create_system=3; info.external_attr=(0o100644)<<16
         with zipfile.ZipFile(level_one,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=1) as archive:
             archive.writestr(info,inner,compress_type=zipfile.ZIP_DEFLATED,compresslevel=1)
-        self.assertFalse(verify_plugin_package(level_one, self.result, self.descriptor))
+        self.assertFalse(self.verify(level_one))
 
     def test_ignores_symlink_in_materialized_resource_tree(self):
         (self.resources / "link").symlink_to(self.descriptor.resolve())
@@ -113,7 +136,7 @@ class PackageTests(unittest.TestCase):
         with self.assertRaises(PackageError): self.build(self.result, bad, self.root/"bad.zip")
 
     def test_rejects_descriptor_with_additional_elements_or_attributes(self):
-        root = ElementTree.parse(self.descriptor).getroot()
+        root = self.template_root()
         ElementTree.SubElement(root, "depends").text = "com.intellij.modules.java"
         root.find("./extensions/languageBundle").set("implementation", "Injected")
         bad = self.root / "plugin.xml"

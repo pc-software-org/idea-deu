@@ -15,8 +15,9 @@
 | Field | Value |
 |---|---|
 | File | `dist/idea-deu.zip` |
-| SHA-256 | `69a19bffed3bf9063af48b77570c893611cae0d2dd50196985ede881eee430d5` |
-| Size | 2 782 876 bytes |
+| Plugin version | `2026.1.3.1` (scheme `<ide-version>.<patch>`; from `config/product.json`) |
+| SHA-256 | `188ddf6b144e2fb5c92462fabbe95a519da518af0854b9eecea9236a639a4823` |
+| Size | 2782881 bytes |
 | Determinism | rebuilt twice → byte-identical SHA-256 |
 | Descriptor | id `org.pc-software.idea-deu`, `<languageBundle locale="de"/>`, since-build `261`, until-build `261.*` (built from 261.25134.95) |
 

@@ -50,7 +50,7 @@
 - Stale units: 0
 - Workflow state: `complete`
 - Generated: present=True, valid=True (`generated/plugin`)
-- Package: present=True, valid=True, sha256=`69a19bffed3bf9063af48b77570c893611cae0d2dd50196985ede881eee430d5`, size=2782876 (`dist/idea-deu.zip`)
+- Package: present=True, valid=True, sha256=`188ddf6b144e2fb5c92462fabbe95a519da518af0854b9eecea9236a639a4823`, size=2782881 (`dist/idea-deu.zip`)
 
 Next command:
 

@@ -126,12 +126,14 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
     if command == "generate":
         result = _generate(root); print(result.root); return 0
     if command == "package":
+        config = _config(root)
         generated = _trusted_generation(root, materialize=False)
         inventory, units = _read_inventory(root), _read_units(root)
         provider = BlobResourceProvider(root / "inventory/source-blobs")
         destination = root / "dist/idea-deu.zip"
         build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination,
-                             dedupe_identical=True, trusted_root=root)
+                             version=config.plugin_version, since_build=config.since_build,
+                             until_build=config.until_build, dedupe_identical=True, trusted_root=root)
         artifact_hash, artifact_size = _file_fingerprint(destination)
         write_jsonl_atomic(root / "dist/manifest.json", [{"schema_version": 1,
             "input_sha256": _state_input_digest(inventory, units),
@@ -450,7 +452,9 @@ def _snapshot(root: Path) -> ReportSnapshot:
     package_valid = False
     try:
         package_valid = bool(generation_valid and trusted is not None and artifact.is_file() and
-                             verify_plugin_package(artifact, trusted, root / "plugin/META-INF/plugin.xml"))
+                             verify_plugin_package(artifact, trusted, root / "plugin/META-INF/plugin.xml",
+                                                   version=product.plugin_version, since_build=product.since_build,
+                                                   until_build=product.until_build))
     except (OSError, ValueError):
         package_valid = False
     package: dict[str, bool | str] = {"present": artifact.is_file(), "valid": package_valid,
