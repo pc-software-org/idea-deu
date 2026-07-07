@@ -13,6 +13,27 @@ The plugin is registered on JetBrains Marketplace as
 Without the secret the release job still builds and publishes a GitHub Release;
 it just logs a notice and skips the Marketplace upload.
 
+## Signing
+
+On release the ZIP is author-signed with JetBrains `marketplace-zip-signer`
+before upload. Two repository secrets drive it (already set for this repo):
+
+- `SIGN_KEY` — PEM private key
+- `SIGN_CERT` — PEM certificate (chain)
+
+They were generated as a self-signed pair (kept out of git under `signing/`):
+
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout signing/private.pem \
+  -out signing/chain.crt -days 3650 -nodes -subj "/CN=pc-software idea-deu/O=pc-software"
+gh secret set SIGN_KEY  < signing/private.pem
+gh secret set SIGN_CERT < signing/chain.crt
+```
+
+If both secrets are absent the release ships unsigned (Marketplace still signs
+on distribution). Keep `signing/private.pem` safe and out of the repo; reusing
+the same key across releases keeps a stable author identity.
+
 ## Versioning
 
 The plugin version lives **only** in `config/product.json` → `plugin_version`

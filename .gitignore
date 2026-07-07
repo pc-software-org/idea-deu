@@ -16,3 +16,6 @@ __pycache__/
 
 # Subagent-driven-development scratch ledger.
 /.superpowers/
+
+# Local plugin-signing key material (never commit; add contents as GH secrets).
+/signing/

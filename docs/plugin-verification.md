@@ -43,17 +43,19 @@ plugin problems; reported as dynamic-plugin eligible (enable/disable without
 restart). This run also surfaced and fixed a missing required `<description>`
 in the descriptor.
 
-## 3. Optional Gradle configuration check
+## 3. Signature
 
-`build.gradle.kts` (IntelliJ Platform Gradle Plugin 2.17.0) provides
-`verifyPluginProjectConfiguration` and a `verifyPlugin` wired to IU-2026.1.3.
-Generate the wrapper once (`gradle wrapper --gradle-version 8.14`), then:
+On release the ZIP is author-signed with `marketplace-zip-signer` (see
+`docs/publishing.md`). Verify a signed ZIP against the certificate:
 
 ```bash
-./gradlew verifyPluginProjectConfiguration
-./gradlew verifyPlugin
+java -jar marketplace-zip-signer-cli-<ver>.jar verify \
+  -in dist/idea-deu.zip -cert signing/chain.crt
 ```
 
-> These Gradle tasks were **not executed** in the environment that authored this
-> repository (no JDK 21 / no network). Run them where both are available. For
-> verifying the actual shipped artifact, prefer method 2.
+JetBrains Marketplace additionally signs the plugin server-side when it
+distributes an approved version, so end users always receive a signed plugin.
+
+> There is intentionally no Gradle build: the pack is produced by the Python
+> pipeline, and the standalone Plugin Verifier (method 2) is the correct check
+> for that externally-built artifact.

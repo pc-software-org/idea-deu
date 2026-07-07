@@ -158,18 +158,13 @@ English. Rebuild against a newer distribution to follow a later release line.
 **Settings → Plugins → German Language Pack → Uninstall**, or set the language
 back to *English* and restart. Removing the plugin fully reverts the UI.
 
-## Optional: JetBrains Plugin Verifier
+## Verification and signing
 
-The generated plugin is descriptor-verified by the pipeline. To additionally run
-JetBrains' Plugin Verifier (requires JDK 21 and network for first download), use
-the Gradle project in this repo:
-
-```bash
-./gradlew verifyPluginProjectConfiguration
-./gradlew verifyPlugin
-```
-
-See `docs/acceptance-checklist.md` for the full manual acceptance procedure.
+The generated plugin is descriptor-verified by the pipeline and has been checked
+`Compatible` by the standalone JetBrains Plugin Verifier against IU-261.25134.95
+— see `docs/plugin-verification.md`. On release the ZIP is additionally
+author-signed (`marketplace-zip-signer`); see `docs/publishing.md`. For the full
+manual acceptance procedure see `docs/acceptance-checklist.md`.
 
 ## License
 

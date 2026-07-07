@@ -79,11 +79,19 @@ jobs:
       MARKETPLACE_PLUGIN_ID: "32785"
       # Permanent Marketplace token; set as a repository secret to enable upload.
       MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
+      # Author-signing key material; set as repository secrets to sign the ZIP.
+      SIGN_KEY: ${{ secrets.SIGN_KEY }}
+      SIGN_CERT: ${{ secrets.SIGN_CERT }}
+      ZIP_SIGNER_VERSION: "0.1.43"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
       - name: Verify tag matches plugin version
         run: |
           # The plugin version is the single source of truth in config; the tag
@@ -99,7 +107,28 @@ jobs:
         run: |
           python -m scripts.idea_deu generate
           python -m scripts.idea_deu package
-          shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
+      - name: Sign plugin
+        if: ${{ env.SIGN_KEY != '' && env.SIGN_CERT != '' }}
+        run: |
+          curl -sSL --fail -o zip-signer.jar \
+            "https://github.com/JetBrains/marketplace-zip-signer/releases/download/${ZIP_SIGNER_VERSION}/marketplace-zip-signer-cli-${ZIP_SIGNER_VERSION}.jar"
+          umask 077
+          printf '%s' "$SIGN_KEY" > sign-key.pem
+          printf '%s' "$SIGN_CERT" > sign-cert.crt
+          java -jar zip-signer.jar sign \
+            -in dist/idea-deu.zip \
+            -out dist/idea-deu-signed.zip \
+            -cert-file sign-cert.crt \
+            -key-file sign-key.pem
+          java -jar zip-signer.jar verify -in dist/idea-deu-signed.zip -cert sign-cert.crt
+          mv dist/idea-deu-signed.zip dist/idea-deu.zip
+          rm -f sign-key.pem sign-cert.crt zip-signer.jar
+          echo "::notice::plugin ZIP signed with the author certificate."
+      - name: Note if signing was skipped
+        if: ${{ env.SIGN_KEY == '' || env.SIGN_CERT == '' }}
+        run: echo "::notice::SIGN_KEY/SIGN_CERT not set — shipping the unsigned ZIP (Marketplace still signs on distribution)."
+      - name: Checksum
+        run: shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
