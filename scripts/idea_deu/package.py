@@ -163,6 +163,7 @@ def _validate_descriptor(data: bytes) -> None:
     expected = (
         ("id", {}, "org.pc-software.idea-deu", ()),
         ("name", {}, "German Language Pack", ()),
+        ("description", {}, "German (Deutsch) language pack for IntelliJ IDEA 2026.1. Translates the IDE user interface, inspection and intention descriptions, tips, and file and postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.", ()),
         ("version", {}, "2026.1.3", ()),
         ("vendor", {}, "PC-Software", ()),
         ("idea-version", {"since-build": "261", "until-build": "261.*"}, "", ()),

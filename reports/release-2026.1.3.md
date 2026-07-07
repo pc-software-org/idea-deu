@@ -15,8 +15,8 @@
 | Field | Value |
 |---|---|
 | File | `dist/idea-deu.zip` |
-| SHA-256 | `ab3ac68f75e2ac287bdd3cec2a2263901e9052448e517139fe1fbd71abbac46e` |
-| Size | 2 782 674 bytes |
+| SHA-256 | `69a19bffed3bf9063af48b77570c893611cae0d2dd50196985ede881eee430d5` |
+| Size | 2 782 876 bytes |
 | Determinism | rebuilt twice → byte-identical SHA-256 |
 | Descriptor | id `org.pc-software.idea-deu`, `<languageBundle locale="de"/>`, since-build `261`, until-build `261.*` (built from 261.25134.95) |
 
@@ -62,25 +62,28 @@ The corpus was migrated from the prior target (2025.3.1.1, build 253.29346.240):
 - Blocked-unit rescue: **353** units repaired (placeholder/markup/message-format),
   including a validator refinement so a literal percentage after a placeholder
   ("{0}% classes") is not mistaken for a printf conversion.
-- Three latent pipeline defects, surfaced by the first real generate/package
-  run, were fixed: `.html` postfix-template descriptions, empty (keyless)
-  `.properties` bundles, and the two content-identical collisions.
+- Four latent pipeline/descriptor defects, surfaced by the first real
+  generate/package and Plugin Verifier runs, were fixed: `.html`
+  postfix-template descriptions, empty (keyless) `.properties` bundles, the two
+  content-identical collisions, and a missing `<description>` in the plugin
+  descriptor (required for a valid plugin).
 
 ## Verification status
 
-- Unit test suite: **211 tests, all green**.
+- Unit test suite: **213 tests, all green**.
 - `python -m scripts.idea_deu validate`: exit 0, 0 blocking.
-- Deterministic re-scan and re-package confirmed.
-- JetBrains Plugin Verifier: **not run in the authoring environment** (no JDK 21
-  / no network). Procedure documented in `docs/plugin-verification.md`.
+- Deterministic re-scan and re-package confirmed (rebuilt → identical SHA-256).
+- **JetBrains Plugin Verifier 1.408: `Compatible`** — verified
+  `dist/idea-deu.zip` against a local IU-261.25134.95; no plugin problems, and
+  reported dynamic-plugin eligible (enable/disable without restart).
 - Windows air-gap acceptance: **pending** — to be executed on Windows with
   IntelliJ IDEA 2026.1.3 per `docs/acceptance-checklist.md` (licensed and
-  unlicensed modes). This is a release gate.
+  unlicensed modes). This is the remaining release gate.
 
 ## Open items before shipping
 
-1. Run the JetBrains Plugin Verifier against `dist/idea-deu.zip` + IU-261.25134.95.
-2. Complete `docs/acceptance-checklist.md` on Windows in both license modes.
+1. Complete `docs/acceptance-checklist.md` on Windows in both license modes
+   (the only remaining gate).
 
 Compatibility was widened to `since-build = 261`, `until-build = 261.*` so the
 pack loads across the whole 2026.1 line, not only the exact build it was built

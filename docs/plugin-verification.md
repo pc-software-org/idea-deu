@@ -38,6 +38,11 @@ Expected: no compatibility problems (a language pack contributes only a
 `languageBundle` extension and resource bundles; the verifier confirms the
 descriptor and compatibility range).
 
+**Result (verifier 1.408, against a local IU-261.25134.95): `Compatible`** — no
+plugin problems; reported as dynamic-plugin eligible (enable/disable without
+restart). This run also surfaced and fixed a missing required `<description>`
+in the descriptor.
+
 ## 3. Optional Gradle configuration check
 
 `build.gradle.kts` (IntelliJ Platform Gradle Plugin 2.17.0) provides
