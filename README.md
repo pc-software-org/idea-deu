@@ -11,6 +11,12 @@ translatable resource in the nested IDE/plugin JARs, stores source and
 translation state as deterministic JSONL, validates every translation, and
 packages a byte-deterministic plugin ZIP.
 
+## Feedback
+
+Any hints, bugreports, suggestions are much appreciated and preferably sent in via github issues.
+
+Vorschläge oder Probleme sind gerne gesehen. Bitte wenn möglich über github Issues, damit sie nicht verloren gehen.
+
 ## Versions and framework conditions
 
 | Component | Value |
