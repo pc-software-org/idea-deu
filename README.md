@@ -140,3 +140,14 @@ the Gradle project in this repo:
 ```
 
 See `docs/acceptance-checklist.md` for the full manual acceptance procedure.
+
+## License
+
+The build pipeline and original project content are licensed under the
+**Apache License 2.0** (see `LICENSE`).
+
+This is an **unofficial** community German localization; it is not affiliated
+with JetBrains. "IntelliJ IDEA" and the English source strings the translations
+derive from are the property of JetBrains s.r.o. See `NOTICE` for details. The
+IntelliJ IDEA distribution is a user-supplied build input and is not
+redistributed here.
