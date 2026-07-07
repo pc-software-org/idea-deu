@@ -17,5 +17,7 @@ __pycache__/
 # Subagent-driven-development scratch ledger.
 /.superpowers/
 
-# Local plugin-signing key material (never commit; add contents as GH secrets).
-/signing/
+# Local plugin-signing material: the private key stays out of git; the public
+# certificate is published so users can verify the signature.
+/signing/*
+!/signing/chain.crt

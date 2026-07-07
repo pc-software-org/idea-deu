@@ -162,9 +162,26 @@ back to *English* and restart. Removing the plugin fully reverts the UI.
 
 The generated plugin is descriptor-verified by the pipeline and has been checked
 `Compatible` by the standalone JetBrains Plugin Verifier against IU-261.25134.95
-— see `docs/plugin-verification.md`. On release the ZIP is additionally
-author-signed (`marketplace-zip-signer`); see `docs/publishing.md`. For the full
-manual acceptance procedure see `docs/acceptance-checklist.md`.
+— see `docs/plugin-verification.md`. For the full manual acceptance procedure
+see `docs/acceptance-checklist.md`.
+
+Release ZIPs are **author-signed** with `marketplace-zip-signer`. The public
+signing certificate is committed at [`signing/chain.crt`](signing/chain.crt).
+To confirm a downloaded ZIP was signed by us:
+
+```bash
+# our certificate's SHA-256 fingerprint (must match):
+openssl x509 -in signing/chain.crt -noout -fingerprint -sha256
+# 4A:31:8A:27:0C:86:34:37:D5:DD:F7:10:13:94:16:39:E7:8B:65:8D:59:91:7B:9B:21:BE:1D:50:7A:61:1A:5A
+
+# verify the signature on the ZIP against that certificate:
+java -jar marketplace-zip-signer-cli-<ver>.jar verify -in idea-deu.zip -cert signing/chain.crt
+```
+
+Signing certificate: **CN=pc-software idea-deu**, SHA-256 fingerprint
+`4A:31:8A:27:0C:86:34:37:D5:DD:F7:10:13:94:16:39:E7:8B:65:8D:59:91:7B:9B:21:BE:1D:50:7A:61:1A:5A`
+(valid until 2036-07-04). JetBrains Marketplace additionally signs the plugin
+server-side when distributing an approved version. See `docs/publishing.md`.
 
 ## License
 
