@@ -11,6 +11,9 @@ from typing import Any
 
 _EXACT_BUILD = "261.25134.95"
 _SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
+# since/until-build may be a widened compatibility range (e.g. "261", "261.*")
+# while build_number stays pinned to the exact scanned distribution.
+_BUILD_RANGE_PATTERN = re.compile(r"\d+(\.\d+)*(\.\*)?")
 
 
 class ConfigError(ValueError):
@@ -51,9 +54,11 @@ def load_product_config(path: Path) -> ProductConfig:
     if _SHA256_PATTERN.fullmatch(data["sha256"]) is None:
         raise ValueError("sha256 must be exactly 64 lowercase hexadecimal characters")
 
-    for key in ("build_number", "since_build", "until_build"):
-        if data[key] != _EXACT_BUILD:
-            raise ValueError(f"{key} must be exactly {_EXACT_BUILD}")
+    if data["build_number"] != _EXACT_BUILD:
+        raise ValueError(f"build_number must be exactly {_EXACT_BUILD}")
+    for key in ("since_build", "until_build"):
+        if _BUILD_RANGE_PATTERN.fullmatch(data[key]) is None:
+            raise ValueError(f"{key} must be a valid build range (digits, dots, optional .*)")
 
     return ProductConfig(**data)
 

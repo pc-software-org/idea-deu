@@ -82,9 +82,10 @@ the finding recorded, and are re-picked by re-exporting after correction.
    → set **Language** to *Deutsch*.
 5. Restart the IDE when prompted.
 
-The pack is pinned to exactly build 261.25134.95 (`since-build` == `until-build`).
-It will not load on other builds; rebuild against the matching distribution to
-target a different version.
+The pack is built from exactly build 261.25134.95 but declares compatibility
+with the whole 2026.1 line (`since-build = 261`, `until-build = 261.*`), so it
+also loads on 2026.1.x patch releases. Untranslated or changed keys fall back to
+English. Rebuild against a newer distribution to follow a later release line.
 
 ### Rollback / uninstall
 

@@ -15,8 +15,8 @@ class ProductConfigTest(unittest.TestCase):
         "build_number": "261.25134.95",
         "product_code": "IU",
         "sha256": "71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e",
-        "since_build": "261.25134.95",
-        "until_build": "261.25134.95",
+        "since_build": "261",
+        "until_build": "261.*",
         "plugin_id": "org.pc-software.idea-deu",
         "plugin_version": "2026.1.3",
     }
@@ -77,10 +77,21 @@ class ProductConfigTest(unittest.TestCase):
             with self.subTest(sha256=sha256), self.assertRaises(ValueError):
                 self._load(self.VALID_CONFIG | {"sha256": sha256})
 
-    def test_rejects_inexact_compatibility_bounds(self) -> None:
+    def test_accepts_widened_compatibility_bounds(self) -> None:
         for field in ("since_build", "until_build"):
-            with self.subTest(field=field), self.assertRaises(ValueError):
-                self._load(self.VALID_CONFIG | {field: "253.*"})
+            for value in ("261", "261.*", "261.25134", "261.25134.95"):
+                with self.subTest(field=field, value=value):
+                    self.assertEqual(getattr(self._load(self.VALID_CONFIG | {field: value}), field), value)
+
+    def test_rejects_invalid_compatibility_bounds(self) -> None:
+        for field in ("since_build", "until_build"):
+            for value in ("", "abc", "261.x", "*"):
+                with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                    self._load(self.VALID_CONFIG | {field: value})
+
+    def test_build_number_must_stay_exact(self) -> None:
+        with self.assertRaisesRegex(ValueError, r"build_number must be exactly 261\.25134\.95"):
+            self._load(self.VALID_CONFIG | {"build_number": "261.*"})
 
     def _load(self, data: dict[str, object]) -> ProductConfig:
         return self._load_json(json.dumps(data))

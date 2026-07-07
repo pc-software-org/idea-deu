@@ -15,10 +15,10 @@
 | Field | Value |
 |---|---|
 | File | `dist/idea-deu.zip` |
-| SHA-256 | `2849ca540634e2870f80ab7761b71d16fb7ddce9dc4a20d0f5e1f6a896b715f3` |
-| Size | 2 782 669 bytes |
+| SHA-256 | `ab3ac68f75e2ac287bdd3cec2a2263901e9052448e517139fe1fbd71abbac46e` |
+| Size | 2 782 674 bytes |
 | Determinism | rebuilt twice → byte-identical SHA-256 |
-| Descriptor | id `org.pc-software.idea-deu`, `<languageBundle locale="de"/>`, since/until-build 261.25134.95 |
+| Descriptor | id `org.pc-software.idea-deu`, `<languageBundle locale="de"/>`, since-build `261`, until-build `261.*` (built from 261.25134.95) |
 
 ## Inventory
 
@@ -81,5 +81,7 @@ The corpus was migrated from the prior target (2025.3.1.1, build 253.29346.240):
 
 1. Run the JetBrains Plugin Verifier against `dist/idea-deu.zip` + IU-261.25134.95.
 2. Complete `docs/acceptance-checklist.md` on Windows in both license modes.
-3. Decide whether to widen `until-build` beyond the exact 261.25134.95 pin so
-   the pack survives 2026.1.x patch releases (currently exact by design).
+
+Compatibility was widened to `since-build = 261`, `until-build = 261.*` so the
+pack loads across the whole 2026.1 line, not only the exact build it was built
+from.

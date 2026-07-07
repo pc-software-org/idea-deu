@@ -40,8 +40,8 @@ class PackageTests(unittest.TestCase):
     def test_descriptor_has_exact_identity_compatibility_and_language_bundle(self):
         root = ElementTree.parse(self.descriptor).getroot()
         self.assertEqual("org.pc-software.idea-deu", root.findtext("id"))
-        idea = root.find("idea-version"); self.assertEqual("261.25134.95", idea.attrib["since-build"])
-        self.assertEqual("261.25134.95", idea.attrib["until-build"])
+        idea = root.find("idea-version"); self.assertEqual("261", idea.attrib["since-build"])
+        self.assertEqual("261.*", idea.attrib["until-build"])
         self.assertEqual("de", root.find("./extensions/languageBundle").attrib["locale"])
 
     def test_build_is_byte_deterministic_sorted_and_has_fixed_metadata(self):

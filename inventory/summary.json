@@ -50,8 +50,8 @@
     "build_number": "261.25134.95",
     "product_code": "IU",
     "sha256": "71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e",
-    "since_build": "261.25134.95",
-    "until_build": "261.25134.95",
+    "since_build": "261",
+    "until_build": "261.*",
     "version": "2026.1.3"
   }
 }
