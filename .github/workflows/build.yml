@@ -74,6 +74,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # JetBrains Marketplace numeric plugin id (32785-german-language-pack).
+      MARKETPLACE_PLUGIN_ID: "32785"
+      # Permanent Marketplace token; set as a repository secret to enable upload.
+      MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -84,10 +89,22 @@ jobs:
           python -m scripts.idea_deu generate
           python -m scripts.idea_deu package
           shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
-      - name: Publish release
+      - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
             dist/idea-deu.zip dist/idea-deu.zip.sha256 \
             --generate-notes --title "$GITHUB_REF_NAME"
+      - name: Publish to JetBrains Marketplace
+        if: ${{ env.MARKETPLACE_TOKEN != '' }}
+        run: |
+          curl -sS --fail-with-body -X POST \
+            --header "Authorization: Bearer $MARKETPLACE_TOKEN" \
+            -F pluginId="$MARKETPLACE_PLUGIN_ID" \
+            -F file=@dist/idea-deu.zip \
+            -F channel=stable \
+            https://plugins.jetbrains.com/api/updates/upload
+      - name: Note if Marketplace upload was skipped
+        if: ${{ env.MARKETPLACE_TOKEN == '' }}
+        run: echo "::notice::MARKETPLACE_TOKEN secret not set — skipped Marketplace upload."

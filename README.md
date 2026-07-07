@@ -11,6 +11,23 @@ translatable resource in the nested IDE/plugin JARs, stores source and
 translation state as deterministic JSONL, validates every translation, and
 packages a byte-deterministic plugin ZIP.
 
+## Install
+
+[![JetBrains Marketplace](https://img.shields.io/jetbrains/plugin/v/32785?label=Marketplace&logo=jetbrains)](https://plugins.jetbrains.com/plugin/32785-german-language-pack)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/32785)](https://plugins.jetbrains.com/plugin/32785-german-language-pack)
+
+- **From the IDE**: Settings → Plugins → Marketplace → search *German Language
+  Pack* → Install (once approved and published).
+- **From the web**:
+  <https://plugins.jetbrains.com/plugin/32785-german-language-pack>
+- **Offline / from disk**: see *Offline installation on Windows* below.
+
+> The JetBrains "Install" JavaScript widget
+> (`MarketplaceWidget.setupMarketplaceWidget('install', 32785, …)`) only runs on
+> a normal web page — GitHub strips `<script>` from Markdown, so this README
+> uses the badges and link above instead. Use the widget on the project
+> website if there is one.
+
 ## Feedback
 
 Any hints, bugreports, suggestions are much appreciated and preferably sent in via github issues.
