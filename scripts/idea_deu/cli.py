@@ -268,7 +268,7 @@ def _stale_units(previous: Sequence[TranslationUnit], active: Sequence[Translati
 
 def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit],
                   stale: Sequence[StaleTranslationUnit] = (), *, blobs: dict[str, bytes] | None = None,
-                  checkpoint: dict[str, Any] | None = None, summary: dict[str, Any] | None = None) -> None:
+                  checkpoint: dict[str, Any] | None = None, summary: dict[str, Any]) -> None:
     for directory in (root / "inventory", root / "translations", root / "translations/batches"):
         directory.mkdir(parents=True, exist_ok=True)
     checkpoint = checkpoint or {"schema_version": 1, "completed_sequence": 0,
@@ -284,7 +284,7 @@ def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationU
         write_jsonl_atomic(transaction / "units.jsonl", units)
         write_jsonl_atomic(transaction / "stale-units.jsonl", stale)
         write_bytes_atomic(transaction / "summary.json",
-                           (json.dumps(summary or {}, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8"))
+                           (json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8"))
         atomic_materialize_tree(transaction / "source-blobs", blobs or {}, trusted_root=root)
         write_jsonl_atomic(transaction / "source-manifest.jsonl", [
             {"id": record.resource_id, "sha256": record.source_sha256, "size": record.size}
@@ -316,7 +316,9 @@ def _recover_scan(root: Path) -> None:
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
     write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))
-    write_bytes_atomic(root / "inventory/summary.json", (transaction / "summary.json").read_bytes())
+    summary_path = transaction / "summary.json"  # absent in transactions prepared by a pre-summary binary
+    if summary_path.exists():
+        write_bytes_atomic(root / "inventory/summary.json", summary_path.read_bytes())
     staged_blobs = transaction / "source-blobs"
     blob_data = {path.name: path.read_bytes() for path in staged_blobs.iterdir() if path.is_file() and not path.is_symlink()}
     atomic_materialize_tree(root / "inventory/source-blobs", blob_data, trusted_root=root)
