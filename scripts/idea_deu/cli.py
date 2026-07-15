@@ -5,10 +5,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import gzip
+import json
 import os
 import shutil
 import stat
 import sys
+import zipfile
 from contextlib import contextmanager
 from dataclasses import replace
 from pathlib import Path
@@ -24,7 +26,8 @@ from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStat
 from .package import PackageError, build_plugin_package, verify_plugin_package
 from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
-from .scanner import ScannerError, load_scanner_config, scan_archive
+from .scanner import ScannerError, load_scanner_config, scan_archive, translation_reference_paths
+from .summary import build_summary
 from .source import SourceValidationError, validate_source
 from .state import StateError, read_jsonl, read_jsonl_bytes, serialize_jsonl, write_bytes_atomic, write_jsonl_atomic
 from .path_safety import atomic_materialize_tree, recover_materialized_tree
@@ -100,9 +103,13 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         print(f"validated {info.version} ({info.build_number}) {info.sha256}"); return 0
     if command == "scan":
         config = _config(root)
+        scanner_config = load_scanner_config(root / "config/scanner.json")
         with _opened_source(root, config) as source:
             validate_source(config, source)
-            inventory = scan_archive(source, load_scanner_config(root / "config/scanner.json"))
+            inventory = scan_archive(source, scanner_config)
+            source.seek(0)
+            with zipfile.ZipFile(source) as outer:
+                reference_paths = translation_reference_paths(outer, scanner_config)
             old_units = _read_units(root)
             with DistributionResourceProvider(source) as source_provider:
                 units = _extract_units(inventory, source_provider, old_units)
@@ -111,7 +118,8 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         checkpoint = _checkpoint(root)
         if checkpoint.get("current_batch") and tuple(units) != tuple(old_units):
             raise BatchError("source inventory changed while a batch is active")
-        _persist_scan(root, inventory, units, stale, blobs=blobs, checkpoint=checkpoint)
+        summary = build_summary(inventory, config, scanner_config, reference_paths, len(units))
+        _persist_scan(root, inventory, units, stale, blobs=blobs, checkpoint=checkpoint, summary=summary)
         print(f"scanned {len(inventory.resources)} resources, {len(units)} translation units"); return 0
     if command == "next-batch":
         path = export_next_batch(root, root / "translations/units.jsonl", limit=args.limit)
@@ -260,7 +268,7 @@ def _stale_units(previous: Sequence[TranslationUnit], active: Sequence[Translati
 
 def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationUnit],
                   stale: Sequence[StaleTranslationUnit] = (), *, blobs: dict[str, bytes] | None = None,
-                  checkpoint: dict[str, Any] | None = None) -> None:
+                  checkpoint: dict[str, Any] | None = None, summary: dict[str, Any] | None = None) -> None:
     for directory in (root / "inventory", root / "translations", root / "translations/batches"):
         directory.mkdir(parents=True, exist_ok=True)
     checkpoint = checkpoint or {"schema_version": 1, "completed_sequence": 0,
@@ -275,6 +283,8 @@ def _persist_scan(root: Path, inventory: Inventory, units: Sequence[TranslationU
         write_jsonl_atomic(transaction / "collisions.jsonl", inventory.collisions)
         write_jsonl_atomic(transaction / "units.jsonl", units)
         write_jsonl_atomic(transaction / "stale-units.jsonl", stale)
+        write_bytes_atomic(transaction / "summary.json",
+                           (json.dumps(summary or {}, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8"))
         atomic_materialize_tree(transaction / "source-blobs", blobs or {}, trusted_root=root)
         write_jsonl_atomic(transaction / "source-manifest.jsonl", [
             {"id": record.resource_id, "sha256": record.source_sha256, "size": record.size}
@@ -306,6 +316,7 @@ def _recover_scan(root: Path) -> None:
     write_jsonl_atomic(root / "inventory/collisions.jsonl", read_jsonl(transaction / "collisions.jsonl", CollisionRecord))
     write_jsonl_atomic(root / "translations/units.jsonl", read_jsonl(transaction / "units.jsonl", TranslationUnit))
     write_jsonl_atomic(root / "inventory/stale-units.jsonl", read_jsonl(transaction / "stale-units.jsonl", StaleTranslationUnit))
+    write_bytes_atomic(root / "inventory/summary.json", (transaction / "summary.json").read_bytes())
     staged_blobs = transaction / "source-blobs"
     blob_data = {path.name: path.read_bytes() for path in staged_blobs.iterdir() if path.is_file() and not path.is_symlink()}
     atomic_materialize_tree(root / "inventory/source-blobs", blob_data, trusted_root=root)

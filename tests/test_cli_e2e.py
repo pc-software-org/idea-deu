@@ -41,13 +41,13 @@ class CliEndToEndTests(unittest.TestCase):
     def _write_archive(self, properties: bytes, *, include_tip: bool):
         entries = [("messages/Bundle.properties", properties)]
         if include_tip: entries.append(("tips/Welcome.html", b"<html>Tip</html>\n"))
-        product = json.dumps({"version":"2026.1.3","buildNumber":"261.25134.95","productCode":"IU"})
+        product = json.dumps({"version":"2026.1.4","buildNumber":"261.26222.65","productCode":"IU"})
         with zipfile.ZipFile(self.archive, "w", zipfile.ZIP_STORED) as outer:
             outer.writestr("product-info.json", product); outer.writestr("lib/app.jar", jar_bytes(entries))
-        config = {"archive":"idea.zip","version":"2026.1.3","build_number":"261.25134.95",
+        config = {"archive":"idea.zip","version":"2026.1.4","build_number":"261.26222.65",
             "product_code":"IU","sha256":hashlib.sha256(self.archive.read_bytes()).hexdigest(),
-            "since_build":"261.25134.95","until_build":"261.25134.95",
-            "plugin_id":"org.pc-software.idea-deu","plugin_version":"2026.1.3"}
+            "since_build":"261.26222.65","until_build":"261.26222.65",
+            "plugin_id":"org.pc-software.idea-deu","plugin_version":"2026.1.4"}
         (self.root / "config/product.json").write_text(json.dumps(config))
 
     def _run(self, *args):

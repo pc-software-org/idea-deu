@@ -1,11 +1,11 @@
 {
-  "archive": "idea-2026.1.3.win.zip",
-  "version": "2026.1.3",
-  "build_number": "261.25134.95",
+  "archive": "idea-2026.1.4.win.zip",
+  "version": "2026.1.4",
+  "build_number": "261.26222.65",
   "product_code": "IU",
-  "sha256": "71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e",
+  "sha256": "5c92bc8dcca7b39857e7b24029432b558cac61ed518761e3b824590b849d548a",
   "since_build": "261",
   "until_build": "261.*",
   "plugin_id": "org.pc-software.idea-deu",
-  "plugin_version": "2026.1.3.1"
+  "plugin_version": "2026.1.4.1"
 }

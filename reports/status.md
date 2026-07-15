@@ -2,14 +2,14 @@
 
 ## Source
 
-- build: `261.25134.95`
-- hash: `71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e`
-- version: `2026.1.3`
+- build: `261.26222.65`
+- hash: `5c92bc8dcca7b39857e7b24029432b558cac61ed518761e3b824590b849d548a`
+- version: `2026.1.4`
 
 ## Counts
 
-- Resource files: 4190
-- Translation units: 71452
+- Resource files: 4191
+- Translation units: 71476
 
 ## Statuses
 
@@ -17,7 +17,7 @@
 |---|---:|
 | open | 0 |
 | translated | 0 |
-| technically_reviewed | 71452 |
+| technically_reviewed | 71476 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -31,7 +31,7 @@
 | nested_archive | 40 |
 | not_in_translation_reference | 945 |
 | not_jar | 1942 |
-| unsupported_resource | 587662 |
+| unsupported_resource | 587985 |
 
 ## Findings and collisions
 
@@ -45,13 +45,13 @@
 
 ## Workflow
 
-- Last completed batch: 29
+- Last completed batch: 30
 - Current batch: none
 - Stale units: 0
-- Workflow state: `complete`
-- Generated: present=True, valid=True (`generated/plugin`)
-- Package: present=True, valid=True, sha256=`188ddf6b144e2fb5c92462fabbe95a519da518af0854b9eecea9236a639a4823`, size=2782881 (`dist/idea-deu.zip`)
+- Workflow state: `generate`
+- Generated: present=True, valid=False (`generated/plugin`)
+- Package: present=True, valid=False, sha256=`188ddf6b144e2fb5c92462fabbe95a519da518af0854b9eecea9236a639a4823`, size=2782881 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu status`
+`python -m scripts.idea_deu generate`

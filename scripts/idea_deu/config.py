@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 
-_EXACT_BUILD = "261.25134.95"
+_EXACT_BUILD = "261.26222.65"
 _SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 # since/until-build may be a widened compatibility range (e.g. "261", "261.*")
 # while build_number stays pinned to the exact scanned distribution.

@@ -81,10 +81,10 @@ class RealInventoryTests(unittest.TestCase):
             self.assertEqual(size, len(data))
             self.assertEqual(digest, hashlib.sha256(data).hexdigest())
 
-    @unittest.skipUnless((ROOT / "idea-2026.1.3.win.zip").is_file(), "real source archive absent")
+    @unittest.skipUnless((ROOT / "idea-2026.1.4.win.zip").is_file(), "real source archive absent")
     def test_real_archive_hash_when_available(self):
         digest = hashlib.sha256()
-        with (ROOT / "idea-2026.1.3.win.zip").open("rb") as stream:
+        with (ROOT / "idea-2026.1.4.win.zip").open("rb") as stream:
             while chunk := stream.read(1024 * 1024):
                 digest.update(chunk)
         self.assertEqual(self.summary["source"]["sha256"], digest.hexdigest())

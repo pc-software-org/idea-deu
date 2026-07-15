@@ -467,6 +467,11 @@ def _translation_reference_paths(outer: zipfile.ZipFile, config: ScannerConfig) 
     return frozenset(paths)
 
 
+def translation_reference_paths(outer: zipfile.ZipFile, config: ScannerConfig) -> frozenset[str] | None:
+    """The translation-reference union used to gate candidates during a scan."""
+    return _translation_reference_paths(outer, config)
+
+
 def _pattern_matches(path: str, pattern: str) -> bool:
     if fnmatchcase(path, pattern):
         return True
