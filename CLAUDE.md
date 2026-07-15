@@ -1,7 +1,7 @@
 # CLAUDE.md — idea-deu
 
-Unofficial German (`de`) language pack for **IntelliJ IDEA Ultimate 2026.1.3**
-(build `261.25134.95`). Dependency-light Python pipeline
+Unofficial German (`de`) language pack for **IntelliJ IDEA Ultimate 2026.1.4**
+(build `261.26222.65`). Dependency-light Python pipeline
 (`python -m scripts.idea_deu`, stdlib only) → code-free `languageBundle` plugin.
 JetBrains Marketplace **plugin id 32785**. Apache-2.0 (+ NOTICE). Remote:
 `pc-software-org/idea-deu`, branch `main`.
@@ -10,12 +10,12 @@ JetBrains Marketplace **plugin id 32785**. Apache-2.0 (+ NOTICE). Remote:
 
 - **The ZIP builds without the 1.5 GB IDE archive.** `generate`/`package` use the
   committed `inventory/source-blobs/`. Only `validate-source`/`scan` need
-  `idea-2026.1.3.win.zip` (git-ignored) in the repo root.
+  `idea-2026.1.4.win.zip` (git-ignored) in the repo root.
 - **Version = single source of truth: `config/product.json` → `plugin_version`.**
   `plugin/META-INF/plugin.xml` is a template with `@PLUGIN_VERSION@`,
   `@SINCE_BUILD@`, `@UNTIL_BUILD@`, rendered by `package.py`. Don't hardcode the
   version elsewhere. Scheme `<ide-version>.<patch>` — a translation-only fix
-  bumps the 4th segment (`2026.1.3.1` → `2026.1.3.2`).
+  bumps the 4th segment (`2026.1.4.1` → `2026.1.4.2`).
 - Build is deterministic (rebuild → identical SHA-256). The strict translation
   validator (`validation.py`) blocks on mnemonic (`&`/`_`) count, MessageFormat,
   markup/tag structure, placeholders. Prose `%` after a digit/`}` is not printf.
