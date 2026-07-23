@@ -56,6 +56,8 @@ jobs:
           assert f'until-build="{cfg["until_build"]}"' in xml, xml
           assert f"<version>{cfg['plugin_version']}</version>" in xml, xml
           assert "<languageBundle" in xml and 'locale="de"' in xml, xml
+          # Marketplace "What's new" must be present and non-empty for this version.
+          assert "<change-notes><![CDATA[<ul><li>" in xml, xml
           print("descriptor OK")
           PY
 

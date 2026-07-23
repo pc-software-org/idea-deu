@@ -30,8 +30,10 @@ class PackageTests(unittest.TestCase):
     VERSION = "2026.1.3.1"
     SINCE = "261"
     UNTIL = "261.*"
+    CHANGE_NOTES = "<ul><li>Erster Punkt</li><li>Zweiter Punkt</li></ul>"
 
-    def build(self,result,descriptor,destination,*,inventory=None,units=None,provider=None):
+    def build(self,result,descriptor,destination,*,inventory=None,units=None,provider=None,
+              change_notes=None):
         return build_plugin_package(
             result,
             self.inventory if inventory is None else inventory,
@@ -40,19 +42,22 @@ class PackageTests(unittest.TestCase):
             descriptor,
             destination,
             version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL,
+            change_notes=self.CHANGE_NOTES if change_notes is None else change_notes,
         )
 
-    def verify(self, path, result=None, descriptor=None):
+    def verify(self, path, result=None, descriptor=None, *, change_notes=None):
         return verify_plugin_package(
             path, self.result if result is None else result,
             self.descriptor if descriptor is None else descriptor,
             version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL,
+            change_notes=self.CHANGE_NOTES if change_notes is None else change_notes,
         )
 
     def rendered_descriptor_root(self):
         from scripts.idea_deu.package import render_descriptor
         data = render_descriptor(self.descriptor.read_bytes(),
-                                 version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL)
+                                 version=self.VERSION, since_build=self.SINCE, until_build=self.UNTIL,
+                                 change_notes=self.CHANGE_NOTES)
         return ElementTree.fromstring(data)
 
     def template_root(self):
@@ -66,6 +71,27 @@ class PackageTests(unittest.TestCase):
         idea = root.find("idea-version"); self.assertEqual("261", idea.attrib["since-build"])
         self.assertEqual("261.*", idea.attrib["until-build"])
         self.assertEqual("de", root.find("./extensions/languageBundle").attrib["locale"])
+
+    def test_descriptor_carries_change_notes_text(self):
+        root = self.rendered_descriptor_root()
+        self.assertEqual(self.CHANGE_NOTES, (root.findtext("change-notes") or "").strip())
+
+    def test_change_notes_cdata_terminator_does_not_break_descriptor(self):
+        from scripts.idea_deu.package import render_descriptor
+        notes = "<ul><li>danger ]]> here</li></ul>"
+        data = render_descriptor(self.descriptor.read_bytes(), version=self.VERSION,
+                                 since_build=self.SINCE, until_build=self.UNTIL, change_notes=notes)
+        root = ElementTree.fromstring(data)  # parses only because ]]> was CDATA-escaped
+        self.assertEqual(notes, (root.findtext("change-notes") or "").strip())
+
+    def test_build_verify_roundtrip_rejects_change_notes_mismatch(self):
+        built = self.root / "cn.zip"; self.build(self.result, self.descriptor, built)
+        self.assertTrue(self.verify(built))
+        self.assertFalse(self.verify(built, change_notes="<ul><li>Andere Notiz</li></ul>"))
+
+    def test_empty_change_notes_rejected(self):
+        with self.assertRaisesRegex(PackageError, "change-notes"):
+            self.build(self.result, self.descriptor, self.root / "empty.zip", change_notes="   ")
 
     def test_build_is_byte_deterministic_sorted_and_has_fixed_metadata(self):
         one = self.root / "one.zip"; two = self.root / "two.zip"

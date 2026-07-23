@@ -14,7 +14,7 @@ from dataclasses import replace
 from unittest import mock
 from pathlib import Path
 
-from scripts.idea_deu.cli import main
+from scripts.idea_deu.cli import DOMAIN_ERROR, main
 from scripts.idea_deu.models import ProcessingStatus, StaleTranslationUnit, TranslationUnit
 from scripts.idea_deu.state import read_jsonl, write_jsonl_atomic
 from tests.fixtures.scanner_factory import jar_bytes
@@ -33,6 +33,7 @@ class CliEndToEndTests(unittest.TestCase):
         (self.root / "config/scanner.json").write_text(json.dumps(scanner))
         shutil.copy(repo / "glossary/de.json", self.root / "glossary/de.json")
         shutil.copy(repo / "plugin/META-INF/plugin.xml", self.root / "plugin/META-INF/plugin.xml")
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.1.4\n- Testnotiz\n")
         self.archive = self.root / "idea.zip"
         self._write_archive(b"hello=Hello\nother=Other\n", include_tip=True)
 
@@ -107,12 +108,23 @@ class CliEndToEndTests(unittest.TestCase):
         self.assertEqual("complete", report["workflow_state"]); self.assertTrue(report["package"]["valid"])
         with zipfile.ZipFile(self.root / "dist/idea-deu.zip") as package:
             self.assertEqual(["idea-deu/lib/idea-deu.jar"], package.namelist())
+            with zipfile.ZipFile(package.open("idea-deu/lib/idea-deu.jar")) as jar:
+                descriptor = jar.read("META-INF/plugin.xml").decode("utf-8")
+        self.assertIn("<change-notes>", descriptor)
+        self.assertIn("<li>Testnotiz</li>", descriptor)
 
         env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[1]))
         process = subprocess.run([sys.executable, "-m", "scripts.idea_deu", "--root", str(self.root), "status"],
                                  text=True, capture_output=True, env=env, check=False)
         self.assertEqual(0, process.returncode); self.assertNotIn("Traceback", process.stderr)
         self.assertIn("complete", json.loads((self.root / "reports/status.json").read_text())["workflow_state"])
+
+        # Fail loud: a CHANGELOG without a section for the built version blocks packaging.
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 9.9.9\n- Andere Version\n")
+        code, stdout, stderr = self._run("package")
+        self.assertEqual(DOMAIN_ERROR, code); self.assertIn("2026.1.4", stderr)
+        self.assertNotIn("Traceback", stderr)
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.1.4\n- Testnotiz\n")
 
         blob = next((self.root / "inventory/source-blobs").iterdir()); blob_bytes = blob.read_bytes(); blob.unlink()
         code, stdout, stderr = self._run("status")
