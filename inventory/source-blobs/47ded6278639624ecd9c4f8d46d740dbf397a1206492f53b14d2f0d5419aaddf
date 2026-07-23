@@ -1,0 +1,47 @@
+remote.dev.name=Remote Development
+
+# Connection
+connection.status.canceled=Cancelled by user
+connection.status.declined.with.reason=Connection Declined by Host: {0}
+connection.status.declined.reason.none=No Reason Provided
+connection.status.declined.reason.userDeclined=User Declined
+connection.status.declined.reason.guestLimitReached=Guest Limit Reached
+connection.status.declined.reason.otherControllerLaunched=Other Controller Connected to the Same Project
+connection.status.declined.reason.hostExit=Host Closed
+connection.status.incompatible=Incompatible version
+connection.unexpected.problem=Unexpected problem
+connection.error.session.not.found.general.message=Unable to find active session on the Lobby server
+
+# Connection Configuration
+connection.configuration.entry.initial.connection.timeout.name=Initial connection timeout
+connection.configuration.entry.initial.connection.timeout.description=Timeout for initial connection process. The setting does not affect reconnection.
+
+connection.configuration.entry.delay.between.connection.retry.name=Connection retry delay
+connection.configuration.entry.delay.between.connection.retry.description=Delay between reconnection retries when connection is failed
+
+connection.configuration.entry.cwm.connection.retries.limit.name=Code With Me Connection attempts limit
+connection.configuration.entry.cwm.connection.retries.limit.description=Max number of attempts to restore connection before fail in Code WIth Me session
+
+connection.configuration.entry.rd.connection.retries.limit.name=Connection attempts (Remote Dev)
+connection.configuration.entry.rd.connection.retries.limit.description=Max number of attempts to restore connection before fail in Remote Development session
+
+connection.configuration.entry.diagnostic.service.pings.interval.name=Diagnostic service delay interval
+connection.configuration.entry.diagnostic.service.pings.interval.description=Time interval between two pings that provides connection diagnostic service connectivity status updates
+
+connection.configuration.entry.diagnostic.service.idle.interval.name=Diagnostic service idle interval
+connection.configuration.entry.diagnostic.service.idle.interval.description=Timeout for the connection diagnostic service, indicating connectivity problems and displaying them to a user
+
+connection.diagnostic.service.network.stale.latency.value.timeout.name=Diagnostic service stale network latency value timeout
+connection.diagnostic.service.network.stale.latency.value.timeout.description=Network latency value is considered stale after the timeout
+
+
+error.connection.timeout=Connection timeout
+thin.client.diagnostics.performance.wire.broken=No connection
+thin.client.diagnostics.performance.host.unreachable=Connecting
+thin.client.diagnostics.performance.host.frozen=Host is unresponsive
+thin.client.diagnostics.performance.connected=Connected
+
+dialog.message.password.required.to.connect.to=A password is required to connect to {0}
+
+backend.control.center.ping.label=Latency {0} ms
+

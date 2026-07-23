@@ -1,4 +1,0 @@
-debugger.log.capture.navigate.to.source.button.title=Go to source code
-debugger.log.capture.navigate.to.breakpoint.button.title=Go to breakpoint
-debugger.log.capture.breakpoint.name=Log capturing internal breakpoint
-debugger.log.capture.notification.unable.to.choose.single.frame=Unable to choose a single code line to navigate to.\nYou can inspect the whole stack trace by setting 'debugger.navigation.from.console.to.sources.show.popup' registry value to true.

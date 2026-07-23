@@ -1,0 +1,7 @@
+logpoint.replace.println.undoable.command.name=Replace with Logpoint
+logpoint.add.command.completion=Add Logpoint
+logpoint.tooltip.title=Logpoint
+logpoint.tooltip.history={0} to navigate history
+inspections.group.logpoints=Logpoints
+logpoint.fix.disable.module.name=Disable inspection ''Replace with Logpoint'' for module ''{0}''
+logpoint.fix.enable.module.name=Enable inspection ''Replace with Logpoint'' for module ''{0}''

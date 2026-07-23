@@ -1,0 +1,482 @@
+filetype.css.description=Cascading style sheet
+
+# validation messages
+inspections.unresolved.variable=Cannot find variable ''{0}''
+invalid.css.class.reference=Invalid CSS class reference
+invalid.css.id.reference=Invalid CSS id reference
+invalid.css.integer.value.message=Float px values may render differently on different browsers
+invalid.css.selector=Invalid CSS selector
+invalid.css.class=Invalid CSS class
+invalid.file.reference=Invalid file reference
+unresolved.css.keyframes=Cannot find keyframes with name {0}
+file.refers.not.to=File refers not to {0} file
+
+create.selector.dialog.title=Create Selector
+create.selector.dialog.error.message=Invalid selector
+create.selector.action=Create selector
+
+show.applied.styles.for.tag.action.name=_Show Applied Styles For Tag
+
+#highlighting categories
+css.comment=Comment
+css.identifier=Identifier
+css.property.name=Property name
+css.property.value=Property value
+css.unit=Unit
+css.tag.name=Tag name
+css.keyword=At-keyword
+css.important=Important
+css.string=String
+css.number=Number
+css.function=Function
+css.property=Property
+css.null.value=Null
+css.url=URL
+css.color=Hex color
+css.id.selector=Id selector
+css.class.name=Class name
+css.attribute.name=Attribute name
+css.unicode.range=Unicode range
+css.bad.character=Bad character
+css.ampersand.selector=Ampersand selector
+css.dot=Dot
+css.colon=Colon
+css.comma=Comma
+css.semicolon=Semicolon
+css.parenthesis=Parenthesis
+css.brackets=Brackets
+css.braces=Braces
+css.operation.sign=Operation sign
+css.pseudo.selector=Pseudo selector
+
+css.property.name.label=Property name
+css.property.value.label=Property value
+css.media.feature.label=Media feature
+css.pseudo.selector.label=Pseudo selector
+
+#quick documentation
+css.element=Css element
+pseudo.class=Pseudo class
+pseudo.element=Pseudo element
+# CSS selector specificity: https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+doc.popup.selector.specificity=Specificity:
+
+#parameter info
+name.value.presentable.name=<identifier>
+custom.property.name.value.presentable.name=<custom property name>
+integer.value.presentable.name=<integer>
+java.script.value.presentable.name=<java script>
+angle.value.presentable.name=<angle>
+frequency.value.presentable.name=<frequency>
+position.value.presentable.name=<position>
+resolution.value.presentable.name=<resolution>
+length.value.presentable.name=<length>
+number.value.presentable.name=<number>
+time.value.presentable.name=<time>
+decibel.value.presentable.name=<decibel>
+semitones.value.presentable.name=<semitones>
+flex.value.presentable.name=<flexible length>
+urange.value.presentable.name=<urange>
+percentage.value.presentable.name=<percentage>
+color.value.presentable.name=<color>
+any.value.presentable.name=<any>
+string.value.presentable.name=<string>
+expression.value.presentable.name=<expression>
+selector.value.presentable.name=<selector>
+url.value.presentable.name=<url>
+id.value.presentable.name=<id>
+
+#lookup items
+resolution.in.lookup=resolution
+shape.in.lookup=rect
+counter.in.lookup=counter
+percentage.in.lookup=percentage
+length.in.lookup=length
+time.in.lookup=time
+frequency.in.lookup=frequency
+angle.in.lookup=angle
+flex.in.lookup=flexible length
+integer.in.lookup=integer
+
+css.terms.selector=selector
+css.terms.animation=animation
+css.terms.ruleset=ruleset
+css.terms.variable=custom property
+css.terms.property=property
+css.terms.custom.property.set=custom property set
+css.value.defined.in.at.value.rule=value
+
+invalid.css.property.name.message=Invalid CSS property name
+css.inspections.family=CSS
+css.intentions.category=CSS
+
+css.unclosed.comment=Unclosed comment
+
+css.inspections.missing.semicolon.name=Missing semicolon
+css.inspections.missing.semicolon.fix.message=Insert semicolon
+
+css.inspections.charset.wrong.position=@charset rule must be placed at the very beginning of the stylesheet
+css.inspections.charset.wrong.file=@charset rule must be placed at the very beginning of the CSS file
+css.inspections.charset.wrong.quotes=Charset must be wrapped with double quotes
+css.inspections.charset.unknown.value=Unknown charset
+css.inspections.remove.charset.fix=Remove misplaced @charset
+css.inspections.move.charset.fix=Move @charset at the very beginning of the style sheet
+
+css.inspections.overwritten.properties=Overwritten property
+css.overwritten.properties.message=Property {0} is overwritten
+css.overwriting.properties.duplicates.message=Property {0} duplicates property {1}
+css.overwriting.properties.duplicated.message=Property {0} duplicated by property {1}
+css.overwriting.properties.message=Property {0} overwrites property {1}
+css.overwritten.properties.fix.message=Remove property
+css.remove.element=Remove {0}
+extract.inline.css.action=Extract inline CSS
+extract.inline.css.title=Extract Inline CSS
+css.class.term=Class selector {0}
+css.class.term.with.file=Class selector {0} [{1}]
+css.id.term=Id selector {0}
+css.id.term.with.file=Id selector {0} [{1}]
+
+css.inspections.unresolved.custom.property.at.rule=Unresolved custom property
+css.inspections.unresolved.custom.property.at.rule.message=Cannot resolve <code>#ref</code> custom property
+css.inspections.invalid.custom.property.at.rule.name=Invalid @property name
+css.inspections.invalid.custom.property.at.rule.name.description=A custom property name should have the prefix "--"
+css.inspections.invalid.custom.property.at.rule.declaration=Invalid @property declaration
+css.inspections.invalid.custom.property.at.rule.name.fix=Use the '--' prefix
+css.inspections.invalid.custom.property.at.rule.declaration.description=Required ''{0}'' property is missing
+css.inspections.invalid.custom.property.at.rule.declaration.description.plural=Required properties are missing: {0}
+css.inspections.invalid.custom.property.at.rule.declaration.fix=Add required properties
+
+css.inspections.unknown.unit=Unknown unit
+
+# The name of the inspections that checks CSS class reference in 'composes: some-class' rule, see https://github.com/css-modules/css-modules#composition
+css.inspections.unresolved.class.in.composes.rule=Unresolved class in 'composes' rule
+css.inspections.unknown.property=Unknown property
+css.inspections.unknown.message=Unknown CSS property <code>#ref</code>
+css.inspections.vendor.specific.checkbox.label=Ignore vendor specific CSS properties
+css.inspections.custom.checkbox.label=Custom CSS properties:
+css.unknown.property.fix.name=Add {0} to custom properties
+css.unknown.vendor.property.fix.name=Ignore vendor specific CSS properties
+css.inspections.create.style.current.file=Current file
+css.inspections.create.style.new.file=New CSS file...
+css.inspections.create.style.existing.file=Existing CSS file...
+css.inspections.create.style.new.file.title=Create New CSS File
+css.inspections.create.style.new.file.text=Please specify location and name for a new CSS file.
+css.inspections.browser.compatibility.properties=Property is incompatible with selected browsers
+no.mdn.data.for.property=CSS property ''{0}'' is not supported (no MDN compatibility data)
+property.not.supported.by.some.browsers=CSS property ''{0}'' is not supported by {1}
+
+css.inspections.invalid.group=Invalid elements
+css.inspections.invalid.pseudo=Invalid pseudo-selector
+css.inspections.invalid.function=Invalid function
+css.inspections.invalid.element.selector=Invalid type selector
+css.inspections.invalid.media.feature=Invalid media feature
+css.inspections.invalid.property.value=Invalid property value
+css.inspections.invalid.charset=Misplaced or incorrect @charset
+css.inspections.negative.value=Negative property value
+css.inspections.negative.value.text=Negative value is not allowed
+
+css.inspections.probable.bugs.group=Probable bugs
+css.inspections.float.px.length=Non-integer length in pixels
+css.inspections.float.px.length.fix.error=Cannot round value {0}
+css.inspections.float.px.length.fix.message=Round a number to integer
+css.inspections.missing.comma.inspection.name=Missing comma in selector list
+css.inspections.missing.comma=Missing comma
+css.inspections.missing.comma.fix.message=Insert missing comma
+css.inspections.nongeneric.fontname=Missing generic font family name
+css.overwritten.nongeneric.fontname.message=Font property {0} does not have generic default
+css.overwritten.nongeneric.fontname.fix.message=Insert generic font name
+
+css.inspections.code.style.issues.group=Code style issues
+css.inspections.redundant.unit=Redundant measure unit
+css.inspections.redundant.unit.message=Unit of measure <code>#ref</code> is redundant
+css.inspections.redundant.unit.fix.message=Remove unit qualifier
+
+# common invalid inspections
+css.inspections.wrong.context={0} is allowed only in following rules\: {1}
+css.inspections.element.not.allowed.here={0} is not allowed here
+css.inspections.wrong.media={0} is allowed only in following media groups\: {1}
+
+# pseudo-selector inspection
+css.inspections.invalid.pseudo.unknown.message=Unknown pseudo selector ''{0}''
+css.inspections.invalid.pseudo.keyframes.message=''{0}'' pseudo selector is not allowed in keyframes name
+css.inspections.invalid.pseudo.prefix=Should have prefix ''{0}''
+css.inspections.invalid.pseudo.prefix.quickfix.family.name=Replace pseudo selector
+css.inspections.invalid.pseudo.prefix.quickfix=Replace ''{0}'' with ''{1}''
+
+css.inspections.unknown.at.rule=Unknown at-rule
+css.inspections.unknown.target=Unresolved file reference
+css.inspections.convert.color.to.hex=Color could be replaced with #-hex
+css.inspections.convert.color.to.rgb=Color could be replaced with rgb()
+
+css.inspections.code.quality.tools.group=Code quality tools
+css.inspections.w3.validator.key=W3C CSS validator
+
+css.inspections.deprecated.value=Deprecated value
+
+css.intentions.update.background.image.size.family=Apply width and height of background image
+css.intentions.insert.background.image.size=Add 'width' and 'height' properties
+css.intentions.update.background.image.size=Update 'width' and 'height' properties
+css.intentions.update.background.image.size.error=Cannot resolve image reference
+css.intentions.update.background.image.calculate.size.error=Cannot read image from reference
+css.intentions.replace.quotes=Replace quotes
+
+css.intentions.extract.image=Extract image
+css.intentions.extract.image.title=Extract Image
+css.intentions.extract.image.save.dialog.title=Extract Data: URL to Image File
+css.intentions.extract.image.cannot.read.data.uri=Cannot read data: URL
+css.intentions.extract.image.cannot.define.image.type=Cannot define image type
+css.intentions.extract.image.cannot.save.file=Cannot save image file
+
+css.intentions.color.change=Change color
+# {0} - argument is like 'rgb()', 'hsl()', or '#-hex' (without quotation marks). It may also be 'color name', see the `color.name` property below
+css.intentions.color.convert=Convert color to {0}
+css.intentions.color.convert.error=Cannot convert color {0} to {1}
+# argument of `css.intentions.color.convert` and `css.intentions.color.convert.error`
+color.name=color name
+css.intentions.replace.with.color.name=Replace with color name
+css.intentions.replace.with.color.name.text=Replace with ''{0}''
+
+css.intentions.replace.var.with.fallback.value=Replace var() with its fallback value
+
+css.inspections.invalid.import=Misplaced @import
+css.invalid.import.fix.name=Move CSS @import to top of the file
+css.invalid.import.remove.fix.name=Remove misplaced @import
+
+css.selector.matches.unknown.element=Selector matches unknown element {0}
+css.invalid.invalid.html.tag.reference.class.action=Declare {0} as a class
+css.invalid.invalid.html.tag.reference.id.action=Declare {0} as an id
+
+# expand shorthand action
+expand.shorthand.action=Expand shorthand property
+expand.shorthand.family=Expand shorthand property
+expand.shorthand.error=Cannot perform shorthand expansion
+
+# optimize similar properties
+css.inspections.replace.with.shorthand.safely=Properties may be safely replaced with a shorthand
+css.inspections.replace.with.shorthand.unsafely=Properties may probably be replaced with a shorthand
+css.inspections.replace.with.shorthand.0.safely=Properties may be safely replaced with ''{0}'' shorthand
+css.inspections.replace.with.shorthand.0.unsafely=Properties may probably be replaced with ''{0}'' shorthand
+css.inspections.quick.fix.replace.with.shorthand.safely=Replace with ''{0}'' shorthand
+css.inspections.quick.fix.replace.with.shorthand.unsafely=Replace with ''{0}'' shorthand (may change result)
+
+#css tree
+css.inspections.unused.symbol=Unused selector
+css.inspections.unused.symbol.text=Selector {0} is never used
+css.inspections.unused.symbol.intention=Remove unused selector {0}
+
+# code style
+css.code.style.braces.placement=&Braces placement:
+css.code.style.align.value=&Align values:
+css.code.style.braces.end.of.line=End of line
+css.code.style.braces.next.line=Next line
+css.code.style.value.align.on.colon=On colon
+css.code.style.value.align.on.value=On value
+css.code.style.value.align.do.not.align=Do not align
+css.code.style.quote.marks=&Quote marks:
+css.code.style.quote.marks.double=Double
+css.code.style.quote.marks.single=Single
+css.code.style.quotes.enforce.on.format=&Enforce on format
+code.style.label.blank.lines.around.top.level.block=Around top-level block:
+code.style.label.blank.lines.around.nested.selector=Around nested selector:
+
+css.settings.comments=Comments
+
+# functions inspection
+css.inspections.invalid.function.unknown.message=Unknown function <code>#ref</code>
+css.inspections.function.mismatched.parameters=Mismatched parameters {0}({1})
+css.inspections.function.mismatched.types=Argument type mismatch. The arguments {0} and {1} must be of the same type: <number>, <dimension>, or <percentage>.
+
+# media features inspection
+css.inspections.invalid.media.feature.unknown.message=Unknown media feature <code>#ref</code>
+css.inspections.media.feature.mismatched.values=Mismatched value {0}({1})
+
+# property value inspection
+css.inspections.property.mismatched.values=Mismatched property value {0}({1})
+css.inspections.property.mismatched.container.values=Container query length unit "{0}" is not applicable outside @container
+
+# css style browser
+css.browser.title=CSS Styles
+css.browser.styles=Styles for {0} tag
+css.browser.styles.title=Styles for {0} Tag
+css.browser.preview.title.default=Source preview for property definition block
+css.browser.preview.title=Source Preview for {0} Property Definition Block
+css.browser.actions.refresh=Refresh
+css.browser.actions.refresh.description=Refresh applied styles
+css.browser.actions.navigate.to.tag=Navigate to Tag
+css.browser.actions.navigate.to.tag.description=Navigate to Tag definition
+css.browser.actions.navigate.to.style.source=Navigate to Style Source
+css.browser.actions.navigate.to.style.source.description=Navigates to style source
+css.browser.actions.expand.styles=Expand Styles
+css.browser.actions.collapse.styles=Collapse Styles
+css.browser.actions.closetab=Close Current Tab
+css.browser.actions.closetab.description=Closes current Tab or ToolWindow
+
+# color
+css.convert.color.to.hex.family=Convert color to #-hex
+css.convert.color.to.rgb.family=Convert color to rgb()
+css.convert.color.value.to.hex=Convert color to #-hex
+css.convert.color.value.to.rgb=Convert color to rgb()
+css.choose.color.dialog.title=Choose Color
+css.code.style.spaces.frame.title=Spaces
+css.code.style.space.after.colon=After &colon
+css.code.style.space.before.opening.brace=B&efore opening brace
+css.code.style.tab.before.closing.brace=Align closing brace with &properties
+
+css.code.style.colors.frame.title=Hex Colors
+css.code.style.colors.format.checkbox=Convert hex colors &format to:
+css.code.style.colors.format.long=&Long format
+css.code.style.colors.format.short=&Short format
+css.code.style.colors.case.checkbox=Convert &hex colors to:
+css.code.style.colors.case.upper=&Upper case
+css.code.style.colors.case.lower=Lo&wer case
+
+# live-template contexts
+live.template.context.generic=CSS
+live.template.context.property.value=Property value
+live.template.context.declaration.block=Declaration block
+live.template.context.ruleset.list=Ruleset list
+
+# structure view
+structure.imports.filter=Show Imports
+structure.custom.properties.filter=Show Custom Properties
+
+suppress.inspection.statement=Suppress for statement
+suppress.inspection.ruleset=Suppress for ruleset
+suppress.inspection.all.ruleset=Suppress all inspections for ruleset
+suppress.inspection.atrule=Suppress for at-rule
+suppress.inspection.all.atrule=Suppress all inspections for at-rule
+
+css.stylesheets.configurable.title=Style Sheets
+stylesheet.code.style.group.description=Set of code styles based on Style Sheets.
+
+# suppress inspection "UnusedProperty" - for generating list of inner configrables, see ConfigurableEditor#createDefaultContent
+configurable.stylesheets.settings.description=Style Sheet settings
+
+css.rename.custom-property.error.must-start-with-two-dashes=Custom CSS property name must start with two dashes --
+css.rename.custom-property.error..must-not-be-empty=Custom CSS property name must not be empty
+
+css.dialects.caption=To change what CSS dialect {0} should use for a file, a directory, or the entire project, \
+  add its path if necessary and then choose a dialect from the drop-down list.
+css.dialects.column.title=CSS Dialect
+css.dialects.title=Dialects
+css.w3c.dialect.name=W3C
+css.dialects.override.warning.text=There are CSS dialects specified for the subdirectories. Override them?
+css.dialects.override.warning.title=Override Subdirectory CSS Dialects
+switch.to.css.dialect.quickfix.fanily.name=Switch CSS dialect
+switch.to.css.dialect.quickfix.name=Switch to {0} CSS
+
+css.emmet.enable.label=Enable &CSS Emmet
+css.emmet.fuzzy.search=Enable &fuzzy search among CSS abbreviations
+css.emmet.auto.insert.vendor.prefixes=Auto insert css vendor &prefixes
+css.emmet.enable.unknown.properties.expansion=Enable expansion of &unknown properties ('unknown' to 'unknown\: ;')
+
+cannot.extract.variable.in.this.context=Cannot extract variable in this context
+
+duplicate.settings.css.index.names = Property names
+duplicate.settings.css.index.values = Property values
+duplicate.settings.inspection.css.length = Skip duplicates simpler than: | CSS properties
+duplicate.settings.label.start.do.not.show.duplicates.containing.less.than.n=Do not show duplicates containing less than
+duplicate.settings.label.tail.n.css.properties=CSS properties
+
+action.ShowAppliedStylesAction.text=Show Applied Styles For Tag
+action.ReloadCssDescriptors.text=Reload CSS Descriptors
+configurable.CssEmmetConfigurable.display.name=CSS
+settings.show.css.color.preview.as.background=Show CSS color preview as background
+settings.sort.css.properties=&Sort CSS properties
+settings.by.name=&By name
+settings.custom.order=&Custom order:
+settings.comma.separated.list.of.css.properties.without.vendor.prefix=Comma-separated list of CSS properties without vendor prefix
+css.code.style.keep.single.line.blocks=&Keep single-line blocks
+column.info.value=Value
+column.info.name=Name
+progress.title.calculating.image.size=Calculating image size...
+dialog.title.images=Images
+column.info.property=Property
+dialog.title.new.css.property=New CSS Property
+dialog.message.property.name=Property name:
+action.text.separator.open.files=Open Files
+action.text.separator.recent.files=Recent Files
+action.text.separator.linked.files=Linked Files
+action.text.extract.ruleset=Extract ruleset
+validation.info.custom.property.with.this.name.already.exists=Custom property with this name already exists in the file
+validation.info.invalid.custom.property.name=Invalid custom property name
+validation.info.custom.property.name.cant.be.dash.dash=Custom property name can't be '--'
+validation.info.custom.property.name.must.start.with.dash.dash=Custom property name must start with '--'
+label.text.name2=Name:
+message.pattern.unknown.font.family=Unknown font-family
+command.name.create.file.0=Create File {0}
+dialog.message.target.file.doesn.t.exist.do.you.want.to.create.it=Target file doesn't exist.\nDo you want to create it?
+# Small modal dialog with one field that accepts a file path. Title: Move Ruleset (see property 'title.move.0.rulesets'). This is a label for the field. So it reads like 'Move ruleset to [file]'.
+label.text.to=&To:
+psi.element.type.name.color=color
+message.pattern.value.0.not.found=Cannot find @value {0}
+action.name.create.stylesheet.0=Create Stylesheet {0}
+dialog.kind.0.file={0} file
+dialog.title.new.stylesheet=New Stylesheet
+action.NewStylesheetFile.description=Creates a stylesheet
+action.NewStylesheetFile.text=Stylesheet
+lookup.advertisement.press.0.again.for.selectors.from.all.stylesheets=Press {0} again for selectors from all stylesheets
+settings.display.name.css=CSS
+label.compresses.css.files=Compresses .css files
+
+parsing.error.0.expected={0} expected
+parsing.error.selector.expected=Selector expected
+parsing.error.url.or.string.expected=URL or string expected
+parsing.error.media.query.expected=Media query expected
+parsing.error.expression.list.expected=Expression list expected
+parsing.error.media.expression.expected=Media expression expected
+parsing.error.identifier.expected=Identifier expected
+parsing.error.closing.bracket.expected=']' expected
+parsing.error.unexpected.term=Unexpected term
+parsing.error.unexpected.terms=Unexpected terms
+parsing.error.opening.parenthesis.expected='(' expected
+parsing.error.closing.parenthesis.expected=')' expected
+parsing.error.invalid.parameter=Invalid parameter
+parsing.error.invalid.argument=Invalid argument
+parsing.error.unexpected.interpolation=Unexpected interpolation
+parsing.error.unexpected.token=Unexpected token
+parsing.error.term.expected=Term expected
+parsing.error.expected.string.or.identifier=Expected a string or an identifier
+parsing.error.unexpected.asterisk=Unexpected asterisk
+parsing.error.unknown.page.margin.keyword=Unknown page margin keyword
+parsing.error.keyframe.block.expected=Keyframe block expected
+parsing.error.invalid.keyframes.name=Invalid keyframes name
+parsing.error.divider.should.be.a.number=Divisor should be a number
+parsing.error.end.of.line.expected=End of line expected
+parsing.error.counter.style.name.expected=Counter-style name expected
+parsing.error.and.or.or.expected='and' or 'or' expected
+parsing.error.or.expected='or' expected
+parsing.error.and.expected='and' expected
+parsing.error.supports.condition.expected=@supports condition expected
+parsing.error.plus.or.minus.expected='+' or '-' expected
+parsing.error.opening.parenthesis.or.identifier.expected='(' or identifier expected
+parsing.error.media.feature.expected=Media feature expected
+parsing.error.variable.expected=Variable expected
+parsing.error.expression.expected=Expression expected
+parsing.error.semicolon.expected=';' expected
+parsing.error.opening.brace.expected='{' expected
+parsing.error.closing.brace.expected='}' expected
+parsing.error.operand.expected=Operand expected
+parsing.error.whitespace.expected=Whitespace expected
+parsing.error.unexpected.whitespace=Unexpected whitespace
+parsing.error.selector.suffix.expected=Selector suffix expected
+parsing.error.pseudo.element.or.pseudo.class.expected=Pseudo element or pseudo class expected
+parsing.error.keyframes.selector.expected=Keyframes selector expected
+parsing.error.page.selector.expected=Page selector expected
+parsing.error.region.selector.expected=Region selector expected
+parsing.error.function.expected=Function expected
+parsing.error.supports.condition.or.declaration.expected=@supports condition or declaration expected
+parsing.error.from.expected='from' expected
+parsing.error.file.path.expected=File path expected
+parsing.error.property.name.expected=Property name expected
+parsing.error.attribute.name.expected=Attribute name expected
+parsing.error.operator.sign.expected=Operator sign expected
+
+dialog.message.error.creating.file=Error creating file:\n{0}
+dialog.message.target.file.not.stylesheet.file=Target file is not a stylesheet file.
+title.move.0.rulesets=Move {0, choice, 1#Ruleset|2#Rulesets}
+title.move.0.rulesets.to=Move {0, choice, 1#Ruleset|2#Rulesets} To
+dialog.message.target.file.not.specified=Target file not specified.
+dialog.message.source.target.files.should.be.different=Source and target files should be different.
+command.name.update.css.color=Update CSS Color
+label.version=Version:

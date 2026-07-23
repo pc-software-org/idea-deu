@@ -1,0 +1,5 @@
+action.ErrorAutoReporterStateInternalAction.text=State of Sending Error Reports
+
+auto.report.enabled.title=Thank you for your assistance!
+auto.report.enabled.text=New errors will be reported automatically.
+auto.report.enabled.settings.action=Open settings

@@ -1,0 +1,3 @@
+action.TraceTypeScriptServiceTypeEvaluator.text=Trace TypeScript Service Type Evaluator\u2026
+action.AbortTypeScriptCompilerRequestsOutsideProjectAction.text=Abort TypeScript Compiler Requests Outside Project
+action.AbortTypeScriptCompilerRequestsOutsideProjectAction.description=Allows enabling a mode that throws an assertion error when a service request attempts to evaluate the type of an element outside the project of currently opened files

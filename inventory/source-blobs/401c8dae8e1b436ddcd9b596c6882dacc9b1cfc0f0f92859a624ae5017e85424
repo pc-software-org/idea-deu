@@ -1,0 +1,72 @@
+group.com.intellij.github.actions.ide.new.file.text=GitHub Actions
+
+#UI to create GitHub Action
+action.CreateGitHubActionFileAction.text=GitHub Action
+action.CreateGitHubActionFileAction.description=Create a GitHub action \u2014 action.yml file
+github.action.file.create=Create a GitHub Action File
+github.action.file.description=GitHub action script file \u2014 action.yml
+invalid.github.action.file.name=GitHub action file name should be: {0}
+
+#UI to create GitHub Workflow
+action.CreateGitHubWorkflowFileAction.text=GitHub Workflow
+action.CreateGitHubWorkflowFileAction.description=Create a GitHub workflow script file
+action.GitHubRefreshActionsCatalog.text=Refresh GitHub Actions Catalog
+action.GitHubRefreshActionsCatalog.description=Force a re-scan of the GitHub Actions organization catalog, bypassing the cached TTL window
+github.workflow.file.create=Create a GitHub Actions Workflow File
+github.workflow.file.description=GitHub workflow script file
+github.workflow.invalid.file.name=Workflow file extension should be ".yml" or ".yaml"
+
+gutter.name.action.color=Action color
+gutter.name.action.icon=Action icon
+
+github.action.inspections.invalid.params=Invalid parameters
+github.action.inspections.group.name=GitHub actions
+github.action.inspection.message.required.parameter.for.action.missing=Missing required parameter(s): "{0}" for: "{1}"
+github.action.intention.add.missing.action.params=Add missing parameter(s)
+
+github.action.inspections.undefined.params=Undefined parameters
+github.action.inspection.message.undefined.parameter=Undefined parameter: "{0}"
+github.action.intention.family.name.remove.undefined.parameter=Remove undefined parameter
+
+github.action.inspections.undefined.action=Undefined action/file reference
+inspection.message.unresolved.action.reference=Unresolved action/workflow reference: "{0}"
+inspection.message.unresolved.action.with.issue.reference=Unresolved action/workflow reference: "{0}"\nError {1} message: {2}
+
+github.action.inspections.illegal.job.dependency=Undefined job dependency
+github.action.inspections.message.illegal.job.dependency=Undefined job dependency: "{0}"
+github.action.intention.family.name.remove.illegal.job=Remove undefined job reference
+
+github.action.inspections.cyclic.job.dependency=Cyclic job dependency
+github.action.inspections.message.cyclic.job.dependency=Cyclic job dependency: "{0}"
+
+pattern.fileset.no.matching.files=Cannot find matching files
+
+github.action.inspections.std.lib.validation.name=Standard library functions validation
+github.action.inspections.std.lib.validation.unknown.function=Unknown function call
+github.action.inspections.std.lib.validation.incorrect.arguments.count=Incorrect arguments number: expected {0}, but got {1}
+label.github.actions.expression.language=GitHub actions expression language
+
+github.action.completion.refresh.link=Refresh GitHub Actions Catalog\u2026
+github.action.completion.refreshing.link=Refreshing GitHub Actions Catalog\u2026
+intention.name.reload.action=Reload action/workflow
+notification.title.action.reload.issue=Action/workflow reloading issue
+notification.content.not.found.action.description.file=File for action "{0}" not found
+notification.content.cannot.download.action.description.file=Cannot get a file for action/workflow: "{0}"
+notification.content.github.rate.limit=Rate limit exceeded. Please check your account settings. Error text: {0}
+notification.content.github.download.file.error=Error downloading file: {0}
+progress.title.loading.action=Loading action/workflow: "{0}"
+
+# VCS Log commit status
+vcs.log.github.commit.status.column.name=GitHub Commit Checks
+vcs.log.github.commit.status.popup.title=GitHub Commit Checks
+vcs.log.github.commit.status.popup.empty=There are no status checks for this commit
+vcs.log.github.commit.status.popup.error=Failed to load commit status
+
+github.action.support=GitHub actions
+github.actions.support.enabled.description=Enable GitHub actions support: parameter autocompletion, inspections and navigation inside the workflow, and custom action files
+advanced.setting.github.actions.support.enabled=GitHub actions authoring support (requires IDE restart)
+GithubActionsCronDocumentationTarget.cron.explanation=<p>Cron explanation: <b>{0}</b></p><p>For Cron format explanation, see <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule">https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule</a>.</p>
+github.actions.configure.github.settings=Open GitHub settings\u2026
+github.action.file.create.title=New GitHub Action File
+github.workflow.file.create.title=New GitHub Workflow File
+create.directory.completion.description=GitHub actions

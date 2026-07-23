@@ -1,0 +1,4 @@
+connecting.to.daemon=Connecting to Daemon\u2026
+daemon.connection.error=Error connecting to Daemon
+host.connection.error=Error connecting to host
+daemon.connection.timed.out=Timed out connecting to host

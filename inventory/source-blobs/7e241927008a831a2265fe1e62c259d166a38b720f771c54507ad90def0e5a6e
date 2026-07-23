@@ -1,0 +1,118 @@
+action.connection.config.widget.enable.text={0, choice, 0#Disable|1#Enable} Connection Configuration Widget (Internal)
+
+wire.stats.status.bar.text=({0}) \u2191{1}/s / \u2193{2}/s
+code.with.me.wire.stats=Remote Development Wire Stats
+protocol.transmission.stats=Protocol transmission stats
+checkbox.stay.on.top=Stay on top
+button.show.protocol.tree.stats.for.selected.wire=Show protocol tree stats for selected wire
+protocol.stats.for.wire.id=Protocol stats for {0}
+protocol.entities.wire.stats.registry.column.name.entity=Entity
+protocol.entities.wire.stats.registry.column.name.speed.down=Speed down
+protocol.entities.wire.stats.registry.column.name.speed.up=Speed up
+protocol.entities.wire.stats.registry.column.name.total.down=Total down
+protocol.entities.wire.stats.registry.column.name.total.up=Total up
+wire.stats.table.registry.column.name.wire=Wire
+wire.stats.table.registry.column.name.speed.down=Speed down
+wire.stats.table.registry.column.name.speed.up=Speed up
+wire.stats.table.registry.column.name.total.down=Total down
+wire.stats.table.registry.column.name.total.up=Total up
+wire.stats.table.registry.column.name.compression.down=Zip rate down
+wire.stats.table.registry.column.name.compression.up=Zip rate up
+
+# Connection
+
+connection.configuration.entry.idle.timeout.name=Connection Idle
+connection.configuration.entry.idle.timeout.description=Timeout for transport in not connected state before drop the channel connection
+
+connection.configuration.entry.pings.interval.name=Ping Interval
+connection.configuration.entry.pings.interval.description=Time interval between two pings that perform the connection health check
+
+connection.configuration.entry.connection.speed.check.interval.name=Connection Speed Check Interval
+connection.configuration.entry.connection.speed.check.interval.description=The amount of time between intervals of the connection speed checking
+
+connection.configuration.entry.last.received.message.check.interval.name=Last Received Message Check Interval
+connection.configuration.entry.last.received.message.check.interval.description=Interval between the checks of the last received message from wire
+
+connection.configuration.entry.transport.ready.timeout.name=Transport Ready Timeout
+connection.configuration.entry.transport.ready.timeout.description=Timeout for transport to be fully prepared and ready
+
+connection.configuration.entry.transport.receive.system.frame.timeout.name=Receive System Frame Timeout
+connection.configuration.entry.transport.receive.system.frame.timeout.description=The timeout duration for receiving a system frame in the transport layer
+
+connection.configuration.entry.transport.await.first.connected.timeout.name=Transport Await First Connected Timeout
+connection.configuration.entry.transport.await.first.connected.timeout.description=Represents the timeout for awaiting transport connections
+
+connection.configuration.entry.transport.lifetime.termination.delay.name=Transport Termination Delay
+connection.configuration.entry.transport.lifetime.termination.delay.description=Represents the duration of termination delay for the transport lifetime
+
+connection.configuration.entry.wire.ready.timeout.name=Wire Ready Timeout
+connection.configuration.entry.wire.ready.timeout.description=Timeout for wire to be fully prepared and ready
+
+connection.configuration.entry.codeWithMe.reconnection.timeout.name=Code With Me Reconnection Timeout
+connection.configuration.entry.codeWithMe.reconnection.timeout.description=JetBrains Client reconnection timeout for Code With Me
+
+connection.configuration.entry.remoteDev.reconnection.timeout.name=Remote Dev Reconnection Timeout
+connection.configuration.entry.remoteDev.reconnection.timeout.description=JetBrains Client reconnection timeout for Remote Development
+
+connection.configuration.entry.remoteDev.show.progress.delay.name=Show connection progress dialog delay
+connection.configuration.entry.remoteDev.show.progress.delay.description=Delay before showing connection progress dialog in seconds
+
+connection.configuration.entry.wireStorage.unconfirmedMessagesBufferSize.name=Unconfirmed Messages Buffer Size
+connection.configuration.entry.wireStorage.unconfirmedMessagesBufferSize.description=Size in bytes for a buffer to store unconfirmed messages. Messages are stored in the buffer in non-connected state for post-processing after the connection is restored
+
+connection.configuration.entry.wireStorage.unconfirmedMessagesBuffer.overflow.check.delay.name=Unconfirmed Messages Buffer Overflow Delay
+connection.configuration.entry.wireStorage.unconfirmedMessagesBuffer.overflow.check.delay.description=Delay between checks for unconfirmed messages buffer overflow
+
+connection.configuration.entry.is.force.drop.transport.name=Force Dropping New Transport
+connection.configuration.entry.is.force.drop.transport.description=The setting allows you to force the dropping of any newly created transport for debugging purposes
+
+connection.configuration.entry.remoteDev.create.transport.when.link.expired.name=Create transport when a join link expired
+connection.configuration.entry.remoteDev.create.transport.when.link.expired.description=Setting allows forcing a client to reconnect to a host without waiting for a new join link
+
+# Control Center
+control.center.tab.connection.config.widget.title=Connection Config (Internal)
+
+control.center.tab.connection.config.widget.enable.checkbox.text=Enable Connection Widget
+control.center.tab.connection.config.widget.configuration.overrides.reset=Reset
+control.center.tab.connection.config.widget.disabled.state.label=The widget allows you to control connection flow and manage connection settings
+
+control.center.tab.connection.config.widget.ping.panel.title=Pings
+control.center.tab.connection.config.widget.ping.panel.direct.label=Direct
+control.center.tab.connection.config.widget.ping.panel.ui.label=UI
+control.center.tab.connection.config.widget.ping.panel.delay.placeholder.text=Delay
+
+control.center.tab.connection.config.widget.connection.state.panel.title=Connection State
+control.center.tab.connection.config.widget.connection.state.panel.transport.label=Transport
+control.center.tab.connection.config.widget.connection.state.panel.wire.label=Wire
+control.center.tab.connection.config.widget.connection.state.panel.button.drop.text=Drop
+
+control.center.tab.connection.config.widget.connection.config.panel.title=Connection Config
+
+control.center.tab.connection.config.widget.connection.config.panel.int.property.suffix=time(s)
+
+action.ShowConnectionConfigurationWidgetInternalAction.text=Enable Connection Configuration Widget (Internal)
+
+
+notification.dialog.backend.title=Remote Development
+
+notification.error.dialog.rd.host.exiting.title=The IDE backend is closed
+notification.error.dialog.rd.host.exiting.message=The IDE is closing due to the IDE backend being closed
+
+notification.error.dialog.connection.error.message=Host session has been terminated due to error
+
+notification.connection.rd.other.controller.connected.title=Connection declined by the IDE backend
+notification.connection.rd.other.controller.connected.message=Cannot connect due to another connection to the same IDE backend
+
+notification.error.dialog.connection.declined.message=Connection declined by the host
+
+notification.close.button.text=Close
+
+
+connection.dialog.connection.problem.detailed.error.message=Cannot connect to a remote host due to the error: {0}
+connection.dialog.connection.problem.general.error.message=Cannot connect to a remote host
+
+connection.status.mismatched.fingerprint=Host fingerprint mismatch. Please make sure you use a valid URL to join.
+
+#connection progress dialog
+jetbrains.client.tm=JetBrains Client
+message.waiting.for.host.unattended=Connecting to remote host\u2026

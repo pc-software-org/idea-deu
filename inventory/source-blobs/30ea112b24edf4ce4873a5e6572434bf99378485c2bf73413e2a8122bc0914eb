@@ -1,0 +1,73 @@
+product.name=Code With Me
+controller.remote.dev=Controller in Remote Development
+
+error.url.issue=Error message: {0}
+
+notification.action.read.only.modification.title=Read-only modification
+notification.action.read.only.modification=Action ''{0}'' tries to modify read-only document
+notification.group.cwm.zipped.logs=Remote Development zipped logs
+
+action.ShownConnectionConfigurationWidget.text=Show Connection Configuration Widget (Internal)
+
+debugger.evaluation.no.access=Evaluation is disabled, there is no write access provided by host
+
+permission.mode.readonly=Read-only
+permission.mode.readonly.description=Guests are not allowed to make any changes
+permission.mode.editfiles=Edit files
+permission.mode.editfiles.description=Guests can access and edit files
+permission.mode.fullaccess=Full access
+permission.mode.fullaccess.description=Guests can have full control over your machine!
+permission.mode.custom=Custom\u2026
+
+dialog.title.submit.logs=Submit Logs
+dialog.title.submit.logs.request=Logs are requested from this machine.\nIDE logs to be submitted: {0}
+dialog.title.submit.logs.allow=Allow Access to Your Logs
+
+# Port Forwarding
+portForwarding.tableHeader.hostPort=Host Port
+portForwarding.tableHeader.portType=Protocol
+portForwarding.createPortForwardingDialog=Port Forwarding
+portForwarding.createPortForwardingDialog.portType=Protocol:
+portForwarding.createPortForwardingDialog.portNumber=Port:
+portForwarding.createPortForwardingDialog.name=Name:
+portForwarding.createPortForwardingDialog.description=Description:
+portForwarding.createPortForwardingDialog.portNumber.validationError=The port number should be between 1 and 65535
+portForwarding.createPortForwardingDialog.portNumber.alreadyForwarded=Local port {0,number,#} is already in use
+portForwarding.createPortForwardingDialog.portNumber.not.null=The port number should be valid
+portForwarding.toolwindow.table.empty.text=No ports forwarded
+port.forwarding.error.port.out.of.valid.range.message=Port {0,number,#} is out of valid port range {1}
+port.forwarding.error.port.already.forwarded.message=Port {0,number,#} is already forwarded
+port.forwarding.error.cyclic.port.forwarding.message=Forwarding port {0,number,#} causes cyclic forwarding
+port.forwarding.error.forwarding.declined.by.user.message=Forwarding for port {0,number,#} was declined by a user
+
+metrics.resources.critical=Resources critical
+metrics.resources.low=Resources low
+metrics.resources.normal=
+metrics.server.ram.label=RAM {0}%
+metrics.server.ram.full.label=RAM Full {0}%
+metrics.jvm.ram.label=JVM RAM {0}%
+metrics.jvm.ram.full.label=JVM RAM Full {0}%
+metrics.disk.label=Disk {0}%
+metrics.disk.full.label=Disk Full {0}%
+metrics.load.average.label=Load {0}
+metrics.cpu.label=CPU {0}%
+
+portForwarding.action.openInBrowser=Open in browser
+portForwarding.action.forwardPort=Forward Port
+portForwarding.action.forwardPortAndOpenInBrowser=Forward Port and Open in Browser
+portForwarding.action.stopForwarding=Stop Forwarding
+
+#Screen forwarding
+screen.forwarding.xpra.not.found.path.from.settings=Xpra is not found at {0} or the file has insufficient permissions
+screen.forwarding.xpra.not.found.env.path.and.default.location=Xpra not found in PATH and at default location {0}
+screen.forwarding.xpra.not.found.env.path=Xpra is not found in PATH
+
+control.center.tab.connection.config.widget.connection.config.panel.reconnection.timeout.entry.name=Reconnection Timeout
+
+control.center.tab.connection.config.widget.client.panel.title=Clients
+control.center.tab.connection.config.widget.client.panel.id.label=ID
+control.center.tab.connection.config.widget.client.panel.button.copy.text=Copy
+remote.files.loading.command.title=Transfer Files Between Client and Host
+remote.files.loading.title=Loading {0,choice,1#{0} file|2#{0} files} to the {1,choice,0#host|1#client} file system
+remote.files.loading.overwrite.title=File-Transfer Conflict
+remote.files.target.directory.chooser.title=Choose Where to Download Files from {0,choice,0#Client|1#Host}

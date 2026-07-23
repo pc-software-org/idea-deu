@@ -1,9 +1,0 @@
-action.JupyterAddSQLCellAction.text=SQL
-action.JupyterAddSQLCellAction.description=Insert a SQL cell
-
-action.JupyterConvertToSqlCellAction.text=_Convert Cell to SQL
-action.JupyterConvertToSqlCellAction.description=Convert cell to SQL cell
-
-jupyter.sql.data.frame.selection=DataFrame
-jupyter.sql.data.source.absent=There are no Data Sources in this project yet
-jupyter.sql.manage.data.source=Manage Data Sources\u2026

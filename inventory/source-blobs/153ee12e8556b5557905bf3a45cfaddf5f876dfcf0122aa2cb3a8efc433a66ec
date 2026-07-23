@@ -1,0 +1,20 @@
+# Authorship API labels
+provenance.authorship.compute.action.label=Computing Source Authorship
+
+# History API labels
+provenance.history.compute.action.label=Collecting File Changes
+
+# Provenance storage labels
+provenance.storage.project.closing.flush.action.title=Saving Provenance Entries\u2026
+
+# UI provenance authorship indicators
+provenance.authorship.indicator.ai=AI
+provenance.authorship.indicator.human=\uD83D\uDC64
+
+# Code Provenance activation settings (Tools | Code Provenance)
+provenance.activation.configurable.title=Code Provenance
+provenance.activation.mode.label=Change tracking
+provenance.activation.mode.autodiscovery=Automatic
+provenance.activation.mode.enable=Always on
+provenance.activation.mode.disable=Off
+provenance.activation.description=Code Provenance records how code changes are made (typed, pasted, AI-generated, refactored). Automatic tracking is enabled only when a consumer, such as AI Assistant, is present.
