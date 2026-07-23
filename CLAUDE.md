@@ -21,6 +21,12 @@ JetBrains Marketplace **plugin id 32785**. Apache-2.0 (+ NOTICE). Remote:
   markup/tag structure, placeholders. Prose `%` after a digit/`}` is not printf.
 - Pseudo-tag sentinels (`<No Group>`, `<empty name>`) must stay verbatim; empty
   `.properties` bundles legitimately have zero units.
+- **Marketplace "What's new" comes from `<change-notes>`, filled by the build**
+  from `CHANGELOG.md`. `package`/`verify` render the section matching
+  `plugin_version` into the descriptor's CDATA block. Fail-loud: a missing or
+  empty section aborts the build (no release without notes; blank "What's new"
+  can't be fixed after upload). Only `## <version>` headers and `-`/`*` bullets
+  are supported.
 
 ## Common tasks
 
@@ -28,7 +34,9 @@ JetBrains Marketplace **plugin id 32785**. Apache-2.0 (+ NOTICE). Remote:
 - Build: `python -m scripts.idea_deu generate && python -m scripts.idea_deu package`.
 - Translate open units: `next-batch --limit 200` → fill each JSONL line's
   `target` → `import-batch <path>` → commit. Dispatch a subagent per batch.
-- Release: bump `plugin_version`, commit to `main`, then
+- Release: bump `plugin_version`, add a matching `## <plugin_version>` section to
+  `CHANGELOG.md` (bullet lines only — becomes the verbatim Marketplace "What's
+  new", not editable after upload), commit to `main`, then
   `git tag v<plugin_version> && git push origin main v<plugin_version>`.
   CI (`.github/workflows/build.yml`) guards tag==version, builds, **signs**,
   GitHub-releases, and uploads to Marketplace.

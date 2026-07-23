@@ -23,6 +23,7 @@ from .generator import (BlobResourceProvider, DistributionResourceProvider, Gene
 from .models import (CollisionRecord, ExclusionRecord, Inventory, ProcessingStatus,
                      ResourceRecord, ResourceType, StaleTranslationUnit,
                      TranslationContext, TranslationUnit)
+from .changelog import ChangelogError, render_change_notes
 from .package import PackageError, build_plugin_package, verify_plugin_package
 from .properties import PropertiesError, parse_properties
 from .report import ReportSnapshot, build_report, recover_report_pair, write_report
@@ -68,7 +69,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     print(f"report refresh failed: {exc}", file=sys.stderr)
                     return DOMAIN_ERROR
             return result
-    except (BatchError, GenerationError, PackageError, PropertiesError, ScannerError,
+    except (BatchError, ChangelogError, GenerationError, PackageError, PropertiesError, ScannerError,
             SourceValidationError, StateError, OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
         return DOMAIN_ERROR
@@ -92,6 +93,20 @@ def _config(root: Path) -> ProductConfig:
         if current.is_symlink():
             raise ValueError("configured archive path must not contain symbolic links")
     return replace(config, archive=str(root / archive))
+
+
+def _change_notes(root: Path, version: str) -> str:
+    """Render the CHANGELOG.md section for *version* into change-notes HTML.
+
+    Fails loud (ChangelogError) when the section is missing or empty; a release
+    without notes should not build, since an empty Marketplace "What's new" can
+    never be fixed after upload."""
+    changelog = root / "CHANGELOG.md"
+    try:
+        text = changelog.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ChangelogError(f"cannot read CHANGELOG.md: {exc}") from exc
+    return render_change_notes(text, version)
 
 
 def _dispatch(root: Path, args: argparse.Namespace) -> int:
@@ -141,7 +156,8 @@ def _dispatch(root: Path, args: argparse.Namespace) -> int:
         destination = root / "dist/idea-deu.zip"
         build_plugin_package(generated, inventory, units, provider, root / "plugin/META-INF/plugin.xml", destination,
                              version=config.plugin_version, since_build=config.since_build,
-                             until_build=config.until_build, dedupe_identical=True, trusted_root=root)
+                             until_build=config.until_build, change_notes=_change_notes(root, config.plugin_version),
+                             dedupe_identical=True, trusted_root=root)
         artifact_hash, artifact_size = _file_fingerprint(destination)
         write_jsonl_atomic(root / "dist/manifest.json", [{"schema_version": 1,
             "input_sha256": _state_input_digest(inventory, units),
@@ -467,7 +483,8 @@ def _snapshot(root: Path) -> ReportSnapshot:
         package_valid = bool(generation_valid and trusted is not None and artifact.is_file() and
                              verify_plugin_package(artifact, trusted, root / "plugin/META-INF/plugin.xml",
                                                    version=product.plugin_version, since_build=product.since_build,
-                                                   until_build=product.until_build))
+                                                   until_build=product.until_build,
+                                                   change_notes=_change_notes(root, product.plugin_version)))
     except (OSError, ValueError):
         package_valid = False
     package: dict[str, bool | str] = {"present": artifact.is_file(), "valid": package_valid,

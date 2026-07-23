@@ -21,11 +21,12 @@ _TIME=(1980,1,1,0,0,0)
 def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
                          descriptor: Path, destination: Path, *,
-                         version: str, since_build: str, until_build: str,
+                         version: str, since_build: str, until_build: str, change_notes: str,
                          dedupe_identical: bool = False, trusted_root: Path | None = None) -> Path:
     payload = plugin_package_bytes(result, trusted_inventory, trusted_units, trusted_provider,
                                    descriptor, version=version, since_build=since_build,
-                                   until_build=until_build, dedupe_identical=dedupe_identical)
+                                   until_build=until_build, change_notes=change_notes,
+                                   dedupe_identical=dedupe_identical)
     destination = Path(destination)
     try:
         atomic_write_bytes(destination, payload, trusted_root=trusted_root)
@@ -37,7 +38,7 @@ def build_plugin_package(result: GenerationResult, trusted_inventory: Inventory,
 def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
                          trusted_units: Sequence[TranslationUnit], trusted_provider: object,
                          descriptor: Path, *, version: str, since_build: str, until_build: str,
-                         dedupe_identical: bool = False) -> bytes:
+                         change_notes: str, dedupe_identical: bool = False) -> bytes:
     """Independently recompute the exact deterministic package bytes."""
     if not isinstance(result, GenerationResult):
         raise PackageError("GenerationResult required")
@@ -67,9 +68,11 @@ def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
     try: template_bytes = Path(descriptor).read_bytes()
     except OSError as exc: raise PackageError(f"cannot read plugin descriptor: {exc}") from exc
     descriptor_bytes = render_descriptor(template_bytes, version=version,
-                                         since_build=since_build, until_build=until_build)
+                                         since_build=since_build, until_build=until_build,
+                                         change_notes=change_notes)
     _validate_descriptor(descriptor_bytes, version=version,
-                         since_build=since_build, until_build=until_build)
+                         since_build=since_build, until_build=until_build,
+                         change_notes=change_notes)
     entries["META-INF/plugin.xml"] = descriptor_bytes
     jar = _zip_bytes(entries)
     payload = {"idea-deu/lib/idea-deu.jar": jar}
@@ -77,14 +80,17 @@ def plugin_package_bytes(result: GenerationResult, trusted_inventory: Inventory,
 
 
 def verify_plugin_package(path: Path, result: GenerationResult, descriptor: Path, *,
-                          version: str, since_build: str, until_build: str) -> bool:
+                          version: str, since_build: str, until_build: str,
+                          change_notes: str) -> bool:
     """Strictly verify an existing deterministic outer and inner plugin ZIP."""
     try:
         template_bytes = Path(descriptor).read_bytes()
         descriptor_bytes = render_descriptor(template_bytes, version=version,
-                                             since_build=since_build, until_build=until_build)
+                                             since_build=since_build, until_build=until_build,
+                                             change_notes=change_notes)
         _validate_descriptor(descriptor_bytes, version=version,
-                             since_build=since_build, until_build=until_build)
+                             since_build=since_build, until_build=until_build,
+                             change_notes=change_notes)
         expected = dict(result.files); expected["META-INF/plugin.xml"] = descriptor_bytes
         canonical_inner = _zip_bytes(expected)
         with Path(path).open("rb") as outer_file, zipfile.ZipFile(outer_file) as outer:
@@ -173,16 +179,23 @@ _DESCRIPTION = ("German (Deutsch) language pack for IntelliJ IDEA 2026.1. Transl
                 "postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.")
 
 
-def render_descriptor(template: bytes, *, version: str, since_build: str, until_build: str) -> bytes:
-    """Fill the plugin.xml template's version/compatibility placeholders from config.
+def render_descriptor(template: bytes, *, version: str, since_build: str, until_build: str,
+                      change_notes: str) -> bytes:
+    """Fill the plugin.xml template's version/compatibility/change-notes placeholders.
 
     config/product.json is the single source of truth for the plugin version and
-    the since/until-build range; a build never derives them from a git tag."""
+    the since/until-build range; a build never derives them from a git tag. The
+    change-notes HTML (Marketplace "What's new") comes from CHANGELOG.md and is
+    rendered into the descriptor's CDATA section — never empty, so no upload ever
+    ships blank release notes."""
+    if not change_notes.strip():
+        raise PackageError("change-notes must not be empty")
     text = template.decode("utf-8")
     for token, value in (
         ("@PLUGIN_VERSION@", version),
         ("@SINCE_BUILD@", since_build),
         ("@UNTIL_BUILD@", until_build),
+        ("@CHANGE_NOTES@", _cdata_safe(change_notes)),
     ):
         if token not in text:
             raise PackageError(f"plugin descriptor template missing placeholder {token}")
@@ -190,13 +203,20 @@ def render_descriptor(template: bytes, *, version: str, since_build: str, until_
     return text.encode("utf-8")
 
 
-def _validate_descriptor(data: bytes, *, version: str, since_build: str, until_build: str) -> None:
+def _cdata_safe(text: str) -> str:
+    """Escape ``]]>`` so *text* cannot close its enclosing CDATA section early."""
+    return text.replace("]]>", "]]]]><![CDATA[>")
+
+
+def _validate_descriptor(data: bytes, *, version: str, since_build: str, until_build: str,
+                         change_notes: str) -> None:
     try: root=ElementTree.fromstring(data)
     except ElementTree.ParseError as exc: raise PackageError(f"invalid plugin XML: {exc}") from exc
     expected = (
         ("id", {}, "org.pc-software.idea-deu", ()),
         ("name", {}, "German Language Pack", ()),
         ("description", {}, _DESCRIPTION, ()),
+        ("change-notes", {}, change_notes.strip(), ()),
         ("version", {}, version, ()),
         ("vendor", {}, "PC-Software", ()),
         ("idea-version", {"since-build": since_build, "until-build": until_build}, "", ()),
