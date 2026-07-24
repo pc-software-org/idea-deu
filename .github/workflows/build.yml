@@ -14,12 +14,38 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Author-signing key material; set as repository secrets to sign the ZIP.
+      # Only consumed by the tag-gated "Sign plugin" step below.
+      SIGN_KEY: ${{ secrets.SIGN_KEY }}
+      SIGN_CERT: ${{ secrets.SIGN_CERT }}
+      ZIP_SIGNER_VERSION: "0.1.43"
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      # Needed to sign the ZIP (every build signs when the secrets are set).
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Verify tag matches plugin version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          # The plugin version is the single source of truth in config; the tag
+          # only marks the release and must agree with it (vX -> plugin_version X).
+          # Fail before we build/sign so a mismatched tag never yields an artifact.
+          tag="${GITHUB_REF_NAME#v}"
+          cfg="$(python -c "import json;print(json.load(open('config/product.json'))['plugin_version'])")"
+          echo "tag=$tag  config.plugin_version=$cfg"
+          if [ "$tag" != "$cfg" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match plugin_version $cfg in config/product.json"
+            exit 1
+          fi
 
       - name: Unit tests
         run: python -m unittest discover -s tests -q
@@ -33,7 +59,6 @@ jobs:
         run: |
           python -m scripts.idea_deu generate
           python -m scripts.idea_deu package
-          shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
 
       - name: Verify deterministic rebuild
         run: |
@@ -61,6 +86,38 @@ jobs:
           print("descriptor OK")
           PY
 
+      # Sign the exact ZIP that will be released. Every build signs when the key
+      # material is present (absent on fork PRs, where secrets are withheld).
+      # The signed ZIP is the uploaded artifact, so the release job ships a
+      # verified, deterministically-built, descriptor-checked binary without
+      # rebuilding.
+      - name: Sign plugin
+        if: ${{ env.SIGN_KEY != '' && env.SIGN_CERT != '' }}
+        run: |
+          curl -sSL --fail -o zip-signer.jar \
+            "https://github.com/JetBrains/marketplace-zip-signer/releases/download/${ZIP_SIGNER_VERSION}/marketplace-zip-signer-cli-${ZIP_SIGNER_VERSION}.jar"
+          umask 077
+          printf '%s' "$SIGN_KEY" > sign-key.pem
+          printf '%s' "$SIGN_CERT" > sign-cert.crt
+          java -jar zip-signer.jar sign \
+            -in dist/idea-deu.zip \
+            -out dist/idea-deu-signed.zip \
+            -cert-file sign-cert.crt \
+            -key-file sign-key.pem
+          java -jar zip-signer.jar verify -in dist/idea-deu-signed.zip -cert sign-cert.crt
+          mv dist/idea-deu-signed.zip dist/idea-deu.zip
+          rm -f sign-key.pem sign-cert.crt zip-signer.jar
+          echo "::notice::plugin ZIP signed with the author certificate."
+
+      - name: Note if signing was skipped
+        if: ${{ env.SIGN_KEY == '' || env.SIGN_CERT == '' }}
+        run: echo "::notice::SIGN_KEY/SIGN_CERT not set — shipping the unsigned ZIP (Marketplace still signs on distribution)."
+
+      # Checksum of the final artifact (signed on tags, unsigned otherwise); the
+      # release job re-checks this to prove the downloaded binary is intact.
+      - name: Checksum
+        run: shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -81,56 +138,43 @@ jobs:
       MARKETPLACE_PLUGIN_ID: "32785"
       # Permanent Marketplace token; set as a repository secret to enable upload.
       MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
-      # Author-signing key material; set as repository secrets to sign the ZIP.
-      SIGN_KEY: ${{ secrets.SIGN_KEY }}
+      # Public cert only — used to re-verify the signature; no private key here.
       SIGN_CERT: ${{ secrets.SIGN_CERT }}
       ZIP_SIGNER_VERSION: "0.1.43"
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      # Take the exact binary produced (and signed) by the build job — no rebuild.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          python-version: "3.12"
+          name: idea-deu-${{ github.sha }}
+          path: dist
+
       - uses: actions/setup-java@v4
+        if: ${{ env.SIGN_CERT != '' }}
         with:
           distribution: temurin
           java-version: "21"
-      - name: Verify tag matches plugin version
-        run: |
-          # The plugin version is the single source of truth in config; the tag
-          # only marks the release and must agree with it (vX -> plugin_version X).
-          tag="${GITHUB_REF_NAME#v}"
-          cfg="$(python -c "import json;print(json.load(open('config/product.json'))['plugin_version'])")"
-          echo "tag=$tag  config.plugin_version=$cfg"
-          if [ "$tag" != "$cfg" ]; then
-            echo "::error::tag $GITHUB_REF_NAME does not match plugin_version $cfg in config/product.json"
-            exit 1
-          fi
-      - name: Build
-        run: |
-          python -m scripts.idea_deu generate
-          python -m scripts.idea_deu package
-      - name: Sign plugin
-        if: ${{ env.SIGN_KEY != '' && env.SIGN_CERT != '' }}
+
+      - name: Verify signature of released artifact
+        if: ${{ env.SIGN_CERT != '' }}
         run: |
           curl -sSL --fail -o zip-signer.jar \
             "https://github.com/JetBrains/marketplace-zip-signer/releases/download/${ZIP_SIGNER_VERSION}/marketplace-zip-signer-cli-${ZIP_SIGNER_VERSION}.jar"
           umask 077
-          printf '%s' "$SIGN_KEY" > sign-key.pem
           printf '%s' "$SIGN_CERT" > sign-cert.crt
-          java -jar zip-signer.jar sign \
-            -in dist/idea-deu.zip \
-            -out dist/idea-deu-signed.zip \
-            -cert-file sign-cert.crt \
-            -key-file sign-key.pem
-          java -jar zip-signer.jar verify -in dist/idea-deu-signed.zip -cert sign-cert.crt
-          mv dist/idea-deu-signed.zip dist/idea-deu.zip
-          rm -f sign-key.pem sign-cert.crt zip-signer.jar
-          echo "::notice::plugin ZIP signed with the author certificate."
-      - name: Note if signing was skipped
-        if: ${{ env.SIGN_KEY == '' || env.SIGN_CERT == '' }}
-        run: echo "::notice::SIGN_KEY/SIGN_CERT not set — shipping the unsigned ZIP (Marketplace still signs on distribution)."
-      - name: Checksum
-        run: shasum -a 256 dist/idea-deu.zip | tee dist/idea-deu.zip.sha256
+          java -jar zip-signer.jar verify -in dist/idea-deu.zip -cert sign-cert.crt
+          rm -f sign-cert.crt zip-signer.jar
+          echo "::notice::released ZIP signature verified against the author certificate."
+
+      - name: Note if signature verification was skipped
+        if: ${{ env.SIGN_CERT == '' }}
+        run: echo "::notice::SIGN_CERT not set — shipping the unsigned ZIP without signature verification."
+
+      - name: Verify checksum
+        run: shasum -a 256 -c dist/idea-deu.zip.sha256
+
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -138,6 +182,7 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             dist/idea-deu.zip dist/idea-deu.zip.sha256 \
             --generate-notes --title "$GITHUB_REF_NAME"
+
       - name: Publish to JetBrains Marketplace
         if: ${{ env.MARKETPLACE_TOKEN != '' }}
         run: |
@@ -147,6 +192,7 @@ jobs:
             -F file=@dist/idea-deu.zip \
             -F channel=stable \
             https://plugins.jetbrains.com/api/updates/upload
+
       - name: Note if Marketplace upload was skipped
         if: ${{ env.MARKETPLACE_TOKEN == '' }}
         run: echo "::notice::MARKETPLACE_TOKEN secret not set — skipped Marketplace upload."
