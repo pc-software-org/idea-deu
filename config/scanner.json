@@ -105,27 +105,27 @@
     },
     {
       "resource": "messages/GatewayBundle.properties",
-      "container": "plugins/gateway-plugin/lib/gateway-plugin.jar",
+      "container": "plugins/gateway-plugin/lib/modules/intellij.gateway.core.jar",
       "reason": "official_localization_selection"
     },
     {
       "resource": "messages/JavaErrorBundle.properties",
-      "container": "plugins/java/lib/java-impl.jar",
+      "container": "plugins/java/lib/intellij.java.psi.impl.jar",
       "reason": "official_localization_selection"
     },
     {
       "resource": "messages/JavaOptionBundle.properties",
-      "container": "plugins/java/lib/java-impl.jar",
+      "container": "plugins/java/lib/intellij.java.frontback.psi.jar",
       "reason": "official_localization_selection"
     },
     {
       "resource": "messages/JavaPsiBundle.properties",
-      "container": "plugins/java/lib/java-impl.jar",
+      "container": "plugins/java/lib/intellij.java.frontback.psi.jar",
       "reason": "official_localization_selection"
     },
     {
       "resource": "messages/LicenseBundle.properties",
-      "container": "lib/product-backend.jar",
+      "container": "lib/intellij.platform.cs.jar",
       "reason": "official_localization_selection"
     },
     {

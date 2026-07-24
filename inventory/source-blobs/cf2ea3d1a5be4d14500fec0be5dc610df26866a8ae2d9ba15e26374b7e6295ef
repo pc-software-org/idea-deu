@@ -1,0 +1,21 @@
+thymeleaf.inspection.group=Thymeleaf
+ThymeleafVariablesResolveInspection.display.name=Unresolved references in Thymeleaf expression variables
+ThymeleafVariablesResolveInspection.cannot.resolve.variable=Cannot resolve ''{0}''
+ThymeleafMessagesResolveInspection.display.name=Unresolved message resource keys
+ThymeleafObsoleteInlineAttributeInspection.display.name=Obsolete th:inline attribute in Thymeleaf 3
+ThymeleafObsoleteInlineAttributeInspection.obsolete.message='th:inline' attribute is obsolete in Thymeleaf 3; inline output expressions [[\u2026]] and [(\u2026)] are supported in text content without it
+ThymeleafObsoleteInlineAttributeInspection.remove.fix.name=Remove obsolete 'th:inline' attribute
+
+dialect.extensions.config.inspection=Thymeleaf Dialect Extensions errors
+framework.support.ie.conditional.comments.support=IE Conditional Comments Support
+framework.support.java.8.time.api.compatibility=Java 8 Time API Compatibility
+framework.support.spring.3.integration=Spring 3 Integration
+framework.support.testing=Testing
+framework.support.spring.4.integration=Spring 4 Integration
+framework.support.spring.security.3.integration=Spring Security 3 Integration
+framework.support.spring.security.4.integration=Spring Security 4 Integration
+framework.support.tiles.2.integration=Tiles 2 Integration
+
+thymeleaf.el.declare.variable.comment.annotation.intention.name=Declare external variable in comment annotation
+thymeleaf.el.declare.variable.intention.family=Declare Variable As External Data
+

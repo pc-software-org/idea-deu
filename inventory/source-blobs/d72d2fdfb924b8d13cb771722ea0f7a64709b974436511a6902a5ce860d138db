@@ -1,0 +1,17 @@
+<html>
+<body>
+Logpoints is a debugger feature that enables printing expressions (<code>kotlin.io.println</code>) to the standard output
+<b>without</b> changing the source code. It has a few advantages over common <code>println</code> in source code:
+<ul>
+  <li>Logpoints can be added, modified, and removed during execution, no need to hot-reload;</li>
+  <li>As a consequence, they can be used in library code, which cannot be manually changed;</li>
+  <li>Logpoints may not even compile, it wouldn't affect the program execution;</li>
+  <li>There is no risk of leaking printing calls into production, as logpoints are not part of the source code.</li>
+</ul>
+
+The inspection only works if there's an executable line after the <code>println</code> call, and this line is <b>not</b> a loop statement.
+This restriction is made because breakpoints work differently at these places, and the replacement is not equivalent.
+<br>
+<b>NOTE:</b> Logpoints only work in Debug mode. In Run, Run with Coverage, Profile modes, logpoint expressions won't appear in the output.
+</body>
+</html>

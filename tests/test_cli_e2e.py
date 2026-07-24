@@ -33,7 +33,7 @@ class CliEndToEndTests(unittest.TestCase):
         (self.root / "config/scanner.json").write_text(json.dumps(scanner))
         shutil.copy(repo / "glossary/de.json", self.root / "glossary/de.json")
         shutil.copy(repo / "plugin/META-INF/plugin.xml", self.root / "plugin/META-INF/plugin.xml")
-        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.1.4\n- Testnotiz\n")
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.2.0.1.1\n- Testnotiz\n")
         self.archive = self.root / "idea.zip"
         self._write_archive(b"hello=Hello\nother=Other\n", include_tip=True)
 
@@ -42,13 +42,13 @@ class CliEndToEndTests(unittest.TestCase):
     def _write_archive(self, properties: bytes, *, include_tip: bool):
         entries = [("messages/Bundle.properties", properties)]
         if include_tip: entries.append(("tips/Welcome.html", b"<html>Tip</html>\n"))
-        product = json.dumps({"version":"2026.1.4","buildNumber":"261.26222.65","productCode":"IU"})
+        product = json.dumps({"version":"2026.2.0.1","buildNumber":"262.8665.337","productCode":"IU"})
         with zipfile.ZipFile(self.archive, "w", zipfile.ZIP_STORED) as outer:
             outer.writestr("product-info.json", product); outer.writestr("lib/app.jar", jar_bytes(entries))
-        config = {"archive":"idea.zip","version":"2026.1.4","build_number":"261.26222.65",
+        config = {"archive":"idea.zip","version":"2026.2.0.1","build_number":"262.8665.337",
             "product_code":"IU","sha256":hashlib.sha256(self.archive.read_bytes()).hexdigest(),
-            "since_build":"261.26222.65","until_build":"261.26222.65",
-            "plugin_id":"org.pc-software.idea-deu","plugin_version":"2026.1.4"}
+            "since_build":"262.8665.337","until_build":"262.8665.337",
+            "plugin_id":"org.pc-software.idea-deu","plugin_version":"2026.2.0.1.1"}
         (self.root / "config/product.json").write_text(json.dumps(config))
 
     def _run(self, *args):
@@ -122,9 +122,9 @@ class CliEndToEndTests(unittest.TestCase):
         # Fail loud: a CHANGELOG without a section for the built version blocks packaging.
         (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 9.9.9\n- Andere Version\n")
         code, stdout, stderr = self._run("package")
-        self.assertEqual(DOMAIN_ERROR, code); self.assertIn("2026.1.4", stderr)
+        self.assertEqual(DOMAIN_ERROR, code); self.assertIn("2026.2.0.1.1", stderr)
         self.assertNotIn("Traceback", stderr)
-        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.1.4\n- Testnotiz\n")
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## 2026.2.0.1.1\n- Testnotiz\n")
 
         blob = next((self.root / "inventory/source-blobs").iterdir()); blob_bytes = blob.read_bytes(); blob.unlink()
         code, stdout, stderr = self._run("status")

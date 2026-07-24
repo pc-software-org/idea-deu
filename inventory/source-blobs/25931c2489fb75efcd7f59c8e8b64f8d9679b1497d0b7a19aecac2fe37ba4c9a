@@ -1,0 +1,762 @@
+accessing.url=Accessing URL {0}
+http.request.element.name=HTTP Request
+
+# actions
+http.request.action.name=HTTP Request
+http.request.new.file=HTTP Request
+action.com.intellij.httpClient.actions.ConvertCurlToHttpRequestAction.text=Convert cURL to HTTP Request
+action.com.intellij.httpClient.actions.ConvertCurlToHttpRequestAction.popup@HttpClientConvertPopupV2.text=cURL Command\u2026
+group.HTTPClientGroup.text=HTTP Client
+action.HTTPClient.OpenCollection.text=Open HTTP Requests Collection
+action.HTTPClient.OpenCollection.HttpClient.NotificationPanel.text=Examples
+action.HTTPClient.OpenCollection.description=Opens a built-in collection of HTTP Requests
+http.request.reformat.response.action.group.title=View As
+http.request.reformat.response.action.view.as.description=Reformat and highlight file as {0}
+http.request.reformat.response.action.view.as.raw.text=Text
+http.request.reformat.response.action.view.as.raw.description=Show response body as a raw file
+http.request.response.view.settings.action.popup.text=Response View Settings
+http.request.save.log.file.action.title=Save HTTP Client Request to History
+action.RESTClient.ShowHistory.text=Show HTTP Requests History
+action.RESTClient.ShowHistory.description=Opens log file with executed HTTP Requests
+http.request.show.log.file.action.toolbar=Open log
+http.request.show.log.file.action.failed=Cannot find HTTP Requests log file
+http.request.show.log.file.action.failed.default.project=Cannot open HTTP Requests log file for default project
+http.request.show.log.file.action.failed.open.config=Open configuration
+http.request.create.scratch.file.with.request.action.title=Create HTTP Request scratch file
+http.request.create.scratch.file.with.request.failed=Failed to create HTTP Request scratch file
+http.request.create.scratch.file.with.request.file.is.invalid=Created HTTP Request scratch file is invalid
+http.request.open.requests.collection.action.toolbar=Examples
+http.request.open.requests.collection.action.failed.default.project=Cannot open HTTP Requests collection for default project
+http.request.open.requests.collection.action.failed.no.file=Cannot find HTTP Requests collection
+action.HTTPClient.AddRequest.text=Add Request
+action.HTTPClient.AddRequest.notification.label=Add request
+action.HTTPClient.NewRequestInToolMenuAction.text=Create Request in HTTP Client
+action.HTTPClient.NewRequestInToolMenuAction.synonym.text=Open HTTP Client
+http.request.add.request.action.failed.find.template=Cannot find template for this request
+http.request.add.request.action.error.adding.request=Error Adding Http Request
+http.request.add.request.action.error.adding.request.message=Current editor is not a text one
+http.request.add.request.action.get=GET Request
+http.request.add.request.action.post.text.body=POST Text Body
+http.request.add.request.action.post.parameters.body=POST Parameters Body
+http.request.add.request.action.form.text.field=POST Form with a Text Field
+http.request.add.request.action.form.file.field=POST Form with a File Field
+http.request.add.request.action.graphql.field=GraphQL Query Request
+http.request.add.request.action.websocket.field=WebSocket Request
+action.HTTPClient.CopyResponseBody.text=Copy Response Body to Clipboard
+http.request.show.request.methods.toggle.text=Show Request Methods (Rerun to Apply)
+http.request.show.request.method.single.toggle.text=Show Request Method (Rerun to Apply)
+http.request.fold.headers.default.toggle.text=Fold Headers of Non-Empty Responses by Default
+action.HTTPClient.CopyUrl.MultiResponseConsole.text=Copy URL
+
+action.HTTP.Request.NewFile.text=HTTP Request
+action.HTTP.Request.NewFile.description=Create new HTTP Request file
+group.HTTPClientNewEnvironmentFile.text=HTTP Environment File
+http.request.create.new.environment.file.action.toolbar=Add environment file
+action.NewPublicEnvironmentFile.popup@HttpClient.NotificationPanel.text=Regular (for common variables such as host or query parameters)
+action.NewPrivateEnvironmentFile.popup@HttpClient.NotificationPanel.text=Private (for sensitive data such as passwords, tokens, or SSL settings)
+http.request.create.new.public.environment.action.text=Add Environment to Public File\u2026
+http.request.create.new.private.environment.action.text=Add Environment to Private File\u2026
+http.request.create.new.environment.file.fail.notification=Cannot create file: the current directory already contains all possible environment files
+http.request.create.new.environment.file.command.name=Create HTTP Environment File
+http.request.create.new.environment.tooltip.text=Use the '{{'{0}'}}' variable directly in .http files and execute requests with the ''{1}'' environment
+http.request.select.environment.action.text=Select
+http.request.navigate.to.public.environment.action.text=Edit Public\u2026
+http.request.navigate.to.private.environment.action.text=Edit Private\u2026
+http.request.no.environment.action.text=No Environment
+http.request.select.before.run.action.text=<Select Environment Before Run>
+action.NewPrivateEnvironmentFile.text=http-client.private.env.json
+action.NewPrivateEnvironmentFile.description=Create private HTTP environment file for HTTP requests
+action.NewPublicEnvironmentFile.text=http-client.env.json
+action.NewPublicEnvironmentFile.description=Create environment file for HTTP requests
+action.HTTPClient.ClearBrowserCookies.text=Clear Auth Browser Cookies
+action.JbaHttpClientTest.text=Test Login via JBA for HTTP Client
+
+# request collections
+# These keys are used dynamically as "http.request.collection." + collectionFileName.replace("-", ".")
+# See: com.intellij.ws.actions.HttpRequestOpenCollectionAction.getCollectionName
+# suppress inspection "UnusedProperty"
+http.request.collection.get.requests=GET Requests
+# suppress inspection "UnusedProperty"
+http.request.collection.post.requests=POST Requests
+# suppress inspection "UnusedProperty"
+http.request.collection.requests.with.authorization=Requests with Authorization
+# suppress inspection "UnusedProperty"
+http.request.collection.requests.with.loop=Requests with Loop
+# suppress inspection "UnusedProperty"
+http.request.collection.requests.with.include=Requests with Include
+# suppress inspection "UnusedProperty"
+http.request.collection.requests.with.tests=Requests with Tests and Scripts
+# suppress inspection "UnusedProperty"
+http.request.collection.ws.requests=WebSocket Requests
+# suppress inspection "UnusedProperty"
+http.request.collection.graphql.requests=GraphQL Requests
+# suppress inspection "UnusedProperty"
+http.request.collection.different.responses=Response Presentations
+http.request.collection.whats.new=What's New in 2026.1
+http.request.collection.open.help=Open HTTP Client Help
+
+# http requests log
+http.request.log.file.is.ignored=Cannot open log file because it''s included in ignored list.<br/>Remove ''{0}'' from "Ignore files and folders" to use requests log file.
+http.request.log.file.is.excluded=Cannot open log file because it''s marked as excluded.<br/>Cancel exclusion for ''{0}'' directory to use requests log file.
+http.request.log.file.wrong.type=Cannot open log file because ''*.http'' extension is marked as ''{0}'' but should be ''HTTP Requests''.
+http.request.log.ignored.files.provider.title=Editor-based HTTP Client requests
+http.request.log.too.large=Cannot open the log file because it's too large. Please clean it up.
+http.request.log.too.large.fix.link.label=Clean HTTP Request log
+http.request.clean.log.file.command.name=Clean HTTP Request Log
+advanced.setting.http.client.history.size=Maximum amount of requests in HTTP Client requests log
+
+# cookie jar
+filetype.http.request.cookie.jar.description=Cookie storage file
+http.request.cookie.jar.action.title=Save HTTP Response Cookies to Cookie Jar
+http.request.cookie.jar.inspection.attributes.missing=Malformed cookie: some TAB-separated attributes are missing. Expected cookie format: \"domain\tpath\tname\tvalue\texpirationDate\"
+http.request.cookie.jar.inspection.too.many.attributes=Malformed cookie: too many TAB-separated attributes for Cookie. Expected cookie format: \"domain\tpath\tname\tvalue\texpirationDate\"
+http.request.cookie.jar.inspection.empty.domain=Malformed cookie: empty domain attribute is not allowed
+http.request.cookie.jar.inspection.empty.path=Malformed cookie: empty path attribute is not allowed
+http.request.cookie.jar.inspection.empty.date=Malformed cookie: empty date attribute is not allowed. Expected date format: \"Tue, 01-Jan-2019 00:00:00\" or \"-1\" for session cookie
+http.request.cookie.jar.inspection.expired.cookie=Expired cookie. Adjust the expiration date to prevent deleting this cookie after the next request
+http.request.cookie.jar.inspection.date.format=Malformed cookie: wrong date format. Expected date format: \"Tue, 01-Jan-2019 00:00:00\" or \"-1\" for session cookie
+http.request.cookie.jar.cookie.preserved=Cookies are preserved between requests:
+http.request.cookie.jar.cookie.preserved.failed=Cannot preserve cookies, {0}:
+
+# run
+rest.client.request.cannot.find.environment=Cannot find ''{0}'' environment
+rest.client.request.cannot.find.non.dumb.environment=Cannot find ''{0}'' environment. Probably it can be found only after project analysis completes
+rest.client.request.execute.cancel=HTTP Request was interrupted
+rest.client.request.execute.cancel.post.process=\n\nHTTP Request was interrupted during response post processing
+rest.client.cannot.execute.response.processor.log.disabled=Cannot show response because logging into a file is disabled
+rest.client.safe.mode.message=HTTP Client scripts are prohibited in Safe Mode. Trust project to run scripts.
+
+rest.client.request.debug.null.process.handler=Cannot prepare the debug session because the process handler is null
+# suppress inspection "TrailingSpacesInProperty"
+rest.client.request.response.handler.console=The output from the response handler script will be shown here.\n\n
+rest.client.request.response.handler.execution=Executing response handler script\u2026
+rest.client.request.pre.request.handler.execution=Execution pre-request handler script\u2026
+rest.client.request.run.request.tooltip=Run HTTP Request
+rest.client.request.run.debug.request.tooltip=Run/Debug HTTP Request
+rest.client.request.execute.with.environment={0} with ''{1}'' environment
+rest.client.request.execute.with.default.environment={0} with default environment
+rest.client.request.execute.with.no.environment={0} with no environment
+rest.client.request.execute.with.text={0} with\u2026
+rest.client.request.execute.environment.popup.header=Choose Environment
+action.HTTPClient.RunAll.text=Run All Requests in File
+action.HTTPClient.RunAll.text.in.notification=Run all requests in file
+rest.client.request.execute.all.text={0} All
+rest.client.request.execute.all.with.environment.text={0} All with ''{1}'' environment
+rest.client.request.run.test.console.root=HTTP Requests
+rest.client.request.response.handler.tab.name=Response Handler
+rest.client.request.test.tab.name=Tests
+rest.client.request.iteration.tab.name=Iterations
+rest.client.request.pre.request.handler.tab.name=Pre-request Handler
+rest.client.request.tab.name=Request
+rest.client.show.request.button.text=Show Request
+rest.client.unknown.error=Unknown error
+rest.client.request.execute.notification=HTTP Client execution
+rest.client.request.response.body.empty=<Response body is empty>
+rest.client.request.response.truncated.label=Response output was truncated to fit in the console.
+rest.client.request.change.console.settings.label=Consider changing the console memory settings
+rest.client.request.connection.closed.message=Connection closed
+rest.client.request.connection.closed.error.message=Connection closed unexpectedly
+rest.client.request.response.file.error.message=Error: {0}
+rest.client.request.response.file.created.message=Response file saved.
+rest.client.request.response.printing.interrupted.error=Response retrieving interrupted
+rest.client.request.response.downloading.with.bound.status=Downloading {0} of {1}
+rest.client.request.response.downloading.without.bound.status=Downloading {0}
+rest.client.request.unknown.http.method=Unknown HTTP method
+rest.client.possible.run.request.name=Possible request name
+rest.client.duplicate.import.name=Duplicate import
+rest.client.request.inspection.add.custom.http.method=Add custom HTTP method
+configurable.http.client.display.name=HTTP Client
+
+# Request error
+http.client.request.error.message.add.to.env.no.env.error=No configured environments
+http.client.request.error.message.add.to.env.already.has.var.error=All environments already contain ''{0}'' variable
+http.client.request.error.message.run.with.env.no.env.error=There are no environments with variable ''{0}''
+http.client.request.error.message.cannot.write.to.response.file=File {0} is not writable
+
+# debug
+debug.http.client.can.not.resolve.host.name=Cannot resolve host name for URL: {0}
+debug.http.client.can.not.parse.url=Cannot parse URL from the string: {0}
+debug.http.client.no.debugger.extensions=Cannot debug request: no debugger extension is defined
+debug.http.client.no.debugger.extension.by.name=Cannot debug request: debugger extension with name {0} does not exist
+
+# refactorings
+rest.client.refactoring.move.request.name=Move HTTP Requests
+rest.client.refactoring.move.request.description=Move HTTP requests to a separate file
+rest.client.refactoring.ui.path.label=Path:
+rest.client.refactoring.ui.browse.select.path=Select Path
+rest.client.refactoring.ui.browse.select.path.description=Select the path to the target file
+rest.client.refactoring.no.requests=Cannot find HTTP request to move
+rest.client.refactoring.request.is.invalid=Cannot move the selected request
+rest.client.refactoring.file.is.invalid=File with HTTP request is invalid
+rest.client.refactoring.cannot.create.file=Cannot create target file
+rest.client.refactoring.target.file.is.invalid=Target file is invalid or does not exist.
+rest.client.refactoring.target.file.same.as.original=Target file is the same as the current one.
+rest.client.refactoring.not.inside.project=Directory is not located inside the project
+rest.client.refactoring.file.not.valid.name="{0}" is not a valid file name
+rest.client.refactoring.file.is.empty=Path to target file is empty
+rest.client.refactoring.is.a.directory=Selected path should point to a file, not a directory
+rest.client.refactoring.empty.selection=Select at least one request
+
+# highlighting
+http.request.highlighting.method.type=Method Type
+http.request.highlighting.import=Import
+http.request.highlighting.comment=Comment
+http.request.highlighting.doc.comment.tag=Comment tag
+http.request.highlighting.requests.separator=Requests Separator
+http.request.highlighting.request.port=Request Port
+http.request.highlighting.request.parameter.name=Request Parameter Name
+http.request.highlighting.request.parameter.value=Request Parameter Value
+http.request.highlighting.header.field.key=Header Field Key
+http.request.highlighting.header.field.value=Header Field Value
+http.request.highlighting.header.message.body=Request Body
+http.request.highlighting.header.input.file.sign=Input File Sign
+http.request.highlighting.header.input.file.path=Input File Path
+http.request.highlighting.header.difference.file.sign=Response History Sign
+http.request.highlighting.header.difference.file.path=Response History Path
+http.request.highlighting.multipart.boundary=Multipart Boundary
+http.request.highlighting.environment.variable=Environment Variable
+http.request.highlighting.variable.braces=Variable Braces
+http.request.highlighting.request.name=Request Name
+http.request.highlighting.escaped.value=Escaped Value
+http.request.highlighting.scripts=Response Handler and Pre-Request scripts
+http.request.highlighting.file.variable.begin=In-Place Variable//Variable begin
+http.request.highlighting.file.variable.name=In-Place Variable//Variable name
+http.request.highlighting.file.variable.value=In-Place Variable//Variable value
+http.request.highlighting.dynamic.variable.string=Dynamic Variable//String arguments
+http.request.highlighting.dynamic.variable.number=Dynamic Variable//Number arguments
+http.request.highlighting.protocol=HTTP protocol
+
+# find usages
+http.request.find.usages.type.variable=Variable
+http.request.find.usages.type.dynamic.variable=DynamicVariable
+http.request.find.usages.type.file.variable=In-Place Variable
+
+# diff
+http.request.diff.compare.with=Compare with\u2026
+http.request.diff.line.marker.provider=HTTP response diff
+http.request.diff.compare.with.file=Compare with {0}
+http.request.diff.compare.with.description=Compares response output with one of the previous results
+http.request.diff.compare.with.dialog.title={0} vs {1} ({2})
+http.request.diff.compare.with.dialog.title.directories={0} vs {1}
+http.request.diff.compare.with.can.not.resolve=Cannot find file ''{0}''
+
+# ui
+rest.clien.ui.deprecation.convert.action=Convert request to the new format
+rest.client.ui.notification.link.label.legacy.request.file=Legacy REST Client request file
+
+# run-configuration
+http.request.run.configuration.panel.title=Configuration
+http.request.run.configuration.name=HTTP Request
+http.request.run.configuration.description=Executes HTTP Request described in '*.http' or '*.rest' file
+http.request.run.configuration.env.label=&Environment:
+http.request.run.configuration.env.combo.box.tooltip=The environment which defines variables to be used in the request
+http.request.run.configuration.no.env.name=no environment
+http.request.run.configuration.file.label=&File:
+http.request.run.configuration.index.label=&Request:
+http.request.run.configuration.file.is.not.configured=Path to HTTP Request file is not configured
+http.request.run.configuration.is.not.runnable.without.license="HTTP Client requires a license to run requests"
+http.request.run.configuration.file.doesn.exists=Cannot find file to execute
+http.request.run.configuration.request.doesn.exists=Cannot find HTTP Request to execute, #{0} is selected but there is only one request
+http.request.run.configuration.request.doesn.exists.many=Cannot find HTTP Request to execute, #{0} is selected but there are only {1} requests
+http.request.run.configuration.request.doesn.exists.by.identifier=Cannot find HTTP Request to execute, there are no requests with identifier ''{0}'' in the selected file
+http.request.run.configuration.run.single.request=Run single request
+http.request.run.configuration.run.all.in.file=Run all in file
+http.request.run.configuration.run.all.in=All in {0}
+
+# run dashboard
+http.request.run.dashboard.customization.status.label=Status: {0}
+
+# doc comment tags
+http.request.doc.comment.documentation.no.redirect=This tag disables automatic redirect handling for the request
+http.request.doc.comment.documentation.no.log=This tag disables automatic response logging. Useful if the response can contain sensitive information.
+http.request.doc.comment.documentation.no.cookie=This tag disables preserving cookies between requests.<br/>This request won't use cookies from the cookie jar and cookies from the response won't be preserved.
+http.request.doc.comment.documentation.no.auto.encoding=This tag disables auto-encoding, allowing the raw data to be sent as is.
+http.request.doc.comment.documentation.name=Use this tag to define a name for the HTTP request. It helps to distinguish this request in the HTTP Client UI and history. For example, <code># @name GetUserDetails</code>.
+http.request.doc.comment.documentation.use.os.credentials=Requests with this tag will attempt to get an authorization ticket from the OS.
+http.request.doc.comment.documentation.socket.timeout=Use this tag to specify the timeout for new packets in ongoing connections (by default, in seconds or with a <code>ms</code>, <code>s</code>, or <code>m</code> suffix). For example, <code># @timeout 600</code> or <code># @timeout 1 m</code>
+http.request.doc.comment.documentation.connection.timeout=Use this tag to specify the timeout for establishing connections (by default, in seconds or with a <code>ms</code>, <code>s</code>, or <code>m</code> suffix). For example, <code># @connection-timeout 600</code> or <code># @connection-timeout 1 m</code>
+
+# converter
+http.request.convert.curl.ui.title=Convert cURL to HTTP Request
+http.request.convert.from.toolbar=Convert\u2026
+http.request.convert.curl.ui.ok.action=&Convert
+http.request.convert.curl.to.http.request.failed.title=Cannot Convert cURL To HTTP Request
+http.request.convert.curl.is.not.curl=Input string is not a valid cURL command
+http.request.convert.curl.no.url=Cannot find URL in the cURL command
+http.request.convert.curl.unknown.option=Option ''{0}'' is not supported
+http.request.convert.curl.no.data=Cannot find required data for the option ''{0}''
+http.request.convert.curl.method.not.supported=Custom HTTP methods are not supported: ''{0}''
+http.request.convert.curl.invalid.url=URL from cURL command is invalid: ''{0}''
+http.request.convert.curl.invalid.header=Header name should not be empty: ''{0}''
+http.request.convert.curl.custom.path.in.form.data=Cannot parse path to file in form data: ''{0}''
+http.request.convert.curl.form.data.no.value=Cannot parse form data, value is empty: ''{0}''
+http.request.convert.curl.method.do.not.support.body=Method ''{0}'' does not support request body
+
+legacy.cannot.convert.message.begin=Cannot convert from legacy REST Client files
+dialog.title.select.xml.file.with.rest.client.request=Select .xml File with REST Client Request
+http.client.convert.popup.title=Convert\u2026
+http.client.convert.popup.v2.title=Import From
+group.HTTPClient.Convert.text=Import HTTP Request
+
+# microservices
+http.request.generate.request.in.http.client.action.message=Generate request in HTTP Client
+http.requests.generation.progress.title=Generating requests\u2026
+http.request.generation.progress.title=Generating request\u2026
+action.com.intellij.httpClient.microservices.actions.HttpGenerateRequestFromEndpointsAction.text=Generate Request in HTTP Client
+http.request.microservices.generate.from.endpoints.view.fail.title=Failed to generate requests in HTTP Client
+http.request.microservices.generate.from.endpoints.view.fail.message=Some URLs are invalid:
+http.request.microservices.generate.from.endpoints.view.fail.dropdown=Invalid URLs
+http.request.microservices.generate.from.endpoints.view.fail.concrete.message={0} in {1}
+
+http.request.open.in.http.client.intention.error.title=Invalid URL. Cannot Generate Requests in HTTP Client.
+http.request.open.in.http.client.intention.web.reference.authority.error.message=Empty authority
+http.request.open.in.http.client.intention.web.reference.scheme.error.message=Cannot retrieve HTTP scheme from the reference
+
+
+#request navigator
+http.request.navigator.rest.client.display.text=Run HTTP Request
+http.request.navigator.update.scratch.file=Update HTTP Request Scratch File
+http.request.navigator.invalid.file=''{0}'' is not a valid HTTP request file
+http.request.navigator.invalid.file.document=Could not modify the file ''{0}''
+
+# generation
+http.request.generation.unsupported.schemes=Unsupported schemes: {0}.
+http.request.generation.invalid.authorities=Invalid authorities: {0}.
+http.request.generation.invalid.url=Invalid URL: ''{0}''.
+http.request.generation.unsupported.methods="Unsupported methods: {0}"
+http.request.generation.from.gutter.error=Unable to generate requests in HTTP Client:\n{0}
+
+http.request.open.in.http.client.gutter.tooltip=Generate request in HTTP Client: {0}
+http.request.open.in.http.client.gutter.tooltip.empty=Generate request in HTTP Client
+http.request.open.in.http.client.goto.related.name={0} in HTTP Client
+
+notification.group.http.generation=HTTP client request generation failed
+notification.group.http.client=HTTP client request execution failed
+
+# placeholder
+http.request.placeholder.inspection.message=Replace $placeholder variable to run request
+http.request.placeholder.inspection.message.fix=Replace '$placeholder'
+http.request.placeholder.inspection.name='$placeholder' in HTTP Request
+
+http.request.add.http.request.command=Add HTTP Request
+http.requests.move.requests.member.panel=Requests
+http.request.add.http.request.separator.command=Add HTTP Request Separator
+
+http.request.no.requests.to.execute.error=No requests to execute
+the.selected.file.is.not.a.valid.xml.file.error=The selected file is not a valid .xml file: {0}
+error.loading.error=Error loading {0}: {1}
+the.selected.file.is.not.a.rest.client.request.error=The selected file is not a REST Client request
+rest.client.ui.xml.file.unknown.error=XML file contains invalid data
+
+http.request.content.length.is.redundant.inspection.name=Redundant 'Content-Length'
+http.request.content.length.is.redundant.inspection.message=Redundant 'Content-Length' field
+http.request.content.length.is.redundant.inspection.message.fix=Delete redundant field
+
+http.request.incorrect.http.header.inspection.name=Incorrect HTTP header
+
+# convert to cURL
+http.request.convert.to.curl.env.list.title=Environment to Substitute Variables
+http.request.convert.to.curl.env.list.element={0} (contains {1} of {2} variables)
+http.request.convert.to.curl.intention.name=Convert to cURL and copy to clipboard
+http.request.convert.to.curl.error=Cannot convert to cURL:\n{0}
+http.request.convert.to.curl.message.1=Converted and copied to clipboard:\n{0}
+http.request.convert.to.curl.message.2=Converted with {0} environment and copied to clipboard:\n{1}
+http.request.convert.to.curl.no.environment.option=No environment
+
+action.HTTPClientConvertToCurlAndCopy.text=Convert to cURL and Copy
+action.HTTPClientConvertToCurlAndCopy.popup@HttpClientConvertPopup.text=Convert HTTP request under caret to cURL and copy it to clipboard
+
+http.request.endpoints.tab.empty.panel.label=Select HTTP endpoints to view HTTP requests
+http.request.endpoints.tab.run.empty.panel.label=Submit requests to see the response
+http.request.endpoints.tab.click.variable.hint=Click to substitute variable
+http.request.endpoints.tab.enter.variable.hint=Press Enter to substitute variable
+http.request.endpoints.tab.click.address.hint=Click to substitute address
+http.request.endpoints.tab.enter.address.hint=Press Enter to substitute address
+http.request.endpoints.tab.click.method.hint=Click to substitute method
+http.request.endpoints.tab.enter.method.hint=Press Enter to substitute method
+http.request.endpoints.tab.submit.request.action.text=Submit Request
+http.request.endpoints.tab.submit.requests.action.text=Submit Requests
+http.request.endpoints.tab.variable.substitute.command.name=Substitute Variable
+http.request.endpoints.tab.substitute.variables.to.run.tooltip=Substitute variables to run the request
+http.request.endpoints.tab.substitute.variables.to.submit.single.tooltip=Substitute variables to submit request
+http.request.endpoints.tab.substitute.variables.to.submit.plural.tooltip=Substitute variables to submit requests
+http.request.endpoints.tab.variable.must.be.substituted.error=Open in the editor to use variables or replace them with values
+
+# foldings
+http.request.difference.files.folding.placeholder.text=\u2026 ({0,number,integer} {0,choice,1#earlier response|1<earlier responses})
+
+#inspection
+inspection.name=Link with unencrypted protocol
+inspection.group=Security
+inspection.template=HTTP links are not secure
+notification.group.name=Microservices
+intention.family.name.change.prefix.to.https=Change prefix to https://
+checkbox.ignore.comments=Ignore comments
+column.name.ignored.urls.label=Ignored URLs:
+quickfix.ignore.url.family.name=Ignore URL: {0}
+checkbox.ignore.tldOnly=Ignore URLs with no top-level domain
+checkbox.ignore.ip=Ignore IP addresses
+
+# ssl
+http.request.env.ssl.conf.key.without.cert.error=SSL Configuration has a key and no certificate
+http.request.env.ssl.conf.cert.obj.has.not.path.error=No path provided for the client certificate
+http.request.env.ssl.conf.key.obj.has.not.path.error=No path provided for the client private key
+http.request.env.ssl.conf.guess.format.from.extension.error=Cannot determine the format from the file extension ''.{0}''.\n\
+  Possible fix: add the ''format'' property to specify the format explicitly.\n\
+  The format is determined by the following rule: {1}.
+http.request.env.ssl.conf.unknown.format.error=Unknown format ''{0}''. Possible variants: {1}.
+# suppress inspection "TrailingSpacesInProperty"
+http.request.env.ssl.conf.unresolved.path.error=Cannot resolve path {0}.\nChecked absolute paths:\n
+http.request.env.ssl.conf.property.not.object.error=''{0}'' must be a JSON object.
+http.request.env.ssl.conf.property.not.object.or.string.literal.error=''{0}'' must be a JSON object or a string literal.
+http.request.env.ssl.conf.property.not.string.literal.error=''{0}'' must be a JSON string literal.
+http.request.env.ssl.conf.property.not.boolean.literal.error=''{0}'' must be a JSON boolean literal.
+http.request.env.ssl.conf.has.passphrase.and.has.not.certificate.error=SSL Configuration has a passphrase and no certificate
+http.request.env.ssl.add.format.fix.action=Add Explicit Format Property
+http.request.env.ssl.passphrase.presentable.name=Certificate passphrase
+http.request.env.ssl.passphrase.line.marker=Set certificate passphrase
+
+# scheme
+http.request.private.env.file.name=HTTP Client Private Environment File
+http.request.env.file.name=HTTP Client Environment File
+
+# live templates
+http.request.environment.general.context.type.label=HTTP Client environment file
+http.request.environment.env.context.type.label=Environment
+http.request.environment.private.env.context.type.label=Private environment
+http.request.environment.public.env.context.type.label=Public environment
+http.request.environment.object.for.envs.context.type.label=Object for environments
+http.request.response.handler.path.context.type=HTTP Request response handler path
+http.client.header.context.name=HTTP Request headers
+http.client.headers.authorization.context.name=HTTP Request Authorization header
+
+# secrets
+http.request.secrets.dialog.message=Enter secured value for {0}
+http.request.secrets.dialog.title=HTTP Client Secured Value
+http.request.secrets.intention.family.name=Set value for secured value
+http.request.secrets.intention.text=Set value for ''{0}''
+
+# run anything
+http.request.run.anything.group.title=HTTP Requests
+http.request.run.anything.element.action.description=Run HTTP Request with @name ''{0}''
+http.request.run.anything.element.from.file.name={0} from {1}
+http.request.run.anything.ad.text=Press {0} to run with environment
+
+# What's new
+http.client.whats.new.title=Requests with Included Files
+
+# history
+http.request.history.file.formatting.status.notification.label=Waiting for the IDE to format the response and write it to the file
+
+# mime types registry
+http.request.mime.type.registry.action.popup.title=Recognize ''{0}'' as\u2026
+http.request.mime.type.registry.inlay.text=''{0}'' mime type settings
+http.request.mime.type.registry.inlay.with.mark.text=''{0}'' mime type is recognized as {1}
+http.request.mime.type.registry.hint.message=Changes will be taken into account on the next request execution
+
+# custom presentations
+http.request.redirections.header=Redirections
+http.request.redirections.disable.button.error.hint=Cannot find request to disable redirecting
+http.request.redirections.disable.button.label=Disable
+http.request.add.tag.command.name=Add ''{0}'' Tag
+http.request.custom.presentation.tag.added.hint=Added ''{0}'' tag
+http.request.disable.cookie.action.error.hint=Cannot find request to disable cookie jar
+
+# new toolbar
+http.client.environment.selector.label=Run with:
+http.client.select.environment.intention.text=Switch environment
+http.client.select.environment.intention.popup.title=Select Environment
+http.client.from.whole.project.separator.text=From Whole Project
+http.client.for.current.file.separator.text=For File
+http.client.current.environment.separator.text=Current Environment
+http.client.more.environments.ad.text=More can be found after project analysis completes
+
+# unresolved variable
+http.client.unresolved.variable.inspection.name=Unresolved environment variable
+http.client.unresolved.variable.with.dev.message=Cannot resolve variable ''{0}'' in the selected environment ''{1}''
+http.client.unresolved.variable.without.dev.message=Environment is not selected. Cannot resolve variable ''{0}''
+http.client.unresolved.variable.add.variable.quickfix.text=Add variable ''{0}'' to environment ''{1}'' {2,choice,0#in regular file|1#in private file}
+http.client.unresolved.variable.select.env.with.var.quickfix.text=Switch to environment with variable ''{0}''
+http.client.unresolved.variable.create.env.with.var.quickfix.text=Create environment with variable ''{0}''
+http.client.unresolved.variable.add.to.pre.request.handler.quickfix.text=Initialize variable ''{0}'' in the pre-request handler script
+http.client.unresolved.variable.add.file.variable.fix=Add in-place variable ''{0}''
+
+# bidi
+http.client.bidi.dialog.description.label.text=Message to be sent to {0}:
+http.client.bidi.dialog.controls.label.text=Press {0} to send. Use {1} and {2} to navigate through the history.
+http.client.bidi.dialog.language.label.tooltip.text=Click to change the language
+http.client.bidi.dialog.language.popup.title=Choose Language
+
+# GraphQL
+http.client.graphql.plugin.promote.install.label.text=Install GraphQL plugin for highlighting of GRAPHQL requests
+http.client.graphql.plugin.promote.install.action.text=Install GraphQL plugin
+http.client.graphql.plugin.promote.enable.label.text=Enable GraphQL plugin for highlighting of GRAPHQL requests
+http.client.graphql.plugin.promote.enable.action.text=Enable GraphQL plugin
+
+http.client.graphql.add.json.variables.intention.text=Add GraphQL JSON variables block
+
+# Code Style
+http.client.code.style.inspection.space.in.request.target.url.inspection.name=Whitespace in URL in request
+http.client.code.style.inspection.space.in.url.yaml.body.inspection.name=Missing request separator in YAML body
+http.client.code.style.inspection.space.in.url.xml.body.inspection.name=Missing request separator in HTML/XML body
+http.client.code.style.inspection.space.in.url.json.body.inspection.name=Missing request separator in JSON body
+http.client.code.style.inspection.json.body.inspection.name=Variable should be double-quoted
+http.client.code.style.inspection.in.path.text=Whitespace inside URL path segment. Use Split Line action for splitting URL correctly: {0}
+http.client.code.style.inspection.in.query.name.text=Whitespace inside query parameter name segment. Use Split Line action for splitting URL correctly: {0}
+http.client.code.style.inspection.in.query.value.text=Whitespace inside query parameter value segment. Use Split Line action for splitting URL correctly: {0}
+http.client.code.style.inspection.remove.space.fix.text=Remove inappropriate space from URL
+http.client.code.style.inspection.add.request.separator.fix.text=Add request separator
+http.client.code.style.inspection.add.run.named.request.import.fix.text=Import from: {0}
+http.client.code.style.inspection.remove.duplicated.import.fix.text=Remove current import definition
+http.client.code.style.inspection.add.request.separator.message=Request separator is missing
+http.client.code.style.inspection.add.run.named.request.import.message=Import for named request is missing
+http.client.code.style.inspection.remove.duplicated.import.message=Import {0} is already defined in this file
+http.client.code.style.inspection.add.wrap.with.quotes.fix.text=Wrap variable with double quotes
+http.client.code.style.inspection.add.wrap.with.quotes=Variable should be double-quoted
+http.client.code.style.settings.continuation.indent.label=URL parts indent:
+http.client.code.style.settings.call.parameters.wrap.label=Query parameters wrap:
+http.client.code.style.settings.method.parameters.wrap.label=Form-urlencoded parameters wrap:
+http.client.code.style.settings.spaces.around.equals.label=Spaces around '='
+http.client.code.style.settings.space.before.and.label=Space before '\\&'
+http.client.code.style.settings.form.urlencoded.group.label='x-www-form-urlencoded' parameters
+http.client.code.style.put.parameters.one.line.intention.family.name=Put parameters on one line
+http.client.code.style.put.query.parameters.one.line.intention.text=Put query parameters on one line
+http.client.code.style.put.form.urlencoded.parameters.one.line.intention.text=Put form-urlencoded parameters on one line
+http.client.code.style.put.parameters.separate.line.intention.family.name=Put parameters on separate lines
+http.client.code.style.put.query.parameters.separate.line.intention.text=Put query parameters on separate lines
+http.client.code.style.put.form.urlencoded.parameters.separate.line.intention.text=Put form-urlencoded parameters on separate lines
+
+# documentation
+http.client.dynamic.variable.documentation.sample.value.title=Sample value:
+http.client.dynamic.variable.documentation.type=Required to be $type$
+http.client.dynamic.variable.documentation.versions.title=Versions
+
+# preview
+action.HTTPClient.Preview.text=Show Preview
+rest.client.show.html.preview.editor.name=HTML Preview in HTTP Client
+action.HTTPClient.PreviewHtml.NavigateBack.text=Go Back
+action.HTTPClient.PreviewHtml.NavigateForward.text=Go Forward
+action.HTTPClient.PreviewHtml.OpenDevTools.text=Open Dev Tools
+action.HTTPClient.Preview.InlinePdf.text=Enable Inline PDF Preview
+action.HTTPClient.Preview.InlinePdf.description=Allows disabling or enabling inline preview for a PDF file
+
+# structure
+http.client.structure.request.body=Body:
+http.client.structure.request.pre.handler=Pre-request handler
+http.client.structure.import=Import
+http.client.structure.run.named.request=Run request
+http.client.structure.run.file=Run file
+http.client.structure.response.handler=Response handler
+http.client.structure.request.host.undefined=<not defined>
+
+# @variables
+http.client.file.variable.overrides.env.line.marker.tooltip=Navigate to overridden environment variable
+http.client.file.variable.line.marker.name=HTTP Client line markers
+http.client.multiple.declaration.error=Variable ''{0}'' is already defined in this file
+http.client.multiple.declaration.error.fix=Rename current definition
+http.client.multiple.declaration.reference.warning=Using a variable that is defined more than once will result in a request failure.
+http.client.refactoring.invalid.variable.name=Cannot rename environment variable because the name ''{0}'' is invalid
+
+# Auth
+http.client.auth.browser.dialog.title=Browser
+http.client.token.created.hint.text=Token acquired successfully. Now it can be used
+http.client.auth.generate.token.intention=Acquire or refresh Auth token
+http.client.auth.force.generate.token.intention=Force acquire Auth token
+http.client.auth.clear.browser.cookies=Clear browser cookies
+http.client.auth.object.error=Auth configuration for ''{0}'' must be an object
+http.client.auth.unexpected.type=Unexpected Auth type ''{0}''. Expected one of {1}
+http.client.property.missed.error=''{0}'' is absent
+http.client.security.must.be.object.error=Security configuration must be a JSON object
+http.client.auth.must.be.object.error=Auth configuration must be a JSON object
+http.client.type.must.be.string.error=Authentication type must be a JSON string
+http.client.auth.property.must.be.string.error={0} must be a JSON string
+http.client.auth.property.must.be.boolean.error={0} must be a JSON boolean
+http.client.auth.client.credentials.must.be.string.boolean.error=Client Credentials must be a JSON string or boolean
+http.client.auth.acquire.automatically.must.be.boolean.error=Acquire automatically must be a JSON boolean
+http.client.auth.unexpected.grant.type=Unexpected Grant type ''{0}''. Expected one of {1}
+http.client.unexpected.client.credentials.value.error=Unexpected Client Credentials value ''{0}''
+http.client.client.credentials.require.client.secret.error=Client Credentials requires Client Secret property
+http.client.custom.parameter.wrong.type.error=Custom Request Parameter elements must be a JSON string, a JSON object, or a JSON Array
+http.client.unexpected.usage.value.error=Unexpected Usage ''{0}''. Expected one of {1}
+http.client.unexpected.custom.parameter.scalar.error=Custom request parameter definition must be a JSON string or a JSON object
+http.client.custom.request.parameters.must.be.object.error=Custom Request Parameters must be a JSON object
+http.client.custom.request.headers.must.be.object.error=Custom Request Headers must be a JSON object
+http.client.auto.authorization.failed.title=Authorization failed
+http.client.no.authentication.in.environment.error=No authentication in the environment
+http.client.no.stored.token.in.environment.error=No stored token for id ''{0}''
+http.client.no.stored.id.token.in.environment.simple.error=No stored ID token for id ''{0}''
+http.client.no.stored.id.token.in.environment.error=No stored ID token for id ''{0}''. Tried to get ID Token, because "Use ID Token" property is true
+http.client.auth.must.be.in.public.file.error=Auth configuration must be declared in public environment file (http-client.env.json).\n\
+    But environment contains only private file: {0}
+http.client.auth.log.tab.title=Auth Log
+http.client.show.auth.button=Show Auth Log
+http.client.auth.message.in.tab=Request uses authentication
+http.client.auth.unresolved.auth.id.inspection=Unresolved Auth identifier
+http.client.auth.pkce.must.be.object.boolean.error=PKCE must be a JSON object or boolean
+http.client.auth.unexpected.code.challenge.method.value.error=Unexpected Code Challenge Method ''{0}''. Expected one of {1}
+http.client.auth.incorrect.code.verifier.length.error=Code Verifier length must be from 43 to 128 symbols, but {0} provided
+http.client.auth.unexpected.code.verifier.symbol.error=Unexpected symbol ''{0}''. Code Verifier must consist only of [A-Z][a-z][0-9].-_~ symbols.
+http.client.auth.refresh.implicit.error=Implicit grant does not support refreshing
+http.client.auth.unsupported.mime.type=Endpoint returned unsupported MIME type: ''{0}''
+http.client.auth.unsupported.response.error=Endpoint returned response in unknown format
+http.client.auth.browser.unavailable.error=Browser-based OAuth requires built-in browser support, but it is not available
+http.client.auth.device.browser.unavailable=Built-in browser support is not available. Open {0} and enter code {1} to continue device authorization.
+http.client.auth.code.error.browser.closed=Cannot retrieve code from the browser because the browser is closed
+http.client.auht.code.error.page.loading=Cannot retrieve code from the browser because of page loading error
+http.client.auth.token.error.browser.closed=Cannot retrieve access token from the browser because the browser is closed
+http.client.auht.token.error.page.loading=Cannot retrieve access token from the browser because of page loading error
+http.client.auth.log.start.title=Getting Authentication for ''{0}''
+http.client.auth.log.refresh.title=Refreshing OAuth2 Token
+http.client.auth.log.retrieving.title=Retrieving New OAuth2 Token
+http.client.auth.log.reusing.existing.title=Reusing Existing OAuth2 Token
+http.client.auth.log.mock.token.title=Using Mock Auth Configuration
+http.client.auth.log.see.url.prefix=See:
+http.client.auth.log.browser.closed.message=User closed browser
+http.client.auth.log.page.loaded.header=Page loaded.
+http.client.auth.log.page.loaded.message=Status: {0}\nURL: {1}
+http.client.auth.log.page.loading.error.header=Page loading error.
+http.client.auth.log.url.message=URL: {0}
+http.client.auth.log.redirect.header=Redirect handled.
+http.client.auth.log.redirecting.header=Redirecting.
+http.client.auth.log.opening.header=Opening page.
+http.client.auth.log.error=Error: {0}
+http.client.auth.log.just.error=Error
+http.client.auth.log.request.sent.header=Request sent.
+http.client.auth.log.response.received.short.header=Response received.
+http.client.auth.log.response.received.long.header=Response received. Status: {0}, body:
+http.client.auth.refresh.disabled=Automatic refresh is disabled
+http.client.auth.automatic.retrieving.disabled=Automatic token acquiring is disabled
+http.client.auth.inspection.message=Unresolved Auth configuration ID
+http.client.add.auth.quickfix=Add Auth configuration to the current environment
+http.client.auth.object.context.name=Auth configurations object
+http.client.auth.no.environment.inspection.message=Cannot use Auth configuration without environment
+http.client.auth.select.environment.fix=Select environment with Auth configuration
+http.client.auth.environment.popup.title=Available Environments
+http.client.auth.environment.contains.hint=Contains Auth configuration ''{0}''
+http.client.auth.environment.doesnt.contain.hint=Does not contain Auth configuration ''{0}''
+http.client.auth.environment.popup.hint=IDE will suggest to create configuration
+http.client.auth.select.environment.fix.description=Suggests selecting environment with ''{0}'' Auth configuration
+http.client.auth.auth.tests.section.title=Authentication
+http.client.auth.password.prompt.title=Credentials for {0}
+http.client.auth.password.prompt.description=This site is asking you to sign in.
+http.client.auth.password.prompt.username.label=Username:
+http.client.auth.password.prompt.password.label=Password:
+http.client.auth.page.loading.progress=Authentication page loading\u2026
+http.client.auth.loading.page.html.content=Loading page\u2026
+http.client.auth.device.no.complete.uri.in.response=Device authorization endpoint returned response without 'verification_uri_complete'
+http.client.auth.polling.access.token.progress=Polling access token\u2026
+http.client.auth.polling.canceled.error=Access token polling canceled
+http.client.auth.device.code.expired=Device code expired. Polling stopped
+http.client.auth.user.code.label=User code: {0}
+http.client.auth.copy.user.code.tooltip=Copy user code
+http.client.auth.config.validation.intention.name=Auth configuration validation
+http.client.auth.config.validation.auth.in.private.intention.message=Security configuration must be declared in the public file
+http.client.move.security.config.quick.fix=Move Security configuration to the public file
+http.client.move.choose.public.file.popup.title=Choose Public File
+http.client.create.new.item=Create new\u2026
+
+group.HttpClient.Add.text=Add to HTTP Client\u2026
+group.HttpClient.Add.description=Adds new request, variable, or Auth configuration
+action.HttpClient.Add.Public.Variable.text=Variable in Public File
+action.HttpClient.Add.Public.Variable.description=Adds new variable to the current environment
+action.HttpClient.Add.Private.Variable.text=Variable in Private File
+action.HttpClient.Add.Private.Variable.description=Adds new variable to the current environment
+action.HttpClient.Add.AuthConfig.text=Auth Configuration
+action.HttpClient.Add.AuthConfig.description=Adds new Auth configuration to the current environment
+group.HttpClient.Add.separator=New\u2026
+action.HttpClient.Add.AuthConfig.got.it.text=You can use the Auth token for created configuration in ''.http'' files by using '''{{'$auth.token("{0}")'}}''' dynamic variable
+action.HttpClient.Add.AuthConfig.got.it.link=Copy variable
+
+http.client.auth.log.toolwindow.id=HTTP Client Authentication Log
+http.client.auth.log.toolwindow.tab.name=Auth Log: {0}
+
+http.client.auth.line.marker.tooltip=Acquire Auth token
+http.client.auth.acquire.action.popup.title=Acquire Auth Token
+http.client.auth.acquire.or.refresh.action.text=Acquire or Refresh Auth Token
+http.client.auth.force.acquire.action.text=Force Acquire Auth Token
+http.client.auth.private.file.chooser.popup.title=Choose Private File with ''{0}'' for Acquiring Token
+http.client.auth.private.file.chooser.without.option=Without private file
+
+# postman converter
+http.client.postman.converter.background.task.name=Converting Postman file to HTTP Client file
+http.client.postman.converter.postman.files.search.task.name=Searching Postman files in project directory
+http.client.postman.converter.task.name=Converting\u2026
+http.client.postman.converter.collection.conversion.step.name=Converting collection file\u2026
+http.client.postman.converter.env.conversion.step.name=Converting environment file\u2026
+http.client.postman.converter.save.collection.file.step.name=Saving collection file\u2026
+http.client.postman.converter.save.env.file.step.name=Saving environment files\u2026
+http.client.postman.converter.save.responses.step.name=Saving response files\u2026
+http.client.postman.converter.convert.dialog.title=Convert Postman Collection to .http
+http.client.postman.converter.convert.dialog.button.text=Convert
+http.client.postman.converter.convert.dialog.label.text=File to convert:
+http.client.postman.converter.convert.dialog.checkbox.text=Attach environment:
+http.client.postman.converter.convert.dialog.validation.error.invalid.collection.file.text=Unknown Postman collection file format: {0}
+http.client.postman.converter.convert.dialog.validation.error.invalid.environment.file.text=Unknown Postman environment file format: {0}
+http.client.postman.converter.convert.suggest.http.client.api=TODO: you can add here {0} handler
+http.client.postman.converter.convert.suggest.migrate.to.http.client.api=TODO: migrate to HTTP Client {0} handler API
+http.client.postman.converter.convert.script.calculated=// calculated response: {0}
+http.client.postman.converter.convert.script.specify.env=// please specify env variables for calculation
+http.client.postman.converter.convert.script.specify.qop=// please specify qop type, current calculation considers it as unknown
+http.client.postman.converter.convert.ui.browse.select.path=Select Path
+http.client.postman.converter.convert.ui.browse.select.path.description=Select the path to the target file
+http.client.postman.converter.dialog.help.tooltip=Show help
+
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanEnvironmentToHttpFileFromProjectViewAction.text=Convert Environment to HTTP Client Format
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanEnvironmentToHttpFileFromProjectViewAction.description=Runs conversion of Postman environment file format to .http format
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanCollectionToHttpFileFromProjectViewAction.text=Convert Collection to .http File
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanCollectionToHttpFileFromProjectViewAction.description=Runs conversion of Postman collection file format to .http format
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanToHttpFileAction.text=Import from Postman Collection File
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanToHttpFileAction.description=Runs conversion of Postman file format to .http format
+action.com.intellij.httpClient.postman.converter.action.ConvertPostmanToHttpFileAction.popup@HttpClientConvertPopupV2.text=Postman Collection\u2026
+curl.client.generator.title=cURL
+
+# HTTP Protocols
+http.client.h2.lookup.element.description=Enables HTTP/2 protocol
+http.client.h2c.lookup.element.description=Enables HTTP/2 over cleartext protocol
+http.client.http11.lookup.element.description=Forces HTTP/1.1 protocol
+http.client.h2c.pk.lookup.element.description=Forces HTTP/2 over cleartext protocol
+http.client.h2.pk.lookup.element.description=Forces HTTP/2 protocol
+http.client.protocol.doc.invalid.presentation=Invalid protocol
+http.client.protocol.doc.valid.presentation={0} keyword
+http.client.https.http1.documentaion=Forces usage of HTTP/1.1 protocol.
+http.client.https.http2.documentation=Enables HTTP/2 protocol alongside HTTP/1.1. HTTP/2 has higher priority. This is the default option for 'https://' requests.
+http.client.https.http2.pk.documentation=Forces HTTP/2 protocol.
+http.client.http.http1.documentation=Forces usage of HTTP/1.1 protocol. This is the default option of 'http://' requests.
+http.client.http.http2.documentation=Enables HTTP/2 over cleartext protocol alongside HTTP/1.1. HTTP/2 has higher priority.
+http.client.http.http2.pk.documentation=Forces HTTP/2 over cleartext protocol.
+http.client.protocol.inspection.name=Inappropriate HTTP Protocol usage
+http.client.inappropriate.protocol.inspection.message=HTTP Protocol keyword has a meaning only for requests with HTTP methods, like GET, POST, etc. It will be ignored and can be omitted
+http.client.inappropriate.protocol.fix=Remove HTTP protocol keyword
+live.template.json.path.description=Filter response with JSONPath
+live.template.bearer.token.description=Bearer with token, e.g., from OAuth2 configuration
+live.template.authorization.token.description=Authorization header with token, e.g., OAuth2
+live.template.auth.obj.description=Authorization configurations object
+live.template.auth.description=Authorization configuration
+live.template.ssl.description=SSL Configuration
+live.template.env.description=HTTP Client Environment
+live.template.var.description=Environment variable
+live.template.gqlr.description=GraphQL Request
+live.template.wsr.description=WebSocket Request
+live.template.fptr.description=POST file by multipart/form-data
+live.template.mptr.description=POST multipart/form-data
+live.template.ptrp.description=POST application/x-www-form-urlencoded
+live.template.ptr.description=POST http://example.com/add\u2026
+live.template.gtrp.description=GET http://example.com/get?id=99
+live.template.gtr.description=GET http://example.com/get
+live.template.xpath.description=Filter response with XPath
+
+# ambiguity encoding inspection
+# Ambiguity Encoding Inspection settings
+http.client.ambiguity.encoding.inspection.name=Ambiguity Encoding Inspection
+http.client.ambiguity.encoding.plus.sign.warning=Possible ambiguity: ' ' is encoded as '+'. It will be auto-encoded with '%2B'
+http.client.ambiguity.encoding.quick.fix.name.add.no.auto.encode.tag=Add "@no-auto-encoding" tag
+http.client.ambiguity.encoding.quick.fix.name.replace.plus=Replace '+' with '%20'
+
+label.jetbrains.account.required=Log in to JetBrains Account to activate a free license
+label.license.required=Activate IDE license to use HTTP Client
+link.label.learn.more=Learn more
+link.label.login=Login
+link.label.trial=Request trial
+
+# onboarding comment
+http.client.static.onboarding.comment.text=<p>To run the request, click <icon src="AllIcons.Actions.Execute"/> in the gutter or press <shortcut actionId="RunClass"/></p><p>To import requests from the other formats, click <icon src="AllIcons.ToolbarDecorator.Import"/> or press <shortcut actionId="HTTPClient.Convert"/></p><p>For more details check the <a href="https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html">HTTP Client documentation</a></p>

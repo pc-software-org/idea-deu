@@ -1,0 +1,31 @@
+<html>
+<body>
+<p>Reports invalid prefixes defined in the <code>@ConfigurationProperties</code> annotations
+  and incorrect property binding via constructor in Spring components.
+</p>
+
+<ul>
+  The reported issues with prefixes include:
+  <li>Missing prefix</li>
+  <li>Empty prefix</li>
+  <li>Prefix in notation other than the kebab-case</li>
+</ul>
+
+<p>
+  The property binding error is reported if a Spring component annotated with <code>@ConfigurationProperties</code>
+  has parameters other than injected beans in the constructor. Constructor cannot be used for property binding
+  in Spring components because it is used for bean injection in this case. Binding via setters should be used instead.
+</p>
+
+<p>
+  The inspection also reports classes that are annotated with <code>@ConfigurationProperties</code>
+  and not registered via <code>@EnableConfigurationProperties</code>,
+  marked as a Spring component, or scanned via <code>@ConfigurationPropertiesScan</code>.
+</p>
+<!-- tooltip end -->
+<p>
+  This inspection only triggers in classes annotated with <code>@ConfigurationProperties</code> that are not scanned via <code>@ConfigurationPropertiesScan</code>
+  when the Spring Boot version for the project or module is set to 2.2.0 or later.
+</p>
+</body>
+</html>

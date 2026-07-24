@@ -1,0 +1,19 @@
+<html>
+<body>
+<p>Reports <code>th:inline</code> attributes that are no longer needed in Thymeleaf 3.</p>
+
+<p>Starting with Thymeleaf 3, inline output expressions <code>[[…]]</code> and <code>[(…)]</code> are evaluated in text content without an enclosing <code>th:inline</code> attribute. The attribute can be safely removed.</p>
+
+<p>Example:</p>
+<pre><code lang="html">
+&lt;p <strong>th:inline="text"</strong>&gt;Hello, [[${name}]]!&lt;/p&gt;
+</code></pre>
+
+<p>After the quick-fix:</p>
+<pre><code lang="html">
+&lt;p&gt;Hello, [[${name}]]!&lt;/p&gt;
+</code></pre>
+
+<p>The inspection only reports the attribute when the project targets Thymeleaf 3.</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+configurable.group.database.main.settings.display.name=Database
+configurable.group.database.main.settings.description=<html><body>\
+  Specify query files behavior, configure data views, and extraction options. \
+  Add custom parameter patterns in SQL queries and specify SQL dialects mapping for files.

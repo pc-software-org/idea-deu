@@ -1,0 +1,3 @@
+advanced.settings.database=Database
+advanced.setting.database.goto.class.enabled=Show Classes tab in Search Everywhere
+advanced.setting.database.goto.class.enabled.description=Shows Classes tab like in other IDEs

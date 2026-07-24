@@ -1,0 +1,8 @@
+xdebugger.logpoints.add.tooltip=Add Logpoint
+xdebugger.logpoints.editor.label=Log:
+xdebugger.logpoints.editor.placeholder=Enter expression to log
+xdebugger.logpoints.undo.redo.confirmation={0}?
+action.AddLogpoint.text=Add Logpoint
+action.AddLogpoint.description=Add a logpoint above the current line
+action.EditLogpoint.text=Edit Logpoint
+action.EditLogpoint.description=Edit the selected logpoint

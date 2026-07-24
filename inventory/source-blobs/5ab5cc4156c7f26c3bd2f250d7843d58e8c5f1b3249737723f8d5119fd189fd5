@@ -1,0 +1,3 @@
+debugger.log.capture.breakpoint.name=Output capturing internal breakpoint
+debugger.log.capture.stack.trace.panel.title=Stack Trace
+debugger.log.capture.stack.trace.panel.close=Close

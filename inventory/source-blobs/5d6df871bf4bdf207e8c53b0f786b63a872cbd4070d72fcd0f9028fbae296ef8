@@ -1,0 +1,3 @@
+debugger.suggestion.severity.name=debugger suggestion
+debugger.suggestion.severity.name.capitalized=Debugger Suggestion
+debugger.suggestion.severity.count.message={0} {0, choice, 0#debugger suggestions|1#debugger suggestion|2#debugger suggestions}

@@ -1,0 +1,301 @@
+lines: 300
+{"id": "242e9bf943164a43aea5f66ea22d30740c6e0beb57734f91dd5a64c8cd935bb5", "key": "jshint.unused.false.text", "source": "Don't check anything"}
+{"id": "2434454f1b09b802ffe21e50bdc448171f5d686b2fe950bcc0f0178bf44dc7c0", "key": "wire.stats.table.registry.column.name.speed.down", "source": "Speed down"}
+{"id": "2449197e1a80af1dfcc1a93b1cb1ae8acf5e97253af38c8bbb06d24eb6d274c5", "key": "ssh.remdev.launch.question", "source": "Remote Development Launch"}
+{"id": "2471ed2748e10987bf686fd2ed92ebe79781e2ad696fa0806c6f24298989a1f5", "key": "intention.name.add.dynamic.prefix", "source": "Add dynamic prefix"}
+{"id": "24944e96ab8ced4eae58fc1de75a2b071f3041c76aecb4941665dde94f59b243", "key": "", "source": "<html>\n<body>\nReports fully qualified class names that can be shortened.\n<p>The quick-fix shortens fully qualified names and adds import statements if necessary.</p>\n<p>Example:</p>\n<pre><code>\n  class ListWrapper {\n    java.util.List&lt;Integer&gt; l;\n  }\n</code></pre>\n<p>After the quick-fix is applied:</p>\n<pre><code>\n  import java.util.List;\n  class ListWrapper {\n    List&lt;Integer&gt; l;\n  }\n</code></pre>\n<!-- tooltip end -->\n<p>Configure the inspection:</p>\n\n<p>\n  Use the <b>Ignore in Java 9 module statements</b> option to ignore fully qualified names inside the Java 9\n  <code>provides</code> and <code>uses</code> module statements.\n<p>\n  In <a href=\"settings://preferences.sourceCode.JAVA?JavaDoc%20Inner\">Settings | Editor | Code Style | Java | Imports</a>,\n  use the following options to configure the inspection:</p>\n<ul>\n  <li>Use the <b>Insert imports for inner classes</b> option if references to inner classes should be qualified with the outer class.</li>\n  <li>Use the <b>Use fully qualified class names in JavaDoc</b> option to allow fully qualified names in Javadocs.</li>\n</ul>\n</body>\n</html>"}
+{"id": "249bbdf368ef365599af0665e57e38fc19ad5e3439d39cff7716bbb662e90482", "key": "jshint.option.unused.description.short", "source": "Warn about unused variables"}
+{"id": "255831fdd2f27a333c7bca07bfca11e08ef7dd7754f17d6e23246b67c19df583", "key": "progress.title.pruning.worktrees", "source": "Pruning worktrees…"}
+{"id": "256caf18b4af49674c12b5a2d96e7adc1ea43f4d002de60d7b3594bfbfaf3643", "key": "mcp.server.configured.with.transport", "source": "Configured ({0})"}
+{"id": "2574468ae332fb2d9512a7b75299f6587da6f3beeb476e1c9761bfd9eaba7176", "key": "KubernetesSettings.crdAndOpenApiTable.columnScope.project.option", "source": "Project"}
+{"id": "25963bea2bb153cef8146c878200465d5f52974f246d7f041b5a1a17e8fc0c38", "key": "connection.configuration.entry.idle.timeout.description", "source": "Timeout for transport in not connected state before drop the channel connection"}
+{"id": "25b1b847afc00cf47c199fbd95a14c27fe59c9914da5ae0f4696618cb217bb4c", "key": "mermaid.style.settings.spacing.around.style.separator", "source": "Around style separator"}
+{"id": "25d23a35b8af5e75c0c41662798fdcb892b865617f878fb9646e4b60964be0f5", "key": "jshint.option.undef.description.short", "source": "Warn when variable is undefined"}
+{"id": "25d38ef8440d6ad406723136ac27424128afa9b615cc60d71617e2e4956fc26c", "key": "ssh.backend.deploy.state.verifying", "source": "Verifying…"}
+{"id": "260f353b0ba295bbf13ff3e91a2d98411edc2ef1ae51d789eda1eda8ac4d7662", "key": "jshint.option.multistr.description.short", "source": "Suppress warnings about multi-line strings"}
+{"id": "263592347f27d6e31720a2e89fb65e80e6437cf5e2559a837c13e08bee967eab", "key": "ssh.authentication", "source": "Authentication"}
+{"id": "26403671bc9de6963ccabc6018c544dc39f797231f07e9fcf39fad8c4462276c", "key": "configurable.mcp.tool.filter.managed.router.acp.only", "source": "ACP agents only"}
+{"id": "2645b8a5255dafcca0af3f941e88fce992ae307e4fb34ba0c1d3915ccb701deb", "key": "devcontainer.required.plugins.action.update", "source": "Update…"}
+{"id": "264b1cd06ecad8732f14df66c1272cc3657042f956b3f50fec9713f24df2a174", "key": "ComposeServiceCompletion.template.solr", "source": "Solr"}
+{"id": "2663757d536ed7c5c45c3a95451e9bc0a758688e8a706541dd2c889d4aacf167", "key": "jbc.download.error.unsupported.archive.format", "source": "Unsupported archive format: {0}"}
+{"id": "26649bb2b6ea0b8fcaacd4803e3ef0c825ed1090792248b0df3c218b36d5d681", "key": "formatter.help", "source": "Formats given files according to code style settings. Run without parameters for more details."}
+{"id": "269ed8a1fcd0e1beee489c97d4cb887d080f89e00ed5dbc9ab7771f186109af1", "key": "filetype.jshint.config.display.name", "source": "JSHint configuration"}
+{"id": "26c5f0787be6fbc7c7fb391abb77c1070e22705b84290dd00a4c3410ed8aa14a", "key": "misordered.assert.equals.arguments.flip.quickfix", "source": "Flip compared arguments"}
+{"id": "26cc1b20c3b23e9b5add475f736252cfd0bdfd6d2270e0aaac19167b9d2d593b", "key": "tag.should.not.be.used.in.tag.file.error.message", "source": "Tag should not be used in tag file"}
+{"id": "26cdde62b01501e3ef8c0df496369e33790c01fc1a0c5fded7c1c81aaeaebaf7", "key": "eslint.code.style.dismiss.text", "source": "No"}
+{"id": "26f6eadcd8540f61b134b2c424587112ace3bf6f90a1f4a7dcae4c56664d5149", "key": "connection.configuration.entry.diagnostic.service.pings.interval.description", "source": "Time interval between two pings that provides connection diagnostic service connectivity status updates"}
+{"id": "26f9cdc3f50ec478bb9c5048bca077ff6adc94c8062fea3d5507770b0db8da7a", "key": "fix.surround.call.with.0.argument.1", "source": "Surround call with ''{0}({1})''"}
+{"id": "27021f9be3a1ae43243d33a34566650b77414985fdfa2fa1530e9396c8cee50a", "key": "progress.text.unloading.n.modules", "source": "Unloading {0} {0, choice, 1#module|2#modules}…"}
+{"id": "27270e3aa7ba4aeaf5bd962b6b6daf7b17df60cabc25e3b8846f7a0da2adf645", "key": "dfa.message.domain.info.caption", "source": "Domain info"}
+{"id": "2775565331087f34d01ba0568ddf0ed19522ce40c004567d80016d05eab671b4", "key": "jshint.option.loopfunc.description.short", "source": "Suppress warnings about functions inside loops"}
+{"id": "278c0aa2b0105f15a5ff9240d39a810352d73c45e26c1735b70d0fad48ad5e0a", "key": "jshint.options.tree.tooltip.set.a.new.value", "source": "Set a new value"}
+{"id": "2791fae52a54a8d3d4f910008b48636ee6582d286be2646110c15c5486160582", "key": "closing.terminal.processes.progress", "source": "Closing Terminal Processes"}
+{"id": "27cf1bee0f779f424d647adc4231f00b29d0125c5f3eae459f06b6b44ae251b1", "key": "wire.stats.table.registry.column.name.total.up", "source": "Total up"}
+{"id": "27d08320ef5b958937e904ba4a743241f244b040e9761981fa0bf3d930ed792d", "key": "fix.create.branch.declaration", "source": "Create branch declaration ''{0}''"}
+{"id": "27d3a855897792e2161e4a41bb12bcc9ccb0c9ea2eebd1971ff62085505d2a64", "key": "connection.configuration.entry.transport.lifetime.termination.delay.description", "source": "Represents the duration of termination delay for the transport lifetime"}
+{"id": "27eb8b81372e3015635c1b298d326a15c7fc35637f342dc642e2cab92e04692f", "key": "kotlin.script.in.project.sources.later", "source": "Decide later"}
+{"id": "27eb920fb1591554ee9fc5ada86a9bc896870b0cdc02fc976abead7e2c3c097d", "key": "event.watcher.column.name.started.at", "source": "Started at"}
+{"id": "27ffb049c5ffd3f131d1c36539557008050f006aefa8fad6a8a51bf931741b3f", "key": "action.ProblemsView.Frontend.SwitchImplementation.text", "source": "Turn on split `Problems View` implementation"}
+{"id": "28307b7af8940f2fb381f873b978aaaf42081d2d9e2ca2e77511925be4d56fdb", "key": "action.TestJbProtocolCommand.description", "source": "Invoke a jetbrains:// URL in the current IDE process (bypasses OS Launch Services)."}
+{"id": "283b1a3b106d12cafde7a535c197ab5ad6d09c31221d9f5d71f6789a4f577cf3", "key": "introduce.field.initialize.in.scope", "source": "Scope to Initialize:"}
+{"id": "284712c70accdf99b306d84e404df0c1defa459ffb452b2631eacbf04e77604f", "key": "", "source": "<html>\n<body>\nConfigure the preferred template data language for the current file.\n</body>\n</html>"}
+{"id": "28527ef18ca36e3043677acf1f34a0b3187d20543781ac24aa2331116c688b72", "key": "ComposeServiceStatusInlayProvider.failed", "source": "Failed"}
+{"id": "28739cb58ce424e595b3e15104d471fa4b1a9c20877bfe096d8931ff9dcc9487", "key": "action.Terminal.AiAgents.LaunchJunieCli.description", "source": "Launch the Junie CLI agent in a new terminal session"}
+{"id": "2876211af0158c5a7b23ff7fe49b2e5d1d8693fd02dc8b488829e2d4598ed5ef", "key": "action.NewDockerComposeFile.kind", "source": "Docker Compose file"}
+{"id": "289407c3148aa74f5215b212f8b06cbc492662ac2e398527848c4a7892511f04", "key": "action.LoadKtGradleConfiguration.text", "source": "Load script configurations"}
+{"id": "28b8cbdc12c3f1e61208ff380246245ca9c84959f3b36b4b4cd0374f17be0ddf", "key": "settings.terminal.promotion.show", "source": "Show setup suggestions for Codex and Claude terminal sessions"}
+{"id": "28be2c09a96752f950739c38983ebb381e4aaf202aecf6cf034cf3fcfcaeb467", "key": "connection.configuration.entry.transport.ready.timeout.description", "source": "Timeout for transport to be fully prepared and ready"}
+{"id": "28c007872271ca47bcdda23fe2d01da922b17ad8d456681d4a2fb2c4281c3c72", "key": "lombok.kotlin.no.kotlin.lombok.compiler.plugin.inspection.problem.descriptor", "source": "Kotlin Lombok compiler plugin is not configured for the module"}
+{"id": "28ce2dffcccd31bc510d520abab316650262c14f448d2c0e6d010a337a3e993f", "key": "text.couldn.t.configure.kotlin.gradle.plugin.automatically", "source": "Couldn't configure the kotlin-gradle plugin automatically."}
+{"id": "28dfcddea9fc44270867943bd9a2efc213fa39e7e45915a8a82f8940bcfc95b3", "key": "jshint.option.eqnull.description.short", "source": "Suppress warnings about <code>== null</code>"}
+{"id": "28f36c837c1830e534bb51e64347009febd16e9428d1a1b8fcb9fc0359da83a8", "key": "", "source": "<html>\n<body>\nConverts <code>forEach</code> over a zero-based range to an equivalent <code>repeat(n) { ... }</code>.\n</body>\n</html>"}
+{"id": "28f5b2f01a21220497a1a437e9cc5497bf1a88ad22d680d6a018896d080f5bb5", "key": "action.Maven.OpenToolchainsXml.description", "source": "Open Maven toolchains.xml"}
+{"id": "2933ca94a792f6556a36e8586e2f4c7c01b80c6506b436e77a80bae7d90a7eeb", "key": "escape.functions.table", "source": "Escape functions:"}
+{"id": "294114c7711c7b8abed9b4355753041242d32cbc82c9bbeed953d34a70232702", "key": "", "source": "<html>\n<body>\nReports <code>@KotlinScript</code>-annotated classes that aren't fully set up to be used as a Kotlin script definition.\n<p>\n    A class annotated with <code>@KotlinScript</code> describes a script template — files matching its pattern\n    (for example <code>*.my.kts</code>) are expected to use its compilation configuration and dependencies.\n    Two things make a definition fully usable, and this inspection reports either being missing:\n</p>\n<ol>\n    <li>\n        <b>Registration in Kotlin scripting settings.</b> Without an entry in\n        <em>Settings → Languages &amp; Frameworks → Kotlin → Kotlin Scripting → \"Script definition classes to load\"</em>,\n        your IDE will not recognize matching <code>.kts</code> files as scripts of this definition. The quick-fix\n        <em>\"Register definition in Kotlin scripting settings\"</em> populates the FQN (and the owning module's classpath)\n        into the settings.\n    </li>\n    <li>\n        <b>Marker file at <code>META-INF/kotlin/script/templates/&lt;fqn&gt;.classname</code></b> packed into the resulting JAR.\n        Library-based discovery (<code>ScriptDefinitionsProvider</code>) scans dependency JARs for this empty marker file\n        to find available templates; consumers of your library won't auto-discover this definition without it.\n        The quick-fix <em>\"Create marker file for downstream auto-discovery\"</em> creates the file under the module's\n        first resource root.\n    </li>\n</ol>\n<p>\n    Apply whichever quick-fixes are relevant — both for the typical library-author flow, or only registration when\n    the template is consumed locally and never published.\n</p>\n</body>\n</html>\n"}
+{"id": "2955995fe2936cf268349c1316fb29d28e4c108b9e720dd1d6417f33e05b6bfb", "key": "vfs.file.save.async.title", "source": "File saving failure"}
+{"id": "297b532d23a89fe7b88c0e3b471af95e3e4036fe34a9d892faedf516bf309b99", "key": "action.Settings.Paste.text", "source": "Paste"}
+{"id": "298375d37ae951dabdbb8212173f501353ecefc36d5db36e5d8976ede911675b", "key": "column.name.annotation", "source": "Annotation"}
+{"id": "298d11bc9e719e2bc95c9160add32ee9a43c8e218aec5fe1843f7a6adac0e38c", "key": "compose.resources.intention.create.string.resource.text", "source": "Create {0} resource ''{1}''"}
+{"id": "29a8e7c0e8bd87f4f744df7538b3b321a8e3334cb1a9d337e2844838df9344ba", "key": "mcp.toolwindow.tab.tool.calls", "source": "Tool Calls"}
+{"id": "29ee734d20019efb0b644da436f167e6e793184a31828c30006097a8be568b5b", "key": "ObjectKind.authentification_policies", "source": "authentification policies"}
+{"id": "2a1a4c70eea2d216e7fcc36732d8cdcd4753273b043862ad538b1af5eea1b698", "key": "jshint.option.laxcomma.description.short", "source": "Suppress warnings about comma-first coding style"}
+{"id": "2a2d3f730b21fc8308d1020c272fdc99433c793bc6c8138834976ece1abe36dc", "key": "jshint.option.strict.description.short", "source": "Warn when code is not in strict mode"}
+{"id": "2a423ed515283cf63b91ff46184d211a1bb8ab03de42decc4e5bef214314527f", "key": "option.highlighting.policy.group.name", "source": "Highlighting Differences"}
+{"id": "2a7545752d0c27df48df315bf94bfc5013cbad1ba0d22a1fff50059b52ceada9", "key": "label.ijent.dashboard.info.gid", "source": "GID:"}
+{"id": "2a80d3667ea5c3b682e9001c24886d0875e8ab2c01fbb9a3ac34619a85176480", "key": "control.center.tab.connection.config.widget.ping.panel.ui.label", "source": "UI"}
+{"id": "2a8d5b34aba74b1a06968335198ba30c6fcb39c9f95ec788aee634e4a117360c", "key": "error.launch.unknown", "source": "Failed to launch agent ''{0}''."}
+{"id": "2aafcc49ed568995cd0865a76c9ca20bc9839739cccde2de27666be14bd349dc", "key": "action.RunFlywayMigrate.text", "source": "Run Flyway Migrate…"}
+{"id": "2ac590c1f03c1c06b139908c3c4c73edc7ebe66cc3bae3dcaab07578e31f9d78", "key": "dfa.message.unnamed", "source": "Unnamed"}
+{"id": "2acb92e60a74587ce91b3cafa9241efb90b4fb498c3df5d35a0058f292d3185c", "key": "templates.intention.settings.category.after", "source": "The result of the intention\nwill be shown here."}
+{"id": "2acc8c32ec171ad3a7fdd30e44fface351c9802a413614a76c0ca68baf37caa6", "key": "dfa.message.left.argument.of.equality.comparison.is.expected.to.be.attribute.variable", "source": "Left argument of equality comparison is expected to be attribute variable"}
+{"id": "2aface1e69990f71ce7cce0100c12066dcfbf381b99c541c0ae06520b388f31c", "key": "title.jsp.imports.layout", "source": "JSP Imports Layout"}
+{"id": "2b06b917c3cde4cec240ab6095d87d6bed2a3a5ed4627c756128c00b071bed6a", "key": "", "source": "<html>\n<body>\nReports Cargo projects that failed to load during Qodana analysis.\n<p>\nWhen cargo operations (such as build script evaluation) fail, the analysis continues\nwith a degraded project model. Inspections that depend on the full project model\nmay produce incomplete results.\n</p>\n</body>\n</html>"}
+{"id": "2b380f0f7cfea22e5b0256473ad44dee6aefcc69e8951cabb15e6e37806ee931", "key": "multiple.file.merge.description", "source": "The following {0,choice,1#file has|2#files have} conflicts:"}
+{"id": "2b425e8615212b0cc5b7abb95b2202dc05dfacb757d42b045e73891f6b59452d", "key": "property.MatchType.title", "source": "Match Type"}
+{"id": "2b45757ef0123dc0ed749a3fe26d067e66aa51472674ce3222a189fd54df7c01", "key": "constant.not.allowed.as.annotation.enum.value", "source": "Constant not allowed as annotation enum value."}
+{"id": "2b700d4f9e9a693a70d2779bf693ee9e087081cc9b039152c0af07f886587d45", "key": "scratch.toggle.make.before.run.disabled.description", "source": "Select a module to enable make before run"}
+{"id": "2b8211b2a129d3b5fcfcc1f44f27c94bed6a5e0367db38a6fd7539779ca40f78", "key": "dfa.message.relation.arity.mismatch", "source": "Relation arity mismatch"}
+{"id": "2b96678d6603142b91ac33b5d3d5325e460c654951b2c32bd17f57441fc68271", "key": "xdebugger.logpoints.editor.placeholder", "source": "Enter expression to log"}
+{"id": "2baf2b3238f1ca7f1cde0548f766536cee4aae1ea578ba9566508b4f36c96fe0", "key": "class.overridden.at.runtime.member.problem", "source": "Member ''{0}'' of class ''{1}'' may call a different implementation at runtime because the class will be loaded from ''{2}''"}
+{"id": "2bb8570e77782bfadc7559df7ae58565f3ea04f2888540d407e1712eb65931de", "key": "dialog.title.error", "source": "Error"}
+{"id": "2bdb80195cf870c9c77e5f97ec663253c5d83d89bcdd46f687dbfd8dfc382311", "key": "configuration.properties.register.via.new.enable", "source": "Create @EnableConfigurationProperties and register"}
+{"id": "2bf78435650ff2a8ecb6f81c6151b7b46293582da6fbe8d88af87157b1dc8b1a", "key": "templates.postfix.settings.category.before", "source": "Sample code for the selected\ntemplate will be shown here.\nA <spot>flashing rectangle</spot> shows where\nthe template can be used."}
+{"id": "2c3e3c54444ba068a5edb6e6e9d07823bb518fd1386923b01cf4e1920715322c", "key": "inspection.print.to.logpoint.display.name", "source": "'println' call can be replaced with a logpoint"}
+{"id": "2c4826c0904fdd5ffaf341e74c8293b865eca236796c324f396ea3286abb2bec", "key": "mermaid.style.settings.spacing.before.colon", "source": "Before colon"}
+{"id": "2c5263ae7fecea1c770a076e350efb7f46fe5c03541d7806a91c5d4d14023a6e", "key": "action.AddLogpoint.text", "source": "Add Logpoint"}
+{"id": "2c56e942a81e8f3f307fae1db482ebb9b451e4d1fddad1ea649d8feab0edf705", "key": "modal.progress.title.loading.plugin", "source": "Loading ''{0}''"}
+{"id": "2c9912470db92b9d41421e185058f6e2a360a6a50985ffb1de730511ae117216", "key": "dfa.message.usage.of.any.expression.in.equality.comparison.is.not.allowed", "source": "Usage of any() expression in equality comparison is not allowed"}
+{"id": "2cb33b3958bf02213eb3832b6f03a7c8f667816f36e3a952c8544b6726371e73", "key": "wire.stats.table.registry.column.name.wire", "source": "Wire"}
+{"id": "2cb61839c5622961601aaae4b8bdde72e4c592f419ed0020c779f5ffe849b6ba", "key": "fix.change.space.symbol", "source": "Change space symbol"}
+{"id": "2cb87b37210ec400b8a74aa6708fe893c9126d2e2a0c4dd5442628f564557964", "key": "label.ijent.dashboard.info.platform", "source": "Platform:"}
+{"id": "2ce982a04f96879819cdf1a930e65bac65143bd1db7b5d067479225ed5ccedb8", "key": "options.jsp.attribute.descriptor.el.dot", "source": "Expression Language//Dot"}
+{"id": "2d45678313c7b4f6ed0fba32ae0e83b4aeae3e3fc9c586dfdeb8dc690a410065", "key": "color.constant", "source": "Constant"}
+{"id": "2d514a2deace550717bd52e37430ae1fcdc78ac743979a0401e19bacaef5fb47", "key": "mermaid.style.settings.blank.lines.within.structures", "source": "Within structures"}
+{"id": "2d5da313184c76167c29043f7bf25de46e9add483887eee0fdc2eb33dbfb99bf", "key": "action.Jdbc.OpenEditor.Console.text", "source": "Open Query Console"}
+{"id": "2d9907fcc987aa2655458cd7c550a9f3bd90c14d42c55ba69f0c2e41ee089d48", "key": "annotator.unsupported.directive", "source": "Directive isn't supported"}
+{"id": "2daaeb468e1f6dfc83258127b98e4b26eef9dc05399827df135db1485a7dee3b", "key": "jbc.download.error.archive.verification", "source": "Failed to verify the integrity of the downloaded archive {0}"}
+{"id": "2dac1b69b29b8bce05cc1b77a8d366032726c42018f6a12926260d6926db892a", "key": "intention.name.wrap.in.tag", "source": "Wrap in {0} <{1}> tag"}
+{"id": "2db01ec97163f35f34cec7b514cb58abe43b0ee16a801257b459d57883e6d9d4", "key": "ssh.validation.failure.non.zero.exit.code", "source": "Non-zero exit code {0}"}
+{"id": "2e05048d7bf4cfc8e380330039528914cea8ef126deecd2e334be47a4bbb94f8", "key": "review.color.collaboration.preview.panel.added.line", "source": "Added line"}
+{"id": "2e07cdfc0ef5a99edeb71be9054e89a004488631f23263db5699d9a4641e2a48", "key": "action.MoveMinimap.description", "source": "Move minimap to the opposite side"}
+{"id": "2e192edb9a74835c1872fc00a06a59c28e4398ab1604af1ab79d3996e8ed130f", "key": "map.keys.call.chain.can.be.simplified", "source": "Call chain can be replaced with 'keys'"}
+{"id": "2e20c610fc1788c226902548925803bfa92f5723dc6708c4df559dbff41f7afa", "key": "KubernetesSettings.crdAndOpenApiTable.columnScope.title", "source": "Scope"}
+{"id": "2e2ff001bed75b78f101ba58e47e39c5ee09652768f942a3e8acd21f56315c8e", "key": "radio.prefer.one.import.statement.per.page.directive", "source": "Prefer one import statement per page directive"}
+{"id": "2e4209e544b603eb314f50df2b9ce43ab97644aba8b90921e1820e1d4a599a78", "key": "options.jsp.attribute.descriptor.el.string", "source": "Expression Language//String"}
+{"id": "2e66a3e462fb1e174ff6855f26f9a9d5ee39f033d291d336bd2ae83642274cd2", "key": "inspection.redundant.explicit.variable.only.simple.option", "source": "Only report when the variable type is obvious from the initializer"}
+{"id": "2e6ae2f4a43b947d6ffcd914347f58ef474f2e18c5262ae007d41e140ca83981", "key": "dataflow.message.storing.array.nullable", "source": "Expression <code>#ref</code> might evaluate to null but is stored to an array of non-null elements"}
+{"id": "2e96e762731c3f4a2a770fd785bec803f5fabf3487562456e2e008d22907b43d", "key": "accessible.name.shortcut", "source": "shortcut: {0}"}
+{"id": "2ec6ea79c811a80ca7fc8a6e9e5379eeefcc66e1c59aa4b05e10d01eaeff7521", "key": "dfa.message.unable.to.locate", "source": "Unable to locate \"{0}\""}
+{"id": "2ecde9f84b798e32c1031da8f462bf73fe1dd4cff72ec865133665a47f522ffe", "key": "", "source": "<html>\n<body>\nGeneric type isn't present in class declaration or its first relation statement. Therefore, it won't be rendered.\n</body>\n</html>"}
+{"id": "2f05b2cffaae3382e559f243d7ef2103f7b7ff2bdc4090abcb751137f63ac50b", "key": "group.DatabaseView.EmptyState.AllDataSources.text", "source": "All Data Sources"}
+{"id": "2f20a5345ad6661c2605164aeaf2c0bfaf5ec72f5ba0d273044c969306acbfa8", "key": "inspection.convert.implicit.context.argument.to.explicit.fix.single", "source": "''{0}''"}
+{"id": "2f272f41af1a6e6226eaaad80bc673583d17cbbd3e0e84fd315d08f6d77838d3", "key": "git.graph.inspection.source.commit.is.already.in.current.branch", "source": "Source commit is already in the current branch"}
+{"id": "2f2733d737030316def3f0ea4c6bf2d4755fb70ea80066ee052b76816d67ab58", "key": "0.smart.cast.to.1", "source": "{0} smart cast to {1}"}
+{"id": "2f28c72b419c2358c5af80d1b46d0942a8eaff2533f643793b95417fbfaf25c3", "key": "progress.title.opening.project", "source": "Opening ''{0}''…"}
+{"id": "2f3514e8c9558357f16b06311ea5eb81595e19564e0e60de027583019965798a", "key": "notification.aia.plugin.missing.content", "source": "Cannot launch ACP agent ''{0}'' because the AI Assistant plugin is not installed."}
+{"id": "2f35376dc3aec0b850523f542e2a447a14443de2054a8b86f6f00763b159541e", "key": "connection.unexpected.problem", "source": "Unexpected problem"}
+{"id": "2f4a2faaeeb5fa6925cc2cadc2793df297a6d7cf597ee4de14eab3b51ef52558", "key": "changelog.field.empty.text", "source": "e.g. resources/db/changelog/db.changelog-master.xml"}
+{"id": "2f5a743a8fd30ebefc9ad72eabe5b98563111af8d6bbc4e30969788257909d64", "key": "add.names.to.this.argument.and.following.arguments", "source": "Add names to this and the following arguments"}
+{"id": "2f82baffd56c9d76db6a4a425e8cfa9625875ddbf8b48b8cd85fb5dcea1a1cda", "key": "merge.differences.status.text", "source": "{0, choice, 0#No changes|1#1 change|2#{0, number} changes}, {1, choice, 0#No conflicts|1#1 conflict|2#{1, number} conflicts}"}
+{"id": "2fb23ab00436f0782bc4ef7e4b042b68f45f8ee67ef9f4c49912a69250d18caf", "key": "mcp.toolwindow.sessions.column.version", "source": "Version"}
+{"id": "304d4c9daba25bd1795865544a307b87ae8626c351bd6af51b34a7c9c2bb3433", "key": "DataSourceConfigurable.drivers.not.downloaded.for.driver", "source": "Do you want to download driver files for {0}?"}
+{"id": "30559c190ec99d7bf4cd59d6fa5625f6fd9feb28d4a4e1b4ec523f461df588f9", "key": "untainted.annotations.description", "source": "These annotations will be used as '@Untainted' annotations during the analysis"}
+{"id": "3057cd6209fa05d91a76ebcffe9715aac22ac6cfa62a0bcd208827fb5576c63a", "key": "action.DatabaseView.OpenDdlInConsole.text", "source": "Generate DDL to Query Console"}
+{"id": "308804ccf3c527be73c00532ca62a8ec502f451c94b30a44c25014c4d8f9a688", "key": "toolwindow.working.trees.worktree.status.locked", "source": "Locked"}
+{"id": "30a8e2cb1e07ad630e4a7a46cc53b5610842178b809fca4e10cc25c643b1fe4d", "key": "generic.will.not.be.rendered", "source": "Generic won't be rendered"}
+{"id": "30d31f9adebf7cd1d03ca49cba8fa928d312d1aadd6ded197875f3eec38538d2", "key": "ssh.backend.deploy.state.configuring", "source": "Configuring…"}
+{"id": "3126cf274094e7b3230a8fe10be252e2caaa7e12ddc80de4b844a1643f85c331", "key": "db.generated.id.description.IDENTITY", "source": "<b>IDENTITY</b> - ID is managed by the database. Works for auto-incremental types and in case of using `nextval(\"sequence_name\")` or any other function as the default value for the ID column."}
+{"id": "31522a575774d30edd6368fc3df45bcac6c40c26c971a328edacfe70aebce3c7", "key": "mermaid.frontmatter.yaml.schema.name", "source": "Mermaid Frontmatter Schema"}
+{"id": "3192cdbb218eaaeecb23ae6618befc141235528c325565d7f9d8ddb4471db9dc", "key": "jshint.inspection.message.duplicate.options", "source": "Duplicate JSHint options: {0}, {1}."}
+{"id": "31b132d98c79d8c49e510aa776f76a08d6ecde7480edda3a10dc088fb7698046", "key": "inspection.nullable.problems.method.overrides.notnull.option", "source": "Report non-null &parameters overriding nullable and vice versa"}
+{"id": "31d13e8f41a038341909aeba4542109c404e0a75879e4002bc7e4805f086fc0c", "key": "action.ToggleSmartMode.SplitMode.text", "source": "Enter Smart Mode (Split Mode)"}
+{"id": "31d254b11924e1efa9f621947e714aa9f03b17701074284b6ee07d8013274363", "key": "memory.usage.panel.accessible.name.with.text", "source": "Memory Usage: {0}"}
+{"id": "31edfd6d652703d76864d6ba8d87adaef74e851d36ea45c09d2bdeb6be675a4b", "key": "configuration.properties.register.via.new.enable.in", "source": "Create in ''{0}''"}
+{"id": "31f6090521bbcb3408e3b34d5275fbb687bcef184ab81f745d7c7259ab326355", "key": "empty.text.shortcut.separator", "source": "or"}
+{"id": "321596131d1d3eaa2a59cbd7362674ba0ce8ac8f9bbba2abd66db5def1d698e5", "key": "action.Debugger.FocusOnFinish.description", "source": "Focus this view by default when the debug session ends"}
+{"id": "32201477980f463fd70e76804451585182d61b36b587d1de2a9aa3158755ffe5", "key": "standardjs.codestyle.updated.dependency", "source": "{0}: The project code style settings were updated based on ''standard'' dependency in package.json"}
+{"id": "32227bfccd85366f9dd3e10c9c09bbf542bb6643a76fd186aea2e78351b9e9db", "key": "copy.config.stream", "source": "HTTP Stream"}
+{"id": "324bd632309f8f89e15950353d902d6476b7aef81392e547ea1dd66c890c53f6", "key": "jshint.latedef.false.text", "source": "Don't warn"}
+{"id": "3252e0a61c77d314db82c86ca84e04a315be0bb757a23aaadcb0c79d63cc4290", "key": "ai.consent.cli.always.allow.title", "source": "Always allow"}
+{"id": "3274639c6841f2e6c9b28a323191b87ce219c1f30626dc6882b272721a3399ea", "key": "untainted.fields.field.name", "source": "Field Name Regex"}
+{"id": "328744e1e1c98c9d8579293552ceaa2936eaefe1921d2269e7aa062340a6dba0", "key": "jshint.option.moz.description.short", "source": "Check if your code uses Mozilla JavaScript extensions"}
+{"id": "32c7f137b227eff99203dfa5c39e268224f2cc289b85919d3c02f3667f10291f", "key": "editor.state.dump.failed", "source": "Editor state dump failed"}
+{"id": "32d873bd2d44066f9811b6bb495e2c4ca1f10cc13216cac307623e335e86eff1", "key": "local.variable.naming.convention.ignore.pattern.variables.option", "source": "Ignore pattern variables"}
+{"id": "32e0b4bf66336f6cdb6e9c41739092d1f9749ce6dc362316f94744452464d232", "key": "", "source": "<html>\n<body>\nCreates a <code>for</code> loop statement with destructuring declaration from a given iterable expression.\n</body>\n</html>\n"}
+{"id": "33172429d90434c0f74f756df344bde4ffbe2e74e02be0df689353fa8a903e4f", "key": "KubernetesSettings.crdAndOpenApiTable.zoneClearSchemaCache.labelResult.failure.text", "source": "Failed to clear"}
+{"id": "33242499cc8983fcef9ac506fa08d1ea2ceea34cb70260040b8ba6d1c2d5cb01", "key": "KubernetesSettings.crdAndOpenApiTable.zoneClearSchemaCache.labelResult.success.text", "source": "Done"}
+{"id": "3328538af479b6d5e1be67b81d23f23e99658fc11299c07b5fc0afcd1da8a6b2", "key": "options.jsp.attribute.descriptor.scripting.background", "source": "Scripting"}
+{"id": "33301caf79706bed7cd20470adf57207ac462bdaee4697b791f8e2f2b7e5a638", "key": "ssh.authenticate", "source": "Authenticate"}
+{"id": "333abece36c45831c1ff8b5c9c0e2f60c91af39096dbde4eecde3f21fab3f212", "key": "jshint.option.browser.description.short", "source": "Browser"}
+{"id": "33426f3ea183db813e1af4f75d7a1601867ebb1a320a17c0fb900cf4698049ee", "key": "inspection.message.unescaped.el.expression", "source": "Unescaped EL expression"}
+{"id": "33af50bdc82f25317a72fe47c1dfd03d33947449d403f73fd6c7319ee411b4fd", "key": "universal.file.chooser.action.home.text", "source": "Home Directory"}
+{"id": "33b8ed157380d3746df2855f1bb80f65a38c838efa199ff299f131f126d905d6", "key": "gradle.dependency.completion.server.timeout", "source": "Server query timed out. Press {0} to retry"}
+{"id": "33fb46e1aece6a9490db69d796a5edbe1ce70c2e1adcb3166c446c3bf81ef768", "key": "action.OpenConsole.text", "source": "Open Console"}
+{"id": "3453bac149710e5a6d12aa99f1fd2154e7697a3be29f32359f1d23eca5d995e7", "key": "dfa.message.assert.failed.domains.pool.pop.domain", "source": "Assert failed: DomainsPool.popDomain"}
+{"id": "348b343a9999f2449367c97756cabe045d4e5b0d98b4ce9263a13dbbc7c40f48", "key": "Git.WorkingTrees.prune.worktrees.failure.notification.title", "source": "Failed to prune worktrees"}
+{"id": "348fc98a33d04cd11121cd94cd8a6d963ac0189a29f2e61e7613437c899cc236", "key": "mssql.disable.timestamp.string.conversion.description", "source": "Disable automatic conversion of datetime values to strings for Microsoft SQL Server"}
+{"id": "34947682c28cc00b897915b4a49f119f04fce1b549b00914177b4a2e7279af73", "key": "connection.configuration.entry.transport.receive.system.frame.timeout.description", "source": "The timeout duration for receiving a system frame in the transport layer"}
+{"id": "34cb4985982cc98857a6a2d8dde19df8d4e14c24a26000060451cb4e21390324", "key": "control.center.tab.connection.config.widget.disabled.state.label", "source": "The widget allows you to control connection flow and manage connection settings"}
+{"id": "34f2891a5b9571092628077d119e738b07a605a3ac6ebacfd8cfabed8e842581", "key": "action.Console.TableResult.EditCellAsSqlExpression.text", "source": "Edit as SQL Expression"}
+{"id": "3515f63da3b078d367c9f4d96308fe35642915899941bc1257234880c55888d2", "key": "git.graph.inspection.branch.does.not.exist", "source": "Branch ''{0}'' does not exist"}
+{"id": "354df9680c193514139ee867a6b70fcdac8bd3cdf9b65386de4beeea936307eb", "key": "settings.javascript.linters.eslint.configurable.name", "source": "ESLint"}
+{"id": "3555ce862c4baaeb78a7f7c7f97df7b114e1452191727170386b20dcf7e039ed", "key": "dfa.message.required.relations.are.missing", "source": "Required relations [{0}] are missing"}
+{"id": "358ffde21268f529e56ff2580aa5fd09ac00fe31b2f25dc3d9123d1078683676", "key": "floating.toolbar.visibility.show.when.mouse.moves.action.text", "source": "When mouse moves"}
+{"id": "35911c7456dfbb34fefbf64a74dc78423c6815fbdaa3570f64edf3cb58260c88", "key": "class.can.be.record.record.highlight.when.semantics.change.fix.name", "source": "Suppress record conversion if members become more accessible"}
+{"id": "3598af4ac4db81cfea64d0a478432b3f70ca01f29ed489435094129d9656ea10", "key": "message.revert.conflict.resolution.dialog.revert", "source": "Revert"}
+{"id": "35dccff32450635459473558fa78e5530d33635bfd9d4a9916045c8a8e800e9b", "key": "universal.file.chooser.action.project.description", "source": "Navigate to project directory"}
+{"id": "35df291859485334185ea03868edf5cb9884f0ba96816ee426218da6c8a4ff82", "key": "wrong.tag.data.error.message", "source": "TEI validation error: {0}"}
+{"id": "35ed5ec1fe3fc09b79c8ff60ad5740782616f3b9587284706c09fba15935d70a", "key": "mcp.server.status.bar.popup.clients.hint", "source": "When enabled, these detected clients can be auto-configured to use IDE features in one click:"}
+{"id": "35f3da534e4ec2a740e3e94519a49df8a163dc9089db4884042cfecf46a1f216", "key": "jshint.option.iterator.description.short", "source": "Suppress warnings about the <code>__iterator__</code> property"}
+{"id": "36021d3b306cbbf1912bd7fefb3d0f62958eb5c46865f186d737e2c5f02191b4", "key": "intention.name.register.as.safe.place", "source": "Register <{0} {1}=\"\"> as safe place"}
+{"id": "362941a5add3548bdb8b25887659f097ed749ca54c2df010ae950ca50b55842a", "key": "maven.toolchain.installed.description", "source": "JDK Added into IntelliJ IDEA from {0}"}
+{"id": "36776d5b84e1c9ee4105bcec4820da3675a600ace613e1991abccbd48ed6e00a", "key": "fix.add.explicit.context.argument.for", "source": "''{0}''"}
+{"id": "36994ff22d6df9a193c086bd565008ac9b5d5311af56bbf79a895960e790746b", "key": "error.connection.timeout", "source": "Connection timeout"}
+{"id": "36bcda4e6f45bc32ee3f916bd7c3367dbbc9885f8c793dc95baa123e86c5d09c", "key": "inspection.notnull.field.not.initialized.display.name", "source": "Non-null field is not initialized"}
+{"id": "36c39241c5fbdf8f042e1129870b85f619a658173c5be4be81df1939a65937a6", "key": "modal.progress.title.loading.plugins", "source": "Loading Plugins"}
+{"id": "3741c46988cf68a92b8f012733aa1491f3a90c9c58776af34d765ce4cef2d2a3", "key": "KubernetesSettings.crdAndOpenApiTable.actionAddUrl.title", "source": "Add URLs"}
+{"id": "3764374674785a49ba8efeff8006f8792cf80b71527b2948e2890d19315c4a11", "key": "ssh.backend.deploy.state.cancelling", "source": "Cancelling…"}
+{"id": "3779b074881b0fa06e5d524d3c599b7cbd52eae6244d7b39c6a1650d9a06b4ef", "key": "dfa.message.field.is.not.initialized.at", "source": "Field \"{0}\" is not initialized at \"{1}\""}
+{"id": "37ba03cde8dd7a5052770980e6b6358ed75a65af207dae27b0b2e95cd500150d", "key": "configurable.mcp.tool.filter.managed.router.label", "source": "Enable router-only mode for:"}
+{"id": "37c657231bfd1cd16e99fea0c7d93e13e8d13153df4589b3675f8268a4e6befb", "key": "dfa.message.use.relation", "source": "Use {0}"}
+{"id": "37c8ffc0510b5c57dc3ec768cbf091a05354b7e04eb3b3e32a8f06eed5e983d1", "key": "devcontainer.required.plugins.notification.title", "source": "Dev Container requires plugins"}
+{"id": "37d95a52274efe6783f875e1782bffa6ea2b0b33a4f765d4d21fab77ade221b5", "key": "", "source": "<html>\n<body>\n<p>Reports underspecified behavior in Markdown specifications.</p>\n<!-- tooltip end -->\n<p>Highlights coverage gaps and missing error handling with suggested clarifications.</p>\n</body>\n</html>\n"}
+{"id": "380e78972b680f7e9aec2afd5f4416a1035408a0fa003b31416c8948b73657a0", "key": "string.concatenation.argument.to.log.call.display.name", "source": "String concatenation as argument to logging call"}
+{"id": "385a22b309c4cdb54a07552066f694dc81875ca72ad7fb89621ce723eef3dedf", "key": "liquibase.schema", "source": "Liquibase schema"}
+{"id": "387d9c629cc68350be2011f292b762972e2ee3785bbf1d8fa539e17baa3b1ddd", "key": "dfa.message.actual.type.but.expected.in", "source": "Actual type of {0} is {1}, but expected {2} in {3}"}
+{"id": "387f1e048f87120fc4c34fe6ba93eada92e351db5d5e45d9a67ea9fed681e279", "key": "jshint.option.shadow.description.short", "source": "Suppress warnings about variable shadowing"}
+{"id": "38863abc26157093762e377418da37b61c34c2f74cdfc185694f27045fbae264", "key": "too.broad.scope.narrow.may.change.semantics.quickfix", "source": "Move declaration of ''{0}'' closer to usages (may change semantics)"}
+{"id": "38b869eb2ac9a83988c0880da14f00341eee661b383435c39660dd3c1307c5bb", "key": "dfa.message.use.ir.constant.condition.when.both.operands.of.ir.comparison.condition.are.constant", "source": "Use IrConstantCondition when both operands of IrComparisonCondition are constant"}
+{"id": "38cbb87cff39618276aa292c61b93add5dfabe06d337af68759f42ee11b23aef", "key": "dictionary.unknown.error.title", "source": "Unknown Error"}
+{"id": "38cc873a270c598f591b201e08e9f68a631ff715c90533287ea47e357e7b394d", "key": "jshint.unused.true.text", "source": "<html><body>Check all variables and parameters, but allow <br>unused parameters after a used parameter</body></html>"}
+{"id": "38d308c8c13768a4da0e2d7f0650343532962bb5f68c26868063e36a0bd88dc3", "key": "kubectl.debug.settings.recents.empty.text.help", "source": "Supporting ephemeral containers"}
+{"id": "3904bc8380b7e217b9950f0ee26eb0eeeab0dab5e1192bd8c952e702576db219", "key": "ora.kerberos.java25.desc", "source": "Current version of Oracle JDBC thin driver in Java 25 do not support Kerberos authentication"}
+{"id": "3950b7f5af4b10f12c7e088be5ac98a397f9266d9c948dbfee83eaba36ed3c9e", "key": "file.chooser.reading.docker.container.information", "source": "Reading Docker container information…"}
+{"id": "395c28b09385e2cf63cb762c9a8b94bad642581db6c7f0189f95efc0b02d5db5", "key": "jshint.quotmark.true.text", "source": "Only single or only double quotes allowed"}
+{"id": "395ecbc6c0d0be261b00510b141259b4d67c26c13b63ffa5b67a7d7bc0fecc8b", "key": "dfa.message.invalid.arity.of.relation.in.file", "source": "Invalid arity of relation \"{0}\" in file \"{1}\""}
+{"id": "397a91e8a0fce15917c9a69c3df8fc45414b5be9d925b817a230c2140ab2fabe", "key": "dfa.message.condition.is.dead", "source": "Condition is dead"}
+{"id": "3989e19a7b0d8ca1805e65cb0b03963efccf5f53f6435507af1a62421d94ea38", "key": "message.waiting.for.host.unattended", "source": "Connecting to remote host…"}
+{"id": "398d52cfe237255a6e13895a798177eeef97bab02e422a4dfe1fb11ec63e320d", "key": "action.DisableMinimap.text", "source": "Disable"}
+{"id": "399a6d31d9be2f5966182bdd3b7f75be2a9ba48eb9bc4e08ab1f44c186b8ae4f", "key": "PathVariableInspection.cannot.resolve.rename", "source": "Replace ''{0}'' with declared path variable"}
+{"id": "39e31e6a99f51b9631f2a3dc16148df8872fec1d33d282548fa84014a787eedb", "key": "action.FocusMainToolbar.description", "source": "Move focus to the first item in the main toolbar"}
+{"id": "39e752dcc215c8a623269b294622a4ec66af2379879da73be1bd7772cbd57408", "key": "ThymeleafObsoleteInlineAttributeInspection.obsolete.message", "source": "'th:inline' attribute is obsolete in Thymeleaf 3; inline output expressions [[…]] and [(…)] are supported in text content without it"}
+{"id": "3a037dc76b34ff606a85246ce451f0fd682399a9abd37d6fda1773e1ff47e49e", "key": "comments", "source": "Table \\& column comments:"}
+{"id": "3a2af3e1639b8ac71b89adf88898d9b3e6848d75d3c0f4931292417579c9a697", "key": "inspection.script.definition.create.marker.fix", "source": "Create marker file"}
+{"id": "3a34d5fabd9ae376c148035ec0a5c23c79621a67e9dcd88b5ebb816508212db6", "key": "mcp.toolwindow.config.server.stopped", "source": "Stopped"}
+{"id": "3a3bcb8237b5af7a3a84328159160d492a86ee8fe5fe507d03c9294e41741b26", "key": "tool.activity.simulating.progress", "source": "Simulating progress: steps={0}, delay={1} ms, background={2}"}
+{"id": "3a3ca02b46d3cadda7818852ab0f88b58d0e5f5345b96d9f6aebdc7ef30608a5", "key": "data.source.connection.mode.description", "source": "Determines whether database statements run in a shared session or in dedicated ones, and whether introspection runs in a separate session."}
+{"id": "3a3dd28974df4581864c9c70576509d483249e2207675b6ac282da5c9e351fb7", "key": "inspection.catch.ignores.exception.option.comments", "source": "Ignore when 'catch' block contains a comment"}
+{"id": "3a60b98465484b1933ee665ced5c8967256404979f58418638655a3f016cf149", "key": "git.graph.inspection.branch.already.exists", "source": "Branch already exists"}
+{"id": "3ac921f78d9753644e95b90a1aefcf089eea1a61299cc628ef52783b3017d80a", "key": "database.view.empty.state.explore.demo.databases", "source": "Explore Demo Databases"}
+{"id": "3af15e2f8e523a3f9cd5febd999d1e6267e4b585b8148d706df97c6f7a28c1d6", "key": "escape.functions.table.name", "source": "Function Name"}
+{"id": "3af4bc8fded54c5df4acc154b840846933c5a8ec3144316e8366f50f93fb84be", "key": "mermaid.style.settings.spacing.within.node.shapes", "source": "Within node shapes"}
+{"id": "3b398d2c0c8656077ff40e0b727f19478a04b87e5ae32cf149a37b5d9aafc9dd", "key": "multiple.file.iterative.merge.status.none.resolved", "source": "No conflicts were resolved automatically"}
+{"id": "3b5b41d5892e785585559e1c88046e9b2f793b6e54039cd6c3e86d2382361cf1", "key": "fix.add.todo.argument.to.existing.context.with.name.and.type", "source": "Add ''TODO()'' as ''{0}'' to existing 'context'"}
+{"id": "3b73c3f3fabed42b5a7618946bc1537038edf629d4a2f831d969d2418f7660b4", "key": "build.manager.launch.build.process.failed.to.find.compatible.jdk.required.version", "source": "The build process requires JDK {1} or newer, but no compatible JDK was found. Install a JDK {1}+ in the project''s environment ({0}) and add it in File | Project Structure | Platform Settings | SDKs."}
+{"id": "3ba572dfc97460aecea2554dc735b6d6f8b9f61f0d40e3d66379ca2567e5eade", "key": "connection.configuration.entry.wireStorage.unconfirmedMessagesBuffer.overflow.check.delay.description", "source": "Delay between checks for unconfirmed messages buffer overflow"}
+{"id": "3c212e30b34edf8a664c353363cfaa6ab16c89c2dc639951760748eae69d54c0", "key": "Devcontainer.build.untrusted.project.notification.title", "source": "Cannot build Dev Container"}
+{"id": "3c28fc45c6205ca86c7921ca3544d3bcc19ee126c5858cbc38e1f0ca32bbe914", "key": "ssh.backend.deploy.ask.stop.running.message", "source": "Running remote {0} {1} does not support the new flow"}
+{"id": "3c4588ba8c8103993acd7e87993397f0d1faf9d5c6ebf5ec83100ac8d106a71a", "key": "dfa.message.domain.assert.failed.plain.relation.exists", "source": "Domain assert failed: PlainRelation.exists"}
+{"id": "3c72f1deccb76973b3222d4a3caa67a67176306b4a004daee646cce39543f6f8", "key": "edit.template", "source": "Edit &template…"}
+{"id": "3c8ddcfed39a329b0a10109ab5775dcc35cd44d01c5e1cdee858e6f84e9e1973", "key": "spring.kotlin.redundant.open.modifier.kotlin.spring.compiler.plugin.inspection.problem.descriptor", "source": "Redundant 'open' modifier in a Spring class"}
+{"id": "3c9b4b2c56404f84a758f513255ee30db338ae2e5a1ad780bdaeec6d1f5db938", "key": "introduce.field.initialization.place.field.declaration.short", "source": "field declaration"}
+{"id": "3cb01214df2f78c41cec34f334369ae8e9ead0b566a5eb1f528747435cf66043", "key": "label.ijent.dashboard.info.uid", "source": "UID:"}
+{"id": "3cf722292cf0f19829d30152e68221246b31b284952977a787d8bea41c461e0d", "key": "collecting.expressions.for.target.class", "source": "Collecting Expressions…"}
+{"id": "3d1942a0152c78e59adcd55ee7f2fdd4eaf929357bb9edb6c595f21c080ea96c", "key": "standardjs.editor.notification.action", "source": "Yes"}
+{"id": "3d24fe47e1e3db7715eaa3b8847798fef4793aa4dd67d0b1b88e519831f26cca", "key": "multiple.file.iterative.merge.close.confirmation.message", "source": "Closing the dialog will discard your changes in partially resolved files"}
+{"id": "3d27794645910d77778f319074f6be382331fd3dfe15461afb1f13a9f37a543b", "key": "return.of.local.class.problem.descriptor", "source": "Return of local class <code>{0}</code> instance"}
+{"id": "3df124c28635d5a5f6b9e00f75e41eaf0fe1a3b9854c63bac63334345b9dbfde", "key": "datasources.cli.help", "source": "Command-line tool for managing data sources. Run 'dataSources --help' for more details."}
+{"id": "3e25c84f4e5435bc2f955fe8c995e7813df6a75f4b87b699ca161c99f0c885b8", "key": "action.RestartIdeFrontend.description", "source": "Restarts the IDE frontend without confirmation."}
+{"id": "3e25ec0852660635723bb88bf8f9ed686bb8c1944ef84b9e22c37f9c3d6032f9", "key": "", "source": "<html>\n<body>\n<p>Reports assignments where a value is assigned but never used later in the code.</p>\n<p><b>Example:</b></p>\n<pre><code>\n  fun foo(): Int = 42\n\n  fun example() {\n      var local = 0\n      print(local)\n      local = foo()  // Assigned value is never read\n  }\n</code></pre>\n<ul>\n    <li>After the quick fix, the assignment is deleted:</li>\n</ul>\n<pre><code>\n  fun foo(): Int = 42\n\n  fun example() {\n      var local = 0\n      print(local)\n  }\n</code></pre>\n\n<ul>\n    <li>If the right-hand side (RHS) expression may have side effects, the quick fix will also suggest keeping the RHS expression to\n        preserve those side effects:\n    </li>\n</ul>\n<pre><code>\n  fun foo(): Int = 42\n\n  fun example() {\n      var local = 0\n      print(local)\n      foo()  // The function call is kept for its side effects\n  }\n</code></pre>\n<!-- tooltip end -->\n</body>\n</html>\n"}
+{"id": "3e2cfd757aca12c05d4f38dd4dc76b95715262a83428dce10fa870a33ac487cc", "key": "action.snowflake.role.switcher.warehouse.label", "source": "Warehouse:"}
+{"id": "3e390dd1e45479165cfae373a535f70a3599e08f2a41f07a2e33ce49a47fd5a6", "key": "jshint.inspection.message.prefix", "source": "JSHint:"}
+{"id": "3e42bc7cc28eb8923dbcbe261888a737e48a875f0626673e1fe24a30534940ce", "key": "jshint.inspection.message.config.not.found", "source": "JSHint config not found"}
+{"id": "3e71a35512b6a2c65315fe54e4aac305b3d9987b0e94139df90f474bd8f80500", "key": "", "source": "<html>\n<body>\nConverts <code>repeat(n) { ... }</code> to an equivalent <code>for</code> loop.\n</body>\n</html>"}
+{"id": "3e82683e5b83806c3935c6830bdf8b4c817756666ce8dbbd75ee7f4148f8ac5f", "key": "", "source": "<html>\n<body>\nMoves the function to a class. One of the function's parameters can be converted into the dispatch receiver.\n</body>\n</html>"}
+{"id": "3eaf1cd6367bfc46cd2307d9016c4b90d676feac45a330dd26c8d1908c42fffe", "key": "KubernetesLogsSettingsPanel.FiltersTable.emptyText.line1", "source": "No filter patterns."}
+{"id": "3f182a482a4a5eb2b5048f82cc57438218b4a3c5efe0625492e639dfde22bdf2", "key": "DatabaseNameComponent.add.comment.action.text", "source": "Add comment"}
+{"id": "3f2d2422b64abf5341b8449306a91e7899c16a35313474f4c649c01280de5226", "key": "ssh.validation.failure.unexpected.error", "source": "Unexpected error"}
+{"id": "3f2ed3fdfeeecd417524788876b53e952684ab8d7168f076d5a0b67b4d159c36", "key": "dialog.edit.template.checkbox.jsp", "source": "JS&P"}
+{"id": "3f703d655e9e2537e477f5526eb7b1063b5c868f52c65d3a6e6406fd8a79016b", "key": "ComposePortActionInlayProvider.open.in.browser", "source": "Open in browser"}
+{"id": "3f7ae2ba24e96437ebbe4ce1e33aebe659236559eb9af6573b90750bb2437a98", "key": "checkbox.stay.on.top", "source": "Stay on top"}
+{"id": "3f8d18228ad63ffc2c016ba38e66036a44439c20a97da29835484f1274b0376d", "key": "options.jsp.attribute.descriptor.el.background", "source": "Expression Language//Background"}
+{"id": "400d49a042aa9640ff35854925262fa6072db6db3a55a10164cb9b2249f1d92a", "key": "", "source": "<html>\n<body>\nConverts a method body to single <code>return</code> form. After applying this action,\nall the intermediate return statements will be removed and the control flow will be changed to\nexit through the last method body statement. Note that while conversion is always possible,\nthe resulting code does not always look pretty.\n</body>\n</html>"}
+{"id": "4013ffedd4d05a6cd99d6600188da37b064e2a713b08b61c99932cb678c319ac", "key": "advanced.setting.ide.ui.non.modal.settings.window.description", "source": "Settings dialog stays open alongside the editor without blocking other IDE actions."}
+{"id": "406876c442ee57f1091b6242aec7892c25eb0d121333aa26cc8972ab1be07dc8", "key": "action.GitHubRefreshActionsCatalog.description", "source": "Force a re-scan of the GitHub Actions organization catalog, bypassing the cached TTL window"}
+{"id": "406d18c461a036f2debc7d2c577609858cc9ce2cba252f934dc136f70f1e297b", "key": "http.client.auth.browser.unavailable.error", "source": "Browser-based OAuth requires built-in browser support, but it is not available"}
+{"id": "407f878d2d68b2fc42f71eea5da32ec858c806efadf037f661fdd96a985dd53e", "key": "group.com.intellij.platform.ijent.impl.VerificationActions.text", "source": "IJent Verification Actions"}
+{"id": "40903698a492107c64fd55f000a408051a676290d2b657cd3668594435f34ce6", "key": "notification.content.plugin.update.sources.are.reset", "source": "Plugin update sources are reset"}
+{"id": "40a8705822a75df5aac4e33e582cc98898b16482c0605601f81adc23c0e645f7", "key": "action.ProblemsView.Frontend.GroupByToolId.text", "source": "Group by Inspection"}
+{"id": "4104b4d02767fd6905304c614b8ca6c7449c0150e89bb0a53d5ed833c66a1f4d", "key": "gradle.dependency.completion.server.still.searching", "source": "Server is still being queried…"}
+{"id": "410cf117434a30d2cc4818fd95d4c16a7622587ae407faced6743757f9b24388", "key": "action.DatabaseView.Diagnostic.Node.text", "source": "Database Explorer Node Internals"}
+{"id": "410d59b2a002096010afe1a91b7eb5ce718b09c5cc8737406d9504a7917c0ac6", "key": "jshint.option.maxstatements.description.short", "source": "Max number of statements in a function"}
+{"id": "411ad41df47b14dcb1749a077afcb8eb8eb37a0685b1f6a64c19ff84d379ba7e", "key": "connection.status.canceled", "source": "Cancelled by user"}
+{"id": "413067821f617404eaa4072d6e251d8d65bbfca8278e471432c42c06947a392d", "key": "action.ShowPlugins.text", "source": "Plugins…"}
+{"id": "416abd993dcb874e3bebe0f369fcfcb52b9a4c9d3ba2e4b228b1bc1db79fda22", "key": "advanced.settings.container.environments", "source": "Container Environments: WSL, Docker"}
+{"id": "418229cca2a06a3c692901f6dd91f33ba83033d84c990bbd590daf7c60a36ee1", "key": "configurable.mcp.tool.filter.search.empty", "source": "Search tools"}
+{"id": "41a29b6104064108325ec0ab5fb06c0c505b64ffaad7b27bbf9b389f352bb045", "key": "options.jsp.attribute.descriptor.el.brackets", "source": "Expression Language//Brackets"}
+{"id": "41a2ca47f9f839784c6a166ca054d0f833c70f0b2459b529a9f38f900888d6e8", "key": "action.HideBottomWindows.description", "source": "Hide bottom tool windows"}
+{"id": "41afe99cf55471e7174a701fd8f2b8945587269883c175e240696a2bab99c5e0", "key": "KubernetesClusterConfigurable.displayName", "source": "Cluster Interaction"}
+{"id": "41f880c807277c9ffaeb7c8afa77912ac0ad6d7ab395ed764a549b1adad223b5", "key": "action.ProblemsView.Frontend.QuickFixes.description", "source": "Show available quick-fixes for a selected problem"}
+{"id": "41f9fd78356c1087bea14e54e61658c408692c41b082bdcc2cae29ef1c5a458e", "key": "ComposeServiceCompletion.inline.chooser.text", "source": "Add a service by typing its name or"}
+{"id": "42069dd1dd356262dc4f9dce77a43150802f8b82d96ceb5eff15b420a7fbdba7", "key": "database.view.empty.state.cloud.provider.header", "source": "Connect to Cloud Provider"}
+{"id": "421f42d0de9117fcfcbc7476a3405cdf651b995289300625df8399913b759b7e", "key": "eslint.action.fix.problems.description", "source": "Fix ESLint problems by calling 'eslint --fix'"}
+{"id": "422590f6b1b19c57bdf41cc94ea325c5b405b06f1ebda71254b32d85e790e275", "key": "action.connection.config.widget.enable.text", "source": "{0, choice, 0#Disable|1#Enable} Connection Configuration Widget (Internal)"}
+{"id": "424e138583c7703640bc2ef327e467c494c7cdba47919a375551d1f80ab9af35", "key": "action.EslintImportCodeStyle.description", "source": "Apply ESLint code style rules"}
+{"id": "424efbdd50dad22eca386266f84202664d94ea22e2df4ded83048573ab477b63", "key": "vue.configurable.service.typescript", "source": "TypeScript Plugin without LSP"}
+{"id": "4266182a224133e3400dd76616f21b0be6aafd3e54802e340ae05a016a6dc8dc", "key": "action.extract.jsp.tag.text", "source": "Extract JSP Tag"}
+{"id": "426c0078a6d124a42e53c9ca13bec2d7aba167cd0363671dd3eb8e3a3ea59b02", "key": "", "source": "<html>\n<body>\nReports position-based destructuring declarations that use custom <code>componentN</code> functions and need to be migrated for name-based destructuring.\n<p>\n    With new name-based destructuring enabled, parentheses <code>(x, y)</code> will be used for name-based destructuring,\n    while square brackets <code>[x, y]</code> should be used for position-based destructuring.\n</p>\n<p>The inspection warns when:</p>\n<ul>\n    <li>Destructuring a non-data-class (all components are custom)</li>\n    <li>Destructuring a data class with more entries than primary constructor parameters (extra components are custom)</li>\n</ul>\n<p><b>Examples:</b></p>\n<pre><code>\n  val (x, y) = listOf(1, 2) // warning: uses custom componentN\n  for ((key, value) in mapOf(1 to \"one\")) { } // NO warning: key and value are Map.Entry properties\n\n  data class Person(val name: String, val age: Int) {\n      operator fun component3(): String = name + age\n  }\n  val (name, age, rendered) = Person(\"John\", 30) // warning: component3 is custom\n</code></pre>\n<p>\n    This inspection is part of the migration plan for name-based destructuring.\n</p>\n</body>\n</html>"}
+{"id": "428df94927b14b774a27d2926c43e7728c7b7a3ef35fd0ac2b1a13805e2196b6", "key": "remove.argument.name.0", "source": "Remove argument name ''{0} =''"}
+{"id": "429b3d0176de1dd853978836aa8f0ae7e927f7b1d7a67d9acb73a702e4b434b5", "key": "connection.configuration.entry.last.received.message.check.interval.name", "source": "Last Received Message Check Interval"}
+{"id": "42a7d5de908e689a7bb280cebfbcf1c3f6631c59abd9520e26dca51fd73ead8d", "key": "ComposePortActionInlayProvider.connect.to.database", "source": "Connect to database"}
+{"id": "42d18ccde2c015820d53d6c8de2f75621397f553a2a0a62ccdf750f2a14690c4", "key": "notification.aia.plugin.missing.action.install", "source": "Install AI Assistant"}
+{"id": "42d6ed6ac6472ce715a2043c571319fe7c3e342057f2f85b3802dfc3cc73eeb7", "key": "action.new.script.description.kts", "source": "General-purpose Kotlin script for prototyping and simple tasks."}
+{"id": "42f8ebf1864a93eac1fbd4816551104fd45e8a5769e34b6224eb43c8938ee919", "key": "action.ToggleMarkupDebugModeAction.text", "source": "Toggle Markup Debug Mode"}
+{"id": "4324dc222208cbdd8d207afdc817123984a1cf4e6893ad122efda084e3abfce4", "key": "dfa.message.processing.tuples", "source": "Processing tuples…"}
+{"id": "433ebecc5f787a8f7ea5a06e6f9072a17fa296e69e787eb9a2e5bbb75a0cdb49", "key": "modal.progress.title.reconfiguring.plugins", "source": "Reconfiguring Plugins"}
+{"id": "4347e4c08217f29e05df579e5ead2850d9b94a434f47446b37ececf342441a88", "key": "dfa.message.unresolved.record", "source": "Unresolved record {0}"}
+{"id": "434e72d396def228b11361da2584cb1d2f1b9b8b51b5a5aa87656e2b0b5c8b23", "key": "service.bundled", "source": "{0} (Bundled) {1}"}
+{"id": "4364e880d35390b72514bab03b990b5a514b80491586962951862cc746f936f0", "key": "action.ProblemsView.Frontend.SortByName.text", "source": "Name"}
+{"id": "43672ba4b4549b31caad34a68faa657c26f5ea45dc20eecc93d5eeb2c7e5d98b", "key": "mcp.toolwindow.config.server.running", "source": "Running"}
+{"id": "4368f04cc79146f50836c18bf93c5da2de3a2ff4c99617e19f6a33073fc2b116", "key": "action.Console.TableResult.Filter.Custom.multipleCells.text", "source": "Filter by {0} Cells"}
+{"id": "43a4ff68ba2ed0759f1b540794cd06476053e6dfebbc5a000fb724440bcf096a", "key": "fix.add.explicit.context.argument.family.single", "source": "Add explicit context ''{0}''"}
+{"id": "43b41f107a2d3b534f0788aa8f153f3458036332c0addb12b7d8ee873528e1e6", "key": "settings.close.application.unsaved.message", "source": "You have unsaved changes in the settings for \"{0}\". Do you want to apply them before closing the application?"}
+{"id": "43d01a345d191abb8f30a0d4a31fefb78f4268105a94ec02a291d75a3339bf59", "key": "action.Jdbc.OpenConsole.default.console", "source": "Default"}
+{"id": "43d1e5d958edf34d700261e30f23e1dae2171537415fa840ee0360ecdfce45a8", "key": "intellij-server.message.license.expired", "source": "License verification failed.\nPlease ensure that the token provided through the {0} environment variable is correct and that you have a valid license."}
+{"id": "43dcfc2f96dc4a05d512f05e1ae486abfd46d0ffe9409c93c7d9845bcc43a08f", "key": "action.AddInlayInternalAction.dialog.title", "source": "Add Inline Inlay"}
+{"id": "43f7e2b489490bcd587fa06fc149029c53f39633a4bbfb6d9a930d702b53fc7e", "key": "multiplatform.web.wizard.comment.web.wizard.or.install", "source": "To create a Kotlin Multiplatform project, use <a href=\"{0}\">web wizard</a>, or install the <a>Kotlin Multiplatform</a> plugin"}
+{"id": "440f239f17d31b9c061f2fd51eccee4391b98b75306ea3c650889176e4864cce", "key": "dfa.message.relations.visitor", "source": "Relations visitor"}
+{"id": "442eb6c0aba13a901fc6393770ed3c450a1a15b37af70f704f0d541991123e5e", "key": "action.com.intellij.platform.ijent.impl.MultiRoutingFileSystemVerificationAction.text", "source": "MultiRoutingFileSystem Verification Action"}
+{"id": "445d6174055820a5481da44d3e0c0a4bb1f7daf438e25bcf73400859be73ea31", "key": "color.note", "source": "Note"}
+{"id": "446b5fa498cfc209ee06e6d321ccb2ce044cf80ba0a3c39533ac7fd47da121c9", "key": "mcp.server.status.bar.widget.name", "source": "MCP Server"}
+{"id": "446ebc48088f9bc50e2679e8573a4394fe4345de4dbcf9272f9435e606fb5420", "key": "qodana.store.report.to.context.no.problems", "source": "No problems selected in Qodana problems view"}
+{"id": "4476eb15a49800b933519a6aff54589cb924e007e51a8a238a4e7ddeabbdac4a", "key": "script.part.circular.file.import.chain", "source": "Script ''{0}'' is part of a circular @file:Import chain."}
+{"id": "4478f8e0873f8276212098b22732c859c74d8ba2cc4b20d3e395bb35c17fdb89", "key": "attribute.should.have.empty.content", "source": "{0} should have empty content"}
+{"id": "4492815c9bf1faf177ce99990a1cf67831fe4063c13a8852776ca27131ffaf42", "key": "eslint.code.style.apply.text", "source": "Yes"}
+{"id": "44a898b13a2ffdb338c25055bde53ede795ede8fc1873d1edebe15fee02d42ef", "key": "templates.postfix.settings.category.after", "source": "The result of the Postfix completion\nwill be shown here."}
+{"id": "44b0e74ae6dcb49027ac7edae3ac231faadff99cbecc24eb4f6d0fe3f8ca6664", "key": "inspection.message.no.content.allowed.inside.tags.with.empty.content.type", "source": "No content allowed inside tags with 'empty' content type"}
+{"id": "44bf27d42bc5b4a17255f2fef1eeae1001d4d1eb477421d5de6cd3dda02b2b0d", "key": "report.non.parameter.cases", "source": "Report non-parameter cases"}
+{"id": "44f7364b4eab9fe535d89c77c8d97d831c9728a85680a9c687e8c553796d5fdc", "key": "ObjectKind.mfa_method", "source": "mfa method"}
+{"id": "44f8017b57f666f874c797c3a807aed2276a414c2123094561bf6f62b090c8f7", "key": "action.NotificationAction.GitRewordOperation.text.edit.again", "source": "Edit again"}
+{"id": "45218986b881ff744a69e696dc6ba38949a78e3f6cd3577116eae74f0f7347d4", "key": "kotlin.postfix.template.condition.non.unit.name", "source": "Non-Unit"}
+{"id": "452750b6bd06a911aecb1b521b0fb9a554b27c743421b1f9ec05abe41ad0cca9", "key": "mcp.toolwindow.calls.column.tool", "source": "Tool"}

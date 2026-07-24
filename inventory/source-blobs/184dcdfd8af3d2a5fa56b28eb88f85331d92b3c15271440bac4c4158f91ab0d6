@@ -1,0 +1,4 @@
+inspection.print.to.logpoint.display.name=Print call can be replaced with a logpoint
+inspection.print.to.logpoint.problem.descriptor='System.out.println' call can be replaced with a logpoint
+inspection.print.to.logpoint.io.problem.descriptor='IO.println' call can be replaced with a logpoint
+inspection.print.to.logpoint.fix.family.name=Replace call with Logpoint

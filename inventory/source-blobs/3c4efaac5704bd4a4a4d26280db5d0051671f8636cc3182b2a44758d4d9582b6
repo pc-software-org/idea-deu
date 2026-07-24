@@ -1,0 +1,8 @@
+action.close.project.text=Disconnect from Project
+project.title.prefix=Connected to
+
+action.ToggleSmartMode.SplitMode.text=Enter Smart Mode (Split Mode)
+action.ToggleSmartMode.TcpLink.text=Enter Smart Mode (TCP Link)
+
+dialog.ToggleSmartMode.TcpLink.title=TCP Link
+menu.label.light.mode=Light Mode

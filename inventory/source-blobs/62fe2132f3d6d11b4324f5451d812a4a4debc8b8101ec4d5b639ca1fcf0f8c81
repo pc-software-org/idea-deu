@@ -1,0 +1,107 @@
+ComposeErroneousRelationInspection.display.name=Erroneous relation in docker-compose YAML
+ComposeErroneousRelationInspection.error.message=Field <code>{0}</code> requires sibling <code>{1}</code> with one of the following values: <code>{2}</code>
+
+ComposeUnknownKeysInspection.display.name=Unknown docker-compose YAML keys
+ComposeUnknownValuesInspection.display.name=Unknown docker-compose YAML values
+ComposeMissingKeysInspection.display.name=Missing docker-compose YAML keys
+
+ComposeUnquotedPortsInspection.display.name=Unquoted port mappings
+ComposeUnquotedPortsInspection.error.message=Unquoted port mapping may be interpreted as a base-60 value
+ComposeUnquotedPortsInspection.warning.message=Unquoted port mapping not recommended
+ComposeUnquotedPortsInspection.quick.fix=Add quotes
+
+ComposeFileRunLineMarkerProvider.ServiceLineMarkerInfo.up.tooltip=docker-compose up {0}
+ComposeFileRunLineMarkerProvider.ServiceLineMarkerInfo.restart.tooltip=docker-compose restart {0}
+ComposeFileRunLineMarkerProvider.AllServicesLineMarkerInfo.tooltip=docker-compose up
+
+ComposeStrictStringType.validation.error=String value expected
+ComposeStrictStringType.quick.fix=Surround with quotes
+
+ComposeLimitedIntegerType.validation.error=Expected value in range from {0} to {1}
+
+ByteValueType.error.cant.parse.value=Byte type value expected: <number>[<unit>]
+ByteValueType.error.unknown.unit=Byte type value expected, supported units are `b`, `k`, `m`, `g`
+DockerImageReferenceType.error.multiple=Single image reference expected
+DockerImageReferenceType.error.format=Invalid image reference format
+
+action.NewDockerComposeFile.text=Docker Compose File\u2026
+action.NewDockerComposeFile.description=Creates a Docker Compose file
+action.NewDockerComposeFile.dialog.title=New Docker Compose File
+action.NewDockerComposeFile.kind=Docker Compose file
+action.NewDockerComposeFile.command=Create Docker Compose File
+
+IPType.ip.value.expected=IP value expected
+IPType.ipv4.value.expected=IPv4 value expected
+IPType.ipv6.value.expected=IPv6 value expected
+
+PortScalarType.ports.mapping.expected=Ports mapping expected
+PortScalarType.not.valid.internet.protocol={0} is not valid internet protocol. Possible values: tcp, udp, sctp
+PortScalarType.not.valid.host.ip={0} is not valid host IP
+PortScalarType.spaces.not.allowed=Spaces are not allowed in ports mapping format
+PortScalarType.not.valid.port.range=The port number must be greater than or equal to 0 and less than 65536
+
+Platform.error.format=The platform format must follow os[/arch[/variant]] syntax
+PublishedPortType.validation.error=The published port range must be in the format START-END, and port numbers must be in the 1\u201365535 range
+DurationType.duration.value.expected=''{0}'' is not a valid duration value. Format the duration as ''5h34m56s''.
+UnsignedType.unsigned.value.expected=The value must be greater than or equal to 0
+CidrType.cidr.format.expected=CIDR format expected
+action.Docker.ComposeEditorGroup.SyncWithServiceView.text=Synchronization with Services
+SyncComposeFileWithServiceView.disable.sync.text=Do not synchronize with the Services tool window
+SyncComposeFileWithServiceView.enable.sync.text=Synchronize with the Services tool window
+SyncComposeFileWithServiceView.enable.sync.description=\n            All services defined in this file will be shown in the Services tool window,\n            even if no containers for this service exist.
+ComposeServiceCompletion.popup.title=Services
+ComposeServiceCompletion.popup.ad.text=Tab or Enter to choose
+ComposeServiceCompletion.popup.options.text=Configure Completion\u2026
+ComposeServiceCompletion.inline.chooser.text=Add a service by typing its name or
+ComposeServiceCompletion.inline.chooser.link=selecting it from the list
+ComposeServiceCompletion.inline.tab.shortcut=Tab
+ComposeServiceCompletion.inline.tab.text=to complete
+ComposeServiceCompletionConfigurable.enable.checkbox.text=Enable Docker Compose service completion
+ComposeServiceCompletionConfigurable.show.popup.on.basic.completion.checkbox.text=Show popup on basic completion invocation
+ComposeServiceCompletionConfigurable.show.choose.from.list.checkbox.text=Show inline service completion hint
+ComposeServiceCompletion.template.postgres=PostgreSQL
+ComposeServiceCompletion.template.mysql=MySQL
+ComposeServiceCompletion.template.mariadb=MariaDB
+ComposeServiceCompletion.template.mongodb=MongoDB
+ComposeServiceCompletion.template.redis=Redis
+ComposeServiceCompletion.template.memcached=Memcached
+ComposeServiceCompletion.template.kafka=Kafka
+ComposeServiceCompletion.template.rabbitmq=RabbitMQ
+ComposeServiceCompletion.template.activemq=ActiveMQ
+ComposeServiceCompletion.template.elasticsearch=Elasticsearch
+ComposeServiceCompletion.template.opensearch=OpenSearch
+ComposeServiceCompletion.template.solr=Solr
+
+ComposePortActionInlayProvider.connect.to.database=Connect to database
+ComposePortActionInlayProvider.database.plugin.required=The Database Tools and SQL plugin is required to create database connections.
+ComposePortActionInlayProvider.database.plugin.required.title=Database Plugin required
+ComposePortActionInlayProvider.iconsOnly.action.text=Show icons only
+ComposePortActionInlayProvider.install.database.plugin=Install the Database Tools and SQL plugin
+ComposePortActionInlayProvider.database.plugin.name=Database Tools and SQL
+ComposePortActionInlayProvider.name=Docker Compose Port Actions
+ComposePortActionInlayProvider.open.in.browser=Open in browser
+ComposeServiceStatusInlayProvider.deleting=Deleting
+ComposeServiceStatusInlayProvider.failed=Failed
+ComposeServiceStatusInlayProvider.failed.tooltip.container=Container exited with code {0}
+ComposeServiceStatusInlayProvider.failed.tooltip.daemon.error=Docker error: {0}
+ComposeServiceStatusInlayProvider.failed.tooltip.dead=Container is dead
+ComposeServiceStatusInlayProvider.failed.tooltip.multiple={0} of {1} containers failed
+ComposeServiceStatusInlayProvider.failed.tooltip.oom=Killed by out-of-memory
+ComposeServiceStatusInlayProvider.name=Docker Compose Service Statuses
+ComposeServiceStatusInlayProvider.paused=Paused
+ComposeServiceStatusInlayProvider.running=Running
+ComposeServiceStatusInlayProvider.starting=Starting
+ComposeServiceStatusInlayProvider.stopped=Stopped
+ComposeServiceStatusInlayProvider.stopping=Stopping
+ComposeServiceStatusInlayProvider.tooltip=The service is {0}
+
+docker.compose.file.type.display.name=Docker Compose YAML
+docker.compose.file.type.description=Docker Compose configuration
+configurable.ComposeServiceCompletionConfigurable.display.name=Docker Compose
+
+notification.group.docker.compose=Docker Compose
+docker.compose.notification.auto.detected=This file was auto-detected as a Docker Compose configuration based on its content.
+docker.compose.notification.not.compose=Not a Compose file
+docker.compose.notification.keep=Keep as Docker Compose
+docker.compose.notification.excluded.message=Docker Compose detection disabled for this file.
+docker.compose.notification.mark.as.compose=Mark as Docker Compose

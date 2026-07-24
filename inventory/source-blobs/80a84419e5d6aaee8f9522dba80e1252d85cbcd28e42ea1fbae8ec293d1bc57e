@@ -1,0 +1,132 @@
+action.NewRemoteDevelopmentConnection.text=Remote Development\u2026
+
+welcome.tab.title=Remote Development
+welcomescreen.connections=Connections
+
+dialog.message.failed.to.run.action=Failed to Run Action
+dialog.title.please.contact.provider.s.support.for.help.exception.info.can.be.found.in.logs=Contact your network provider for support. Exception details can be found in logs.
+default.connector.actionText=Connector
+
+welcome.tab.run.ide.remotely=Run the IDE Remotely
+
+ssh.connector.title=SSH Connection
+ssh.connector.description=Work with a project on a machine reachable using SSH
+ssh.connector.action.name=New Connection
+ssh.connector.recents.name=SSH
+ssh.recent.projects.title=Recent SSH Projects
+label.work.on.your.code.on=Work on your code on
+label.another.host.using.ssh=another host using SSH
+
+ssh.new.project=New Project
+ssh.new.host=Connect to Host\u2026
+
+multistagePanel.nextButton=Next
+multistagePanel.backButton=Back
+
+ssh.deploy.checkingDirectory.emptyPath=Empty path
+ssh.path.should.start.with=Path should be rooted or start with ~
+ssh.project.directory=Project directory:
+ssh.deploy.checkingConnection.title=Checking Connection
+
+ssh.connect.title=Connect to SSH
+ssh.connection=Connection:
+ssh.combo.noConfigsPlaceholder=<New Connection>
+ssh.username=Username:
+ssh.specify.username=Specify username
+ssh.host=Host:
+ssh.port=Port:
+ssh.specify.host=Specify host
+ssh.specify.private.key=Specify private key
+ssh.check.and.continue=Check Connection and Continue
+ssh.cancel=Cancel
+ssh.back= Back
+ssh.open.settings=Open Settings\u2026
+ssh.open.settings.window=Open Settings
+
+ssh.deploy.remote.browser.warning.title=Cannot Browse Files
+ssh.deploy.remote.browser.warning.message=<p>The remote file browser failed to open</p>
+
+ssh.heap.size.label=Maximum heap size:
+ssh.customize.heap.size=Customize heap size
+ssh.use.default.heap.size=Use default heap size
+ssh.incorrect.heap.size=Incorrect heap size
+ssh.heap.size.less.than.2048=Heap size should not be less than 2048MB
+ssh.heap.size.must.contain.numbers.only=This field must contain numbers only
+ssh.heap.size.must.contain.numbers.and.not.exceed.int=This field must contain numbers only and must not exceed the maximum integer value
+ssh.heap.size.comment.message=Heap size is in megabytes. The default size is 2048MB
+ssh.heap.size.mb=MB
+
+ssh.choose.project=Choose Project
+ssh.connected.to=Successfully connected to:
+ssh.download.and.connect=Download IDE and Connect
+
+ssh.validation.failure.title=SSH Connection Check Failed
+ssh.validation.failure.unexpected.error=Unexpected error
+ssh.validation.failure.multiple.errors={0} errors occurred during the connection
+ssh.validation.failure.auth.error=Wrong credentials
+ssh.validation.failure.connection.refused=Connection refused
+ssh.validation.failure.connection.timeout=Connection timeout
+ssh.validation.failure.forwarding.prohibited=Forwarding prohibited
+ssh.validation.failure.host.unreachable=Host unreachable
+ssh.validation.failure.host.key.verification.failed=Host key verification failed for {0}
+ssh.validation.failure.inaccessible.file=Inaccessible file {0} - {1}
+ssh.validation.failure.non.zero.exit.code=Non-zero exit code {0}
+ssh.validation.failure.ssh.agent.conflict=SSH agent conflict: IdentityAgent={0}, SSH_AUTH_SOCK={1}
+ssh.validation.failure.too.wide.permissions=Too wide permissions for {0}
+ssh.validation.failure.unresolved.hostname=Unresolved hostname {0}: {1}
+
+ssh.agent.add.confirmation.title=Add SSH Key to Agent
+ssh.agent.add.confirmation.message=Add SSH key to agent?\n{0}
+
+ssh.fingerprint.confirmation.title=SSH Host Verification
+ssh.fingerprint.label=Fingerprint: {0}
+ssh.host.label=Host: {0}
+
+ssh.add.failure.title=SSH Key Addition Failed
+ssh.add.failure.message=Failed to add SSH key to agent:\n{0}\n\nReason: {1}
+
+ssh.authenticate.to=Authenticating to:
+ssh.authentication=Authentication
+ssh.authenticate=Authenticate
+save.until.next.restart=Save until restart
+save.permanently=Save permanently
+
+ssh.credentials.error=Invalid Credentials
+
+ssh.remdev.launch.question=Remote Development Launch
+ssh.backend.deploy.ask.option.update=Update
+ssh.backend.deploy.ask.option.stop.and.update=Stop and Update
+ssh.backend.deploy.ask.option.use.remote=Use Remote
+ssh.backend.deploy.ask.option.install.requested=Install Requested
+ssh.backend.deploy.ask.stop.running.message=Running remote {0} {1} does not support the new flow
+ssh.backend.deploy.ask.old.ide.message=Remote {0} {1} does not support the new flow
+ssh.backend.deploy.ask.update.or.not.message=Remote {0} {1} is older than local build {2}
+ssh.backend.deploy.state.applying.patches=Applying patches\u2026
+ssh.backend.deploy.state.cancelling=Cancelling\u2026
+ssh.backend.deploy.state.configuring=Configuring\u2026
+ssh.backend.deploy.state.downloading=Downloading\u2026
+ssh.backend.deploy.state.installing=Installing\u2026
+ssh.backend.deploy.state.restarting=Restarting\u2026
+ssh.backend.deploy.state.uninstalling=Uninstalling\u2026
+ssh.backend.deploy.state.unpacking=Unpacking\u2026
+ssh.backend.deploy.state.verifying=Verifying\u2026
+ssh.remdev.launch.success.title=Remote Development Launch: Success
+ssh.remdev.launch.success.message=Successfully launched build {0}
+ssh.remdev.launch.error.title=Remote Development Launch Error
+
+jbc.download.step.checking.existing=Checking existing JetBrains Client installation\u2026
+jbc.download.step.downloading=Downloading JetBrains Client\u2026
+jbc.download.step.extracting=Extracting archive\u2026
+jbc.download.step.verifying=Verifying archive\u2026
+
+jbc.download.error.file.modification=Failed to write or modify file: {0}
+jbc.download.error.artifact.not.found=Resource could not be found at {0}
+jbc.download.error.timeout=Timed out while downloading resource from {0}
+jbc.download.error.http.status=Received unexpected HTTP status {1} while downloading resource from {0}
+jbc.download.error.network=Network error while downloading resource from {0}
+jbc.download.error.archive.extraction=Failed to extract the downloaded archive {0}
+jbc.download.error.archive.verification=Failed to verify the integrity of the downloaded archive {0}
+jbc.download.error.unsupported.archive.format=Unsupported archive format: {0}
+jbc.download.error.manifest.generation=Failed to generate the installation manifest at {0}
+jbc.download.error.unexpected=An unexpected error occurred while downloading JetBrains Client
+jbc.download.error.unknown=An unknown error occurred while downloading JetBrains Client

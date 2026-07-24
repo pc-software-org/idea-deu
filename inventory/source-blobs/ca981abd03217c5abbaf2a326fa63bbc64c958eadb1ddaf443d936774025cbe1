@@ -1,0 +1,400 @@
+# Node.js run configuration
+rc.nodejs.profiling.tab.name=V8 Profiling
+rc.nodejs.file.label=&File:
+rc.nodejs.nodeParameters.label=N&ode parameters:
+rc.nodejs.appOptions.label=Appli&cation parameters:
+rc.nodejs.profiling.record.CPU.profiling.label=Record CPU profiling info
+rc.nodejs.profiling.allowTakingHeapSnapshots.label=Allow taking heap snapshots
+rc.nodejs.error.incorrect.workingDirectory.text=Please specify working directory correctly
+rc.nodejs.error.incorrect.file.path.text=Please specify a path to file correctly
+rc.nodejs.error.script.not.found.text=Cannot find script file
+rc.nodejs.error.bundled.loader.not.found.text=Node.js bundled loader for TypeScript not found
+rc.nodejs.error.ts.run.requires.higher.node.text="TypeScript file execution requires Node.js 24 or higher"
+rc.nodejs.line.marker.run=Run ''{0}''
+
+# Mocha
+rc.mocha.run_configuration_type.name=Mocha
+rc.mocha.mochaPackageField.label=&Mocha package:
+rc.mocha.userInterfaceField.label=&User interface:
+rc.mocha.extraMochaOptionsField.label=E&xtra Mocha options:
+rc.mocha.extraMochaOptionsField.emptyText=CLI options, e.g. --watch
+rc.mocha.testRunScope.filePattern=File &patterns
+rc.mocha.testRunScope.allInDirectory=All in di&rectory
+rc.mocha.testRunScope.allInDirectory.includeSubdirectories=Include subdirectories
+rc.mocha.testRunScope.allInDirectory.testDirectory.label=&Test directory:
+rc.mocha.testRunScope.allInDirectory.testDirectory.browseDialogTitle=Select Test Directory
+rc.mocha.testRunScope.filePattern.filePattern.label=&Test file patterns:
+rc.mocha.testRunScope.filePattern.filePattern.emptyText=Keep empty to enable default mocha logic
+rc.mocha.ui_parameter.show_description_in_browser.tooltip=Show description in browser
+rc.mocha.package_bin_file_not_found.message=Not found {0} bin file
+rc.mocha.intellij_mocha_reporter_not_found.message=IntelliJ Mocha reporter not found
+mocha.coverage.view.files_coverage_info.text={0} {0,choice,1#file|2#files}
+mocha.coverage.invalid_package.file_not_found.message=Cannot use ''{0}'' package to run Mocha tests with coverage:<br/>File {1} not found
+mocha.coverage.cannot_create_temporary_directory.message=Cannot create temporary directory
+
+
+runConfiguration.nodejs.profiling.cpu.record.checkbox=Record CPU profiling info
+runConfiguration.nodejs.profiling.cpu.log.folder.label=Log folder:
+runConfiguration.nodejs.profiling.cpu.one.log.file.checkbox=One log file for all isolates (V8 instances)
+
+runConfiguration.nodejs.profiling.cpu.error.log.folder.isfile=V8 Profiling: log folder points to a file.
+
+runConfiguration.nodejs.profiling.heap.take.snapshots.checkbox=Allow taking heap snapshots
+runConfiguration.nodejs.profiling.heap.inspect.explanation=Use the \u201CTake Heap Snapshot\u201D button on the tool window.<br/>Enable this option with Node.js > 7 to take heap snapshots when running or debugging the app. With Node.js 6.3 - 7 you can only take snapshots when running the app.
+
+runConfiguration.nodejs.profiling.heap.v8profiler.error.no.app.file=V8 Profiling: For taking heap snapshots, JavaScript file in Configuration tab should be defined.
+
+node.js.v8.heap.take.snapshot.dialog.title=Take Heap Snapshot
+node.js.v8.heap.take.snapshot.action.text=Take Heap Snapshot
+node.js.v8.heap.take.snapshot.action.description=Take heap snapshot
+node.js.v8.heap.take.snapshot.dialog.show.hidden=Show &hidden snapshot data
+node.js.v8.heap.take.snapshot.dialog.open.snapshot=Open &snapshot
+
+node.js.v8.cpu.navigation.not.found.error=Cannot navigate to the call:<br/>it has been filtered out due to its small impact.<br/>\
+The call still may be contained in other statistic views.
+node.js.v8.cpu.top.calls.overview.description=Self time distribution (Calls that take more that 1% are shown separately)
+
+# remote interpreters
+remote.interpreter.configure.path.title=Select Node.js Runtime
+remote.interpreter.configure.temp.files.path.title=Select Folder for WebStorm Helpers
+remote.interpreter.configure.path.label=Node.js runtime path:
+remote.interpreter.configure.temp.files.path.label=WebStorm helpers path:
+# suppress inspection "UnusedProperty"
+remote.interpreter.unspecified.interpreter.path=Specify Node.js runtime path
+# suppress inspection "UnusedProperty"
+remote.interpreter.unspecified.temp.files.path=Specify path for WebStorm helpers
+checkbox.show.hidden.data=Show hidden data
+checkbox.everywhere=&Everywhere
+checkbox.case.sensitive=Case Sens&itive
+action.DumbAware.SearchInV8TreeAction.text.show.in.tree=Show In Tree
+action.DumbAware.SearchInV8TreeAction.description.show.in.tree=Show In Tree
+action.DumbAware.V8ProfilingMainComponent.text.close=Close
+action.DumbAware.V8ProfilingMainComponent.description.close=Close
+
+
+# nodeunit
+nodeunit.rc.working_directory.label=Working directory:
+nodeunit.rc.working_directory.select.title=Select Working Directory
+nodeunit.rc.environment_variables.label=Environment variables:
+nodeunit.rc.nodeunit_module.label=Nodeunit module:
+nodeunit.rc.run.label=Run:
+nodeunit.rc.run.all.in.label=All in {0}
+nodeunit.rc.run_all_in_directory.label=All test files in directory
+nodeunit.rc.run_test_file.label=Test file
+nodeunit.rc.run_all_in_directory.directory.label=Directory:
+nodeunit.rc.run_all_in_directory.directory.browseTitle=Select a directory with tests
+nodeunit.rc.run_test_file.file.label=Test file:
+nodeunit.rc.run_test_file.file.browseTitle=Select a JavaScript Test File
+nodeunit.rc.unnamed.label=Unnamed
+nodeunit.rc.check.package.text=Please specify nodeunit module directory correctly.
+nodeunit.rc.check.working.dir.text=Please specify working directory correctly.
+nodeunit.rc.check.test.dir.text=Please specify test directory correctly.
+nodeunit.rc.check.test.file.text=Please specify JavaScript test file correctly.
+rc.nodeunit.cannot_find_intellij_starter.error.message=Cannot find {0}
+
+## Node.js Test Runner
+rc.nodejs.test.runner.intellij_reporter_not_found.message=IntelliJ Node.js test runner reporter not found
+rc.nodejs.test.runner.node_js_version_does_not_support_test_runner=The specified Node.js version does not support the test runner. Use Node.js 18.0.0 or later.
+rc.nodejs.test.runner.node_js_version_has_experimental_support=The specified Node.js version supports the test runner in the experimental mode so filtering tests and suits may be incorrect. For stable test runner support, use Node.js 20.0.0 or later.
+rc.nodejs.test.runner.node_js_version_does_not_support_nested_tests_execution=The specified Node.js version does not support <a href="https://github.com/nodejs/node/pull/48382">nested tests execution</a>. Use Node.js 20.4.0 or later.
+rc.nodejs.test.runner.node_js_version_does_not_support_correct_tests_filtration=The specified Node.js version is under development, which may result in problems with filtering tests and suits. Use Node.js 22.0.0 or later. <a href="https://github.com/nodejs/node/issues/46728#issuecomment-1764968836">Learn More</a>.
+rc.nodejs.test.runner.language_setting=Language:
+rc.nodejs.test.runner.language_setting.java_script=JavaScript
+rc.nodejs.test.runner.language_setting.typescript_typescript=TypeScript
+rc.nodejs.test.runner.type_script_loader=Loader:
+rc.nodejs.test.runner.type_script_loader.ts_node=ts-node
+rc.nodejs.test.runner.type_script_loader.tsx=tsx
+rc.nodejs.test.runner.type_script_loader.manual_setup_in_node_option=Manual setup in Node options
+rc.nodejs.test.runner.type_script_loader.manual_set_loader_should_be_set_in_node_options=To use a loader other than <a href="https://tsx.is/">tsx</a> or <a href="https://typestrong.org/ts-node/">ts-node</a>, specify parameters in the Node options field: <code>--require loader-name</code> or <code>--import loader-name</code>. Use <a href="https://nodejs.org/api/cli.html#--importmodule"><code>--import</code></a> to preload an ECMAScript module and use  <a href="https://nodejs.org/api/cli.html#-r---require-module"><code>--require</code></a> with a CommonJS module.
+rc.nodejs.test.runner.type_script_loader.could_not_find_ts_node_package=Couldn't find <a href="https://typestrong.org/ts-node/">ts-node</a> package for using it as TypeScript loader. The package should be installed in the project.
+rc.nodejs.test.runner.type_script_loader.could_not_find_tsx_package=Couldn't find <a href="https://tsx.is/">tsx</a> package for using it as TypeScript loader. The package should be installed in the project.
+
+# "Node.js" (npm init) generator
+npm.init.generator.name=Node.js
+npm.init.generator.description=Powered by npm-init
+
+# Node.js Express App generator
+express.generator.options.delimiter.name=Options
+express.generator.view.engine.label=Vie&w Engine:
+express.generator.stylesheet.engine.label=&Stylesheet Engine:
+
+
+dialog.message.template.engine.unavailable=Template engine is unavailable
+dialog.message.stylesheet.engine.unavailable=Stylesheet engine is unavailable
+popup.advertisement.type.at.least.symbols.press.twice.for.remote.packages=Type at least 3 symbols and press {0} twice for remote packages
+popup.advertisement.press.again.for.remote.packages=Press {0} again for remote packages
+progress.text.getting.node.js.documentation=Getting Node.js {0} documentation{1}\u2026
+progress.title.node.js.documentation=Node.js Documentation
+dialog.message.no.such=No such {0}
+dialog.message.unspecified=Unspecified {0}
+action.CloseTabAction.close.tab.text=Close Tab
+action.CloseTabAction.close.tab.description=Close Tab
+popup.title.select.file.to.navigate.to=Select File to Navigate To:
+progress.title.process.v8.log=Process V8 log\u2026
+action.Read.V8.Log.In.House.text=Analyze V8 Profiling Log\u2026
+action.Read.V8.Log.In.House.description=Read V8 profiling log file, show CPU profiling results.
+progress.text.reading.indexes=Reading indexes\u2026
+progress.text.recording.indexes=Recording indexes\u2026
+progress.text.calculating.total.weights.calls=Calculating total weights of calls\u2026
+progress.text.creating.top.calls.data=Creating Top Calls data\u2026
+progress.text.reading.v8.log=Reading V8 log\u2026
+progress.text.recording.string.index=Recording string index\u2026
+progress.text.calculating.calls.durations=Calculating calls durations\u2026
+progress.text.calculating.overview.approximations=Calculating overview approximations\u2026
+progress.details.processing.tick.at.ms=Processing tick at {0} ms
+progress.title.calculating.v8.cpu.profiles.diff=Calculating V8 CPU Profiles Diff
+action.V8CpuDiffAction.compare.with.text=Compare with\u2026
+action.V8CpuDiffAction.compare.with.another.v8.log.description=Compare with another V8 log
+label.select.path.to.save.statistics=Select path to save statistics.
+action.ExportStatisticsAction.export.profiling.statistic.text=Export Profiling Statistic
+action.ExportStatisticsAction.export.profiling.statistic.description=Export Profiling Statistic
+progress.text.export.profiling.stats=Export profiling statistic
+action.navigate.in.text=Navigate in {0}
+action.ShowAsStackTraceAction.show.as.stacktrace.text=Show As Stacktrace
+action.ZoomFlameChartAnAction.text=Zoom
+action.ZoomFlameChartAnAction.description=Zoom
+progress.title.zooming.v8.cpu.flamechart=Zooming V8 CPU flamechart\u2026
+action.CollapseNodeAction.collapse.node.text=Collapse Node
+action.CollapseNodeAction.collapse.node.description=Collapse node
+action.CompareWithClipboard.compare.with.clipboard.text=Compare With Clipboard
+action.CopyNameAction.copy.call.text=Copy Call
+action.ExpandByDefaultAction.expand.heavy.traces.text=Expand Heavy Traces
+action.ExpandByDefaultAction.expand.heavy.traces.description=Expand heavy traces
+action.ExpandNodeAction.expand.node.text=Expand Node
+action.ExpandNodeAction.expand.node.recursively.description=Expand node recursively
+label.search.for=Search for:
+dialog.title.search.in.v8.cpu.profiling.log=Search in V8 CPU Profiling Log
+action.SearchInV8TreeAction.search.text=Search
+popup.title.navigate.to=Navigate To\u2026
+action.V8CpuNavigationAction.navigates.to.call.in.other.views.description=Navigates to call in other views
+action.V8CpuNavigationAction.navigate.to.text=Navigate To\u2026
+label.select.location.to.save.v8.heap.snapshot.to=Select a location to save a V8 heap snapshot to.
+action.NavigateInSourceSnapshotAction.navigate.in.source.snapshot.text=Navigate In Source Snapshot
+radio.after.current=&After current
+radio.before.current=&Before current
+popup.title.select.source.profile=Select source profile:
+dialog.message.mark.node.with.text=Mark node @{0} with text: 
+dialog.title.mark.heap.object=Mark Heap Object
+action.V8NavigateToMainTreeAction.navigate.in.main.tree.text=Navigate in Main Tree
+progress.title.processing.heap.snapshot.building.snapshots.diff=Processing heap snapshot {0} and building snapshots diff.
+action.CompareWithSnapshotAction.compare.with.text=Compare with\u2026
+action.CompareWithSnapshotAction.compare.with.another.snapshot.description=Compare with another snapshot
+action.GroupByAction.group.by.type.text=Group by Type
+progress.title.searching.in.heap.snapshot=Searching ''{0}'' in heap snapshot
+progress.text.found.object=Found object @{0}
+progress.text.found.nodes.by.text.mark=Found {0} nodes by text mark.
+label.search=&Search: 
+label.scope=Scope:
+dialog.title.search.in.v8.heap=Search In V8 Heap
+progress.text.looking.for.filtered.names.ids=Looking for filtered name id's\u2026
+progress.text.iterating.reverse.string.index=Iterating reverse string index\u2026
+progress.text.filtering.by.name.groups.removing.hidden.small=Filtering by name groups (removing hidden and small nodes)\u2026
+progress.text.marking.nodes.referenced.by.hidden.links.only=Marking nodes referenced by hidden links only\u2026
+progress.text.grouping.nodes.by.classes=Grouping nodes by classes\u2026
+progress.text.filtering.by.class.groups=Filtering by class groups\u2026
+progress.title.checking.snapshot.distances=Checking Snapshot Distances
+action.V8HeapContainmentView.show.node.details.text=Show Node Details
+action.V8HeapContainmentView.show.node.details.description=Show node details
+action.V8HeapContainmentView.search.string.text=Search String
+action.V8HeapContainmentView.search.string.description=Search string
+action.Load.V8.Heap.Snapshot.text=Analyze V8 Heap Snapshot\u2026
+progress.title.processing.heap.snapshot=Processing heap snapshot {0}
+label.path.mappings=Path mappings:
+node.remote.path.mappings.link.text=Path mappings
+node.remote.path.mappings.link.for.text=for Run/Debug Configurations on {0}
+dialog.title.configure.node.js.remote.interpreter=Configure Node.js Remote Runtime
+progress.title.detect.interpreter.version=Detect Node.js Runtime Version
+dialog.title.can.t.create.node.js.remote.interpreter=Can't Create Node.js Remote Runtime
+dialog.message.unspecified.mocha.user.interface=Unspecified mocha user interface
+dialog.message.v8.profiling.no.log.folder.defined=V8 profiling: no log folder defined.
+dialog.message.path.mappings.for.selected.interpreter.are.set=Path mappings for selected runtime are not set.
+dialog.message.error.during.checking.remote.mappings=Error during checking remote mappings: {0}
+text.html.express.js.application.skeleton=<html>Express.js application skeleton from <a href='http://expressjs.com'>http://expressjs.com</a></html>
+label.node.js.express.app=Express
+
+profile.table.column.constructor.name=Constructor
+profile.diff.table.column.count_diff.name=Count Diff
+profile.diff.table.column.count.name=Count
+profile.diff.table.column.size_diff.name=Size Diff
+profile.diff.table.column.size.name=Size
+profile.diff.table.column.retained_size.name=Retained Size
+profile.table.column.distance.name=Distance
+profile.table.column.objects_count.name=Objects Count
+profile.table.column.shallow_size.name=Shallow Size
+profile.table.column.retained.size.name=Retained Size
+profile.biggest_objects.diff.table.column.object.name=Object
+profile.biggest_objects.diff.table.column.size_diff.name=Size Diff
+profile.biggest_objects.diff.table.column.size.name=Size
+profile.biggest_objects.diff.table.column.retained_size_diff.name=Retained Size Diff
+profile.biggest_objects.diff.table.column.retained_size.name=Retained Size
+profile.compare_snapshot_with_itself.action.name=Cannot show diff with itself
+profile.DistancesInspection.table.description.text=This inspection shows groups of objects with a similar class/name, which have different distances (range > 5)
+profile.DistancesInspection.table.foundByType.text=Classes with distances variation
+profile.DistancesInspection.table.foundByName.text=Same-named objects with distances variation
+profile.DistancesInspection.table.single_occurrence.text=1 occurrence
+profile.DistancesInspection.table.part_of_found_occurrences.text=Only {0} of found occurrences shown
+profile.DistancesInspection.table.multiple_occurrences.text={0} occurrences
+profile.FlameChartView.stacktrace.tab.title=Stacktrace from V8 profiling
+profile.GoToSourceAction.notification.not_found.content=Cannot find declaration to go to
+profile.cpu.fetching.log.files.failed.notification.content=Error with V8 log files: {0}
+profile.cpu.no.log.files.notification.content=No V8 log files found.
+profile.cpu.log.file.not.copied.notification.content=Unable to copy the file to the log folder: {0}
+profile.cpu.cannot.generate.log.file.dialog.message=Unable to generate log file name
+profile.cpu.no.log.folder.dialog.message=V8 profiling: no log folder defined.
+profile.heap.error.notification.content=Problem with heap snapshot: {0}
+profile.heap.processing.snapshot.error.notification.content=Error during processing snapshot: {0}
+profile.cpu.processing.log.error.notification.content=V8 CPU log processing problem: {0}
+profile.retained.table.column.object.name=Object
+profile.retained.table.column.distance.name=Distance
+profile.retained.table.column.shallow_size.name=Shallow Size
+profile.retained.table.column.retained_size.name=Retained Size
+profile.search.table.column.object.name=Object
+profile.heap.search.nothing_found_by_text.notification.content=No nodes by search string ''{0}'' found.
+profile.heap.search.processing.error.notification.content=Error during search by string: {0}
+profile.heap.search.by.snapshot.object.id.error.notification.content=IOException while searching by snapshot object id: {0}
+profile.search_results.targets.node.name=Targets
+profile.search_results.found_occurrences.node.name=Found Occurrences
+profile.search_results.found_occurrences.text={0} {0,choice,1#occurrence|2#occurrences}
+profile.heap.taking.snapshot.progress.title=Taking V8 heap snapshot\u2026
+profile.heap.taking_snapshot_failed.pass_inspect_brk.notification.content=Cannot take V8 Heap Snapshot: please check that --inspect-brk option was passed to Node.js
+profile.heap.taking_snapshot_failed_common.notification.content=Cannot take snapshot: {0}
+profile.heap.snapshot_not_saved.notification.content=Heap snapshot wasn't saved.
+profile.heap.snapshot_saved_to.notification.content=Heap snapshot was saved to {0}
+profile.heap.cannot_create_file.notification.content=Unable to create file ''{0}''. {1}
+profile.cpu.top_called_table.column.calls.name=Calls
+profile.cpu.diff_table.column.calls.name=Calls
+profile.cpu.statistics_saved_to_file.notification.content=V8 profiling statistics has been saved to {0}
+profile.cpu.error_saving_statistics_to_file.notification.content=Problem while saving statistics file: {0}
+profile.heap.containment_table.column.object.name=Object
+profile.heap.containment_table.column.distance.name=Distance
+profile.heap.containment_table.column.shallow_size.name=Shallow Size
+profile.heap.containment_table.column.retained_size.name=Retained Size
+profile.cpu.main_table.details.text=Details
+profile.cpu.main_table.cannot_navigate.notification.content=Cannot navigate to the node in the main tree: the node is either hidden or unreachable
+profile.cpu.parse_error.cannot_parse_line.message=Bad tick output format. Cannot parse line ''{0}''
+profile.cpu.parse_error.undefined_parent.message=Bad tick output format. Undefined parent for ''{0}''
+profile.cpu.parse_error.too_big_offset_difference.message=Bad tick output format. Offset difference relative to parent exceeds limit: ''{0}''
+profile.cpu.parse_error.new_parent_is_undefined.message=Bad tick output format. New parent is undefined for ''{0}''
+profile.cpu.no.percentage.text=no
+profile.cpu.milliseconds.text={0}ms
+profile.cpu.table.column.calls.name=Calls
+profile.table.unreachable_or_hidden.text=<unreachable or hidden>
+profile.table.named_function.text=function {0}()
+profile.table.root.text=<root>
+
+node.remote.connecting.to.remote.host.title=Connecting to ''{0}''
+node.remote.no_deployment_configuration.error.message=No deployment configuration for remote runtime found {0}
+node.remote.no_ssh_configuration.dialog.error.message=No SSH configuration for remote runtime found {0}
+node.remote.interpreter_not_found.error.message=Remote runtime {0} is not found.
+node.remote.cannot_failed_path_mappings.error.message=Failed to fetch path mappings
+node.remote.unsupported.configuration.error.message=Unsupported remote runtime {0}
+remote.ssh.cannot.find.ssh.config.error.message=Cannot find SSH configuration for {0}
+remote.docker.cannot.find.docker.server.error.message=Cannot find Docker Server {0}
+remote.docker.cannot.create.docker.runtime=Cannot create Docker runtime
+
+popup.content.nothing.found.by.search.string=Nothing found by search string ''{0}''
+popup.content.error.when.opening.search.results=Error when opening search results: {0}
+tab.title.search.results.for=Search Results for ''{0}''
+popup.content.cannot.navigate.to.flame.chart.details=Cannot navigate to the Flame Chart: {0, choice, 0#the call has not been recorded at the stack top.|1#data not found.}
+popup.content.can.not.navigate.to.flame.chart=Unable to navigate to Flame Chart: {0}
+profile.cpu.node_type.hidden.description=Hidden node, may be filtered when shown to user
+profile.cpu.node_type.array.description=An array of elements
+profile.cpu.node_type.string.description=A string
+profile.cpu.node_type.object.description=A JS object (except for arrays and strings)
+profile.cpu.node_type.compiled_code.description=Compiled code
+profile.cpu.node_type.closure.description=Function closure
+profile.cpu.node_type.regexp.description=Regular expression
+profile.cpu.node_type.number.description=Number stored in the heap
+profile.cpu.node_type.native.description=Native object (not from V8 heap)
+profile.cpu.node_type.synthetic.description=Synthetic object, usualy used for grouping snapshot items together
+profile.cpu.node_type.concatenated_string.description=Concatenated string. A pair of pointers to strings.
+profile.cpu.node_type.sliced_string.description=Sliced string. A fragment of another string.
+profile.cpu.node_type.symbol.description=A Symbol (ES6)
+profile.cpu.node_type.bigint.description=BigInt
+profile.cpu.node_type.ObjectShape.description=Object Shape (internal)
+action.Load.V8.Heap.Snapshot.description=Analyze V8 heap snapshot
+action.MarkUnmarkAction.text=Mark
+action.MarkUnmarkAction.description=Mark object with text
+profile.search.option.link_names.text=&Link names
+profile.search.option.class_names.text=&Class names
+profile.search.option.text_strings.text=&Text strings
+profile.search.option.snapshot_object_ids.text=Snapshot &object ids
+profile.search.option.marks.text=&Marks
+profile.CompareWithSnapshot.snapshot_was_taken.text=Snapshot was taken: 
+profile.cpu.top_called_table.total_perc.column.name=Total %
+profile.cpu.top_called_table.self_perc.column.name=Self %
+profile.cpu.top_called_table.total.column.name=Total
+profile.cpu.top_called_table.self.column.name=Self
+profile.action_took_time.text={0} took: {1}
+profile.heap.processing.action.name=Heap processing
+profile.top_call_diagram.piece.idle.name=Idle
+profile.top_call_diagram.piece.gc.name=GC
+profile.top_call_diagram.piece.other.name=Other
+profile.top_call_diagram.title=Overview
+profile.cpu.error.text=Error
+profile.cpu.ShowSnapshotDiffDialog.title=Log was recorded: 
+profile.cpu.diff_table.total_perc_diff.column.name=Total % Diff
+profile.cpu.diff_table.self_perc_diff.column.name=Self % Diff
+profile.cpu.diff_table.parent_perc_diff.column.name=Parent % Diff
+profile.cpu.diff_table.total.column.name=Total
+profile.cpu.diff_table.self.column.name=Self
+profile.cpu.diff_table.ticks.column.name=Ticks
+profile.cpu.toolwindow.title=V8 CPU Profiling
+profile.heap.tool_window.title=V8 Heap
+profile.search.occurrences_tab.title=Occurrences of ''{0}''
+profile.heap.tab.distances_inspection.title=Distances Inspection
+profile.cpu.top_call.total.filter.text=Total % Filter
+profile.cpu.top_call.parent.filter.text=Parent % Filter
+profile.cpu.top_call.total_diff.filter.text=Total % Diff Filter
+profile.flame.chart.title=Flame Chart
+profile.heap.summary.title=Summary
+profile.cpu.top_calls.title=Top Calls
+profile.cpu.top.down.diff.name=Top-down Diff
+profile.cpu.bottom.up.diff.name=Bottom-up Diff
+profile.cpu.top.call.diff.name=Top Calls Diff
+profile.heap.biggest.objects.diff.name=Biggest Objects Diff
+profile.cpu.biggest.objects.name=Biggest objects
+profile.heap.containment.name=Containment
+profile.heap.summary.diff.name=Summary Diff
+profile.cpu.top.down.name=Top-down
+profile.cpu.bottom.up.name=Bottom-up
+profile.cpu.fragment_not_found.error.text=Fragment not found
+profile.cpu.line.total.text=<total>
+profile.cpu.navigate_in_top_calls.text=Navigate in Top Calls
+profile.cpu.navigate_in_bottom_up.text=Navigate in Bottom-up
+profile.cpu.navigate_in_top_down.text=Navigate in Top-down
+profile.cpu.table.ticks.column.name=Ticks
+profile.cpu.table.of_parent.column.name=of Parent
+profile.cpu.table.total_percentage.column.name=Total %
+profile.cpu.table.self_percentage.column.name=Self %
+profile.cpu.table.total.column.name=Total
+profile.cpu.table.self.column.name=Self
+profile.cpu.nothing_to_show.label=Nothing to show
+profile.action_group.v8_profiling.text=V_8 Profiling
+
+remote.interpreter.communication.error.dialog.message=Communication error
+remote.interpreter.cannot.connect.to.remote.host.title.message=Can't connect to remote host
+remote.interpreter.version.detection.cancelled.dialog.message=Version detection cancelled
+remote.interpreter.same.interpreter.already.exists.dialog.message=There is already the same runtime: {0}
+remote.interpreter.connection.cancelled=Connection cancelled
+mocha.coverage.cannot_find_coverage_package.text=Cannot find ''nyc'' or ''istanbul'' package to run Mocha tests with coverage.<p>Please run {0}
+remote.interpreter.fetching_log_files.progress.title=Fetching log files
+
+# deprecated (used by external plugins, to be removed)
+# suppress inspection "UnusedProperty"
+runConfiguration.mocha.test_dir.browse_dialog.title=Select Test Directory
+# suppress inspection "UnusedProperty"
+runConfiguration.mocha.test_file.browse_dialog.title=Select Test File
+notification.group.v8.cpu=V8 CPU profiling issue
+notification.group.v8.heap=V8 heap snapshot analysis issue
+function=Function
+file=File
+duration=Duration
+number=Number
+gc=GC
+engine=engine
+external=external
+execution=execution
+s=s
+ms=ms
+min=min
