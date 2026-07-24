@@ -1,0 +1,31 @@
+name: watch-idea
+
+# Detect new IntelliJ IDEA Ultimate releases so the language pack can be
+# retargeted promptly. Compares the JetBrains release API against the version
+# this repo is currently bound to (config/product.json) and opens a GitHub issue
+# when they differ. Runs unattended on a schedule; no local machine involved.
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # daily, 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compare latest IDEA release against the bound version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python .github/scripts/watch_idea.py
