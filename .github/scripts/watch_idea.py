@@ -59,7 +59,7 @@ def main() -> int:
     Path("issue_body.md").write_text(body)
     subprocess.run(
         ["gh", "issue", "create", "--title", title, "--body-file", "issue_body.md",
-         "--label", "idea-update"],
+         "--label", "idea-update", "--assignee", "pcornelissen"],
         check=True,
     )
     print("issue created")
