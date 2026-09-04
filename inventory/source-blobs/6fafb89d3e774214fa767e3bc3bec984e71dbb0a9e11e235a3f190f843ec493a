@@ -1,0 +1,7 @@
+storybook.suggestion.text=This project uses Storybook {0}. Storybook Connect opens its stories in the IDE, beside the code that renders them.
+storybook.suggestion.text.unknown.version=This project uses Storybook. Storybook Connect opens its stories in the IDE, beside the code that renders them.
+storybook.suggestion.text.upgrade.required=This project uses Storybook {0}. Storybook Connect requires Storybook {1} or later, and can upgrade the project for you.
+# Storybook 7 and older: StorybookUpgradeGuidance returns TooFarBehind and its Update button does not
+# appear, so this text promises no automated upgrade.
+storybook.suggestion.text.too.far.behind=This project uses Storybook {0}. Storybook Connect requires Storybook {1} or later.
+storybook.suggestion.action.enable=Enable {0}

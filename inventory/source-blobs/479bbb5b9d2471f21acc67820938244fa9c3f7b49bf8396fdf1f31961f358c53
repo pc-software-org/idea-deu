@@ -1,0 +1,98 @@
+next.edit.inline.shortcut.review.hint.text=to review
+next.edit.inline.shortcut.review.with.action.hint.text=to review the ''{0}'' action
+next.edit.inline.shortcut.jump.hint.text=to jump
+next.edit.inline.shortcut.jump.with.action.hint.text=to jump to the ''{0}'' action
+next.edit.inline.shortcut.apply.completion.hint.text=to complete
+next.edit.inline.shortcut.apply.removal.hint.text=to remove
+next.edit.inline.shortcut.apply.replacement.hint.text=to replace
+next.edit.inline.shortcut.apply.insertion.hint.text=to insert
+
+# Actions
+action.NextEdit.ShowFeedbackDialogsAction.text=Show Next Edit Feedback Dialog
+action.NextEdit.ShowFeedbackDialogsAction.description=Opens a dialog to provide feedback on the Next Edit functionality
+action.InsertNextEditAction.text=Accept Next Edit Suggestion
+action.next.edit.trigger.action.text=Trigger Next Edit Suggestions
+
+# NEP as Inline Completion
+next.edit.inline.completion.provider.name=Next Edit Suggestions powered by {0}
+
+# Feedback Survey
+next.edit.feedback.title=Next Edit Feedback
+next.edit.feedback.description=Help us improve Next Edit Suggestions!
+next.edit.feedback.description.internal=Share your feedback in <code>#ai-completion</code> or fill out this form.
+next.edit.feedback.description.external=We would appreciate your feedback on the preview of the Next Edit feature.<br>Your responses will remain confidential.
+next.edit.feedback.other.comments=Any other comments?
+next.edit.feedback.other.placeholder=For example, bugs, missing features, or suggestions.
+next.edit.feedback.ondisable.description=Please share your thoughts.
+next.edit.feedback.ondisable.error=Write your feedback.
+
+next.edit.feedback.question.usefulness=How useful do you find the suggestions?
+next.edit.feedback.answer.very.useful=Very useful
+next.edit.feedback.answer.somewhat.useful=Somewhat useful
+next.edit.feedback.answer.neutral=Neutral
+next.edit.feedback.answer.not.very.useful=Not very useful
+next.edit.feedback.answer.not.useful.at.all=Not useful at all
+
+# Onboarding
+next.edit.onboarding.tooltip.header=Your first Next Edit Suggestion
+next.edit.onboarding.tooltip.text=This is a new AI Assistant feature that displays edit suggestions.<br/><br/>\
+  Press <b>{0}</b> to insert the next edit.
+next.edit.onboarding.tooltip.go.to.settings=Go to Settings
+
+# Accessible context
+next.edit.accessible.context.diff.panel=Next Edit Diff View Panel
+next.edit.accessible.context.suggestion=Next Edit Suggestion
+next.edit.accessible.context.shortcut.hint=Next Edit Shortcut Hint
+
+# Colors page
+next.edit.colors.page.name=Next Edit Suggestions
+next.edit.colors.descriptor.hint=Suggestion hint background
+next.edit.colors.descriptor.review.insight=Suggested refactoring highlight background
+next.edit.colors.descriptor.next.edit=Suggestion area background
+next.edit.colors.descriptor.next.edit.gutter=Gutter indicator background
+next.edit.colors.descriptor.review.removal=Suggested deletion background
+next.edit.colors.descriptor.next.edit.diff.add=Suggested addition background
+next.edit.colors.descriptor.panel.border=Comparison panel border
+next.edit.colors.descriptor.next.edit.diff.after=Comparison view background
+
+# Provider status
+next.edit.provider.status.connection.not.configured=Not configured
+next.edit.provider.status.connection.ready=Ready
+next.edit.provider.status.connection.auth.required=Sign in required
+next.edit.provider.status.connection.auth.required.details=Open provider settings and verify the selected provider to authenticate.
+next.edit.provider.status.connection.error=Error
+next.edit.provider.status.connection.verifying=Verifying\u2026
+next.edit.provider.status.connection.verifying.details=Checking provider status\u2026
+next.edit.provider.status.connection.last.checked=Last checked {0}
+next.edit.provider.status.availability.enabled=Suggestions enabled
+next.edit.provider.status.availability.enabled.short=Enabled
+next.edit.provider.status.availability.snoozed=Suggestions snoozed
+next.edit.provider.status.availability.snoozed.short=Snoozed
+next.edit.provider.status.availability.snoozed.remaining=Snoozed for {0}
+next.edit.provider.status.availability.disabled=Suggestions disabled
+next.edit.provider.status.availability.disabled.short=Disabled
+
+# Next Edit settings
+next.edit.settings.action.configure.provider=Configure Provider\u2026
+
+# Status bar widget
+next.edit.status.widget.name=Next Edit Suggestions
+next.edit.status.widget.tooltip.summary={0} \u00B7 {1}
+next.edit.status.widget.popup.header=AI Completion
+next.edit.status.widget.popup.status.summary={0} \u00B7 {1}
+next.edit.status.widget.popup.status.tooltip={0}. {1}
+next.edit.status.widget.action.enable=Enable Suggestions
+next.edit.status.widget.action.disable=Disable Suggestions
+next.edit.status.widget.action.disable.language=Disable for {0}
+next.edit.status.widget.action.enable.language=Enable for {0}
+next.edit.status.widget.action.disable.globally=Disable Globally
+next.edit.status.widget.action.snooze=Snooze Suggestions
+next.edit.status.widget.action.snooze.30.minutes=Snooze for 30 Minutes
+next.edit.status.widget.action.snooze.1.hour=Snooze for 1 Hour
+next.edit.status.widget.action.resume=Resume Suggestions
+next.edit.status.widget.action.open.settings=Open Next Edit Settings
+next.edit.status.widget.footer.enable=Enable
+next.edit.status.widget.footer.disable=Disable
+next.edit.status.widget.footer.pause=Pause
+next.edit.status.widget.footer.resume=Resume
+next.edit.status.widget.footer.settings=Settings

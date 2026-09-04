@@ -1,0 +1,28 @@
+<html>
+<body>
+<p>Reports request-matcher registrations (<code>requestMatchers</code>, <code>mvcMatchers</code>,
+  <code>antMatchers</code>, <code>regexMatchers</code>) that are chained <b>after</b> <code>anyRequest()</code>
+  inside an <code>authorizeHttpRequests</code> / <code>authorizeRequests</code> block.</p>
+
+<p><code>anyRequest()</code> must be the last matcher in the authorization chain. Configuring another matcher after it
+  makes Spring Security fail at startup with <code>Can't configure requestMatchers after anyRequest</code>.</p>
+
+<p><b>Incorrect:</b></p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers("/", "/home").permitAll()
+    .anyRequest().authenticated()
+    .requestMatchers("/admin/**").hasRole("ADMIN")   // reports: configured after anyRequest()
+  );
+</code></pre>
+
+<p><b>Correct</b> (move <code>anyRequest()</code> to the end):</p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers("/", "/home").permitAll()
+    .requestMatchers("/admin/**").hasRole("ADMIN")
+    .anyRequest().authenticated()
+  );
+</code></pre>
+</body>
+</html>

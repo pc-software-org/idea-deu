@@ -86,9 +86,9 @@ class CliTests(unittest.TestCase):
         for name in ("config", "inventory", "translations/batches", "reports"):
             (self.root / name).mkdir(parents=True)
         (self.root / "config/product.json").write_text(json.dumps({
-            "archive":"source.zip", "version":"2026.2.0.1", "build_number":"262.8665.337", "product_code":"IU",
-            "sha256":"a"*64, "since_build":"262.8665.337", "until_build":"262.8665.337",
-            "plugin_id":"org.pc-software.idea-deu", "plugin_version":"2026.2.0.1.1"}))
+            "archive":"source.zip", "version":"2026.2.2", "build_number":"262.10315.125", "product_code":"IU",
+            "sha256":"a"*64, "since_build":"262.10315.125", "until_build":"262.10315.125",
+            "plugin_id":"org.pc-software.idea-deu", "plugin_version":"2026.2.2.1"}))
         write_jsonl_atomic(self.root / "translations/units.jsonl", [TranslationUnit(
             "u"*64, "Hello", "b"*64, "", TranslationContext("B", "k", "c.jar", "B.properties"), ProcessingStatus.OPEN, ())])
         for name in ("resources", "exclusions", "collisions"):

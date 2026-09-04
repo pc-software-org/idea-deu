@@ -1,0 +1,16 @@
+# Settings
+next.edit.settings.checkbox.enable=Enable next edit suggestions
+next.edit.provider.name.none=No provider
+next.edit.provider.name.acp=ACP
+next.edit.provider.name.openai.compatible=OpenAI Compatible
+next.edit.provider.name.mercury=Mercury
+next.edit.provider.name.mistral=Mistral
+next.edit.provider.name.deepseek=DeepSeek
+next.edit.provider.name.jetbrains.dev=JetBrains Dev
+next.edit.provider.name.jetbrains=JetBrains
+
+# Reasons why no suggestions are produced at all
+next.edit.blocker.ai.assistant.prohibited=AI Assistant is turned off on this computer by a policy: the -Dnoai flag, the AIAssistant/isAllowed registry key, a .noai file in the project, or your license. Next edit suggestions cannot run until the policy allows them.
+next.edit.blocker.not.authorized=No applicable JetBrains AI license was found. Log in with an account that includes AI Pro, AI Ultimate, or AI Enterprise, or select a third-party provider.
+next.edit.blocker.third.party.conflict=Another code completion plugin is active and has taken over inline completion. Disable it to use next edit suggestions.
+next.edit.blocker.local.mode.cloud.provider=AI Assistant local mode is on, which blocks the JetBrains provider. Select a locally hosted or third-party provider, or turn local mode off.

@@ -2,7 +2,7 @@
 <idea-plugin>
   <id>org.pc-software.idea-deu</id>
   <name>German Language Pack</name>
-  <description>German (Deutsch) language pack for IntelliJ IDEA 2026.1. Translates the IDE user interface, inspection and intention descriptions, tips, and file and postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.</description>
+  <description>German (Deutsch) language pack for IntelliJ IDEA 2026.2. Translates the IDE user interface, inspection and intention descriptions, tips, and file and postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.2.</description>
   <change-notes><![CDATA[@CHANGE_NOTES@]]></change-notes>
   <version>@PLUGIN_VERSION@</version>
   <vendor>PC-Software</vendor>
