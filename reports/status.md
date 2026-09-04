@@ -408,7 +408,7 @@
   - `fc82900932f325173c433c52ded09ad76ead88ed863be68ccfd0267d5feb987f`: source_changed, build=262.10315.125, context={&quot;bundle&quot;:&quot;MicroservicesBundle&quot;,&quot;container&quot;:&quot;lib/intellij.platform.lang.jar&quot;,&quot;key&quot;:&quot;PathVariableInspection.cannot.resolve.rename.popup&quot;,&quot;path&quot;:&quot;messages/MicroservicesBundle.properties&quot;}
 - Workflow state: `complete`
 - Generated: present=True, valid=True (`generated/plugin`)
-- Package: present=True, valid=True, sha256=`c1fa2d26de0190e7824e9d81a71dcd5eab75738d6540f04ef3cc90eff635e4ce`, size=2789312 (`dist/idea-deu.zip`)
+- Package: present=True, valid=True, sha256=`a540daf64578f355f711f0bff4b34ded18fe6e246c6338ff79104ea78d90b2ac`, size=2789309 (`dist/idea-deu.zip`)
 
 Next command:
 
