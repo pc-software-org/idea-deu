@@ -1,0 +1,29 @@
+<html>
+<body>
+<p>Reports <code>@EventListener</code> methods that handle Spring Boot application events which are published
+  <b>before the <code>ApplicationContext</code> is created</b>. Such events can never be delivered to a bean-registered
+  listener, so the annotated method silently never runs.</p>
+
+<p>The affected events are:</p>
+<ul>
+  <li><code>ApplicationStartingEvent</code></li>
+  <li><code>ApplicationEnvironmentPreparedEvent</code></li>
+  <li><code>ApplicationContextInitializedEvent</code></li>
+  <li><code>ApplicationPreparedEvent</code></li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Component
+  class MyListener {
+    @EventListener // reports: this event is published before the context exists
+    void on(ApplicationStartingEvent event) { ... }
+  }
+</code></pre>
+
+<p>To listen for these early events, register the listener via <code>META-INF/spring.factories</code>
+  (<code>org.springframework.context.ApplicationListener</code>) or
+  <code>SpringApplication.addListeners(...)</code> instead of relying on a bean.</p>
+<!-- tooltip end -->
+</body>
+</html>

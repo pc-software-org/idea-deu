@@ -1,0 +1,31 @@
+<html>
+<body>
+<p>Reports request matchers in an <code>authorizeHttpRequests</code> / <code>authorizeRequests</code> chain that are
+  unreachable because an <b>earlier, more general matcher already covers them</b>.</p>
+
+<p>Spring Security evaluates matchers in declaration order and the <b>first matching rule wins</b>, so a specific rule
+  placed after a more general one that also matches it is silently ignored. More specific matchers must come first.</p>
+
+<p><b>Incorrect</b> (the marked rules are ignored):</p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers("/", "/home").permitAll()
+    .requestMatchers(HttpMethod.POST, "/home").hasRole("USER")        // covered by the earlier "/home"
+    .requestMatchers(HttpMethod.GET, "/test1/**").hasRole("USER")
+    .requestMatchers(HttpMethod.GET, "/test1/test2").hasRole("ADMIN") // covered by the earlier "/test1/**"
+    .anyRequest().authenticated()
+  );
+</code></pre>
+
+<p><b>Correct</b> (most specific first):</p>
+<pre><code>
+  http.authorizeHttpRequests(auth -> auth
+    .requestMatchers(HttpMethod.POST, "/home").hasRole("USER")
+    .requestMatchers("/", "/home").permitAll()
+    .requestMatchers(HttpMethod.GET, "/test1/test2").hasRole("ADMIN")
+    .requestMatchers(HttpMethod.GET, "/test1/**").hasRole("USER")
+    .anyRequest().authenticated()
+  );
+</code></pre>
+</body>
+</html>

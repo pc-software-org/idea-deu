@@ -1,0 +1,8 @@
+next.edit.agent.delegation.task.status.running=Implementing with agent...
+next.edit.agent.delegation.task.status.attention=Agent is waiting for your input
+next.edit.agent.delegation.task.status.finished.success=Implemented
+next.edit.agent.delegation.task.status.finished.error=Agent task failed
+next.edit.agent.delegation.task.status.finished.cancelled=Agent task cancelled
+next.edit.agent.delegation.task.link.review.changes=Review changes
+next.edit.agent.delegation.task.link.open.chat=Open chat
+next.edit.agent.delegation.task.link.answer.in.chat=Answer in chat

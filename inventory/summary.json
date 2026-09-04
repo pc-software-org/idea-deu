@@ -5,54 +5,54 @@
   },
   "counts": {
     "collisions": 1,
-    "exclusions": 592591,
-    "resources": 4198,
-    "source_blob_bytes": 6795158,
+    "exclusions": 596799,
+    "resources": 4199,
+    "source_blob_bytes": 6800030,
     "source_blobs": 4126,
-    "translation_units": 71265,
+    "translation_units": 71408,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
     "already_localized": 3,
     "collision_not_selected": 21,
     "directory": 2318,
-    "localized": 1282,
+    "localized": 1277,
     "nested_archive": 40,
-    "not_in_translation_reference": 898,
-    "not_jar": 1602,
-    "unsupported_resource": 586427
+    "not_in_translation_reference": 896,
+    "not_jar": 1649,
+    "unsupported_resource": 590595
   },
   "reference_coverage": {
-    "candidate_paths": 4937,
-    "candidate_paths_in_reference": 4008,
-    "candidate_paths_not_in_reference": 929,
+    "candidate_paths": 4936,
+    "candidate_paths_in_reference": 4009,
+    "candidate_paths_not_in_reference": 927,
     "not_present_by_type": {
-      "file_template": 329,
-      "inspection_description": 1622,
-      "intention_description": 494,
+      "file_template": 331,
+      "inspection_description": 1646,
+      "intention_description": 495,
       "postfix_template": 190,
-      "properties": 910
+      "properties": 930
     },
-    "reference_paths": 7553,
-    "reference_paths_not_present_in_idea": 3545,
+    "reference_paths": 7601,
+    "reference_paths_not_present_in_idea": 3592,
     "suspicious_missing_candidate_paths": 0
   },
   "resource_types": {
-    "file_template": 255,
-    "inspection_description": 2367,
-    "intention_description": 731,
+    "file_template": 260,
+    "inspection_description": 2356,
+    "intention_description": 732,
     "postfix_template": 132,
-    "properties": 524,
+    "properties": 530,
     "tip": 189
   },
   "schema_version": 1,
   "source": {
-    "archive": "idea-2026.2.0.1.win.zip",
-    "build_number": "262.8665.337",
+    "archive": "idea-2026.2.2.win.zip",
+    "build_number": "262.10315.125",
     "product_code": "IU",
-    "sha256": "269c47f7b184f65b2ce23e411736c55d4dcc5bc42ca6ad8cf377212e2efd2d34",
+    "sha256": "5a8b7af34ac62b83914435bc54a0b5062f20bc70586f2c1aa31c6602af8aabf6",
     "since_build": "262",
     "until_build": "262.*",
-    "version": "2026.2.0.1"
+    "version": "2026.2.2"
   }
 }

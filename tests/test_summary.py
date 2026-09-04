@@ -16,15 +16,15 @@ from scripts.idea_deu.summary import build_summary
 PATTERNS = ("*.properties", "tips/**/*.html")
 
 PRODUCT = ProductConfig(
-    archive="idea-2026.2.0.1.win.zip",
-    version="2026.2.0.1",
-    build_number="262.8665.337",
+    archive="idea-2026.2.2.win.zip",
+    version="2026.2.2",
+    build_number="262.10315.125",
     product_code="IU",
     sha256="a" * 64,
     since_build="262",
     until_build="262.*",
     plugin_id="org.pc-software.idea-deu",
-    plugin_version="2026.2.0.1.1",
+    plugin_version="2026.2.2.1",
 )
 
 
@@ -95,9 +95,9 @@ class BuildSummaryTest(unittest.TestCase):
         s = self._summary()
         self.assertEqual(s["schema_version"], 1)
         self.assertEqual(s["source"], {
-            "archive": "idea-2026.2.0.1.win.zip", "build_number": "262.8665.337",
+            "archive": "idea-2026.2.2.win.zip", "build_number": "262.10315.125",
             "product_code": "IU", "sha256": "a" * 64,
-            "since_build": "262", "until_build": "262.*", "version": "2026.2.0.1",
+            "since_build": "262", "until_build": "262.*", "version": "2026.2.2",
         })
 
     def test_no_reference_yields_zero_coverage(self):

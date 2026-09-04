@@ -1,0 +1,7 @@
+# Notifications
+notification.group.llm.next.edit=Next edit suggestions
+next.edit.opt.in.promotion.notification.title=Next Edit Suggestions is now in preview
+next.edit.opt.in.promotion.notification.content=Try the new AI Assistant feature that suggests edits as you type. \
+  It helps you refine your code in real time \u2014 give it a try!
+next.edit.opt.in.promotion.notification.go.to.settings.action.text=Go to Settings
+next.edit.opt.in.promotion.notification.enable.action.text=Enable

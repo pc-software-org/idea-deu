@@ -1,0 +1,82 @@
+# Provider settings
+next.edit.providers.configurable.ai.completion=AI Completion
+next.edit.providers.connection.not.configured=Not configured
+next.edit.providers.connection.auth.required=Authentication required
+next.edit.providers.configurable.provider.label=Provider:
+next.edit.providers.configurable.test.connection=Test Connection
+next.edit.providers.configurable.test.connection.accessible.name=AI Completion Connection Check
+next.edit.providers.configurable.test.connection.view.details=View details
+next.edit.providers.configurable.test.connection.result.success=Connected
+next.edit.providers.configurable.test.connection.result.fail=Failed to connect
+next.edit.providers.configurable.details.verifying=Checking provider status\u2026
+next.edit.providers.configurable.saving.title=Saving Next Edit Provider Settings
+
+# Model selection (shared across providers that expose a /models endpoint)
+next.edit.providers.configurable.model.loading=Loading models\u2026
+next.edit.providers.configurable.model.loaded={0,choice,0#No models found|1#Loaded 1 model|1<Loaded {0,number,integer} models}
+next.edit.providers.configurable.model.empty=No models returned by the endpoint
+next.edit.providers.configurable.model.auth.required=Authentication required to list models
+next.edit.providers.configurable.model.error=Failed to load models
+next.edit.providers.configurable.model.error.details=Failed to load models: {0}
+next.edit.providers.configurable.model.discovery.unavailable=Model discovery is unavailable; enter the model manually
+
+next.edit.providers.configurable.inline.link=Client-side controls are available in <a>Inline Completion Settings</a>.
+
+# JetBrains
+next.edit.providers.configurable.jetbrains.comment=Uses JetBrains AI service. No additional setup is required.
+
+# Mercury
+next.edit.providers.configurable.mercury.comment=Mercury uses the Inception Labs API. Create an API key in the Inception Labs dashboard before testing the connection.
+next.edit.providers.configurable.mercury.api.key=API key:
+next.edit.providers.configurable.mercury.api.key.comment=Paste the Inception Labs API key used for Mercury completion requests.
+next.edit.providers.configurable.mercury.mode=Completion mode:
+next.edit.providers.configurable.mercury.mode.comment=Edit suggests changes to the code around the caret; FIM (fill-in-the-middle) inserts a completion at the caret from the surrounding code.
+next.edit.providers.configurable.mercury.mode.edit=Edit
+next.edit.providers.configurable.mercury.mode.fim=FIM
+next.edit.providers.configurable.mercury.model=Model:
+next.edit.providers.configurable.mercury.model.comment=Model ID sent to Inception Labs.
+
+# Mistral/Codestral
+next.edit.providers.configurable.mistral.comment=Codestral uses the native Mistral FIM API. Create an API key in the Mistral AI dashboard before testing the connection.
+next.edit.providers.configurable.mistral.api.key=API key:
+next.edit.providers.configurable.mistral.api.key.comment=Paste the Mistral API key used for Codestral completion requests.
+next.edit.providers.configurable.mistral.url=API URL:
+next.edit.providers.configurable.mistral.url.comment=Use the Mistral/Codestral endpoint URL. The connection check derives the model endpoint from this value.
+next.edit.providers.configurable.mistral.model=Model name:
+next.edit.providers.configurable.mistral.model.comment=Model ID sent to Mistral for fill-in-the-middle completion requests.
+next.edit.providers.configurable.mistral.max.tokens=Max tokens:
+next.edit.providers.configurable.mistral.max.tokens.comment=Maximum number of tokens for one suggestion.
+
+# DeepSeek
+next.edit.providers.configurable.deepseek.comment=DeepSeek uses its beta FIM completion API. Create an API key in the DeepSeek platform before testing the connection.
+next.edit.providers.configurable.deepseek.api.key=API key:
+next.edit.providers.configurable.deepseek.api.key.comment=Paste the DeepSeek API key used for FIM completion requests.
+next.edit.providers.configurable.deepseek.model=Model name:
+next.edit.providers.configurable.deepseek.model.comment=Model ID sent to DeepSeek for fill-in-the-middle completion requests.
+next.edit.providers.configurable.deepseek.max.tokens=Max tokens:
+next.edit.providers.configurable.deepseek.max.tokens.comment=Maximum number of tokens for one suggestion.
+
+# OpenAI-Compatible
+next.edit.providers.configurable.openai.comment=Configure an OpenAI-compatible endpoint for AI Completion. This does not reuse or change the selected chat provider.
+next.edit.providers.configurable.openai.api.key=API key:
+next.edit.providers.configurable.openai.api.key.comment=Used as the Bearer token when the endpoint requires authentication. Leave empty for local endpoints without authentication.
+next.edit.providers.configurable.openai.url=Base URL:
+next.edit.providers.configurable.openai.url.comment=Base URL of the OpenAI-compatible server, for example, http://127.0.0.1:1234/v1.
+next.edit.providers.configurable.openai.max.tokens=Model context:
+next.edit.providers.configurable.openai.max.tokens.comment=Upper bound of the model context window shared by prompt and generated output.
+next.edit.providers.configurable.openai.max.output.tokens=Max output tokens:
+next.edit.providers.configurable.openai.max.output.tokens.comment=Maximum number of tokens requested from the model for one suggestion.
+next.edit.providers.configurable.tokens.postfix=tokens
+next.edit.providers.configurable.openai.url.validation=Enter a valid HTTP or HTTPS URL with a host
+next.edit.providers.configurable.openai.model=Model:
+next.edit.providers.configurable.openai.model.comment=Model ID sent to the OpenAI-compatible endpoint.
+next.edit.providers.configurable.openai.model.status.supported=Recognized as {0}. Supported for AI Completion.
+next.edit.providers.configurable.openai.model.status.unsupported=Recognized as {0}, but it isn't supported for AI Completion. Suggestions may not work.
+next.edit.providers.configurable.openai.model.status.unknown=Model is not recognized. Choose a prompt schema manually.
+next.edit.providers.configurable.openai.model.status.mellum.non.base=This Mellum variant isn't optimized for code completion. Use the base model instead.
+next.edit.providers.configurable.openai.schema=Prompt schema:
+next.edit.providers.configurable.openai.schema.comment=Prompt to request and parse the response from the model.
+next.edit.providers.configurable.openai.schema.auto=Auto (Recommended)
+
+# ACP
+next.edit.providers.configurable.acp.comment=This provider is configured externally in ACP Agents settings. Open ACP Agents Settings to change its connection details.

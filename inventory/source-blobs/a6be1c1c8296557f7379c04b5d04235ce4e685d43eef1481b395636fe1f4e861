@@ -1,0 +1,35 @@
+<html>
+<body>
+<p>Reports
+  <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html">@TransactionalEventListener</a>
+  methods that are also annotated with a plain
+  <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html">@Transactional</a>.</p>
+
+<p>A transactional event listener runs during the cleanup phase of the original transaction, which is still active but in
+  an undefined state. A regular <code>@Transactional</code> therefore executes in an undefined transactional state and
+  fails at runtime. The combination is valid only when the propagation is <code>REQUIRES_NEW</code> or
+  <code>NOT_SUPPORTED</code>, or when the method is also annotated with <code>@Async</code> (which runs the listener on a
+  separate thread with a clean transactional slate).</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Component
+  class MyListener {
+    @Transactional // reports: runs in an undefined transactional state
+    @TransactionalEventListener
+    void on(MyEvent event) { ... }
+  }
+</code></pre>
+
+<p>After the quick fix:</p>
+<pre><code lang="java">
+  @Component
+  class MyListener {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @TransactionalEventListener
+    void on(MyEvent event) { ... }
+  }
+</code></pre>
+
+</body>
+</html>
