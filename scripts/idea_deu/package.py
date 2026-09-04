@@ -174,9 +174,9 @@ def _raw_deflate(data: bytes) -> bytes:
     compressor = zlib.compressobj(9, zlib.DEFLATED, -15)
     return compressor.compress(data) + compressor.flush()
 
-_DESCRIPTION = ("German (Deutsch) language pack for IntelliJ IDEA 2026.1. Translates the IDE "
+_DESCRIPTION = ("German (Deutsch) language pack for IntelliJ IDEA 2026.2. Translates the IDE "
                 "user interface, inspection and intention descriptions, tips, and file and "
-                "postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.1.")
+                "postfix templates into German. Deutsches Sprachpaket für IntelliJ IDEA 2026.2.")
 
 
 def render_descriptor(template: bytes, *, version: str, since_build: str, until_build: str,

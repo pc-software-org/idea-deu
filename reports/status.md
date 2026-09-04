@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 475 |
+| open | 0 |
 | translated | 0 |
-| technically_reviewed | 70933 |
+| technically_reviewed | 71408 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -36,16 +36,16 @@
 ## Findings and collisions
 
 - Blocking findings: 0
-- Warning findings: 334
+- Warning findings: 337
 - Collisions: 1 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| length_ratio | 334 |
+| length_ratio | 337 |
 
 ## Workflow
 
-- Last completed batch: 38
+- Last completed batch: 41
 - Current batch: none
 - Stale units: 356
   - removed_from_source: 342
@@ -406,10 +406,10 @@
   - `df9ab314e30fd7b71920a25ca3b2464bbb080aa19301b63ab89ab5c3070caf5e`: source_changed, build=262.10315.125, context={&quot;bundle&quot;:&quot;RestClientBundle&quot;,&quot;container&quot;:&quot;plugins/restClient/lib/restClient.jar&quot;,&quot;key&quot;:&quot;http.request.collection.whats.new&quot;,&quot;path&quot;:&quot;messages/RestClientBundle.properties&quot;}
   - `e78716b5f0e1c524f799a16401fe5cf8ccb1cc02aaadc37f25151702efe44ba4`: source_changed, build=262.10315.125, context={&quot;bundle&quot;:&quot;IdeBundle&quot;,&quot;container&quot;:&quot;lib/intellij.platform.ide.jar&quot;,&quot;key&quot;:&quot;plugins.advertiser.check.progress&quot;,&quot;path&quot;:&quot;messages/IdeBundle.properties&quot;}
   - `fc82900932f325173c433c52ded09ad76ead88ed863be68ccfd0267d5feb987f`: source_changed, build=262.10315.125, context={&quot;bundle&quot;:&quot;MicroservicesBundle&quot;,&quot;container&quot;:&quot;lib/intellij.platform.lang.jar&quot;,&quot;key&quot;:&quot;PathVariableInspection.cannot.resolve.rename.popup&quot;,&quot;path&quot;:&quot;messages/MicroservicesBundle.properties&quot;}
-- Workflow state: `translate`
-- Generated: present=True, valid=False (`generated/plugin`)
-- Package: present=True, valid=False, sha256=`eacb76cbe12c7d8f3d0ba0e0afd4ebbb6924411145eb0be90353857c709e3bca`, size=2788669 (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`c1fa2d26de0190e7824e9d81a71dcd5eab75738d6540f04ef3cc90eff635e4ce`, size=2789312 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu status`
