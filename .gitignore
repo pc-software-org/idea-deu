@@ -8,6 +8,10 @@
 /build/
 /.worktrees/
 
+# Reports the standalone JetBrains Plugin Verifier drops in the repo root
+# ("verification-<date> at <time>/"); see docs/plugin-verification.md.
+/verification-*/
+
 # Local Python artifacts.
 __pycache__/
 *.py[cod]
