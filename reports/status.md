@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 24 |
+| open | 0 |
 | translated | 0 |
-| technically_reviewed | 71370 |
+| technically_reviewed | 71394 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -45,7 +45,7 @@
 
 ## Workflow
 
-- Last completed batch: 41
+- Last completed batch: 42
 - Current batch: none
 - Stale units: 38
   - removed_from_source: 37
@@ -88,10 +88,10 @@
   - `fa44277814617f7ddb2b701af8087faacd9445a0fbeca357c3d5d00f14619747`: removed_from_source, build=262.10968.63, context={&quot;bundle&quot;:&quot;ChatCompletionBundle&quot;,&quot;container&quot;:&quot;plugins/fullLine/lib/modules/intellij.ml.llm.chat.completion.jar&quot;,&quot;key&quot;:&quot;chat.completion.feedback.notification.respond&quot;,&quot;path&quot;:&quot;messages/ChatCompletionBundle.properties&quot;}
   - `fd5fe7387598663dd8b8c16a2ba2b682229fa880382cf4fda43afb60403f7b36`: removed_from_source, build=262.10968.63, context={&quot;bundle&quot;:&quot;ChatCompletionBundle&quot;,&quot;container&quot;:&quot;plugins/fullLine/lib/modules/intellij.ml.llm.chat.completion.jar&quot;,&quot;key&quot;:&quot;action.FullLine.ChatCompletionOptInSurveyAction.text&quot;,&quot;path&quot;:&quot;messages/ChatCompletionBundle.properties&quot;}
   - `815f88d54ba67f865e456255b1af5fdddd728cb58bdab2626d891f8069261e16`: source_changed, build=262.10968.63, context={&quot;bundle&quot;:&quot;SSRBundle&quot;,&quot;container&quot;:&quot;plugins/platform-structuralSearch-plugin/lib/modules/intellij.platform.structuralSearch.jar&quot;,&quot;key&quot;:&quot;error.script.constraint.for.0.has.problem.1&quot;,&quot;path&quot;:&quot;messages/SSRBundle.properties&quot;}
-- Workflow state: `translate`
-- Generated: present=True, valid=False (`generated/plugin`)
-- Package: present=True, valid=False, sha256=`a540daf64578f355f711f0bff4b34ded18fe6e246c6338ff79104ea78d90b2ac`, size=2789309 (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`9bbea81131d7fbcd32798bfc9730698ebea8e72c492ac2cb712ae2131120b21e`, size=2788582 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu status`
