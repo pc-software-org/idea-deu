@@ -5,36 +5,36 @@
   },
   "counts": {
     "collisions": 1,
-    "exclusions": 596799,
-    "resources": 4199,
-    "source_blob_bytes": 6800030,
-    "source_blobs": 4126,
-    "translation_units": 71408,
+    "exclusions": 597910,
+    "resources": 4198,
+    "source_blob_bytes": 6798053,
+    "source_blobs": 4125,
+    "translation_units": 71394,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
     "already_localized": 3,
     "collision_not_selected": 21,
-    "directory": 2318,
+    "directory": 2330,
     "localized": 1277,
     "nested_archive": 40,
-    "not_in_translation_reference": 896,
-    "not_jar": 1649,
-    "unsupported_resource": 590595
+    "not_in_translation_reference": 897,
+    "not_jar": 1652,
+    "unsupported_resource": 591690
   },
   "reference_coverage": {
     "candidate_paths": 4936,
-    "candidate_paths_in_reference": 4009,
-    "candidate_paths_not_in_reference": 927,
+    "candidate_paths_in_reference": 4008,
+    "candidate_paths_not_in_reference": 928,
     "not_present_by_type": {
       "file_template": 331,
-      "inspection_description": 1646,
+      "inspection_description": 1650,
       "intention_description": 495,
       "postfix_template": 190,
-      "properties": 930
+      "properties": 935
     },
-    "reference_paths": 7601,
-    "reference_paths_not_present_in_idea": 3592,
+    "reference_paths": 7609,
+    "reference_paths_not_present_in_idea": 3601,
     "suspicious_missing_candidate_paths": 0
   },
   "resource_types": {
@@ -42,17 +42,17 @@
     "inspection_description": 2356,
     "intention_description": 732,
     "postfix_template": 132,
-    "properties": 530,
+    "properties": 529,
     "tip": 189
   },
   "schema_version": 1,
   "source": {
-    "archive": "idea-2026.2.2.win.zip",
-    "build_number": "262.10315.125",
+    "archive": "idea-2026.2.3.win.zip",
+    "build_number": "262.10968.63",
     "product_code": "IU",
-    "sha256": "5a8b7af34ac62b83914435bc54a0b5062f20bc70586f2c1aa31c6602af8aabf6",
+    "sha256": "d113b117d72afe512626c478cbf952f6d1a234af5a1cb22cbf6089df55958f51",
     "since_build": "262",
     "until_build": "262.*",
-    "version": "2026.2.2"
+    "version": "2026.2.3"
   }
 }
