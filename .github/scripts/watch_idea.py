@@ -52,7 +52,8 @@ def main() -> int:
         f"- SHA-256: {checksum}\n\n"
         f"**Sprachpaket aktualisieren:** `config/product.json` + `config.py "
         f"_EXACT_BUILD` neu binden, `validate-source`, `scan`, Delta übersetzen, "
-        f"`CHANGELOG.md`-Abschnitt für die neue `plugin_version` anlegen, dann "
+        f"`CHANGELOG.md`-Abschnitt für die neue `plugin_version` anlegen, "
+        f"README + `docs/` nachziehen (`tests/test_docs_current.py`), dann "
         f"`v<plugin_version>` taggen.\n\n"
         f"_Automatisch erstellt von `.github/workflows/watch-idea.yml`._\n"
     )

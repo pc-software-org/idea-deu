@@ -1,7 +1,7 @@
-# idea-deu — German Language Pack for IntelliJ IDEA 2026.1.3
+# idea-deu — German Language Pack for IntelliJ IDEA 2026.2.3
 
 An offline-installable German (`de`) language pack for **IntelliJ IDEA
-2026.1.3**, build **261.25134.95** (product code `IU`, Ultimate). The pack is a
+2026.2.3**, build **262.10968.63** (product code `IU`, Ultimate). The pack is a
 code-free IntelliJ plugin that overlays translated resource bundles and
 description files onto the IDE via a `languageBundle` extension.
 
@@ -39,26 +39,26 @@ Vorschläge oder Probleme sind gerne gesehen. Bitte wenn möglich über github I
 | Component | Value |
 |---|---|
 | Target IDE | IntelliJ IDEA **Ultimate** (`IU`) |
-| Target version | **2026.1.3**, build **261.25134.95** |
-| Declared compatibility | `since-build = 261`, `until-build = 261.*` (whole 2026.1 line) |
-| Plugin version | 2026.1.3.1 — scheme `<ide-version>.<patch>`; the 4th segment bumps for translation-only fixes on the same IDE |
+| Target version | **2026.2.3**, build **262.10968.63** |
+| Declared compatibility | `since-build = 262`, `until-build = 262.*` (whole 2026.2 line) |
+| Plugin version | 2026.2.3.1 — scheme `<ide-version>.<patch>`; the 4th segment bumps for translation-only fixes on the same IDE |
 | Locale | `de` (German) |
 | Build toolchain | **Python 3.12+**, standard library only (no third-party deps) |
-| Source archive | `idea-2026.1.3.win.zip`, SHA-256 `71b0e287…f80026` (git-ignored build input) |
-| Plugin Verifier (optional) | JetBrains `verifier-cli` 1.408, any JDK 17+ (verified with JDK 25) |
+| Source archive | `idea-2026.2.3.win.zip`, SHA-256 `d113b117…958f51` (git-ignored build input) |
+| Plugin Verifier (optional) | JetBrains `verifier-cli` 1.410, any JDK 17+ (verified with JDK 25) |
 
-The pack is built from exactly build 261.25134.95 but declares compatibility
-with the whole 2026.1 line, so it also loads on 2026.1.x patch releases.
+The pack is built from exactly build 262.10968.63 but declares compatibility
+with the whole 2026.2 line, so it also loads on 2026.2.x patch releases.
 Verified `Compatible` by the JetBrains Plugin Verifier.
 
 ## Prerequisites
 
 - **Python 3.12+** (standard library only; no third-party runtime dependencies).
 - For a full re-scan / re-translation only: the exact source archive
-  `idea-2026.1.3.win.zip` in the repository root. Verify it:
+  `idea-2026.2.3.win.zip` in the repository root. Verify it:
   ```
-  shasum -a 256 idea-2026.1.3.win.zip
-  # 71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e
+  shasum -a 256 idea-2026.2.3.win.zip
+  # d113b117d72afe512626c478cbf952f6d1a234af5a1cb22cbf6089df55958f51
   ```
   Building the ZIP does **not** need the archive — the committed
   `inventory/source-blobs/` hold every source byte, so the pack (and CI) builds
@@ -103,7 +103,7 @@ config at build time. A **local build takes the version from config only** —
 there is no git tag involved, so `generate`/`package` work the same offline.
 
 To cut a release, bump `plugin_version` (a translation-only fix bumps the 4th
-segment, e.g. `2026.1.3.1` → `2026.1.3.2`), commit, then tag `v<plugin_version>`
+segment, e.g. `2026.2.3.1` → `2026.2.3.2`), commit, then tag `v<plugin_version>`
 and push. CI checks that the tag equals `plugin_version`, builds, publishes a
 GitHub release, and uploads to the Marketplace. See `docs/publishing.md`.
 
@@ -140,7 +140,7 @@ the finding recorded, and are re-picked by re-exporting after correction.
 
 ## Offline installation on Windows (air-gapped)
 
-1. Start an unmodified **IntelliJ IDEA 2026.1.3 (261.25134.95)**.
+1. Start an unmodified **IntelliJ IDEA 2026.2.3 (262.10968.63)**.
 2. Disconnect Marketplace / network access.
 3. **Settings → Plugins → ⚙ → Install Plugin from Disk…** and choose
    `dist/idea-deu.zip`.
@@ -148,9 +148,9 @@ the finding recorded, and are re-picked by re-exporting after correction.
    → set **Language** to *Deutsch*.
 5. Restart the IDE when prompted.
 
-The pack is built from exactly build 261.25134.95 but declares compatibility
-with the whole 2026.1 line (`since-build = 261`, `until-build = 261.*`), so it
-also loads on 2026.1.x patch releases. Untranslated or changed keys fall back to
+The pack is built from exactly build 262.10968.63 but declares compatibility
+with the whole 2026.2 line (`since-build = 262`, `until-build = 262.*`), so it
+also loads on 2026.2.x patch releases. Untranslated or changed keys fall back to
 English. Rebuild against a newer distribution to follow a later release line.
 
 ### Rollback / uninstall
@@ -161,7 +161,7 @@ back to *English* and restart. Removing the plugin fully reverts the UI.
 ## Verification and signing
 
 The generated plugin is descriptor-verified by the pipeline and has been checked
-`Compatible` by the standalone JetBrains Plugin Verifier against IU-261.25134.95
+`Compatible` by the standalone JetBrains Plugin Verifier against IU-262.10968.63
 — see `docs/plugin-verification.md`. For the full manual acceptance procedure
 see `docs/acceptance-checklist.md`.
 
