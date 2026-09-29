@@ -10,7 +10,7 @@ otherwise:
 
 - every included unit is `technically_reviewed` with no blocking finding,
 - no unresolved path collisions,
-- exact descriptor identity and `since/until-build = 261.25134.95`,
+- exact descriptor identity and `since-build`/`until-build` from `config/product.json` (currently `262`/`262.*`),
 - a byte-deterministic ZIP (repeat `generate` + `package` → identical SHA-256).
 
 ```bash
@@ -28,17 +28,18 @@ the unpacked target IDE. Requires JDK 21 and (once) network to fetch the
 verifier and, if not already present, the IDE.
 
 ```bash
-# verifier-cli-<ver>-all.jar from https://github.com/JetBrains/intellij-plugin-verifier/releases
+# verifier-cli-<ver>-all.jar (not a GitHub release asset) from
+# https://packages.jetbrains.team/maven/p/intellij-plugin-verifier/intellij-plugin-verifier/org/jetbrains/intellij/plugins/verifier-cli/<ver>/verifier-cli-<ver>-all.jar
 java -jar verifier-cli-<ver>-all.jar check-plugin \
     dist/idea-deu.zip \
-    /path/to/idea-IU-261.25134.95     # unpacked IntelliJ IDEA 2026.1.3
+    /path/to/idea-IU-262.10968.63     # unpacked IntelliJ IDEA 2026.2.3
 ```
 
 Expected: no compatibility problems (a language pack contributes only a
 `languageBundle` extension and resource bundles; the verifier confirms the
 descriptor and compatibility range).
 
-**Result (verifier 1.408, against a local IU-261.25134.95): `Compatible`** — no
+**Result (verifier 1.410, against a local IU-262.10968.63): `Compatible`** — no
 plugin problems; reported as dynamic-plugin eligible (enable/disable without
 restart). This run also surfaced and fixed a missing required `<description>`
 in the descriptor.
