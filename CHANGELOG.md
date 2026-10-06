@@ -4,6 +4,9 @@ Der Abschnitt der jeweils gebauten `plugin_version` (aus `config/product.json`)
 wird zum „What's new"-Text auf dem JetBrains Marketplace. Nur `## <version>`-
 Überschriften und `-`-Aufzählungspunkte werden unterstützt.
 
+## 2026.2.3.2
+- Aktion „Verketteten String in die Zwischenablage kopieren“ (Java, Kotlin, Groovy) verständlich und einheitlich benannt
+
 ## 2026.2.3.1
 - Kompatibel mit IntelliJ IDEA 2026.2.3
 - 24 neue und geänderte Oberflächentexte ins Deutsche übersetzt

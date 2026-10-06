@@ -41,7 +41,7 @@ Vorschläge oder Probleme sind gerne gesehen. Bitte wenn möglich über github I
 | Target IDE | IntelliJ IDEA **Ultimate** (`IU`) |
 | Target version | **2026.2.3**, build **262.10968.63** |
 | Declared compatibility | `since-build = 262`, `until-build = 262.*` (whole 2026.2 line) |
-| Plugin version | 2026.2.3.1 — scheme `<ide-version>.<patch>`; the 4th segment bumps for translation-only fixes on the same IDE |
+| Plugin version | 2026.2.3.2 — scheme `<ide-version>.<patch>`; the 4th segment bumps for translation-only fixes on the same IDE |
 | Locale | `de` (German) |
 | Build toolchain | **Python 3.12+**, standard library only (no third-party deps) |
 | Source archive | `idea-2026.2.3.win.zip`, SHA-256 `d113b117…958f51` (git-ignored build input) |

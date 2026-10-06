@@ -90,7 +90,7 @@
   - `815f88d54ba67f865e456255b1af5fdddd728cb58bdab2626d891f8069261e16`: source_changed, build=262.10968.63, context={&quot;bundle&quot;:&quot;SSRBundle&quot;,&quot;container&quot;:&quot;plugins/platform-structuralSearch-plugin/lib/modules/intellij.platform.structuralSearch.jar&quot;,&quot;key&quot;:&quot;error.script.constraint.for.0.has.problem.1&quot;,&quot;path&quot;:&quot;messages/SSRBundle.properties&quot;}
 - Workflow state: `complete`
 - Generated: present=True, valid=True (`generated/plugin`)
-- Package: present=True, valid=True, sha256=`9bbea81131d7fbcd32798bfc9730698ebea8e72c492ac2cb712ae2131120b21e`, size=2788582 (`dist/idea-deu.zip`)
+- Package: present=True, valid=True, sha256=`01918dca5f92a5e9fbdcfef1328a4a7bd7e8cf1d2885e6428f2831d1ae37db26`, size=2788590 (`dist/idea-deu.zip`)
 
 Next command:
 
