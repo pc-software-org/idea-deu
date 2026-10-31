@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 194 |
+| open | 0 |
 | translated | 0 |
-| technically_reviewed | 71297 |
+| technically_reviewed | 71491 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -45,7 +45,7 @@
 
 ## Workflow
 
-- Last completed batch: 42
+- Last completed batch: 43
 - Current batch: none
 - Stale units: 121
   - removed_from_source: 109
@@ -171,10 +171,10 @@
   - `c8225f6e522e9e7dbaf0f740eeb1d0defca9a6e8e11c863e8272d4b09da6d3d4`: source_changed, build=262.11879.100, context={&quot;bundle&quot;:&quot;CommonNextEditBundle&quot;,&quot;container&quot;:&quot;plugins/fullLine/lib/fullLine.jar&quot;,&quot;key&quot;:&quot;next.edit.provider.name.none&quot;,&quot;path&quot;:&quot;messages/CommonNextEditBundle.properties&quot;}
   - `d6bb0493d9bf7224614a95b6313920c922188d3efa03f4911bf4d3ecf6a15204`: source_changed, build=262.11879.100, context={&quot;bundle&quot;:&quot;IdeBundle&quot;,&quot;container&quot;:&quot;lib/intellij.platform.ide.jar&quot;,&quot;key&quot;:&quot;updates.from.to.size&quot;,&quot;path&quot;:&quot;messages/IdeBundle.properties&quot;}
   - `d7f751f0a195d08dcf5e8504a6bd2e41b7965d173df277260a24fc215738a872`: source_changed, build=262.11879.100, context={&quot;bundle&quot;:&quot;FeedbackBundle&quot;,&quot;container&quot;:&quot;plugins/Kotlin/lib/kotlin-plugin.jar&quot;,&quot;key&quot;:&quot;notification.request.content&quot;,&quot;path&quot;:&quot;messages/FeedbackBundle.properties&quot;}
-- Workflow state: `translate`
-- Generated: present=True, valid=False (`generated/plugin`)
-- Package: present=True, valid=False, sha256=`01918dca5f92a5e9fbdcfef1328a4a7bd7e8cf1d2885e6428f2831d1ae37db26`, size=2788590 (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`35b3d354ae2940eef24565fc2dcaac27192d02442c77060022d20e06391f4167`, size=2791938 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu status`
