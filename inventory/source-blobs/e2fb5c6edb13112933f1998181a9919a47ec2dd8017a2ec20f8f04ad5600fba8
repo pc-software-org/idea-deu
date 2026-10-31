@@ -1,6 +1,7 @@
 # Settings
 next.edit.settings.checkbox.enable=Enable next edit suggestions
-next.edit.provider.name.none=No provider
+next.edit.settings.provider.moved=The next edit provider is now selected in <a>Inline Completion</a> settings.
+next.edit.provider.name.none=None
 next.edit.provider.name.acp=ACP
 next.edit.provider.name.openai.compatible=OpenAI Compatible
 next.edit.provider.name.mercury=Mercury

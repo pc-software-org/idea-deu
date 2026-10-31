@@ -5,6 +5,8 @@ next.edit.providers.connection.auth.required=Authentication required
 next.edit.providers.configurable.provider.label=Provider:
 next.edit.providers.configurable.test.connection=Test Connection
 next.edit.providers.configurable.test.connection.accessible.name=AI Completion Connection Check
+next.edit.providers.configurable.sign.in=Sign in
+next.edit.providers.configurable.sign.in.accessible.name=AI Completion Sign in
 next.edit.providers.configurable.test.connection.view.details=View details
 next.edit.providers.configurable.test.connection.result.success=Connected
 next.edit.providers.configurable.test.connection.result.fail=Failed to connect
@@ -20,10 +22,9 @@ next.edit.providers.configurable.model.error=Failed to load models
 next.edit.providers.configurable.model.error.details=Failed to load models: {0}
 next.edit.providers.configurable.model.discovery.unavailable=Model discovery is unavailable; enter the model manually
 
-next.edit.providers.configurable.inline.link=Client-side controls are available in <a>Inline Completion Settings</a>.
 
 # JetBrains
-next.edit.providers.configurable.jetbrains.comment=Uses JetBrains AI service. No additional setup is required.
+next.edit.providers.configurable.jetbrains.comment=Uses JetBrains AI models. Every JetBrains AI plan includes them, also AI Free.
 
 # Mercury
 next.edit.providers.configurable.mercury.comment=Mercury uses the Inception Labs API. Create an API key in the Inception Labs dashboard before testing the connection.
@@ -72,6 +73,8 @@ next.edit.providers.configurable.openai.model=Model:
 next.edit.providers.configurable.openai.model.comment=Model ID sent to the OpenAI-compatible endpoint.
 next.edit.providers.configurable.openai.model.status.supported=Recognized as {0}. Supported for AI Completion.
 next.edit.providers.configurable.openai.model.status.unsupported=Recognized as {0}, but it isn't supported for AI Completion. Suggestions may not work.
+next.edit.providers.configurable.openai.model.status.chat.only.api=The {0} API has no models for AI Completion. Use a local server, such as Ollama, LM Studio, or vLLM.
+next.edit.providers.configurable.openai.model.status.dedicated.provider=Select the {0} provider for AI Completion. It uses the FIM endpoint of the {0} API.
 next.edit.providers.configurable.openai.model.status.unknown=Model is not recognized. Choose a prompt schema manually.
 next.edit.providers.configurable.openai.model.status.mellum.non.base=This Mellum variant isn't optimized for code completion. Use the base model instead.
 next.edit.providers.configurable.openai.schema=Prompt schema:

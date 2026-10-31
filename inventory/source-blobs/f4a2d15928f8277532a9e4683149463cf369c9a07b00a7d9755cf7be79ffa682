@@ -91,6 +91,16 @@ next.edit.acp.diagnostics.session.events={0} events
 next.edit.acp.diagnostics.session.lifetime={0}
 next.edit.acp.diagnostics.badge.suggestions={0} suggestions
 next.edit.acp.diagnostics.badge.history=history {0}
+next.edit.acp.diagnostics.badge.request.id=Next Edit request {0}
+next.edit.acp.diagnostics.badge.protocol.request.id=ACP request {0}
+next.edit.acp.diagnostics.badge.protocol.method={0}
+next.edit.acp.diagnostics.badge.protocol.error.code=JSON-RPC {0}
+next.edit.acp.diagnostics.operation.protocol.error=ACP protocol error
+next.edit.acp.diagnostics.operation.optional.protocol.notification=Optional ACP notification
+next.edit.acp.diagnostics.detail.protocol.method=Method
+next.edit.acp.diagnostics.detail.protocol.error.code=JSON-RPC code
+next.edit.acp.diagnostics.detail.protocol.request.id=ACP request ID
+next.edit.acp.diagnostics.detail.next.edit.request.id=Next Edit request ID
 next.edit.acp.diagnostics.badge.request.bytes=\u2191 {0}
 next.edit.acp.diagnostics.badge.response.bytes=\u2193 {0}
 next.edit.acp.diagnostics.latency.suggest=suggest {0}x avg {1} max {2}
@@ -99,6 +109,7 @@ next.edit.acp.diagnostics.session.changes={0} changes
 next.edit.acp.diagnostics.session.resyncs={0} resyncs
 next.edit.acp.diagnostics.session.saves={0} saves
 next.edit.acp.diagnostics.session.suggest.outcome=ok {0} fail {1}
+next.edit.acp.diagnostics.session.suggest.empty=no suggestions {0}
 next.edit.acp.diagnostics.session.payload.sent=tx {0}
 next.edit.acp.diagnostics.session.payload.received=rx {0}
 next.edit.acp.diagnostics.session.accept.no.latency=accept {0}
@@ -129,6 +140,7 @@ action.NextEdit.ResetStatistics.text=Reset Statistic-Based ML Features
 
 # Settings
 next.edit.settings.checkbox.enable=Enable next edit suggestions
+next.edit.settings.provider.no.project=Open a project to choose the next edit provider.
 next.edit.settings.checkbox.enable.comment=Suggests likely edits across the file
 next.edit.settings.checkbox.enable.comment.local.mode.selected=Available only with Cloud completion
 next.edit.settings.checkbox.instant.preview.enable=Preview instantly
@@ -139,6 +151,11 @@ next.edit.settings.code.insight.actions.enable=Suggest refactorings
 next.edit.settings.code.insight.actions.enable.description=Include edits based on IDE refactoring actions, like Rename
 next.edit.settings.universal.display.name=All Other
 next.edit.enable.checkbox.comment.3rd.party.model.configured=Not available due to model override in <a>AI Assistant | Models</a>
+next.edit.enable.checkbox.comment.3rd.party.model.configured.no.link=Not available due to a model override in AI Assistant | Models
 next.edit.enable.checkbox.comment.china.region=Not available in your region
 
 next.edit.settings.configure.provider=Configure Provider\u2026
+
+# Display path of the AI Assistant provider settings page. It is a fallback lookup only, so it mirrors
+# the LLMBundle keys `settings.configurable.display.name` and
+# `settings.configurable.third.party.ai.providers.display.name`.

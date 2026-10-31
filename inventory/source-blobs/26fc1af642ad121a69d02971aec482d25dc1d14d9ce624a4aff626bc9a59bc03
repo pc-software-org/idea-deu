@@ -1,0 +1,15 @@
+storybook.suggestion.text=This project uses Storybook {0}. Storybook Connect opens its stories in the IDE, beside the code that renders them.
+storybook.suggestion.text.unknown.version=This project uses Storybook. Storybook Connect opens its stories in the IDE, beside the code that renders them.
+storybook.suggestion.text.upgrade.required=This project uses Storybook {0}. Storybook Connect opens its stories in the IDE, beside the code that renders them, and can update the project to Storybook {1} for you.
+# Storybook 7 and older: StorybookUpgradeGuidance returns TooFarBehind and its Update button does not
+# appear, so this text promises no automated upgrade.
+storybook.suggestion.text.too.far.behind=This project uses Storybook {0}. Storybook Connect opens stories in the IDE, beside the code that renders them, from Storybook {1} onward.
+storybook.suggestion.action.enable=Enable {0}
+
+# The Settings | Appearance & Behavior | Notifications row for the project-open advertisement.
+storybook.notification.group=Storybook Connect suggestion
+
+# The settings page under Languages & Frameworks | JavaScript.
+storybook.settings.display.name=Storybook
+storybook.settings.reset.dismissed=Reset Dismissed Suggestions
+storybook.settings.reset.dismissed.comment=Offer the Storybook Connect plugin again for this project.

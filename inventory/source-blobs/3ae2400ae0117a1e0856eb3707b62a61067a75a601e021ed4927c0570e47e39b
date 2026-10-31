@@ -63,7 +63,7 @@ ssh.download.and.connect=Download IDE and Connect
 ssh.validation.failure.title=SSH Connection Check Failed
 ssh.validation.failure.unexpected.error=Unexpected error
 ssh.validation.failure.multiple.errors={0} errors occurred during the connection
-ssh.validation.failure.auth.error=Wrong credentials
+ssh.validation.failure.auth.error=Permission denied
 ssh.validation.failure.connection.refused=Connection refused
 ssh.validation.failure.connection.timeout=Connection timeout
 ssh.validation.failure.forwarding.prohibited=Forwarding prohibited
@@ -74,6 +74,7 @@ ssh.validation.failure.non.zero.exit.code=Non-zero exit code {0}
 ssh.validation.failure.ssh.agent.conflict=SSH agent conflict: IdentityAgent={0}, SSH_AUTH_SOCK={1}
 ssh.validation.failure.too.wide.permissions=Too wide permissions for {0}
 ssh.validation.failure.unresolved.hostname=Unresolved hostname {0}: {1}
+ssh.validation.failure.no.route.to.host=Cannot connect to remote host: No route to host<br>See <a href="https://youtrack.jetbrains.com/articles/SUPPORT-A-564/Cannot-connect-to-remote-host-No-route-to-host-macOS-15-Sequoia">SUPPORT-A-564</a> for possible solutions.
 
 ssh.agent.add.confirmation.title=Add SSH Key to Agent
 ssh.agent.add.confirmation.message=Add SSH key to agent?\n{0}
@@ -116,7 +117,8 @@ ssh.remdev.launch.backend.update.error.message=Failed to update IDE on the backe
 ssh.remdev.launch.backend.stop.error.message=Failed to stop IDE on the backend\n{0}
 ssh.remdev.launch.backend.launch.error.message=Failed to launch IDE on the backend\n{0}
 ssh.remdev.launch.workspace.not.found.error.message=Workspace not found
-ssh.remdev.launch.agent.terminated.error.message=Agent is terminated
+ssh.remdev.launch.agent.dropped.connection.error.message=Agent dropped connection
+ssh.remdev.launch.auth.error.message=Authentication problem
 ssh.remdev.launch.generic.error.message=Error starting IDE\n{0}
 ssh.remdev.launch.unknown.error.message=Error starting IDE\n{0}
 ssh.remdev.launch.progress.title=Initiating Remote Development Session

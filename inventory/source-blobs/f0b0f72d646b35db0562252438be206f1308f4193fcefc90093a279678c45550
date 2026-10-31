@@ -1,0 +1,5 @@
+notification.request.title=Kotlin Developer Survey 2026
+notification.request.content=Help us improve your experience.
+notification.request.action.take.survey=Take the survey
+
+action.org.jetbrains.kotlin.onboarding.ShowKotlinDeveloperSurveyNotificationAction.text=Show Kotlin Developer Survey Notification

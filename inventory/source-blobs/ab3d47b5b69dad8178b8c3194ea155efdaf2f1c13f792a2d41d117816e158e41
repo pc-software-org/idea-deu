@@ -1,4 +1,5 @@
 toolwindow.stripe.AIAssistant=AI Chat
+toolwindow.title.connect.ai=Connect AI with IDE
 toolwindow.install.title=Install {0}
 
 plugin.install.llm.tos=By clicking "Install", you agree to the <a href="{0}">JetBrains AI Terms of Service</a>
@@ -110,7 +111,19 @@ ai.hub.not.installed.tos.comment=By clicking "{0}", you agree to<br>the <a href=
 ai.hub.incompatible.assistant.message=To access full functionality, update AI<br>Assistant.
 ai.hub.incompatible.assistant.update=Update
 
-action.AIHub.NotInstalled.InlineCompletionSettings.text=Settings\u2026
+# Air promo
+air.promo.title=Try Air
+air.promo.subtitle=New AI workflow<br>for agents you already use
+air.promo.feature.agents=\u2022 Works with Codex, Claude Agent, Junie by JetBrains, GitHub Copilot, and more than 100 other Agents and Providers.
+air.promo.feature.sessions=\u2022 Session history management and code-review workflows, even for CLI tools.
+air.promo.feature.free=\u2022 It is free. No additional subscriptions needed.
+air.promo.install.button=Install Air
+air.promo.installing=Installing Air
+air.promo.assistant.trial=30-day trial
+
+ai.hub.air.subtitle=New AI workflow<br>for agents you already use
+ai.hub.air.tooltip.text=JetBrains Air
+ai.hub.air.tooltip.description=New AI workflow for agents you already use
 
 # following properties are retrieved by dynamic key
 # suppress inspection "UnusedProperty"

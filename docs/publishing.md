@@ -42,8 +42,8 @@ The plugin version lives **only** in `config/product.json` → `plugin_version`
 
 | Change | plugin_version |
 |---|---|
-| First release for 2026.2.3 | `2026.2.3.1` |
-| Translation fix (same IDE) | `2026.2.3.2`, `2026.2.3.3`, … |
+| First release for 2026.2.4 | `2026.2.4.1` |
+| Translation fix (same IDE) | `2026.2.4.2`, `2026.2.4.3`, … |
 | Re-scan onto a new IDE (e.g. 2026.3) | `2026.3.0.1` |
 
 A local build (`generate`/`package`) reads the version from config; **no git
@@ -54,13 +54,13 @@ marker, and CI fails the release if the tag does not equal `plugin_version`.
 
 ```bash
 # 1. bump the version (translation fix example)
-#    edit config/product.json: "plugin_version": "2026.2.3.2"
-git commit -am "release 2026.2.3.2"
+#    edit config/product.json: "plugin_version": "2026.2.4.2"
+git commit -am "release 2026.2.4.2"
 
 # 2. tag it v<plugin_version> and push. build.yml verifies tag == plugin_version,
 #    builds, creates a GitHub Release, and uploads to Marketplace (channel stable).
-git tag v2026.2.3.2
-git push origin main v2026.2.3.2
+git tag v2026.2.4.2
+git push origin main v2026.2.4.2
 ```
 
 The upload uses the documented Marketplace API:
