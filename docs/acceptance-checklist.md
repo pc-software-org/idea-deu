@@ -1,6 +1,6 @@
-# Acceptance Checklist — German Language Pack 2026.2.4
+# Acceptance Checklist — German Language Pack 2026.3
 
-Target: IntelliJ IDEA **2026.2.4**, build **262.11879.100** (`IU`).
+Target: IntelliJ IDEA **2026.3**, build **263.7307.200** (`IU`).
 Artifact: `dist/idea-deu.zip` (SHA-256 in `dist/idea-deu.zip.sha256`).
 
 Mark each item **PASS/FAIL** with a screenshot or a one-line observation.
@@ -11,7 +11,7 @@ missing dependency, or a broken placeholder is a **release blocker**.
 
 | Field | Value |
 |---|---|
-| IDE build | `262.11879.100` (confirm via Help → About) |
+| IDE build | `263.7307.200` (confirm via Help → About) |
 | OS | Windows ____ (record version) |
 | Plugin SHA-256 | ____ (must equal `dist/idea-deu.zip.sha256`) |
 | Marketplace access | disconnected |
@@ -22,7 +22,7 @@ missing dependency, or a broken placeholder is a **release blocker**.
 - [ ] Install Plugin from Disk accepts `idea-deu.zip` without error.
 - [ ] Language and Region lists *Deutsch*; selecting it prompts a restart.
 - [ ] After restart the UI is German.
-- [ ] Help → About still reports build 262.11879.100 (pack did not alter the IDE).
+- [ ] Help → About still reports build 263.7307.200 (pack did not alter the IDE).
 
 ## Functional areas (spot-check German + correct placeholders)
 

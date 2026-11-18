@@ -16326,10 +16326,10 @@
   - `f7bae6ac4ddb8b5eeed2a81ad2eba9d07bf398098121a40257268364c11c219d`: source_changed, build=263.7307.200, context={&quot;bundle&quot;:&quot;JavaFrontbackBundle&quot;,&quot;container&quot;:&quot;plugins/java/lib/intellij.java.frontback.impl.jar&quot;,&quot;key&quot;:&quot;import.layout.panel.module.imports&quot;,&quot;path&quot;:&quot;messages/JavaFrontbackBundle.properties&quot;}
   - `fa429fea96f77e9fa72830035bc9e5250272cdd9a6daa411e729cacde6cc8909`: source_changed, build=263.7307.200, context={&quot;bundle&quot;:&quot;DaemonFrontendSplitBundle&quot;,&quot;container&quot;:&quot;plugins/platform-daemon-plugin/lib/modules/intellij.platform.daemon.frontend.split.jar&quot;,&quot;key&quot;:&quot;daemon.no.route.to.host.error&quot;,&quot;path&quot;:&quot;messages/DaemonFrontendSplitBundle.properties&quot;}
   - `fcdf6eff114574cba22d81f976ff69857c2d608b0c4e9a7815726d5c6c2d5361`: source_changed, build=263.7307.200, context={&quot;bundle&quot;:&quot;GatewayBundle&quot;,&quot;container&quot;:&quot;plugins/gateway-plugin/lib/modules/intellij.gateway.core.jar&quot;,&quot;key&quot;:&quot;wsl.open.project&quot;,&quot;path&quot;:&quot;messages/GatewayBundle.properties&quot;}
-- Workflow state: `generate`
-- Generated: present=True, valid=False (`generated/plugin`)
-- Package: present=True, valid=False, sha256=`35b3d354ae2940eef24565fc2dcaac27192d02442c77060022d20e06391f4167`, size=2791938 (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`ebdf920de84c7bd6a7bf3e04af2cb457a229abe06f110980a63b733d6acd96b1`, size=2893141 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu generate`
+`python -m scripts.idea_deu status`
