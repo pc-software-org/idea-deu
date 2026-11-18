@@ -10,22 +10,22 @@ from scripts.idea_deu.config import ConfigError, ProductConfig, load_product_con
 
 class ProductConfigTest(unittest.TestCase):
     VALID_CONFIG = {
-        "archive": "idea-2026.2.4.win.zip",
-        "version": "2026.2.4",
-        "build_number": "262.11879.100",
+        "archive": "idea-2026.3.win.zip",
+        "version": "2026.3",
+        "build_number": "263.7307.200",
         "product_code": "IU",
         "sha256": "71b0e287a2fec5fe3428dda95ad8e947e4c35cd35e7dd3e5cad1fc19dc92fb3e",
-        "since_build": "262",
-        "until_build": "262.*",
+        "since_build": "263",
+        "until_build": "263.*",
         "plugin_id": "org.pc-software.idea-deu",
-        "plugin_version": "2026.2.4.1",
+        "plugin_version": "2026.3.0.1",
     }
 
     def test_loads_exact_product_binding(self) -> None:
         config = load_product_config(Path("config/product.json"))
 
-        self.assertEqual(config.version, "2026.2.4")
-        self.assertEqual(config.build_number, "262.11879.100")
+        self.assertEqual(config.version, "2026.3")
+        self.assertEqual(config.build_number, "263.7307.200")
         self.assertEqual(config.product_code, "IU")
         self.assertRegex(config.sha256, re.compile(r"^[0-9a-f]{64}$"))
 
@@ -68,9 +68,9 @@ class ProductConfigTest(unittest.TestCase):
 
     def test_rejects_wrong_build_number(self) -> None:
         with self.assertRaisesRegex(
-            ValueError, r"build_number must be exactly 262\.11879\.100"
+            ValueError, r"build_number must be exactly 263\.7307\.200"
         ):
-            self._load(self.VALID_CONFIG | {"build_number": "262.11879.101"})
+            self._load(self.VALID_CONFIG | {"build_number": "263.7307.201"})
 
     def test_rejects_invalid_sha256(self) -> None:
         for sha256 in ("a" * 63, "A" * 64, "g" * 64):
@@ -79,7 +79,7 @@ class ProductConfigTest(unittest.TestCase):
 
     def test_accepts_widened_compatibility_bounds(self) -> None:
         for field in ("since_build", "until_build"):
-            for value in ("262", "262.*", "262.11879", "262.11879.100"):
+            for value in ("263", "263.*", "263.7307", "263.7307.200"):
                 with self.subTest(field=field, value=value):
                     self.assertEqual(getattr(self._load(self.VALID_CONFIG | {field: value}), field), value)
 
@@ -90,8 +90,8 @@ class ProductConfigTest(unittest.TestCase):
                     self._load(self.VALID_CONFIG | {field: value})
 
     def test_build_number_must_stay_exact(self) -> None:
-        with self.assertRaisesRegex(ValueError, r"build_number must be exactly 262\.11879\.100"):
-            self._load(self.VALID_CONFIG | {"build_number": "262.*"})
+        with self.assertRaisesRegex(ValueError, r"build_number must be exactly 263\.7307\.200"):
+            self._load(self.VALID_CONFIG | {"build_number": "263.*"})
 
     def _load(self, data: dict[str, object]) -> ProductConfig:
         return self._load_json(json.dumps(data))

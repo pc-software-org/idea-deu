@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports cross-query constructs that reference a data source by a name shared by more than one registered data source.
+<p>
+  A cross query addresses its target data source by name — in the <code>$ds.schema.table</code> sugar or the first
+  argument of <code>dg_cross('ds', ...)</code>. When several data sources carry that name, the query binds to an
+  arbitrary match. Rename one of the data sources to make the reference unambiguous.
+</p>
+</body>
+</html>

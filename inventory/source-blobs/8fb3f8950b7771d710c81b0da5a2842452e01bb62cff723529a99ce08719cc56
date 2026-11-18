@@ -1,0 +1,5 @@
+toolset.display.name.coverage=Coverage
+tool.description.coverage_run_configuration=Runs a configuration with coverage and retains successfully loaded results for later MCP queries.
+tool.description.coverage_get_status=Returns whether a retained coverage run is pending, loaded, or failed.
+tool.description.coverage_get_file=Returns every executable line range for a source file in a retained coverage run.
+tool.description.coverage_get_stats=Returns batched coverage statistics for files, recursive packages, classes, or the whole run.

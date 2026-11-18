@@ -4,6 +4,11 @@ Der Abschnitt der jeweils gebauten `plugin_version` (aus `config/product.json`)
 wird zum „What's new"-Text auf dem JetBrains Marketplace. Nur `## <version>`-
 Überschriften und `-`-Aufzählungspunkte werden unterstützt.
 
+## 2026.3.0.1
+- Kompatibel mit IntelliJ IDEA 2026.3
+- 9411 neue und geänderte Oberflächentexte ins Deutsche übersetzt
+- Neue KI-Agenten-Oberfläche (Sitzungen, Workflows, Worktrees, MCP-Einstellungen) vollständig auf Deutsch
+
 ## 2026.2.4.1
 - Kompatibel mit IntelliJ IDEA 2026.2.4
 - 194 neue und geänderte Oberflächentexte ins Deutsche übersetzt

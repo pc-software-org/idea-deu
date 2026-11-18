@@ -1,0 +1,11 @@
+context.snippet.selection.title=Selection ({0,number,#}-{1,number,#})
+context.snippet.caret.title=Caret Context ({0,number,#}-{1,number,#})
+context.file.title=File
+context.symbol.title=Symbol
+context.paths.title=Paths
+context.tree.selection.title=Tree Selection ({0})
+context.list.selection.title=Selection ({0})
+context.list.selection.default.title=Selection
+manual.context.paths.title=Files
+action.AgentPrompt.AddToAgentContext.text=Add to Agent Context
+action.AgentPrompt.AddToAgentContext.description=Add context from the current IDE state to an agent prompt

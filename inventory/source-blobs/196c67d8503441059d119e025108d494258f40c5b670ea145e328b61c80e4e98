@@ -1,0 +1,24 @@
+action.IjentSshVerificationAction.text=Test IJent + SSH
+action.OpenEelSshProjectAction.text=Open Project over Eel+SSH
+dialog.title.failed.to.connect.to.ssh=Failed to Connect to SSH {0}
+dialog.message.error=Error: {0}
+file.chooser.tab.title.ssh=SSH
+file.chooser.no.ssh.connections.found=No SSH connections found
+
+# SSH agent forwarding consent dialog. The wording repeats the Remote Development dialog on purpose.
+ssh.agent.forwarding.dialog.title=Provide SSH Key Access
+ssh.agent.forwarding.request.message=A process on the remote host is requesting access to your local SSH agent.
+ssh.agent.forwarding.host=Host:
+ssh.agent.forwarding.operation=Operation:
+ssh.agent.forwarding.operation.list.identities=List the keys held by the agent
+ssh.agent.forwarding.operation.sign=Sign data with a key
+ssh.agent.forwarding.local.agent=Local agent:
+ssh.agent.forwarding.process.id.pid=Process id (PID):
+ssh.agent.forwarding.process.user.id.uid=User id (UID):
+ssh.agent.forwarding.process.group.id.gid=Group id (GID):
+ssh.agent.forwarding.provide.access=Provide access:
+ssh.agent.forwarding.request.type.allow.for.this.request=Allow only this request
+ssh.agent.forwarding.request.type.allow.for.session=Allow any request in this IDE session
+ssh.agent.forwarding.warning=While access is allowed, any process on that host, root included, can sign with your keys.
+ssh.agent.forwarding.allow.button.text=Allow
+ssh.agent.forwarding.deny.button.text=Deny

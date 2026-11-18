@@ -1,0 +1,63 @@
+#region Type Dependency Diagram
+group.SolutionExplorerPopupMenu.Diagrams.text=Diagrams
+action.ShowTypeDependencyDiagramAction.text=Show Type Dependency Diagram
+action.ShowOnDiagramUsageToolbar.text=Show on Diagram
+action.ShowOnDiagramHierarchyToolbar.text=Show on Diagram
+action.GroupsRadio.text=Grouping
+action.RiderAddAllReferencedTypes.text=Add All Referenced Types
+
+popup.loading=Fetching data\u2026
+dialog.confirm.diagram.opening.title=High Resource Usage
+dialog.confirm.diagram.opening.message=There are %d nodes and %d edges. Building the diagram may consume significant resources, but you can proceed. Continue?
+
+group.Rider.Graph.CommonLayoutGroup.text=Layout
+action.Rider.Diagram.Layout.OrganicLayouter.text=Organic
+action.Rider.Diagram.Layout.BusinessLogicLayouter.text=Business Logic
+
+tooltip.section.usages=Usages
+tooltip.section.base.types=Base Types
+tooltip.section.immediate.inheritors=Immediate inheritors
+tooltip.section.constructor.injections=Constructor injections
+tooltip.section.references=References
+tooltip.usages.loading=Loading\u2026
+tooltip.go.to.declaration=Go to declaration
+tooltip.show.all.used.types.in.find.results=Show all used types in Find Results window
+tooltip.show.all.usages.in.find.results=Show all usages in Find Results window
+tooltip.show.all.usages=Show all usages
+tooltip.edge.depends.on=depends on
+tooltip.edge.inherits.from=inherits from
+tooltip.use.count=x{0}
+tooltip.and.more.types.are.used=And {0} more types are used
+tooltip.and.more=And {0} more
+#endregion
+
+
+#region Project Dependency Diagram
+action.OpenProjectDiagramFromFile.text=Compare with Saved\u2026
+action.ShowArchitectureDiagramAction.text=Show Project Dependency Diagram
+action.ShowArchitectureDiagramAction.description=Create a diagram of dependencies between selected projects
+group.Architecture.text=Architecture
+tool.window.title=Project Diagram
+dialog.title.open.project.diagram.from.file=Open Project Diagram from file
+diagram.dialog.title.print.preview=Print Preview
+diagram.print=Print\u2026
+action.save.diagram.to.file.text=Save Diagram to File
+diagram.dialog.title.save.file=Save File
+diagram.label.save.project.diagram.to.file=Save project diagram to file
+action.export.to.image.text=Export to Image\u2026
+dialog.title.print.graph=Print Graph
+button.reset=Reset
+button.abort=Abort
+action.print.text=Print\u2026
+action.disable.coupling.analysis.text=Disable Coupling Analysis
+action.enable.coupling.analysis.text=Enable Coupling Analysis
+action.hide.groups.text=Hide Groups
+action.show.groups.text=Show Groups
+action.don.t.show.neighbours.selected.nodes.text=Don't Show Neighbours of Selected Nodes
+action.show.neighbours.selected.nodes.text=Show Neighbours of Selected Nodes
+action.hide.transitive.references.text=Hide Transitive References
+action.show.transitive.references.text=Show Transitive References
+action.apply.current.layout.text=Apply Current Layout
+diagram.print.options=Options\u2026
+diagram.provider.presentable.name=Project Diagram
+#endregion

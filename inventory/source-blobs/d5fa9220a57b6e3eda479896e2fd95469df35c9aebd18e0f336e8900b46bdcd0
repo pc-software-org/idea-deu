@@ -1,0 +1,12 @@
+<html>
+<body>
+<p>Reports a call to a
+<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/CachePut.html">@CachePut</a>
+method made from inside a
+<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/Cacheable.html">@Cacheable</a>
+method when both target the same cache.</p>
+
+While <code>@CachePut</code> forces method execution to update the cache, <code>@Cacheable</code> skips the execution of its body on a cache hit.
+As a result, the <code>@CachePut</code> call is never reached once the surrounding result is cached, so the cache update is silently ignored.
+</body>
+</html>

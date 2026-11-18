@@ -1,0 +1,12 @@
+cmd.message.specify.command.to.show.help=Specify command to show help
+cmd.message.invalid.params.number=Invalid number of parameters
+cmd.message.unknown.command.to.show.help=Unknown command to show help {0}
+cmd.message.failed.to.parse=Failed to parse command line
+
+register.backend.location.default.path={0} is located in the default directory. Registration is not necessary.
+register.backend.location.already.registered={0} is already registered ({1} exists)
+register.backend.location.created=Created the link {0} to {1}
+register.backend.location.failed=Cannot register the IDE {0}: {1}
+
+dialog.message.unknown.argument.for.showdialog.command=Unknown argument ''{0}'' for ''showDialog'' command
+cmd.message.backend.unavailable=The command ''{0}'' requires Remote Development backend

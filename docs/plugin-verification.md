@@ -10,7 +10,7 @@ otherwise:
 
 - every included unit is `technically_reviewed` with no blocking finding,
 - no unresolved path collisions,
-- exact descriptor identity and `since-build`/`until-build` from `config/product.json` (currently `262`/`262.*`),
+- exact descriptor identity and `since-build`/`until-build` from `config/product.json` (currently `263`/`263.*`),
 - a byte-deterministic ZIP (repeat `generate` + `package` → identical SHA-256).
 
 ```bash
@@ -32,14 +32,14 @@ verifier and, if not already present, the IDE.
 # https://packages.jetbrains.team/maven/p/intellij-plugin-verifier/intellij-plugin-verifier/org/jetbrains/intellij/plugins/verifier-cli/<ver>/verifier-cli-<ver>-all.jar
 java -jar verifier-cli-<ver>-all.jar check-plugin \
     dist/idea-deu.zip \
-    /path/to/idea-IU-262.11879.100     # unpacked IntelliJ IDEA 2026.2.4
+    /path/to/idea-IU-263.7307.200     # unpacked IntelliJ IDEA 2026.3
 ```
 
 Expected: no compatibility problems (a language pack contributes only a
 `languageBundle` extension and resource bundles; the verifier confirms the
 descriptor and compatibility range).
 
-**Result (verifier 1.411, against a local IU-262.11879.100): `Compatible`** — no
+**Result (verifier 1.411, against a local IU-263.7307.200): `Compatible`** — no
 plugin problems; reported as dynamic-plugin eligible (enable/disable without
 restart). This run also surfaced and fixed a missing required `<description>`
 in the descriptor.

@@ -39,21 +39,6 @@
       "reason": "official_localization_selection"
     },
     {
-      "resource": "intentionDescriptions/DefineImplicitVariableIntentionLocal/description.html",
-      "container": "plugins/velocity/lib/velocity.jar",
-      "reason": "official_localization_selection"
-    },
-    {
-      "resource": "intentionDescriptions/DefineImplicitVariableIntentionLocalExternal/description.html",
-      "container": "plugins/velocity/lib/velocity.jar",
-      "reason": "official_localization_selection"
-    },
-    {
-      "resource": "intentionDescriptions/DefineImplicitVariableIntentionModuleWide/description.html",
-      "container": "plugins/velocity/lib/velocity.jar",
-      "reason": "official_localization_selection"
-    },
-    {
       "resource": "intentionDescriptions/ExpandBooleanIntention/description.html",
       "container": "plugins/java/lib/modules/intellij.java.impl.jar",
       "reason": "official_localization_selection"
@@ -85,7 +70,7 @@
     },
     {
       "resource": "intentionDescriptions/SelectedBlockHistoryIntention/description.html",
-      "container": "lib/intellij.platform.vcs.impl.jar",
+      "container": "plugins/platform-vcs-plugin/lib/modules/intellij.platform.vcs.impl.jar",
       "reason": "official_localization_selection"
     },
     {
@@ -95,7 +80,7 @@
     },
     {
       "resource": "intentionDescriptions/SplitIfIntention/description.html",
-      "container": "plugins/Kotlin/lib/kotlin-plugin.jar",
+      "container": "plugins/Kotlin/lib/modules/intellij.kotlin.codeInsight.descriptions.jar",
       "reason": "official_localization_selection"
     },
     {

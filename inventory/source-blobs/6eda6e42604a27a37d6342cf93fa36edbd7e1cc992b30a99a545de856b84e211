@@ -1,0 +1,9 @@
+provider.name=AWS Bedrock
+provider.configuration.title=AWS Bedrock API key
+provider.api.key=AWS Bedrock API &key:
+setting.region=AWS &region:
+setting.region.comment=The API key and default endpoints are scoped to this region
+setting.region.required=AWS region is required
+setting.region.invalid=AWS region is invalid
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to derive the Bedrock Runtime endpoint from the AWS region

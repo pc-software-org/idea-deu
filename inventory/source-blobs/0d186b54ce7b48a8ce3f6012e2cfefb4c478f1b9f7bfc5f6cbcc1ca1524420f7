@@ -1,0 +1,13 @@
+logpoint.replace.println.undoable.command.name=Replace with Logpoint
+logpoint.add.command.completion=Add Logpoint
+logpoint.tooltip.title=Logpoint
+logpoint.tooltip.enable={0} to enable
+logpoint.tooltip.disable={0} to disable
+inspections.group.logpoints=Logpoints
+logpoint.fix.disable.module.name=Disable inspection ''Replace with Logpoint'' for module ''{0}''
+logpoint.fix.enable.module.name=Enable inspection ''Replace with Logpoint'' for module ''{0}''
+print.to.logpoint.fix.family.name=Replace call with Logpoint
+print.to.logpoint.fix.preview.description=Removes the println call and adds a Logpoint printing the same expression to standard out
+usage.type.breakpoint.condition=Breakpoint condition
+usage.type.breakpoint.log.expression=Logpoint expression
+

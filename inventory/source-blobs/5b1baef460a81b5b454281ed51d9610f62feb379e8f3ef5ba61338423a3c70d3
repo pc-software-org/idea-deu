@@ -1,0 +1,5 @@
+provider.name=Gemini
+provider.configuration.title=Gemini API key
+provider.api.key=Gemini API &key:
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to use the provider's default endpoint

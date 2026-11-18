@@ -1,0 +1,3 @@
+about.dialog.jetbrainsd.version=JetBrains Daemon version: {0}
+about.dialog.jetbrainsd.version.unknown=Unknown
+collect.toolbox.agent.logs.progress=Collecting toolbox agent logs…

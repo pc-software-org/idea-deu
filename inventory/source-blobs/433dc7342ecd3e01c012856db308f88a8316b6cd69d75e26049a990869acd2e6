@@ -1,0 +1,5 @@
+provider.name=Anthropic
+provider.configuration.title=Anthropic API key
+provider.api.key=Anthropic API &key:
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to use the provider's default endpoint

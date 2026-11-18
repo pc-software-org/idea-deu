@@ -1,0 +1,7 @@
+provider.name=Azure OpenAI
+provider.configuration.title=Azure OpenAI API key
+provider.api.key=Azure OpenAI API &key:
+setting.endpoint=Azure &endpoint:
+setting.endpoint.comment=Enter the Azure resource endpoint, for example https://example.openai.azure.com. \
+  The /openai/v1 path is added automatically.
+setting.endpoint.required=Azure endpoint is required

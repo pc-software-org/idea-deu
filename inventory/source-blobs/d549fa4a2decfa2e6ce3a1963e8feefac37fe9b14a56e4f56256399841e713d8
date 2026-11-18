@@ -1,0 +1,2 @@
+action.Air.ThreadGui.CodeFence.RunInTerminal.text=Run in Terminal
+action.Air.ThreadGui.CodeFence.RunInTerminal.description=Run the code block in a new terminal tab

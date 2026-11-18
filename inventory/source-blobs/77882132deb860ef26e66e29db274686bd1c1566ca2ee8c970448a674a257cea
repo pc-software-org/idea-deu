@@ -1,5 +1,0 @@
-<html>
-<body>
-Reports illegal usages of formal notation within <code>#macro</code> and <code>#set</code> directives.
-</body>
-</html>

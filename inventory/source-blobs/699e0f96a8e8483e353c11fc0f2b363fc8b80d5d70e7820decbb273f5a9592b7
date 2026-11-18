@@ -1,0 +1,9 @@
+gitlab.ci.expression.color.settings.display.name=GitLab CI Expression
+gitlab.ci.expression.color.bad.character=Bad character
+gitlab.ci.expression.color.variable.prefix=Variable prefix ($)
+gitlab.ci.expression.color.identifier=Identifier
+gitlab.ci.expression.color.string=String
+gitlab.ci.expression.color.regexp=Regular expression
+gitlab.ci.expression.color.parentheses=Parentheses
+gitlab.ci.expression.color.comparison.operator=Comparison operator (==, !=, =~, !~)
+gitlab.ci.expression.color.logical.operator=Logical operator (&&, ||)

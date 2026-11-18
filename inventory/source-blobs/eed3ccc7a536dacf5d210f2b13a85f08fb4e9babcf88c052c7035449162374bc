@@ -1,0 +1,16 @@
+provider.name=Google Vertex AI
+provider.configuration.title=Google Vertex AI
+provider.api.key=API &key:
+setting.method=&Method:
+setting.method.api.key=API key
+setting.method.adc=ADC
+setting.method.adc.comment=Application Default Credentials
+setting.project.id=&Project ID:
+setting.project.id.required=Google Cloud project ID is required
+setting.project.id.invalid=Google Cloud project ID is invalid
+setting.location=&Location:
+setting.location.comment=Google Cloud region used by Vertex AI
+setting.location.required=Google Cloud location is required
+setting.location.invalid=Google Cloud location is invalid
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to use the endpoint for the selected authentication method

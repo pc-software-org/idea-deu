@@ -1,0 +1,23 @@
+<html>
+<body>
+Reports problems in the front matter and the prompt of Markdown files in <code>.air/workflows</code>.
+<p>The inspection reports these problems:</p>
+<ul>
+  <li>No YAML front matter: the file does not start with a <code>---</code> line, or the front matter has no closing <code>---</code> line.</li>
+  <li>An incorrect or unknown field, or an incorrect cron expression.</li>
+  <li>An empty prompt after the front matter.</li>
+</ul>
+<p>Example:</p>
+<pre><code>---
+name: Nightly review
+trigger:
+  kind: schedule
+  cron: "0 8 * * MONDAY"
+agent:
+  name: codex
+---
+</code></pre>
+<p>Here <code>MONDAY</code> is not a weekday name, and the prompt is empty.</p>
+<p>Use <b>Fix with agent</b> to open an agent draft that fixes the errors in the workflow file.</p>
+</body>
+</html>

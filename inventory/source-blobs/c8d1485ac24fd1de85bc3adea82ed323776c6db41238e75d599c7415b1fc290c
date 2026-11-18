@@ -1,0 +1,16 @@
+hooks.settings.title=Hooks
+hooks.settings.banner=This page shows only the hooks that are bundled with the IDE. Hooks are available for {0}.
+hooks.settings.agent=Agent:
+hooks.settings.agent.empty=No bundled hooks are available.
+hooks.settings.search=Search hooks
+hooks.settings.loading=Loading hooks…
+hooks.settings.empty=No hooks found.
+hooks.settings.agent.enabled=Enable {0} for {1}
+hooks.settings.open=Open
+hooks.settings.open.accessible=Open the {0} package for {1}
+hooks.settings.open.remote.title=Hook Package Location
+hooks.settings.open.remote=The package is stored in a remote environment at {0}. This IDE cannot open remote folders in the local file manager.
+hooks.settings.open.failed.title=Cannot Open Hook Package
+hooks.settings.open.failed=Could not deploy the hook package: {0}
+hooks.agent.codex=Codex
+hooks.agent.claude=Claude

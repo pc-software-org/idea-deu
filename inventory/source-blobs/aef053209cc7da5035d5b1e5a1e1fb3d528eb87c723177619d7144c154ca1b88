@@ -1,0 +1,7 @@
+provider.name=OpenAI
+provider.configuration.title=OpenAI API key
+provider.api.key=OpenAI API &key:
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to use the provider's default endpoint
+setting.organization=OpenAI o&rganization:
+setting.project=OpenAI pro&ject:

@@ -1,0 +1,20 @@
+<html>
+<body>
+<p>Reports an un-annotated parameter of a <code>@SpringBootTest</code> test-class constructor when the effective
+<code>@TestConstructor</code> autowire mode is the default <code>ANNOTATED</code>.</p>
+
+<p>In <code>ANNOTATED</code> mode Spring injects only constructor parameters annotated with <code>@Autowired</code>,
+<code>@Qualifier</code> or <code>@Value</code>, so an un-annotated parameter is not resolved and the test fails at runtime.
+Annotate the parameter with <code>@Autowired</code>, or opt the whole class into injection with
+<code>@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)</code>.</p>
+
+<p><b>Example:</b></p>
+<pre><code>
+@SpringBootTest
+class MyTest {
+    // reports 'service': not autowired under the default ANNOTATED mode
+    MyTest(MyService service) { }
+}
+</code></pre>
+</body>
+</html>

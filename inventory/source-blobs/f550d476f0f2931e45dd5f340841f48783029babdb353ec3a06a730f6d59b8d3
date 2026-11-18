@@ -1,0 +1,17 @@
+<html>
+<body>
+<p>Reports cache-annotation SpEL variables that are referenced without the required <code>#</code> prefix.</p>
+
+<p>At runtime Spring evaluates <code>@Cacheable</code> / <code>@CachePut</code> / <code>@CacheEvict</code> SpEL against
+<code>CacheExpressionRootObject</code>. Implicit variables such as <code>#result</code>, <code>#root</code>,
+<code>#aN</code> / <code>#pN</code>, and method parameter names resolve only when the leading <code>#</code> is present.
+The bare form is treated as a property lookup on the root object and fails with
+<i>"Property or field '…' cannot be found on object of type 'CacheExpressionRootObject'"</i>.</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+@Cacheable(condition = "result.companies.empty")   // Cache SpEL variable 'result' must be prefixed with #
+@Cacheable(condition = "#result.companies.empty")  // OK
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,18 @@
+logs.trace.enabled=Several tracing scenarios are enabled
+logs.trace.description=Extensive logging may affect performance.
+logs.trace.select.all=Select all
+logs.trace.deselect.all=Deselect all
+logs.advanced.settings=Advanced log settings
+choose.trace.scenarios=Choose Trace Scenarios
+choose.trace.scenarios.scenario.column=Scenario
+
+notification.group.trace.scenarios.enabled.notification=Trace scenarios enabled notification
+
+widget.EnterSplitMode.text=Enter Split Mode
+action.EnterSplitMode.restart.dialog.text=Restarting the application in Split mode\u2026
+action.EnterSplitMode.restart.error.run.from.sources.message=Cannot restart the application in Split Mode when running from sources.</br>Please, use "IDEA Split" run configuration.
+action.EnterSplitMode.restart.error.run.from.launcher.message=Cannot restart the IDE in Split Mode.</br>If you run from sources, please use "IDEA Split" run configuration.</br></br>Otherwise, run IDE in Split Mode using Toolbox.</br>You can find this option under the "More" button near the IDE item.
+action.EnterSplitMode.restart.application.confirmation.message=Do you want to restart the IDE in Split Mode?
+
+action.EnterSplitMode.text=Enter Split Mode
+action.EnterSplitMode.description=Restart IDE in Split Mode when an IDE is split on backend and frontend processes that both are running on a local machine. The action is used to switch between Split and Monolith Modes for Remote Development.

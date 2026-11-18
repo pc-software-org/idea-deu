@@ -1,0 +1,4 @@
+checkbox.save.browser.in.run.configuration=Save browser in run configuration
+popup.empty.text.no.browsers.found=No browsers found
+popup.title.select.browser.to.debug=Select Browser to Debug
+popup.title.select.target.to.debug=Choose Page to Debug

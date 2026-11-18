@@ -1,0 +1,9 @@
+thread.view.initial.prompt.delivery.failed.title=Prompt was not sent
+thread.view.initial.prompt.delivery.failed.body=The prompt for ''{0}'' could not be delivered to the agent: {1}\nThe prompt was kept, so you can retry or copy it.
+thread.view.initial.prompt.delivery.failed.body.no.reason=The prompt for ''{0}'' could not be delivered to the agent.\nThe prompt was kept, so you can retry or copy it.
+thread.view.initial.prompt.delivery.failed.action.retry=Send again
+thread.view.initial.prompt.delivery.failed.action.copy=Copy prompt
+thread.view.initial.prompt.delivery.failed.copied.title=Prompt copied
+thread.view.initial.prompt.delivery.failed.copied.body=The undelivered prompt is now in the clipboard
+thread.view.initial.prompt.delivery.failed.retry.rejected.title=Prompt was not sent again
+thread.view.initial.prompt.delivery.failed.retry.rejected.body=This session moved on since the prompt failed. Copy the prompt and send it in the session instead.

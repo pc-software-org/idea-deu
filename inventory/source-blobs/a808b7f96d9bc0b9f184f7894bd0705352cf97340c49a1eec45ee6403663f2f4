@@ -1,0 +1,22 @@
+<html>
+<body>
+Reports unknown variables and variables that are unavailable in a workflow prompt.
+<p>Some variables need a trigger that supplies them:</p>
+<ul>
+  <li>The changed file variables need a <code>session-finished</code> trigger or a Git trigger.</li>
+  <li>The <code>GIT_</code> variables need a Git trigger. <code>GIT_REMOTE</code> and <code>GIT_REMOTE_BRANCH</code> need a <code>git-push</code> or a <code>git-pull</code> trigger.</li>
+  <li><code>GIT_COMMIT_MESSAGE</code>, <code>COMMIT</code>, and <code>REF-COMMIT</code> need a <code>git-commit</code> trigger.</li>
+</ul>
+<p>Example:</p>
+<pre><code>---
+name: Review
+trigger:
+  kind: manual
+agent:
+  name: codex
+---
+Review ${CHANGED_FILES}.
+</code></pre>
+<p>A manual trigger supplies no changed files, so <code>${CHANGED_FILES}</code> is unavailable here.</p>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Copyright 2000-2026 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
+
+notification.group.air.availability=Air availability
+notification.restart.title=AI availability changed
+notification.restart.content=Restart the IDE to apply the change.
+
+plugin.unload.veto=Restart the IDE to unload or update Air.
+
+notification.license.ai.disabled.title=Air is not available
+notification.license.ai.disabled.content=Your organization has disabled AI in your license, so Air is turned off. To add an agent, use ~/.jetbrains/acp.json
+notification.ide.services.ai.disabled.content=Your organization has disabled JetBrains AI Enterprise for your profile, so Air is turned off. To add an agent, use ~/.jetbrains/acp.json
+notification.license.ai.disabled.how.to.enable=How to enable
+notification.license.ai.disabled.dont.show.again=Don't show again
+
+action.AirAvailability.EmulateAiDisabledInLicense.text=Air: Emulate AI Disabled in License
+action.AirAvailability.EmulateAiDisabledInLicense.description=Read the license as one that forbids AI. Without an own ACP agent, the Air modules go out

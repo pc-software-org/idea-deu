@@ -1,0 +1,13 @@
+codeNotes.parent.workingCopy.optionUnavailable=This project is not available right now
+codeNotes.parent.agentSession.untitled=Untitled session
+codeNotes.workingCopy.sentNoteKeepsItsText=A note that reached an agent keeps its text
+codeNotes.workingCopy.duplicate=The same note exists on this code already
+codeNotes.workingCopy.status.sent=Sent to {0}
+codeNotes.workingCopy.status.sent.unknown=Sent
+codeNotes.tree.undo.remove=Undo Remove {0,choice,1#Code Note|1<Code Notes}
+codeNotes.tree.redo.remove=Redo Remove {0,choice,1#Code Note|1<Code Notes}
+codeNotes.tree.undo.edit=Undo Edit Code Note
+codeNotes.tree.redo.edit=Redo Edit Code Note
+codeNotes.workingCopy.destinations.workingCopies=Attach Note:
+codeNotes.workingCopy.destinations.sessions=To an Agent Session:
+codeNotes.workingCopy.badge.inCodeReview=In code review

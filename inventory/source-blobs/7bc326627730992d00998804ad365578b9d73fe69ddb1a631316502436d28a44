@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>This inspection is designed to identify complex dataflow paths leading to dereference of pointers that may be null.</p>
+</body>
+</html>

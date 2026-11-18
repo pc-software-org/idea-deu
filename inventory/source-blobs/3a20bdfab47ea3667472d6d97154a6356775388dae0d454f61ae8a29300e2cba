@@ -1,0 +1,28 @@
+
+# Inline Completion Survey
+feedback.system.info.shell=Selected shell:
+
+inline.completion.feedback.notification.title=Share feedback about Terminal
+inline.completion.feedback.notification.text=Help us improve the terminal inline AI completion by taking our short survey
+
+inline.completion.feedback.dialog.title=Terminal Feedback
+inline.completion.feedback.dialog.text=It's been a while since you started using the terminal inline AI completion suggestions, and we'd appreciate your feedback about this feature.
+inline.completion.feedback.dialog.question.1=How satisfied are you with the terminal inline AI completion in general?
+inline.completion.feedback.dialog.question.1.hint=Where 1 is Dissatisfied and 5 is Fully satisfied
+inline.completion.feedback.dialog.question.2=How would you rate the following aspects of the inline AI completion?
+inline.completion.feedback.dialog.question.2.hint=Where 1 is Poor and 5 is Excellent
+inline.completion.feedback.dialog.rating.label.relevance=Suggestion relevance (accuracy):
+inline.completion.feedback.dialog.rating.label.seamlessness=Seamlessness:
+inline.completion.feedback.dialog.rating.label.speed=Generation speed / timing:
+inline.completion.feedback.dialog.experience.label=Is there anything else you would like to share?
+inline.completion.feedback.dialog.experience.placeholder=For example, usefulness of the feature and overall usability
+action.ml.llm.ToggleTerminalCompletionHttpDump.text=Dump Terminal Completion HTTP Exchanges
+action.ml.llm.ToggleTerminalCompletionHttpDump.description=Write terminal completion request and response bodies to the IDE log directory (authentication headers are omitted)
+action.ml.llm.ShowTerminalCompletionHttpDumps.text=Show Terminal Completion HTTP Dumps
+action.ml.llm.ShowTerminalCompletionHttpDumps.description=Choose and view a captured terminal completion HTTP exchange
+terminal.completion.http.dump.enabled=Terminal completion HTTP dumping enabled. Dumps containing request and response bodies will be written to {0}
+terminal.completion.http.dump.disabled=Terminal completion HTTP dumping disabled.
+terminal.completion.http.dump.empty=No terminal completion HTTP dumps have been captured yet.
+terminal.completion.http.dump.title=Terminal Completion HTTP Dumps
+terminal.completion.http.dump.read.failed=Failed to read {0}\n\n{1}: {2}
+notification.group.terminal.completion.http.dumps=Terminal Completion HTTP Dumps
