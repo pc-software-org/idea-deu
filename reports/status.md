@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 5411 |
+| open | 4411 |
 | translated | 0 |
-| technically_reviewed | 72835 |
+| technically_reviewed | 73835 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -36,16 +36,16 @@
 ## Findings and collisions
 
 - Blocking findings: 0
-- Warning findings: 353
+- Warning findings: 359
 - Collisions: 1 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| length_ratio | 353 |
+| length_ratio | 359 |
 
 ## Workflow
 
-- Last completed batch: 47
+- Last completed batch: 48
 - Current batch: none
 - Stale units: 16276
   - removed_from_source: 16111
