@@ -1,0 +1,4 @@
+station.opening.project.progress.title=Opening ''{0}''\u2026
+station.opening.project.project.widget.status=Opening\u2026
+station.opening.project.error.title=Could not open the Project
+station.opening.project.error.generic.text=Could not connect to the Toolbox App

@@ -1,0 +1,219 @@
+action.NewRemoteDevelopmentConnection.text=Connect to Remote\u2026
+action.ConnectToRemoteAction.large.text=<html><div style="text-align: center">Connect<br>to Remote</div></html>
+dialog.NewRemoteDevelopmentConnection.title=Connect to Remote
+connections.welcome.tab.title=Remote Connections
+
+more.providers.title=More Providers
+plugin.install=Install
+install.plugin.learn.more=More
+
+action.NewRemoteDevelopmentConnection.old.text=Remote Development\u2026
+
+welcome.tab.title=Remote Development
+welcomescreen.connections=Connections
+
+dialog.message.failed.to.run.action=Failed to Run Action
+dialog.title.please.contact.provider.s.support.for.help.exception.info.can.be.found.in.logs=Contact your network provider for support. Exception details can be found in logs.
+default.connector.actionText=Connector
+
+welcome.tab.run.ide.remotely=Run the IDE Remotely
+
+connector.step.title={0}/{1} steps
+ssh.connect.button=Connect
+ssh.connect.first.step.description=Enter user@host, just host, or an SSH command line
+ssh.connect.second.step.change.connection.text=Change
+ssh.connect.second.step.connection.text={0} is connected
+ssh.deploy.checkingConnection=Checking connection
+ssh.check.progress.connecting=Connecting to remote environment
+ssh.check.progress.deploying.agent=Deploying remote execution agent
+ssh.configurable.title=SSH Configurations\u2026
+ssh.use.terminal.link=To clone a project <a>open an SSH terminal</a>
+ssh.use.terminal.text=To clone a project open an SSH terminal
+ssh.connect.open.project=Open Project
+ssh.connect.open.ide=Skip and Open IDE
+plugin.connector.loading=Loading {0}\u2026
+plugin.connector.loading.failed=Failed to load {0}. Check IDE log.
+plugin.connector.title=Connecting to {0} project
+plugin.provider.actions=Provider actions
+plugin.provider.actions.tooltip=More actions
+plugin.environments.loading=Loading environments
+plugin.environments.empty=No environments yet.
+plugin.environment.label=Workspace:
+plugin.environment.connecting=Connecting to workspace\u2026
+plugin.environment.connect.failed=Failed to connect to workspace
+plugin.environment.ssh.info.missing=Selected workspace does not provide SSH connection information
+plugin.password.show=Show password
+plugin.password.hide=Hide password
+plugin.field.unsupported={0}: component not yet implemented
+plugin.account.dropdown.logout=Log out
+ssh.connect.open.project.progress=Opening
+ssh.connect.cancel=Cancel
+
+ssh.configurable.recent.connections=Recent connections
+ssh.configurable.openssh.config=From ~/.ssh/config
+ssh.configurable.toolbox=From Toolbox App
+
+ssh.connect.error.more.action=Diagnostic actions
+connector.more.actions=Additional actions
+
+ssh.connector.title=SSH
+ssh.connector.panel.title=Connect to Remote Project
+ssh.connector.description=Work with a project on a machine reachable using SSH
+ssh.connector.action.name=New Connection
+ssh.connector.recents.name=SSH
+ssh.recent.projects.title=Recent SSH Projects
+label.work.on.your.code.on=Work on your code on
+label.another.host.using.ssh=another host using SSH
+
+ssh.new.project=New Project
+ssh.new.host=Connect to Host\u2026
+
+multistagePanel.nextButton=Next
+multistagePanel.backButton=Back
+
+ssh.deploy.checkingDirectory.emptyPath=Empty path
+ssh.path.should.start.with=Path should be rooted, start with ~ or a drive letter (for Windows host)
+ssh.project.directory=Project directory
+ssh.project.directory.home.failed=Cannot resolve the project path. Enter the full path.
+ssh.project.directory.home.unsupported='~' is not supported. Enter the full path.
+ssh.deploy.checkingConnection.title=Checking Connection
+
+ssh.connect.title=Connect to SSH
+ssh.connection=Connection:
+ssh.combo.noConfigsPlaceholder=<New Connection>
+ssh.username=Username:
+ssh.specify.username=Specify username
+ssh.host=Host:
+ssh.port=Port:
+ssh.specify.host=Specify host
+ssh.specify.private.key=Specify private key
+ssh.check.and.continue=Check Connection and Continue
+ssh.cancel=Cancel
+ssh.back= Back
+ssh.open.settings=Open Settings\u2026
+ssh.open.settings.window=Open Settings
+
+ssh.deploy.remote.browser.warning.title=Cannot Browse Files
+ssh.deploy.remote.browser.warning.message=<p>The remote file browser failed to open</p>
+
+ssh.heap.size.label=Maximum heap size:
+ssh.customize.heap.size=Customize heap size
+ssh.use.default.heap.size=Use default heap size
+ssh.incorrect.heap.size=Incorrect heap size
+ssh.heap.size.less.than.2048=Heap size should not be less than 2048MB
+ssh.heap.size.must.contain.numbers.only=This field must contain numbers only
+ssh.heap.size.must.contain.numbers.and.not.exceed.int=This field must contain numbers only and must not exceed the maximum integer value
+ssh.heap.size.comment.message=Heap size is in megabytes. The default size is 2048MB
+ssh.heap.size.mb=MB
+
+ssh.choose.project=Choose Project
+ssh.connected.to=Successfully connected to:
+ssh.download.and.connect=Download IDE and Connect
+
+ssh.connection.string.parse.host.not.specified=SSH host is not specified
+ssh.connection.string.parse.identity.file.doesnt.exit=Key file at path {0} doesn''t exist
+ssh.connection.string.parse.invalid.identity.file=Invalid identity file path: {0}
+ssh.connection.string.parse.invalid.port=Invalid SSH port: {0}
+ssh.connection.string.parse.malformed.destination=Malformed SSH destination. Expected [user@]host[:port]
+ssh.connection.string.parse.option.requires.value=SSH option {0} requires a value
+ssh.connection.string.parse.unexpected.argument=Unexpected SSH argument: {0}
+ssh.connection.string.parse.unsupported.option=Illegal option {0}.\nFor more detailed SSH configuration, use an ssh_config file.\nSupported options: {1}
+
+ssh.validation.failure.common.title=SSH Connection Check Failed
+ssh.validation.failure.host.key.verification.failed.title=Host Key Verification Failed
+ssh.validation.failure.unexpected.error.message=Unexpected error
+ssh.validation.failure.multiple.errors={0} errors occurred during the connection:
+ssh.validation.failure.auth.error.message=Failed to authenticate to remote host
+ssh.validation.failure.auth.error.description=All authentication methods failed.
+ssh.validation.failure.bad.credentials.message=Failed to authenticate to remote host
+ssh.validation.failure.bad.credentials.description=Incorrect password or passphrase.
+ssh.validation.failure.connection.refused.message=Connection refused
+ssh.validation.failure.connection.timeout.message=Connection timeout
+ssh.validation.failure.forwarding.prohibited.message=TCP port forwarding is administratively prohibited in SSH server
+ssh.validation.failure.forwarding.prohibited.description=Contact your remote machine administrator or change the configuration of the SSH server. \
+  To enable TCP port forwarding in the OpenSSH server, add the following line to sshd_config:{0}<br>\
+  Remember to restart the OpenSSH server after applying changes to the configuration.
+ssh.validation.failure.host.unreachable.message=Host unreachable
+ssh.validation.failure.host.key.verification.failed.message=Host key verification failed
+ssh.validation.failure.host.key.verification.failed.description=This may indicate that someone is eavesdropping on your connection (a man-in-the-middle attack) or that the identity of the host at the specified address has changed.<br>\
+  <br>\
+  If you are sure that the connection is safe, delete the conflicting entry in ~/.ssh/known_hosts.
+ssh.validation.failure.inaccessible.file.message=Inaccessible {0} file
+ssh.validation.failure.inaccessible.file.description={0}: {1}
+ssh.validation.failure.insufficient.disk.space.message=Not enough free disk space: {0} MB required, {1} MB available
+ssh.validation.failure.insufficient.disk.space.description=Check the disk space under {0} on the remote host.
+ssh.validation.failure.key.permission.denied.message=macOS blocks access to the SSH key
+ssh.validation.failure.key.permission.denied.description=Open <b>System Settings \\&gt; Privacy \\&amp; Security \\&gt; Files and Folders</b>, find <b>JetBrains</b>, and allow access to the folder that holds {0}. Or move the key to ~/.ssh.
+ssh.validation.failure.non.zero.exit.code.message=Command returned non-zero exit code: {0}
+ssh.validation.failure.proxy.command.failed.message=SSH proxy command failed
+ssh.validation.failure.ssh.agent.conflict.message=Detected conflict in ssh-agent configuration
+ssh.validation.failure.ssh.agent.conflict.description=The IdentityAgent property in ssh_config points to: <code>{0}</code><br>\
+  <br>\
+  The SSH_AUTH_SOCK environment variable points to: <code>{1}</code><br>\
+  <br>\
+  This conflict may lead to problems with authentication. It is often associated with configuring 1Password or another third-party ssh-agent. \
+  Make sure the IdentityAgent property in ssh_config and the SSH_AUTH_SOCK environment variable contain the same path.<br>\
+  SSH_AUTH_SOCK in the scope of this connection has been overridden to match IdentityAgent.
+ssh.validation.failure.too.wide.permissions.message=Too wide permissions for the SSH key
+ssh.validation.failure.too.wide.permissions.description.windows=Set correct permissions for the key {0}.
+ssh.validation.failure.too.wide.permissions.description.unix=Set correct permissions for the key:
+ssh.validation.failure.unresolved.hostname.message=Unresolved hostname
+ssh.validation.failure.unresolved.hostname.description=The hostname {0} could not be resolved: {1}<br>\
+  <br>\
+  Check your internet connection, connection to a VPN, if used, and proxy configuration.
+ssh.validation.failure.no.route.to.host.message=Cannot connect to remote host: No route to host
+ssh.validation.failure.no.route.to.host.description=macOS may be blocking access to the local network. On your local machine, go to <b>System Settings > Privacy \\& Security > Local Network</b> and allow access for <b>JetBrains</b>. Then try reconnecting.<br>\
+  For more troubleshooting options, see <a href="https://youtrack.jetbrains.com/articles/SUPPORT-A-564/Cannot-connect-to-remote-host-No-route-to-host-macOS-15-Sequoia">SUPPORT-A-564</a>
+ssh.validation.failure.daemon.initialization.failed.message=JetBrains Daemon isn't running
+ssh.validation.failure.daemon.initialization.failed.description=To recover, try manually terminating the JetBrains (jetbrainsd) process and restart IDE.<br>\
+  <br>\
+  If the problem persists, please report it in <a href="{0}">YouTrack</a> and attach logs.
+
+ssh.connection.failure.general.advice=Check your internet connection. If the problem persists, please report it in <a href="{0}">YouTrack</a> and attach logs.
+ssh.connection.failure.collect.logs.action=Collect logs
+
+ssh.agent.add.confirmation.title=Add SSH Key to Agent
+ssh.agent.add.confirmation.message=Add SSH key to agent?\n{0}
+
+ssh.fingerprint.confirmation.title=SSH Host Verification
+ssh.fingerprint.label=Fingerprint: {0}
+ssh.host.label=Host: {0}
+
+ssh.add.failure.title=SSH Key Addition Failed
+ssh.add.failure.message=Failed to add SSH key to agent:\n{0}\n\nReason: {1}
+
+ssh.authenticate.to=Authenticating to:
+ssh.authentication=Authentication
+ssh.authenticate=Authenticate
+save.until.next.restart=Save until restart
+save.permanently=Save permanently
+
+ssh.credentials.error=Invalid Credentials
+
+ssh.remdev.launch.backend.install.error.message=Failed to install {0} {1} on the backend
+ssh.remdev.launch.backend.update.error.message=Failed to update to {0} {1} on the backend
+ssh.remdev.launch.backend.stop.error.message=Failed to stop {0} on the backend before updating
+ssh.remdev.launch.backend.launch.error.message=Failed to launch {0} on the backend
+ssh.remdev.launch.workspace.not.found.error.message=Workspace not found
+ssh.remdev.launch.agent.dropped.connection.error.message=Agent dropped connection
+ssh.remdev.launch.auth.error.message=Authentication problem
+ssh.remdev.launch.open.privacy.settings.action=Open privacy settings
+ssh.remdev.launch.unexpected.error.message=Unexpected error
+ssh.remdev.launch.success.message=The remote IDE is ready. You can close this window or open another project on the same host.
+
+jbc.download.step.checking.existing=Checking existing JetBrains Client installation\u2026
+jbc.download.step.downloading=Downloading JetBrains Client\u2026
+jbc.download.step.extracting=Extracting archive\u2026
+jbc.download.step.verifying=Verifying archive\u2026
+
+jbc.download.error.file.modification=Failed to write or modify file: {0}
+jbc.download.error.artifact.not.found=Resource could not be found at {0}
+jbc.download.error.timeout=Timed out while downloading resource from {0}
+jbc.download.error.http.status=Received unexpected HTTP status {1} while downloading resource from {0}
+jbc.download.error.network=Network error while downloading resource from {0}
+jbc.download.error.archive.extraction=Failed to extract the downloaded archive {0}
+jbc.download.error.archive.verification=Failed to verify the integrity of the downloaded archive {0}
+jbc.download.error.unsupported.archive.format=Unsupported archive format: {0}
+jbc.download.error.manifest.generation=Failed to generate the installation manifest at {0}
+jbc.download.error.unexpected=An unexpected error occurred while downloading JetBrains Client
+jbc.download.error.unknown=An unknown error occurred while downloading JetBrains Client

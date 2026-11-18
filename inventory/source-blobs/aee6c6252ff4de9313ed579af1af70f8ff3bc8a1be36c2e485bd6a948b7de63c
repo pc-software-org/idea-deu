@@ -1,0 +1,25 @@
+<html>
+<body>
+<p>Reports the <code>value</code> / <code>expression</code> attribute of the Spring test annotations
+<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/junit/jupiter/EnabledIf.html">@EnabledIf</a>
+and <code>@DisabledIf</code> when it is a plain literal that cannot evaluate to a boolean at runtime.</p>
+
+<p>The attribute must be a SpEL expression (<code>#{...}</code>), a property placeholder (<code>${...}</code>),
+or the literal <code>true</code> / <code>false</code>.</p>
+
+<p><b>Example:</b></p>
+<pre><code lang="java">
+  @Test
+  @EnabledIf("yes") // reports: not a SpEL expression, placeholder, or 'true'/'false'
+  void test() {...}
+
+  @Test
+  @EnabledIf("#{@conditionService.isConditionMet}") // ok
+  void spelTest() {...}
+
+  @Test
+  @EnabledIf("${my.props.condition:true}") // ok
+  void propertyTest() {...}
+</code></pre>
+</body>
+</html>

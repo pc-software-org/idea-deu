@@ -1,0 +1,16 @@
+manual.context.screen.display.name=Context from Screen\u2026
+manual.context.screen.title=Screen Capture
+manual.context.screen.preview.title=Screen Capture
+manual.context.screen.preview.attach=Attach
+manual.context.screen.preview.retake=Retake
+manual.context.screen.error.capture=Failed to capture the selected screen content
+manual.context.screen.error.permission.denied=Screen recording permission was denied. Allow the IDE under Privacy \\& Security | Screen Recording, then try again.
+manual.context.screen.error.unavailable=Screen capture is not available on this system
+manual.context.screen.error.no.response=The system did not answer the screen capture request
+manual.context.screen.error.busy=A previous screen capture is still finishing. Try again when it completes.
+manual.context.screen.chooser.title=Capture from Screen
+manual.context.screen.chooser.windows=Windows
+manual.context.screen.chooser.display=Display {0}
+manual.context.screen.grant.open.settings=Open screen recording settings
+manual.context.screen.unload.veto=A screen capture is still in progress
+notification.group.air.screen.capture=Air screen capture

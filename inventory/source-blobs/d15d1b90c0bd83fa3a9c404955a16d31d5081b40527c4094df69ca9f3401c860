@@ -1,3 +1,0 @@
-inspection.print.to.logpoint.display.name='println' call can be replaced with a logpoint
-inspection.print.to.logpoint.problem.descriptor=Call to 'println' can be replaced with a logpoint
-inspection.print.to.logpoint.fix.family.name=Replace call with Logpoint

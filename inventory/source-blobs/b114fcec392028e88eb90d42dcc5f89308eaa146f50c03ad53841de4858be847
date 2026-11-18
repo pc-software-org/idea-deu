@@ -1,0 +1,18 @@
+ssh.agent.add.confirmation.title=Add SSH Key to Agent
+ssh.agent.add.confirmation.message=Add SSH key to agent?\n{0}
+
+ssh.fingerprint.confirmation.title=SSH Host Verification
+ssh.fingerprint.label=Fingerprint: {0}
+ssh.host.label=Host: {0}
+
+ssh.add.failure.title=SSH Key Addition Failed
+ssh.add.failure.message=Failed to add SSH key to agent:\n{0}\n\nReason: {1}
+
+ssh.unknown.host=remote host
+ssh.authenticate.to=Authenticating to:
+ssh.authentication=Authentication
+ssh.authenticate=Authenticate
+save.until.next.restart=Save until restart
+save.permanently=Save permanently
+
+ssh.prompt.password=Password:

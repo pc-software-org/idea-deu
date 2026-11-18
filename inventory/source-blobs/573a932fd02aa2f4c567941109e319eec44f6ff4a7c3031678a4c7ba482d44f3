@@ -1,0 +1,9 @@
+endpoint.not.configured=IDE Services AI endpoint is not configured
+agents.request.failed=IDE Services agents request failed with status {0}
+agents.read.failed=Air could not read the IDE Services agent model catalog
+mcp.request.failed=IDE Services MCP request failed with status {0}
+mcp.read.failed=Air could not read the IDE Services MCP provisioning settings
+acp.request.failed=IDE Services agent registry request failed with status {0}
+acp.read.failed=Air could not read the IDE Services agent registry
+configuration.failed=Air could not load the AI configuration from IDE Services
+login.required=Log in to IDE Services to use AI

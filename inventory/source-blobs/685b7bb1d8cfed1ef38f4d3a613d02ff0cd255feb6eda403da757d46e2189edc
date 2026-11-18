@@ -1,0 +1,92 @@
+graph.framework.printing.options=Print Options
+graph.framework.printing.poster.rows=Poster Rows
+graph.framework.printing.poster.cols=Poster Columns
+graph.framework.printing.poster.coords=Add Poster Coords
+graph.framework.printing.view=View
+graph.framework.printing.graph=Graph
+graph.framework.printing.clip.area=Clip Area
+graph.framework.printing.general=General
+
+graph.delete.message=Delete selection
+graph.delete.message.caption=Delete
+dialog.title.print.graph2=Print Graph
+dialog.title.choose.directory=Choose Directory
+dialog.title.export.to.file=Export to File
+button.print=Print\u2026
+dialog.title.print.preview=Print Preview
+
+compact.orthogonal.layout=Compact
+hierarchic.layout=Hierarchic Groups
+hierarchic.compact.layout=Hierarchic
+orthogonal.groups.layout=Orthogonal Groups
+channel.layout=Channel
+series.parallel.layout=Series Parallel
+circular.layout=Circular
+circular.edge.bundled.layout=Edge Bundled Circular
+radial.layout=Radial
+radial.edge.bundled.layout=Edge Bundled Radial
+single.cycle.layout=Single Cycle
+ar.tree.layout=Compact
+balloon.layout=Balloons
+balloon.edge.bundled.layout=Edge Bundled Balloons
+family.tree.layout=Family
+generic.tree.layout=Generic
+hv.tree.layout=Wide
+organic.layout=Organic
+organic.edge.bundled.layout=Edge Bundled Organic
+random.layout=Random
+custom.layout=Diagram Specific
+local.view.same.as.main.layout=Same as Main
+
+dialog.copying.to.the.clipboard=Copying to the clipboard
+dialog.title.export=Export
+dialog.title.label=Export files
+button.text.print.options=Options\u2026
+
+graph.select.area.you.want.to.copy.notification=Select the area you want to copy
+graph.copied.successfully.notification=Copied successfully
+graph.copying.failed.notification=Failed to copy selection
+
+graph.computing.layout=Computing layout\u2026
+
+graph.localview.show=Show
+graph.localview.show.for.node=For Selected Node
+graph.localview.show.for.node.neighbourhood=Neighbours
+graph.localview.show.for.node.successors=Successors
+graph.localview.show.for.node.predecessors=Predecessors
+graph.localview.show.for.edge=For Selected Edge
+graph.localview.show.for.edge.group.by.source=Edges with same Source
+graph.localview.show.for.edge.group.by.target=Edges with same Target
+graph.localview.show.for.edge.group.by.source.or.target=Edges with same Source or Target
+graph.localview.show.for.edge.group.by.source.and.target=Edges with same Source and Target
+graph.localview.show.for.edge.source.and.target=Source and Target
+
+graph.builder.event.move.nodes=Move nodes
+graph.builder.event.move.edge=Move edge
+graph.builder.event.move.graph=Move graph
+graph.builder.event.zoom=Change zoom
+graph.builder.default.command.name=Graph Movement
+save.graph.dialog.directory=&Directory:
+save.graph.dialog.file.name=&File Name:
+save.graph.dialog.save.as=&Save as:
+
+# e.g. "Export failed: image is too large (12000 x 12000 pixels)"
+graph.ExportToFileAction.image.is.too.large=Export failed: image is too large ({0} x {1} pixels)
+
+action.Graph.ApplyCurrentLayout.text=Apply Current Layout
+action.Graph.RouteEdges.text=Route Edges
+action.Graph.MergeEdgesBySources.text=Merge Edges by Sources Switch
+action.Graph.MergeEdgesByTargets.text=Merge Edges by Targets Switch
+action.Graph.LayoutOrientation.BottomToTop.text=\u2191 Bottom to Top
+action.Graph.LayoutOrientation.TopToBottom.text=\u2193 Top to Bottom
+action.Graph.LayoutOrientation.LeftToRight.text=\u2192 Left to Right
+action.Graph.LayoutOrientation.RightToLeft.text=\u2190 Right to Left
+action.Graph.AlignNodesTop.text=Align Top
+action.Graph.AlignNodesMiddle.text=Align Middle
+action.Graph.AlignNodesBottom.text=Align Bottom
+action.Graph.AlignNodesLeft.text=Align Left
+action.Graph.AlignNodesCenter.text=Align Center
+action.Graph.AlignNodesRight.text=Align Right
+action.Graph.DistributeNodesHorizontally.text=Distribute Horizontally
+action.Graph.DistributeNodesVertically.text=Distribute Vertically
+notification.group.graph=Diagrams

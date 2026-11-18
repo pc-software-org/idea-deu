@@ -1,0 +1,21 @@
+<html>
+<body>
+Reports the comma form of the
+<a href="https://sass-lang.com/documentation/breaking-changes/if-function/">Sass <code>if()</code> function</a>.
+Dart Sass 1.95.0 deprecated it, and plans to remove it in Dart Sass 3.0.0.
+Use the CSS-style form instead.
+<p><b>Example:</b></p>
+<pre><code>
+.a {
+  width: if($wide, 70%, 50%);
+}
+</code></pre>
+<p>After the quick fix:</p>
+<pre><code>
+.a {
+  width: if(sass($wide): 70%; else: 50%);
+}
+</code></pre>
+<!-- tooltip end -->
+</body>
+</html>

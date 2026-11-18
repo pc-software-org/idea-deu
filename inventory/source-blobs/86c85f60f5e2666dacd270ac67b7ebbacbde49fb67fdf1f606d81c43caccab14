@@ -1,0 +1,10 @@
+<html>
+<body>
+  <p>This inspection visualizes how Taint Analysis configuration
+    is applied by highlighting on method calls.</p>
+  <p>Taint configuration determines which method is considered
+    as source, sink, sanitizer, passthrough or custom propagation rule.</p>
+  <p>For method calls that refer to the method without a defined Taint Analysis configuration,
+    the inspection provides quick fixes to facilitate the addition of appropriate configuration.</p>
+</body>
+</html>

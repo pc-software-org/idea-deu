@@ -1,0 +1,2 @@
+profilers.air.error.title=Air Could Not Start the Session
+profilers.air.error.generic=Air could not start the session. See the IDE log for details.

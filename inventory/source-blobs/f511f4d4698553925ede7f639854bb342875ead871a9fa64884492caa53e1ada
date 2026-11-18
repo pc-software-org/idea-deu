@@ -1,0 +1,2 @@
+codeNotes.anchor.file.outsideSource=Cannot attach the note: ''{0}'' is not part of the source this note belongs to
+codeNotes.anchor.archive.notLocal=Cannot attach the note: ''{0}'' is not a local archive

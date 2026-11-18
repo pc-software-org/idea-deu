@@ -1,0 +1,12 @@
+advanced.settings.database=Database
+advanced.setting.database.goto.class.enabled=Show Classes tab in Search Everywhere
+advanced.setting.database.goto.class.enabled.description=Shows Classes tab like in other IDEs
+
+configurable.group.database.main.settings.display.name=Database
+configurable.group.database.plugin.settings.description=<html><body>\
+  Specify query files behavior, configure data views, and extraction options. \
+  Add custom parameter patterns in SQL queries and specify SQL dialects mapping for files.
+# suppress inspection "UnusedProperty"
+configurable.group.database.main.settings.description=<html><body>\
+  Specify database console behavior, configure data views, and extraction options. \
+  Add custom parameter patterns in SQL queries and specify SQL dialects mapping for files.

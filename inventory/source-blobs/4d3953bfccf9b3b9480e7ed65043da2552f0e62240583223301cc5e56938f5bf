@@ -1,0 +1,7 @@
+<html>
+<body>
+<p>
+  Reports GitLab CI/CD variables inside single-quoted shell strings. The shell treats their contents as literal text and does not expand variables.
+</p>
+</body>
+</html>

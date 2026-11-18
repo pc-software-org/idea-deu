@@ -1,0 +1,10 @@
+progress.title.opening.project=Opening ''{0}''\u2026
+
+recent.project.progress.text.opening=Opening\u2026
+
+notification.group.recent.projects=Recent projects
+notification.title.opening.project.error=Couldn't open project
+notification.content.opening.project.unexpected.error=Unexpected error
+
+action.collect.logs.text=Collect Logs
+action.open.privacy.settings.text=Open privacy settings

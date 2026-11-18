@@ -1,0 +1,4 @@
+acp.auth.forwarding.failed=Air could not forward the login callback. Check the remote connection and try again.
+acp.auth.device.code=Enter this code on the sign-in page: {0}
+acp.auth.login.command.failed=The agent's sign-in command failed with exit code {0}. Try signing in again.
+acp.auth.browser.request.missing=The agent did not open its sign-in page in time. Remote sign-in can be unavailable for this agent version. Update the agent, or sign in on the remote machine.

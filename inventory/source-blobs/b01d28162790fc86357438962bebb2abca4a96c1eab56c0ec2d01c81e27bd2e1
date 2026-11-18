@@ -1,0 +1,33 @@
+notification.group.ij.light.backend.deployment=IDE Backend Deployment
+
+deployment.progress.title=IDE Backend Deployment
+deployment.progress.preparing=Preparing remote environment\u2026
+deployment.progress.awaiting.decision=Waiting for a decision in the launching IDE\u2026
+deployment.progress.deploying=Deploying IDE backend\u2026
+deployment.progress.waiting.for.backend=Waiting for the IDE backend\u2026
+deployment.progress.failed=IDE backend deployment failed
+deployment.editor.banner.failed=IDE backend deployment failed. Some IDE features remain unavailable.
+
+deployment.state.applying.patches=Applying patches\u2026
+deployment.state.cancelling=Cancelling\u2026
+deployment.state.configuring=Configuring IDE backend\u2026
+deployment.state.downloading=Downloading IDE backend\u2026
+deployment.state.installing=Installing IDE backend\u2026
+deployment.state.restarting=Restarting IDE backend\u2026
+deployment.state.uninstalling=Uninstalling IDE backend\u2026
+deployment.state.unpacking=Unpacking IDE backend\u2026
+deployment.state.verifying=Verifying IDE backend\u2026
+
+deployment.ask.title=Remote Development Launch
+deployment.ask.option.update=Update
+deployment.ask.option.stop.and.update=Stop and Update
+deployment.ask.option.use.remote=Use Remote
+deployment.ask.option.install.new=Install New
+deployment.ask.ide.outdated.title=Backend IDE Version Is Outdated
+deployment.ask.update.running.or.install.new.version.message=To continue, update the running {0} to version {1} or install a new version.
+deployment.ask.update.running.message=To continue, update the running {0} to version {1}.
+deployment.ask.update.or.install.new.version.message=To continue, update {0} to version {1} or install a new version.
+deployment.ask.update.or.not.message=Remote {0} {1} is older than local build {2}
+deployment.ask.update.blocked.message=Cannot complete backend update: backend process is running. Do you want to stop the backend process?
+
+deployment.progress.retry=Retry

@@ -1,0 +1,11 @@
+action.ml.llm.BuildRepoMapOnImports.text=Build a Repomap for a Project Using Imports
+action.ml.llm.DumpRepoMapOnImports.text=Dump a Repomap on Imports
+action.ml.llm.DumpRepoMapStartPathsOnImports.text=Dump RepoMap on Imports Start Paths
+
+ml.llm.DumpRepoMapStartPathsOnImports.modal.text=Dump RepoMap on imports start paths
+
+action.ml.llm.BuildRepoMapOnAllReferences.text=Build a Repomap for a Project Using All References
+action.ml.llm.DumpRepoMapOnAllReferences.text=Dump a Repomap on All References
+action.ml.llm.DumpRepoMapStartPathsOnAllReferences.text=Dump RepoMap on All References Start Paths
+
+ml.llm.DumpRepoMapStartPathsOnAllReferences.modal.text=Dump RepoMap on all references start paths

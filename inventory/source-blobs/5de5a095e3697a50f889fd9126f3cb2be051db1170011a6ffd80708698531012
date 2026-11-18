@@ -1,0 +1,17 @@
+<html>
+<body>
+Reports <code>System.out.println()</code> and <code>IO.println()</code> calls which can be replaced with a Logpoint.
+Logpoints are a debugger feature to print expressions to standard output <b>without</b> requiring changes to the source code.
+The advantages of Logpoints:
+<ul>
+<li>Can be added, modified, and removed during execution, no need to HotSwap</li>
+<li>Can be used in library code, which usually can't be changed</li>
+<li>When a Logpoint contains invalid (uncompilable) code, the program remains runnable</li>
+<li>No risk of leaking printing calls into production, as logpoints are not part of the source code</li>
+</ul>
+
+The inspection only reports when there's another executable line available, that is not a loop statement, to put the Logpoint.
+<br>
+<b>NOTE:</b> Logpoints only work when Debugging. Under Run, Run with Coverage and Profile modes, logpoint expressions won't appear in the output.
+</body>
+</html>

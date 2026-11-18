@@ -1,0 +1,29 @@
+action.close.project.text=Disconnect from Project
+project.title.prefix=Connected to
+
+host.file.chooser.tab.title=Host
+host.file.chooser.root.name=Host
+host.file.chooser.loading=Loading the host roots…
+host.file.chooser.no.entries=No host is connected
+
+action.ToggleSmartMode.SplitMode.text=Enter Smart Mode (Split Mode)
+action.ToggleSmartMode.TcpLink.text=Enter Smart Mode (TCP Link)
+action.ToggleSmartMode.DaemonConnection.text=Enter Smart Mode (Link from Daemon)
+
+dialog.ToggleSmartMode.TcpLink.title=TCP Link
+action.IjLightMenuLabel.text=Light Mode
+menu.label.light.mode=Light Mode
+menu.label.light.mode.connection.ping=ping {0} ms
+menu.label.light.mode.popup.more=More Actions
+
+eel.error.no.rd.protocol.transport.is.registered.in.this.product=No RD protocol transport is registered in this product
+eel.error.no.transport.for.rd.path=No connection is registered for this RD path
+eel.error.rd.path.addresses.the.machine.0.but.the.session.host.is.the.machine.1=The RD path addresses the machine ''{0}'', but the session host is the machine ''{1}''
+modal.progress.title.loading.plugins=Loading plugins
+
+progress.connecting.to.host=Opening remote IDE\u2026
+progress.reconnecting.to.host=Reconnecting\u2026
+editor.banner.reconnecting=Reconnecting to the IDE backend\u2026 Changes in this file might be lost.
+editor.banner.disconnected=No connection to the IDE backend.
+popup.banner.reconnecting=Reconnecting to the host\u2026
+popup.banner.disconnected=Disconnected from the host.

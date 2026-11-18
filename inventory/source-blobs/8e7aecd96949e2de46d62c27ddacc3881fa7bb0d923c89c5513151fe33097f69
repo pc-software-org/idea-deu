@@ -1,0 +1,5 @@
+llm.sandbox.spec.wysiwyg.editor.name=Specification Markdown
+action.llm.sandbox.spec.GenerateSpecificationFixture.text=Test Specification Fixture Generation
+spec.agent.suggestion.severity.name=agent suggestion
+spec.agent.suggestion.severity.name.capitalized=Agent Suggestion
+spec.agent.suggestion.severity.count.message={0,choice,0#0 agent suggestions|1#1 agent suggestion|2#{0} agent suggestions}

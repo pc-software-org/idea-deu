@@ -1,0 +1,26 @@
+ui.security.analysis.panel.initial.title=Detect vulnerabilities in your code
+ui.security.analysis.panel.initial.description=<html><body><center>Dataflow analysis for Java and Kotlin: SQL injection, XSS,<br>command injection, and path traversal.</center></body></html>
+ui.security.analysis.panel.scan.project=Scan project
+ui.security.analysis.panel.no.issues=No issues found
+ui.security.analysis.panel.scanning={0,choice,0#Scanning\u2026|1#Scanning\u2026 1 file|2#Scanning\u2026 {0} files}
+ui.security.analysis.panel.scanning.of.total=Scanning\u2026 {0} of {1,choice,1#1 file|2#{1} files}
+
+ui.security.analysis.documentation.plugin.url=https://www.jetbrains.com/help/qodana/taint-analysis.html
+ui.security.analysis.documentation.link.label=Learn more
+
+group.SecurityAnalysis.AnalysisWindowGroup.text=Security Analysis
+group.SecurityAnalysis.AnalysisWindowGroup.description=Security analysis
+action.SecurityAnalysis.ShowDemoAction.text=Show Analysis Demo
+action.ShowSecurityAnalysisDemoAction.indicator.text=Show analysis demo
+action.SecurityAnalysis.RunAnalysisAction.text=Run Taint Analysis
+action.SecurityAnalysis.UpdateProjectAnalysisAction.text=Update
+action.SecurityAnalysis.UpdateProjectAnalysisAction.description=Run the project analysis again.
+action.SecurityAnalysis.OpenProjectAnalysisSettingsAction.text=Open Analysis Settings…
+action.SecurityAnalysis.OpenProjectAnalysisSettingsAction.description=Open the security analysis settings.
+action.SecurityAnalysis.RunAnalysisAction.jdk.not.configured.text=Configure project JDK
+action.SecurityAnalysis.RunAnnotatorAction.text=Highlight Taint Configuration
+action.SecurityAnalysis.EnableTaintAnalysisByDefaultAction.text=Enable Taint Analysis in Editor
+action.SecurityAnalysis.EnableTaintAnalysisByDefaultAction.description=Turn on the taint analysis inspection in the current inspection profile.
+action.SecurityAnalysis.DisableTaintAnalysisByDefaultAction.text=Disable Taint Analysis in Editor
+action.SecurityAnalysis.DisableTaintAnalysisByDefaultAction.description=Turn off the taint analysis inspection in the current inspection profile.
+ui.security.analysis.run.dialog.ok.button=Run

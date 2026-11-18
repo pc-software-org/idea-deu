@@ -1,0 +1,8 @@
+<html>
+<body>
+Reports an unavailable or ambiguous agent, an unavailable model, and an unknown or unsupported effort in Markdown files in <code>.air/workflows</code>.
+<p>The model and effort checks ask the agent for its models, so the checks can start the agent. They run only in the editor, after the other checks.</p>
+<p>Use <b>Replace with</b> to put a valid value of the agent or the model in the field.</p>
+<p>Use <b>Fix with agent</b> to open an agent draft that fixes the errors in the workflow file.</p>
+</body>
+</html>

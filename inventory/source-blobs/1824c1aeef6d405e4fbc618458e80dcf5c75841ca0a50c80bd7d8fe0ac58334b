@@ -1,0 +1,24 @@
+title.empty=Specify a title for the view.
+messages.invalid=Specify messages as a JSON array of one or more A2UI v0.9 message objects.
+access.invalid=The Air launch token is no longer valid.
+project.missing=The Air session is not bound to a project.
+service.closed=The session UI service is closed.
+view.unavailable=The view does not belong to this runtime, or it is closed.
+action.unknown=Unknown action {0}. Use present, state, close, place, or screenshot.
+place.unknown=Unknown place {0}. Use sessionView, editor, split, or window.
+place.name.required=The place window needs a name.
+place.name.invalid=The name of a window is one line of at most {0} characters.
+place.name.unexpected=Only the place window takes a name.
+place.first.present=A present with viewId takes no place. Use action=place to move the view.
+place.no.surface=No Session View tab of this IDE shows the session, so the view has no place.
+place.not.placeable=The Session View tab of the session takes no place: it shows a pending session or a sub-agent, or it has no tab.
+app.view.exists=The session has a view of the app {0} already. A result of the app goes to that view.
+app.view.refused=The view refused the result of the app {0}: {1}.
+app.state.agent.view=Only the view of an app stores a page state.
+screenshot.no.page=No page of the IDE shows the view now, so the view has no screenshot. Ask the user to open the Session View of the session.
+screenshot.server.page=The app server of the view serves its own page, so the IDE takes no screenshot of it.
+screenshot.timeout=The page of the view gave no screenshot in {0} seconds.
+screenshot.failed=The page of the view gave no screenshot: {0}
+screenshot.other.view=The page shows the view {0} now, so it gave no screenshot of this view.
+screenshot.too.large=The page gave a screenshot that is too large.
+screenshot.no.render=The view has no screenshot, because its status is {0}.

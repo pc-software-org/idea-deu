@@ -1,0 +1,5 @@
+context.vcs.title=Commits
+context.vcs.commit.file.title=File in Commit
+context.changes.title=Local Changes
+action.AgentPrompt.AddToAgentContext.BackendVcs.text=Add to Agent Context
+action.AgentPrompt.AddToAgentContext.BackendVcs.description=Add context from the current IDE state to an agent prompt
