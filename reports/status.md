@@ -15,9 +15,9 @@
 
 | Status | Count |
 |---|---:|
-| open | 1335 |
+| open | 0 |
 | translated | 0 |
-| technically_reviewed | 77399 |
+| technically_reviewed | 78734 |
 | linguistically_reviewed | 0 |
 
 ## Exclusions
@@ -36,16 +36,16 @@
 ## Findings and collisions
 
 - Blocking findings: 0
-- Warning findings: 393
+- Warning findings: 402
 - Collisions: 1 (0 unresolved)
 
 | Finding code | Count |
 |---|---:|
-| length_ratio | 393 |
+| length_ratio | 402 |
 
 ## Workflow
 
-- Last completed batch: 53
+- Last completed batch: 55
 - Current batch: none
 - Stale units: 847
   - removed_from_source: 189
@@ -897,10 +897,10 @@
   - `fe35e202e76aeaef7f9e55d1882d4d1ef3117faa8ae0deb597ac1430053ae26a`: source_changed, build=263.7307.353, context={&quot;bundle&quot;:&quot;AgentThreadsBundle&quot;,&quot;container&quot;:&quot;plugins/air-plugin/lib/modules/intellij.air.shared.session.jar&quot;,&quot;key&quot;:&quot;toolwindow.error.cloud.no.agents&quot;,&quot;path&quot;:&quot;messages/AgentThreadsBundle.properties&quot;}
   - `fed35f6dd29602753280a7c3b9f37dc89424a3891349cc4b91e38fa0cf7e0a30`: source_changed, build=263.7307.353, context={&quot;bundle&quot;:&quot;AgentThreadsBundle&quot;,&quot;container&quot;:&quot;plugins/air-plugin/lib/modules/intellij.air.shared.session.jar&quot;,&quot;key&quot;:&quot;agent.threads.workspace.rollback.blocker.stale&quot;,&quot;path&quot;:&quot;messages/AgentThreadsBundle.properties&quot;}
   - `ff6fad867a01c7127a9b4173b40ac5daa231c0a1fb92b55e9fef13aaa09a1fd5`: source_changed, build=263.7307.353, context={&quot;bundle&quot;:&quot;AirAvailabilityBundle&quot;,&quot;container&quot;:&quot;plugins/air-plugin/lib/modules/intellij.air.availability.jar&quot;,&quot;key&quot;:&quot;notification.license.ai.disabled.content&quot;,&quot;path&quot;:&quot;messages/AirAvailabilityBundle.properties&quot;}
-- Workflow state: `translate`
-- Generated: present=True, valid=False (`generated/plugin`)
-- Package: present=True, valid=False, sha256=`ebdf920de84c7bd6a7bf3e04af2cb457a229abe06f110980a63b733d6acd96b1`, size=2893141 (`dist/idea-deu.zip`)
+- Workflow state: `complete`
+- Generated: present=True, valid=True (`generated/plugin`)
+- Package: present=True, valid=True, sha256=`d700a3a2d0780dd25a4ba45a2cbaae446572a5f48260352d40aa00491a5ad669`, size=2904784 (`dist/idea-deu.zip`)
 
 Next command:
 
-`python -m scripts.idea_deu next-batch --limit 100`
+`python -m scripts.idea_deu status`
