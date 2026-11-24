@@ -1,6 +1,0 @@
-storage.finding.stale=The note {0} changed before the write
-storage.finding.restore.present=The note {0} is in its place already
-codeNotes.parent.unknownTitle=Unavailable source: {0}
-codeNotes.parent.unavailable=The source ''{0}'' is not available right now
-codeNotes.parent.optionOwnerUnavailable=This destination is not available right now
-codeNotes.anchor.documentMovedOn=The document changed while the notes were being re-anchored

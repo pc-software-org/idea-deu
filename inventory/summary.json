@@ -5,11 +5,11 @@
   },
   "counts": {
     "collisions": 1,
-    "exclusions": 660105,
-    "resources": 4078,
-    "source_blob_bytes": 7253638,
-    "source_blobs": 4024,
-    "translation_units": 78246,
+    "exclusions": 665411,
+    "resources": 4087,
+    "source_blob_bytes": 7290815,
+    "source_blobs": 4033,
+    "translation_units": 78734,
     "unresolved_collisions": 0
   },
   "exclusion_reasons": {
@@ -18,23 +18,23 @@
     "directory": 2266,
     "localized": 649,
     "nested_archive": 41,
-    "not_in_translation_reference": 886,
-    "not_jar": 1649,
-    "unsupported_resource": 654593
+    "not_in_translation_reference": 884,
+    "not_jar": 1659,
+    "unsupported_resource": 659891
   },
   "reference_coverage": {
-    "candidate_paths": 4817,
-    "candidate_paths_in_reference": 4069,
-    "candidate_paths_not_in_reference": 748,
+    "candidate_paths": 4824,
+    "candidate_paths_in_reference": 4082,
+    "candidate_paths_not_in_reference": 742,
     "not_present_by_type": {
       "file_template": 340,
-      "inspection_description": 1709,
+      "inspection_description": 1711,
       "intention_description": 524,
       "postfix_template": 190,
-      "properties": 1047
+      "properties": 1052
     },
-    "reference_paths": 7879,
-    "reference_paths_not_present_in_idea": 3810,
+    "reference_paths": 7899,
+    "reference_paths_not_present_in_idea": 3817,
     "suspicious_missing_candidate_paths": 0
   },
   "resource_types": {
@@ -42,17 +42,17 @@
     "inspection_description": 2372,
     "intention_description": 718,
     "postfix_template": 132,
-    "properties": 622,
+    "properties": 631,
     "tip": 4
   },
   "schema_version": 1,
   "source": {
-    "archive": "idea-2026.3.win.zip",
-    "build_number": "263.7307.200",
+    "archive": "idea-2026.3.0.1.win.zip",
+    "build_number": "263.7307.353",
     "product_code": "IU",
-    "sha256": "42265a4a25cac579aaa4690bb3553f4b034d42282ecaea571818e611f66fbb35",
+    "sha256": "8c44f8f179f5b5974fd4f597f45ae1cc648a0ee52020ae48a2a8b82b4ace1f1e",
     "since_build": "263",
     "until_build": "263.*",
-    "version": "2026.3"
+    "version": "2026.3.0.1"
   }
 }

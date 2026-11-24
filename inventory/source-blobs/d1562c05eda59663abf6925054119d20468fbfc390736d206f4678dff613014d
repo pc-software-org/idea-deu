@@ -1,3 +1,0 @@
-notification.group.session.folders=Session folders
-notification.title.session.folder.write.refused=Air cannot save the session folders
-notification.content.session.folder.write.refused=Air cannot write the file of the session folders, so it keeps the folders as they were. The IDE log names the file and the cause.

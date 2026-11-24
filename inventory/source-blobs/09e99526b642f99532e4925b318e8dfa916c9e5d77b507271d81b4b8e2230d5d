@@ -1,0 +1,6 @@
+action.com.intellij.junie.rpc.ide.chronicles.actions.ListRecentChroniclesAction.text=List Recent Chronicles
+action.com.intellij.junie.rpc.ide.chronicles.actions.ListRecentChroniclesAction.description=Lists recent chronicle entries
+dialog.recent.chronicles.title=Recent Chronicles
+dialog.no.chronicles.found=No chronicles found
+chronicles.tests.passed=Tests passed: {0} of {1}
+chronicles.tests.failed=Some tests failed: {0} of {1} passed

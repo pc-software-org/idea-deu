@@ -1,0 +1,10 @@
+problem.file.invalid=Air cannot read the file as a "mcpServers" object: {0}. The last valid list stays in use.
+problem.file.unreadable=Air could not read the file: {0}. The last valid list stays in use.
+problem.entry.shape=A field has the wrong shape: {0}
+problem.entry.name=The name may contain only letters, digits, "-" and "_"
+problem.entry.name.reserved=The name is reserved by Air
+problem.entry.transport=The transport "{0}" is not supported. Air supports "stdio" and "http".
+problem.entry.transport.ambiguous=The entry has both "command" and "url". Set "type" to "stdio" or "http".
+problem.entry.command.missing=Missing "command"
+problem.entry.url.missing=Missing "url"
+problem.entry.cwd.unsupported="cwd" is not supported. An ACP agent starts the server in the session's working directory.

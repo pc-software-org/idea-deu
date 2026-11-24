@@ -1,6 +1,0 @@
-action.CLion.ConfigureCMakeWithAgent.text=Configure CMake with Agent
-action.CLion.ConfigureCMakeWithAgent.description=Launch a terminal agent that configures the CMake project using the bundled CMake configuration skill
-toast.configureCMakeWithAgent.message=Got stuck with the project setup?
-toast.configureCMakeWithAgent.action=Configure with {0}
-toast.configureCMakeWithAgent.doNotShowAgain=Do Not Show Again
-toast.configureCMakeWithAgent.moreActions=More Actions
