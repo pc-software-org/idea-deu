@@ -1,0 +1,6 @@
+mcp.render.image.accessible.name=MCP image
+mcp.render.audio.title=MCP audio
+mcp.render.audio.description={0}, {1} {1,choice,1#byte|1<bytes}
+mcp.render.resource.title=MCP resource
+mcp.render.resource.binary={0}, {1} {1,choice,1#byte|1<bytes}
+mcp.render.resource.link.title=MCP resource link

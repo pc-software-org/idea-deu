@@ -1,0 +1,7 @@
+nes.position.encoding.unsupported=The agent selected a position encoding that the client does not support.
+nes.acp.provisioning.accept=Accept the required document for {0} in Air
+nes.acp.provisioning.accept.and.install=Accept the required document and install {0} in Air
+nes.acp.provisioning.install=Install {0} in Air
+nes.acp.provisioning.update=Update {0} in Air
+nes.acp.provisioning.unavailable={0} is not available on this platform
+nes.acp.provisioning.action.open.agents=Open Agents Page

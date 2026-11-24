@@ -1,0 +1,9 @@
+quota.error=Could not load Claude usage
+settings.air.status.bar.widgets.group=Status Bar Widgets
+settings.air.claude.quota.status.bar.widget=Show Claude usage in the status bar
+status.bar.claude.quota.display.name=Claude Usage
+status.bar.claude.quota.tooltip.session=Session (5h): {0}%, resets in {1}
+status.bar.claude.quota.tooltip.session.no.reset=Session (5h): {0}%
+status.bar.claude.quota.tooltip.weekly=Weekly (7d): {0}%, resets in {1}
+status.bar.claude.quota.tooltip.weekly.no.reset=Weekly (7d): {0}%
+status.bar.claude.quota.tooltip.stale=Could not refresh. The value may be out of date.

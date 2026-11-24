@@ -1,0 +1,11 @@
+provider.name=OpenRouter
+provider.configuration.title=OpenRouter API key
+provider.api.key=OpenRouter API &key:
+authorization.action=Authorize in Browser
+authorization.browser.response=Close this tab and return to Air to continue.
+authorization.denied=OpenRouter authorization was denied. Your saved key did not change.
+authorization.timeout=OpenRouter authorization timed out. Try again.
+authorization.exchange.failed=OpenRouter did not return an API key. Start authorization again.
+authorization.failed=Could not authorize with OpenRouter. Your saved key did not change.
+setting.base.url=Base &URL:
+setting.base.url.comment=Leave blank to use the provider's default endpoint

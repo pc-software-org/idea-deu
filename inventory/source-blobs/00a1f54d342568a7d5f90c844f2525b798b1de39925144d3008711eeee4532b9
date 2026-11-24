@@ -1,0 +1,2 @@
+external.editor.script.waiting=The file is open in the IDE. Close its editor tab to continue.
+external.editor.script.failed=The IDE did not open the file. The text stays unchanged.

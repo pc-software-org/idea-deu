@@ -1,0 +1,15 @@
+cloud.git.results.branch.fetch.failed=Could not fetch the results branch
+cloud.git.results.branch.notification.title=Cloud results branch
+cloud.git.repository.remote.not.found=No open repository has a remote matching {0}
+cloud.git.commits.collect.failed=Could not collect the commits to cherry-pick
+cloud.git.repository.not.loaded=The Git repository {0} is not loaded yet
+cloud.git.target.git.not.installed=Git is not installed. Install Git to start a cloud run.
+cloud.git.target.no.repository=No Git repository found. A cloud run needs a remote repository.
+cloud.git.target.no.remote=''{0}'' has no remote. A cloud run needs a remote.
+cloud.git.target.remote.no.url=Remote ''{0}'' of {1} has no URL. A cloud run needs a remote that the environment can clone.
+cloud.git.target.no.remote.branch=The repository at {0} has no remote branch. A cloud run clones a branch from the remote. Push a branch, or fetch the remote, then start the cloud run.
+cloud.git.target.remote.branch.missing=Branch ''{0}'' no longer exists on ''{1}''. Push it again, or switch to a branch that the remote still has.
+cloud.git.target.project.not.trusted=The project is open in safe mode, so Git cannot read the checkout at {0}. Trust the project to start a cloud run.
+cloud.git.target.resolution.failed=Could not read the Git state of {0}: {1}
+cloud.git.target.branch.verification.failed=Could not verify branch ''{0}'' on the remote: {1}
+cloud.git.target.branch.verification.rejected=Could not verify branch ''{0}'' on ''{1}'': {2}

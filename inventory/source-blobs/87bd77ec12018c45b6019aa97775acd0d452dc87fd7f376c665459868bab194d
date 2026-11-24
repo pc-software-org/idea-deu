@@ -1,0 +1,9 @@
+sign.in.required=The agent needs you to sign in. Open Air in the IDE and sign in to the agent.
+context.compaction.in.progress=Compacting conversation
+context.compaction.completed=Conversation compacted
+context.compaction.completed.automatic=Conversation automatically compacted
+context.compaction.failed=Conversation compaction failed
+context.compaction.operation=Conversation compaction
+model.default.group=Default
+model.section.default.group=Select mode
+model.section.models=Select model

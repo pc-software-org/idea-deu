@@ -1,0 +1,7 @@
+html.render.title=HTML document
+html.render.loading=Loading the HTML preview…
+html.render.failed=Cannot load the HTML preview.
+html.render.open.editor=Open in Editor Tab
+html.render.fence.preview=Preview
+html.render.fence.code=Code
+html.render.visualization.title=Visualization

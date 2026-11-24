@@ -1,0 +1,10 @@
+caller.missing.context=The MCP call is not bound to an Air session.
+caller.invalid.token=The Air launch token is no longer valid.
+arguments.unknown=Unknown tool arguments: {0}
+arguments.required=The argument ''{0}'' is required.
+arguments.string=The argument ''{0}'' must be a string.
+arguments.boolean=The argument ''{0}'' must be true or false.
+server.tool.failed=The tool failed: {0}
+catalog.ide.gateway.summary=IDE tools of the project that owns the session
+catalog.ide.gateway.plugin=Air
+catalog.figma.plugin=Figma

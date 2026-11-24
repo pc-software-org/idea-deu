@@ -1,0 +1,10 @@
+relative.time.minutes={0}m
+relative.time.hours={0}h
+relative.time.days.short={0}d
+relative.time.weeks.short={0}w
+relative.time.months.short={0}mo
+relative.time.years.short={0}y
+relative.time.days.long={0,choice,1#1 day|1<{0} days} ago
+relative.time.weeks.long={0,choice,1#1 week|1<{0} weeks} ago
+relative.time.months.long={0,choice,1#1 month|1<{0} months} ago
+relative.time.years.long={0,choice,1#1 year|1<{0} years} ago
